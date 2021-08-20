@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dorpdownItemGroup1 {
+    @apply flex justify-between border-t-2 border-white font-bold text-xl bg-gray-300
+}
+
+.dorpdownSubMenu {
+    @apply border-t-2 border-white font-bold text-xl 
+}
+
+.dorpdownItem {
+    @apply border-t-2 border-white hover:bg-gray-400  cursor-pointer
+}
