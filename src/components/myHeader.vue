@@ -1,16 +1,38 @@
 <template>
-    <div>
-        <header class="flex justify-between max-w-full h-10 ">
-            <Navbar></Navbar>
-            <link rel="stylesheet" href="" />asdfas
-        </header>
-    </div>
+    <header
+        class="hidden md:block bg-fixed justify-between h-16 w-full bg-white"
+    >
+        <div class="flex h-16 flex-row">
+            <div class="w-48">
+                <!-- メニューリスト -->
+                <menu-dropdown-item :isDispaly="false"></menu-dropdown-item>
+            </div>
+            <div class="flex-auto"></div>
+            <div class="w-32">
+                <div class="flex justify-center my-5">
+                    <div class="underline font-NotoSansJp text-sm">ヘルプ</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <header class="md:hidden fixed flex justify-between h-16 w-full bg-white">
+        <div class="flex justify-between space-x-2 items-center">
+            <!-- メニューリスト -->
+            <menu-dropdown-item :isDispaly="true"></menu-dropdown-item>
+        </div>
+        <div class="flex items-center space-x-2 pr-2">
+            <data-manager-dropdown
+                :class="{ 'md:hidden': true }"
+            ></data-manager-dropdown>
+        </div>
+    </header>
 </template>
 
 <script>
-import Navbar from './dropdown/Dropdown.vue'
+import menuDropdownItem from './dropdown/menuDropdown.vue'
+import DataManagerDropdown from './dropdown/dataManagerDropdown.vue';
 export default {
-  components: { Navbar },
+  components: { menuDropdownItem, DataManagerDropdown },
   props: {},
   data() {
     return {
