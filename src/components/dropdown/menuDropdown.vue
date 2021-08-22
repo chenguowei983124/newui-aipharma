@@ -9,7 +9,7 @@
             <div class="flex-none">
                 <div class="flex">
                     <svg
-                        class="w-16 h-16 bg-gray-400"
+                        class="w-15 h-15 bg-gray-400"
                         fill="none"
                         stroke="white"
                         viewBox="-4 -4 32 32"
@@ -26,12 +26,12 @@
                     </svg>
 
                     <svg
-                        class="w-16 h-16 md:ml-24 bg-gray-400"
+                        class="w-15 h-15 md:ml-24 bg-gray-400"
                         fill="none"
                         stroke="white"
                         viewBox="-4 -4 32 32"
                         v-if="isOpen"
-                        @click="isOpen = !isOpen"
+                        @click="linkClick"
                         xmlns="http://www.w3.org/2000/svg"
                     >
                         <path
@@ -42,7 +42,7 @@
                         ></path>
                     </svg>
                     <router-link
-                        class="h-16 w-32 bg-white"
+                        class="h-15 w-32 bg-white"
                         @click="scrollToTop"
                         to="/"
                     >
@@ -255,6 +255,7 @@ export default {
     linkClick() {
 
       this.isOpen = !this.isOpen
+      this.$store.dispatch('setMenuClick', this.isOpen)
     }, scrollToTop() {
       let currentScroll = document.documentElement.scrollTop,
         int = setInterval(frame, 6)

@@ -1,0 +1,44 @@
+.dorpdownItemGroup1 {
+    @apply flex justify-between border-t-2 border-white font-bold text-xl bg-gray-300 ;
+}
+.searchResultGroup {
+    @apply text-xs text-white font-NotoSansJp font-medium text-center;
+}
+.searchResultPmdaGroup {
+    @apply text-xs font-NotoSansJp font-medium text-center;
+}
+/* Card white head style */
+.searchResultCardHeaderStyle {
+    @apply font-NotoSansJp font-bold text-lg text-white;
+}
+/* Card white English head style */
+.searchResultCardHeaderStyleE {
+    @apply font-Lato font-bold text-lg text-white;
+}
+/* Card Black head style */
+.searchResultCardBlackHeaderStyle {
+    @apply font-NotoSansJp font-bold text-lg text-black;
+}
+/* List search screen */
+.searchResultDateStyle {
+    @apply text-base font-Lato font-bold;
+}
+/* List search screen */
+.searchResultTitleStyle {
+    @apply text-base font-NotoSansJp ;
+}
+.searchResultBrowseRequiredStyle{
+    @apply bg-cardBrowseRequired
+    font-NotoSansJp
+    text-center text-xxss text-white;
+}
+.searchResultNotificationStyle {
+    @apply 
+    text-xxs text-center text-gray-400
+    font-medium font-NotoSansJp;
+}
+.searchResultViewCountStyle {
+    @apply text-googleTitle
+    text-xs text-center 
+    font-medium font-NotoSansJp;
+}

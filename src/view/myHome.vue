@@ -1,7 +1,9 @@
 <template>
     <div>
         <my-header></my-header>
-        <home-main></home-main>
+        <div class="ml-12.5 mr-12.5">
+            <home-main></home-main>
+        </div>
         <home-bottom-template class="mt-20"></home-bottom-template>
     </div>
 </template>
@@ -23,7 +25,6 @@ export default {
 
   },
   created() {
-
   }
 }
 </script>

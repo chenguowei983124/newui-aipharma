@@ -1,23 +1,26 @@
 <template>
-    <div
-        class="
-            md:mx-10
-            md:rounded-md
-            bg-backgroundMainSearch
-            flex
-            justify-center
-            h-full
-        "
-    >
+    <div class="md:rounded-md bg-backgroundMainSearch flex items-center h-full">
         <!-- 検索条件リスト -->
-        <search-dropdown class="my-4 hidden md:block"></search-dropdown>
+        <search-dropdown
+            class="h-10 ml-32 flex-none hidden md:block"
+        ></search-dropdown>
 
         <!-- 検索条件入力 -->
         <input
             v-model="searchValue"
-            class="border-2 w-10/12 md:w-2/3 my-4 NotoSansJp-normal text-xs"
+            class="
+                border-2
+                h-10
+                w-10/12
+                md:w-full
+                my-4
+                NotoSansJp-normal
+                text-xs
+                flex-grow
+                pl-4
+            "
             type="text"
-            placeholder="   Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます"
+            placeholder="Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます"
         />
 
         <!-- 検索ボタン -->
@@ -30,8 +33,10 @@
                 md:rounded-tr-lg md:rounded-br-lg
                 my-4
                 w-8
-                md:w-20
-                h-8
+                md:w-17.5
+                h-10
+                mr-32
+                flex-none
             "
         >
             <!-- 検索ボタンのアイコン -->

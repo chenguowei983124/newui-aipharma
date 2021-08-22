@@ -1,21 +1,21 @@
 <template>
     <header
-        class="hidden md:block bg-fixed justify-between h-16 w-full bg-white"
+        class="hidden md:block bg-fixed justify-between h-15 w-full bg-white"
     >
-        <div class="flex h-16 flex-row">
+        <div class="flex h-15 flex-row">
             <div class="w-48">
                 <!-- メニューリスト -->
                 <menu-dropdown-item :isDispaly="false"></menu-dropdown-item>
             </div>
             <div class="flex-auto"></div>
-            <div class="w-32">
+            <div class="w-15">
                 <div class="flex justify-center my-5">
                     <div class="underline font-NotoSansJp text-sm">ヘルプ</div>
                 </div>
             </div>
         </div>
     </header>
-    <header class="md:hidden fixed flex justify-between h-16 w-full bg-white">
+    <header class="md:hidden fixed flex justify-between h-15 w-full bg-white">
         <div class="flex justify-between space-x-2 items-center">
             <!-- メニューリスト -->
             <menu-dropdown-item :isDispaly="true"></menu-dropdown-item>
@@ -30,9 +30,9 @@
 
 <script>
 import menuDropdownItem from './dropdown/menuDropdown.vue'
-import DataManagerDropdown from './dropdown/dataManagerDropdown.vue';
+import dataManagerDropdown from './dropdown/dataManagerDropdown.vue';
 export default {
-  components: { menuDropdownItem, DataManagerDropdown },
+  components: { menuDropdownItem, dataManagerDropdown },
   props: {},
   data() {
     return {

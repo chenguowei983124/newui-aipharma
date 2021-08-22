@@ -1,15 +1,14 @@
 <template>
     <div>
-        <vTable></vTable>
+        <menu-dropdown-item></menu-dropdown-item>
     </div>
 </template>
 
 <script>
-import vTable from './components/vTable.vue'
+import menuDropdownItem from './menuDropdown.vue'
 export default {
-  components: {
-    vTable,
-  },
+  name: 'navbar',
+  components: { menuDropdownItem },
   props: {},
   data() {
     return {

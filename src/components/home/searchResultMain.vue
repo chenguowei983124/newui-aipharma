@@ -1,57 +1,56 @@
 <template>
-    <div class="md:h-32">
-        <logo> </logo>
-    </div>
-    <div class="flex flex-row">
-        <div class="flex-auto h-20 hidden md:block">
-            <search-bar class=""></search-bar>
-        </div>
+    <div class="h-full space-y-4">
+        <resut-tag
+            class="h-52"
+            :sites="$store.getters.topNoticeInfo"
+            :sites1="$store.getters.topBulletinBoardInfo"
+            :from="1"
+        ></resut-tag>
 
-        <div
-            class="flex-auto h-20 block md:hidden"
-            :class="[
-                $store.getters.getIsMenuClick ? 'mt-10' : 'fixed w-full top-16',
-            ]"
-        >
-            <search-bar class=""></search-bar>
+        <resut-tag
+            class="h-52"
+            :sites="$store.getters.topNoticeInfo"
+            :sites1="$store.getters.topBulletinBoardInfo"
+            :from="2"
+        ></resut-tag>
+        <!-- お知らせ -->
+        <!-- <search-template class="block md:hidden"></search-template> -->
+        <!-- 掲示板 -->
+        <bulletin-board-template
+            class="hidden md:block"
+        ></bulletin-board-template>
+        <!-- 学会情報 -->
+        <societyInfoTemplate></societyInfoTemplate>
+        <!-- PMDA -->
+        <pharmaceuticals-item></pharmaceuticals-item>
+        <div class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
+            <!-- 医薬品更新情報 -->
+            <pharmaceuticalsInfoTemplate></pharmaceuticalsInfoTemplate>
+            <!-- Topics -->
+            <topicsTemplate></topicsTemplate>
         </div>
-        <div
-            class="block md:hidden"
-            :class="{ 'h-24 mt-10': !$store.getters.getIsMenuClick }"
-        ></div>
-    </div>
-
-    <div class="flex mt-4 space-x-3.75">
-        <div class="flex-grow truncate space-y-3.75">
-            <div class="grid grid-cols-1 gap-1 space-y-3.75">
-                <search-result-main
-                    class="flex-grow truncate"
-                ></search-result-main>
-            </div>
-        </div>
-        <div class="flex-none w-0 border-2 md:w-52 hidden md:block">
-            <!-- ユーザーの情報 -->
-            <data-management-area></data-management-area>
-        </div>
+        <otherInfoTemplate></otherInfoTemplate>
     </div>
 </template>
 
 <script>
-import logo from '../components/home/logo.vue'
-import searchBar from '../components/search/searchBar.vue'
-import dataManagementArea from '../components/home/dataManagementArea.vue'
-import searchResultMain from "../components/home/searchResultMain.vue"
-
+import resutTag from '../seachResult/resultTag.vue'
+// import searchTemplatel from './personItem.vue'
+// import bulletinBoardTemplate from './bulletinBoardItem.vue'
+// import societyInfoTemplate from './societyInforItem.vue'
+// import PharmaceuticalsItem from './pharmaceuticalsItem.vue'
 export default {
   components: {
-    searchBar, logo, dataManagementArea, searchResultMain
+    resutTag
+    // , searchTemplatel
+    // , bulletinBoardTemplate
+    // , societyInfoTemplate
+    // , PharmaceuticalsItem
   },
   props: {},
   data() {
     return {
-      tagInfo: [{ ID: 1, title: "お知らせ" },
-      { ID: 2, title: "掲示板" }]
-      , isDropdownActive: true,
+
       sites: [{ id: 0, group: '1', looked: '0', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: '0', notificationType: '1', viewCount: '12345' },
       { id: 1, group: '2', looked: '0', date: '2021.01.01', title: '○○学会の開催について◯◯◯◯◯◯◯', browseRequired: '0', notificationType: '2', viewCount: '12345' },
       { id: 2, group: '1', looked: '0', date: '2021.01.01', title: '○○の提出締切について◯◯◯◯◯◯◯◯', browseRequired: '1', notificationType: '3', viewCount: '54321' },
@@ -64,7 +63,6 @@ export default {
       { id: 3, group: '3', looked: '0', date: '2021.05.23', title: 'AI-PHARMA アップデート情報◯◯◯◯◯◯◯', browseRequired: '0', notificationType: '4', viewCount: '12345' },
       { id: 4, group: '1', looked: '1', date: '2021.05.20', title: '○○の簡易懸濁について◯◯◯◯◯◯◯◯◯◯', browseRequired: '0', notificationType: '5', viewCount: '12345' }
       ]
-      , isMenuOpen: true
     };
   },
   couputed: {},
@@ -79,4 +77,3 @@ export default {
 </script>
 <style scoped>
 </style>
-

@@ -1,8 +1,7 @@
 <template>
-    <div class="flex justify-center invisible md:visible">
+    <div class="flex justify-around invisible md:visible">
         <img
-            sty
-            class="h-0 md:h-32"
+            class="w-0 md:w-60 md:h-32"
             src="../../assets/image/AI-PHARMA_logo.svg"
             alt=""
         />

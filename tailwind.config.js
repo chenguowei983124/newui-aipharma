@@ -5,6 +5,24 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      spacing: {
+        '3.75': '0.9375rem',
+        '12.5': '3.125rem',
+        '15': '3.75rem',
+        '16.25': '4.0625rem',
+        '16.5': '4.125rem',
+        '16.75': '4.1875rem',
+        '17': '4.25rem',
+        '17.25': '4.3125rem',
+        '17.5': '4.375rem',
+        '17.75': '4.4375rem',
+        '18': '4.5rem',
+        '18.25': '4.5625rem',
+        '18.5': '4.625rem',
+        '18.75': '4.6875rem',
+        '19': '4.75rem',
+        '25': '6.25rem',
+      },
       maxHeight: {
         'screen-menu': 'calc(100vh - 3.5rem)',
         modal: 'calc(100vh - 160px)'

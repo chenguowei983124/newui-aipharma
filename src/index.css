@@ -4,64 +4,34 @@
 @tailwind components;
 @tailwind utilities;
 
-.dorpdownItemGroup1 {
-    @apply flex justify-between border-t-2 border-white font-bold text-xl bg-gray-300
-}
+
 
 .dorpdownSubMenu {
-    @apply border-t-2 border-white font-bold text-xl 
+    @apply border-t-2 border-white font-bold text-xl  ;
 }
 
 .dorpdownItem {
-    @apply border-t-2 border-white hover:bg-gray-400  cursor-pointer
+    @apply border-t-2 border-white hover:bg-gray-400  cursor-pointer;
 }
 .headerDropdownGroup {
-    @apply pl-4 font-NotoSansJp text-lg font-bold
+    @apply pl-4 font-NotoSansJp text-lg font-bold;
 }
 .headerDropdownSubMenu {
-    @apply pl-4 font-NotoSansJp text-base font-bold
+    @apply pl-4 font-NotoSansJp text-base font-bold;
 }
 .headerDropdownItem{
-    @apply pl-8 font-NotoSansJp text-base font-normal text-dropdownListItem
+    @apply pl-8 font-NotoSansJp text-base font-normal text-dropdownListItem;
 }
-.searchResultGroup {
-    @apply text-xs text-white font-NotoSansJp font-medium text-center
+#a1:checked ~ .tab-a1{
+    @apply flex;
 }
-.searchResultPmdaGroup {
-    @apply text-xs font-NotoSansJp font-medium text-center
+#a1:checked ~ .nav label[for="a1"] {
+    @apply bg-cardTitle text-white font-NotoSansJp font-bold text-lg;
 }
-/* Card white head style */
-.searchResultCardHeaderStyle {
-    @apply font-NotoSansJp font-bold text-lg text-white
+
+#a2:checked ~ .tab-a2{
+    @apply flex;
 }
-/* Card white English head style */
-.searchResultCardHeaderStyleE {
-    @apply font-Lato font-bold text-lg text-white
-}
-/* Card Black head style */
-.searchResultCardBlackHeaderStyle {
-    @apply font-NotoSansJp font-bold text-lg text-black
-}
-/* List search screen */
-.searchResultDateStyle {
-    @apply text-base font-Lato font-bold
-}
-/* List search screen */
-.searchResultTitleStyle {
-    @apply text-base font-NotoSansJp 
-}
-.searchResultBrowseRequiredStyle{
-    @apply bg-cardBrowseRequired
-    font-NotoSansJp
-    text-center text-xxss text-white
-}
-.searchResultNotificationStyle {
-    @apply 
-    text-xxs text-center text-gray-400
-    font-medium font-NotoSansJp
-}
-.searchResultViewCountStyle {
-    @apply bg-cardViewCount
-    text-xs text-center text-blue-400
-    font-medium font-NotoSansJp
+#a2:checked ~ .nav label[for="a2"] {
+    @apply bg-cardTitle text-white font-NotoSansJp font-bold text-lg;
 }

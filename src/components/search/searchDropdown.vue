@@ -5,7 +5,7 @@
                 flex
                 justify-start
                 items-center
-                h-8
+                h-10
                 rounded-l-lg
                 bg-backgroundMain
             "
@@ -16,13 +16,13 @@
             </a>
             <img
                 class="h-2 ml-1 mr-1"
-                src="../../../assets/image/triangle-down.svg"
+                src="../../assets/image/triangle-down.svg"
                 alt=""
                 v-if="isDown == false"
             />
             <img
                 class="h-2 ml-1 mr-1"
-                src="../../../assets/image/triangle-up.svg"
+                src="../../assets/image/triangle-up.svg"
                 alt=""
                 v-else
             />
