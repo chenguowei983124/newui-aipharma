@@ -1,8 +1,8 @@
 <template>
     <div class="md:flex">
-        <div>asd</div>
-        <!-- <div class="flex-none">
-            <div class="rounded-md bg-personInfo md:p-4">
+        <!-- <div>asd</div> -->
+        <div class="flex-none">
+            <div class="rounded-md bg-personInfo md:p-0">
                 <div class="md:flex justify-between items-center">
                     <div class="font-bold text-base font-NotoSansJp">
                         {{ sites[0].name }}
@@ -142,7 +142,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 

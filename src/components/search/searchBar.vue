@@ -2,7 +2,7 @@
     <div class="md:rounded-md bg-backgroundMainSearch flex items-center h-full">
         <!-- 検索条件リスト -->
         <search-dropdown
-            class="h-10 ml-32 flex-none hidden md:block"
+            class="h-10 md:ml-32 flex-none hidden md:block"
         ></search-dropdown>
 
         <!-- 検索条件入力 -->
@@ -12,6 +12,8 @@
                 border-2
                 h-10
                 w-10/12
+                ml-5
+                md:ml-0
                 md:w-full
                 my-4
                 NotoSansJp-normal
@@ -32,11 +34,12 @@
                 text-white
                 md:rounded-tr-lg md:rounded-br-lg
                 my-4
-                w-8
+                w-10
                 md:w-17.5
                 h-10
-                mr-32
+                md:mr-32
                 flex-none
+                mr-5
             "
         >
             <!-- 検索ボタンのアイコン -->
