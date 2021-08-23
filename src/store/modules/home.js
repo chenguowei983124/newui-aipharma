@@ -3,6 +3,9 @@ export default {
     state: () => ({
         noticeInfo: [],
         bulletinBoardInfo: [],
+        managementInfo: [],
+        managementItemList: [],
+        managementItemUserList: []
     }),
 
     getters: {
@@ -27,6 +30,32 @@ export default {
             ]
 
             return bulletinBoardInfo;
+        },
+        // management
+        topManagementInfo(state) {
+            const managementInfo = { name: '木村 太郎', title: 'doctor', hospital: '◯◯◯◯◯◯◯◯◯◯大学病院', authority: '管 理 者', }
+
+            return managementInfo;
+        },
+        // managementGroup
+        topManagementItemList(state) {
+            const managementItemList = [
+                { 'id': '1', 'title': '組織内DI 記録', 'itemStyle': 'title' },
+                { 'id': '4', 'title': '症例', 'itemStyle': 'title' },
+                { 'id': '8', 'title': '下書き一覧', 'itemStyle': 'title' }
+            ]
+
+            return managementItemList;
+        },
+        // managementUserGroup
+        topManagementItemUserList(state) {
+            const managementItemUserList = [{ 'id': '1', 'title': 'マイページ' },
+            { 'id': '2', 'title': '施設切替' },
+            { 'id': '3', 'title': '設定' },
+            { 'id': '4', 'title': 'ログアウト' }
+            ]
+
+            return managementItemUserList;
         }
     },
 

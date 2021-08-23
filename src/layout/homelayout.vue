@@ -29,7 +29,7 @@
                 ></search-result-main>
             </div>
         </div>
-        <div class="flex-none w-0 border-2 md:w-52 hidden md:block">
+        <div class="flex-none w-0 md:w-50 hidden md:block">
             <!-- ユーザーの情報 -->
             <data-management-area></data-management-area>
         </div>

@@ -6,7 +6,11 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
+        // 15px
         '3.75': '0.9375rem',
+        // 30px
+        '7.5': '1.875rem',
+        // 50px
         '12.5': '3.125rem',
         '15': '3.75rem',
         '16.25': '4.0625rem',
@@ -21,7 +25,23 @@ module.exports = {
         '18.5': '4.625rem',
         '18.75': '4.6875rem',
         '19': '4.75rem',
+        // 90px
+        '22.5': '5.625rem',
+        // 100px
         '25': '6.25rem',
+        // 124px
+        '31': '7.75rem',
+        // 134px
+        '33.5': '8.375rem',
+        // 170px
+        '42.5': '10.625rem',
+        // 190px
+        '47.5': '11.875rem',
+        // 200px
+        '50': '12.5rem',
+        // 484px
+        '121': '30.25rem',
+
       },
       maxHeight: {
         'screen-menu': 'calc(100vh - 3.5rem)',
@@ -35,8 +55,11 @@ module.exports = {
         'backgroundMain': 'rgb(214, 237, 248)',
         'backgroundMainSearch': 'rgb(50, 165, 220)',
         'searchResultTitle': 'rgb(101, 187, 229)',
-        'personInfo': 'rgb(204, 204, 204)',
+        // 'personInfo': 'rgb(204, 204, 204)',
         'personDataInfo': 'rgb(230, 230, 230)',
+        'personGroupInformation': 'rgb(253, 244, 229)',
+        'personInformationButton': 'rgb(241, 90, 36)',
+        'personOrganizationButton': 'rgb(240, 150, 0)',
         'searchBunnon': 'rgb(240, 150, 0)',
         'cardTitle': 'rgb(101, 187, 229)',
         'cardTitlePmad': 'rgb(153, 153, 153)',
