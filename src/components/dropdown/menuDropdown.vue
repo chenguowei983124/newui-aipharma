@@ -8,6 +8,7 @@
         <div class="flex justify-between items-center">
             <div class="flex-none">
                 <div class="flex">
+                    <!-- Menu icon 30px*22.5px -->
                     <svg
                         class="w-15 h-15 bg-gray-400"
                         fill="none"
@@ -24,9 +25,9 @@
                             d="M4 6h16M4 12h16M4 18h16"
                         ></path>
                     </svg>
-
+                    <!-- x icon -->
                     <svg
-                        class="w-15 h-15 md:ml-24 bg-gray-400"
+                        class="w-15 h-15 md:ml-25 bg-gray-400"
                         fill="none"
                         stroke="white"
                         viewBox="-4 -4 32 32"
@@ -41,193 +42,289 @@
                             d="M6 18L18 6M6 6l12 12"
                         ></path>
                     </svg>
+                    <!-- Logo img -->
                     <router-link
-                        class="h-15 w-32 bg-white"
+                        class="
+                            w-37.5
+                            h-15
+                            bg-white
+                            flex
+                            justify-center
+                            items-center
+                        "
                         @click="scrollToTop"
                         to="/"
                     >
                         <img
-                            class="h-12 my-2 mx-2"
+                            class="w-21 h-9.5"
                             v-if="isDispaly || isOpen"
-                            src="../../assets/image/AI-PHARMA_logo.svg"
+                            src="../../assets/image/menuLogo.svg"
                             alt="/"
                         />
                     </router-link>
                 </div>
             </div>
-            <!-- <p
-                class="hidden md:block mx-10 underline font-NotoSansJp text-sm"
-                :class="{ 'mr-28': isOpen }"
-            >
-                ヘルプ0000000
-            </p> -->
         </div>
 
-        <div
-            class="md:ml-24 top-16 -translate-x-1/2 w-48 bg-gray-200"
-            v-if="isOpen"
-        >
+        <div class="md:ml-25 w-52.5 bg-gray-200" v-if="isOpen">
+            <!-- The first one -->
             <div
-                class="dorpdownItemGroup1"
+                class="flex justify-between bg-gray-300 h-7.5"
                 @click="
                     ;(itemType1 = !itemType1),
+                        (itemType2 = false),
+                        (itemType3 = false),
+                        (itemType4 = false)
+                "
+            >
+                <div class="flex items-center ml-3.75 cursor-pointer">
+                    <!-- Home icon -->
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                        />
+                    </svg>
+                </div>
+                <!-- Triangle icon -->
+                <div class="cursor-pointer">
+                    <img
+                        class="h-3 mt-2.5 mr-3.75"
+                        src="../../assets/image/selectTriangle-down.svg"
+                        alt=""
+                        v-if="itemType1 == false"
+                    />
+                    <img
+                        class="h-3 mt-2.5 mr-3.75 transform rotate-180"
+                        src="../../assets/image/selectTriangle-down.svg"
+                        alt=""
+                        v-else
+                    />
+                </div>
+            </div>
+            <div class="" v-for="items in menuItemList" :key="items">
+                <div
+                    v-if="itemType1"
+                    class="
+                        h-7
+                        pl-3.75
+                        font-NotoSansJp
+                        text-base
+                        font-normal
+                        text-dropdownListItem
+                        border-b-2 border-white
+                        flex
+                        items-center
+                        cursor-pointer
+                    "
+                >
+                    <div v-if="items.itemStyle == 'item'">
+                        {{ items.title }}
+                    </div>
+                </div>
+            </div>
+            <!-- The second one -->
+            <div
+                class="
+                    flex
+                    justify-between
+                    border-t-2 border-white
+                    bg-gray-300
+                    h-7.5
+                "
+                @click="
+                    ;(itemType2 = !itemType2),
+                        (itemType1 = false),
+                        (itemType3 = false),
+                        (itemType4 = false)
+                "
+            >
+                <div
+                    class="flex items-center ml-3.75 cursor-pointer"
+                    v-for="items in menuItemList2"
+                    :key="items"
+                >
+                    <div v-if="items.itemStyle == 'title'">
+                        {{ items.title }}
+                    </div>
+                </div>
+                <!-- Triangle icon -->
+                <div class="cursor-pointer">
+                    <img
+                        class="h-3 mt-2.5 mr-3.75"
+                        src="../../assets/image/selectTriangle-down.svg"
+                        alt=""
+                        v-if="itemType2 == false"
+                    />
+                    <img
+                        class="h-3 mt-2.5 mr-3.75 transform rotate-180"
+                        src="../../assets/image/selectTriangle-down.svg"
+                        alt=""
+                        v-else
+                    />
+                </div>
+            </div>
+            <div class="" v-for="items in menuItemList2" :key="items">
+                <div v-if="itemType2">
+                    <div
+                        v-if="items.itemStyle == 'item'"
+                        class="
+                            font-NotoSansJp
+                            text-base
+                            font-normal
+                            text-dropdownListItem
+                            border-b-2 border-white
+                            h-7
+                            pl-3.75
+                            cursor-pointer
+                        "
+                    >
+                        {{ items.title }}
+                    </div>
+                </div>
+            </div>
+            <!-- The third -->
+            <div
+                class="
+                    flex
+                    justify-between
+                    border-t-2 border-white
+                    bg-gray-300
+                    h-7.5
+                "
+                @click="
+                    ;(itemType3 = !itemType3),
+                        (itemType1 = false),
+                        (itemType2 = false),
+                        (itemType4 = false)
+                "
+            >
+                <div
+                    class="flex items-center ml-3.75 cursor-pointer"
+                    v-for="items in menuItemList3"
+                    :key="items"
+                >
+                    <div v-if="items.itemStyle == 'title'">
+                        {{ items.title }}
+                    </div>
+                </div>
+                <!-- Triangle icon -->
+                <div class="cursor-pointer">
+                    <img
+                        class="h-3 mt-2.5 mr-3.75"
+                        src="../../assets/image/selectTriangle-down.svg"
+                        alt=""
+                        v-if="itemType3 == false"
+                    />
+                    <img
+                        class="h-3 mt-2.5 mr-3.75 transform rotate-180"
+                        src="../../assets/image/selectTriangle-down.svg"
+                        alt=""
+                        v-else
+                    />
+                </div>
+            </div>
+            <div class="" v-for="items in menuItemList3" :key="items">
+                <div v-if="itemType3">
+                    <div
+                        v-if="items.itemStyle == 'item'"
+                        class="
+                            font-NotoSansJp
+                            text-base
+                            font-normal
+                            text-dropdownListItem
+                            border-b-2 border-white
+                            h-7
+                            pl-3.75
+                            cursor-pointer
+                        "
+                    >
+                        {{ items.title }}
+                    </div>
+                    <div
+                        v-if="items.itemStyle == 'subproject'"
+                        class="
+                            font-NotoSansJp
+                            text-base
+                            font-normal
+                            text-dropdownListItem
+                            border-b-2 border-white
+                            h-7
+                            pl-7.5
+                            cursor-pointer
+                        "
+                    >
+                        {{ items.title }}
+                    </div>
+                </div>
+            </div>
+            <!-- The Fourth -->
+            <div
+                class="
+                    flex
+                    justify-between
+                    border-t-2 border-white
+                    bg-gray-300
+                    h-7.5
+                "
+                @click="
+                    ;(itemType4 = !itemType4),
+                        (itemType1 = false),
                         (itemType2 = false),
                         (itemType3 = false)
                 "
             >
-                <a class="headerDropdownGroup">検索</a>
-                <img
-                    class="h-3 mt-2 mr-2"
-                    src="../../assets/image/selectTriangle-down.svg"
-                    alt=""
-                    v-if="itemType1 == false"
-                />
-                <img
-                    class="h-3 mt-2 mr-2"
-                    src="../../assets/image/selectTriangle-up.svg"
-                    alt=""
-                    v-else
-                />
+                <div
+                    class="flex items-center ml-3.75 cursor-pointer"
+                    v-for="items in menuItemList4"
+                    :key="items"
+                >
+                    <div v-if="items.itemStyle == 'title'">
+                        {{ items.title }}
+                    </div>
+                </div>
+                <!-- Triangle icon -->
+                <div class="cursor-pointer">
+                    <img
+                        class="h-3 mt-2.5 mr-3.75"
+                        src="../../assets/image/selectTriangle-down.svg"
+                        alt=""
+                        v-if="itemType4 == false"
+                    />
+                    <img
+                        class="h-3 mt-2.5 mr-3.75 transform rotate-180"
+                        src="../../assets/image/selectTriangle-down.svg"
+                        alt=""
+                        v-else
+                    />
+                </div>
             </div>
-            <div class="dorpdownSubMenu" v-if="itemType1">
-                <a class="headerDropdownSubMenu">Q&A</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">KIT-DI DB</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">施設 DI DB</a>
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType1">
-                <a class="headerDropdownSubMenu">おくすり事例</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">おくすり事例</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">副作用事例</a>
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType1">
-                <a class="headerDropdownSubMenu">DI 辞書</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">DI 辞書</a>
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType1">
-                <a class="headerDropdownSubMenu">掲示板</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">全体</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">施設</a>
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType1">
-                <a class="headerDropdownSubMenu">他の検索エンジン</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">Google</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">PubMEd</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">J-STAGE</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType1">
-                <a class="headerDropdownItem" href="">Safe-DI</a>
-            </div>
-            <div
-                class="dorpdownItemGroup1"
-                @click="
-                    ;(itemType2 = !itemType2),
-                        (itemType1 = false),
-                        (itemType3 = false)
-                "
-            >
-                <a class="headerDropdownGroup">データ管理</a>
-                <img
-                    class="h-3 mt-2 mr-2"
-                    src="../../assets/image/selectTriangle-down.svg"
-                    alt=""
-                    v-if="itemType2 == false"
-                />
-                <img
-                    class="h-3 mt-2 mr-2"
-                    src="../../assets/image/selectTriangle-up.svg"
-                    alt=""
-                    v-else
-                />
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType2">
-                <a class="headerDropdownSubMenu">Q&A</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType2">
-                <a class="headerDropdownItem" href="">投稿データ</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType2">
-                <a class="headerDropdownItem" href="">一時保存データ</a>
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType2">
-                <a class="headerDropdownSubMenu">おくすり事例</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType2">
-                <a class="headerDropdownItem">投稿データ</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType2">
-                <a class="headerDropdownItem">一時保存データ</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType2">
-                <a class="headerDropdownItem" href="">入出力</a>
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType2">
-                <a class="headerDropdownSubMenu">掲示板</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType2">
-                <a class="headerDropdownItem" href="">投稿データ</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType2">
-                <a class="headerDropdownItem" href="">一時保存データ</a>
-            </div>
-            <div
-                class="dorpdownItemGroup1"
-                @click="
-                    ;(itemType3 = !itemType3),
-                        (itemType1 = false),
-                        (itemType2 = false)
-                "
-            >
-                <a class="headerDropdownGroup">その他</a>
-                <img
-                    class="h-3 mt-2 mr-2"
-                    src="../../assets/image/selectTriangle-down.svg"
-                    alt=""
-                    v-if="itemType3 == false"
-                />
-                <img
-                    class="h-3 mt-2 mr-2"
-                    src="../../assets/image/selectTriangle-up.svg"
-                    alt=""
-                    v-else
-                />
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType3">
-                <a class="headerDropdownSubMenu" href="">動画</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType3">
-                <a class="headerDropdownItem" href="">動画コンテンツ</a>
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType3">
-                <a class="headerDropdownSubMenu" href="">予約</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType3">
-                <a class="headerDropdownItem" href="">学会カレンダー</a>
-            </div>
-            <div class="dorpdownSubMenu" v-if="itemType3">
-                <a class="headerDropdownSubMenu" href="">その他の情報一覧</a>
-            </div>
-            <div class="dorpdownItem" v-if="itemType3">
-                <a class="headerDropdownItem" href="">企業一覧</a>
+            <div class="" v-for="items in menuItemList4" :key="items">
+                <div v-if="itemType4">
+                    <div
+                        v-if="items.itemStyle == 'item'"
+                        class="
+                            font-NotoSansJp
+                            text-base
+                            font-normal
+                            text-dropdownListItem
+                            border-b-2 border-white
+                            h-7
+                            pl-3.75
+                            cursor-pointer
+                        "
+                    >
+                        {{ items.title }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -245,6 +342,34 @@ export default {
       itemType1: false,
       itemType2: false,
       itemType3: false,
+      itemType4: false,
+      menuItemList: [
+        { 'id': '1', 'title': 'TOP', 'itemStyle': 'item' },
+        { 'id': '2', 'title': 'お知らせ', 'itemStyle': 'item' },
+        { 'id': '3', 'title': '掲示板', 'itemStyle': 'item' }
+      ],
+      menuItemList2: [
+        { 'id': '4', 'title': 'データベース', 'itemStyle': 'title' },
+        { 'id': '5', 'title': 'DI ナレッジシェア', 'itemStyle': 'item' },
+        { 'id': '6', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item' },
+        { 'id': '7', 'title': '症例（プレアボイド）', 'itemStyle': 'item' },
+        { 'id': '8', 'title': 'DI 辞書', 'itemStyle': 'item' },
+        { 'id': '9', 'title': '製薬企業情報', 'itemStyle': 'item' }],
+      menuItemList3: [
+        { 'id': '10', 'title': 'マイデータ', 'itemStyle': 'title' },
+        { 'id': '11', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item' },
+        { 'id': '12', 'title': '登録', 'itemStyle': 'subproject' },
+        { 'id': '13', 'title': '症例（プレアボイド）', 'itemStyle': 'item' },
+        { 'id': '14', 'title': '登録', 'itemStyle': 'subproject' },
+        { 'id': '15', 'title': 'データ入出力', 'itemStyle': 'item' }],
+      menuItemList4: [
+        { 'id': '16', 'title': 'その他', 'itemStyle': 'title' },
+        { 'id': '17', 'title': '外部リンク', 'itemStyle': 'item' },
+        { 'id': '18', 'title': '動画', 'itemStyle': 'item' },
+        { 'id': '19', 'title': '学会', 'itemStyle': 'item' },
+        { 'id': '20', 'title': '製薬企業DIチャットボット', 'itemStyle': 'item' },
+        { 'id': '21', 'title': 'ヘルプ', 'itemStyle': 'item' }
+      ]
     };
   },
   couputed: {

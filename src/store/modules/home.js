@@ -81,19 +81,19 @@ export default {
         // managementGroup
         topManagementItemList(state) {
             const managementItemList = [
-                { 'id': '1', 'title': '組織内DI 記録', 'itemStyle': 'title' },
-                { 'id': '4', 'title': '症例', 'itemStyle': 'title' },
-                { 'id': '8', 'title': '下書き一覧', 'itemStyle': 'title' }
+                { 'title': '組織内DI 記録', 'itemStyle': 'title' },
+                { 'title': '症例', 'itemStyle': 'title' },
+                { 'title': '下書き一覧', 'itemStyle': 'title' }
             ]
 
             return managementItemList;
         },
         // managementUserGroup
         topManagementItemUserList(state) {
-            const managementItemUserList = [{ 'id': '1', 'title': 'マイページ' },
-            { 'id': '2', 'title': '施設切替' },
-            { 'id': '3', 'title': '設定' },
-            { 'id': '4', 'title': 'ログアウト' }
+            const managementItemUserList = [{ 'title': 'マイページ' },
+            { 'title': '施設切替' },
+            { 'title': '設定' },
+            { 'title': 'ログアウト' }
             ]
 
             return managementItemUserList;
