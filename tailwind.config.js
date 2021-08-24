@@ -64,18 +64,23 @@ module.exports = {
         'eventType': '#fadcaa',
         'international': '#d8c8e6',
         'rescue': '#d9edc8',
+        // 右カラム
+        // 背景 
+        'backgroundMain': '#d6edf8',
+        // アバター
+        'backgroundMainSearch': '#32a5dc',
+        // マイデータ 背景
+        'personGroupInformation': '#fdf4e5',
+        // お知らせ・掲示板ボタン
+        'personInformationButton': '#f15a24',
+        // 組織内DI・症例 登録ボタン
+        'personOrganizationButton': '#f09600',
 
 
 
-
-        'backgroundMain': 'rgb(214, 237, 248)',
-        'backgroundMainSearch': 'rgb(50, 165, 220)',
         'searchResultTitle': 'rgb(101, 187, 229)',
         // 'personInfo': 'rgb(204, 204, 204)',
         'personDataInfo': 'rgb(230, 230, 230)',
-        'personGroupInformation': 'rgb(253, 244, 229)',
-        'personInformationButton': 'rgb(241, 90, 36)',
-        'personOrganizationButton': 'rgb(240, 150, 0)',
         'searchBunnon': 'rgb(240, 150, 0)',
         'cardTitle': 'rgb(101, 187, 229)',
         'cardTitlePmad': 'rgb(153, 153, 153)',
@@ -133,7 +138,11 @@ module.exports = {
         '75': 75,
         '99': 99,
         'auto': 'auto',
-      }
+      }, borderColor: (theme) => ({
+        DEFAULT: theme('colors.gray.200', 'currentColor'),
+        // 組織内DI・症例 登録ボタン、マイデータ 帯・境界線
+        'personOrganizationButton': '#f09600',
+      }),
     },
   },
   variants: {

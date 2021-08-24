@@ -15,10 +15,10 @@
                     <!-- 最初の行 -->
                     <div class="md:flex justify-between w-42.5 my-3.75">
                         <div class="h-12.5 flex flex-col justify-center">
-                            <div class="font-bold text-base font-NotoSansJp">
+                            <div class="notoSansJpAndSixteenBold">
                                 {{ $store.getters.topManagementInfo.name }}
                             </div>
-                            <div class="text-xs">
+                            <div class="notoSansJpAndTwelve">
                                 {{
                                     $store.getters.topManagementInfo.title ==
                                     'doctor'
@@ -34,7 +34,7 @@
                                     rounded-full
                                     h-12.5
                                     w-12.5
-                                    bg-searchResultTitle
+                                    bg-backgroundMainSearch
                                 "
                             >
                                 <div
@@ -42,8 +42,8 @@
                                         flex
                                         justify-center
                                         pt-2.5
-                                        text-white text-xl
-                                        font-bold
+                                        text-white
+                                        notoSansJpAndtTwentyBold
                                     "
                                 >
                                     {{
@@ -74,7 +74,7 @@
                                     <div
                                         class="
                                             absolute
-                                            border-2 border-gray-400
+                                            border-2 border-black
                                             rounded-md
                                             bg-white
                                             w-25
@@ -92,11 +92,9 @@
                                         >
                                             <div
                                                 class="
-                                                    text-black
-                                                    font-bold
-                                                    text-sm
-                                                    font-NotoSansJp
+                                                    notoSansJpAndFourteen
                                                     hover:text-searchDropdown
+                                                    cursor-pointer
                                                     ml-2.5
                                                 "
                                             >
@@ -111,8 +109,7 @@
                     <!-- 二行目 -->
                     <div
                         class="
-                            text-xs
-                            font-bold font-NotoSansJp
+                            notoSansJpAndTwelveBold
                             text-center
                             h-3.75
                             mb-3.75
@@ -123,9 +120,9 @@
                     <!-- 三行目 -->
                     <div
                         class="
-                            bg-searchResultTitle
-                            text-center text-white text-xs
-                            font-NotoSansJp
+                            bg-backgroundMainSearch
+                            text-center text-white
+                            notoSansJpAndTwelve
                         "
                     >
                         <button class="h-5 w-42.5">
@@ -140,7 +137,7 @@
                             bg-personInformationButton
                             h-10
                             rounded-full
-                            font-black
+                            notoSansJpAndSixteenblack
                             text-white
                         "
                     >
@@ -152,7 +149,7 @@
                             bg-personInformationButton
                             h-10
                             rounded-full
-                            font-black
+                            notoSansJpAndSixteenblack
                             text-white
                         "
                     >
@@ -166,7 +163,7 @@
                             bg-personOrganizationButton
                             h-10
                             rounded-full
-                            font-black
+                            notoSansJpAndSixteenblack
                             text-white
                         "
                     >
@@ -178,7 +175,7 @@
                             bg-personOrganizationButton
                             h-10
                             rounded-full
-                            font-black
+                            notoSansJpAndSixteenblack
                             text-white
                         "
                     >
@@ -190,8 +187,7 @@
                         h-31
                         w-42.5
                         rounded-md
-                        border-yellow-500
-                        text-base
+                        border-personOrganizationButton
                         font-NotoSansJp
                         mb-3.75
                     "
@@ -213,7 +209,7 @@
                         class="
                             bg-personGroupInformation
                             rounded-b-lg
-                            border-yellow-500 border-2
+                            border-personOrganizationButton border-2
                             grid
                             justify-items-start
                             space-y-2.5
@@ -259,12 +255,12 @@ export default {
       //   ],
       isDown: true,
       isSelect: true,
-      itemUserList: [
-        { 'id': '1', 'title': 'マイページ' },
-        { 'id': '2', 'title': '施設切替' },
-        { 'id': '3', 'title': '設定' },
-        { 'id': '4', 'title': 'ログアウト' }
-      ]
+      //   itemUserList: [
+      //     { 'id': '1', 'title': 'マイページ' },
+      //     { 'id': '2', 'title': '施設切替' },
+      //     { 'id': '3', 'title': '設定' },
+      //     { 'id': '4', 'title': 'ログアウト' }
+      //   ]
     };
   },
   couputed: {},
