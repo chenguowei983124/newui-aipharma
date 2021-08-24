@@ -1,5 +1,6 @@
 <template>
-    <div class="container" v-if="from == 1">
+    <div class="container" v-if="headerStyle == '1'">
+        <!-- <result-header></result-header> -->
         <input type="radio" name="tab" id="a1" class="hidden" checked />
         <input type="radio" name="tab" id="a2" class="hidden" />
         <div class="flex space-x-2 nav">
@@ -7,7 +8,7 @@
                 for="a1"
                 class="
                     w-1/2
-                    h-10
+                    md:justify-start
                     rounded-t-lg
                     text-center
                     md:text-left
@@ -21,35 +22,18 @@
                     text-lg
                 "
             >
-                <span> お知らせ</span></label
+                <span> {{ title1 }}</span></label
             >
             <label
                 for="a2"
-                class="
-                    w-1/2
-                    h-10
-                    rounded-t-lg
-                    text-center
-                    py-2
-                    md:hidden
-                    bg-cardViewCount
-                    text-googleTitle
-                    font-NotoSansJp font-bold
-                    text-lg
-                "
+                class="w-1/2 md:hidden searchResultActiveTagTitleStyle"
             >
-                <span> 掲示板</span></label
+                <span> {{ title2 }}</span></label
             >
         </div>
-
-        <div class="tab-a1 hidden">
-            <result-detail-row :sites="sites"> </result-detail-row>
-        </div>
-        <div class="tab-a2 hidden">
-            <result-detail-row :sites="sites1"> </result-detail-row>
-        </div>
+        <slot></slot>
     </div>
-    <div class="container hidden md:block" v-if="from == 2">
+    <div class="container">
         <label
             class="
                 flex
@@ -65,24 +49,25 @@
                 font-NotoSansJp font-bold
                 text-lg
             "
+            v-if="headerStyle != '1'"
         >
-            <span> 掲示板</span></label
+            <span> {{ title1 }}</span></label
         >
-        <result-detail-row :sites="sites1"> </result-detail-row>
+        <slot></slot>
     </div>
 </template>
 
 <script>
 import resultDetailRow from './resultDetailRow.vue'
-// import bulletinBoardItem from './bulletinBoardItem.vue'
+import resultHeader from './reaultHeader.vue'
 
 export default {
-  components: { resultDetailRow },
-  props: { sites: [], sites1: [], from: "" },
+  components: { resultDetailRow, resultHeader },
+  props: { headerStyle: String, title1: String, title2: String },
   data() {
     return {
     };
-  },
+  }
 
 }
 </script>

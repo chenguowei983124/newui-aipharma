@@ -1,5 +1,121 @@
+/* フォント相関 */
+.searchResult_label_font_10{
+    @apply font-NotoSansJp font-medium text-xxss ;
+}
+.searchResult_label_font_10_b{
+    @apply font-NotoSansJp font-bold text-xxss ;
+}
+.searchResult_label_font_12{
+    @apply font-NotoSansJp font-medium text-xs ;
+}
+.searchResult_label_font_noto_12_b{
+    @apply font-NotoSansJp font-bold text-xs ;
+}
+
+.searchResult_label_font_lato_12_b{
+    @apply font-Lato font-bold text-xs ;
+}
+
+.searchResult_date_font{
+    @apply font-Lato font-bold text-sm;
+}
+.searchResult_title_font{
+    @apply font-NotoSansJp font-normal text-base;
+}
+
+/* ラベル　組織内 */
+.searchResult_lable_organization{
+    @apply searchResult_label_font_12 text-white bg-organization w-17.5 text-center;
+}
+
+/* ラベル　全体 */
+.searchResult_lable_whole{
+    @apply searchResult_label_font_12 text-white bg-whole w-17.5 text-center;
+}
+
+/* ラベル　グループ */
+.searchResult_lable_group{
+    @apply searchResult_label_font_12 text-white bg-group w-17.5 text-center;
+}
+
+/* ラベル　学会 */
+.searchResult_lable_society{
+    @apply searchResult_label_font_12 text-white bg-society w-17.5 text-center;
+}
+
+/* ラベル　未 */
+.searchResult_lable_notLooked{
+    @apply searchResult_label_font_10 text-notlooked bg-notlooked w-4 h-4 text-center;
+}
+
+/* ラベル　要閲覧 */
+.searchResult_lable_browse{
+    @apply searchResult_label_font_10_b text-white bg-browse w-10  h-4 text-center;
+}
+
+/* ラベル　安全 */
+.searchResult_lable_safety{
+    @apply searchResult_label_font_12 text-black bg-safety w-17.5 text-center;
+}
+
+/* ラベル　採用 */
+.searchResult_lable_recruitment{
+    @apply searchResult_label_font_12 text-black bg-recruitment w-17.5 text-center;
+}
+
+/* ラベル　イベント */
+.searchResult_lable_eventType{
+    @apply searchResult_label_font_12 text-black bg-eventType w-17.5 text-center;
+}
+
+/* ラベル　国際 */
+.searchResult_lable_international{
+    @apply searchResult_label_font_12 text-black bg-international w-17.5 text-center;
+}
+
+/* ラベル　救済 */
+.searchResult_lable_rescue{
+    @apply searchResult_label_font_12 text-black bg-rescue w-17.5 text-center;
+}
+
+/* ラベル　審査 */
+.searchResult_lable_examination{
+    @apply searchResult_label_font_12 text-black bg-examination w-17.5 text-center;
+}
+
+/* ラベル　告知 */
+.searchResult_lable_notice{
+    @apply searchResult_label_font_10 text-notice ring-notice w-16.25 h-4 text-center  ring-1 ;
+}
+
+/* ラベル　view */
+.searchResult_lable_view{
+    @apply searchResult_label_font_12 text-view  w-16.25 h-4 text-center   ;
+}
+
+/* ラベル　日付 */
+.searchResult_date_title{
+    @apply searchResult_date_font w-18.75 block;
+}
+
+/* ラベル　タイトル */
+.searchResult_title{
+    @apply searchResult_title_font ;
+}
+
+/* ラベル　new */
+.searchResult_lable_new{
+    @apply searchResult_label_font_noto_12_b text-cardPmadNew w-12.5 h-4 text-left block;
+}
+/* ラベル　update */
+.searchResult_lable_update{
+    @apply searchResult_label_font_noto_12_b text-cardPmadUpadte w-12.5 h-4 text-left block;
+}
+/*---------------------------------------------------------------------------------------------------*/
+
+
 .dorpdownItemGroup1 {
-    @apply flex justify-between border-t-2 border-white font-bold text-xl bg-gray-300 ;
+    @apply flex justify-between border-t-2 border-white  bg-gray-300 ;
 }
 .searchResultGroup {
     @apply text-xs text-white font-NotoSansJp font-medium text-center;
@@ -21,7 +137,7 @@
 }
 /* List search screen */
 .searchResultDateStyle {
-    @apply text-base font-Lato font-bold;
+    @apply text-sm font-Lato font-bold;
 }
 /* List search screen */
 .searchResultTitleStyle {
@@ -41,4 +157,8 @@
     @apply text-googleTitle
     text-xs text-center 
     font-medium font-NotoSansJp;
+}
+/**  */
+.searchResultActiveTagTitleStyle{
+    @apply h-10 rounded-t-lg text-center py-2　bg-cardViewCount text-googleTitle font-NotoSansJp font-bold text-lg
 }

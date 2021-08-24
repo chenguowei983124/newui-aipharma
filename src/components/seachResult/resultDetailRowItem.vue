@@ -1,14 +1,8 @@
 <template>
-    <span v-if="itemType == 1" :class="itemClass" :title="sdf">{{
-        title
-    }}</span>
-    <span v-if="itemType == 2" :class="itemClass" :title="sdf">{{
-        itemValue
-    }}</span>
-    <span v-if="itemType == 3" :class="itemClass" :title="sdf">{{
-        itemValue
-    }}</span>
-    <span v-if="itemType == 4" :class="itemClass" :title="sdf"
+    <span v-if="itemType == '1'" :class="itemClass">{{ title }}</span>
+    <span v-if="itemType == '2'" :class="itemClass">{{ itemValue }}</span>
+    <span v-if="itemType == '3'" :class="itemClass">{{ itemValue }}</span>
+    <span v-if="itemType == '4'" :class="itemClass"
         >{{ itemValue }}{{ itemTitle }}</span
     >
 </template>
@@ -46,101 +40,84 @@ export default {
 
         // 1:全体
         if (props.typeKB == "whole") {
-          style.push('w-17.5 bg-cardGroup2 searchResultGroup')
-        }
-
-        if (props.typeKB == "organization") {
+          style.push('searchResult_lable_whole')
+        } else if (props.typeKB == "organization") {
           // 2:組織内 
-          style.push("w-17.5 bg-cardGroup1 searchResultGroup")
-        }
-
-        if (props.typeKB == "group") {
+          style.push("searchResult_lable_organization")
+        } else if (props.typeKB == "group") {
           // 3:グループ 
-          style.push("w-17.5 bg-cardGroup3 searchResultGroup")
-        }
-
-        if (props.typeKB == "society") {
+          style.push("searchResult_lable_group")
+        } else if (props.typeKB == "society") {
           // 4:学　会 
-          style.push("w-17.5 bg-cardGroup2 searchResultGroup")
-        }
-
-        if (props.typeKB == "safety") {
+          style.push("searchResult_lable_society")
+        } else if (props.typeKB == "safety") {
           // 5:安全 
-          style.push("w-17.5 bg-cardTypePmad1 searchResultPmdaGroup")
-        }
-
-        if (props.typeKB == "recruitment") {
+          style.push("searchResult_lable_safety")
+        } else if (props.typeKB == "recruitment") {
           // 6:採 用 
-          style.push("w-17.5 bg-cardTypePmad2 searchResultPmdaGroup")
-        }
-
-        if (props.typeKB == "examination") {
+          style.push("searchResult_lable_recruitment")
+        } else if (props.typeKB == "examination") {
           // 7:審 査 
-          style.push("w-17.5 bg-cardTypePmad3 searchResultPmdaGroup")
-        }
-
-        if (props.typeKB == "browse") {
+          style.push("searchResult_lable_examination")
+        } else if (props.typeKB == "browse") {
           // 8:要閲覧 
-          style.push("w-10 searchResultBrowseRequiredStyle")
-        }
-
-        if (props.typeKB == "notice") {
+          style.push("searchResult_lable_browse")
+        } else if (props.typeKB == "notice") {
           // 9: 告　知
-          style.push("w-16.25 ring-1 ring-gray-400 searchResultNotificationStyle ")
-        }
-
-        if (props.typeKB == "event") {
+          style.push("searchResult_lable_notice")
+        } else if (props.typeKB == "event") {
           // 10:イベント
-          style.push("w-16.25 ring-1 ring-gray-400 searchResultNotificationStyle ")
-        }
-
-        if (props.typeKB == "other") {
+          style.push("searchResult_lable_notice ")
+        } else if (props.typeKB == "other") {
           // 12:その他
-          style.push("w-16.25 ring-1 ring-gray-400 searchResultNotificationStyle ")
-        }
-
-        if (props.typeKB == "query") {
+          style.push("searchResult_lable_notice ")
+        } else if (props.typeKB == "query") {
           // 13:アンケート
-          style.push("w-16.25 ring-1 ring-gray-400 searchResultNotificationStyle ")
-        }
-
-        if (props.typeKB == "questionnaire") {
-          // 13:アンケート
-          style.push("w-16.25 ring-1 ring-gray-400 searchResultNotificationStyle ")
-        }
-        if (props.typeKB == "view") {
+          style.push("searchResult_lable_notice ")
+        } else if (props.typeKB == "questionnaire") {
+          // 13:質問
+          style.push("searchResult_lable_notice ")
+        } else if (props.typeKB == "view") {
           // 14:view
-          style.push("w-12.5 ring-1 ring-blue-400 searchResultViewCountStyle")
-        }
-        if (props.typeKB == "new") {
+          style.push("searchResult_lable_view")
+        } else if (props.typeKB == "new") {
           // 15：New　
-          style.push("w-12.5 border-4 border-red-500 searchResultPmdaGroup text-cardPmadNew")
-        }
-        if (props.typeKB == "update") {
+          style.push("searchResult_lable_new")
+        } else if (props.typeKB == "update") {
           // 16：UPDATE
-          style.push("w-20 border-4 border-yellow-500 archResultPmdaGroup text-cardPmadUpadte")
-        }
-        if (props.typeKB == "notLooked") {
+          style.push("searchResult_lable_update")
+        } else if (props.typeKB == "notLooked") {
           // 17：未
-          style.push("w-4 h-4 block text-xxs font-NotoSansJp font-medium ring-1 ring-yellow-600 bg-cardLooked text-yellow-600 text-center")
-        }
-        if (props.typeKB == "Looked") {
+          style.push("searchResult_lable_notLooked")
+        } else if (props.typeKB == "Looked") {
           // 17：未
-          style.push("w-4 h-4 invisible block text-xxs font-NotoSansJp font-medium ring-1 ring-yellow-600 bg-cardLooked text-yellow-600 text-center")
+          style.push("invisible searchResult_lable_notLooked")
+        } else if (props.typeKB == "eventType") {
+          // 6:採 用 
+          style.push(" searchResult_lable_eventType")
+        } else if (props.typeKB == "international") {
+          // 6:採 用 
+          style.push(" searchResult_lable_international")
+        } else if (props.typeKB == "rescue") {
+          // 6:採 用 
+          style.push(" searchResult_lable_rescue")
+        } else {
+          style.push("")
         }
+
       } else if (props.itemType == "2") {
         // 2:日付
-        style.push("w-18.75 searchResultDateStyle")
+        style.push("searchResult_date_title")
       } else if (props.itemType == "3") {
         //3:タイトル
-        style.push("searchResultTitleStyle")
+        style.push("searchResult_title")
       } else if (props.itemType == "4") {
-        //3:タイトル
-        style.push(" searchResultViewCountStyle")
+        //3:view
+        style.push("searchResult_lable_view")
       }
       // style追加
       if (props.addStyle != "") {
-        console.log(props.addStyle)
+
         style.push(props.addStyle)
       }
       return style
@@ -149,7 +126,7 @@ export default {
     const title = computed(() => {
       // 1:全体
       if (props.typeKB == "whole") {
-        return "全体"
+        return "全　体"
       }
 
       if (props.typeKB == "organization") {
@@ -169,17 +146,17 @@ export default {
 
       if (props.typeKB == "safety") {
         // 5:安全 
-        return "安全"
+        return "安　全"
       }
 
       if (props.typeKB == "recruitment") {
         // 6:採 用 
-        return "採 用"
+        return "採　用"
       }
 
       if (props.typeKB == "examination") {
         // 7:審 査 
-        return "審 査"
+        return "審　査"
       }
 
       if (props.typeKB == "browse") {
@@ -204,7 +181,7 @@ export default {
 
       if (props.typeKB == "query") {
         // 13:質問
-        return "質問"
+        return "質　問"
       }
 
       if (props.typeKB == "questionnaire") {
@@ -230,6 +207,21 @@ export default {
       if (props.typeKB == "Looked") {
         // 17：未
         return " "
+      }
+
+      if (props.typeKB == "international") {
+        // 17：国　際
+        return "国　際"
+      }
+
+      if (props.typeKB == "eventType") {
+        // 17：イベント
+        return "イベント"
+      }
+
+      if (props.typeKB == "rescue") {
+        // 17：救済
+        return "救　済"
       }
     })
     return {
