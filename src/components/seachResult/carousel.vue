@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-between bg-cardTitlePmad h-28 mx-3">
+    <div class="flex justify-between bg-cardTitlePmad h-28 mx-5 my-5">
         <div class="nav-indicator prevArrow w-5 mx-1">
             <img src="../../assets/image/iconmonstr-left.svg" alt="" />
         </div>

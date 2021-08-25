@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white border-2 border-blue-300 rounded-b-lg w-full">
+    <div>
         <div
             class="
                 md:flex
@@ -7,11 +7,9 @@
                 md:space-x-3
                 align-baseline
                 items-center
+                pt-1.5
             "
-            :class="[
-                index == 4 ? 'md:pb-4' : 'border-b-2 border-blue-300',
-                index == 0 ? 'md:pt-4' : '',
-            ]"
+            :class="getLineStyle(index, lineStyle)"
             v-for="(row, index) in sites"
             :key="row"
         >
@@ -47,6 +45,7 @@
                 <result-detail-row-item
                     itemType="2"
                     :itemValue="row.dateTo"
+                    addStyle=" block w-12 h-5"
                     v-if="row.dateTo != undefined"
                 ></result-detail-row-item>
 
@@ -60,26 +59,21 @@
 
             <span class="flex-grow truncate items-center align-baseline">
                 <span
-                    class="
-                        justify-start
-                        items-center
-                        align-baseline
-                        pl-2
-                        md:pl-0
-                    "
+                    class="justify-start items-center align-baseline"
                     :class="midAreaStyle"
                 >
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.title"
                         :addStyle="getLookedTitle(row.looked, midDetailStyle)"
+                        :itemStyle="resetTitle(midDetailStyle)"
                         v-if="row.title != undefined"
                     ></result-detail-row-item>
 
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.urlTitle"
-                        addStyle="md:underline"
+                        addStyle="underline pl-2 md:pl-0"
                         v-if="row.urlTitle != undefined"
                     ></result-detail-row-item>
                     <result-detail-row-item
@@ -94,7 +88,8 @@
             <div
                 class="
                     flex-none
-                    space-x-3
+                    space-x-1.5
+                    md:space-x-3
                     items-center
                     align-baseline
                     pb-2
@@ -107,7 +102,10 @@
                 <result-detail-row-item
                     itemType="1"
                     :typeKB="row.browseRequired"
-                    v-if="row.browseRequired != undefined"
+                    v-if="
+                        row.browseRequired != undefined &&
+                        row.browseRequired == 'browse'
+                    "
                     addStyle="block md:hidden text-xs md:text-xxss md:flex-none"
                 ></result-detail-row-item>
                 <result-detail-row-item
@@ -148,6 +146,9 @@ export default {
     bakDetailStyle: {
       type: String,
       default: "style1"
+    }, lineStyle: {
+      type: String,
+      default: "blueline"
     }
   },
   data() {
@@ -156,8 +157,6 @@ export default {
     };
   }, methods: {
     getLookedTitle(lookedKB, midStyle) {
-      console.log(lookedKB)
-      console.log(midStyle)
       if (lookedKB != undefined) {
         if (lookedKB == "Looked") {
           return "truncate md:underline md:whitespace-pre  text-dropdownListItem"
@@ -166,11 +165,17 @@ export default {
         }
       } else {
         if (midStyle == "style2") {
-          return "truncate md:whitespace-pre block"
+          return "truncate block pl-2 md:pl-0"
         }
       }
-
-    }, getDateFrom(dateFrom, dateTo) {
+    },
+    // タイトルのStyleをリセット
+    resetTitle(midStyle) {
+      if (midStyle == "style2") {
+        return "searchResult_title_font_14 truncate block pl-2 md:pl-0"
+      }
+    }
+    , getDateFrom(dateFrom, dateTo) {
       if (dateTo != "") {
         return dateFrom.concat(" - ")
       } else {
@@ -182,13 +187,29 @@ export default {
       } else {
         return null
       }
+    }, getLineStyle(index, style) {
+      const line = []
+      if (style == "blueline") {
+        line.push("border-b-2 border-blueline")
+      } else {
+        line.push("border-b-2 border-grayline")
+      }
+      if (index == 4) {
+        return "md:pb-4"
+      } else if (index == 0) {
+        line.push("md:pt-4")
+      }
+      return line
     }
   },
   setup(props) {
     const proAreaStyle = computed(() => {
       const style = []
       if (props.proDetailStyle == "style1") {
-        style.push("flex space-x-3 ")
+        style.push("flex space-x-1.5 md:space-x-3 pl-2 md:pl-0")
+      }
+      if (props.proDetailStyle == "style2") {
+        style.push("flex flex-row md:flex-col md:space-x-0 space-x-2 ")
       }
       return style
 
@@ -196,10 +217,11 @@ export default {
     const midAreaStyle = computed(() => {
       const style = []
       if (props.midDetailStyle == "style1") {
-        style.push("flex ")
+        style.push("flex pl-2 md:pl-0")
       }
-      console.log(1)
-      console.log(style)
+      if (props.proDetailStyle == "style2") {
+        style.push("")
+      }
       return style
 
     })

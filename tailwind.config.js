@@ -33,6 +33,7 @@ module.exports = {
         '22.5': '5.625rem',
         // 100px
         '25': '6.25rem',
+        '30': '7.5rem',
         // 124px
         '31': '7.75rem',
         // 134px
@@ -64,7 +65,7 @@ module.exports = {
         'whole': '#8cc85a',
         'group': '#fa82a0',
         'society': '#8cc85a',
-        'notlooked': '#f09600',
+        'notlooked': '#fdf4e5',
         'browse': '#d4145a',
         'safety': '#fdd5df',
         'recruitment': '#bbe1f3',
@@ -72,6 +73,7 @@ module.exports = {
         'eventType': '#fadcaa',
         'international': '#d8c8e6',
         'rescue': '#d9edc8',
+        'toTop': '#f09600',
         // 右カラム
         // 背景 
         'backgroundMain': '#d6edf8',
@@ -86,9 +88,14 @@ module.exports = {
 
 
 
+        'backgroundMain': 'rgb(214, 237, 248)',
+        'backgroundMainSearch': 'rgb(50, 165, 220)',
         'searchResultTitle': 'rgb(101, 187, 229)',
         // 'personInfo': 'rgb(204, 204, 204)',
         'personDataInfo': 'rgb(230, 230, 230)',
+        'personGroupInformation': 'rgb(253, 244, 229)',
+        'personInformationButton': 'rgb(241, 90, 36)',
+        'personOrganizationButton': 'rgb(240, 150, 0)',
         'searchBunnon': 'rgb(240, 150, 0)',
         'cardTitle': 'rgb(101, 187, 229)',
         'cardTitlePmad': 'rgb(153, 153, 153)',
@@ -105,7 +112,7 @@ module.exports = {
 
       }), textColor: theme => theme('colors'),
       textColor: {
-        'notlooked': '#fdf4e5',
+        'notlooked': '#f09600',
         'view': '#32a5dc',
         'notice': '#666666',
 
@@ -117,6 +124,21 @@ module.exports = {
         'googleTitle': 'rgb(50, 165,220)',
       }, colors: {
         'notice': '#666666',
+        'notlooked': '#f09600',
+        'browse': '#d4145a',
+        'organization': '#326EB5',
+        'whole': '#8cc85a',
+        'group': '#fa82a0',
+        'society': '#8cc85a',
+        'safety': '#fdd5df',
+        'recruitment': '#bbe1f3',
+        'examination': '#bbe1f3',
+        'eventType': '#fadcaa',
+        'international': '#d8c8e6',
+        'rescue': '#d9edc8',
+        'blueline': '#65bbe5',
+        'grayline': '#999999',
+
 
       },
       fontSize: theme => theme('Size'),

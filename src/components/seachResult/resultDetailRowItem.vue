@@ -91,10 +91,10 @@ export default {
           style.push("searchResult_lable_notLooked")
         } else if (props.typeKB == "Looked") {
           // 17：未
-          style.push("invisible searchResult_lable_notLooked")
+          style.push("hidden md:block invisible searchResult_lable_notLooked")
         } else if (props.typeKB == "eventType") {
           // 6:採 用 
-          style.push(" searchResult_lable_eventType")
+          style.push("searchResult_lable_eventType")
         } else if (props.typeKB == "international") {
           // 6:採 用 
           style.push(" searchResult_lable_international")

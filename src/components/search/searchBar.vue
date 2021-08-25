@@ -12,7 +12,7 @@
                 border-2
                 h-10
                 w-10/12
-                ml-5
+                ml-2.5
                 md:ml-0
                 md:w-full
                 my-4
@@ -39,7 +39,7 @@
                 h-10
                 md:mr-32
                 flex-none
-                mr-5
+                mr-2.5
             "
         >
             <!-- 検索ボタンのアイコン -->
