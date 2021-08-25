@@ -58,7 +58,8 @@
                             md:h-15
                             bg-white
                             flex
-                            justify-startm
+                            justify-start
+                            md:justify-center
                             pl-2
                             items-center
                         "
@@ -73,6 +74,7 @@
                         />
                         <div
                             class="
+                                md:hidden
                                 w-18
                                 h-8
                                 pl-1
@@ -91,7 +93,7 @@
             </div>
         </div>
 
-        <div class="md:ml-25 w-56.25 bg-gray-200" v-if="isOpen">
+        <div class="md:ml-25 w-56.25 md:w-52.5 bg-gray-200" v-if="isOpen">
             <!-- The first one -->
             <div
                 class="flex justify-between bg-gray-300 h-7.5"
