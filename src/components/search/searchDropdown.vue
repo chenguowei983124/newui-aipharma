@@ -1,7 +1,7 @@
 <template>
     <div>
         <div
-            class="flex justify-start items-center h-10 bg-backgroundMain"
+            class="flex justify-start items-center h-10 bg-searchBar"
             @click="isDown = !isDown"
             :class="[isDown ? 'rounded-tl-lg' : 'rounded-l-lg']"
         >
@@ -22,7 +22,7 @@
             />
         </div>
         <div
-            class="absolute bg-backgroundMain w-45"
+            class="absolute bg-searchBar w-45"
             v-if="isDown"
             @click="isSelect = !isSelect"
         >
@@ -41,7 +41,7 @@
                     <!-- 未選択アイテム -->
                     <div v-if="value.id != checkedID">
                         <div
-                            class="flex hover:text-searchDropdown"
+                            class="flex hover:text-googleTitle"
                             @click="itemClick(value)"
                         >
                             <a class="w-4"></a>
@@ -50,7 +50,7 @@
                             <a
                                 v-if="value.itemStyle == 'All'"
                                 class="
-                                    hover:text-searchDropdown
+                                    hover:text-googleTitle
                                     NotoSansJp
                                     text-sm
                                     font-bold
@@ -63,7 +63,7 @@
                             <a
                                 v-if="value.itemStyle == 'item'"
                                 class="
-                                    hover:text-searchDropdown
+                                    hover:text-googleTitle
                                     NotoSansJp
                                     text-sm
                                     font-bold
@@ -78,7 +78,7 @@
                     <!-- 選択したアイテム -->
                     <div v-if="value.id == checkedID">
                         <div
-                            class="flex hover:text-searchDropdown"
+                            class="flex hover:text-googleTitle"
                             @click="itemClick(value)"
                         >
                             <img
@@ -90,11 +90,11 @@
                             <a
                                 v-if="value.itemStyle == 'All'"
                                 class="
-                                    text-searchDropdown
+                                    text-googleTitle
                                     NotoSansJp
                                     text-sm
                                     font-bold
-                                    hover:text-searchDropdown
+                                    hover:text-googleTitle
                                     h-7.5
                                 "
                                 >{{ value.title }}</a
@@ -104,11 +104,11 @@
                             <a
                                 v-if="value.itemStyle == 'item'"
                                 class="
-                                    text-searchDropdown
+                                    text-googleTitle
                                     NotoSansJp
                                     text-sm
                                     font-bold
-                                    hover:text-searchDropdown
+                                    hover:text-googleTitle
                                     h-7.5
                                 "
                                 >{{ value.title }}</a

@@ -29,7 +29,6 @@
 </template>
 
 <script>
-// import { FontAwesomeIcon } from 'font-awesome-icon'
 import { Swiper, SwiperSlide, } from 'swiper/vue';
 import SwiperCore, { Navigation, Parallax, Autoplay } from 'swiper'
 import 'swiper/components/navigation/navigation.scss'
@@ -80,6 +79,7 @@ export default {
     position: relative;
     width: 93%;
     margin-top: 14px;
+    flex: none;
 }
 .parallax-slide {
     height: 80px !important;
@@ -90,8 +90,10 @@ export default {
     width: 33% !important;
     margin-top: 1px;
     margin-bottom: 4px;
+    flex: none;
 }
 .nav-indicator {
     margin-top: 4.5%;
+    flex: none;
 }
 </style>

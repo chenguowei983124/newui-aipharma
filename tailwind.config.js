@@ -88,7 +88,7 @@ module.exports = {
         'personInformationButton': '#f15a24',
         // 組織内DI・症例 登録ボタン
         'personOrganizationButton': '#f09600',
-
+        'searchBar': '#cce8f6',
 
 
         'backgroundMain': 'rgb(214, 237, 248)',
