@@ -169,7 +169,7 @@ export default {
         }
       }
     },
-    // ƒ^ƒCƒgƒ‹‚ÌStyle‚ðƒŠƒZƒbƒg
+    // ï¿½^ï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½Styleï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
     resetTitle(midStyle) {
       if (midStyle == "style2") {
         return "searchResult_title_font_14 truncate block pl-2 md:pl-0"

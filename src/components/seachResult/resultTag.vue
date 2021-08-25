@@ -69,7 +69,7 @@
                 "
                 v-if="urlLink != ''"
             >
-                —\–ñ‚Í‚±‚¿‚ç??
+                äºˆç´„ã¯ã“ã¡ã‚‰â–¹
             </div></label
         >
         <label

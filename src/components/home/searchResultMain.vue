@@ -46,15 +46,15 @@
             >
             </result-detail-row
         ></resut-tag>
-        <div class="md:flex space-y-2 md:space-x-4">
+        <div class="md:flex space-y-2 space-x-0 md:space-y-0 md:space-x-4">
             <resut-tag headerStyle="5" title1="医薬品更新情報"
                 ><result-detail-row class="searchResult_detail_gray">
-                    <div>aa</div>
+                    <div class="h-15 font-bold">Coming Soon…</div>
                 </result-detail-row></resut-tag
             >
             <resut-tag headerStyle="5" title1="Topics"
                 ><result-detail-row class="searchResult_detail_gray">
-                    <div>aa</div>
+                    <div class="h-15 font-bold">Coming Soon…</div>
                 </result-detail-row></resut-tag
             >
         </div>
@@ -65,8 +65,8 @@
                     searchResult_detail_gray
                     md:flex
                     justify-between
-                    md:space-x-4
-                    space-y-2
+                    md:space-x-4 md:space-y-0
+                    space-y-2 space-x-0
                     md:p-4
                     p-2
                 "
