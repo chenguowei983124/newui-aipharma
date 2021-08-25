@@ -6,6 +6,8 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
+        '1.5': '0.375rem',
+        '2.5': '0.625rem',
         // 15px
         '3.75': '0.9375rem',
         // 30px
@@ -42,6 +44,7 @@ module.exports = {
         '37.5': '9.375rem',
         // 170px
         '42.5': '10.625rem',
+        '45': '11.25rem',
         // 190px
         '47.5': '11.875rem',
         // 200px
