@@ -7,10 +7,10 @@
     >
         <div class="flex justify-between items-center">
             <div class="flex-none">
-                <div class="flex">
+                <div class="flex items-center">
                     <!-- Menu icon 30px*22.5px -->
                     <svg
-                        class="w-15 h-15 bg-gray-400"
+                        class="w-12.5 h-12.5 md:w-15 md:h-15 bg-gray-400"
                         fill="none"
                         stroke="white"
                         viewBox="-4 -4 32 32"
@@ -27,7 +27,14 @@
                     </svg>
                     <!-- x icon -->
                     <svg
-                        class="w-15 h-15 md:ml-25 bg-gray-400"
+                        class="
+                            w-12.5
+                            h-12.5
+                            md:w-15
+                            md:h-15
+                            md:ml-25
+                            bg-gray-400
+                        "
                         fill="none"
                         stroke="white"
                         viewBox="-4 -4 32 32"
@@ -45,11 +52,14 @@
                     <!-- Logo img -->
                     <router-link
                         class="
-                            w-37.5
-                            h-15
+                            w-43.75
+                            h-12.5
+                            md:w-37.5
+                            md:h-15
                             bg-white
                             flex
-                            justify-center
+                            justify-startm
+                            pl-2
                             items-center
                         "
                         @click="scrollToTop"
@@ -61,12 +71,27 @@
                             src="../../assets/image/menuLogo.svg"
                             alt="/"
                         />
+                        <div
+                            class="
+                                w-18
+                                h-8
+                                pl-1
+                                pt-1
+                                ml-1
+                                border-l-2 border-gray-300
+                                font-NotoSansJp font-normal
+                                text-xxs
+                            "
+                            :class="[isOpen ? 'hidden' : '']"
+                        >
+                            〇〇〇〇〇〇〇〇大学病院
+                        </div>
                     </router-link>
                 </div>
             </div>
         </div>
 
-        <div class="md:ml-25 w-52.5 bg-gray-200" v-if="isOpen">
+        <div class="md:ml-25 w-56.25 bg-gray-200" v-if="isOpen">
             <!-- The first one -->
             <div
                 class="flex justify-between bg-gray-300 h-7.5"

@@ -7,6 +7,10 @@
             class="parallax-slider"
             parallax
             grabCursor
+            :autoplay="swiperOption.autoplay"
+            :loop="swiperOption.loop"
+            :speed="swiperOption.speed"
+            :pagination="swiperOption.pagination"
             :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
             :slides-per-view="3"
             :space-between="12"
@@ -16,9 +20,7 @@
                 v-for="image in images"
                 :key="image.id"
             >
-                <div class="parallx-slide-image">
-                    <img src="../../assets/image/image7.jpeg" />
-                </div>
+                <img :src="image.imageUrl" />
             </swiper-slide>
         </swiper>
 
@@ -29,12 +31,21 @@
 </template>
 
 <script>
+
 import { Swiper, SwiperSlide, } from 'swiper/vue';
 import SwiperCore, { Navigation, Parallax, Autoplay } from 'swiper'
 import 'swiper/components/navigation/navigation.scss'
 // Import Swiper styles
 import 'swiper/swiper.scss';
+import { reactive } from '@vue/reactivity';
 SwiperCore.use([Navigation, Parallax, Autoplay])
+
+
+import img1 from "../../assets/image/banner_cps2021.png"
+import img2 from "../../assets/image/banner_jpds2020.png"
+import img3 from "../../assets/image/banner_kanblo51.png"
+import img4 from "../../assets/image/image7.jpeg"
+
 export default {
   data() {
     return {
@@ -42,25 +53,25 @@ export default {
       images: [
         {
           id: 1,
-          imageUrl: "../../assets/image/image/image1.jpeg"
+          imageUrl: img1
         }, {
           id: 2,
-          imageUrl: "../../assets/image/image/image1.jpeg"
+          imageUrl: img2
         }, {
           id: 3,
-          imageUrl: "../../assets/image/image/image1.jpeg"
+          imageUrl: img3
         }, {
           id: 4,
-          imageUrl: "../../assets/image/image/image1.jpeg"
+          imageUrl: img4
         }, {
           id: 5,
-          imageUrl: "../../assets/image/image/image1.jpeg"
+          imageUrl: img4
         }, {
           id: 6,
-          imageUrl: "../../assets/image/image/image1.jpeg"
+          imageUrl: img4
         }, {
           id: 7,
-          imageUrl: "../../assets/image/image/image1.jpeg"
+          imageUrl: img4
         }
       ]
     }
@@ -70,7 +81,22 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-  },
+  }, setup() {
+    const swiperOption = reactive({
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
+      loop: true,
+      speed: 1000,
+      pagination: {
+        clickable: true
+      }
+    })
+    return {
+      swiperOption
+    }
+  }
 }
 </script>
 
@@ -78,6 +104,7 @@ export default {
 .parallax-slider {
     position: relative;
     width: 93%;
+    height: 100%;
     margin-top: 14px;
     flex: none;
 }

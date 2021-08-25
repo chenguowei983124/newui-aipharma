@@ -10,14 +10,16 @@
         <div
             class="flex-auto h-15 md:h-20 block md:hidden"
             :class="[
-                $store.getters.getIsMenuClick ? 'mt-15' : 'fixed w-full top-15',
+                $store.getters.getIsMenuClick
+                    ? 'mt-12.5'
+                    : 'fixed w-full top-12.5',
             ]"
         >
             <search-bar class=""></search-bar>
         </div>
         <div
             class="block md:hidden"
-            :class="[$store.getters.getIsMenuClick ? '' : 'h-30']"
+            :class="[$store.getters.getIsMenuClick ? '' : 'h-27.5']"
         ></div>
     </div>
 
