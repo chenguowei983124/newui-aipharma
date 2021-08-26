@@ -59,18 +59,14 @@
                                     class="flex justify-end"
                                     @click="isDown = !isDown"
                                 >
-                                    <img
-                                        class="h-3 ml-2"
-                                        src="../../assets/image/selectTriangle-down.svg"
-                                        alt=""
+                                    <icon-down
+                                        class="ml-2"
                                         v-if="isDown == true"
-                                    />
-                                    <img
-                                        class="h-3 ml-2 transform rotate-180"
-                                        src="../../assets/image/selectTriangle-down.svg"
-                                        alt=""
+                                    ></icon-down>
+                                    <icon-down
+                                        class="ml-2 transform rotate-180"
                                         v-if="isDown == false"
-                                    />
+                                    ></icon-down>
                                     <div
                                         class="
                                             absolute
@@ -233,34 +229,15 @@
 </template>
 
 <script>
+import iconDown from '../svgImage/iconDown.vue';
 
 export default {
-  components: {},
+  components: { iconDown },
   props: { sites: [] },
   data() {
     return {
-      //   sites: [{ id: 0, name: '木村 太郎', hospital: '◯◯◯◯◯◯◯◯◯◯大学病院', authority: '施 設 管 理 者', },
-      //   ],
-      //   itemList: [
-      //     [{ 'id': '1', 'title': 'Q&A', 'itemStyle': 'title' }],
-      //     [{ 'id': '2', 'title': '投稿データ', 'itemStyle': 'item' }],
-      //     [{ 'id': '3', 'title': '一時保存データ', 'itemStyle': 'item' }],
-      //     [{ 'id': '4', 'title': 'おくすり事例', 'itemStyle': 'title' }],
-      //     [{ 'id': '5', 'title': '投稿データ', 'itemStyle': 'item' }],
-      //     [{ 'id': '6', 'title': '一時保存データ', 'itemStyle': 'item' }],
-      //     [{ 'id': '7', 'title': '入出力', 'itemStyle': 'item' }],
-      //     [{ 'id': '8', 'title': 'その他', 'itemStyle': 'title' }],
-      //     [{ 'id': '9', 'title': '投稿データ', 'itemStyle': 'item' }],
-      //     [{ 'id': '10', 'title': '一時保存データ', 'itemStyle': 'item' }],
-      //   ],
       isDown: true,
       isSelect: true,
-      //   itemUserList: [
-      //     { 'id': '1', 'title': 'マイページ' },
-      //     { 'id': '2', 'title': '施設切替' },
-      //     { 'id': '3', 'title': '設定' },
-      //     { 'id': '4', 'title': 'ログアウト' }
-      //   ]
     };
   },
   couputed: {},

@@ -1,5 +1,5 @@
 <template>
-    <div class="container" v-if="headerStyle == '1'">
+    <div class="" v-if="headerStyle == '1'">
         <input type="radio" name="tab" id="a1" class="hidden" checked />
         <input type="radio" name="tab" id="a2" class="hidden" />
         <div class="flex space-x-2 nav">
@@ -35,10 +35,7 @@
         </div>
         <slot></slot>
     </div>
-    <div
-        class="container"
-        :class="[headerStyle == '2' ? 'hidden md:block' : 'block']"
-    >
+    <div class="" :class="[headerStyle == '2' ? 'hidden md:block' : 'block']">
         <label
             class="
                 flex

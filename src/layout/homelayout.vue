@@ -54,11 +54,11 @@
             h-15
             w-15
             bottom-5
-            right-5
+            right-1.25
             bg-toTop
             text-white
             rounded-full
-            md:hidden
+            md:right-37.5
         "
         @click="toTop"
     >

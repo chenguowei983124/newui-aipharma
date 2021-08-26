@@ -18,14 +18,11 @@
                 </div>
             </div>
             <!-- </div> -->
-            <div class="whitespace-nowrap flex items-center">
-                <img
-                    class="h-3 cursor-pointer"
-                    src="../../assets/image/selectTriangle-down.svg"
-                    alt=""
+            <div class="whitespace-nowrap flex items-center w-3 cursor-pointer">
+                <icon-down
                     @click="linkClickDown"
                     v-if="isDown == false"
-                />
+                ></icon-down>
             </div>
             <!-- 投稿ボタン -->
             <!-- <div class=""> -->
@@ -122,13 +119,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="whitespace-nowrap flex items-center">
-                    <img
-                        class="h-3 cursor-pointer transform rotate-180"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
+                <div class="whitespace-nowrap flex items-center w-3">
+                    <icon-down
+                        class="cursor-pointer transform rotate-180"
                         @click="linkClickDown"
-                    />
+                    ></icon-down>
                 </div>
 
                 <!-- 投稿ボタン -->
@@ -298,67 +293,6 @@
                 v-if="isSelect == true"
                 class="flex justify-end pt-2 items-center space-x-2 mr-2"
             >
-                <div class="invisible">
-                    <div
-                        class="
-                            rounded-full
-                            h-9
-                            w-9
-                            bg-backgroundMainSearch
-                            flex
-                            justify-center
-                            items-center
-                        "
-                    >
-                        <div class="text-white notoSansJpAndFourteen font-bold">
-                            {{
-                                $store.getters.topManagementInfo.name.substring(
-                                    0,
-                                    2
-                                )
-                            }}
-                        </div>
-                    </div>
-                </div>
-                <div class="whitespace-nowrap flex items-center invisible">
-                    <img
-                        class="h-3 cursor-pointer transform rotate-180"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                    />
-                </div>
-
-                <!-- 投稿ボタン -->
-                <div class="invisible">
-                    <div
-                        class="
-                            h-9
-                            w-9
-                            rounded-full
-                            bg-personInformationButton
-                            flex
-                            justify-center
-                            items-center
-                            cursor-pointer
-                        "
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke="white"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                            />
-                        </svg>
-                    </div>
-                </div>
                 <!-- データ管理ボタン -->
                 <div class="">
                     <div
@@ -402,7 +336,6 @@
                     "
                     v-if="isSelect"
                 >
-                    <!--  -->
                     <div
                         v-for="item in itemList"
                         :key="item"
@@ -446,8 +379,9 @@
 </template>
 
 <script>
+import iconDown from "../svgImage/iconDown.vue"
 export default {
-  components: {},
+  components: { iconDown },
   props: {},
   data() {
     return {

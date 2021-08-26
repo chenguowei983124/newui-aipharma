@@ -8,21 +8,16 @@
             <a class="text-searchDropdown font-bold pl-2 text-xs NotoSansJp">
                 {{ itemValue }}
             </a>
-            <img
-                class="h-2 ml-1 mr-1"
-                src="../../assets/image/triangle-down.svg"
-                alt=""
-                v-if="isDown == false"
-            />
-            <img
-                class="h-2 ml-1 mr-1"
-                src="../../assets/image/triangle-up.svg"
-                alt=""
-                v-else
-            />
+            <div class="ml-1 mr-1">
+                <triangle-down-svg v-if="isDown == false"></triangle-down-svg>
+                <triangle-down-svg
+                    v-else
+                    class="transform rotate-180"
+                ></triangle-down-svg>
+            </div>
         </div>
         <div
-            class="absolute bg-searchBar w-45"
+            class="absolute bg-searchBar w-45 cursor-pointer"
             v-if="isDown"
             @click="isSelect = !isSelect"
         >
@@ -81,11 +76,7 @@
                             class="flex hover:text-googleTitle"
                             @click="itemClick(value)"
                         >
-                            <img
-                                class="w-4 h-4 mt-1"
-                                src="../../assets/image/check.svg"
-                            />
-
+                            <check-svg class="mt-1"> </check-svg>
                             <!-- すべてアイテム -->
                             <a
                                 v-if="value.itemStyle == 'All'"
@@ -123,8 +114,11 @@
 
 <script>
 
+import checkSvg from '../svgImage/checkSvg.vue'
+import triangleDownSvg from '../svgImage/triangleDownSvg.vue'
+
 export default {
-  components: {},
+  components: { checkSvg, triangleDownSvg },
   props: {},
   data() {
     return {
@@ -139,23 +133,6 @@ export default {
         [{ 'id': '4', 'title': '病例（プレアボイド）', 'itemStyle': 'item' }],
         [{ 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item' }],
         [{ 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item' }]
-        //      [{ 'id': '3', 'title': 'KIT-DI DB', 'itemStyle': 'item' }],
-        // [{ 'id': '2', 'title': 'Q&A', 'itemStyle': 'title' }],
-        // [{ 'id': '3', 'title': 'KIT-DI DB', 'itemStyle': 'item' }],
-        // [{ 'id': '4', 'title': '施設 DI DB', 'itemStyle': 'item' }],
-        // [{ 'id': '5', 'title': 'おくすり事例', 'itemStyle': 'title' }],
-        // [{ 'id': '6', 'title': 'おくすり事例', 'itemStyle': 'item' }],
-        // [{ 'id': '7', 'title': '副作用事例', 'itemStyle': 'item' }],
-        // [{ 'id': '8', 'title': 'DI 辞書', 'itemStyle': 'title' }],
-        // [{ 'id': '9', 'title': 'DI 辞書', 'itemStyle': 'item' }],
-        // [{ 'id': '10', 'title': '掲示板', 'itemStyle': 'title' }],
-        // [{ 'id': '11', 'title': '全体', 'itemStyle': 'item' }],
-        // [{ 'id': '12', 'title': '施設', 'itemStyle': 'item' }],
-        // [{ 'id': '13', 'title': '他の検索エンジン', 'itemStyle': 'title' }],
-        // [{ 'id': '14', 'title': 'GooGle', 'itemStyle': 'item' }],
-        // [{ 'id': '15', 'title': 'PubMEd', 'itemStyle': 'item' }],
-        // [{ 'id': '16', 'title': 'J-STAGE', 'itemStyle': 'item' }],
-        // [{ 'id': '17', 'title': 'Safe-DI', 'itemStyle': 'item' }]
       ]
     };
   },

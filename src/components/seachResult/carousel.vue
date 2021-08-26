@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-between bg-cardTitlePmad h-28 mx-5 my-5">
-        <div class="nav-indicator prevArrow w-5 mx-1">
-            <img src="../../assets/image/iconmonstr-left.svg" alt="" />
+        <div class="nav-indicator prevArrow">
+            <icon-left class="w-5 mx-1"></icon-left>
         </div>
         <swiper
             class="parallax-slider"
@@ -24,8 +24,8 @@
             </swiper-slide>
         </swiper>
 
-        <div class="nav-indicator nextArrow w-5 mx-1">
-            <img src="../../assets/image/iconmonstr-right.svg" alt="" />
+        <div class="nav-indicator nextArrow">
+            <icon-right class="w-5 mx-1"></icon-right>
         </div>
     </div>
 </template>
@@ -39,8 +39,8 @@ import 'swiper/components/navigation/navigation.scss'
 import 'swiper/swiper.scss';
 import { reactive } from '@vue/reactivity';
 SwiperCore.use([Navigation, Parallax, Autoplay])
-
-
+import iconLeft from "../svgImage/iconLeft.vue"
+import iconRight from "../svgImage/iconRight.vue"
 import img1 from "../../assets/image/banner_cps2021.png"
 import img2 from "../../assets/image/banner_jpds2020.png"
 import img3 from "../../assets/image/banner_kanblo51.png"
@@ -81,6 +81,8 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
+    iconLeft,
+    iconRight
   }, setup() {
     const swiperOption = reactive({
       autoplay: {

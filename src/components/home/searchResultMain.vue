@@ -46,7 +46,13 @@
             >
             </result-detail-row
         ></resut-tag>
-        <div class="md:flex space-y-2 space-x-0 md:space-y-0 md:space-x-4">
+        <div
+            class="
+                md:grid md:grid-cols-2
+                space-y-2 space-x-0
+                md:space-y-0 md:space-x-4
+            "
+        >
             <resut-tag headerStyle="5" title1="医薬品更新情報"
                 ><result-detail-row class="searchResult_detail_gray">
                     <div class="h-15 font-bold">Coming Soon…</div>

@@ -66,12 +66,16 @@
                         @click="scrollToTop"
                         to="/"
                     >
-                        <img
+                        <menu-logo-svg
+                            class="w-21 h-9.5"
+                            v-if="isDispaly || isOpen"
+                        ></menu-logo-svg>
+                        <!-- <img
                             class="w-21 h-9.5"
                             v-if="isDispaly || isOpen"
                             src="../../assets/image/menuLogo.svg"
                             alt="/"
-                        />
+                        /> -->
                         <div
                             class="
                                 md:hidden
@@ -122,19 +126,10 @@
                     </svg>
                 </div>
                 <!-- Triangle icon -->
-                <div class="cursor-pointer">
-                    <img
-                        class="h-3 mt-2.5 mr-3.75"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                        v-if="itemType1 == false"
-                    />
-                    <img
-                        class="h-3 mt-2.5 mr-3.75 transform rotate-180"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                        v-else
-                    />
+                <div class="cursor-pointer mt-2.5 mr-3.75">
+                    <icon-down v-if="itemType1 == false" class=""></icon-down>
+
+                    <icon-down v-else class="transform rotate-180"></icon-down>
                 </div>
             </div>
             <div class="" v-for="items in menuItemList" :key="items">
@@ -184,19 +179,10 @@
                     </div>
                 </div>
                 <!-- Triangle icon -->
-                <div class="cursor-pointer">
-                    <img
-                        class="h-3 mt-2.5 mr-3.75"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                        v-if="itemType2 == false"
-                    />
-                    <img
-                        class="h-3 mt-2.5 mr-3.75 transform rotate-180"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                        v-else
-                    />
+                <div class="cursor-pointer mt-2.5 mr-3.75">
+                    <icon-down v-if="itemType2 == false" class=""></icon-down>
+
+                    <icon-down v-else class="transform rotate-180"></icon-down>
                 </div>
             </div>
             <div class="" v-for="items in menuItemList2" :key="items">
@@ -244,19 +230,10 @@
                     </div>
                 </div>
                 <!-- Triangle icon -->
-                <div class="cursor-pointer">
-                    <img
-                        class="h-3 mt-2.5 mr-3.75"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                        v-if="itemType3 == false"
-                    />
-                    <img
-                        class="h-3 mt-2.5 mr-3.75 transform rotate-180"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                        v-else
-                    />
+                <div class="cursor-pointer mt-2.5 mr-3.75">
+                    <icon-down v-if="itemType3 == false" class=""></icon-down>
+
+                    <icon-down v-else class="transform rotate-180"></icon-down>
                 </div>
             </div>
             <div class="" v-for="items in menuItemList3" :key="items">
@@ -319,19 +296,10 @@
                     </div>
                 </div>
                 <!-- Triangle icon -->
-                <div class="cursor-pointer">
-                    <img
-                        class="h-3 mt-2.5 mr-3.75"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                        v-if="itemType4 == false"
-                    />
-                    <img
-                        class="h-3 mt-2.5 mr-3.75 transform rotate-180"
-                        src="../../assets/image/selectTriangle-down.svg"
-                        alt=""
-                        v-else
-                    />
+                <div class="cursor-pointer mt-2.5 mr-3.75">
+                    <icon-down v-if="itemType4 == false" class=""></icon-down>
+
+                    <icon-down v-else class="transform rotate-180"></icon-down>
                 </div>
             </div>
             <div class="" v-for="items in menuItemList4" :key="items">
@@ -359,9 +327,11 @@
 
 <script>
 import { computed } from '@vue/runtime-core';
+import menuLogoSvg from '../svgImage/menuLogoSvg.vue';
+import iconDown from '../svgImage/iconDown.vue';
 export default {
   name: 'dropdown',
-  components: {},
+  components: { menuLogoSvg, iconDown },
   props: { isDispaly: false },
   data() {
     return {
@@ -425,5 +395,5 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
 </style>
