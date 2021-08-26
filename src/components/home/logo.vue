@@ -1,10 +1,29 @@
 <template>
     <div class="flex justify-around invisible md:visible">
-        <img
-            class="w-0 md:w-60 md:h-32"
-            src="../../assets/image/AI-PHARMA_logo.svg"
-            alt=""
-        />
+        <logo-image class="w-0 md:w-60 md:h-32"></logo-image>
+        <!-- <img class="w-0 md:w-60 md:h-32" :src="logoImage" alt="" /> -->
     </div>
 </template>
 
+<script>
+import logoImage from '../svgImage/logoSvg.vue'
+export default {
+  components: { logoImage },
+  props: {},
+  data() {
+    return {
+      logoImage
+    };
+  },
+  couputed: {},
+  watch: {},
+  methods: {
+
+  },
+  created() {
+
+  }
+}
+</script>
+<style scoped>
+</style>
