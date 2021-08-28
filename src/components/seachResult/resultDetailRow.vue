@@ -1,22 +1,26 @@
 <template>
     <div>
+        <!-- itemType 1:ラベル 2:日付 3:タイトル -->
         <div
             class="
+                pt-1.25
+                space-y-1.5
+                md:space-y-0
                 md:flex
+                items-baseline
                 md:border-white
                 md:space-x-3
-                align-baseline
-                items-center
-                pt-1.5
             "
             :class="getLineStyle(index, lineStyle)"
             v-for="(row, index) in sites"
             :key="row"
         >
+            <!-- sp 最初の行目 -->
             <div
-                class="items-center align-baseline pl-2 md:pl-5"
+                class="ml-2.5 md:h-4 md:flex items-center"
                 :class="proAreaStyle"
             >
+                <!-- 属性ラベル -->
                 <result-detail-row-item
                     itemType="1"
                     :typeKB="row.type"
@@ -27,16 +31,19 @@
                     :typeKB="row.group"
                     v-if="row.group != undefined"
                 ></result-detail-row-item>
+                <!-- 未アイコン -->
                 <result-detail-row-item
                     itemType="1"
                     :typeKB="row.looked"
                     v-if="row.looked != undefined"
                 ></result-detail-row-item>
+                <!-- date -->
                 <result-detail-row-item
                     itemType="2"
                     :itemValue="row.date"
                     v-if="row.date != undefined"
                 ></result-detail-row-item>
+
                 <result-detail-row-item
                     itemType="2"
                     :itemValue="getDateFrom(row.dateFrom, row.dateTo)"
@@ -48,7 +55,6 @@
                     addStyle=" block w-12 h-5"
                     v-if="row.dateTo != undefined"
                 ></result-detail-row-item>
-
                 <result-detail-row-item
                     itemType="1"
                     :typeKB="row.states"
@@ -56,12 +62,10 @@
                     v-if="row.states != undefined"
                 ></result-detail-row-item>
             </div>
-
-            <span class="flex-grow truncate items-center align-baseline">
-                <span
-                    class="justify-start items-center align-baseline"
-                    :class="midAreaStyle"
-                >
+            <!-- sp 二行目 -->
+            <div class="ml-2.5 md:ml-0 flex-grow truncate md:h-6">
+                <span class="items-center" :class="midAreaStyle">
+                    <!-- title text -->
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.title"
@@ -69,36 +73,38 @@
                         :itemStyle="resetTitle(midDetailStyle)"
                         v-if="row.title != undefined"
                     ></result-detail-row-item>
-
+                    <div></div>
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.urlTitle"
                         addStyle="underline pl-2 md:pl-0"
                         v-if="row.urlTitle != undefined"
                     ></result-detail-row-item>
+                    <!-- 要閲覧ラベル -->
                     <result-detail-row-item
                         itemType="1"
                         :typeKB="row.browseRequired"
                         v-if="row.browseRequired != undefined"
-                        addStyle="hidden md:block flex-none "
+                        addStyle="hidden md:block flex-none"
                     ></result-detail-row-item>
                 </span>
-            </span>
-
+            </div>
+            <!-- sp 三行目 -->
             <div
                 class="
-                    flex-none
-                    space-x-1.5
-                    md:space-x-3
-                    items-center
-                    align-baseline
+                    ml-5
+                    md:ml-0
                     pb-2
-                    pl-2
-                    md:0
+                    md:pb-0
                     md:pr-5
+                    flex-none
+                    md:h-4
+                    items-center
+                    md:space-x-2.5
                 "
                 :class="bakAreaStyle"
             >
+                <!-- 要閲覧ラベル -->
                 <result-detail-row-item
                     itemType="1"
                     :typeKB="row.browseRequired"
@@ -106,14 +112,16 @@
                         row.browseRequired != undefined &&
                         row.browseRequired == 'browse'
                     "
-                    addStyle="block md:hidden text-xs md:text-xxss md:flex-none"
+                    addStyle="flex justify-center items-center mr-1.875 block md:hidden text-xs md:text-xxss md:flex-none"
                 ></result-detail-row-item>
+                <!-- 告知ラベル -->
                 <result-detail-row-item
                     itemType="1"
                     :typeKB="row.notificationType"
                     v-if="row.notificationType != undefined"
-                    addStyle="md:flex-none"
+                    addStyle="flex justify-center items-center mr-1.25 md:flex-none"
                 ></result-detail-row-item>
+                <!-- view数 -->
                 <result-detail-row-item
                     itemType="4"
                     itemTitle=" view"
@@ -153,15 +161,14 @@ export default {
   },
   data() {
     return {
-
     };
   }, methods: {
     getLookedTitle(lookedKB, midStyle) {
       if (lookedKB != undefined) {
         if (lookedKB == "Looked") {
-          return "truncate md:underline md:whitespace-pre  text-dropdownListItem"
+          return "truncate underline md:whitespace-pre text-dropdownListItem"
         } else {
-          return "truncate md:underline md:whitespace-pre"
+          return "truncate underline md:whitespace-pre"
         }
       } else {
         if (midStyle == "style2") {
@@ -169,7 +176,6 @@ export default {
         }
       }
     },
-    // �^�C�g����Style�����Z�b�g
     resetTitle(midStyle) {
       if (midStyle == "style2") {
         return "searchResult_title_font_14 truncate block pl-2 md:pl-0"
@@ -194,6 +200,7 @@ export default {
       } else {
         line.push("border-b-2 border-grayline")
       }
+
       if (index == 4) {
         return "md:pb-4"
       } else if (index == 0) {
@@ -212,8 +219,8 @@ export default {
         style.push("flex flex-row md:flex-col md:space-x-0 space-x-2 ")
       }
       return style
-
     })
+
     const midAreaStyle = computed(() => {
       const style = []
       if (props.midDetailStyle == "style1") {
@@ -223,16 +230,16 @@ export default {
         style.push("")
       }
       return style
-
     })
+
     const bakAreaStyle = computed(() => {
       const style = []
       if (props.bakDetailStyle == "style1") {
         style.push("flex")
       }
       return style
-
     })
+
     return {
       proAreaStyle,
       midAreaStyle,

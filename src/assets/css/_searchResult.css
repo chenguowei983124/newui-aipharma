@@ -57,13 +57,13 @@
 
 /* ラベル　未 */
 .searchResult_lable_notLooked{
-    @apply searchResult_label_font_10 ring-1 ring-notlooked text-notlooked bg-notlooked w-4 h-4 text-center;
+    @apply searchResult_label_font_10 ring-1 ring-notlooked text-notlooked bg-notlooked w-4 h-4 flex items-center justify-center;
 }
 
 /* ラベル　要閲覧 */
 .searchResult_lable_browse{
-    @apply searchResult_label_font_10_b text-white bg-browse w-10  h-4 text-center ring-1 ring-browse;
-}
+    @apply searchResult_label_font_10_b text-white bg-browse w-8 h-4 ring-1 ring-browse;
+}   
 
 /* ラベル　安全 */
 .searchResult_lable_safety{
@@ -97,12 +97,12 @@
 
 /* ラベル　告知 */
 .searchResult_lable_notice{
-    @apply searchResult_label_font_10 text-notice ring-notice w-16.25 h-4 text-center  ring-1 ;
+    @apply searchResult_label_font_10 text-notice ring-notice w-16.25 h-4 ring-1;
 }
 
 /* ラベル　view */
 .searchResult_lable_view{
-    @apply searchResult_label_font_12 text-view  w-16.25 h-4 text-center   ;
+    @apply searchResult_label_font_12 text-view  w-16.25 h-4 text-center;
 }
 
 /* ラベル　日付 */
