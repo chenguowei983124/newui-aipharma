@@ -68,7 +68,7 @@ export default {
     searchClick: function (event) {
       this.$store.dispatch('saveSearchValue', this.searchValue)
 
-      this.$router.push('/searchAllResult')
+      this.$router.push('/searchResultAll')
     }
   }
 }
