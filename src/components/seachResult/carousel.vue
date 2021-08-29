@@ -1,7 +1,7 @@
 <template>
-    <div class="flex justify-between bg-cardTitlePmad h-28 mx-5 my-5">
-        <div class="nav-indicator prevArrow">
-            <icon-left class="w-5 mx-1"></icon-left>
+    <div class="flex justify-between bg-cardTitlePmad h-21 mx-5 my-5">
+        <div class="nav-indicator prevArrow w-7.5">
+            <icon-left class="w-4 mx-1"></icon-left>
         </div>
         <swiper
             class="parallax-slider"
@@ -12,8 +12,9 @@
             :speed="swiperOption.speed"
             :pagination="swiperOption.pagination"
             :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
-            :slides-per-view="3"
-            :space-between="12"
+            :slides-per-view="2"
+            :space-between="-65"
+            :centeredSlides="true"
         >
             <swiper-slide
                 class="parallax-slide"
@@ -22,10 +23,11 @@
             >
                 <img :src="image.imageUrl" />
             </swiper-slide>
+            <div class="absolute right-72 w-12.5 h-36 bg-red-400 block"></div>
         </swiper>
 
-        <div class="nav-indicator nextArrow">
-            <icon-right class="w-5 mx-1"></icon-right>
+        <div class="nav-indicator nextArrow w-7.5">
+            <icon-right class="w-4 mx-2"></icon-right>
         </div>
     </div>
 </template>
@@ -103,26 +105,60 @@ export default {
 </script>
 
 <style>
-.parallax-slider {
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+/* .parallax-slider {
     position: relative;
     width: 93%;
     height: 100%;
     margin-top: 14px;
     flex: none;
-}
+} */
 .parallax-slide {
+    left: 40px;
+    /* width: 300px !important; */
+    text-align: center;
+    font-size: 18px;
+    background-color: rgb(153, 153, 153);
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;*/
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.swiper-slide img {
+    display: block;
+    width: 288px;
+    height: 70px;
+    position: relative;
+
+    /* object-fit: cover; */
+}
+/* .parallax-slide {
     height: 80px !important;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    width: 33% !important;
+    width: 30% !important;
     margin-top: 1px;
     margin-bottom: 4px;
     flex: none;
-}
+} */
 .nav-indicator {
-    margin-top: 4.5%;
+    margin-top: 4%;
     flex: none;
 }
 </style>
