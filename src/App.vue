@@ -4,7 +4,7 @@
         <div
             class="
                 relative
-                flex-none
+                flex-shrink
                 md:block
                 md:overflow-x-auto
                 w-full

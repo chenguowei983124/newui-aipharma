@@ -23,7 +23,6 @@
             >
                 <img :src="image.imageUrl" />
             </swiper-slide>
-            <div class="absolute right-72 w-12.5 h-36 bg-red-400 block"></div>
         </swiper>
 
         <div class="nav-indicator nextArrow w-7.5">
@@ -109,16 +108,8 @@ export default {
     width: 100%;
     height: 100%;
 }
-/* .parallax-slider {
-    position: relative;
-    width: 93%;
-    height: 100%;
-    margin-top: 14px;
-    flex: none;
-} */
 .parallax-slide {
     left: 40px;
-    /* width: 300px !important; */
     text-align: center;
     font-size: 18px;
     background-color: rgb(153, 153, 153);
@@ -137,12 +128,13 @@ export default {
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
+    z-index: 0;
 }
 .swiper-slide img {
     display: block;
     width: 288px;
     height: 70px;
-    position: relative;
+    z-index: 0;
 
     /* object-fit: cover; */
 }

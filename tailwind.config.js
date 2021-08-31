@@ -80,6 +80,7 @@ module.exports = {
         '93.75': '23.4375rem',
         // 484px
         '121': '30.25rem',
+        '191.25': '47.8125rem',
         '270': '67.5rem',
 
       },
@@ -105,6 +106,7 @@ module.exports = {
         'international': '#d8c8e6',
         'rescue': '#d9edc8',
         'toTop': '#f09600',
+        'carousel': 'rgb(46, 38, 35)',
         // 右カラム
         // 背景 
         'backgroundMain': '#d6edf8',
@@ -203,7 +205,11 @@ module.exports = {
         DEFAULT: theme('colors.gray.200', 'currentColor'),
         // 組織内DI・症例 登録ボタン、マイデータ 帯・境界線
         'personOrganizationButton': '#f09600',
-      }),
+      }), screens: {
+        'mid': '980px',
+        // => @media (min-width: 640px) { ... }
+
+      },
     },
   },
   variants: {

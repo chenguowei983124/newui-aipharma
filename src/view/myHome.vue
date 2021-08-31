@@ -1,9 +1,7 @@
 <template>
     <div>
         <my-header></my-header>
-        <div class="md:ml-12.5 md:mr-12.5">
-            <home-main></home-main>
-        </div>
+        <home-main></home-main>
         <home-bottom-template class="mt-20"></home-bottom-template>
     </div>
 </template>
