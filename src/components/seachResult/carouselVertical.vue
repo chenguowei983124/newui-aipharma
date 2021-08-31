@@ -1,7 +1,6 @@
 <template>
-    <div class="flex w-82.5 h-82.5">
+    <div class="flex h-82.5">
         <swiper
-            class="parallax-slider"
             parallax
             grabCursor
             :direction="'vertical'"
@@ -10,14 +9,10 @@
             :speed="swiperOption.speed"
             :pagination="swiperOption.pagination"
             :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
-            :slides-per-view="3"
-            :space-between="30"
+            :slidesPerView="3"
+            :spaceBetween="20"
         >
-            <swiper-slide
-                class="parallax-slide"
-                v-for="image in images"
-                :key="image.id"
-            >
+            <swiper-slide v-for="image in images" :key="image.id">
                 <img :src="image.imageUrl" />
             </swiper-slide>
         </swiper>
@@ -33,8 +28,6 @@ import 'swiper/components/navigation/navigation.scss'
 import 'swiper/swiper.scss';
 import { reactive } from '@vue/reactivity';
 SwiperCore.use([Navigation, Parallax, Autoplay])
-import iconLeft from "../svgImage/iconLeft.vue"
-import iconRight from "../svgImage/iconRight.vue"
 import img1 from "../../assets/image/banner_cps2021.png"
 import img2 from "../../assets/image/banner_jpds2020.png"
 import img3 from "../../assets/image/banner_kanblo51.png"
@@ -75,8 +68,6 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    iconLeft,
-    iconRight
   }, setup() {
     const swiperOption = reactive({
       autoplay: {
@@ -122,9 +113,8 @@ export default {
 }
 
 .swiper-slide img {
-    left: 0;
     display: block;
-    width: 100%;
-    height: 120px;
+    width: 330px;
+    height: 100px;
 }
 </style>

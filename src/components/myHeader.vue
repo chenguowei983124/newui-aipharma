@@ -18,7 +18,7 @@
             </div>
             <div class="flex-auto"></div>
             <div class="w-15 md:mr-12.5 md:mt-5">
-                <div class="flex justify-center cursor-pointer">
+                <div class="flex justify-end cursor-pointer">
                     <div class="underline font-NotoSansJp text-sm">ヘルプ</div>
                 </div>
             </div>
