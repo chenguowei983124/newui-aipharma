@@ -32,7 +32,10 @@
                 bakDetailStyle="style2"
                 lineStyle="grayline"
             >
-                <carousel class="mt-3 mb-3"></carousel> </result-detail-row
+                <carousel class="mt-3 mb-3 hidden md:block"></carousel>
+                <carousel-vertical
+                    class="block md:hidden"
+                ></carousel-vertical> </result-detail-row
         ></resut-tag>
 
         <resut-tag
@@ -90,9 +93,11 @@
 import resutTag from '../seachResult/resultTag.vue'
 import resultDetailRow from '../seachResult/resultDetailRow.vue'
 import carousel from '../seachResult/carousel.vue'
+import carouselVertical from '../seachResult/carouselVertical.vue'
+
 export default {
   components: {
-    resutTag, resultDetailRow, carousel
+    resutTag, resultDetailRow, carousel, carouselVertical
   },
   props: {},
   data() {
