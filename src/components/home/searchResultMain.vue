@@ -32,7 +32,7 @@
                 bakDetailStyle="style2"
                 lineStyle="grayline"
             >
-                <carousel class="mt-3 mb-3"></carousel>
+                <carousel class="mt-7 md:mt-3 mb-3"></carousel>
                 <carousel-vertical
                     class="block md:hidden -mt-8"
                 ></carousel-vertical> </result-detail-row

@@ -13,8 +13,20 @@
             relative
         "
     >
-        <div class="nav-indicator prevArrow w-7.5">
-            <icon-left class="w-4 mx-1"></icon-left>
+        <div
+            class="
+                nav-indicator
+                prevArrow
+                -top-7
+                w-7.5
+                z-99
+                absolute
+                bg-cardTitlePmad
+            "
+        >
+            <div class="w-7.5 flex flex-col z-99 justify-center h-20">
+                <icon-left class="w-4 mx-1 z-99 absolute"></icon-left>
+            </div>
         </div>
         <div
             class="
@@ -26,16 +38,17 @@
                 w-full
                 absolute
                 h-19.25
-                z-99
+                z-75
             "
         >
             <div
-                class="w-12.5 z-99 bg-gradient-to-r from-gray-900 bg-opacity-75"
+                class="w-12.5 z-75 bg-gradient-to-r from-gray-900 bg-opacity-75"
             ></div>
             <div
-                class="w-12.5 z-99 bg-gradient-to-l from-gray-900 bg-opacity-75"
+                class="w-12.5 z-75 bg-gradient-to-l from-gray-900 bg-opacity-75"
             ></div>
         </div>
+
         <swiper
             class="parallax-slider"
             parallax
@@ -57,10 +70,25 @@
                 <img :src="image.imageUrl" />
             </swiper-slide>
         </swiper>
-
-        <div class="nav-indicator nextArrow w-7.5">
-            <icon-right class="w-4 mx-2"></icon-right>
+        <div
+            class="
+                nav-indicator
+                nextArrow
+                -top-7
+                right-0
+                w-7.5
+                z-99
+                absolute
+                bg-cardTitlePmad
+            "
+        >
+            <div class="w-7.5 flex flex-col z-99 justify-center h-20">
+                <icon-right class="w-4 mx-1 z-99 absolute"></icon-right>
+            </div>
         </div>
+        <!-- <div class="nav-indicator nextArrow">
+            <icon-right class="w-4 mx-2"></icon-right>
+        </div> -->
     </div>
 </template>
 
