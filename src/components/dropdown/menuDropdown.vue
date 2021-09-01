@@ -21,18 +21,10 @@
                 </svg>
                 <!-- x icon -->
                 <svg
-                    class="
-                        absolute
-                        top-0
-                        -left-25
-                        w-12.5
-                        h-12.5
-                        md:w-15
-                        md:h-15
-                        md:ml-25
-                        bg-gray-400
-                        z-99
-                    "
+                    class="w-12.5 h-12.5 md:w-15 md:h-15 md:ml-25 bg-gray-400"
+                    :class="{
+                        'absolute z-99 left-0 md:top-0 md:-left-25': isOpen,
+                    }"
                     fill="none"
                     stroke="white"
                     viewBox="-4 -4 32 32"
@@ -52,7 +44,8 @@
                     class="
                         w-43.75
                         h-12.5
-                        md:w-37.5
+                        md:w-30
+                        mid:w-37.5
                         md:h-15
                         bg-white
                         flex
@@ -60,16 +53,16 @@
                         md:justify-center
                         pl-2
                         items-center
-                        z-99
-                        absolute
-                        top-0
-                        left-15
                     "
+                    :class="{
+                        'absolute z-99 md:w-37.5 left-12 md:top-0 md:left-15':
+                            isOpen,
+                    }"
                     @click="scrollToTop"
                     to="/"
                 >
                     <menu-logo-svg
-                        class="w-21 left-10 h-9.5 z-99 absolute"
+                        class="w-21 h-9.5"
                         v-if="isDispaly || isOpen"
                     ></menu-logo-svg>
 
@@ -81,8 +74,6 @@
                             pl-1
                             pt-1
                             ml-1
-                            z-99
-                            absolute
                             border-l-2 border-gray-300
                             font-NotoSansJp font-normal
                             text-xxs
@@ -102,7 +93,10 @@
         }"
     ></div>
     <div
-        class="absolute top-15 z-99 w-56.25 md:w-52.5 bg-gray-200"
+        class="w-56.25 md:w-52.5 bg-gray-200"
+        :class="{
+            'absolute z-99 -left-2.5 top-12.5 md:top-15 md:left-0': isOpen,
+        }"
         v-if="isOpen"
     >
         <!-- The first one -->
