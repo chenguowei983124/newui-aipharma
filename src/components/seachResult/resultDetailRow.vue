@@ -174,6 +174,9 @@ export default {
           return "truncate underline md:whitespace-pre"
         }
       } else {
+        if (midStyle == "style1") {
+          return "underline"
+        }
         if (midStyle == "style2") {
           return "truncate block "
         }
