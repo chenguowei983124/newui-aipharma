@@ -233,7 +233,7 @@
                 <!-- <dataManagerDropdownList class="my-3"></dataManagerDropdownList> -->
             </div>
 
-            <div class="w-50">
+            <div class="md:w-30 mid:w-40">
                 <div class="flex justify-end cursor-pointer mt-5 mr-12.5">
                     <div class="underline font-NotoSansJp text-sm">ヘルプ</div>
                 </div>
