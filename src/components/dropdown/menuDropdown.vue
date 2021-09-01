@@ -48,7 +48,7 @@
                     ></path>
                 </svg>
                 <!-- Logo img -->
-                <!-- <router-link
+                <router-link
                     class="
                         w-43.75
                         h-12.5
@@ -60,21 +60,20 @@
                         md:justify-center
                         pl-2
                         items-center
+                        z-99
+                        absolute
+                        top-0
+                        left-15
                     "
                     @click="scrollToTop"
                     to="/"
-                > -->
-                <!-- <menu-logo-svg
-                        class="w-21 h-9.5 z-99 absolute"
+                >
+                    <menu-logo-svg
+                        class="w-21 left-10 h-9.5 z-99 absolute"
                         v-if="isDispaly || isOpen"
-                    ></menu-logo-svg> -->
-                <!-- <img
-                            class="w-21 h-9.5"
-                            v-if="isDispaly || isOpen"
-                            src="../../assets/image/menuLogo.svg"
-                            alt="/"
-                        /> -->
-                <!-- <div
+                    ></menu-logo-svg>
+
+                    <div
                         class="
                             md:hidden
                             w-18
@@ -91,8 +90,8 @@
                         :class="[isOpen ? 'hidden' : '']"
                     >
                         〇〇〇〇〇〇〇〇大学病院
-                    </div> -->
-                <!-- </router-link> -->
+                    </div>
+                </router-link>
             </div>
         </div>
     </div>
