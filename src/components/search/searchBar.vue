@@ -1,5 +1,7 @@
 <template>
-    <div class="md:rounded-md bg-backgroundMainSearch flex items-center h-full">
+    <div
+        class="mid:rounded-md bg-backgroundMainSearch flex items-center h-full"
+    >
         <!-- 検索条件リスト -->
         <search-dropdown
             class="h-10 md:ml-32 flex-none hidden md:block"

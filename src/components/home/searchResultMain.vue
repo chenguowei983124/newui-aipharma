@@ -32,7 +32,7 @@
                 bakDetailStyle="style2"
                 lineStyle="grayline"
             >
-                <carousel class="mt-3 mb-3 hidden md:block"></carousel>
+                <carousel class="mt-7 mb-3"></carousel>
                 <carousel-vertical
                     class="block md:hidden"
                 ></carousel-vertical> </result-detail-row
@@ -55,6 +55,8 @@
                 space-y-2 space-x-0
                 md:space-y-0 md:space-x-4
             "
+            headerStyle="3"
+            title1="PMDA"
         >
             <resut-tag headerStyle="5" title1="医薬品更新情報"
                 ><result-detail-row class="searchResult_detail_gray">

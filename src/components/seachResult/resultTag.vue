@@ -96,6 +96,41 @@
         >
             <span> {{ title1 }}</span>
         </label>
+        <label
+            class="searchResult_header_bg_gray searchResult_header_font_noto_16"
+            v-if="headerStyle == '6'"
+        >
+            <span> {{ title1 }}</span>
+        </label>
+        <label
+            class="
+                flex
+                justify-between
+                h-10
+                rounded-t-lg
+                text-center
+                py-2
+                px-5
+                w-auto
+                bg-cardTitle
+                text-white
+                font-NotoSansJp font-bold
+                text-lg
+                items-baseline
+            "
+            v-if="headerStyle == '7'"
+        >
+            <span class="underline"> {{ title1 }}</span>
+            <span
+                class="
+                    bg-backgroundMainSearch
+                    text-white
+                    searchResult_title_font_14
+                    w-25
+                "
+                >該当：{{ $store.getters.searchAllDiKnowledge.count }}件</span
+            ></label
+        >
         <slot></slot>
     </div>
 </template>

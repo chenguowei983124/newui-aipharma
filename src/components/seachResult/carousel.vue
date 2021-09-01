@@ -1,7 +1,40 @@
 <template>
-    <div class="flex justify-between bg-cardTitlePmad h-21 mx-5 my-5">
+    <div
+        class="
+            flex
+            justify-between
+            bg-cardTitlePmad
+            mx-5
+            my-5
+            h-0
+            invisible
+            md:visible
+            md:h-21
+            relative
+        "
+    >
         <div class="nav-indicator prevArrow w-7.5">
             <icon-left class="w-4 mx-1"></icon-left>
+        </div>
+        <div
+            class="
+                flex
+                pl-7
+                pr-7.5
+                pt-1.75
+                justify-between
+                w-full
+                absolute
+                h-19.25
+                z-99
+            "
+        >
+            <div
+                class="w-12.5 z-99 bg-gradient-to-r from-gray-900 bg-opacity-75"
+            ></div>
+            <div
+                class="w-12.5 z-99 bg-gradient-to-l from-gray-900 bg-opacity-75"
+            ></div>
         </div>
         <swiper
             class="parallax-slider"
@@ -107,8 +140,10 @@ export default {
 .swiper {
     width: 100%;
     height: 100%;
+    z-index: 1;
 }
 .parallax-slide {
+    z-index: 1;
     left: 40px;
     text-align: center;
     font-size: 18px;
@@ -134,7 +169,7 @@ export default {
     display: block;
     width: 288px;
     height: 70px;
-    z-index: 0;
+    z-index: 1;
 
     /* object-fit: cover; */
 }

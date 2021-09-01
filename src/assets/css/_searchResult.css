@@ -8,6 +8,10 @@
 .searchResult_label_font_12{
     @apply font-NotoSansJp font-medium text-xs ;
 }
+.searchResult_label_font_noto_R_12{
+    @apply font-NotoSansJp font-normal text-xs ;
+}
+
 .searchResult_label_font_noto_12_b{
     @apply font-NotoSansJp font-bold text-xs ;
 }
@@ -105,9 +109,40 @@
     @apply searchResult_label_font_12 text-view  w-16.25 h-4 text-center;
 }
 
+/* ラベル　AI */
+.searchResult_lable_Ai{
+    @apply searchResult_label_font_12 bg-toTop text-white w-17.5 h-4 text-center;
+}
+
+/* ラベル　キーワード */
+.searchResult_lable_keyword{
+    @apply searchResult_label_font_12 bg-organization text-white w-17.5 h-4 text-center;
+}
+/* ラベル　確信度 タイトル */
+.searchResult_lable_certainty_title{
+    @apply searchResult_label_font_noto_R_12 text-black h-4 text-right;
+}
+
+/* ラベル　確信度 値 */
+.searchResult_lable_certainty_value{
+    @apply searchResult_label_font_noto_R_12 text-view h-4 text-left;
+}
+
+/* ラベル　自施設 値 */
+.searchResult_lable_ownFacility{
+    @apply searchResult_label_font_12 bg-organization text-white w-17.5 h-4 text-center;
+}
+/* ラベル　他施設 値 */
+.searchResult_lable_otherFacility{
+    @apply searchResult_label_font_12 bg-whole text-white w-17.5 h-4 text-center;
+}
 /* ラベル　日付 */
 .searchResult_date_title{
     @apply searchResult_date_font w-18.75 block;
+}
+
+.searchResult_overview{
+    @apply w-60 h-25 searchResult_title_font_14;
 }
 
 /* ラベル　タイトル */
@@ -122,6 +157,15 @@
 /* ラベル　update */
 .searchResult_lable_update{
     @apply searchResult_label_font_noto_12_b text-cardPmadUpadte w-12.5 h-4 text-left block;
+}
+
+/* ラベル　new */
+.searchResult_lable_new_right{
+    @apply searchResult_label_font_noto_12_b text-cardPmadNew md:w-12.5 h-4 text-left md:text-right block;
+}
+/* ラベル　update */
+.searchResult_lable_update_right{
+    @apply searchResult_label_font_noto_12_b text-cardPmadUpadte md:w-12.5 h-4 text-left md:text-right block;
 }
 
 .searchResult_detail_blue{
@@ -142,6 +186,8 @@
     @apply flex justify-between h-8 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
     text-white ;
 }
+
+
 /*---------------------------------------------------------------------------------------------------*/
 
 

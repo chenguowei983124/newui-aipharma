@@ -1,0 +1,322 @@
+<template>
+    <div>
+        <!-- itemType 1:ラベル 2:日付 3:タイトル -->
+        <div
+            class="
+                pt-1.25
+                space-y-1.5
+                md:space-x-3 md:space-y-0
+                md:flex
+                items-baseline
+                md:border-white
+            "
+            :class="getLineStyle(index, lineStyle)"
+            v-for="(row, index) in sites"
+            :key="row"
+        >
+            <!-- sp 最初の行目 -->
+            <div class="md:ml-5 md:h-4 items-center" v-if="sub1 != undefined">
+                <div
+                    class="md:flex"
+                    v-for="dispItem in sub1"
+                    :key="dispItem"
+                    :class="proAreaStyle"
+                >
+                    <!-- 属性ラベル -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.type"
+                        v-if="row.type != undefined && dispItem == 'type'"
+                    ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.group"
+                        v-if="row.group != undefined && dispItem == 'group'"
+                    ></result-detail-row-item>
+                    <!-- 未アイコン -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.looked"
+                        v-if="row.looked != undefined && dispItem == 'looked'"
+                    ></result-detail-row-item>
+                    <!-- date -->
+                    <result-detail-row-item
+                        itemType="2"
+                        :itemValue="row.date"
+                        v-if="row.date != undefined && dispItem == 'date'"
+                    ></result-detail-row-item>
+
+                    <result-detail-row-item
+                        itemType="2"
+                        :itemValue="getDateFrom(row.dateFrom, row.dateTo)"
+                        v-if="
+                            row.dateFrom != undefined && dispItem == 'dateFrom'
+                        "
+                    ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="2"
+                        :itemValue="row.dateTo"
+                        addStyle=" block w-12 h-5"
+                        v-if="row.dateTo != undefined && dispItem == 'dateTo'"
+                    ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.states"
+                        :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                        v-if="row.states != undefined && dispItem == 'states'"
+                    ></result-detail-row-item>
+                </div>
+            </div>
+            <!-- sp 二行目 -->
+            <div class="md:ml-0 flex-grow truncate md:h-6">
+                <span class="items-center" :class="midAreaStyle">
+                    <!-- title text -->
+                    <div class="underline truncate">
+                        <result-detail-row-item
+                            itemType="3"
+                            :itemValue="row.title"
+                            :itemStyle="resetTitle(midDetailStyle)"
+                            addStyle="truncate"
+                            v-if="row.title != undefined"
+                        ></result-detail-row-item>
+                    </div>
+
+                    <result-detail-row-item
+                        itemType="3"
+                        :itemValue="row.urlTitle"
+                        addStyle="underline truncate pl-2 md:pl-0"
+                        v-if="row.urlTitle != undefined"
+                    ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="5"
+                        :itemValue="row.overview"
+                        v-if="row.overview != undefined"
+                    ></result-detail-row-item>
+                    <!-- 要閲覧ラベル -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.browseRequired"
+                        v-if="row.browseRequired != undefined"
+                        addStyle="hidden md:block flex-none"
+                    ></result-detail-row-item>
+                </span>
+            </div>
+            <!-- sp 三行目 -->
+            <div
+                class="md:ml-0 md:pr-5 pb-2 md:pb-0 flex-none"
+                :class="bakAreaStyle"
+            >
+                <div
+                    class="flex md:space-x-2.5 ml-1.5 md:ml-0 items-center"
+                    v-for="dispItem in sub3"
+                    :key="dispItem"
+                >
+                    <!-- 確信度ラベル -->
+                    <div>
+                        <result-detail-row-item
+                            itemType="1"
+                            typeKB="CertaintyTitle"
+                            v-if="
+                                row.Certainty != undefined &&
+                                row.Certainty != '' &&
+                                dispItem == 'Certainty'
+                            "
+                        ></result-detail-row-item>
+                        <result-detail-row-item
+                            itemType="4"
+                            typeKB="CertaintyValue"
+                            :itemValue="row.Certainty"
+                            itemTitle="%"
+                            v-if="
+                                row.Certainty != undefined &&
+                                row.Certainty != '' &&
+                                dispItem == 'Certainty'
+                            "
+                            itemStyle="searchResult_lable_certainty_value"
+                        ></result-detail-row-item>
+                    </div>
+                    <!-- 要閲覧ラベル -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.browseRequired"
+                        v-if="
+                            row.browseRequired != undefined &&
+                            row.browseRequired == 'browse' &&
+                            dispItem == 'browseRequired'
+                        "
+                        addStyle="flex justify-center items-center mr-1.875 block md:hidden text-xs md:text-xxss md:flex-none"
+                    ></result-detail-row-item>
+                    <!-- 告知ラベル -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.notificationType"
+                        v-if="
+                            row.notificationType != undefined &&
+                            dispItem == 'notificationType'
+                        "
+                        addStyle="flex justify-center items-center mr-1.25 md:flex-none"
+                    ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.states"
+                        :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                        v-if="row.states != undefined && dispItem == 'states'"
+                    ></result-detail-row-item>
+                    <!-- date -->
+                    <result-detail-row-item
+                        itemType="2"
+                        :itemValue="row.date"
+                        v-if="row.date != undefined && dispItem == 'date'"
+                    ></result-detail-row-item>
+                    <!-- view数 -->
+                    <result-detail-row-item
+                        itemType="4"
+                        itemTitle=" view"
+                        :itemValue="row.viewCount"
+                        addStyle="md:flex-none"
+                        v-if="row.viewCount != undefined && dispItem == 'view'"
+                    ></result-detail-row-item>
+                </div>
+            </div>
+        </div>
+        <slot></slot>
+    </div>
+</template>
+
+<script>
+import resultDetailRowItem from './resultDetailRowItem.vue'
+import { computed } from '@vue/runtime-core'
+
+export default {
+  components: { resultDetailRowItem },
+  props: {
+    sites: Array,
+    proDetailStyle: {
+      type: String,
+      default: "style1"
+    },
+    midDetailStyle: {
+      type: String,
+      default: "style1"
+    },
+    bakDetailStyle: {
+      type: String,
+      default: "style1"
+    }, lineStyle: {
+      type: String,
+      default: "blueline"
+    }, sub1: Array,
+    sub2: Array,
+    sub3: Array
+  },
+  data() {
+    return {
+    };
+  }, methods: {
+    getLookedTitle(lookedKB, midStyle) {
+      if (lookedKB != undefined) {
+        if (lookedKB == "Looked") {
+          return "truncate underline md:whitespace-pre text-dropdownListItem"
+        } else {
+          return "truncate underline md:whitespace-pre"
+        }
+      } else {
+        if (midStyle == "style1") {
+          console.log("midStyle")
+          return "truncate underline md:whitespace-pre"
+
+        }
+        if (midStyle == "style2") {
+          return "truncate block pl-2 md:pl-0"
+        }
+      }
+    },
+    resetTitle(midStyle) {
+      if (midStyle == "style2") {
+        return "searchResult_title_font_14 truncate block pl-2 md:pl-0"
+      }
+    }
+    , getDateFrom(dateFrom, dateTo) {
+      if (dateTo != "") {
+        return dateFrom.concat(" - ")
+      } else {
+        return dateFrom
+      }
+    }, getPmdaStatesDefaultStype(states) {
+      if (states == "") {
+        return "w-12.5 hidden md:block "
+      } else {
+        if (states == "new") {
+
+          return "searchResult_lable_new_right"
+        } else {
+          return "searchResult_lable_update_right"
+        }
+        return null
+      }
+    }, getLineStyle(index, style) {
+      const line = []
+      if (style == "blueline") {
+        line.push("border-b-2 border-blueline")
+      } else {
+        line.push("border-b-2 border-grayline")
+      }
+
+      if (index == 4) {
+        return "md:pb-4"
+      } else if (index == 0) {
+        line.push("md:pt-4")
+      }
+      return line
+    }, isDisp1(itemName, rowItem) {
+      if (rowItem == undefined) {
+        return false
+      }
+      this.sub1.forEach(element => {
+        if (itemName == element) {
+          return true
+        } else {
+          return false
+        }
+      });
+    }
+  },
+  setup(props) {
+    const proAreaStyle = computed(() => {
+      const style = []
+      if (props.proDetailStyle == "style1") {
+        style.push("flex space-x-1.5 md:space-x-3 pl-2 md:pl-0")
+      }
+      if (props.proDetailStyle == "style2") {
+        style.push("flex flex-row md:flex-col md:space-x-0 space-x-2 ")
+      }
+      return style
+    })
+
+    const midAreaStyle = computed(() => {
+      const style = []
+      if (props.midDetailStyle == "style1") {
+        style.push("flex pl-2 md:pl-0")
+      }
+      if (props.proDetailStyle == "style2") {
+        style.push("flex flex-col")
+      }
+      return style
+    })
+
+    const bakAreaStyle = computed(() => {
+      const style = []
+      if (props.bakDetailStyle == "style1") {
+        style.push("flex")
+      }
+      return style
+    })
+
+    return {
+      proAreaStyle,
+      midAreaStyle,
+      bakAreaStyle
+    }
+  }
+}
+</script>

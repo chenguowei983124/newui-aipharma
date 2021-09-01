@@ -17,7 +17,7 @@
         >
             <!-- sp 最初の行目 -->
             <div
-                class="ml-2.5 md:h-4 md:flex items-center"
+                class="ml-2.5 md:ml-5 md:h-4 md:flex items-center"
                 :class="proAreaStyle"
             >
                 <!-- 属性ラベル -->
@@ -73,11 +73,11 @@
                         :itemStyle="resetTitle(midDetailStyle)"
                         v-if="row.title != undefined"
                     ></result-detail-row-item>
-                    <div></div>
+
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.urlTitle"
-                        addStyle="underline pl-2 md:pl-0"
+                        addStyle="underline pb-5"
                         v-if="row.urlTitle != undefined"
                     ></result-detail-row-item>
                     <!-- 要閲覧ラベル -->
@@ -92,7 +92,7 @@
             <!-- sp 三行目 -->
             <div
                 class="
-                    ml-5
+                    ml-2.5
                     md:ml-0
                     pb-2
                     md:pb-0
@@ -104,31 +104,33 @@
                 "
                 :class="bakAreaStyle"
             >
-                <!-- 要閲覧ラベル -->
-                <result-detail-row-item
-                    itemType="1"
-                    :typeKB="row.browseRequired"
-                    v-if="
-                        row.browseRequired != undefined &&
-                        row.browseRequired == 'browse'
-                    "
-                    addStyle="flex justify-center items-center mr-1.875 block md:hidden text-xs md:text-xxss md:flex-none"
-                ></result-detail-row-item>
-                <!-- 告知ラベル -->
-                <result-detail-row-item
-                    itemType="1"
-                    :typeKB="row.notificationType"
-                    v-if="row.notificationType != undefined"
-                    addStyle="flex justify-center items-center mr-1.25 md:flex-none"
-                ></result-detail-row-item>
-                <!-- view数 -->
-                <result-detail-row-item
-                    itemType="4"
-                    itemTitle=" view"
-                    :itemValue="row.viewCount"
-                    addStyle="md:flex-none"
-                    v-if="row.viewCount != undefined"
-                ></result-detail-row-item>
+                <div class="flex justify-end">
+                    <!-- 要閲覧ラベル -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.browseRequired"
+                        v-if="
+                            row.browseRequired != undefined &&
+                            row.browseRequired == 'browse'
+                        "
+                        addStyle="flex justify-center items-center mr-1.875 block md:hidden text-xs md:text-xxss md:flex-none"
+                    ></result-detail-row-item>
+                    <!-- 告知ラベル -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.notificationType"
+                        v-if="row.notificationType != undefined"
+                        addStyle="flex justify-center items-center mr-1.25 md:flex-none"
+                    ></result-detail-row-item>
+                    <!-- view数 -->
+                    <result-detail-row-item
+                        itemType="4"
+                        itemTitle=" view"
+                        :itemValue="row.viewCount"
+                        addStyle="md:ml-2.5 md:flex-none"
+                        v-if="row.viewCount != undefined"
+                    ></result-detail-row-item>
+                </div>
             </div>
         </div>
         <slot></slot>
@@ -172,13 +174,13 @@ export default {
         }
       } else {
         if (midStyle == "style2") {
-          return "truncate block pl-2 md:pl-0"
+          return "truncate block "
         }
       }
     },
     resetTitle(midStyle) {
       if (midStyle == "style2") {
-        return "searchResult_title_font_14 truncate block pl-2 md:pl-0"
+        return "searchResult_title_font_14 truncate block "
       }
     }
     , getDateFrom(dateFrom, dateTo) {
@@ -213,7 +215,7 @@ export default {
     const proAreaStyle = computed(() => {
       const style = []
       if (props.proDetailStyle == "style1") {
-        style.push("flex space-x-1.5 md:space-x-3 pl-2 md:pl-0")
+        style.push("flex space-x-1.5 md:space-x-3 ")
       }
       if (props.proDetailStyle == "style2") {
         style.push("flex flex-row md:flex-col md:space-x-0 space-x-2 ")
@@ -224,7 +226,7 @@ export default {
     const midAreaStyle = computed(() => {
       const style = []
       if (props.midDetailStyle == "style1") {
-        style.push("flex pl-2 md:pl-0")
+        style.push("flex")
       }
       if (props.proDetailStyle == "style2") {
         style.push("")

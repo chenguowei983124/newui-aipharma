@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-82.5">
+    <div class="flex h-82.5 w-full">
         <swiper
             parallax
             grabCursor
@@ -114,7 +114,7 @@ export default {
 
 .swiper-slide img {
     display: block;
-    width: 330px;
+    width: 90%;
     height: 100px;
 }
 </style>

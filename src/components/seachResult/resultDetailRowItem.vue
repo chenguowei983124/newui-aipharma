@@ -5,6 +5,7 @@
     <span v-if="itemType == '4'" :class="itemClass"
         >{{ itemValue }}{{ itemTitle }}</span
     >
+    <span v-if="itemType == '5'" :class="itemClass">{{ itemValue }}</span>
 </template>
 
 <script>
@@ -31,7 +32,7 @@ export default {
     const itemClass = computed(() => {
       const style = [];
       // ディフォルト以外
-      if (props.itemStyle != null) {
+      if (props.itemStyle != undefined && props.itemStyle != "") {
         style.push(props.itemStyle)
         return style
       }
@@ -86,6 +87,12 @@ export default {
         } else if (props.typeKB == "update") {
           // 16：UPDATE
           style.push("searchResult_lable_update")
+        } else if (props.typeKB == "newRight") {
+          // 15：New　
+          style.push("searchResult_lable_new_right")
+        } else if (props.typeKB == "updateRight") {
+          // 16：UPDATE
+          style.push("searchResult_lable_update_right")
         } else if (props.typeKB == "notLooked") {
           // 17：未
           style.push("searchResult_lable_notLooked")
@@ -101,20 +108,39 @@ export default {
         } else if (props.typeKB == "rescue") {
           // 6:採 用 
           style.push(" searchResult_lable_rescue")
+        } else if (props.typeKB == "AI") {
+          // 6:AI
+          style.push(" searchResult_lable_Ai")
+        } else if (props.typeKB == "keyword") {
+          // 6:keyword
+          style.push(" searchResult_lable_keyword")
+        } else if (props.typeKB == "CertaintyTitle") {
+          // 6:確信度タイトル
+          style.push(" searchResult_lable_certainty_title")
+        } else if (props.typeKB == "ownFacility") {
+          // 6:自施設
+          style.push(" searchResult_lable_ownFacility")
+        } if (props.typeKB == "otherFacility") {
+          // :他施設
+          style.push(" searchResult_lable_otherFacility")
         } else {
           style.push("")
         }
-
       } else if (props.itemType == "2") {
         // 2:日付
         style.push("searchResult_date_title")
       } else if (props.itemType == "3") {
+        console.log(props.itemValue)
         //3:タイトル
         style.push("searchResult_title")
       } else if (props.itemType == "4") {
         //3:view
         style.push("searchResult_lable_view")
+      } else if (props.itemType == "5") {
+        //3:overview
+        style.push("searchResult_overview")
       }
+
       // style追加
       if (props.addStyle != "") {
 
@@ -124,6 +150,7 @@ export default {
     })
 
     const title = computed(() => {
+
       // 1:全体
       if (props.typeKB == "whole") {
         return "全　体"
@@ -222,6 +249,26 @@ export default {
       if (props.typeKB == "rescue") {
         // 17：救済
         return "救　済"
+      }
+      if (props.typeKB == "AI") {
+        // 17：AI
+        return "AI"
+      }
+      if (props.typeKB == "keyword") {
+        // 17：キーワード
+        return "キーワード"
+      }
+      if (props.typeKB == "CertaintyTitle") {
+        // 17：確信度
+        return "確信度:"
+      }
+      if (props.typeKB == "ownFacility") {
+        // 17：自施設
+        return "自施設"
+      }
+      if (props.typeKB == "otherFacility") {
+        // 17：他施設
+        return "他施設"
       }
     })
     return {

@@ -2,13 +2,14 @@
     <header
         class="
             hidden
-            md:block
+            mid:block
             bg-fixed
             justify-between
             h-12.5
             md:h-15
             w-full
             bg-white
+            z-99
         "
     >
         <div class="flex h-15 flex-row">
@@ -24,6 +25,8 @@
             </div>
         </div>
     </header>
+    <!-- <my-mid-header class="hidden md:block mid:hidden"></my-mid-header> -->
+    <my-mid-header class="hidden md:block mid:hidden"></my-mid-header>
     <header
         class="
             md:hidden
@@ -34,6 +37,7 @@
             md:h-15
             w-full
             bg-white
+            z-99
         "
     >
         <div class="flex justify-between space-x-2 items-center">
@@ -51,8 +55,9 @@
 <script>
 import menuDropdownItem from './dropdown/menuDropdown.vue'
 import dataManagerDropdown from './dropdown/dataManagerDropdown.vue';
+import MyMidHeader from './myMidHeader.vue';
 export default {
-  components: { menuDropdownItem, dataManagerDropdown },
+  components: { menuDropdownItem, dataManagerDropdown, MyMidHeader },
   props: {},
   data() {
     return {

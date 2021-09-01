@@ -1,6 +1,6 @@
 <template>
-    <div class="flex justify-around invisible md:visible">
-        <logo-image class="w-0 md:w-60 md:h-32"></logo-image>
+    <div class="flex justify-around invisible mid:visible">
+        <logo-image class="w-0 h-0 md:w-60 mid:h-32"></logo-image>
         <!-- <img class="w-0 md:w-60 md:h-32" :src="logoImage" alt="" /> -->
     </div>
 </template>
