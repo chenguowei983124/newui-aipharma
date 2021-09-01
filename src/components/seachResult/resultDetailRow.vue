@@ -63,8 +63,8 @@
                 ></result-detail-row-item>
             </div>
             <!-- sp 二行目 -->
-            <div class="ml-2.5 md:ml-0 flex-grow truncate md:h-6">
-                <span class="items-center" :class="midAreaStyle">
+            <div class="ml-2.5 md:ml-0 flex-grow truncate">
+                <span class="items-center truncate" :class="midAreaStyle">
                     <!-- title text -->
                     <result-detail-row-item
                         itemType="3"
@@ -77,7 +77,7 @@
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.urlTitle"
-                        addStyle="underline pb-5"
+                        addStyle="underline truncate"
                         v-if="row.urlTitle != undefined"
                     ></result-detail-row-item>
                     <!-- 要閲覧ラベル -->
@@ -89,6 +89,7 @@
                     ></result-detail-row-item>
                 </span>
             </div>
+
             <!-- sp 三行目 -->
             <div
                 class="
