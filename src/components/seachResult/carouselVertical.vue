@@ -114,7 +114,7 @@ export default {
 
 .swiper-slide img {
     display: block;
-    width: 90%;
+    width: 700px;
     height: 100px;
 }
 </style>
