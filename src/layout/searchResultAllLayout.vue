@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row">
         <div class="flex-auto h-15 md:h-20 hidden md:block">
-            <search-bar class=""></search-bar>
+            <search-bar></search-bar>
         </div>
 
         <div
@@ -12,36 +12,31 @@
                     : 'fixed w-full top-12.5',
             ]"
         >
-            <search-bar class=""></search-bar>
+            <search-bar></search-bar>
         </div>
         <div
             class="block md:hidden"
             :class="[$store.getters.getIsMenuClick ? '' : 'h-27.5']"
         ></div>
     </div>
-    <div class="w-25 h-full bg-red-400">sdas</div>
-    <div
-        class="
-            flex
-            ml-2.5
-            mr-2.5
-            md:ml-0
-            md:mr-0
-            md:space-x-3.75
-            md:pl-37.5
-            md:pr-37.5
-            md:pt-12.5
-        "
-    >
-        <div class="flex-grow truncate space-y-3.75">
-            <div class="flex-col">
-                <div class="grid grid-cols-1 gap-1 md:space-y-3.75">
-                    <search-result-main
-                        class="flex-grow truncate"
-                    ></search-result-main>
+    <div class="flex">
+        <!-- 検索結果両側の左余白 -->
+        <div class="flex-grow max-h-full min-w-min block"></div>
+
+        <div class="lex-shrink w-full md:w-191.25 space-y-3.75">
+            <div class="flex-grow space-y-3.75">
+                <div class="flex-col">
+                    <div class="grid grid-cols-1 gap-1 md:space-y-3.75">
+                        <search-result-main
+                            class="flex-grow"
+                        ></search-result-main>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- 検索結果両側の左余白 -->
+        <div class="flex-grow max-h-full min-w-min block"></div>
     </div>
 </template>
 

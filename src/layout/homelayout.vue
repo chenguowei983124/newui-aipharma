@@ -7,7 +7,7 @@
         <div class="flex-grow mid:flex-shrink">
             <div class="flex flex-row">
                 <div class="flex-auto h-15 md:h-20 hidden md:block">
-                    <search-bar class=""></search-bar>
+                    <search-bar class="mid:rounded-md"></search-bar>
                 </div>
 
                 <div
@@ -18,7 +18,7 @@
                             : 'fixed w-full top-12.5 z-99',
                     ]"
                 >
-                    <search-bar class=""></search-bar>
+                    <search-bar class="mid:rounded-md"></search-bar>
                 </div>
                 <div
                     class="block md:hidden"
