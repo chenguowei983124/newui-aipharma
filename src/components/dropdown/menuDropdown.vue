@@ -9,7 +9,7 @@
                     stroke="white"
                     viewBox="-4 -4 32 32"
                     @click="linkClick"
-                    v-if="isOpen == false"
+                    v-if="$store.getters.getIsMenuClick == false"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
@@ -23,12 +23,13 @@
                 <svg
                     class="w-12.5 h-12.5 md:w-15 md:h-15 md:ml-25 bg-gray-400"
                     :class="{
-                        'absolute z-99 left-0 md:top-0 md:-left-25': isOpen,
+                        'absolute z-99 left-0 md:top-0 md:-left-25':
+                            $store.getters.getIsMenuClick,
                     }"
                     fill="none"
                     stroke="white"
                     viewBox="-4 -4 32 32"
-                    v-if="isOpen"
+                    v-if="$store.getters.getIsMenuClick"
                     @click="linkClick"
                     xmlns="http://www.w3.org/2000/svg"
                 >
@@ -55,14 +56,14 @@
                     "
                     :class="{
                         'absolute z-99 md:w-37.5 left-12 md:top-0 md:left-15':
-                            isOpen,
+                            $store.getters.getIsMenuClick,
                     }"
                     @click="scrollToTop"
                     to="/"
                 >
                     <menu-logo-svg
                         class="w-21 h-9.5"
-                        v-if="isDispaly || isOpen"
+                        v-if="isDispaly || $store.getters.getIsMenuClick"
                     ></menu-logo-svg>
 
                     <div
@@ -77,7 +78,7 @@
                             font-NotoSansJp font-normal
                             text-xxs
                         "
-                        :class="[isOpen ? 'hidden' : '']"
+                        :class="[$store.getters.getIsMenuClick ? 'hidden' : '']"
                     >
                         〇〇〇〇〇〇〇〇大学病院
                     </div>
@@ -88,15 +89,17 @@
     <div
         class=""
         :class="{
-            'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75': isOpen,
+            'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
+                $store.getters.getIsMenuClick,
         }"
     ></div>
     <div
         class="w-56.25 md:w-52.5 bg-gray-200"
         :class="{
-            'absolute z-99 -left-2.5 top-12.5 md:top-15 md:left-0': isOpen,
+            'absolute z-99 -left-2.5 top-12.5 md:top-15 md:left-0':
+                $store.getters.getIsMenuClick,
         }"
-        v-if="isOpen"
+        v-if="$store.getters.getIsMenuClick"
     >
         <!-- The first one -->
         <div
@@ -375,8 +378,7 @@ export default {
   methods: {
     linkClick() {
 
-      this.isOpen = !this.isOpen
-      this.$store.dispatch('setMenuClick', this.isOpen)
+      this.$store.dispatch('setMenuClick', !this.$store.getters.getIsMenuClick)
     }, scrollToTop() {
       let currentScroll = document.documentElement.scrollTop,
         int = setInterval(frame, 6)
