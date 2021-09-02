@@ -5,7 +5,7 @@
                 <!-- メニューリスト -->
                 <menu-dropdown-item :isDispaly="true"></menu-dropdown-item>
             </div>
-            <div class="w-24 border-l-2 border-gray-400 h-12 my-2">
+            <div class="w-24 border-l-2 border-gray-400 h-12 my-2 md:ml-6">
                 <!-- 人像 -->
                 <div class="flex justify-center items-center space-x-2">
                     <div

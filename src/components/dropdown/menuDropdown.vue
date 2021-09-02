@@ -51,7 +51,6 @@
                         flex
                         justify-start
                         md:justify-center
-                        pl-2
                         items-center
                     "
                     :class="{
