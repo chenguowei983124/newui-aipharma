@@ -30,7 +30,7 @@
                 ></personal-info>
             </div>
         </div>
-        <div class="flex flex-row space-x-4">
+        <div class="flex flex-row">
             <!-- third -->
             <div class="flex items-center">
                 <div
