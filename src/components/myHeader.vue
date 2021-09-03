@@ -1,63 +1,86 @@
 <template>
-    <header
+    <div
         class="
-            hidden
-            mid:block
-            bg-fixed
-            justify-between
-            h-12.5
-            md:h-15
-            w-full
-            bg-white
-            z-99
-        "
-    >
-        <div class="flex h-15 flex-row">
-            <div class="w-48">
-                <!-- メニューリスト -->
-                <menu-dropdown-item :isDispaly="false"></menu-dropdown-item>
-            </div>
-            <div class="flex-auto"></div>
-            <div class="w-15 md:mr-12.5 md:mt-5">
-                <div class="flex justify-end cursor-pointer">
-                    <div class="underline font-NotoSansJp text-sm">ヘルプ</div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- <my-mid-header class="hidden md:block mid:hidden"></my-mid-header> -->
-    <my-mid-header class="hidden md:block mid:hidden"></my-mid-header>
-    <header
-        class="
-            md:hidden
             fixed
+            md:static
             flex
             justify-between
             h-12.5
             md:h-15
             w-full
-            bg-white
             z-99
+            bg-white
         "
     >
-        <div class="flex justify-between space-x-2 items-center">
-            <!-- メニューリスト -->
-            <menu-dropdown-item :isDispaly="true"></menu-dropdown-item>
+        <div class="flex flex-row">
+            <!-- first -->
+            <div class="w-43.75 md:w-45 mid:w-15 block md:block mid:hidden">
+                <menu-dropdown-item :isDispaly="true"></menu-dropdown-item>
+            </div>
+            <div class="w-43.75 md:w-45 mid:w-15 hidden md:hidden mid:block">
+                <menu-dropdown-item :isDispaly="false"></menu-dropdown-item>
+            </div>
+            <!-- second -->
+            <div class="flex-auto flex justify-start items-center space-x-2">
+                <portrait-icon
+                    class="hidden md:block mid:hidden"
+                ></portrait-icon>
+                <personal-info
+                    class="hidden md:block mid:hidden"
+                ></personal-info>
+            </div>
         </div>
+        <div class="flex flex-row space-x-4">
+            <!-- third -->
+            <div class="flex items-center">
+                <div
+                    class="
+                        w-37.5
+                        md:w-30
+                        mid:w-0
+                        flex
+                        justify-center
+                        space-x-1.25
+                    "
+                >
+                    <portrait-icon
+                        class="block md:hidden mid:hidden"
+                    ></portrait-icon>
+                    <issue-icon class="block md:block mid:hidden"></issue-icon>
+                    <management-icon
+                        class="block md:block mid:hidden"
+                    ></management-icon>
+                </div>
+            </div>
 
-        <data-manager-dropdown
-            class="pr-2"
-            :class="{ 'md:hidden': true }"
-        ></data-manager-dropdown>
-    </header>
+            <!-- Fourth -->
+            <div class="w-0 md:w-25">
+                <div class="hidden md:block mid:block">
+                    <div
+                        class="
+                            underline
+                            font-NotoSansJp
+                            text-sm
+                            cursor-pointer
+                            pt-5
+                        "
+                    >
+                        ヘルプ
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
+import personalInfo from '../components/header/personalInfo.vue'
+import portraitIcon from '../components/header/portraitIcon.vue'
+import issueIcon from '../components/header/issueIcon.vue';
+import managementIcon from '../components/header/managementIcon.vue';
 import menuDropdownItem from './dropdown/menuDropdown.vue'
-import dataManagerDropdown from './dropdown/dataManagerDropdown.vue';
-import MyMidHeader from './myMidHeader.vue';
 export default {
-  components: { menuDropdownItem, dataManagerDropdown, MyMidHeader },
+  components: { personalInfo, portraitIcon, menuDropdownItem, issueIcon, managementIcon },
   props: {},
   data() {
     return {

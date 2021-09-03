@@ -1,10 +1,17 @@
 <template>
     <div class="flex justify-between items-center">
-        <div class="relative flex-none">
-            <div class="flex items-center">
+        <div class="flex-none">
+            <div class="flex items-center relative">
                 <!-- Menu icon 30px*22.5px -->
                 <svg
-                    class="w-12.5 h-12.5 md:w-15 md:h-15 bg-gray-400"
+                    class="
+                        w-12.5
+                        h-12.5
+                        md:w-15
+                        md:h-15
+                        bg-gray-400
+                        cursor-pointer
+                    "
                     fill="none"
                     stroke="white"
                     viewBox="-4 -4 32 32"
@@ -23,7 +30,7 @@
                 <svg
                     class="w-12.5 h-12.5 md:w-15 md:h-15 md:ml-25 bg-gray-400"
                     :class="{
-                        'absolute z-99 left-0 md:top-0 md:-left-25':
+                        'absolute z-99 -bottom-12.5  md:top-0 md:-left-25':
                             $store.getters.getIsMenuClick,
                     }"
                     fill="none"
@@ -55,14 +62,14 @@
                         items-center
                     "
                     :class="{
-                        'absolute z-99 md:w-37.5 left-12 md:top-0 md:left-15':
+                        'absolute z-99 -bottom-12.5  md:w-37.5 left-12 md:top-0 md:left-15':
                             $store.getters.getIsMenuClick,
                     }"
                     @click="scrollToTop"
                     to="/"
                 >
                     <menu-logo-svg
-                        class="w-21 h-9.5"
+                        class="w-17.5 h-8 mx-4"
                         v-if="isDispaly || $store.getters.getIsMenuClick"
                     ></menu-logo-svg>
 
@@ -71,16 +78,16 @@
                             md:hidden
                             w-18
                             h-8
-                            pl-1
-                            pt-1
-                            ml-1
+                            flex
+                            items-center
+                            pl-1.25
                             border-l-2 border-gray-300
                             font-NotoSansJp font-normal
                             text-xxs
                         "
                         :class="[$store.getters.getIsMenuClick ? 'hidden' : '']"
                     >
-                        〇〇〇〇〇〇〇〇大学病院
+                        {{ $store.getters.topManagementInfo.hospital }}
                     </div>
                 </router-link>
             </div>
@@ -96,7 +103,7 @@
     <div
         class="w-56.25 md:w-52.5 bg-gray-200"
         :class="{
-            'absolute z-99 -left-2.5 top-12.5 md:top-15 md:left-0':
+            'absolute z-99 -left-0.5 top-12.5 md:top-15 md:left-0':
                 $store.getters.getIsMenuClick,
         }"
         v-if="$store.getters.getIsMenuClick"

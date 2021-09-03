@@ -1,0 +1,4 @@
+/* font-size: 15px font-family: NotoSansJp font-weight: 700*/
+.notoSansJpAndFifteenBold{
+    @apply text-mxxs font-NotoSansJp font-bold;
+}

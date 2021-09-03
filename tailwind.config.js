@@ -28,6 +28,8 @@ module.exports = {
         // 50px
         '12.5': '3.125rem',
         '13': '3.25rem',
+        // 55px
+        '13.75': '3.4375rem',
         '15': '3.75rem',
         '16.25': '4.0625rem',
         '16.5': '4.125rem',
@@ -180,12 +182,14 @@ module.exports = {
       },
       fontSize: theme => theme('Size'),
       fontSize: {
-        // 13px
-        mxs: ['0.8125rem', { lineHeight: '1rem' }],
-        // 11px
-        xxs: ['0.6875rem', { lineHeight: '0.875rem' }],
         // 10px
         xxss: ['0.625rem', { lineHeight: '0.75rem' }],
+        // 11px
+        xxs: ['0.6875rem', { lineHeight: '0.875rem' }],
+        // 13px
+        mxs: ['0.8125rem', { lineHeight: '1rem' }],
+        // 15px
+        mxxs: ['0.9375rem', { lineHeight: '1rem' }],
         // 28px
         xxl: ['1.75rem', { lineHeight: '1.875rem' }],
         // 32px

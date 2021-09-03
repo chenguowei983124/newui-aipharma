@@ -66,7 +66,7 @@ export default {
         },
         // management
         topManagementInfo(state) {
-            const managementInfo = { name: '木村 太郎', title: 'doctor', hospital: '◯◯◯◯◯◯◯◯◯◯大学病院', authority: '管 理 者', }
+            const managementInfo = { lastName: '木村', name: '木村 太郎', title: 'doctor', hospital: '◯◯◯◯◯◯大学病院', authority: '管 理 者', }
 
             return managementInfo;
         },
@@ -89,6 +89,34 @@ export default {
             ]
 
             return managementItemUserList;
+        },
+        // managementitemLists
+        topManagementitemLists(state) {
+            const managementitemList = [
+                { 'title': 'データ登録', 'itemStyle': 'title' },
+                { 'title': '組織内DI 記録（Q&A）登録', 'itemStyle': 'item' },
+                { 'title': '症例（プレアボイド）登録', 'itemStyle': 'item' },
+                { 'title': 'マイデータ', 'itemStyle': 'title' },
+                { 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item' },
+                { 'title': '症例（プレアボイド）', 'itemStyle': 'item' },
+                { 'title': '下書き一覧', 'itemStyle': 'item' },
+            ]
+
+            return managementitemList;
+        },
+        // managementitemLists
+        topPcManagementitemLists(state) {
+            const managementitemList = [
+                { 'title': 'データ登録', 'itemStyle': 'title' },
+                { 'title': '組織内DI 記録 登録', 'itemStyle': 'item' },
+                { 'title': '症例 登録', 'itemStyle': 'item' },
+                { 'title': 'マイデータ', 'itemStyle': 'title' },
+                { 'title': '組織内DI 記録 ', 'itemStyle': 'item' },
+                { 'title': '症例', 'itemStyle': 'item' },
+                { 'title': '下書き一覧', 'itemStyle': 'item' },
+            ]
+
+            return managementitemList;
         }
     },
 

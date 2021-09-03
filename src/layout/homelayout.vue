@@ -15,7 +15,7 @@
                     :class="[
                         $store.getters.getIsMenuClick
                             ? 'mt-12.5'
-                            : 'fixed w-full top-12.5 z-99',
+                            : 'fixed w-full top-12.5 z-20',
                     ]"
                 >
                     <search-bar class="mid:rounded-md"></search-bar>
