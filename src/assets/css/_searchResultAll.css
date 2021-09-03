@@ -1,0 +1,4 @@
+/* レイアウト */
+.searchResult_label_font_10{
+    @apply font-NotoSansJp font-medium text-xxss ;
+}
