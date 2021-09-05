@@ -55,7 +55,7 @@ export default {
             return scientifiSocietyInfo;
         }, topPMDAInfo(state) {
             const pmdaInfo = [
-                { type: 'eventType', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
+                { type: ['eventType', 'recruitment'], date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
                 { type: 'recruitment', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
                 { type: 'international', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
                 { type: 'examination', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'update', linkUrl: '' },

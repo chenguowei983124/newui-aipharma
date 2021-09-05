@@ -77,17 +77,7 @@
             countStyle="searchResultAllCountLable"
         >
             <result-detail-row class="searchResult_detail_blue">
-                <div
-                    class="
-                        h-15
-                        w-full
-                        font-bold
-                        bg-green-300
-                        overflow-ellipsis overflow-hidden
-                    "
-                >
-                    ロキソニンの用途についてはロキソニンの用途〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇
-                </div>
+                Coming soon
             </result-detail-row>
         </resut-tag>
 
@@ -110,7 +100,7 @@
                     $store.getters.searchAllBulletinBoardInfo.bulletinBoardInfo
                 "
                 :sub1="['group']"
-                :sub2="['title']"
+                :sub2="['titleHeightAuto']"
                 :sub3="['states', 'date', 'view']"
             >
             </result-detail-row>
@@ -119,9 +109,9 @@
 </template>
 
 <script>
-import resutTag from '../seachResult/resultTag.vue'
-import resultDetailRow from '../seachResult/resultAllDetailRow.vue'
-import carousel from '../seachResult/carousel.vue'
+import resutTag from '../searchResult/resultTag.vue'
+import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
+import carousel from '../searchResult/carousel.vue'
 export default {
   components: {
     resutTag, resultDetailRow, carousel

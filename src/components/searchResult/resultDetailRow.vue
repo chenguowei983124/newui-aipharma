@@ -16,51 +16,68 @@
             :key="row"
         >
             <!-- sp 最初の行目 -->
-            <div
-                class="ml-2.5 md:ml-5 md:h-4 md:flex items-center"
-                :class="proAreaStyle"
-            >
-                <!-- 属性ラベル -->
-                <result-detail-row-item
-                    itemType="1"
-                    :typeKB="row.type"
-                    v-if="row.type != undefined"
-                ></result-detail-row-item>
-                <result-detail-row-item
-                    itemType="1"
-                    :typeKB="row.group"
-                    v-if="row.group != undefined"
-                ></result-detail-row-item>
-                <!-- 未アイコン -->
-                <result-detail-row-item
-                    itemType="1"
-                    :typeKB="row.looked"
-                    v-if="row.looked != undefined"
-                ></result-detail-row-item>
-                <!-- date -->
-                <result-detail-row-item
-                    itemType="2"
-                    :itemValue="row.date"
-                    v-if="row.date != undefined"
-                ></result-detail-row-item>
+            <div>
+                <div
+                    class="ml-2.5 md:ml-5 md:h-4 md:flex items-center"
+                    :class="proAreaStyle"
+                    v-if="objectCheck(row.type) == false"
+                >
+                    <!-- 属性ラベル -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.type"
+                        v-if="row.type != undefined"
+                    ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.group"
+                        v-if="row.group != undefined"
+                    ></result-detail-row-item>
+                    <!-- 未アイコン -->
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.looked"
+                        v-if="row.looked != undefined"
+                    ></result-detail-row-item>
+                    <!-- date -->
+                    <result-detail-row-item
+                        itemType="2"
+                        :itemValue="row.date"
+                        v-if="row.date != undefined"
+                    ></result-detail-row-item>
 
-                <result-detail-row-item
-                    itemType="2"
-                    :itemValue="getDateFrom(row.dateFrom, row.dateTo)"
-                    v-if="row.dateFrom != undefined"
-                ></result-detail-row-item>
-                <result-detail-row-item
-                    itemType="2"
-                    :itemValue="row.dateTo"
-                    addStyle=" block w-12 h-5"
-                    v-if="row.dateTo != undefined"
-                ></result-detail-row-item>
-                <result-detail-row-item
-                    itemType="1"
-                    :typeKB="row.states"
-                    :itemStyle="getPmdaStatesDefaultStype(row.states)"
-                    v-if="row.states != undefined"
-                ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="2"
+                        :itemValue="getDateFrom(row.dateFrom, row.dateTo)"
+                        v-if="row.dateFrom != undefined"
+                    ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="2"
+                        :itemValue="row.dateTo"
+                        addStyle=" block w-12 h-5"
+                        v-if="row.dateTo != undefined"
+                    ></result-detail-row-item>
+                    <result-detail-row-item
+                        itemType="1"
+                        :typeKB="row.states"
+                        :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                        v-if="row.states != undefined"
+                    ></result-detail-row-item>
+                </div>
+                <div
+                    class="ml-2.5 md:ml-5 md:h-4 items-center"
+                    :class="proAreaStyle"
+                    v-else
+                >
+                    <div v-for="typeItem in row.type" :key="typeItem">
+                        <!-- 属性ラベル -->
+                        <result-detail-row-item
+                            itemType="1"
+                            :typeKB="typeItem"
+                            v-if="objectCheck(typeItem)"
+                        ></result-detail-row-item>
+                    </div>
+                </div>
             </div>
             <!-- sp 二行目 -->
             <div class="ml-2.5 md:ml-0 flex-grow truncate">
@@ -166,6 +183,14 @@ export default {
     return {
     };
   }, methods: {
+    objectCheck(type) {
+      console.log(type)
+      if (typeof type == Object) {
+        return true
+      } else {
+        return false
+      }
+    },
     getLookedTitle(lookedKB, midStyle) {
       if (lookedKB != undefined) {
         if (lookedKB == "Looked") {

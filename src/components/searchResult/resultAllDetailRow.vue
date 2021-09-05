@@ -68,10 +68,18 @@
                 </div>
             </div>
             <!-- sp 二行目 -->
-            <div class="md:ml-0 flex-grow truncate md:h-6">
-                <span class="items-center" :class="midAreaStyle">
+            <div class="md:ml-0 flex-grow md:truncate md:h-6">
+                <span
+                    class="items-center"
+                    :class="midAreaStyle"
+                    v-for="dispItem in sub2"
+                    :key="dispItem"
+                >
                     <!-- title text -->
-                    <div class="underline truncate">
+                    <div
+                        class="underline truncate"
+                        v-show="dispItem == 'title'"
+                    >
                         <result-detail-row-item
                             itemType="3"
                             :itemValue="row.title"
@@ -80,7 +88,13 @@
                             v-if="row.title != undefined"
                         ></result-detail-row-item>
                     </div>
-
+                    <div v-show="dispItem == 'titleHeightAuto'">
+                        <result-detail-row-item
+                            itemType="3"
+                            :itemValue="row.title"
+                            v-if="row.title != undefined"
+                        ></result-detail-row-item>
+                    </div>
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.urlTitle"

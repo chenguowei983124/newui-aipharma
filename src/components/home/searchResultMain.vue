@@ -137,10 +137,10 @@
 </template>
 
 <script>
-import resutTag from '../seachResult/resultTag.vue'
-import resultDetailRow from '../seachResult/resultDetailRow.vue'
-import carousel from '../seachResult/carousel.vue'
-import carouselVertical from '../seachResult/carouselVertical.vue'
+import resutTag from '../searchResult/resultTag.vue'
+import resultDetailRow from '../searchResult/resultDetailRow.vue'
+import carousel from '../searchResult/carousel.vue'
+import carouselVertical from '../searchResult/carouselVertical.vue'
 
 export default {
   components: {
