@@ -7,18 +7,20 @@
                 for="a1"
                 class="
                     w-1/2
-                    h-10
-                    pt-2
-                    rounded-t-lg
-                    text-center
-                    bg-cardViewCount
-                    text-googleTitle
-                    searchResult_header_font_noto_18
+                    notoSansJpAndEighteenBold
+                    searchResultUnActiveTagTitleStyle
                 "
             >
                 <span> {{ title }}</span></label
             >
-            <label for="a2" class="w-1/2 searchResultActiveTagTitleStyle">
+            <label
+                for="a2"
+                class="
+                    w-1/2
+                    notoSansJpAndEighteenBold
+                    searchResultActiveTagTitleStyle
+                "
+            >
                 <span> {{ subTitle }}</span></label
             >
         </div>

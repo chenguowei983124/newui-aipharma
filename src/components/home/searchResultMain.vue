@@ -17,7 +17,9 @@
             class="block md:hidden"
             headerStyle="doubleTag"
             title="お知らせ"
+            TitleStyle="notoSansJpAndEighteenBold"
             subTitle="掲示板"
+            subTitleStyle="notoSansJpAndEighteenBold"
         >
             <div class="tab-a1 hidden">
                 <result-detail-row
@@ -103,17 +105,17 @@
             <resut-tag
                 headerStyle="titleOnlyUnderlineBgColorGray"
                 title="Topics"
-                titleStyle="searchResult_header_font_lato_16"
+                titleStyle="latoAndSixteenBold"
                 ><result-detail-row class="searchResult_detail_gray">
                     <div class="h-15 font-bold">Coming Soon…</div>
                 </result-detail-row></resut-tag
             >
         </div>
-
         <resut-tag
             headerStyle="titleOnlyUnderlineGrayLine"
             title="その他の情報"
-            titleStyle="notoSansJpAndEighteenblack"
+            titleStyle="notoSansJpAndEighteenBold"
+            titleURL="/"
             ><result-detail-row
                 class="
                     searchResult_detail_gray

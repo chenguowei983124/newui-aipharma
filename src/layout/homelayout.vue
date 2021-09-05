@@ -22,7 +22,7 @@
                 </div>
                 <div
                     class="block md:hidden"
-                    :class="[$store.getters.getIsMenuClick ? '' : 'h-27.5']"
+                    :class="[$store.getters.getIsMenuClick ? '' : 'h-24']"
                 ></div>
             </div>
 

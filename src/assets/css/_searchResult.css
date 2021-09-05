@@ -214,12 +214,10 @@
     @apply latoAndEighteenBold text-white;
 }
 
-
-
-
-
-
 /**  */
 .searchResultActiveTagTitleStyle{
-    @apply h-10 rounded-t-lg text-center bg-cardViewCount text-blueline ;
+    @apply flex flex-col justify-center h-10 rounded-t-lg text-center bg-cardViewCount text-blueline ;
+}
+.searchResultUnActiveTagTitleStyle{
+    @apply flex flex-col justify-center h-10 rounded-t-lg text-center bg-cardViewCount text-googleTitle ;
 }
