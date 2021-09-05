@@ -1,0 +1,73 @@
+/* font-family: NotoSansJp font-size: 10px  font-weight: 700*/
+.notoSansJpAndTenBold{
+    @apply font-NotoSansJp text-xxss font-bold  ;
+}
+/* font-family: NotoSansJp font-size: 10px  font-weight: 500*/
+.notoSansJpAndTenMedium{
+    @apply font-NotoSansJp font-medium text-xxss ;
+}
+/* font-family: NotoSansJp font-size: 12px */
+.notoSansJpAndTwelveRegular{
+    @apply font-NotoSansJp font-normal text-xs ;
+}
+/* font-family: NotoSansJp font-size: 12px  font-weight: 500*/
+.notoSansJpAndTwelveMedium{
+    @apply font-NotoSansJp font-medium text-xs ;
+}
+/* font-family: NotoSansJp font-size: 12px  font-weight: 700*/
+.notoSansJpAndTwelveBold{
+    @apply font-NotoSansJp font-bold text-xs ;
+}
+/* font-family: NotoSansJp font-size: 12px  font-weight: 700*/
+.notoSansJpAndTwelveBold{
+    @apply font-NotoSansJp font-bold text-xs ;
+}
+/* font-family: NotoSansJp font-size: 14px font-weight: 400*/
+.notoSansJpAndFourteenRegular{
+    @apply font-NotoSansJp text-sm font-normal;
+}
+/* font-family: NotoSansJp font-size: 15px  font-weight: 700*/
+.notoSansJpAndFifteenBold{
+    @apply font-NotoSansJp text-mxxs font-bold;
+}
+
+/* font-family: NotoSansJp font-size: 16px font-weight: 400 */
+.notoSansJpAndSixteenRegular{
+    @apply font-NotoSansJp text-base font-normal ;
+}
+/* font-family: NotoSansJp font-size: 16px font-weight: 700 */
+.notoSansJpAndSixteenBold{
+    @apply font-NotoSansJp text-base font-bold ;
+}
+
+/* font-family: NotoSansJp font-size: 16px font-weight: 900 */
+.notoSansJpAndSixteenblack{
+    @apply font-NotoSansJp text-base font-black ;
+}
+
+/* font-family: NotoSansJp font-size: 18px font-weight: 700 */
+.notoSansJpAndEighteenBold{
+    @apply font-NotoSansJp text-lg font-bold ;
+}
+/* font-family: NotoSansJp font-size: 20px font-weight: 700 */
+.notoSansJpAndTwentyBold{
+    @apply font-NotoSansJp text-xl font-bold ;
+}
+
+
+/* font-family: Lato font-size: 12px font-weight: 700 */
+.latoAndTwentyBold{
+    @apply font-Lato font-bold text-xs ;
+}
+/* font-family: Lato font-size: 14px font-weight: 700 */
+.latoAndFourteenBold{
+    @apply font-Lato font-bold text-sm;
+}
+/* font-family: Lato font-size: 16px font-weight: 700 */
+.latoAndSixteenBold{
+    @apply font-Lato font-bold text-base;
+}
+/* font-family: Lato font-size: 18px font-weight: 700 */
+.latoAndEighteenBold{
+    @apply font-Lato text-lg font-bold ;
+}

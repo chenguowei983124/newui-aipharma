@@ -1,190 +1,64 @@
 /* フォント相関 */
-.searchResult_label_font_10{
-    @apply font-NotoSansJp font-medium text-xxss ;
-}
-.searchResult_label_font_10_b{
-    @apply font-NotoSansJp font-bold text-xxss ;
-}
-.searchResult_label_font_12{
-    @apply font-NotoSansJp font-medium text-xs ;
-}
-.searchResult_label_font_noto_R_12{
-    @apply font-NotoSansJp font-normal text-xs ;
-}
 
-.searchResult_label_font_noto_12_b{
-    @apply font-NotoSansJp font-bold text-xs ;
-}
 
-.searchResult_label_font_lato_12_b{
-    @apply font-Lato font-bold text-xs ;
-}
-.searchResult_header_font_noto_18{
-    @apply font-NotoSansJp font-bold text-lg;
-}
-.searchResult_header_font_lato_16{
-    @apply font-Lato font-bold text-base;
-}
 
-.searchResult_header_font_noto_16{
-    @apply font-NotoSansJp font-bold text-base;
-}
 
-.searchResult_date_font{
-    @apply font-Lato font-bold text-sm;
-}
-.searchResult_title_font{
-    @apply font-NotoSansJp font-normal text-base;
-}
-.searchResult_title_font_14{
-    @apply font-NotoSansJp font-normal text-sm;
-}
+
+
+
 /* ラベル　組織内 */
 .searchResult_lable_organization{
-    @apply searchResult_label_font_12 text-white bg-organization w-17.5 text-center ring-1 ring-organization;
+    @apply notoSansJpAndTwelveMedium text-white bg-organization w-17.5 text-center ring-1 ring-organization;
 }
-
 /* ラベル　全体 */
 .searchResult_lable_whole{
-    @apply searchResult_label_font_12 text-white bg-whole w-17.5 text-center ring-1 ring-whole;
+    @apply notoSansJpAndTwelveMedium text-white bg-whole w-17.5 text-center ring-1 ring-whole;
 }
-
 /* ラベル　グループ */
 .searchResult_lable_group{
-    @apply searchResult_label_font_12 text-white bg-group w-17.5 text-center  ring-1 ring-group;
+    @apply notoSansJpAndTwelveMedium text-white bg-group w-17.5 text-center  ring-1 ring-group;
 }
-
 /* ラベル　学会 */
 .searchResult_lable_society{
-    @apply searchResult_label_font_12 text-white bg-society w-17.5 text-center  ring-1 ring-society;
+    @apply notoSansJpAndTwelveMedium text-white bg-society w-17.5 text-center  ring-1 ring-society;
 }
 
 /* ラベル　未 */
 .searchResult_lable_notLooked{
-    @apply searchResult_label_font_10 ring-1 ring-notlooked text-notlooked bg-notlooked w-4 h-4 flex items-center justify-center;
+    @apply notoSansJpAndTenMedium ring-1 ring-notlooked text-notlooked bg-notlooked w-4 h-4 flex items-center justify-center;
 }
-
 /* ラベル　要閲覧 */
 .searchResult_lable_browse{
-    @apply searchResult_label_font_10_b text-white bg-browse w-8 h-4 ring-1 ring-browse;
-}   
+    @apply notoSansJpAndTenBold text-white bg-browse w-8 h-4 ring-1 ring-browse;
+}  
 
 /* ラベル　安全 */
 .searchResult_lable_safety{
-    @apply searchResult_label_font_12 text-black bg-safety w-17.5 text-center ring-1 ring-safety;
+    @apply notoSansJpAndTwelveMedium text-black bg-safety w-17.5 text-center ring-1 ring-safety;
 }
 
 /* ラベル　採用 */
 .searchResult_lable_recruitment{
-    @apply searchResult_label_font_12 text-black bg-recruitment w-17.5 text-center  ring-1 ring-recruitment;
+    @apply notoSansJpAndTwelveMedium text-black bg-recruitment w-17.5 text-center  ring-1 ring-recruitment;
 }
 
 /* ラベル　イベント */
 .searchResult_lable_eventType{
-    @apply searchResult_label_font_12 text-black bg-eventType w-17.5 text-center ring-1 ring-eventType;
+    @apply notoSansJpAndTwelveMedium text-black bg-eventType w-17.5 text-center ring-1 ring-eventType;
 }
-
 /* ラベル　国際 */
 .searchResult_lable_international{
-    @apply searchResult_label_font_12 text-black bg-international w-17.5 text-center  ring-1 ring-international;
+    @apply notoSansJpAndTwelveMedium text-black bg-international w-17.5 text-center  ring-1 ring-international;
 }
 
 /* ラベル　救済 */
 .searchResult_lable_rescue{
-    @apply searchResult_label_font_12 text-black bg-rescue w-17.5 text-center ring-1 ring-rescue;
+    @apply notoSansJpAndTwelveMedium text-black bg-rescue w-17.5 text-center ring-1 ring-rescue;
 }
 
 /* ラベル　審査 */
 .searchResult_lable_examination{
-    @apply searchResult_label_font_12 text-black bg-examination w-17.5 text-center ring-1 ring-examination;
-}
-
-/* ラベル　告知 */
-.searchResult_lable_notice{
-    @apply searchResult_label_font_10 text-notice ring-notice w-16.25 h-4 ring-1;
-}
-
-/* ラベル　view */
-.searchResult_lable_view{
-    @apply searchResult_label_font_12 text-view  w-16.25 h-4 text-center;
-}
-
-/* ラベル　AI */
-.searchResult_lable_Ai{
-    @apply searchResult_label_font_12 bg-toTop text-white w-17.5 h-4 text-center;
-}
-
-/* ラベル　キーワード */
-.searchResult_lable_keyword{
-    @apply searchResult_label_font_12 bg-organization text-white w-17.5 h-4 text-center;
-}
-/* ラベル　確信度 タイトル */
-.searchResult_lable_certainty_title{
-    @apply searchResult_label_font_noto_R_12 text-black h-4 text-right;
-}
-
-/* ラベル　確信度 値 */
-.searchResult_lable_certainty_value{
-    @apply searchResult_label_font_noto_R_12 text-view h-4 text-left;
-}
-
-/* ラベル　自施設 値 */
-.searchResult_lable_ownFacility{
-    @apply searchResult_label_font_12 bg-organization text-white w-17.5 h-4 text-center;
-}
-/* ラベル　他施設 値 */
-.searchResult_lable_otherFacility{
-    @apply searchResult_label_font_12 bg-whole text-white w-17.5 h-4 text-center;
-}
-/* ラベル　日付 */
-.searchResult_date_title{
-    @apply searchResult_date_font w-18.75 block;
-}
-
-.searchResult_overview{
-    @apply w-60 h-25 searchResult_title_font_14;
-}
-
-/* ラベル　タイトル */
-.searchResult_title{
-    @apply searchResult_title_font ;
-}
-
-/* ラベル　new */
-.searchResult_lable_new{
-    @apply searchResult_label_font_noto_12_b text-cardPmadNew w-12.5 h-4 text-left block;
-}
-/* ラベル　update */
-.searchResult_lable_update{
-    @apply searchResult_label_font_noto_12_b text-cardPmadUpadte w-12.5 h-4 text-left block;
-}
-
-/* ラベル　new */
-.searchResult_lable_new_right{
-    @apply searchResult_label_font_noto_12_b text-cardPmadNew md:w-12.5 h-4 text-left md:text-right block;
-}
-/* ラベル　update */
-.searchResult_lable_update_right{
-    @apply searchResult_label_font_noto_12_b text-cardPmadUpadte md:w-12.5 h-4 text-left md:text-right block;
-}
-
-.searchResult_detail_blue{
-    @apply bg-white border-2 border-blueline rounded-b-lg w-full;
-}
-.searchResult_detail_gray{
-    @apply bg-white border-b-2 border-l-2 border-r-2 border-grayline rounded-b-lg w-full;
-}
-/* 学会情報　その他の情報 */
-.searchResult_header_grayline{
-    @apply flex searchResult_header_font_noto_18 items-center  rounded-t-lg    
-           border-2 border-grayline text-center h-10 py-1 px-5 w-auto    
-           bg-white text-black  space-x-2.5;
-}
-
-/* PMDA 医薬品更新情報　Topics */
-.searchResult_header_bg_gray{
-    @apply flex justify-between h-8 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
-    text-white ;
+    @apply notoSansJpAndTwelveMedium text-black bg-examination w-17.5 text-center ring-1 ring-examination;
 }
 
 
@@ -196,98 +70,156 @@
 .dorpdownItem {
     @apply border-t-2 border-white hover:bg-gray-400  cursor-pointer;
 }
+/* ラベル　告知 */
+.searchResult_lable_notice{
+    @apply notoSansJpAndTenMedium text-notice ring-notice w-16.25 h-4 ring-1;
+}
+
+/* ラベル　view */
+.searchResult_lable_view{
+    @apply notoSansJpAndTwelveMedium text-view  w-16.25 h-4 text-center;
+}
+
+/* ラベル　AI */
+.searchResult_lable_Ai{
+    @apply notoSansJpAndTwelveMedium bg-toTop text-white w-17.5 h-4 text-center;
+}
+
+/* ラベル　キーワード */
+.searchResult_lable_keyword{
+    @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center;
+}
+
+/* ラベル　確信度 タイトル */
+.searchResult_lable_certainty_title{
+    @apply notoSansJpAndTwelveRegular text-black h-4 text-right;
+}
+
+/* ラベル　確信度 値 */
+.searchResult_lable_certainty_value{
+    @apply notoSansJpAndTwelveRegular text-view h-4 text-left;
+}
+
+/* ラベル　自施設 値 */
+.searchResult_lable_ownFacility{
+    @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center;
+}
+/* ラベル　他施設 値 */
+.searchResult_lable_otherFacility{
+    @apply notoSansJpAndTwelveMedium bg-whole text-white w-17.5 h-4 text-center;
+}
+/* ラベル　日付 */
+.searchResult_date_title{
+    @apply latoAndFourteenBold w-18.75 block;
+}
+
+.searchResult_overview{
+    @apply w-60 h-25 notoSansJpAndFourteenRegular;
+}
+
+/* ラベル　タイトル */
+.searchResult_title{
+    @apply notoSansJpAndSixteenRegular ;
+}
+
+/* ラベル　new */
+.searchResult_lable_new{
+    @apply notoSansJpAndTwelveBold text-cardPmadNew w-12.5 h-4 text-left block;
+}
+/* ラベル　update */
+.searchResult_lable_update{
+    @apply notoSansJpAndTwelveBold text-cardPmadUpadte w-12.5 h-4 text-left block;
+}
+
+/* ラベル　new */
+.searchResult_lable_new_right{
+    @apply notoSansJpAndTwelveBold text-cardPmadNew md:w-12.5 h-4 text-left md:text-right block;
+}
+/* ラベル　update */
+.searchResult_lable_update_right{
+    @apply notoSansJpAndTwelveBold text-cardPmadUpadte md:w-12.5 h-4 text-left md:text-right block;
+}
 .headerDropdownGroup {
-    @apply pl-4 font-NotoSansJp text-lg font-bold;
+    @apply pl-4 notoSansJpAndEighteenBold;
 }
 .headerDropdownSubMenu {
-    @apply pl-4 font-NotoSansJp text-base font-bold;
+    @apply pl-4 notoSansJpAndSixteenBold ;
 }
 .headerDropdownItem{
-    @apply pl-8 font-NotoSansJp text-base font-normal text-dropdownListItem;
+    @apply pl-8 notoSansJpAndSixteenBold text-dropdownListItem;
 }
-/* font-size: 12px font-family: NotoSansJp*/
-.notoSansJpAndTwelve{
-    @apply text-xs font-NotoSansJp;
+
+
+.searchResult_detail_blue{
+    @apply bg-white border-2 border-blueline rounded-b-lg w-full;
 }
-/* font-size: 12px font-family: NotoSansJp font-weight: 700*/
-.notoSansJpAndTwelveBold{
-    @apply text-xs font-NotoSansJp font-bold;
+.searchResult_detail_gray{
+    @apply bg-white border-b-2 border-l-2 border-r-2 border-grayline rounded-b-lg w-full;
 }
-/* font-size: 14px font-family: NotoSansJp*/
-.notoSansJpAndFourteen{
-    @apply text-sm font-NotoSansJp;
+
+/* 掲示板タイトル */
+.bulletinBoardInfoTitle{
+    @apply  notoSansJpAndEighteenBold underline text-center text-white;
 }
-/* font-size: 16px font-weight: 700 font-family: NotoSansJp*/
-.notoSansJpAndSixteenBold{
-    @apply text-base font-bold font-NotoSansJp;
+
+/* 学会情報　その他の情報 */
+.searchResult_header_grayline{
+    @apply flex items-center  rounded-t-lg    
+           border-2 border-grayline text-center h-10 py-1 px-5 w-auto    
+           bg-white  space-x-2.5;
 }
-/* font-size: 16px font-weight: 900 font-family: NotoSansJp*/
-.notoSansJpAndSixteenblack{
-    @apply text-base font-black font-NotoSansJp;
+
+/* 学会情報 ヘッダータイトル */
+.scientifiSocietyInfoTitle{
+    @apply notoSansJpAndEighteenBold text-black;
 }
-/* font-size: 20px font-weight: 700 font-family: NotoSansJp*/
-.notoSansJpAndtTwentyBold{
-    @apply text-xl font-bold font-NotoSansJp;
+
+/* PDMA ヘッダータイトル */
+.pdmaInfoTitle{
+    @apply latoAndSixteenBold ;
+}
+/* 予約はこちら */
+.searchResult_header_reserveLink{
+    @apply  pl-3.5 text-googleTitle notoSansJpAndFourteenRegular underline;
+}
+
+
+/* PMDA 医薬品更新情報　Topics */
+.searchResult_header_bg_gray{
+    @apply flex justify-between h-8 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
+    text-white ;
 }
 
 #a1:checked ~ .tab-a1{
     @apply flex;
 }
 #a1:checked ~ .nav label[for="a1"] {
-    @apply bg-cardTitle text-white font-NotoSansJp font-bold text-lg;
+    @apply bg-cardTitle text-white notoSansJpAndEighteenBold;
 }
 
 #a2:checked ~ .tab-a2{
     @apply flex;
 }
 #a2:checked ~ .nav label[for="a2"] {
-    @apply bg-cardTitle text-white font-NotoSansJp font-bold text-lg;
+    @apply bg-cardTitle text-white notoSansJpAndEighteenBold;
 }
-.dorpdownItemGroup1 {
-    @apply flex justify-between border-t-2 border-white  bg-gray-300 ;
-}
-.searchResultGroup {
-    @apply text-xs text-white font-NotoSansJp font-medium text-center;
-}
-.searchResultPmdaGroup {
-    @apply text-xs font-NotoSansJp font-medium text-center;
-}
+
+
 /* Card white head style */
 .searchResultCardHeaderStyle {
-    @apply font-NotoSansJp font-bold text-lg text-white;
+    @apply notoSansJpAndEighteenBold text-white;
 }
 /* Card white English head style */
 .searchResultCardHeaderStyleE {
-    @apply font-Lato font-bold text-lg text-white;
+    @apply latoAndEighteenBold text-white;
 }
-/* Card Black head style */
-.searchResultCardBlackHeaderStyle {
-    @apply font-NotoSansJp font-bold text-lg text-black;
-}
-/* List search screen */
-.searchResultDateStyle {
-    @apply text-sm font-Lato font-bold;
-}
-/* List search screen */
-.searchResultTitleStyle {
-    @apply text-base font-NotoSansJp ;
-}
-.searchResultBrowseRequiredStyle{
-    @apply bg-cardBrowseRequired
-    font-NotoSansJp
-    text-center text-xxss text-white;
-}
-.searchResultNotificationStyle {
-    @apply 
-    text-xxs text-center text-gray-400
-    font-medium font-NotoSansJp;
-}
-.searchResultViewCountStyle {
-    @apply text-googleTitle
-    text-xs text-center 
-    font-medium font-NotoSansJp;
-}
+
+
+
+
+
+
 /**  */
 .searchResultActiveTagTitleStyle{
-    @apply h-10 rounded-t-lg text-center py-2　bg-cardViewCount text-blueline font-NotoSansJp font-bold text-lg
+    @apply h-10 rounded-t-lg text-center bg-cardViewCount text-blueline ;
 }

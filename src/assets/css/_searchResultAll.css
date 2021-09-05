@@ -1,4 +1,20 @@
-/* レイアウト */
-.searchResult_label_font_10{
-    @apply font-NotoSansJp font-medium text-xxss ;
+/**================================================*/
+/* ヴュー                                          */
+/**================================================*/
+
+/**================================================*/
+/* レイアウト                                      */
+/**================================================*/
+
+/**================================================*/
+/* 検索結果                                        */
+/**================================================*/
+/* 検索結果 */
+.searchResultAllTitleAndValue{
+    @apply notoSansJpAndTwentyBold ;
+}
+
+/* 件数 */
+.searchResultAllCountLable{
+    @apply bg-backgroundMainSearch text-white notoSansJpAndFourteenRegular w-25 block text-center;
 }

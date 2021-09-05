@@ -6,6 +6,6 @@
 @import "./tailwind/_components.css";
 @import "./tailwind/_utilities.css";
 
-@import "./_searchResult.css"
-
-
+@import "./_common.css";
+@import "./_searchResult.css";
+@import "./_searchResultAll.css";
