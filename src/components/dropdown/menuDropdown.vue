@@ -99,6 +99,7 @@
             'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
                 $store.getters.getIsMenuClick,
         }"
+        @click.self="linkClick"
     ></div>
     <div
         class="w-56.25 md:w-52.5 bg-gray-200"
