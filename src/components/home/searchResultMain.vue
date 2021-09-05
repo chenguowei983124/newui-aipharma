@@ -1,6 +1,24 @@
 <template>
     <div class="h-full space-y-2.5 md:space-y-3.75">
-        <resut-tag headerStyle="1" title1="お知らせ" title2="掲示板">
+        <!-- お知らせ -->
+        <resut-tag
+            class="hidden md:block"
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="お知らせ"
+            titleStyle="bulletinBoardInfoTitle"
+        >
+            <result-detail-row
+                class="searchResult_detail_blue"
+                :sites="$store.getters.topNoticeInfo"
+            >
+            </result-detail-row>
+        </resut-tag>
+        <resut-tag
+            class="block md:hidden"
+            headerStyle="doubleTag"
+            title="お知らせ"
+            subTitle="掲示板"
+        >
             <div class="tab-a1 hidden">
                 <result-detail-row
                     class="searchResult_detail_blue"
@@ -16,14 +34,29 @@
                 </result-detail-row>
             </div>
         </resut-tag>
-        <resut-tag headerStyle="2" title1="掲示板">
+
+        <!-- 掲示板 -->
+        <resut-tag
+            class="hidden md:block"
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="掲示板"
+            titleStyle="bulletinBoardInfoTitle"
+        >
             <result-detail-row
                 class="searchResult_detail_blue"
                 :sites="$store.getters.topBulletinBoardInfo"
             >
             </result-detail-row>
         </resut-tag>
-        <resut-tag headerStyle="3" title1="学会情報" urlLink="123"
+
+        <!-- 学会情報 -->
+        <resut-tag
+            headerStyle="titleOnlyUnderlineGrayLine"
+            title="学会情報"
+            titleStyle="scientifiSocietyInfoTitle"
+            subTitle="予約はこちら▹"
+            subTitleStyle="searchResult_header_reserveLink"
+            subTitleURL="/"
             ><result-detail-row
                 class="searchResult_detail_gray"
                 :sites="$store.getters.topScientifiSocietyInfo.details"
@@ -38,10 +71,13 @@
                 ></carousel-vertical> </result-detail-row
         ></resut-tag>
 
+        <!-- PMDA -->
         <resut-tag
-            class="searchResult_header_bg_gray searchResult_header_font_noto_16"
-            headerStyle="4"
-            title1="PMDA"
+            headerStyle="titleOnlyUnderlineBgColorGray"
+            title="PMDA"
+            titleStyle="pdmaInfoTitle"
+            rightStyle="icon"
+            iconUrl="https://www.pmda.go.jp/"
             ><result-detail-row
                 class="searchResult_detail_gray"
                 lineStyle="grayline"
@@ -55,22 +91,29 @@
                 space-y-2 space-x-0
                 md:space-y-0 md:space-x-4
             "
-            headerStyle="3"
-            title1="PMDA"
         >
-            <resut-tag headerStyle="5" title1="医薬品更新情報"
+            <resut-tag
+                headerStyle="titleOnlyUnderlineBgColorGray"
+                title="医薬品更新情報"
+                titleStyle="notoSansJpAndSixteenBold"
                 ><result-detail-row class="searchResult_detail_gray">
                     <div class="h-15 font-bold">Coming Soon…</div>
                 </result-detail-row></resut-tag
             >
-            <resut-tag headerStyle="5" title1="Topics"
+            <resut-tag
+                headerStyle="titleOnlyUnderlineBgColorGray"
+                title="Topics"
+                titleStyle="searchResult_header_font_lato_16"
                 ><result-detail-row class="searchResult_detail_gray">
                     <div class="h-15 font-bold">Coming Soon…</div>
                 </result-detail-row></resut-tag
             >
         </div>
 
-        <resut-tag headerStyle="3" title1="その他の情報" urlLink=""
+        <resut-tag
+            headerStyle="titleOnlyUnderlineGrayLine"
+            title="その他の情報"
+            titleStyle="notoSansJpAndEighteenblack"
             ><result-detail-row
                 class="
                     searchResult_detail_gray

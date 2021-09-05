@@ -1,6 +1,6 @@
 <template>
     <!-- 検索枠 -->
-    <div class="flex flex-row">
+    <div class="flex">
         <!-- pcの場合 -->
         <div class="flex-auto h-15 md:h-20 hidden md:block">
             <search-bar></search-bar>
@@ -17,7 +17,7 @@
         >
             <search-bar></search-bar>
         </div>
-        <!-- spの場合、ヘッダー,、検索枠の位置を替える -->
+        <!-- spの場合、ヘッダー、検索枠の位置を替える -->
         <div
             class="block md:hidden"
             :class="[$store.getters.getIsMenuClick ? '' : 'h-27.5']"

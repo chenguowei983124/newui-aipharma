@@ -1,36 +1,57 @@
 <template>
-    <div>
-        <input type="radio" name="tab" id="a1" class="hidden" checked />
-        <input type="radio" name="tab" id="a2" class="hidden" />
-        <div class="flex space-x-2 nav">
-            <label
-                for="a1"
-                class="
-                    w-1/2
-                    md:text-left
-                    md:underline
-                    md:px-5
-                    md:w-full
-                    searchResultActiveTagTitleStyle
-                "
-            >
-                <span> お知らせ</span></label
-            >
-            <label
-                for="a2"
-                class="w-1/2 md:hidden searchResultActiveTagTitleStyle"
-            >
-                <span> 掲示板</span></label
+    <label class="flex flex-row flex-auto justify-between" :class="headerStyle">
+        <div class="justify-center h-full">
+            <!-- 検索結果ヘッダータイトル -->
+            <a :class="titleStyle" v-if="title != undefine" :href="titleURL">{{
+                title
+            }}</a>
+
+            <a
+                :class="subTitleStyle"
+                v-if="subTitle != undefine"
+                :href="subTitleURL"
+                >{{ subTitle }}</a
             >
         </div>
-    </div>
+        <div
+            class="flex flex-col justify-end h-full"
+            v-if="rightStyle != undefine"
+        >
+            <div class="" v-if="rightStyle == 'count'">
+                <span
+                    class="searchResultAllCountLable"
+                    v-if="rightStyle == 'count'"
+                >
+                    {{ countTitle }}
+                </span>
+            </div>
+            <div v-if="rightStyle == 'icon'">
+                <a :href="iconUrl" target="_blank">
+                    <external-link></external-link>
+                </a>
+            </div>
+        </div>
+    </label>
 </template>
 
 <script>
-
+import externalLink from '../../components/svgImage/extarnalLink.vue'
 export default {
-  components: {},
-  props: {},
+  components: { externalLink },
+  props: {
+    headerStyle: { type: String, defult: "" },
+    title: { type: String, defult: "" },
+    titleStyle: { type: String, defult: "" },
+    titleURL: { type: String, defult: "" },
+    subTitle: { type: String, defult: "" },
+    subTitleStyle: { type: String, defult: "" },
+    subTitleURL: { type: String, defult: "" },
+    rightStyle: { type: String, defult: "" },
+    countTitle: { type: String, defult: "" },
+    countStyle: { type: String, defult: "" },
+    iconType: { type: String, defult: "" },
+    iconUrl: { type: String, defult: "" }
+  },
   data() {
     return {
 

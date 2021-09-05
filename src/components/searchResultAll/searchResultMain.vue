@@ -1,10 +1,15 @@
 <template>
-    <div class="font-NotoSansJp font-bold text-xl">
+    <div class="searchResultAllTitleAndValue">
         検索結果：{{ $store.getters.getSearchValue }}
     </div>
 
     <div class="h-full space-y-2.5 md:space-y-3.75">
-        <resut-tag headerStyle="7" title1="DI ナレッジシェア">
+        <resut-tag
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="DI ナレッジシェア"
+            titleStyle="bulletinBoardInfoTitle"
+            titleURL="\"
+        >
             <result-detail-row
                 class="searchResult_detail_blue"
                 :sites="
@@ -16,11 +21,24 @@
             >
             </result-detail-row>
         </resut-tag>
-        <resut-tag headerStyle="7" title1="組織内 DI 記録（Q&A）">
+        <resut-tag
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="組織内 DI 記録（Q&A）"
+            titleStyle="bulletinBoardInfoTitle"
+            titleURL="\"
+            rightStyle="count"
+            :countTitle="
+                '該当：' +
+                $store.getters.searchAllSearchAllOrganizationDidDocument.count +
+                '件'
+            "
+            countStyle="searchResultAllCountLable"
+        >
             <result-detail-row
                 class="searchResult_detail_blue"
                 :sites="
                     $store.getters.searchAllSearchAllOrganizationDidDocument
+                        .SearchAllOrganizationDidDocument
                 "
                 :sub1="['group']"
                 :sub2="['title']"
@@ -28,10 +46,20 @@
             >
             </result-detail-row>
         </resut-tag>
-        <resut-tag headerStyle="7" title1="症例（プレアボイド）">
+        <resut-tag
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="症例（プレアボイド）"
+            titleStyle="bulletinBoardInfoTitle"
+            titleURL="\"
+            rightStyle="count"
+            :countTitle="
+                '該当：' + $store.getters.searchAllPreAvoid.count + '件'
+            "
+            countStyle="searchResultAllCountLable"
+        >
             <result-detail-row
                 class="searchResult_detail_blue"
-                :sites="$store.getters.searchAllPreAvoid"
+                :sites="$store.getters.searchAllPreAvoid.searchAllPreAvoid"
                 :sub1="['group']"
                 :sub2="['title']"
                 :sub3="['states', 'date', 'view']"
@@ -39,16 +67,48 @@
             </result-detail-row>
         </resut-tag>
 
-        <resut-tag headerStyle="7" title1="DI 辞書">
+        <resut-tag
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="DI 辞書"
+            titleStyle="bulletinBoardInfoTitle"
+            titleURL="\"
+            rightStyle="count"
+            countTitle="該当：9999件"
+            countStyle="searchResultAllCountLable"
+        >
             <result-detail-row class="searchResult_detail_blue">
-                <div class="h-15 font-bold">Coming Soon…</div>
+                <div
+                    class="
+                        h-15
+                        w-full
+                        font-bold
+                        bg-green-300
+                        overflow-ellipsis overflow-hidden
+                    "
+                >
+                    ロキソニンの用途についてはロキソニンの用途〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇
+                </div>
             </result-detail-row>
         </resut-tag>
 
-        <resut-tag headerStyle="7" title1="掲示板">
+        <resut-tag
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="掲示板"
+            titleStyle="bulletinBoardInfoTitle"
+            titleURL="\"
+            rightStyle="count"
+            :countTitle="
+                '該当：' +
+                $store.getters.searchAllBulletinBoardInfo.count +
+                '件'
+            "
+            countStyle="searchResultAllCountLable"
+        >
             <result-detail-row
                 class="searchResult_detail_blue"
-                :sites="$store.getters.searchAllBulletinBoardInfo"
+                :sites="
+                    $store.getters.searchAllBulletinBoardInfo.bulletinBoardInfo
+                "
                 :sub1="['group']"
                 :sub2="['title']"
                 :sub3="['states', 'date', 'view']"

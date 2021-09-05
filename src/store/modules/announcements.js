@@ -21,7 +21,6 @@ export default {
             const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
                 params: {
                     token: rootState.apiToken,
-                    user_group_id: userGroupId
                 }
             })
             console.log(info)

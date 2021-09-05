@@ -7,7 +7,7 @@
                 space-y-1.5
                 md:space-x-3 md:space-y-0
                 md:flex
-                items-baseline
+                items-center
                 md:border-white
             "
             :class="getLineStyle(index, lineStyle)"
@@ -92,13 +92,6 @@
                         :itemValue="row.overview"
                         v-if="row.overview != undefined"
                     ></result-detail-row-item>
-                    <!-- 要閲覧ラベル -->
-                    <result-detail-row-item
-                        itemType="1"
-                        :typeKB="row.browseRequired"
-                        v-if="row.browseRequired != undefined"
-                        addStyle="hidden md:block flex-none"
-                    ></result-detail-row-item>
                 </span>
             </div>
             <!-- sp 三行目 -->
@@ -107,7 +100,7 @@
                 :class="bakAreaStyle"
             >
                 <div
-                    class="flex md:space-x-2.5 ml-1.5 md:ml-0 items-center"
+                    class="flex justify-start ml-1.5 md:ml-0 items-center"
                     v-for="dispItem in sub3"
                     :key="dispItem"
                 >
@@ -135,37 +128,20 @@
                             itemStyle="searchResult_lable_certainty_value"
                         ></result-detail-row-item>
                     </div>
-                    <!-- 要閲覧ラベル -->
-                    <result-detail-row-item
-                        itemType="1"
-                        :typeKB="row.browseRequired"
-                        v-if="
-                            row.browseRequired != undefined &&
-                            row.browseRequired == 'browse' &&
-                            dispItem == 'browseRequired'
-                        "
-                        addStyle="flex justify-center items-center mr-1.875 block md:hidden text-xs md:text-xxss md:flex-none"
-                    ></result-detail-row-item>
-                    <!-- 告知ラベル -->
-                    <result-detail-row-item
-                        itemType="1"
-                        :typeKB="row.notificationType"
-                        v-if="
-                            row.notificationType != undefined &&
-                            dispItem == 'notificationType'
-                        "
-                        addStyle="flex justify-center items-center mr-1.25 md:flex-none"
-                    ></result-detail-row-item>
+
+                    <!-- 状態 -->
                     <result-detail-row-item
                         itemType="1"
                         :typeKB="row.states"
                         :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                        addStyle="mr-2.5"
                         v-if="row.states != undefined && dispItem == 'states'"
                     ></result-detail-row-item>
                     <!-- date -->
                     <result-detail-row-item
                         itemType="2"
                         :itemValue="row.date"
+                        addStyle="mr-2.5"
                         v-if="row.date != undefined && dispItem == 'date'"
                     ></result-detail-row-item>
                     <!-- view数 -->
@@ -173,7 +149,7 @@
                         itemType="4"
                         itemTitle=" view"
                         :itemValue="row.viewCount"
-                        addStyle="md:flex-none"
+                        addStyle="md:flex-none "
                         v-if="row.viewCount != undefined && dispItem == 'view'"
                     ></result-detail-row-item>
                 </div>
@@ -247,10 +223,9 @@ export default {
         return "w-12.5 hidden md:block "
       } else {
         if (states == "new") {
-
-          return "searchResult_lable_new_right"
+          return "searchResult_lable_new_right mr-2.5"
         } else {
-          return "searchResult_lable_update_right"
+          return "searchResult_lable_update_right mr-2.5"
         }
         return null
       }

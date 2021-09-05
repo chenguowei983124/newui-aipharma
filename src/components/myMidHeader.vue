@@ -19,7 +19,13 @@
                             items-center
                         "
                     >
-                        <div class="text-white notoSansJpAndFourteen font-bold">
+                        <div
+                            class="
+                                text-white
+                                notoSansJpAndFourteenRegular
+                                font-bold
+                            "
+                        >
                             {{
                                 $store.getters.topManagementInfo.name.substring(
                                     0,

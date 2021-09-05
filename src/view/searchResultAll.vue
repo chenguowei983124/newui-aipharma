@@ -1,7 +1,5 @@
 <template>
     <div>
-        <!-- <my-header></my-header> -->
-        <!-- <my-mid-header></my-mid-header> -->
         <my-mid-header class="hidden md:block"></my-mid-header>
         <header
             class="
@@ -16,10 +14,8 @@
                 z-99
             "
         >
-            <div class="flex justify-between space-x-2 items-center">
-                <!-- メニューリスト -->
-                <menu-dropdown-item :isDispaly="true"></menu-dropdown-item>
-            </div>
+            <!-- メニューリスト -->
+            <menu-dropdown-item :isDispaly="true"></menu-dropdown-item>
 
             <data-manager-dropdown
                 class="pr-2"
@@ -42,7 +38,14 @@ import dataManagerDropdown from '../components/dropdown/dataManagerDropdown.vue'
 import searchResultAllLayout from '../layout/searchResultAllLayout.vue'
 import homeBottomTemplate from '../components/homeBottomItem.vue'
 export default {
-  components: { myHeader, MyMidHeader, menuDropdownItem, dataManagerDropdown, searchResultAllLayout, homeBottomTemplate },
+  components: {
+    myHeader,
+    MyMidHeader,
+    menuDropdownItem,
+    dataManagerDropdown,
+    searchResultAllLayout,
+    homeBottomTemplate
+  },
 
 }
 

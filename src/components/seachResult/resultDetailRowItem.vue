@@ -130,7 +130,6 @@ export default {
         // 2:日付
         style.push("searchResult_date_title")
       } else if (props.itemType == "3") {
-        console.log(props.itemValue)
         //3:タイトル
         style.push("searchResult_title")
       } else if (props.itemType == "4") {

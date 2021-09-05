@@ -43,7 +43,7 @@
                                         justify-center
                                         pt-2.5
                                         text-white
-                                        notoSansJpAndtTwentyBold
+                                        notoSansJpAndTwentyBold
                                     "
                                 >
                                     {{
@@ -88,7 +88,7 @@
                                         >
                                             <div
                                                 class="
-                                                    notoSansJpAndFourteen
+                                                    notoSansJpAndFourteenRegular
                                                     hover:text-searchDropdown
                                                     cursor-pointer
                                                     ml-2.5
