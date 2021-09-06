@@ -61,7 +61,7 @@
                         class="
                             hidden
                             md:block
-                            mid:hidden
+                            mid:block
                             absolute
                             border-2 border-gray-700
                             rounded-md

@@ -100,7 +100,7 @@
             </div>
         </div>
         <!-- pc リスト -->
-        <div class="hidden md:block mid:hidden">
+        <div class="hidden md:block mid:block">
             <div class="flex justify-end">
                 <div
                     class="
