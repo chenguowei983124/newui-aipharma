@@ -43,6 +43,7 @@
                 'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
                     $store.getters.getManagementClick,
             }"
+            @click="clickDown"
         >
             <div v-if="$store.getters.getManagementClick == true">
                 <!-- リスト -->
@@ -89,6 +90,7 @@
                                         flex
                                         items-center
                                         font-light
+                                        hover:text-googleTitle
                                     "
                                 >
                                     {{ item.title }}
@@ -100,50 +102,61 @@
             </div>
         </div>
         <!-- pc リスト -->
-        <div class="hidden md:block mid:block">
-            <div class="flex justify-end">
-                <div
-                    class="
-                        absolute
-                        rounded-md
-                        border-2 border-personOrganizationButton
-                        bg-personOrganizationButton
-                        w-37.5
-                        mt-1
-                    "
-                    v-if="$store.getters.getManagementClick"
-                >
-                    <div
-                        v-for="item in $store.getters.topPcManagementitemLists"
-                        :key="item"
-                        class="h-9 font-NotoSansJp cursor-pointer"
-                    >
-                        <div class="">
+        <div
+            :class="{
+                'absolute top-0 left-0 right-0 bottom-0 z-75 bg-lock':
+                    $store.getters.getManagementClick,
+            }"
+            @click="clickDown"
+        >
+            <div v-if="$store.getters.getManagementClick == true">
+                <div class="hidden md:block mid:block">
+                    <div class="flex justify-end my-13 md:mr-28 mid:mr-37.5">
+                        <div
+                            class="
+                                rounded-md
+                                border-2 border-personOrganizationButton
+                                bg-personOrganizationButton
+                                w-37.5
+                                mt-1
+                            "
+                            v-if="$store.getters.getManagementClick"
+                        >
                             <div
-                                v-if="item.itemStyle == 'title'"
-                                class="
-                                    h-9
-                                    pl-2.5
-                                    flex
-                                    items-center
-                                    text-white
-                                    font-light
-                                "
+                                v-for="item in $store.getters
+                                    .topPcManagementitemLists"
+                                :key="item"
+                                class="h-9 font-NotoSansJp cursor-pointer"
                             >
-                                {{ item.title }}
-                            </div>
-                            <div
-                                v-if="item.itemStyle == 'item'"
-                                class="
-                                    bg-yellow-50
-                                    h-9
-                                    pl-2.5
-                                    flex
-                                    items-center
-                                    font-light
-                                "
-                            >
-                                {{ item.title }}
+                                <div class="">
+                                    <div
+                                        v-if="item.itemStyle == 'title'"
+                                        class="
+                                            h-9
+                                            pl-2.5
+                                            flex
+                                            items-center
+                                            text-white
+                                            font-light
+                                        "
+                                    >
+                                        {{ item.title }}
+                                    </div>
+                                    <div
+                                        v-if="item.itemStyle == 'item'"
+                                        class="
+                                            bg-yellow-50
+                                            h-9
+                                            pl-2.5
+                                            flex
+                                            items-center
+                                            font-light
+                                            hover:text-googleTitle
+                                        "
+                                    >
+                                        {{ item.title }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

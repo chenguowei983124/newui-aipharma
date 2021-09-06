@@ -2,19 +2,10 @@
     <!-- portrait -->
     <div>
         <div class="md:border-l-2 border-gray-300">
-            <div
-                class="
-                    flex
-                    relative
-                    items-center
-                    space-x-1
-                    w-12.5
-                    md:w-13.75
-                    md:ml-2
-                "
-            >
+            <div class="flex items-center space-x-1 w-12.5 md:w-13.75 md:ml-2">
                 <div
                     class="
+                        relative
                         rounded-full
                         h-9
                         w-9
@@ -56,38 +47,49 @@
                             v-if="$store.getters.getPortraitClick == true"
                         ></icon-down>
                     </div>
-                    <!-- pc リスト -->
+                    <!-- pc リスト マスクレイヤー -->
                     <div
-                        class="
-                            hidden
-                            md:block
-                            mid:block
-                            absolute
-                            border-2 border-gray-700
-                            rounded-md
-                            bg-white
-                            w-25
-                            my-6
-                            md:pl-3.5
-                            md:pb-1.5
-                        "
-                        v-if="$store.getters.getPortraitClick"
+                        :class="{
+                            'absolute top-0 left-0 right-0 bottom-0 z-75':
+                                $store.getters.getPortraitClick,
+                        }"
+                        @click="clickDown"
                     >
-                        <div
-                            v-for="item in $store.getters
-                                .topManagementItemUserList"
-                            :key="item"
-                        >
+                        <div v-if="$store.getters.getPortraitClick == true">
                             <div
                                 class="
-                                    md:mt-1.5
-                                    text-black
-                                    font-bold
-                                    hover:text-searchDropdown
-                                    cursor-pointer
+                                    hidden
+                                    md:block
+                                    mid:block
+                                    border-2 border-gray-700
+                                    rounded-md
+                                    bg-white
+                                    w-25
+                                    my-13
+                                    md:ml-40
+                                    mid:ml-47.5
+                                    md:pl-3.5
+                                    md:pb-1.5
                                 "
+                                v-if="$store.getters.getPortraitClick"
                             >
-                                {{ item.title }}
+                                <div
+                                    v-for="item in $store.getters
+                                        .topManagementItemUserList"
+                                    :key="item"
+                                >
+                                    <div
+                                        class="
+                                            md:mt-1.5
+                                            text-black
+                                            font-bold
+                                            hover:text-searchDropdown
+                                            cursor-pointer
+                                        "
+                                    >
+                                        {{ item.title }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -98,6 +100,7 @@
                             'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
                                 $store.getters.getPortraitClick,
                         }"
+                        @click="clickDown"
                     >
                         <div v-if="$store.getters.getPortraitClick == true">
                             <!-- リスト -->
@@ -250,8 +253,19 @@ export default {
   },
   methods: {
     clickDown() {
-      this.$store.dispatch('setPortraitClick', !this.$store.getters.getPortraitClick
-      )
+      this.$store.dispatch('setPortraitClick', !this.$store.getters.getPortraitClick)
+      //   this.$store.getters.getPortraitClick = !this.$store.getters.getPortraitClick;
+      //   let _this = this;
+      //   document.addEventListener('click', function (e) {
+      //     console.log(_this.$refs.chickBox.contains(e.target))
+      //     if (_this.$refs.chickBox.contains(e.target)) {
+      //       console.log("点击的是页面内" + _this.btnShow)
+      //       return;
+      //     } else {
+      //       _this.btnShow = false;
+      //       console.log("点击的是页面外" + _this.btnShow)
+      //     }
+      //   })
     },
   }
 }

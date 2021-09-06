@@ -34,14 +34,7 @@
             <!-- third -->
             <div class="flex items-center">
                 <div
-                    class="
-                        w-37.5
-                        md:w-30
-                        mid:w-0
-                        flex
-                        justify-center
-                        space-x-1.25
-                    "
+                    class="w-37.5 md:w-30 mid:w-0 flex justify-center space-x-2"
                 >
                     <portrait-icon
                         class="block md:hidden mid:hidden"

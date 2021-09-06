@@ -33,7 +33,7 @@
                         mid:w-50
                         flex
                         justify-center
-                        space-x-1.25
+                        space-x-2
                     "
                 >
                     <portrait-icon

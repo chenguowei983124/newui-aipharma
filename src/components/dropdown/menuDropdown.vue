@@ -107,7 +107,7 @@
     <div
         class=""
         :class="{
-            'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
+            'fixed top-0 left-0 right-0 bottom-0 z-75':
                 $store.getters.getIsMenuClick,
         }"
         @click.self="linkClick"
@@ -178,7 +178,10 @@
                         cursor-pointer
                     "
                 >
-                    <div v-if="items.itemStyle == 'item'">
+                    <div
+                        v-if="items.itemStyle == 'item'"
+                        class="hover:text-googleTitle"
+                    >
                         {{ items.title }}
                     </div>
                 </div>
@@ -228,6 +231,7 @@
                             h-7
                             pl-3.75
                             cursor-pointer
+                            hover:text-googleTitle
                         "
                     >
                         {{ items.title }}
@@ -279,6 +283,7 @@
                             h-7
                             pl-3.75
                             cursor-pointer
+                            hover:text-googleTitle
                         "
                     >
                         {{ items.title }}
@@ -294,6 +299,7 @@
                             h-7
                             pl-7.5
                             cursor-pointer
+                            hover:text-googleTitle
                         "
                     >
                         {{ items.title }}
@@ -345,6 +351,7 @@
                             h-7
                             pl-3.75
                             cursor-pointer
+                            hover:text-googleTitle
                         "
                     >
                         {{ items.title }}
