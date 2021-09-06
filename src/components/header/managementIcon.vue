@@ -104,7 +104,7 @@
         <!-- pc リスト -->
         <div
             :class="{
-                'absolute top-0 left-0 right-0 bottom-0 z-75 bg-lock':
+                'absolute top-0 left-0 right-0 bottom-0 z-75':
                     $store.getters.getManagementClick,
             }"
             @click="clickDown"

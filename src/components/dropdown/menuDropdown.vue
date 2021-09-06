@@ -182,7 +182,9 @@
                         v-if="items.itemStyle == 'item'"
                         class="hover:text-googleTitle"
                     >
-                        {{ items.title }}
+                        <router-link :to="{ path: items.path }">
+                            {{ items.title }}</router-link
+                        >
                     </div>
                 </div>
             </div>
@@ -234,7 +236,9 @@
                             hover:text-googleTitle
                         "
                     >
-                        {{ items.title }}
+                        <router-link :to="{ path: items.path }">
+                            {{ items.title }}</router-link
+                        >
                     </div>
                 </div>
             </div>
@@ -283,10 +287,17 @@
                             h-7
                             pl-3.75
                             cursor-pointer
-                            hover:text-googleTitle
                         "
                     >
-                        {{ items.title }}
+                        <router-link :to="{ path: items.path }">
+                            <div
+                                v-if="items.path != ''"
+                                class="hover:text-googleTitle"
+                            >
+                                {{ items.title }}
+                            </div>
+                            <div v-else>{{ items.title }}</div>
+                        </router-link>
                     </div>
                     <div
                         v-if="items.itemStyle == 'subproject'"
@@ -302,7 +313,9 @@
                             hover:text-googleTitle
                         "
                     >
-                        {{ items.title }}
+                        <router-link :to="{ path: items.path }">
+                            {{ items.title }}</router-link
+                        >
                     </div>
                 </div>
             </div>
@@ -354,7 +367,9 @@
                             hover:text-googleTitle
                         "
                     >
-                        {{ items.title }}
+                        <router-link :to="{ path: items.path }">
+                            {{ items.title }}</router-link
+                        >
                     </div>
                 </div>
             </div>
@@ -378,31 +393,31 @@ export default {
       itemType3: false,
       itemType4: false,
       menuItemList: [
-        { 'id': '1', 'title': 'TOP', 'itemStyle': 'item' },
-        { 'id': '2', 'title': 'お知らせ', 'itemStyle': 'item' },
-        { 'id': '3', 'title': '掲示板', 'itemStyle': 'item' }
+        { 'id': '1', 'title': 'TOP', 'itemStyle': 'item', 'path': 'top' },
+        { 'id': '2', 'title': 'お知らせ', 'itemStyle': 'item', 'path': 'notification' },
+        { 'id': '3', 'title': '掲示板', 'itemStyle': 'item', 'path': 'bulletinBoard' }
       ],
       menuItemList2: [
-        { 'id': '4', 'title': 'データベース', 'itemStyle': 'title' },
-        { 'id': '5', 'title': 'DI ナレッジシェア', 'itemStyle': 'item' },
-        { 'id': '6', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item' },
-        { 'id': '7', 'title': '症例（プレアボイド）', 'itemStyle': 'item' },
-        { 'id': '8', 'title': 'DI 辞書', 'itemStyle': 'item' },
-        { 'id': '9', 'title': '製薬企業情報', 'itemStyle': 'item' }],
+        { 'id': '4', 'title': 'データベース', 'itemStyle': 'title', 'path': '' },
+        { 'id': '5', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': 'knowledgeShare' },
+        { 'id': '6', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': 'DIRecord ' },
+        { 'id': '7', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': 'case' },
+        { 'id': '8', 'title': 'DI 辞書', 'itemStyle': 'item', 'path': 'DIDictionary' },
+        { 'id': '9', 'title': '製薬企業情報', 'itemStyle': 'item', 'path': 'companyInformation' }],
       menuItemList3: [
-        { 'id': '10', 'title': 'マイデータ', 'itemStyle': 'title' },
-        { 'id': '11', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item' },
-        { 'id': '12', 'title': '登録', 'itemStyle': 'subproject' },
-        { 'id': '13', 'title': '症例（プレアボイド）', 'itemStyle': 'item' },
-        { 'id': '14', 'title': '登録', 'itemStyle': 'subproject' },
-        { 'id': '15', 'title': 'データ入出力', 'itemStyle': 'item' }],
+        { 'id': '10', 'title': 'マイデータ', 'itemStyle': 'title', 'path': '' },
+        { 'id': '11', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': '' },
+        { 'id': '12', 'title': '登録', 'itemStyle': 'subproject', 'path': 'register' },
+        { 'id': '13', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '' },
+        { 'id': '14', 'title': '登録', 'itemStyle': 'subproject', 'path': 'register' },
+        { 'id': '15', 'title': 'データ入出力', 'itemStyle': 'item', 'path': 'dataInputOutput' }],
       menuItemList4: [
-        { 'id': '16', 'title': 'その他', 'itemStyle': 'title' },
-        { 'id': '17', 'title': '外部リンク', 'itemStyle': 'item' },
-        { 'id': '18', 'title': '動画', 'itemStyle': 'item' },
-        { 'id': '19', 'title': '学会', 'itemStyle': 'item' },
-        { 'id': '20', 'title': '製薬企業DIチャットボット', 'itemStyle': 'item' },
-        { 'id': '21', 'title': 'ヘルプ', 'itemStyle': 'item' }
+        { 'id': '16', 'title': 'その他', 'itemStyle': 'title', 'path': '' },
+        { 'id': '17', 'title': '外部リンク', 'itemStyle': 'item', 'path': 'externalLink' },
+        { 'id': '18', 'title': '動画', 'itemStyle': 'item', 'path': 'movie' },
+        { 'id': '19', 'title': '学会', 'itemStyle': 'item', 'path': 'society' },
+        { 'id': '20', 'title': '製薬企業DIチャットボット', 'itemStyle': 'item', 'path': 'DIChatbot' },
+        { 'id': '21', 'title': 'ヘルプ', 'itemStyle': 'item', 'path': 'help' }
       ]
     };
   },
