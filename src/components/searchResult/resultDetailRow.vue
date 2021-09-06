@@ -64,17 +64,60 @@
                         v-if="row.states != undefined"
                     ></result-detail-row-item>
                 </div>
+
                 <div
-                    class="ml-2.5 md:ml-5 md:h-4 items-center"
+                    class="ml-2.5 md:ml-5 md:h-4 items-start"
+                    v-if="objectCheck(row.type) == true"
                     :class="proAreaStyle"
-                    v-else
                 >
-                    <div v-for="typeItem in row.type" :key="typeItem">
-                        <!-- 属性ラベル -->
+                    <div class="flex md:block space-y-2">
+                        <div
+                            class="flex md:flex-col space-y-1.5"
+                            v-for="typeItem in row.type"
+                            :key="typeItem"
+                        >
+                            <!-- 属性ラベル -->
+                            <result-detail-row-item
+                                itemType="1"
+                                :typeKB="typeItem"
+                            ></result-detail-row-item>
+                        </div>
+                    </div>
+                    <div :class="proAreaStyle">
                         <result-detail-row-item
                             itemType="1"
-                            :typeKB="typeItem"
-                            v-if="objectCheck(typeItem)"
+                            :typeKB="row.group"
+                            v-if="row.group != undefined"
+                        ></result-detail-row-item>
+                        <!-- 未アイコン -->
+                        <result-detail-row-item
+                            itemType="1"
+                            :typeKB="row.looked"
+                            v-if="row.looked != undefined"
+                        ></result-detail-row-item>
+                        <!-- date -->
+                        <result-detail-row-item
+                            itemType="2"
+                            :itemValue="row.date"
+                            v-if="row.date != undefined"
+                        ></result-detail-row-item>
+
+                        <result-detail-row-item
+                            itemType="2"
+                            :itemValue="getDateFrom(row.dateFrom, row.dateTo)"
+                            v-if="row.dateFrom != undefined"
+                        ></result-detail-row-item>
+                        <result-detail-row-item
+                            itemType="2"
+                            :itemValue="row.dateTo"
+                            addStyle=" block w-12 h-5"
+                            v-if="row.dateTo != undefined"
+                        ></result-detail-row-item>
+                        <result-detail-row-item
+                            itemType="1"
+                            :typeKB="row.states"
+                            :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                            v-if="row.states != undefined"
                         ></result-detail-row-item>
                     </div>
                 </div>
@@ -183,9 +226,8 @@ export default {
     return {
     };
   }, methods: {
-    objectCheck(type) {
-      console.log(type)
-      if (typeof type == Object) {
+    objectCheck(itemtype) {
+      if (typeof itemtype == "object") {
         return true
       } else {
         return false
