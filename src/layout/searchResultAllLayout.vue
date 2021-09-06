@@ -7,12 +7,20 @@
         </div>
 
         <!-- SPの場合 -->
-        <div
+        <!-- <div
             class="flex-auto h-15 md:h-20 block md:hidden"
             :class="[
                 $store.getters.getIsMenuClick
                     ? 'mt-12.5 fixed w-full top-12.5'
                     : 'fixed w-full top-12.5',
+            ]"
+        > -->
+        <div
+            class="flex-auto h-15 md:h-20 block md:hidden"
+            :class="[
+                $store.getters.getIsMenuClick
+                    ? 'mt-12.5'
+                    : 'fixed w-full top-12.5 z-20',
             ]"
         >
             <search-bar></search-bar>

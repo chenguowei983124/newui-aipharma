@@ -1,17 +1,17 @@
 <template>
     <div>
-        <my-header></my-header>
+        <my-top-header></my-top-header>
         <home-main></home-main>
         <home-bottom-template class="mt-20"></home-bottom-template>
     </div>
 </template>
 
 <script>
-import myHeader from '../components/myHeader.vue'
+import myTopHeader from '../components/myTopHeader.vue'
 import homeMain from '../layout/homelayout.vue'
 import homeBottomTemplate from '../components/homeBottomItem.vue'
 export default {
-  components: { myHeader, homeMain, homeBottomTemplate },
+  components: { myTopHeader, homeMain, homeBottomTemplate },
   props: {},
   data() {
     return {

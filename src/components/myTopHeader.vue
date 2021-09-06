@@ -74,11 +74,11 @@
 </template>
 
 <script>
-import personalInfo from '../components/header/personalInfo.vue'
-import portraitIcon from '../components/header/portraitIcon.vue'
-import issueIcon from '../components/header/issueIcon.vue';
-import managementIcon from '../components/header/managementIcon.vue';
-import menuDropdownItem from './dropdown/menuDropdown.vue'
+import personalInfo from './header/personalInfo.vue';
+import portraitIcon from './header/portraitIcon.vue';
+import issueIcon from './header/issueIcon.vue';
+import managementIcon from './header/managementIcon.vue';
+import menuDropdownItem from './dropdown/menuDropdown.vue';
 export default {
   components: { personalInfo, portraitIcon, menuDropdownItem, issueIcon, managementIcon },
   props: {},
