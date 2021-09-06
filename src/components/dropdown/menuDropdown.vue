@@ -172,11 +172,15 @@
                         text-base
                         font-normal
                         text-dropdownListItem
-                        border-b-2 border-white
                         flex
                         items-center
                         cursor-pointer
                     "
+                    :class="[
+                        items.id == menuItemList.length
+                            ? ''
+                            : 'border-b-2 border-white',
+                    ]"
                 >
                     <div
                         v-if="items.itemStyle == 'item'"
@@ -190,13 +194,8 @@
             </div>
             <!-- The second one -->
             <div
-                class="
-                    flex
-                    justify-between
-                    border-t-2 border-white
-                    bg-gray-300
-                    h-7.5
-                "
+                class="flex justify-between bg-gray-300 h-7.5"
+                :class="[itemType1 ? '' : 'border-t-2 border-white']"
                 @click="
                     ;(itemType2 = !itemType2),
                         (itemType1 = false),
@@ -229,12 +228,16 @@
                             text-base
                             font-normal
                             text-dropdownListItem
-                            border-b-2 border-white
                             h-7
                             pl-3.75
                             cursor-pointer
                             hover:text-googleTitle
                         "
+                        :class="[
+                            items.id == menuItemList2.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
                     >
                         <router-link :to="{ path: items.path }">
                             {{ items.title }}</router-link
@@ -244,13 +247,8 @@
             </div>
             <!-- The third -->
             <div
-                class="
-                    flex
-                    justify-between
-                    border-t-2 border-white
-                    bg-gray-300
-                    h-7.5
-                "
+                class="flex justify-between bg-gray-300 h-7.5"
+                :class="[itemType2 ? '' : 'border-t-2 border-white']"
                 @click="
                     ;(itemType3 = !itemType3),
                         (itemType1 = false),
@@ -283,11 +281,15 @@
                             text-base
                             font-normal
                             text-dropdownListItem
-                            border-b-2 border-white
                             h-7
                             pl-3.75
                             cursor-pointer
                         "
+                        :class="[
+                            items.id == menuItemList3.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
                     >
                         <router-link :to="{ path: items.path }">
                             <div
@@ -306,12 +308,16 @@
                             text-base
                             font-normal
                             text-dropdownListItem
-                            border-b-2 border-white
                             h-7
                             pl-7.5
                             cursor-pointer
                             hover:text-googleTitle
                         "
+                        :class="[
+                            items.id == menuItemList3.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
                     >
                         <router-link :to="{ path: items.path }">
                             {{ items.title }}</router-link
@@ -321,13 +327,8 @@
             </div>
             <!-- The Fourth -->
             <div
-                class="
-                    flex
-                    justify-between
-                    border-t-2 border-white
-                    bg-gray-300
-                    h-7.5
-                "
+                class="flex justify-between bg-gray-300 h-7.5"
+                :class="[itemType3 ? '' : 'border-t-2 border-white']"
                 @click="
                     ;(itemType4 = !itemType4),
                         (itemType1 = false),
@@ -360,12 +361,16 @@
                             text-base
                             font-normal
                             text-dropdownListItem
-                            border-b-2 border-white
                             h-7
                             pl-3.75
                             cursor-pointer
                             hover:text-googleTitle
                         "
+                        :class="[
+                            items.id == menuItemList4.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
                     >
                         <router-link :to="{ path: items.path }">
                             {{ items.title }}</router-link
@@ -398,26 +403,26 @@ export default {
         { 'id': '3', 'title': '掲示板', 'itemStyle': 'item', 'path': 'bulletinBoard' }
       ],
       menuItemList2: [
-        { 'id': '4', 'title': 'データベース', 'itemStyle': 'title', 'path': '' },
-        { 'id': '5', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': 'knowledgeShare' },
-        { 'id': '6', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': 'DIRecord ' },
-        { 'id': '7', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': 'case' },
-        { 'id': '8', 'title': 'DI 辞書', 'itemStyle': 'item', 'path': 'DIDictionary' },
-        { 'id': '9', 'title': '製薬企業情報', 'itemStyle': 'item', 'path': 'companyInformation' }],
+        { 'id': '1', 'title': 'データベース', 'itemStyle': 'title', 'path': '' },
+        { 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': 'knowledgeShare' },
+        { 'id': '3', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': 'DIRecord ' },
+        { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': 'case' },
+        { 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item', 'path': 'DIDictionary' },
+        { 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item', 'path': 'companyInformation' }],
       menuItemList3: [
-        { 'id': '10', 'title': 'マイデータ', 'itemStyle': 'title', 'path': '' },
-        { 'id': '11', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': '' },
-        { 'id': '12', 'title': '登録', 'itemStyle': 'subproject', 'path': 'register' },
-        { 'id': '13', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '' },
-        { 'id': '14', 'title': '登録', 'itemStyle': 'subproject', 'path': 'register' },
-        { 'id': '15', 'title': 'データ入出力', 'itemStyle': 'item', 'path': 'dataInputOutput' }],
+        { 'id': '1', 'title': 'マイデータ', 'itemStyle': 'title', 'path': '' },
+        { 'id': '2', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': '' },
+        { 'id': '3', 'title': '登録', 'itemStyle': 'subproject', 'path': 'register' },
+        { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '' },
+        { 'id': '5', 'title': '登録', 'itemStyle': 'subproject', 'path': 'register' },
+        { 'id': '6', 'title': 'データ入出力', 'itemStyle': 'item', 'path': 'dataInputOutput' }],
       menuItemList4: [
-        { 'id': '16', 'title': 'その他', 'itemStyle': 'title', 'path': '' },
-        { 'id': '17', 'title': '外部リンク', 'itemStyle': 'item', 'path': 'externalLink' },
-        { 'id': '18', 'title': '動画', 'itemStyle': 'item', 'path': 'movie' },
-        { 'id': '19', 'title': '学会', 'itemStyle': 'item', 'path': 'society' },
-        { 'id': '20', 'title': '製薬企業DIチャットボット', 'itemStyle': 'item', 'path': 'DIChatbot' },
-        { 'id': '21', 'title': 'ヘルプ', 'itemStyle': 'item', 'path': 'help' }
+        { 'id': '1', 'title': 'その他', 'itemStyle': 'title', 'path': '' },
+        { 'id': '2', 'title': '外部リンク', 'itemStyle': 'item', 'path': 'externalLink' },
+        { 'id': '3', 'title': '動画', 'itemStyle': 'item', 'path': 'movie' },
+        { 'id': '4', 'title': '学会', 'itemStyle': 'item', 'path': 'society' },
+        { 'id': '5', 'title': '製薬企業DIチャットボット', 'itemStyle': 'item', 'path': 'DIChatbot' },
+        { 'id': '6', 'title': 'ヘルプ', 'itemStyle': 'item', 'path': 'help' }
       ]
     };
   },
