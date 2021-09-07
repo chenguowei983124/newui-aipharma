@@ -66,13 +66,20 @@
                 </div>
 
                 <div
-                    class="ml-2.5 md:ml-5 md:h-4 items-start"
+                    class="ml-2.5 md:ml-5 items-start"
                     v-if="objectCheck(row.type) == true"
                     :class="proAreaStyle"
                 >
-                    <div class="flex md:block space-y-2">
+                    <div
+                        class="
+                            flex
+                            md:block
+                            space-x-2
+                            md:space-y-2 md:space-x-0
+                        "
+                    >
                         <div
-                            class="flex md:flex-col space-y-1.5"
+                            class="flex md:flex-col space-x-1.5 md:space-y-1.5"
                             v-for="typeItem in row.type"
                             :key="typeItem"
                         >

@@ -159,7 +159,7 @@
 
 /* 掲示板タイトル */
 .bulletinBoardInfoTitle{
-    @apply  notoSansJpAndEighteenBold underline text-center text-white;
+    @apply  notoSansJpAndEighteenBold text-center text-white border-b border-white;
 }
 
 /* 学会情報　その他の情報 */

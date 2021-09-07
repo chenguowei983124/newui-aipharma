@@ -6,9 +6,33 @@
         ></search-dropdown>
 
         <!-- 検索条件入力 -->
+        <!-- sp -->
         <input
             v-model="searchValue"
             class="
+                block
+                md:hidden
+                mid:hidden
+                border-2
+                h-10
+                w-10/12
+                ml-2.5
+                my-4
+                NotoSansJp-normal
+                text-xs
+                flex-grow
+                pl-4
+            "
+            type="text"
+            placeholder="キーワードを入力"
+        />
+        <!-- pc -->
+        <input
+            v-model="searchValue"
+            class="
+                hidden
+                md:block
+                mid:block
                 border-2
                 h-10
                 w-10/12

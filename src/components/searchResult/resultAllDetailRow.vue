@@ -3,8 +3,9 @@
         <!-- itemType 1:ラベル 2:日付 3:タイトル -->
         <div
             class="
-                pt-1.25
-                space-y-1.5
+                pt-2.5
+                md:pt-1.25
+                space-y-1
                 md:space-x-3 md:space-y-0
                 md:flex
                 items-center
@@ -92,6 +93,7 @@
                         <result-detail-row-item
                             itemType="3"
                             :itemValue="row.title"
+                            addStyle="underline"
                             v-if="row.title != undefined"
                         ></result-detail-row-item>
                     </div>
@@ -152,12 +154,16 @@
                         v-if="row.states != undefined && dispItem == 'states'"
                     ></result-detail-row-item>
                     <!-- date -->
-                    <result-detail-row-item
-                        itemType="2"
-                        :itemValue="row.date"
-                        addStyle="mr-2.5"
-                        v-if="row.date != undefined && dispItem == 'date'"
-                    ></result-detail-row-item>
+                    <!-- 状態無し -->
+                    <div :class="[row.states == '' ? '-ml-1.5 md:ml-0' : '']">
+                        <result-detail-row-item
+                            itemType="2"
+                            :itemValue="row.date"
+                            addStyle="mr-2.5"
+                            v-if="row.date != undefined && dispItem == 'date'"
+                        ></result-detail-row-item>
+                    </div>
+
                     <!-- view数 -->
                     <result-detail-row-item
                         itemType="4"

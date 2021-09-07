@@ -47,54 +47,66 @@
                                     "
                                 >
                                     {{
-                                        $store.getters.topManagementInfo.name.substring(
-                                            0,
-                                            2
-                                        )
+                                        $store.getters.topManagementInfo
+                                            .lastName
                                     }}
                                 </div>
                             </div>
                             <div class="">
                                 <div
-                                    class="flex justify-end"
-                                    @click="isDown = !isDown"
+                                    class="flex justify-end cursor-pointer"
+                                    @click="itemClick"
                                 >
                                     <icon-down
                                         class="ml-2"
-                                        v-if="isDown == true"
+                                        v-if="isDown == false"
                                     ></icon-down>
                                     <icon-down
                                         class="ml-2 transform rotate-180"
-                                        v-if="isDown == false"
+                                        v-if="isDown == true"
                                     ></icon-down>
+                                    <!-- リスト -->
                                     <div
+                                        :class="{
+                                            'absolute top-0 left-0 right-0 bottom-0 z-75':
+                                                isDown,
+                                        }"
                                         class="
                                             absolute
-                                            border-2 border-black
-                                            rounded-md
-                                            bg-white
-                                            w-25
-                                            h-33.5
-                                            mt-9
-                                            space-y-2.5
-                                            py-2.5
+                                            flex
+                                            justify-end
+                                            mid:pr-16
+                                            pt-88.75
                                         "
-                                        v-if="!isDown"
                                     >
                                         <div
-                                            v-for="item in $store.getters
-                                                .topManagementItemUserList"
-                                            :key="item"
+                                            class="
+                                                absolute
+                                                border-2 border-black
+                                                rounded-md
+                                                bg-white
+                                                w-25
+                                                h-33.5
+                                                space-y-2.5
+                                                py-2.5
+                                            "
+                                            v-if="isDown"
                                         >
                                             <div
-                                                class="
-                                                    notoSansJpAndFourteenRegular
-                                                    hover:text-searchDropdown
-                                                    cursor-pointer
-                                                    ml-2.5
-                                                "
+                                                v-for="item in $store.getters
+                                                    .topManagementItemUserList"
+                                                :key="item"
                                             >
-                                                {{ item.title }}
+                                                <div
+                                                    class="
+                                                        notoSansJpAndFourteenRegular
+                                                        hover:text-searchDropdown
+                                                        cursor-pointer
+                                                        ml-2.5
+                                                    "
+                                                >
+                                                    {{ item.title }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -236,8 +248,7 @@ export default {
   props: { sites: [] },
   data() {
     return {
-      isDown: true,
-      isSelect: true,
+      isDown: false,
     };
   },
   couputed: {},

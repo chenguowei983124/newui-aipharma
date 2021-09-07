@@ -74,11 +74,11 @@ export default {
       const style = []
       //   青背景
       if (props.headerStyle == "titleOnlyUnderlineBgColorBlue") {
-        style.push("h-10 rounded-t-lg  py-2 px-5 bg-cardTitle ")
+        style.push("h-10 rounded-t-lg py-1.5 px-2.5 md:px-5 bg-cardTitle")
       }
 
       if (props.headerStyle == "titleOnlyUnderlineBgColorGray") {
-        style.push("searchResult_header_bg_gray ")
+        style.push("searchResult_header_bg_gray")
       }
       if (props.headerStyle == "titleOnlyUnderlineGrayLine") {
         style.push("searchResult_header_grayline")
