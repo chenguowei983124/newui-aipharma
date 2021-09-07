@@ -50,7 +50,7 @@
         />
 
         <!-- 検索ボタン -->
-        <!-- <router-link class="h-12" to="/searchAllResult"> -->
+        <!-- <router-link class="" to="/searchResultAll"> -->
         <button
             @click="searchClick"
             class="
@@ -90,8 +90,8 @@ export default {
   },
   methods: {
     searchClick: function (event) {
+      console.log('this.searchValue =' + this.searchValue)
       this.$store.dispatch('saveSearchValue', this.searchValue)
-
       this.$router.push('/searchResultAll')
     }
   }

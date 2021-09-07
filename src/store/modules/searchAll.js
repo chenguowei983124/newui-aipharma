@@ -1,7 +1,7 @@
 import axios from 'axios'
 export default {
     state: () => ({
-        searchValue: "",
+        searchValue: '',
         searchAllOrganizationDidDocument: [],
         searchAllPreAvoid: []
     }),
@@ -78,12 +78,17 @@ export default {
     mutations: {
         setSearchAllDiKnowledge(state, info) {
             state.SearchAllDiKnowledge = info
-        }, setSearchValue(state, info) {
-            state.searchValue = info
-        }
+        },
+        basic(state, payload) {
+            state[payload.key] = payload.value
+        },
     },
 
     actions: {
+        saveSearchValue({ commit, state }, value) {
+            commit('basic', { key: 'searchValue', value })
+            // console.log("searchValue =" + value)
+        }
         // async getTopNotice({ rootState, commit }, userGroupId) {
         //     const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
         //         params: {
@@ -93,14 +98,14 @@ export default {
         //     })
         //     commit('setTopNotice', info)
         //}, 
-        async saveSearchValue({ rootState, commit }, searchValue) {
-            const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
-                params: {
-                    token: rootState.apiToken,
-                    user_group_id: userGroupId
-                }
-            })
-            commit('setSearchValue', searchValue)
-        }
+        // async saveSearchValue({ rootState, commit }, searchValue) {
+        //     const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
+        //         params: {
+        //             token: rootState.apiToken,
+        //             user_group_id: searchValue
+        //         }
+        //     })
+        //     commit('setSearchValue', searchValue)
+        // }
     },
 }
