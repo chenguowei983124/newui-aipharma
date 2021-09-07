@@ -13,28 +13,16 @@
             "
         >
             <router-view />
-            <button
-                class="
-                    absolute
-                    h-15
-                    w-15
-                    bottom-5
-                    right-1.25
-                    bg-toTop
-                    text-white
-                    rounded-full
-                    md:right-12.5
-                    md:bottom-7.5
-                "
-                @click="toTop"
-            >
-                ▲
-            </button>
+            <move-top-button></move-top-button>
         </div>
         <div class="flex-grow max-h-full min-w-min bg-backgroundMain"></div>
     </div>
 </template>
-<script>export default {
+<script>
+import moveTopButton from './components/moveTopButton.vue'
+
+export default {
+  components: { moveTopButton },
   methods: {
     toTop() {
       let currentScroll = document.documentElement.scrollTop,

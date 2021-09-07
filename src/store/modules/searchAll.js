@@ -26,7 +26,7 @@ export default {
             state.data = {
                 count: "123"
                 , SearchAllOrganizationDidDocument: [
-                    { group: 'ownFacility', title: '痛み止めとして処方される◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'ownFacility', title: '痛み止めとして処方される◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: 'ロキソニンテープ 50mg の用途◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'group', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'update', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
@@ -54,7 +54,7 @@ export default {
             state.data = {
                 count: "456",
                 bulletinBoardInfo: [
-                    { group: 'ownFacility', title: '痛み止めとして処方される◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'ownFacility', title: '痛み止めとして処方される◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: 'ロキソニンテープ 50mg の用途◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'group', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'update', date: '2021.01.01', viewCount: '12345', linkUrl: '' },

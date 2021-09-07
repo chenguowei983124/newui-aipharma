@@ -105,6 +105,9 @@
             >
             </result-detail-row>
         </resut-tag>
+        <google-item></google-item>
+        <pharmaceuticals-item></pharmaceuticals-item>
+        <jstage-item></jstage-item>
     </div>
 </template>
 
@@ -112,9 +115,12 @@
 import resutTag from '../searchResult/resultTag.vue'
 import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
 import carousel from '../searchResult/carousel.vue'
+import googleItem from '../searchResult/googleItem.vue'
+import pharmaceuticalsItem from '../searchResult/pharmaceuticalsItem.vue'
+import jstageItem from '../searchResult/jstageItem.vue'
 export default {
   components: {
-    resutTag, resultDetailRow, carousel
+    resutTag, resultDetailRow, carousel, googleItem, pharmaceuticalsItem, jstageItem
   },
   props: {},
   data() {
