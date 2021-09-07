@@ -1,5 +1,5 @@
 <template>
-    <div class="searchResultAllTitleAndValue">
+    <div class="searchResultAllTitleAndValue mt-7.5 md:mt-12.5">
         検索結果：{{ $store.getters.getSearchValue }}
     </div>
 

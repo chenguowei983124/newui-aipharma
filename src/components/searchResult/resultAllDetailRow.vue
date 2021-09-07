@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="md:pt-3.5">
         <!-- itemType 1:ラベル 2:日付 3:タイトル -->
         <div
             class="
@@ -150,7 +150,7 @@
                         itemType="1"
                         :typeKB="row.states"
                         :itemStyle="getPmdaStatesDefaultStype(row.states)"
-                        addStyle="mr-2.5"
+                        addStyle=""
                         v-if="row.states != undefined && dispItem == 'states'"
                     ></result-detail-row-item>
                     <!-- date -->
@@ -159,7 +159,7 @@
                         <result-detail-row-item
                             itemType="2"
                             :itemValue="row.date"
-                            addStyle="mr-2.5"
+                            addStyle=""
                             v-if="row.date != undefined && dispItem == 'date'"
                         ></result-detail-row-item>
                     </div>
@@ -243,9 +243,9 @@ export default {
         return "w-12.5 hidden md:block "
       } else {
         if (states == "new") {
-          return "searchResult_lable_new_right mr-2.5"
+          return "searchResult_lable_new_right md:mr-2.5"
         } else {
-          return "searchResult_lable_update_right mr-2.5"
+          return "searchResult_lable_update_right md:mr-2.5"
         }
         return null
       }
