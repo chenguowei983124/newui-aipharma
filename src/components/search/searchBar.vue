@@ -2,6 +2,7 @@
     <div class="bg-backgroundMainSearch flex items-center h-full">
         <!-- 検索条件リスト -->
         <search-dropdown
+            @getCheckedId="getCheckId"
             class="h-10 md:ml-32 flex-none hidden md:block"
         ></search-dropdown>
 
@@ -50,7 +51,7 @@
         />
 
         <!-- 検索ボタン -->
-        <!-- <router-link class="" to="/searchResultAll"> -->
+        <!-- <router-link class="h-12" to="/searchAllResult"> -->
         <button
             @click="searchClick"
             class="
@@ -84,15 +85,54 @@ export default {
   components: { searchDropdown, searchSvg },
   data() {
     return {
-      searchValue: ''
+      searchValue: '',
+      checkId: '1'
     }
 
   },
   methods: {
+    // ========================================
+    // 検索ボタン押下イベント
+    // ========================================
     searchClick: function (event) {
-      console.log('this.searchValue =' + this.searchValue)
-      this.$store.dispatch('saveSearchValue', this.searchValue)
-      this.$router.push('/searchResultAll')
+      // すべて
+      if (this.checkId == 1) {
+        // 検索APIを呼び出し(画面入力値)
+        this.$store.dispatch('saveSearchValue', this.searchValue)
+
+        // 一括検索結果画面へ遷移
+        this.$router.push('/searchResultAll')
+      }
+      // DI ナレッジシェア
+      else if (this.checkId == 2) {
+
+        this.$router.push('/searchResultAll')
+      }
+      // 組織内 DI 記録（Q&A）
+      else if (this.checkId == 3) {
+        this.$store.dispatch('searchOrganization', this.searchValue)
+        this.$router.push('/searchOrganization')
+      }
+      // 病例（プレアボイド）
+      else if (this.checkId == 4) {
+        this.$router.push('/searchOrganization')
+      }
+      // DI 辞書
+      else if (this.checkId == 5) {
+        this.$router.push('/searchOrganization')
+      }
+      // 製薬企業情報
+      else if (this.checkId == 6) {
+        this.$router.push('/searchOrganization')
+      }
+
+      // this.$router.push('/searchResultAll')
+    },
+    // ========================================
+    // DropDown 選択したアイテムＩＤ取得
+    // ========================================
+    getCheckId(data) {
+      this.checkId = data
     }
   }
 }

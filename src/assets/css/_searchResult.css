@@ -221,3 +221,10 @@
 .searchResultUnActiveTagTitleStyle{
     @apply flex flex-col justify-center h-10 rounded-t-lg text-center bg-cardViewCount text-googleTitle ;
 }
+.basePage{
+    @apply w-8 h-8 notoSansJpAndFourteenRegular  text-center  pt-1 rounded border-2 border-grayline text-grayline ;
+}
+
+.currentPage{
+    @apply w-8 h-8 notoSansJpAndFourteenRegular  text-center  pt-1 rounded border-2 bg-blueline border-blueline text-white ;
+}

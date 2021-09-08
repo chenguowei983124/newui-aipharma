@@ -1,8 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import myHome from '/src/view/myHome.vue'
 import searchResultAll from '/src/view/searchResultAll.vue'
-import carouselVertical from '../components/searchResult/carouselVertical.vue'
-// import test from '../components/test.vue'
+import searchOrganization from '/src/view/searchOrganization.vue'
+
+
+
 const routes = [
     {
         meta: {
@@ -16,9 +18,9 @@ const routes = [
         name: 'searchResultAll',
         component: searchResultAll,
     }, {
-        path: '/carouselVertical',
-        name: 'carouselVertical',
-        component: carouselVertical,
+        path: '/searchOrganization',
+        name: 'searchOrganization',
+        component: searchOrganization,
     }
 ]
 

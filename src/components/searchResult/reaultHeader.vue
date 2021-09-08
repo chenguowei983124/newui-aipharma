@@ -2,21 +2,18 @@
     <label class="flex flex-row flex-auto justify-between" :class="headerStyle">
         <div class="justify-center h-full">
             <!-- 検索結果ヘッダータイトル -->
-            <a :class="titleStyle" v-if="title != undefine" :href="titleURL">{{
+            <a :class="titleStyle" v-if="title != ''" :href="titleURL">{{
                 title
             }}</a>
 
             <a
                 :class="subTitleStyle"
-                v-if="subTitle != undefine"
+                v-if="subTitle != ''"
                 :href="subTitleURL"
                 >{{ subTitle }}</a
             >
         </div>
-        <div
-            class="flex flex-col justify-end h-full"
-            v-if="rightStyle != undefine"
-        >
+        <div class="flex flex-col justify-end h-full" v-if="rightStyle != ''">
             <div class="" v-if="rightStyle == 'count'">
                 <span
                     class="searchResultAllCountLable"

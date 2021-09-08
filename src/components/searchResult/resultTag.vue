@@ -1,5 +1,5 @@
 <template>
-    <div class="" v-if="headerStyle == 'doubleTag'">
+    <div v-if="headerStyle == 'doubleTag'">
         <input type="radio" name="tab" id="a1" class="hidden" checked />
         <input type="radio" name="tab" id="a2" class="hidden" />
         <div class="flex space-x-2 nav">
@@ -26,7 +26,7 @@
         </div>
         <slot></slot>
     </div>
-    <div class="" v-else>
+    <div v-else>
         <result-header
             :class="resultHeaderStyle"
             :title="title"

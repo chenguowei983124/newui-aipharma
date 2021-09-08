@@ -144,9 +144,9 @@ export default {
         this.checkedID = value.id
         this.itemValue = value.title
         this.isDown = !this.isDown
+        this.$emit("getCheckedId", value.id)
+
       }
-
-
     }
   },
   created() {

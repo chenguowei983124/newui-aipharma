@@ -1,7 +1,8 @@
 import axios from 'axios'
 export default {
     state: () => ({
-        searchValue: '',
+        searchKey: "",
+        organizationInfo: {},
         searchAllOrganizationDidDocument: [],
         searchAllPreAvoid: []
     }),
@@ -71,7 +72,7 @@ export default {
 
             return google;
         }, getSearchValue(state) {
-            return state.searchValue
+            return state.searchKey
         }
     },
 
@@ -86,26 +87,34 @@ export default {
 
     actions: {
         saveSearchValue({ commit, state }, value) {
-            commit('basic', { key: 'searchValue', value })
-            // console.log("searchValue =" + value)
+            commit('basic', { key: 'searchKey', value })
+        },
+        // ========================================
+        // DI ナレッジシェアAPI実行
+        // ========================================
+        async searchOrganization({ rootState, commit }, value) {
+
+            // API呼び出し
+            // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
+            //     params: {
+            //         token: rootState.apiToken,
+            //         user_group_id: value
+            //     }
+            // })
+            // 検索キー格納
+            commit('basic', { key: 'searchKey', value })
+            const info = {
+                count: 1,
+                searchResult: [
+                    { group: 'ownFacility', title: '痛み止めとして処方される◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'otherFacility', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'otherFacility', title: 'ロキソニンテープ 50mg の用途◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'group', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'update', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'group', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'update', date: '2021.01.01', viewCount: '12345', linkUrl: '' }
+                ]
+            }
+            // 検索結果格納
+            commit('basic', { key: 'organizationInfo', info })
         }
-        // async getTopNotice({ rootState, commit }, userGroupId) {
-        //     const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
-        //         params: {
-        //             token: rootState.apiToken,
-        //             user_group_id: userGroupId
-        //         }
-        //     })
-        //     commit('setTopNotice', info)
-        //}, 
-        // async saveSearchValue({ rootState, commit }, searchValue) {
-        //     const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
-        //         params: {
-        //             token: rootState.apiToken,
-        //             user_group_id: searchValue
-        //         }
-        //     })
-        //     commit('setSearchValue', searchValue)
-        // }
     },
 }
