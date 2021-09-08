@@ -89,11 +89,14 @@
                             v-if="row.title != undefined"
                         ></result-detail-row-item>
                     </div>
-                    <div v-show="dispItem == 'titleHeightAuto'">
+                    <div
+                        v-show="dispItem == 'titleHeightAuto'"
+                        class="truncate"
+                    >
                         <result-detail-row-item
                             itemType="3"
                             :itemValue="row.title"
-                            addStyle="underline"
+                            addStyle="underline "
                             v-if="row.title != undefined"
                         ></result-detail-row-item>
                     </div>

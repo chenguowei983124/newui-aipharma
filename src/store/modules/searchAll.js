@@ -13,7 +13,7 @@ export default {
             state.data = {
                 searchAllDiKnowledge: [
                     { group: 'AI', title: 'Q：ロキソニン貼付剤の適応症は', Certainty: '12345', linkUrl: '' },
-                    { group: 'keyword', title: 'Q：ロキソニンとベンザリンの相互作用について', Certainty: '', linkUrl: '' },
+                    { group: 'keyword', title: 'Q：ロキソニンとベンザリンの相互作用についてロキソニンとベンザリンの相互作用について', Certainty: '', linkUrl: '' },
                     { group: 'keyword', title: ' Q：ロキソニンとオメプラゾンの相互作用について', Certainty: '', linkUrl: '' },
                     { group: 'keyword', title: ' Q：ロキソニンとデパケンの相互作用について', Certainty: '', linkUrl: '' },
                     { group: 'keyword', title: ' Q：ロキソニンとリスパダールの相互作用について', Certainty: '', linkUrl: '' },
@@ -27,7 +27,7 @@ export default {
             state.data = {
                 count: "123"
                 , SearchAllOrganizationDidDocument: [
-                    { group: 'ownFacility', title: '痛み止めとして処方される◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'ownFacility', title: '痛み止めとして処方される痛み止めとして処方される痛み止めとして処方される', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: 'ロキソニンテープ 50mg の用途◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'group', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'update', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
@@ -41,7 +41,7 @@ export default {
             state.data = {
                 count: "456",
                 searchAllPreAvoid: [
-                    { group: 'ownFacility', title: '採用薬に○○が追加されました。', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'ownFacility', title: '採用薬に○○が追加されました。採用薬に○○が追加されました。', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: '採用薬に○○が追加されました。', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: '採用薬に○○が追加されました。', states: '', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'group', title: '採用薬に○○が追加されました。', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
@@ -55,9 +55,9 @@ export default {
             state.data = {
                 count: "456",
                 bulletinBoardInfo: [
-                    { group: 'ownFacility', title: '痛み止めとして処方される◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'ownFacility', title: '痛み止めとして処方される痛み止めとして処方される痛み止めとして処方される', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'otherFacility', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
-                    { group: 'otherFacility', title: 'ロキソニンテープ 50mg の用途◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
+                    { group: 'otherFacility', title: 'ロキソニンテープ 50mg の用途ロキソニンテープの用途◯◯◯◯◯◯', states: 'new', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'group', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'update', date: '2021.01.01', viewCount: '12345', linkUrl: '' },
                     { group: 'group', title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯', states: 'update', date: '2021.01.01', viewCount: '12345', linkUrl: '' }
                 ]

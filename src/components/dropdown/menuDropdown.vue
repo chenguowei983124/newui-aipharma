@@ -163,34 +163,37 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList" :key="items">
-            <div
-                v-if="itemType1"
-                class="
-                    h-7
-                    pl-3.75
-                    font-NotoSansJp
-                    text-base
-                    font-normal
-                    text-dropdownListItem
-                    flex
-                    items-center
-                    cursor-pointer
-                "
-                :class="[
-                    items.id == menuItemList.length
-                        ? ''
-                        : 'border-b-2 border-white',
-                ]"
-            >
+            <router-link :to="{ path: items.path }">
                 <div
-                    v-if="items.itemStyle == 'item'"
-                    class="hover:text-googleTitle"
+                    v-if="itemType1"
+                    class="
+                        h-7
+                        pl-3.75
+                        font-NotoSansJp
+                        text-base
+                        font-normal
+                        text-dropdownListItem
+                        flex
+                        items-center
+                        cursor-pointer
+                    "
+                    :class="[
+                        items.id == menuItemList.length
+                            ? ''
+                            : 'border-b-2 border-white',
+                    ]"
                 >
-                    <router-link :to="{ path: items.path }">
-                        {{ items.title }}</router-link
+                    <div
+                        v-if="items.itemStyle == 'item'"
+                        class="hover:text-googleTitle"
                     >
+                        {{ items.title }}
+                        <!-- <router-link :to="{ path: items.path }">
+                        {{ items.title }}</router-link
+                    > -->
+                    </div>
                 </div>
-            </div>
+            </router-link>
         </div>
         <!-- The second one -->
         <div
@@ -220,30 +223,32 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList2" :key="items">
-            <div v-if="itemType2">
-                <div
-                    v-if="items.itemStyle == 'item'"
-                    class="
-                        font-NotoSansJp
-                        text-base
-                        font-normal
-                        text-dropdownListItem
-                        h-7
-                        pl-3.75
-                        cursor-pointer
-                        hover:text-googleTitle
-                    "
-                    :class="[
-                        items.id == menuItemList2.length
-                            ? ''
-                            : 'border-b-2 border-white',
-                    ]"
-                >
-                    <router-link :to="{ path: items.path }">
-                        {{ items.title }}</router-link
+            <router-link :to="{ path: items.path }">
+                <div v-if="itemType2">
+                    <div
+                        v-if="items.itemStyle == 'item'"
+                        class="
+                            font-NotoSansJp
+                            text-base
+                            font-normal
+                            text-dropdownListItem
+                            h-7
+                            pl-3.75
+                            cursor-pointer
+                            hover:text-googleTitle
+                        "
+                        :class="[
+                            items.id == menuItemList2.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
                     >
+                        <!-- <router-link :to="{ path: items.path }"> -->
+                        {{ items.title }}
+                        <!-- </router-link> -->
+                    </div>
                 </div>
-            </div>
+            </router-link>
         </div>
         <!-- The third -->
         <div
@@ -273,25 +278,26 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList3" :key="items">
-            <div v-if="itemType3">
-                <div
-                    v-if="items.itemStyle == 'item'"
-                    class="
-                        font-NotoSansJp
-                        text-base
-                        font-normal
-                        text-dropdownListItem
-                        h-7
-                        pl-3.75
-                        cursor-pointer
-                    "
-                    :class="[
-                        items.id == menuItemList3.length
-                            ? ''
-                            : 'border-b-2 border-white',
-                    ]"
-                >
-                    <router-link :to="{ path: items.path }">
+            <router-link :to="{ path: items.path }">
+                <div v-if="itemType3">
+                    <div
+                        v-if="items.itemStyle == 'item'"
+                        class="
+                            font-NotoSansJp
+                            text-base
+                            font-normal
+                            text-dropdownListItem
+                            h-7
+                            pl-3.75
+                            cursor-pointer
+                        "
+                        :class="[
+                            items.id == menuItemList3.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
+                    >
+                        <!-- <router-link :to="{ path: items.path }"> -->
                         <div
                             v-if="items.path != ''"
                             class="hover:text-googleTitle"
@@ -299,31 +305,32 @@
                             {{ items.title }}
                         </div>
                         <div v-else>{{ items.title }}</div>
-                    </router-link>
-                </div>
-                <div
-                    v-if="items.itemStyle == 'subproject'"
-                    class="
-                        font-NotoSansJp
-                        text-base
-                        font-normal
-                        text-dropdownListItem
-                        h-7
-                        pl-7.5
-                        cursor-pointer
-                        hover:text-googleTitle
-                    "
-                    :class="[
-                        items.id == menuItemList3.length
-                            ? ''
-                            : 'border-b-2 border-white',
-                    ]"
-                >
-                    <router-link :to="{ path: items.path }">
-                        {{ items.title }}</router-link
+                        <!-- </router-link> -->
+                    </div>
+                    <div
+                        v-if="items.itemStyle == 'subproject'"
+                        class="
+                            font-NotoSansJp
+                            text-base
+                            font-normal
+                            text-dropdownListItem
+                            h-7
+                            pl-7.5
+                            cursor-pointer
+                            hover:text-googleTitle
+                        "
+                        :class="[
+                            items.id == menuItemList3.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
                     >
+                        <!-- <router-link :to="{ path: items.path }"> -->
+                        {{ items.title }}
+                        <!-- </router-link> -->
+                    </div>
                 </div>
-            </div>
+            </router-link>
         </div>
         <!-- The Fourth -->
         <div
@@ -353,30 +360,32 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList4" :key="items">
-            <div v-if="itemType4">
-                <div
-                    v-if="items.itemStyle == 'item'"
-                    class="
-                        font-NotoSansJp
-                        text-base
-                        font-normal
-                        text-dropdownListItem
-                        h-7
-                        pl-3.75
-                        cursor-pointer
-                        hover:text-googleTitle
-                    "
-                    :class="[
-                        items.id == menuItemList4.length
-                            ? ''
-                            : 'border-b-2 border-white',
-                    ]"
-                >
-                    <router-link :to="items.path">
-                        {{ items.title }}</router-link
+            <router-link :to="items.path">
+                <div v-if="itemType4">
+                    <div
+                        v-if="items.itemStyle == 'item'"
+                        class="
+                            font-NotoSansJp
+                            text-base
+                            font-normal
+                            text-dropdownListItem
+                            h-7
+                            pl-3.75
+                            cursor-pointer
+                            hover:text-googleTitle
+                        "
+                        :class="[
+                            items.id == menuItemList4.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
                     >
+                        <!-- <router-link :to="items.path"> -->
+                        {{ items.title }}
+                        <!-- </router-link> -->
+                    </div>
                 </div>
-            </div>
+            </router-link>
         </div>
     </div>
     <!-- </transition> -->
@@ -398,14 +407,14 @@ export default {
       itemType3: false,
       itemType4: false,
       menuItemList: [
-        { 'id': '1', 'title': 'TOP', 'itemStyle': 'item', 'path': 'top' },
+        { 'id': '1', 'title': 'TOP', 'itemStyle': 'item', 'path': '/' },
         { 'id': '2', 'title': 'お知らせ', 'itemStyle': 'item', 'path': 'notification' },
         { 'id': '3', 'title': '掲示板', 'itemStyle': 'item', 'path': 'bulletinBoard' }
       ],
       menuItemList2: [
         { 'id': '1', 'title': 'データベース', 'itemStyle': 'title', 'path': '' },
         { 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': 'knowledgeShare' },
-        { 'id': '3', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': '/searchOrganization ' },
+        { 'id': '3', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': 'searchOrganization' },
         { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': 'case' },
         { 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item', 'path': 'DIDictionary' },
         { 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item', 'path': 'companyInformation' }],
