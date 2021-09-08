@@ -1,5 +1,5 @@
 <template>
-    <div class="md:pt-3.5">
+    <div class="md:pt-0 mid:pt-3.5">
         <!-- itemType 1:ラベル 2:日付 3:タイトル -->
         <div
             class="
@@ -78,10 +78,11 @@
                             md:block
                             space-x-2
                             md:space-y-1.5 md:space-x-0
+                            md:pb-1.25
                         "
                     >
                         <div
-                            class="flex md:flex-col space-x-1.5 md:space-y-1.5"
+                            class="flex md:flex-col space-x-1.5"
                             v-for="typeItem in row.type"
                             :key="typeItem"
                         >
