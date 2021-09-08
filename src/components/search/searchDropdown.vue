@@ -17,6 +17,12 @@
             </div>
         </div>
         <div
+            :class="{
+                'absolute top-0 left-0 right-0 bottom-0 z-75': isDown,
+            }"
+            @click="isDown = !isDown"
+        ></div>
+        <div
             class="absolute bg-searchBar w-45 cursor-pointer"
             v-if="isDown"
             @click="isSelect = !isSelect"
