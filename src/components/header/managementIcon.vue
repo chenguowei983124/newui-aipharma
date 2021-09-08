@@ -168,8 +168,6 @@
 
 <script>
 export default {
-  data() {
-  },
   methods: {
     clickDown() {
       this.$store.dispatch('setManagementClick', !this.$store.getters.getManagementClick

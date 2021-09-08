@@ -75,11 +75,6 @@ import menuDropdownItem from './dropdown/menuDropdown.vue';
 export default {
   components: { personalInfo, portraitIcon, menuDropdownItem, issueIcon, managementIcon },
   props: {},
-  data() {
-    return {
-
-    };
-  },
   couputed: {},
   watch: {},
   methods: {

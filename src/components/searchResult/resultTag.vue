@@ -65,10 +65,6 @@ export default {
     iconType: { type: String, defult: "" },
     iconUrl: { type: String, defult: "" }
   },
-  data() {
-    return {
-    };
-  },
   setup(props) {
     const resultHeaderStyle = computed(() => {
       const style = []

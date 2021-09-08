@@ -147,20 +147,10 @@ export default {
     resutTag, resultDetailRow, carousel, carouselVertical
   },
   props: {},
-  data() {
-    return {
-
-
-    };
-  },
   couputed: {},
   watch: {},
   methods: {
-
   },
-  created() {
-
-  }
 }
 </script>
 <style scoped>

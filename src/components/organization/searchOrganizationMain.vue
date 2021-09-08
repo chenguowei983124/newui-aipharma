@@ -352,9 +352,6 @@ export default {
     setDetailDisp: function () {
       this.isDetailDisp = !this.isDetailDisp
     }
-  },
-  created() {
-
   }
 }
 </script>

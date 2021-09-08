@@ -16,11 +16,6 @@
 export default {
   components: {},
   props: {},
-  data() {
-    return {
-
-    };
-  },
   couputed: {},
   watch: {},
   methods: {

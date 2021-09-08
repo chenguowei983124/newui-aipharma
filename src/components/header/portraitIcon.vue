@@ -211,27 +211,27 @@
                                         </div>
                                     </div>
 
-                                    <router-link :to="{ path: 'helloWorld' }">
+                                    <!-- <router-link :to="{ path: 'helloWorld' }"> -->
+                                    <div
+                                        v-for="item in $store.getters
+                                            .topManagementItemUserList"
+                                        :key="item"
+                                    >
                                         <div
-                                            v-for="item in $store.getters
-                                                .topManagementItemUserList"
-                                            :key="item"
+                                            class="
+                                                h-9
+                                                flex
+                                                justify-center
+                                                items-center
+                                                hover:text-searchDropdown
+                                                border-t-2 border-black
+                                                font-NotoSansJp
+                                            "
                                         >
-                                            <div
-                                                class="
-                                                    h-9
-                                                    flex
-                                                    justify-center
-                                                    items-center
-                                                    hover:text-searchDropdown
-                                                    border-t-2 border-black
-                                                    font-NotoSansJp
-                                                "
-                                            >
-                                                {{ item.title }}
-                                            </div>
+                                            {{ item.title }}
                                         </div>
-                                    </router-link>
+                                    </div>
+                                    <!-- </router-link> -->
                                 </div>
                             </div>
                         </div>
@@ -245,6 +245,7 @@
 <script>
 import iconDown from "../svgImage/iconDown.vue"
 export default {
+  emits: ['clickDown'],
   components: { iconDown },
   data() {
     return {

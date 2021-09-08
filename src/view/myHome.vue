@@ -13,10 +13,6 @@ import homeBottomTemplate from '../components/homeBottomItem.vue'
 export default {
   components: { myTopHeader, homeMain, homeBottomTemplate },
   props: {},
-  data() {
-    return {
-    };
-  },
   couputed: {},
   watch: {},
   methods: {

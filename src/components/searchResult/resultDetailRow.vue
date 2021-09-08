@@ -236,10 +236,7 @@ export default {
       default: "blueline"
     }
   },
-  data() {
-    return {
-    };
-  }, methods: {
+  methods: {
     objectCheck(itemtype) {
       if (typeof itemtype == "object") {
         return true

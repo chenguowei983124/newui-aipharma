@@ -49,11 +49,6 @@ export default {
     iconType: { type: String, defult: "" },
     iconUrl: { type: String, defult: "" }
   },
-  data() {
-    return {
-
-    };
-  },
   couputed: {},
   watch: {},
   methods: {
