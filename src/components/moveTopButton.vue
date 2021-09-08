@@ -1,7 +1,7 @@
 <template>
     <button
         class="
-            fixed
+            absolute
             h-15
             w-15
             bottom-5

@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div class="md:pt-3.75">
         <!-- itemType 1:ラベル 2:日付 3:タイトル -->
         <div
             class="
-                pt-1.25
+                pt-2.5
+                md:pt-0
+                mid:pt-0
                 space-y-1.5
                 md:space-y-0
                 md:flex
@@ -75,7 +77,7 @@
                             flex
                             md:block
                             space-x-2
-                            md:space-y-2 md:space-x-0
+                            md:space-y-1.5 md:space-x-0
                         "
                     >
                         <div

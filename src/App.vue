@@ -13,7 +13,7 @@
             "
         >
             <router-view />
-            <move-top-button></move-top-button>
+            <move-top-button class=""></move-top-button>
         </div>
         <div class="flex-grow max-h-full min-w-min bg-backgroundMain"></div>
     </div>
