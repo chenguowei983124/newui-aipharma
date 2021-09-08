@@ -163,7 +163,7 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList" :key="items">
-            <router-link :to="{ path: items.path }">
+            <router-link :to="{ path: items.path }" @click="linkClick">
                 <div
                     v-if="itemType1"
                     class="
@@ -223,7 +223,7 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList2" :key="items">
-            <router-link :to="{ path: items.path }">
+            <router-link :to="{ path: items.path }" @click="linkClick">
                 <div v-if="itemType2">
                     <div
                         v-if="items.itemStyle == 'item'"
@@ -278,7 +278,7 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList3" :key="items">
-            <router-link :to="{ path: items.path }">
+            <router-link :to="{ path: items.path }" @click="linkClick">
                 <div v-if="itemType3">
                     <div
                         v-if="items.itemStyle == 'item'"
@@ -360,7 +360,7 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList4" :key="items">
-            <router-link :to="items.path">
+            <router-link :to="items.path" @click="linkClick">
                 <div v-if="itemType4">
                     <div
                         v-if="items.itemStyle == 'item'"
