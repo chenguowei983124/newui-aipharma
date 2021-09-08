@@ -372,7 +372,7 @@
                             : 'border-b-2 border-white',
                     ]"
                 >
-                    <router-link :to="{ path: items.path }">
+                    <router-link :to="items.path">
                         {{ items.title }}</router-link
                     >
                 </div>
@@ -405,7 +405,7 @@ export default {
       menuItemList2: [
         { 'id': '1', 'title': 'データベース', 'itemStyle': 'title', 'path': '' },
         { 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': 'knowledgeShare' },
-        { 'id': '3', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': 'DIRecord ' },
+        { 'id': '3', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': '/searchOrganization ' },
         { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': 'case' },
         { 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item', 'path': 'DIDictionary' },
         { 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item', 'path': 'companyInformation' }],
