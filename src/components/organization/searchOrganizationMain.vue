@@ -293,8 +293,7 @@
             <result-detail-row
                 class="searchResult_detail_gray"
                 :sites="
-                    $store.getters.searchAllSearchAllOrganizationDidDocument
-                        .SearchAllOrganizationDidDocument
+                    $store.getters.getSearchAllOrganizationDidDocument.details
                 "
                 :sub1="['group']"
                 :sub2="['title']"
@@ -311,8 +310,7 @@
             <result-detail-row
                 class="searchResult_detail_gray"
                 :sites="
-                    $store.getters.searchAllSearchAllOrganizationDidDocument
-                        .SearchAllOrganizationDidDocument
+                    $store.getters.getSearchAllOrganizationDidDocument.details
                 "
                 :sub1="['group']"
                 :sub2="['title']"

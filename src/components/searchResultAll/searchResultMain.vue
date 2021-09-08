@@ -1,113 +1,113 @@
 <template>
-    <div class="searchResultAllTitleAndValue mt-7.5 md:mt-12.5">
-        検索結果：{{ $store.getters.getSearchValue }}
-    </div>
+    <div>
+        <div class="searchResultAllTitleAndValue mt-7.5 md:mt-12.5">
+            検索結果：{{ $store.getters.getSearchValue }}
+        </div>
 
-    <div class="h-full space-y-2.5 md:space-y-3.75">
-        <resut-tag
-            headerStyle="titleOnlyUnderlineBgColorBlue"
-            title="DI ナレッジシェア"
-            titleStyle="bulletinBoardInfoTitle"
-            titleURL="\"
-        >
-            <result-detail-row
-                class="searchResult_detail_blue"
-                :sites="
-                    $store.getters.searchAllDiKnowledge.searchAllDiKnowledge
+        <div class="h-full space-y-2.5 md:space-y-3.75">
+            <resut-tag
+                headerStyle="titleOnlyUnderlineBgColorBlue"
+                title="DI ナレッジシェア"
+                titleStyle="bulletinBoardInfoTitle"
+                titleURL="\"
+            >
+                <result-detail-row
+                    class="searchResult_detail_blue"
+                    :sites="$store.getters.getSearchAllDiKnowledge.details"
+                    :sub1="['group']"
+                    :sub2="['title']"
+                    :sub3="['Certainty']"
+                >
+                </result-detail-row>
+            </resut-tag>
+            <resut-tag
+                headerStyle="titleOnlyUnderlineBgColorBlue"
+                title="組織内 DI 記録（Q&A）"
+                titleStyle="bulletinBoardInfoTitle"
+                titleURL="\"
+                rightStyle="count"
+                :countTitle="
+                    '該当：' +
+                    $store.getters.getSearchAllOrganizationDidDocument.count +
+                    '件'
                 "
-                :sub1="['group']"
-                :sub2="['title']"
-                :sub3="['Certainty']"
+                countStyle="searchResultAllCountLable"
             >
-            </result-detail-row>
-        </resut-tag>
-        <resut-tag
-            headerStyle="titleOnlyUnderlineBgColorBlue"
-            title="組織内 DI 記録（Q&A）"
-            titleStyle="bulletinBoardInfoTitle"
-            titleURL="\"
-            rightStyle="count"
-            :countTitle="
-                '該当：' +
-                $store.getters.searchAllSearchAllOrganizationDidDocument.count +
-                '件'
-            "
-            countStyle="searchResultAllCountLable"
-        >
-            <result-detail-row
-                class="searchResult_detail_blue"
-                :sites="
-                    $store.getters.searchAllSearchAllOrganizationDidDocument
-                        .SearchAllOrganizationDidDocument
+                <result-detail-row
+                    class="searchResult_detail_blue"
+                    :sites="
+                        $store.getters.getSearchAllOrganizationDidDocument
+                            .details
+                    "
+                    :sub1="['group']"
+                    :sub2="['title']"
+                    :sub3="['states', 'date', 'view']"
+                >
+                </result-detail-row>
+            </resut-tag>
+            <resut-tag
+                headerStyle="titleOnlyUnderlineBgColorBlue"
+                title="症例（プレアボイド）"
+                titleStyle="bulletinBoardInfoTitle"
+                titleURL="\"
+                rightStyle="count"
+                :countTitle="
+                    '該当：' + $store.getters.getSearchAllPreAvoid.count + '件'
                 "
-                :sub1="['group']"
-                :sub2="['title']"
-                :sub3="['states', 'date', 'view']"
+                countStyle="searchResultAllCountLable"
             >
-            </result-detail-row>
-        </resut-tag>
-        <resut-tag
-            headerStyle="titleOnlyUnderlineBgColorBlue"
-            title="症例（プレアボイド）"
-            titleStyle="bulletinBoardInfoTitle"
-            titleURL="\"
-            rightStyle="count"
-            :countTitle="
-                '該当：' + $store.getters.searchAllPreAvoid.count + '件'
-            "
-            countStyle="searchResultAllCountLable"
-        >
-            <result-detail-row
-                class="searchResult_detail_blue"
-                :sites="$store.getters.searchAllPreAvoid.searchAllPreAvoid"
-                :sub1="['group']"
-                :sub2="['title']"
-                :sub3="['states', 'date', 'view']"
-            >
-            </result-detail-row>
-        </resut-tag>
+                <result-detail-row
+                    class="searchResult_detail_blue"
+                    :sites="$store.getters.getSearchAllPreAvoid.details"
+                    :sub1="['group']"
+                    :sub2="['title']"
+                    :sub3="['states', 'date', 'view']"
+                >
+                </result-detail-row>
+            </resut-tag>
 
-        <resut-tag
-            headerStyle="titleOnlyUnderlineBgColorBlue"
-            title="DI 辞書"
-            titleStyle="bulletinBoardInfoTitle"
-            titleURL="\"
-            rightStyle="count"
-            countTitle="該当：9999件"
-            countStyle="searchResultAllCountLable"
-        >
-            <result-detail-row class="searchResult_detail_blue">
-                Coming soon
-            </result-detail-row>
-        </resut-tag>
-
-        <resut-tag
-            headerStyle="titleOnlyUnderlineBgColorBlue"
-            title="掲示板"
-            titleStyle="bulletinBoardInfoTitle"
-            titleURL="\"
-            rightStyle="count"
-            :countTitle="
-                '該当：' +
-                $store.getters.searchAllBulletinBoardInfo.count +
-                '件'
-            "
-            countStyle="searchResultAllCountLable"
-        >
-            <result-detail-row
-                class="searchResult_detail_blue"
-                :sites="
-                    $store.getters.searchAllBulletinBoardInfo.bulletinBoardInfo
-                "
-                :sub1="['group']"
-                :sub2="['titleHeightAuto']"
-                :sub3="['states', 'date', 'view']"
+            <resut-tag
+                headerStyle="titleOnlyUnderlineBgColorBlue"
+                title="DI 辞書"
+                titleStyle="bulletinBoardInfoTitle"
+                titleURL="\"
+                rightStyle="count"
+                countTitle="該当：9999件"
+                countStyle="searchResultAllCountLable"
             >
-            </result-detail-row>
-        </resut-tag>
-        <google-item></google-item>
-        <pharmaceuticals-item></pharmaceuticals-item>
-        <jstage-item></jstage-item>
+                <result-detail-row class="searchResult_detail_blue">
+                    Coming soon
+                </result-detail-row>
+            </resut-tag>
+
+            <resut-tag
+                headerStyle="titleOnlyUnderlineBgColorBlue"
+                title="掲示板"
+                titleStyle="bulletinBoardInfoTitle"
+                titleURL="\"
+                rightStyle="count"
+                :countTitle="
+                    '該当：' +
+                    $store.getters.getSearchAllBulletinBoardInfo.count +
+                    '件'
+                "
+                countStyle="searchResultAllCountLable"
+            >
+                <result-detail-row
+                    class="searchResult_detail_blue"
+                    :sites="
+                        $store.getters.getSearchAllBulletinBoardInfo.details
+                    "
+                    :sub1="['group']"
+                    :sub2="['titleHeightAuto']"
+                    :sub3="['states', 'date', 'view']"
+                >
+                </result-detail-row>
+            </resut-tag>
+            <google-item></google-item>
+            <pharmaceuticals-item></pharmaceuticals-item>
+            <jstage-item></jstage-item>
+        </div>
     </div>
 </template>
 

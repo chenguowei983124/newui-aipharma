@@ -408,30 +408,30 @@ export default {
       itemType4: false,
       menuItemList: [
         { 'id': '1', 'title': 'TOP', 'itemStyle': 'item', 'path': '/' },
-        { 'id': '2', 'title': 'お知らせ', 'itemStyle': 'item', 'path': 'notification' },
-        { 'id': '3', 'title': '掲示板', 'itemStyle': 'item', 'path': 'bulletinBoard' }
+        { 'id': '2', 'title': 'お知らせ', 'itemStyle': 'item', 'path': '' },
+        { 'id': '3', 'title': '掲示板', 'itemStyle': 'item', 'path': '' }
       ],
       menuItemList2: [
         { 'id': '1', 'title': 'データベース', 'itemStyle': 'title', 'path': '' },
-        { 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': 'knowledgeShare' },
+        { 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': '' },
         { 'id': '3', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': 'searchOrganization' },
-        { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': 'case' },
-        { 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item', 'path': 'DIDictionary' },
-        { 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item', 'path': 'companyInformation' }],
+        { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '' },
+        { 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item', 'path': '' },
+        { 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item', 'path': '' }],
       menuItemList3: [
         { 'id': '1', 'title': 'マイデータ', 'itemStyle': 'title', 'path': '' },
         { 'id': '2', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': '' },
-        { 'id': '3', 'title': '登録', 'itemStyle': 'subproject', 'path': 'register' },
+        { 'id': '3', 'title': '登録', 'itemStyle': 'subproject', 'path': '' },
         { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '' },
-        { 'id': '5', 'title': '登録', 'itemStyle': 'subproject', 'path': 'register' },
-        { 'id': '6', 'title': 'データ入出力', 'itemStyle': 'item', 'path': 'dataInputOutput' }],
+        { 'id': '5', 'title': '登録', 'itemStyle': 'subproject', 'path': '' },
+        { 'id': '6', 'title': 'データ入出力', 'itemStyle': 'item', 'path': '' }],
       menuItemList4: [
         { 'id': '1', 'title': 'その他', 'itemStyle': 'title', 'path': '' },
-        { 'id': '2', 'title': '外部リンク', 'itemStyle': 'item', 'path': 'externalLink' },
-        { 'id': '3', 'title': '動画', 'itemStyle': 'item', 'path': 'movie' },
-        { 'id': '4', 'title': '学会', 'itemStyle': 'item', 'path': 'society' },
-        { 'id': '5', 'title': '製薬企業DIチャットボット', 'itemStyle': 'item', 'path': 'DIChatbot' },
-        { 'id': '6', 'title': 'ヘルプ', 'itemStyle': 'item', 'path': 'help' }
+        { 'id': '2', 'title': '外部リンク', 'itemStyle': 'item', 'path': '' },
+        { 'id': '3', 'title': '動画', 'itemStyle': 'item', 'path': '' },
+        { 'id': '4', 'title': '学会', 'itemStyle': 'item', 'path': '' },
+        { 'id': '5', 'title': '製薬企業DIチャットボット', 'itemStyle': 'item', 'path': '' },
+        { 'id': '6', 'title': 'ヘルプ', 'itemStyle': 'item', 'path': '' }
       ]
     };
   },
