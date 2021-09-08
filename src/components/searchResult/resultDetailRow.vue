@@ -1,5 +1,5 @@
 <template>
-    <div class="md:pt-3.75">
+    <div class="md:pt-3.5">
         <!-- itemType 1:ラベル 2:日付 3:タイトル -->
         <div
             class="
