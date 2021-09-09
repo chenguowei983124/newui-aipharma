@@ -66,6 +66,9 @@
             @click="searchClick"
             class="
                 bg-searchBunnon
+                hover:bg-yellow-400
+                active:opacity-100
+                active:bg-personInformationButton
                 text-white
                 md:rounded-tr-lg md:rounded-br-lg
                 my-4

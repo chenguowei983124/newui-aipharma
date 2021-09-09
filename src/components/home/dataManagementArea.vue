@@ -65,7 +65,7 @@
                                         class="ml-2 transform rotate-180"
                                         v-if="isDown == true"
                                     ></icon-down>
-                                    <div
+                                    <!-- <div
                                         class="
                                             absolute
                                             border-2 border-black
@@ -96,9 +96,9 @@
                                                 {{ item.title }}
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- リスト -->
-                                    <!-- <div
+                                    <div
                                         :class="{
                                             'absolute top-0 left-0 right-0 bottom-0 z-75':
                                                 isDown,
@@ -142,7 +142,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -291,15 +291,6 @@ import iconDown from '../svgImage/iconDown.vue';
 export default {
   components: { iconDown },
   props: {},
-  mounted() {
-    document.addEventListener("click", this.handleClickOutside);
-    document.addEventListener("keyup", this.handleClickOutside);
-    this.searchText = this.initial;
-  },
-  destroyed() {
-    document.removeEventListener("keyup", this.handleClickOutside);
-    document.removeEventListener("click", this.handleClickOutside);
-  },
   data() {
     return {
       isDown: false,
@@ -313,12 +304,6 @@ export default {
       this.isDown = !this.isDown
       console.log(this.isDown)
     },
-    handleClickOutside(e) {
-      if (this.$el.contains(e.target)) {
-        return;
-      }
-      this.isDown = false
-    }
   },
   created() {
 
