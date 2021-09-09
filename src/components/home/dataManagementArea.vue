@@ -65,8 +65,40 @@
                                         class="ml-2 transform rotate-180"
                                         v-if="isDown == true"
                                     ></icon-down>
-                                    <!-- リスト -->
                                     <div
+                                        class="
+                                            absolute
+                                            border-2 border-black
+                                            rounded-md
+                                            bg-white
+                                            w-25
+                                            h-33.5
+                                            space-y-2.5
+                                            py-2.5
+                                            mt-8
+                                        "
+                                        v-if="isDown"
+                                    >
+                                        <div
+                                            v-for="item in $store.getters
+                                                .topManagementItemUserList"
+                                            :key="item"
+                                        >
+                                            <div
+                                                class="
+                                                    notoSansJpAndFourteenRegular
+                                                    hover:opacity-50
+                                                    active:opacity-50
+                                                    cursor-pointer
+                                                    ml-2.5
+                                                "
+                                            >
+                                                {{ item.title }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- リスト -->
+                                    <!-- <div
                                         :class="{
                                             'absolute top-0 left-0 right-0 bottom-0 z-75':
                                                 isDown,
@@ -100,7 +132,8 @@
                                                 <div
                                                     class="
                                                         notoSansJpAndFourteenRegular
-                                                        hover:text-searchDropdown
+                                                        hover:opacity-50
+                                                        active:opacity-50
                                                         cursor-pointer
                                                         ml-2.5
                                                     "
@@ -109,7 +142,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -143,6 +176,9 @@
                     <button
                         class="
                             bg-personInformationButton
+                            hover:opacity-50
+                            active:bg-red-600
+                            active:opacity-100
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -155,6 +191,9 @@
                     <button
                         class="
                             bg-personInformationButton
+                            hover:opacity-50
+                            active:bg-red-600
+                            active:opacity-100
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -169,6 +208,9 @@
                     <button
                         class="
                             bg-personOrganizationButton
+                            hover:opacity-50
+                            active:bg-personInformationButton
+                            active:opacity-100
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -181,6 +223,9 @@
                     <button
                         class="
                             bg-personOrganizationButton
+                            hover:opacity-50
+                            active:bg-personInformationButton
+                            active:opacity-100
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -245,7 +290,16 @@ import iconDown from '../svgImage/iconDown.vue';
 
 export default {
   components: { iconDown },
-  props: { sites: [] },
+  props: {},
+  mounted() {
+    document.addEventListener("click", this.handleClickOutside);
+    document.addEventListener("keyup", this.handleClickOutside);
+    this.searchText = this.initial;
+  },
+  destroyed() {
+    document.removeEventListener("keyup", this.handleClickOutside);
+    document.removeEventListener("click", this.handleClickOutside);
+  },
   data() {
     return {
       isDown: false,
@@ -255,7 +309,15 @@ export default {
   watch: {},
   methods: {
     itemClick() {
+      console.log(this.isDown)
       this.isDown = !this.isDown
+      console.log(this.isDown)
+    },
+    handleClickOutside(e) {
+      if (this.$el.contains(e.target)) {
+        return;
+      }
+      this.isDown = false
     }
   },
   created() {

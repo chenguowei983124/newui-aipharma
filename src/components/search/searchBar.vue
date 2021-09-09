@@ -14,7 +14,6 @@
                 block
                 md:hidden
                 mid:hidden
-                border-2
                 h-10
                 w-10/12
                 ml-2.5
@@ -23,6 +22,12 @@
                 text-xs
                 flex-grow
                 pl-4
+                placeholder-gray-500
+                focus:placeholder-opacity-0
+                border border-transparent
+                focus:outline-none
+                focus:ring-1 focus:ring-326EB5Lins
+                focus:border-transparent
             "
             type="text"
             placeholder="キーワードを入力"
@@ -34,7 +39,6 @@
                 hidden
                 md:block
                 mid:block
-                border-2
                 h-10
                 w-10/12
                 ml-2.5
@@ -45,6 +49,12 @@
                 text-xs
                 flex-grow
                 pl-4
+                placeholder-gray-500
+                focus:placeholder-opacity-0
+                border border-transparent
+                focus:outline-none
+                focus:ring-1 focus:ring-326EB5Lins
+                focus:border-transparent
             "
             type="text"
             placeholder="Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます"

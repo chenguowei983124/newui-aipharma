@@ -136,7 +136,10 @@
             <div class="ml-2.5 md:ml-0 flex-grow truncate">
                 <span class="items-center truncate" :class="midAreaStyle">
                     <!-- title text -->
-                    <router-link :to="{ path: row.linkUrl }" class="truncate">
+                    <router-link
+                        :to="{ path: row.linkUrl }"
+                        class="truncate hover:opacity-50 active:opacity-50"
+                    >
                         <result-detail-row-item
                             itemType="3"
                             :itemValue="row.title"
@@ -151,7 +154,7 @@
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.urlTitle"
-                        addStyle="underline truncate"
+                        addStyle="underline truncate hover:opacity-50 active:opacity-50"
                         v-if="row.urlTitle != undefined"
                     ></result-detail-row-item>
                     <!-- 要閲覧ラベル -->

@@ -154,6 +154,7 @@ module.exports = {
         'notlooked': '#f09600',
         'view': '#32a5dc',
         'notice': '#666666',
+        'CCE8F6': '#CCE8F6',
 
 
         'searchDropdown': 'rgb(58, 175, 226)',
@@ -177,6 +178,7 @@ module.exports = {
         'rescue': '#d9edc8',
         'blueline': '#65bbe5',
         'grayline': '#999999',
+        '326EB5Lins': '#326EB5',
 
 
       },
@@ -221,7 +223,12 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      opacity: ['active'],
+      backgroundColor: ['active'],
+      padding: ['hover'],
+      maxHeight: ['focus'],
+    },
   },
   plugins: [],
 }

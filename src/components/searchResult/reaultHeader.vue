@@ -24,7 +24,9 @@
             </div>
             <div v-if="rightStyle == 'icon'">
                 <a :href="iconUrl" target="_blank">
-                    <external-link></external-link>
+                    <external-link
+                        class="hover:opacity-50 active:opacity-50"
+                    ></external-link>
                 </a>
             </div>
         </div>

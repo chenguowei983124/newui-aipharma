@@ -7,6 +7,8 @@
             bottom-5
             right-5
             bg-toTop
+            hover:opacity-50
+            active:opacity-50
             text-white
             rounded-full
             md:right-30

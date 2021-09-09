@@ -1,7 +1,14 @@
 <template>
     <div>
         <div
-            class="flex justify-start items-center h-10 bg-searchBar"
+            class="
+                flex
+                justify-start
+                items-center
+                h-10
+                bg-searchBar
+                cursor-pointer
+            "
             @click="isDown = !isDown"
             :class="[isDown ? 'rounded-tl-lg' : 'rounded-l-lg']"
         >
@@ -37,7 +44,7 @@
                     <!-- 未選択アイテム -->
                     <div v-if="value.id != checkedID">
                         <div
-                            class="flex hover:text-googleTitle"
+                            class="flex hover:opacity-50"
                             @click="itemClick(value)"
                         >
                             <a class="w-4"></a>
@@ -121,6 +128,15 @@ import triangleDownSvg from '../svgImage/triangleDownSvg.vue'
 export default {
   components: { checkSvg, triangleDownSvg },
   props: {},
+  mounted() {
+    document.addEventListener("click", this.handleClickOutside);
+    document.addEventListener("keyup", this.handleClickOutside);
+    this.searchText = this.initial;
+  },
+  destroyed() {
+    document.removeEventListener("keyup", this.handleClickOutside);
+    document.removeEventListener("click", this.handleClickOutside);
+  },
   data() {
     return {
       isDown: false,
@@ -148,6 +164,12 @@ export default {
         this.$emit("getCheckedId", value.id)
 
       }
+    },
+    handleClickOutside(e) {
+      if (this.$el.contains(e.target)) {
+        return;
+      }
+      this.isDown = false
     }
   },
   created() {

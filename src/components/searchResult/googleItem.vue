@@ -3,7 +3,7 @@
         <div class="rounded-t-lg bg-cardTitlePmad flex justify-between p-2">
             <a class="searchResultCardHeaderStyleE ml-2.5">Google</a>
             <a
-                class="text-white"
+                class="text-white hover:opacity-50 active:opacity-50"
                 href="https://www.google.co.jp/"
                 target="_blank"
                 ><svg
@@ -41,6 +41,8 @@
                                     text-base
                                     underline
                                     text-googleTitle
+                                    hover:opacity-50
+                                    active:opacity-50
                                 "
                             >
                                 {{ item.link }}

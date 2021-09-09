@@ -56,6 +56,8 @@
                             text-sm
                             cursor-pointer
                             pt-5
+                            active:opacity-50
+                            hover:opacity-50
                         "
                     >
                         ヘルプ

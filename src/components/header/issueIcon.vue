@@ -1,6 +1,6 @@
 <template>
     <!-- 投稿ボタン -->
-    <div class="">
+    <div>
         <div
             class="
                 rounded-full
@@ -9,6 +9,8 @@
                 md:w-10
                 md:h-10
                 bg-personInformationButton
+                active:opacity-50
+                hover:opacity-50
                 flex
                 justify-center
                 items-center

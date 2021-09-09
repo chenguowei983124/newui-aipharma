@@ -83,7 +83,8 @@
                                             md:mt-1.5
                                             text-black
                                             font-bold
-                                            hover:text-searchDropdown
+                                            hover:opacity-50
+                                            active:opacity-50
                                             cursor-pointer
                                         "
                                     >
@@ -223,7 +224,7 @@
                                                 flex
                                                 justify-center
                                                 items-center
-                                                hover:text-searchDropdown
+                                                cursor-pointer
                                                 border-t-2 border-black
                                                 font-NotoSansJp
                                             "

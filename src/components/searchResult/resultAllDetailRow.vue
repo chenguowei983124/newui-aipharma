@@ -78,7 +78,12 @@
                 >
                     <!-- title text -->
                     <div
-                        class="underline truncate"
+                        class="
+                            underline
+                            truncate
+                            hover:opacity-50
+                            active:opacity-50
+                        "
                         v-show="dispItem == 'title'"
                     >
                         <result-detail-row-item
@@ -96,7 +101,7 @@
                         <result-detail-row-item
                             itemType="3"
                             :itemValue="row.title"
-                            addStyle="underline "
+                            addStyle="underline hover:opacity-50 active:opacity-50"
                             v-if="row.title != undefined"
                         ></result-detail-row-item>
                     </div>

@@ -77,7 +77,13 @@
                         to="/"
                     >
                         <menu-logo-svg
-                            class="w-17.5 h-8 mx-4"
+                            class="
+                                w-17.5
+                                h-8
+                                mx-4
+                                active:opacity-50
+                                hover:opacity-50
+                            "
                             v-if="isDispaly || $store.getters.getIsMenuClick"
                         ></menu-logo-svg>
 
@@ -185,7 +191,7 @@
                 >
                     <div
                         v-if="items.itemStyle == 'item'"
-                        class="hover:text-googleTitle"
+                        class="hover:opacity-50 active:opacity-50"
                     >
                         {{ items.title }}
                         <!-- <router-link :to="{ path: items.path }">
@@ -235,7 +241,8 @@
                             h-7
                             pl-3.75
                             cursor-pointer
-                            hover:text-googleTitle
+                            hover:opacity-50
+                            active:opacity-50
                         "
                         :class="[
                             items.id == menuItemList2.length
@@ -300,11 +307,13 @@
                         <!-- <router-link :to="{ path: items.path }"> -->
                         <div
                             v-if="items.path != ''"
-                            class="hover:text-googleTitle"
+                            class="hover:opacity-50 active:opacity-50"
                         >
                             {{ items.title }}
                         </div>
-                        <div v-else>{{ items.title }}</div>
+                        <div v-else class="">
+                            {{ items.title }}
+                        </div>
                         <!-- </router-link> -->
                     </div>
                     <div
@@ -317,7 +326,8 @@
                             h-7
                             pl-7.5
                             cursor-pointer
-                            hover:text-googleTitle
+                            hover:opacity-50
+                            active:opacity-50
                         "
                         :class="[
                             items.id == menuItemList3.length
@@ -372,7 +382,8 @@
                             h-7
                             pl-3.75
                             cursor-pointer
-                            hover:text-googleTitle
+                            hover:opacity-50
+                            active:opacity-50
                         "
                         :class="[
                             items.id == menuItemList4.length
@@ -424,7 +435,7 @@ export default {
         { 'id': '3', 'title': '登録', 'itemStyle': 'subproject', 'path': '' },
         { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '' },
         { 'id': '5', 'title': '登録', 'itemStyle': 'subproject', 'path': '' },
-        { 'id': '6', 'title': 'データ入出力', 'itemStyle': 'item', 'path': '' }],
+        { 'id': '6', 'title': 'データ入出力', 'itemStyle': 'item', 'path': 'searchOrganization' }],
       menuItemList4: [
         { 'id': '1', 'title': 'その他', 'itemStyle': 'title', 'path': '' },
         { 'id': '2', 'title': '外部リンク', 'itemStyle': 'item', 'path': '' },

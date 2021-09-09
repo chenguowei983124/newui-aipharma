@@ -10,8 +10,9 @@
                     notoSansJpAndEighteenBold
                     searchResultUnActiveTagTitleStyle
                 "
-            >
-                <span> {{ title }}</span></label
+                ><div class="hover:opacity-50">
+                    <span class=""> {{ title }}</span>
+                </div></label
             >
             <label
                 for="a2"
@@ -21,7 +22,7 @@
                     searchResultActiveTagTitleStyle
                 "
             >
-                <span> {{ subTitle }}</span></label
+                <span class=""> {{ subTitle }}</span></label
             >
         </div>
         <slot></slot>

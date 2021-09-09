@@ -10,6 +10,8 @@
                 md:h-10
                 md:w-10
                 bg-personOrganizationButton
+                active:opacity-50
+                hover:opacity-50
                 flex
                 items-center
                 justify-center
@@ -90,7 +92,6 @@
                                         flex
                                         items-center
                                         font-light
-                                        hover:text-googleTitle
                                     "
                                 >
                                     {{ item.title }}
@@ -151,10 +152,16 @@
                                             flex
                                             items-center
                                             font-light
-                                            hover:text-googleTitle
                                         "
                                     >
-                                        {{ item.title }}
+                                        <div
+                                            class="
+                                                hover:opacity-50
+                                                active:opacity-50
+                                            "
+                                        >
+                                            {{ item.title }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
