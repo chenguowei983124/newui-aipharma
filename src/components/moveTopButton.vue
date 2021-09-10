@@ -1,22 +1,20 @@
 <template>
-    <button
-        class="
-            absolute
-            h-15
-            w-15
-            bottom-5
-            right-5
-            bg-toTop
-            hover:opacity-50
-            active:opacity-50
-            text-white
-            rounded-full
-            md:right-30
-        "
-        @click="toTop"
-    >
-        ▲
-    </button>
+    <div class="fixed block bottom-5 z-99">
+        <button
+            class="
+                h-15
+                w-15
+                bg-toTop
+                text-white
+                rounded-full
+                hover:opacity-50
+                active:opacity-50
+            "
+            @click="toTop"
+        >
+            ▲
+        </button>
+    </div>
 </template>
 
 <script>

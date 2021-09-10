@@ -13,7 +13,9 @@
             "
         >
             <router-view />
-            <move-top-button class=""></move-top-button>
+            <div class="flex justify-end mr-5">
+                <move-top-button></move-top-button>
+            </div>
         </div>
         <div class="flex-grow max-h-full min-w-min bg-backgroundMain"></div>
     </div>

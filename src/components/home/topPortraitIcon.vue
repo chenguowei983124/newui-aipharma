@@ -1,0 +1,78 @@
+<template>
+    <div class="flex justify-start items-center h-2.5 cursor-pointer">
+        <div class="flex justify-end">
+            <icon-down
+                class="transform rotate-180"
+                @click="itemClick"
+                v-show="isDown"
+            ></icon-down>
+            <icon-down class="" @click="itemClick" v-show="!isDown"></icon-down>
+            <div
+                class="
+                    absolute
+                    border-2 border-black
+                    rounded-md
+                    bg-white
+                    w-25
+                    h-33.5
+                    space-y-2.5
+                    py-2.5
+                    mt-8
+                "
+                v-if="isDown"
+            >
+                <div
+                    v-for="item in $store.getters.topManagementItemUserList"
+                    :key="item"
+                >
+                    <div
+                        class="
+                            notoSansJpAndFourteenRegular
+                            hover:opacity-50
+                            active:opacity-50
+                            cursor-pointer
+                            ml-2.5
+                        "
+                    >
+                        {{ item.title }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import iconDown from '../svgImage/iconDown.vue';
+export default {
+  components: { iconDown },
+  mounted() {
+    document.addEventListener("click", this.handleClickOutside);
+    document.addEventListener("keyup", this.handleClickOutside);
+    this.searchText = this.initial;
+  },
+  destroyed() {
+    document.removeEventListener("keyup", this.handleClickOutside);
+    document.removeEventListener("click", this.handleClickOutside);
+  },
+  data() {
+    return {
+      isDown: false,
+    };
+  },
+  methods: {
+    itemClick() {
+      this.isDown = !this.isDown
+    },
+    handleClickOutside(e) {
+      if (this.$el.contains(e.target)) {
+        return;
+      }
+      this.isDown = false
+    }
+  },
+}
+</script>
+
+<style>
+</style>
