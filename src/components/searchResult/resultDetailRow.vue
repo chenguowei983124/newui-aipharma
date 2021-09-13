@@ -136,8 +136,9 @@
             <div class="ml-2.5 md:ml-0 flex-grow truncate">
                 <span class="items-center truncate" :class="midAreaStyle">
                     <!-- title text -->
+                    <!-- :to="{ path: row.linkUrl }" -->
                     <router-link
-                        :to="{ path: row.linkUrl }"
+                        :to="{ path: '/' }"
                         class="truncate hover:opacity-50 active:opacity-50"
                     >
                         <result-detail-row-item

@@ -81,11 +81,14 @@ export default {
         basic(state, payload) {
             state[payload.key] = payload.value
         },
+        setSearchKey(state, info) {
+            state.searchKey = info
+        },
     },
 
     actions: {
         saveSearchValue({ commit, state }, value) {
-            commit('basic', { key: 'searchKey', value })
+            commit('setSearchKey', value)
         },
         // ========================================
         // DI ナレッジシェアAPI実行
@@ -100,7 +103,7 @@ export default {
             //     }
             // })
             // 検索キー格納
-            commit('basic', { key: 'searchKey', value })
+            commit('searchKey', { key: 'searchKey', value })
             const info = {
                 count: 1,
                 searchResult: [

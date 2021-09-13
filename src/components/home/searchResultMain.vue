@@ -9,7 +9,7 @@
         >
             <result-detail-row
                 class="searchResult_detail_blue"
-                :sites="$store.getters.topNoticeInfo"
+                :sites="$store.getters.topNoticeInfo.details"
             >
             </result-detail-row>
         </resut-tag>
@@ -24,14 +24,14 @@
             <div class="tab-a1 hidden">
                 <result-detail-row
                     class="searchResult_detail_blue"
-                    :sites="$store.getters.topNoticeInfo"
+                    :sites="$store.getters.topNoticeInfo.details"
                 >
                 </result-detail-row>
             </div>
             <div class="tab-a2 hidden">
                 <result-detail-row
                     class="searchResult_detail_blue"
-                    :sites="$store.getters.topBulletinBoardInfo"
+                    :sites="$store.getters.topBulletinBoardInfo.details"
                 >
                 </result-detail-row>
             </div>
@@ -46,7 +46,7 @@
         >
             <result-detail-row
                 class="searchResult_detail_blue"
-                :sites="$store.getters.topBulletinBoardInfo"
+                :sites="$store.getters.topBulletinBoardInfo.details"
             >
             </result-detail-row>
         </resut-tag>
@@ -61,7 +61,7 @@
             subTitleURL="/"
             ><result-detail-row
                 class="searchResult_detail_gray"
-                :sites="$store.getters.topScientifiSocietyInfo.details"
+                :sites="$store.getters.topScientifiSocietyInfo.detail"
                 proDetailStyle="style2"
                 midDetailStyle="style2"
                 bakDetailStyle="style2"
@@ -83,7 +83,7 @@
             ><result-detail-row
                 class="searchResult_detail_gray"
                 lineStyle="grayline"
-                :sites="$store.getters.topPMDAInfo"
+                :sites="$store.getters.topPMDAInfo.details"
             >
             </result-detail-row
         ></resut-tag>
@@ -149,7 +149,11 @@ export default {
   props: {},
   couputed: {},
   watch: {},
-  methods: {
+  mounted() {
+    this.$store.dispatch('getTopNotice')
+    this.$store.dispatch('getTopBulletinBoardInfo')
+    this.$store.dispatch('getScientifiSocietyInfoe')
+    this.$store.dispatch('getPmdaInfo')
   },
 }
 </script>
