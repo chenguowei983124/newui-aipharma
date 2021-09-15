@@ -34,6 +34,13 @@
             :slides-per-view="2"
             :space-between="-70"
             :centeredSlides="true"
+            :preloadImages="true"
+            :updateOnImagesReady="true"
+            :updateOnWindowResize="true"
+            :watchOverflow="true"
+            :observer="true"
+            :observeParents="true"
+            :breakpoints="breakpoints"
         >
             <swiper-slide
                 class="parallax-slide"

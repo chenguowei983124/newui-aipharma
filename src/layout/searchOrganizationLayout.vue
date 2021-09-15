@@ -3,37 +3,44 @@
     <div class="flex">
         <!-- pcの場合 -->
         <div
-            class="flex-auto hidden md:block"
-            :class="[isDetailButtonClick ? 'h-60 md:h-60' : 'h-36 md:h-36']"
+            class="flex-auto hidden md:block mid:block"
+            :class="[isDetailButtonClick ? 'h-65' : 'h-36']"
         >
             <search-bar @isDetailClick="getDetailClick"></search-bar>
         </div>
-
         <!-- SPの場合 -->
-        <div
-            class="flex-auto h-15 md:h-20 block md:hidden"
-            :class="[
+        <div class="flex-auto h-30 block md:hidden mid:hidden">
+            <div
+                :class="[
+                    $store.getters.getIsMenuClick
+                        ? 'mt-12.5'
+                        : 'fixed w-full top-12.5 z-20',
+                ]"
+            >
+                <search-bar @isDetailClick="getDetailClick"></search-bar>
+            </div>
+            <!-- :class="[
                 $store.getters.getIsMenuClick
-                    ? 'mt-12.5 fixed w-full top-12.5'
+                    ? 'mt-80 fixed w-full top-12.5'
                     : 'fixed w-full top-12.5',
-            ]"
-        >
-            <search-bar></search-bar>
+            ]" -->
         </div>
         <!-- spの場合、ヘッダー、検索枠の位置を替える -->
         <div
-            class="block md:hidden"
-            :class="[$store.getters.getIsMenuClick ? '' : 'h-27.5']"
+            class="block md:hidden mid:hidden"
+            :class="[isDetailButtonClick ? 'h-65' : 'h-40']"
         ></div>
     </div>
-    <div class="flex border-b-2 border-blue-200 h-20">
-        <div class="flex-grow max-h-full min-w-min block"></div>
+    <div class="flex border-b-2 border-blue-200 mt-20 md:mt-5 md:h-20">
+        <div
+            class="flex-grow max-h-full min-w-min hidden md:block mid:block"
+        ></div>
         <div class="flex flex-col justify-center">
             <div class="flex flex-row space-x-2">
                 <div class="text-googleTitle notoSansJpAndTwentyBold">
                     組織内 DI 記録（Q&A）
                 </div>
-                <div>トレンドタグ</div>
+                <div class="hidden md:block mid:block">トレンドタグ</div>
                 <div
                     class="
                         rounded-full
@@ -44,6 +51,9 @@
                         pl-1
                         pr-1
                         text-center
+                        hidden
+                        md:block
+                        mid:block
                     "
                     v-for="item in torenndoTab"
                     :key="item"
@@ -52,12 +62,12 @@
                 </div>
             </div>
         </div>
-
-        <div class="flex-grow max-h-full min-w-min block"></div>
+        <div
+            class="flex-grow max-h-full min-w-min hidden md:block mid:block"
+        ></div>
     </div>
 
     <div class="flex pt-8">
-        <!-- 検索結果両側の左余白 -->
         <div class="flex-grow max-h-full min-w-min block"></div>
 
         <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">
@@ -66,7 +76,6 @@
             </div>
         </div>
 
-        <!-- 検索結果両側の左余白 -->
         <div class="flex-grow max-h-full min-w-min block"></div>
     </div>
 </template>
