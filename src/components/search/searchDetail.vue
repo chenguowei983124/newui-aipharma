@@ -198,7 +198,7 @@
                 <div>
                     <input
                         class="
-                            pl-4x
+                            pl-4 pl-4x
                             border-2
                             rounded
                             w-full
