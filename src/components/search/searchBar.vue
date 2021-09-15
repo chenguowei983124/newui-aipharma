@@ -126,7 +126,7 @@ export default {
         this.$store.dispatch('searchOrganization', this.searchValue)
         this.$router.push('/searchOrganization')
       }
-      // 病例（プレアボイド）
+      // 症例（プレアボイド）
       else if (this.checkId == 4) {
         this.$router.push('/searchOrganization')
       }

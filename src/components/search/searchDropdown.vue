@@ -147,7 +147,7 @@ export default {
         [{ 'id': '1', 'title': 'すべて', 'itemStyle': 'All' }],
         [{ 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item' }],
         [{ 'id': '3', 'title': '組織内 DI 記録（Q&A）', 'itemStyle': 'item' }],
-        [{ 'id': '4', 'title': '病例（プレアボイド）', 'itemStyle': 'item' }],
+        [{ 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item' }],
         [{ 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item' }],
         [{ 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item' }]
       ]

@@ -3,7 +3,7 @@ export default {
     state: () => ({
         noticeInfo: [],
         bulletinBoardInfo: [],
-        scientifiSocietyInfo: {},
+        scientifiSocietyInfo: [],
         pmdaInfo: [],
         managementInfo: [],
         managementItemList: [],
@@ -12,58 +12,66 @@ export default {
 
     getters: {
         topNoticeInfo(state) {
-            // const noticeInfo = [
-            //     { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加採用薬に○○が追加採用薬に○○が追加採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
-            //     { group: 'whole', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
-            //     { group: 'group', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
-            //     { group: 'society', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
-            //     { group: 'whole', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加採用薬に○○が追加されました。', browseRequired: 'notbrowsed', notificationType: 'notice', viewCount: '12345', linkUrl: '' }
-            // ]
+            const noticeInfo =
+            {
+                "details": [
+                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加採用薬に○○が追加採用薬に○○が追加採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
+                    { group: 'whole', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
+                    { group: 'group', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
+                    { group: 'society', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
+                    { group: 'whole', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加採用薬に○○が追加されました。', browseRequired: 'notbrowsed', notificationType: 'notice', viewCount: '12345', linkUrl: '' }
+                ]
+            }
 
-            return state.noticeInfo;
+            return noticeInfo;
         },
         topBulletinBoardInfo(state) {
-            // const bulletinBoardInfo = [
-            //     { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
-            //     { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
-            //     { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
-            //     { group: 'organization', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
-            //     { group: 'organization', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' }
-            // ]
+            const bulletinBoardInfo = {
+                "details": [
+                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
+                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
+                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
+                    { group: 'organization', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
+                    { group: 'organization', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' }
+                ]
+            }
 
-            return state.bulletinBoardInfo;
+            return bulletinBoardInfo;
         },
         topScientifiSocietyInfo(state) {
-            // const scientifiSocietyInfo = {
-            //     "details": [
-            //         { dateFrom: '2021.01.01', dateTo: '2021.12.30', title: '一般社団法人妊娠と薬情報研究会。', urlTitle: 'e-ラーニングBASIC', linkUrl: '' },
-            //         { dateFrom: '2021.01.01', dateTo: '', title: '福井県病院薬剤師会。', urlTitle: '血液腫瘍における感染症対策について考える ～福井県病院薬剤師会共催～', linkUrl: '' },
-            //         { dateFrom: '2021.01.01', dateTo: '2021.12.30', title: '日本製薬医学会', urlTitle: '【ハイブリット開催】第12回日本製薬医学会年次大会', linkUrl: '' },
-            //     ],
-            //     "imageLists": [
-            //         { imageUrl: 'organization', linkUrl: 'notLooked' },
-            //         { imageUrl: 'organization', linkUrl: 'notLooked' },
-            //         { imageUrl: 'organization', linkUrl: 'notLooked' },
-            //         { imageUrl: 'organization', linkUrl: 'notLooked' },
-            //         { imageUrl: 'organization', linkUrl: 'notLooked' },
-            //         { imageUrl: 'organization', linkUrl: 'notLooked' },
-            //         { imageUrl: 'organization', linkUrl: 'notLooked' },
-            //         { imageUrl: 'organization', linkUrl: 'notLooked' },
+            const scientifiSocietyInfo = {
+                "details": [
+                    { dateFrom: '2021.01.01', dateTo: '2021.12.30', title: '一般社団法人妊娠と薬情報研究会。', urlTitle: 'e-ラーニングBASIC', linkUrl: '' },
+                    { dateFrom: '2021.01.01', dateTo: '', title: '福井県病院薬剤師会。', urlTitle: '血液腫瘍における感染症対策について考える ～福井県病院薬剤師会共催～', linkUrl: '' },
+                    { dateFrom: '2021.01.01', dateTo: '2021.12.30', title: '日本製薬医学会', urlTitle: '【ハイブリット開催】第12回日本製薬医学会年次大会', linkUrl: '' },
+                ],
+                "imageLists": [
+                    { imageUrl: 'organization', linkUrl: 'notLooked' },
+                    { imageUrl: 'organization', linkUrl: 'notLooked' },
+                    { imageUrl: 'organization', linkUrl: 'notLooked' },
+                    { imageUrl: 'organization', linkUrl: 'notLooked' },
+                    { imageUrl: 'organization', linkUrl: 'notLooked' },
+                    { imageUrl: 'organization', linkUrl: 'notLooked' },
+                    { imageUrl: 'organization', linkUrl: 'notLooked' },
+                    { imageUrl: 'organization', linkUrl: 'notLooked' },
 
-            //     ]
-            // }
-            return state.scientifiSocietyInfo;
-        },
-        topPMDAInfo(state) {
-            // const pmdaInfo = [
-            //     { type: ['eventType', 'recruitment'], date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
-            //     { type: 'recruitment', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
-            //     { type: 'international', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
-            //     { type: 'examination', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'update', linkUrl: '' },
-            //     { type: 'rescue', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: '', linkUrl: '' }
-            // ]
+                ]
+            }
+            return scientifiSocietyInfo;
+        }, topPMDAInfo(state) {
+            const pmdaInfo =
+            {
+                "details": [
+                    { type: ['eventType', 'recruitment'], date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
+                    { type: 'recruitment', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
+                    { type: 'international', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
+                    { type: 'examination', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'update', linkUrl: '' },
+                    { type: 'rescue', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: '', linkUrl: '' }
+                ]
+            }
 
-            return state.pmdaInfo;
+
+            return pmdaInfo;
         },
         // management
         topManagementInfo(state) {
@@ -122,44 +130,47 @@ export default {
     },
 
     mutations: {
-        basic(state, payload) {
-            state[payload.key] = payload.info.data
+        setTopNotice(state, info) {
+            state.noticeInfo = info
         },
-
     },
 
     actions: {
-        // トップ画面のお知らせ情報取得
-        async getTopNotice({ rootState, commit }) {
-            const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/get_topmenu_Noticel_info`, {
-                params: {
-                    token: '123456',
-                }
-            })
-            commit('basic', { key: 'noticeInfo', info })
+        getTopNotice({ rootState, commit }, userGroupId) {
+            // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
+            //     params: {
+            //         token: rootState.apiToken,
+            //         user_group_id: userGroupId
+            //     }
+            // })
+            // commit('setTopNotice', info)
         },
-        // トップ画面の掲示板情報取得
-        async getTopBulletinBoardInfo({ rootState, commit }) {
-            const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/get_topmenu_bulletinboard_info`, {
-                params: {
-                    token: '123456',
-                }
-            })
-            commit('basic', { key: 'bulletinBoardInfo', info })
+        getTopBulletinBoardInfo({ rootState, commit }, userGroupId) {
+            // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
+            //     params: {
+            //         token: rootState.apiToken,
+            //         user_group_id: userGroupId
+            //     }
+            // })
+            // commit('setTopNotice', info)
         },
-        // トップ画面の学会情報取得
-        async getScientifiSocietyInfoe({ rootState, commit }) {
-            const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/get_topmenu_scientifisociety_info`, {
-
-            })
-            commit('basic', { key: 'scientifiSocietyInfo', info })
+        getScientifiSocietyInfoe({ rootState, commit }, userGroupId) {
+            // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
+            //     params: {
+            //         token: rootState.apiToken,
+            //         user_group_id: userGroupId
+            //     }
+            // })
+            // commit('setTopNotice', info)
         },
-        // トップ画面のPDMAリスト情報取得
-        async getPmdaInfo({ rootState, commit }) {
-            const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/get_topmenu_pmda_info`, {
-
-            })
-            commit('basic', { key: 'pmdaInfo', info })
+        getPmdaInfo({ rootState, commit }, userGroupId) {
+            // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
+            //     params: {
+            //         token: rootState.apiToken,
+            //         user_group_id: userGroupId
+            //     }
+            // })
+            // commit('setTopNotice', info)
         },
     },
 }

@@ -162,6 +162,11 @@
 @apply notoSansJpAndEighteenBold text-center text-white border-b border-white hover:opacity-50 active:opacity-50;
 }
 
+/* 新着Q＆Aタイトル */
+.newQaInfoTitle{
+    @apply notoSansJpAndEighteenBold text-center text-white  hover:opacity-50 active:opacity-50;
+    }
+
 /* 学会情報　その他の情報 */
 .searchResult_header_grayline{
     @apply flex items-center  rounded-t-lg    
@@ -183,6 +188,11 @@
     @apply  pl-3.5 text-googleTitle notoSansJpAndFourteenRegular underline;
 }
 
+/* 新着Q＆A Topics */
+.organizationResult_header_bg_gray{
+    @apply flex justify-between h-10 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
+    text-white ;
+}
 
 /* PMDA 医薬品更新情報　Topics */
 .searchResult_header_bg_gray{

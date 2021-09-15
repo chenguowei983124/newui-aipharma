@@ -412,7 +412,6 @@
                             </div>
                         </div>
                     </div>
-                    -->
                 </div>
             </div>
         </div>
@@ -442,16 +441,16 @@
         activeClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular bg-blueline text-white"
         prevClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
         nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-        class="flex justify-center"
+        class="flex justify-center space-x-1"
     ></pagination>
 
     <div class="flex justify-center">{{ '1-20件 表示' }}</div>
 
     <div class="h-full space-y-2.5 md:space-y-3.75">
         <resut-tag
-            headerStyle="titleOnlyUnderlineGrayLine"
+            headerStyle="titleBgColorGray"
             title="新着Q＆A"
-            titleStyle="scientifiSocietyInfoTitle"
+            titleStyle="newQaInfoTitle"
             titleURL="/"
         >
             <result-detail-row
@@ -466,9 +465,9 @@
             </result-detail-row>
         </resut-tag>
         <resut-tag
-            headerStyle="titleOnlyUnderlineGrayLine"
+            headerStyle="titleBgColorGray"
             title="よく見られているQ＆A"
-            titleStyle="scientifiSocietyInfoTitle"
+            titleStyle="newQaInfoTitle"
             titleURL="/"
         >
             <result-detail-row

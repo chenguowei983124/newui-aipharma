@@ -28,7 +28,7 @@
             "
         >
             <!-- 最初の行 -->
-            <div class="flex items-center justify-center w-full">
+            <div class="flex items-center justify-center w-full px-2">
                 <!-- 検索条件リスト -->
                 <search-dropdown
                     @getCheckedId="getCheckId"
@@ -74,7 +74,7 @@
             </div>
             <!-- 二行目 -->
             <div>
-                <div class="">
+                <div class="px-2">
                     <Multiselect
                         placeholder="#タグ"
                         v-model="value"
@@ -166,12 +166,13 @@
             </div>
             <!-- 三行目、四行目、五行目 -->
             <div
-                class="space-y-2 bg-backgroundMainSearch"
+                class="space-y-2 bg-backgroundMainSearch px-2"
                 :class="[isDetailClick ? 'block' : 'hidden']"
             >
                 <div>
                     <input
                         class="
+                            pl-4
                             border-2
                             rounded
                             w-full
@@ -184,6 +185,7 @@
                 <div>
                     <input
                         class="
+                            pl-4
                             border-2
                             rounded
                             w-full
@@ -196,6 +198,7 @@
                 <div>
                     <input
                         class="
+                            pl-4x
                             border-2
                             rounded
                             w-full
@@ -356,7 +359,7 @@ export default {
       else if (this.checkId == 3) {
         this.$router.push('/searchOrganization')
       }
-      // 病例（プレアボイド）
+      // 症例（プレアボイド）
       else if (this.checkId == 4) {
         this.$router.push('/searchOrganization')
       }
