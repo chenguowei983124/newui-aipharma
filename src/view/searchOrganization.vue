@@ -9,18 +9,16 @@
 
 <script>
 import myAllHeader from '../components/myAllHeader.vue';
-import menuDropdownItem from '../components/dropdown/menuDropdown.vue'
 import dataManagerDropdown from '../components/dropdown/dataManagerDropdown.vue';
 import searchOrganizationLayout from '../layout/searchOrganizationLayout.vue'
 import homeBottomTemplate from '../components/homeBottomItem.vue'
 export default {
   components: {
     myAllHeader,
-    menuDropdownItem,
     dataManagerDropdown,
     searchOrganizationLayout,
     homeBottomTemplate
-  },
+  }
 
 }
 

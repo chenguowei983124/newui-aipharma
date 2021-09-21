@@ -4,59 +4,39 @@
         <div class="flex justify-between">
             <div>該当：145件</div>
             <div class="flex space-x-2">
-                <div class="flex">
-                    <div
-                        class="
-                            h-8
-                            pl-2
-                            pr-2
-                            text-center
-                            rounded-l
-                            border-2 border-grayline
+                <div class="flex space-x-2">
+                    <!-- 質問区分 -->
+                    <vue-single-select
+                        class="w-56"
+                        :name="'field1'"
+                        :default-value="0"
+                        :placeholder="'-- Choose an option --'"
+                        :default-input-attribs="{ tabindex: 1 }"
+                        :default-options="
+                            $store.getters.getOrganizationDateSort
                         "
-                    >
-                        質問日時の新しい順
-                    </div>
-                    <div
-                        class="
-                            h-8
-                            w-8
-                            rounded-r
-                            pt-1
-                            text-center
-                            bg-grayline
-                            text-white
+                        @selected="setSelectValue"
+                        :leftLableDisp="false"
+                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
+                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-1 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                                border border-transparent focus:outline-none"
+                    ></vue-single-select>
+                    <!-- 質問区分 -->
+                    <vue-single-select
+                        class="w-32"
+                        :name="'field1'"
+                        :default-value="0"
+                        :placeholder="'-- Choose an option --'"
+                        :default-input-attribs="{ tabindex: 1 }"
+                        :default-options="
+                            $store.getters.getOrganizationCountSort
                         "
-                    >
-                        ▼
-                    </div>
-                </div>
-                <div class="flex">
-                    <div
-                        class="
-                            h-8
-                            pl-2
-                            pr-2
-                            text-center
-                            rounded-l
-                            border-2 border-grayline
-                        "
-                    >
-                        20 件 表示
-                    </div>
-                    <div
-                        class="
-                            h-8
-                            w-8
-                            rounded-r
-                            pt-1
-                            text-center
-                            bg-grayline
-                            text-white
-                        "
-                    >
-                        ▼
-                    </div>
+                        @selected="setSelectValue"
+                        :leftLableDisp="false"
+                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
+                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-1 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                                border border-transparent focus:outline-none"
+                    ></vue-single-select>
                 </div>
             </div>
         </div>
@@ -65,60 +45,20 @@
         <div class="flex flex-col">
             <div>該当：145件</div>
             <div class="flex space-x-2">
-                <div class="flex">
-                    <div
-                        class="
-                            h-8
-                            pl-2
-                            pr-2
-                            text-center
-                            rounded-l
-                            border-2 border-grayline
-                        "
-                    >
-                        質問日時の新しい順
-                    </div>
-                    <div
-                        class="
-                            h-8
-                            w-8
-                            rounded-r
-                            pt-1
-                            text-center
-                            bg-grayline
-                            text-white
-                        "
-                    >
-                        ▼
-                    </div>
-                </div>
-                <div class="flex">
-                    <div
-                        class="
-                            h-8
-                            pl-2
-                            pr-2
-                            text-center
-                            rounded-l
-                            border-2 border-grayline
-                        "
-                    >
-                        20 件 表示
-                    </div>
-                    <div
-                        class="
-                            h-8
-                            w-8
-                            rounded-r
-                            pt-1
-                            text-center
-                            bg-grayline
-                            text-white
-                        "
-                    >
-                        ▼
-                    </div>
-                </div>
+                <!-- 質問区分 -->
+                <vue-single-select
+                    :name="'field1'"
+                    :default-value="null"
+                    :placeholder="'-- Choose an option --'"
+                    :default-input-attribs="{ tabindex: 1 }"
+                    :default-options="$store.getters.qa_classify_facility"
+                    @selected="setSelectValue"
+                    leftLableTitle="施設"
+                    buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
+                    inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-20 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                                border border-transparent focus:outline-none"
+                    iconColor="#32a5dc"
+                ></vue-single-select>
             </div>
         </div>
     </div>
@@ -514,28 +454,32 @@ import bad from '../svgImage/bad.vue'
 import talk from '../svgImage/talk.vue'
 // import Pagination from '../pagination/pagination.vue'
 import Pagination from '../pagination/pagiation.vue'
+import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
+
 export default {
   components: {
     resutTag, resultDetailRow, carousel,
     Good, bad, talk,
-    Pagination
+    Pagination, vueSingleSelect
   },
   props: {},
   data() {
     return {
       isDetailDisp: false,
-      aa: "",
-      bb: "",
-      cc: "",
       torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"]
     };
   },
-  couputed: {},
+
   watch: {},
   methods: {
     setDetailDisp: function () {
       //   console.log(this.isDetailDisp)
       this.isDetailDisp = !this.isDetailDisp
+    },
+    clickCallback() {
+
+    }, setSelectValue(value) {
+      this.selectValue = value
     }
   }
 }

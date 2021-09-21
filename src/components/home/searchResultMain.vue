@@ -154,6 +154,7 @@ export default {
     this.$store.dispatch('getTopBulletinBoardInfo')
     this.$store.dispatch('getScientifiSocietyInfoe')
     this.$store.dispatch('getPmdaInfo')
+    this.$store.dispatch('getCommonInfo')
   },
 }
 </script>

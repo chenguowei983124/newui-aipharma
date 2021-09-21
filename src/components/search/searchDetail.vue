@@ -158,56 +158,70 @@
                         }"
                     />
                 </div>
-                <!-- <input
-                    class="border-2 rounded w-full h-8 pl-4"
-                    type="text"
-                    placeholder="#タグ"
-                /> -->
             </div>
             <!-- 三行目、四行目、五行目 -->
             <div
                 class="space-y-2 bg-backgroundMainSearch px-2"
                 :class="[isDetailClick ? 'block' : 'hidden']"
             >
-                <div>
-                    <input
-                        class="
-                            pl-4
-                            border-2
-                            rounded
-                            w-full
-                            placeholder-32a5dcPlaceholderColor
-                        "
-                        type="text"
-                        placeholder="薬の分類"
-                    />
-                </div>
-                <div>
-                    <input
-                        class="
-                            pl-4
-                            border-2
-                            rounded
-                            w-full
-                            placeholder-32a5dcPlaceholderColor
-                        "
-                        type="text"
-                        placeholder="質問区分"
-                    />
-                </div>
-                <div>
-                    <input
-                        class="
-                            pl-4 pl-4x
-                            border-2
-                            rounded
-                            w-full
-                            placeholder-32a5dcPlaceholderColor
-                        "
-                        type="text"
-                        placeholder="施設"
-                    />
-                </div>
+                <!-- <vue-single-select
+                    :name="'field1'"
+                    :default-value="null"
+                    :placeholder="'-- Choose an option --'"
+                    :default-input-attribs="{ tabindex: 1 }"
+                    :default-options="options"
+                    leftLableTitle="薬の分類"
+                    buttonStyle="w-8 h-8 bg-blueline rounded-r right-0"
+                    inputStyle="w-full border-2 h-8 border-grayline bg-white rounded focus:placeholder-opacity-0
+                border border-transparent
+                focus:outline-none
+                focus:ring-1"
+                ></vue-single-select> -->
+
+                <!-- 薬の分類 -->
+                <vue-single-select
+                    :name="'field1'"
+                    :default-value="null"
+                    :placeholder="'-- Choose an option --'"
+                    :default-input-attribs="{ tabindex: 1 }"
+                    :default-options="$store.getters.getQa_classify_class"
+                    @selected="setSelectValue"
+                    leftLableTitle="薬の分類"
+                    buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
+                    inputStyle="w-full text-left pl-20 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                                border border-transparent focus:outline-none"
+                    iconColor="#32a5dc"
+                ></vue-single-select>
+
+                <!-- 質問区分 -->
+                <vue-single-select
+                    :name="'field1'"
+                    :default-value="null"
+                    :placeholder="'-- Choose an option --'"
+                    :default-input-attribs="{ tabindex: 1 }"
+                    :default-options="$store.getters.qa_classify_subject"
+                    @selected="setSelectValue"
+                    leftLableTitle="質問区分"
+                    buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
+                    inputStyle="w-full text-left pl-20  notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                                border border-transparent focus:outline-none"
+                    iconColor="#32a5dc"
+                ></vue-single-select>
+
+                <!-- 質問区分 -->
+                <vue-single-select
+                    :name="'field1'"
+                    :default-value="null"
+                    :placeholder="'-- Choose an option --'"
+                    :default-input-attribs="{ tabindex: 1 }"
+                    :default-options="$store.getters.qa_classify_facility"
+                    @selected="setSelectValue"
+                    leftLableTitle="施設"
+                    buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
+                    inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-20 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                                border border-transparent focus:outline-none"
+                    iconColor="#32a5dc"
+                ></vue-single-select>
             </div>
             <!-- 六行目　-->
             <div
@@ -318,19 +332,25 @@ import searchDropdown from './searchDropdown.vue'
 import searchSvg from '../svgImage/searchSvg.vue'
 import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
 import Multiselect from '@vueform/multiselect'
+import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
+
 
 export default {
-  components: { searchDropdown, searchSvg, TriangleDownSvg, Multiselect },
+  components: { searchDropdown, searchSvg, TriangleDownSvg, Multiselect, vueSingleSelect },
   data() {
     return {
       searchValue: '',
       checkId: '',
-      isDetailClick: false
+      isDetailClick: false,
+      selectValue: "",
+      value: []
     }
 
   },
   methods: {
-
+    setSelectValue(value) {
+      this.selectValue = value
+    },
     // ========================================
     // 詳細条件クリックイベント
     // ========================================
