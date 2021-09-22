@@ -12,9 +12,9 @@
                 bg-white
             "
         >
-            <keep-alive>
-                <router-view />
-            </keep-alive>
+            <!-- <keep-alive> -->
+            <router-view />
+            <!-- </keep-alive> -->
             <div class="flex justify-end mr-5">
                 <move-top-button></move-top-button>
             </div>

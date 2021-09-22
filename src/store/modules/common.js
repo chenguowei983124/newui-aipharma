@@ -6,7 +6,13 @@ export default {
         isManagementClick: false,
         qa_classify_class: {},
         qa_classify_subject: {},
-        qa_classify_facility: {},
+        qa_classify_facility: [
+            { "value": "0", "title": "全体" },
+            { "value": "1", "title": "自施設のみ" },
+            { "value": "2", "title": "他施設のみ" },
+            { "value": "3", "title": "グループ施設のみ" },
+            { "value": "4", "title": "グループ施設+自施設" }
+        ],
     }),
 
     getters: {
@@ -28,15 +34,16 @@ export default {
             return state.qa_classify_subject
         },
         qa_classify_facility(state) {
-            state.qa_classify_facility = [
-                { "value": "0", "title": "全体" },
-                { "value": "1", "title": "自施設のみ" },
-                { "value": "2", "title": "他施設のみ" },
-                { "value": "3", "title": "グループ施設のみ" },
-                { "value": "4", "title": "グループ施設+自施設" }
-            ]
-
             return state.qa_classify_facility
+            // state.qa_classify_facility = [
+            //     { "value": "0", "title": "全体" },
+            //     { "value": "1", "title": "自施設のみ" },
+            //     { "value": "2", "title": "他施設のみ" },
+            //     { "value": "3", "title": "グループ施設のみ" },
+            //     { "value": "4", "title": "グループ施設+自施設" }
+            // ]
+
+            // return state.qa_classify_facility
         }
     },
 
@@ -64,7 +71,7 @@ export default {
             console.log("isManagementClick =" + value)
         },
         getCommonInfo({ commit, state }) {
-            console.log("getCommonInfo =11")
+            // console.log("getCommonInfo =11")
             let value = [
                 { "value": "0", "title": "医療用医薬品（内服薬）" },
                 { "value": "1", "title": "医療用医薬品（注射薬）" },

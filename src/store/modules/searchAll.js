@@ -103,7 +103,7 @@ export default {
             //     }
             // })
             // 検索キー格納
-            commit('searchKey', { key: 'searchKey', value })
+            commit('basic', { key: 'searchKey', value })
             const info = {
                 count: 1,
                 searchResult: [

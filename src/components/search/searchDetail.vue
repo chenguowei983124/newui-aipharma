@@ -75,7 +75,7 @@
             <!-- 二行目 -->
             <div>
                 <div class="px-2">
-                    <Multiselect
+                    <!-- <Multiselect
                         placeholder="#タグ"
                         v-model="value"
                         mode="tags"
@@ -86,7 +86,21 @@
                             { value: 'batman', label: 'Batman' },
                             { value: 'robin', label: 'Robin' },
                             { value: 'joker', label: 'Joker' },
-                        ]"
+                        ]" -->
+                    <Multiselect
+                        v-model="value"
+                        mode="tags"
+                        placeholder="#タグ"
+                        :filterResults="false"
+                        :minChars="1"
+                        :resolveOnLoad="false"
+                        :delay="0"
+                        :searchable="true"
+                        :options="
+                            async function (query) {
+                                return await fetchLanguages(query) // check JS block for implementation
+                            }
+                        "
                         :classes="{
                             container:
                                 'relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-gray-300 rounded bg-white text-base leading-snug outline-none',
@@ -164,20 +178,6 @@
                 class="space-y-2 bg-backgroundMainSearch px-2"
                 :class="[isDetailClick ? 'block' : 'hidden']"
             >
-                <!-- <vue-single-select
-                    :name="'field1'"
-                    :default-value="null"
-                    :placeholder="'-- Choose an option --'"
-                    :default-input-attribs="{ tabindex: 1 }"
-                    :default-options="options"
-                    leftLableTitle="薬の分類"
-                    buttonStyle="w-8 h-8 bg-blueline rounded-r right-0"
-                    inputStyle="w-full border-2 h-8 border-grayline bg-white rounded focus:placeholder-opacity-0
-                border border-transparent
-                focus:outline-none
-                focus:ring-1"
-                ></vue-single-select> -->
-
                 <!-- 薬の分類 -->
                 <vue-single-select
                     :name="'field1'"
@@ -195,12 +195,12 @@
 
                 <!-- 質問区分 -->
                 <vue-single-select
-                    :name="'field1'"
+                    :name="'field2'"
                     :default-value="null"
                     :placeholder="'-- Choose an option --'"
                     :default-input-attribs="{ tabindex: 1 }"
                     :default-options="$store.getters.qa_classify_subject"
-                    @selected="setSelectValue"
+                    @selected="setSelectValue2"
                     leftLableTitle="質問区分"
                     buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                     inputStyle="w-full text-left pl-20  notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -210,12 +210,12 @@
 
                 <!-- 質問区分 -->
                 <vue-single-select
-                    :name="'field1'"
+                    :name="'field3'"
                     :default-value="null"
                     :placeholder="'-- Choose an option --'"
                     :default-input-attribs="{ tabindex: 1 }"
                     :default-options="$store.getters.qa_classify_facility"
-                    @selected="setSelectValue"
+                    @selected="setSelectValue3"
                     leftLableTitle="施設"
                     buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                     inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-20 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -343,13 +343,50 @@ export default {
       checkId: '',
       isDetailClick: false,
       selectValue: "",
+      selectValue2: "",
+      selectValue3: "",
       value: []
     }
 
   },
   methods: {
+    async fetchLanguages(query) {
+      // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
+
+      let where = ''
+
+      if (query) {
+        where = '&where=' + encodeURIComponent(JSON.stringify({
+          "ProgrammingLanguage": {
+            "$regex": `${query}|${query.toUpperCase()}|${query[0].toUpperCase() + query.slice(1)}`
+          }
+        }))
+      }
+
+      const response = await fetch(
+        'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' + where,
+        {
+          headers: {
+            'X-Parse-Application-Id': 'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
+            'X-Parse-Master-Key': 'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
+          }
+        }
+      );
+
+      const data = await response.json(); // Here you have the data that you need
+
+      return data.results.map((item) => {
+        return { value: item.ProgrammingLanguage, label: item.ProgrammingLanguage }
+      })
+    },
     setSelectValue(value) {
       this.selectValue = value
+    },
+    setSelectValue2(value) {
+      this.selectValue2 = value
+    },
+    setSelectValue3(value) {
+      this.selectValue3 = value
     },
     // ========================================
     // 詳細条件クリックイベント

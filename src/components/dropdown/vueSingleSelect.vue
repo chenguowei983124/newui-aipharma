@@ -342,7 +342,7 @@ export default {
     },
 
     onClickOptions(event) {
-      console.log("asdfasd")
+      // console.log("asdfasd")
       let optionEl = closest(event.target, '[data-index]');
       this.selectedIndex = parseInt(optionEl.getAttribute('data-index'));
       this.inputText = this.options[this.selectedIndex].title;
@@ -448,7 +448,7 @@ export default {
         }
       }
       this.hasVisibleOptions = hasVisibleOptions;
-      console.log(this.hasVisibleOptions)
+      // console.log(this.hasVisibleOptions)
       this.showAllOptions = false;
       this.updateDisplaySelectedIndex();
     },

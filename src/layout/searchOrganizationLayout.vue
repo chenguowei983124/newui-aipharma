@@ -78,15 +78,38 @@
 
         <div class="flex-grow max-h-full min-w-min block"></div>
     </div>
+    <div
+        class="block mid:hidden md:hidden"
+        :class="[
+            $store.getters.getGoodMessageBox
+                ? 'block mt-2 w-full fixed z-20 bottom-20'
+                : 'hidden',
+        ]"
+    >
+        <good-message-box></good-message-box>
+    </div>
+    <div
+        :class="[
+            $store.getters.getCommentMessageBox
+                ? 'block fixed w-full top-1/4 z-99'
+                : 'hidden',
+        ]"
+    >
+        <!-- <div class="bg-blue-400">464645646465</div> -->
+        <comment-message-box class=""></comment-message-box>
+    </div>
 </template>
 
 <script>
+import CommentMessageBox from '../components/messageBox/commentMessageBox.vue'
+import GoodMessageBox from '../components/messageBox/goodMessageBox.vue'
 import searchBar from '../components/search/searchDetail.vue'
 import searchOrganizationMain from "../components/organization/searchOrganizationMain.vue"
 
 export default {
   components: {
-    searchBar, searchOrganizationMain
+    CommentMessageBox,
+    GoodMessageBox, searchBar, searchOrganizationMain
   },
   props: {},
   data() {

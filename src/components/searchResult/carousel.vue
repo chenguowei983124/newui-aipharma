@@ -40,8 +40,8 @@
             :watchOverflow="true"
             :observer="true"
             :observeParents="true"
-            :breakpoints="breakpoints"
         >
+            <!-- :breakpoints="breakpoints" -->
             <swiper-slide
                 class="parallax-slide"
                 v-for="image in images"

@@ -9,16 +9,18 @@
 
 <script>
 import myAllHeader from '../components/myAllHeader.vue';
-import dataManagerDropdown from '../components/dropdown/dataManagerDropdown.vue';
 import searchOrganizationLayout from '../layout/searchOrganizationLayout.vue'
+import goodMessageBox from '../components/messageBox/goodMessageBox.vue'
+import commentMessageBox from '../components/messageBox/commentMessageBox.vue'
 import homeBottomTemplate from '../components/homeBottomItem.vue'
 export default {
   components: {
     myAllHeader,
-    dataManagerDropdown,
     searchOrganizationLayout,
+    goodMessageBox,
+    commentMessageBox,
     homeBottomTemplate
-  }
+  },
 
 }
 
