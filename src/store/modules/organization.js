@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
     state: () => ({
         organizationDateSort: [
@@ -16,7 +17,9 @@ export default {
             { "value": "2", "title": "100件 表示" }
         ],
         goodMessageBox: false,
-        commentMessageBox: false
+        commentMessageBox: false,
+        organizationSearchInfo: {},
+        isOrganizationSearch: false,
     }),
 
     getters: {
@@ -25,6 +28,12 @@ export default {
         },
         getCommentMessageBox(state) {
             return state.commentMessageBox
+        },
+        getIsOrganizationSearch(state) {
+            return state.isOrganizationSearch
+        },
+        organizationSearchInfo(state) {
+            return state.organizationSearchInfo
         },
         getOrganizationDateSort(state) {
             // state.organizationDateSort = [
@@ -54,16 +63,38 @@ export default {
     mutations: {
         basic(state, payload) {
             state[payload.key] = payload.value
+            // state[payload.key] = payload.info.data
+            // console.log(payload.info.data)
+            // console.log(state[payload.key])
+        },
+        setOrganizationSearchInfo(state, info) {
+            console.log(info)
+            state.organizationSearchInfo = info.data
         },
     },
 
     actions: {
+        async getOrganizationSearchInfo({ rootState, commit }) {
+            const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info`, {
+                params: {
+                }
+            })
+            // console.log('getOrganizationSearchInfo', info)
+            // commit('basic', { key: 'organizationSearchInfo', info })
+            commit('setOrganizationSearchInfo', info)
+        },
+
         setGoodMessageBox({ commit, state }, value) {
             commit('basic', { key: 'goodMessageBox', value })
             // console.log(value)
         },
+
         setCommentMessageBox({ commit, state }, value) {
             commit('basic', { key: 'commentMessageBox', value })
+            // console.log(value)
+        },
+        setIsOrganizationSearch({ commit, state }, value) {
+            commit('basic', { key: 'isOrganizationSearch', value })
             // console.log(value)
         },
     },

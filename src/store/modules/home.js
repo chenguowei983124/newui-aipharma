@@ -136,7 +136,18 @@ export default {
     },
 
     actions: {
+        // async getTopNotice({ rootState, commit }) {
+        //     const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info`, {
+        //         params: {
+        //             // token: '123456',
+        //         }
+        //     })
+        //     commit('basic', { key: 'noticeInfo', info })
+        // },
+
         getTopNotice({ rootState, commit }, userGroupId) {
+            // http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info
+
             // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
             //     params: {
             //         token: rootState.apiToken,

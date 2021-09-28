@@ -13,7 +13,7 @@
             :class="[isDown ? 'rounded-tl-lg' : 'rounded-l-lg']"
         >
             <a class="text-searchDropdown font-bold pl-2 text-xs NotoSansJp">
-                {{ itemValue }}
+                 {{ itemList[checkedID][0].title }}
             </a>
             <div class="ml-1 mr-1">
                 <triangle-down-svg v-if="isDown == false"></triangle-down-svg>
@@ -25,7 +25,7 @@
         </div>
 
         <div
-            class="absolute bg-searchBar w-45 cursor-pointer"
+            class="absolute bg-searchBar w-45 cursor-pointer z-10"
             v-if="isDown"
             @click="isSelect = !isSelect"
         >
@@ -127,7 +127,12 @@ import triangleDownSvg from '../svgImage/triangleDownSvg.vue'
 
 export default {
   components: { checkSvg, triangleDownSvg },
-  props: {},
+  props: {
+    checkedID: {
+      type: Number,
+      default: 1
+    }
+  },
   mounted() {
     document.addEventListener("click", this.handleClickOutside);
     document.addEventListener("keyup", this.handleClickOutside);
@@ -141,15 +146,15 @@ export default {
     return {
       isDown: false,
       isSelect: true,
-      itemValue: 'すべて',
-      checkedID: 1,
+      //   itemValue: 'すべて',
+      //   checkedID: 1,
       itemList: [
-        [{ 'id': '1', 'title': 'すべて', 'itemStyle': 'All' }],
-        [{ 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item' }],
-        [{ 'id': '3', 'title': '組織内 DI 記録（Q&A）', 'itemStyle': 'item' }],
-        [{ 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item' }],
-        [{ 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item' }],
-        [{ 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item' }]
+        [{ 'id': '0', 'title': 'すべて', 'itemStyle': 'All' }],
+        [{ 'id': '1', 'title': 'DI ナレッジシェア', 'itemStyle': 'item' }],
+        [{ 'id': '2', 'title': '組織内 DI 記録（Q&A）', 'itemStyle': 'item' }],
+        [{ 'id': '3', 'title': '症例（プレアボイド）', 'itemStyle': 'item' }],
+        [{ 'id': '4', 'title': 'DI 辞書', 'itemStyle': 'item' }],
+        [{ 'id': '5', 'title': '製薬企業情報', 'itemStyle': 'item' }]
       ]
     };
   },
@@ -158,8 +163,8 @@ export default {
   methods: {
     itemClick(value) {
       if (value.itemStyle != 'title') {
-        this.checkedID = value.id
-        this.itemValue = value.title
+        // this.checkedID = value.id
+        // this.itemValue = value.title
         this.isDown = !this.isDown
         this.$emit("getCheckedId", value.id)
 

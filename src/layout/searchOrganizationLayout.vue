@@ -4,7 +4,7 @@
         <!-- pcの場合 -->
         <div
             class="flex-auto hidden md:block mid:block"
-            :class="[isDetailButtonClick ? 'h-65' : 'h-36']"
+            :class="[isDetailButtonClick ? 'h-72' : 'h-44']"
         >
             <search-bar @isDetailClick="getDetailClick"></search-bar>
         </div>
@@ -31,11 +31,12 @@
             :class="[isDetailButtonClick ? 'h-65' : 'h-40']"
         ></div>
     </div>
+    <!-- 内容 -->
     <div class="flex border-b-2 border-blue-200 mt-20 md:mt-5 md:h-20">
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
-        <div class="flex flex-col justify-center">
+        <div class="flex flex-col w-full md:w-191.25 justify-center">
             <div class="flex flex-row space-x-2">
                 <div class="text-googleTitle notoSansJpAndTwentyBold">
                     組織内 DI 記録（Q&A）
@@ -66,18 +67,26 @@
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
     </div>
-
     <div class="flex pt-8">
         <div class="flex-grow max-h-full min-w-min block"></div>
-
         <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">
             <div class="grid grid-cols-1 gap-1 md:space-y-3.75">
-                <search-organization-main></search-organization-main>
+                <!-- :class="[
+                        $store.getters.getIsOrganizationSearch
+                            ? 'block'
+                            : 'hidden',
+                    ]" -->
+                <div>
+                    <search-organization-main></search-organization-main>
+                </div>
+                <!-- <div>465456</div> -->
+                <div><organization-init></organization-init></div>
             </div>
         </div>
-
         <div class="flex-grow max-h-full min-w-min block"></div>
     </div>
+    <!-- <organization-init></organization-init> -->
+    <!-- good-message-box -->
     <div
         class="block mid:hidden md:hidden"
         :class="[
@@ -88,6 +97,7 @@
     >
         <good-message-box></good-message-box>
     </div>
+    <!-- comment-message-box -->
     <div
         :class="[
             $store.getters.getCommentMessageBox
@@ -95,7 +105,6 @@
                 : 'hidden',
         ]"
     >
-        <!-- <div class="bg-blue-400">464645646465</div> -->
         <comment-message-box class=""></comment-message-box>
     </div>
 </template>
@@ -105,12 +114,14 @@ import CommentMessageBox from '../components/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/messageBox/goodMessageBox.vue'
 import searchBar from '../components/search/searchDetail.vue'
 import searchOrganizationMain from "../components/organization/searchOrganizationMain.vue"
+import OrganizationInit from '../components/organization/organizationInit.vue'
 
 export default {
   components: {
     CommentMessageBox,
-    GoodMessageBox, searchBar, searchOrganizationMain
+    GoodMessageBox, searchBar, searchOrganizationMain, OrganizationInit
   },
+
   props: {},
   data() {
     return {

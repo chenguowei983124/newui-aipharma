@@ -7,7 +7,14 @@
         <div class="flex-grow mid:flex-shrink">
             <div class="flex flex-row">
                 <div class="flex-auto h-15 md:h-20 hidden md:block">
-                    <search-bar class="mid:rounded-md"></search-bar>
+                    <!-- <search-bar class="mid:rounded-md"></search-bar> -->
+                    <search-bar
+                        @searchInput="getSearchInput"
+                        @searchID="getsearchBarSelectID"
+                        :searchValue="searchInput"
+                        :searchbarSelectID="Number(searchBarSelectId)"
+                        class="mid:rounded-md"
+                    ></search-bar>
                 </div>
 
                 <div
@@ -18,7 +25,14 @@
                             : 'fixed w-full top-12.5 z-20',
                     ]"
                 >
-                    <search-bar class="mid:rounded-md"></search-bar>
+                    <!-- <search-bar class="mid:rounded-md"></search-bar> -->
+                    <search-bar
+                        @searchInput="getSearchInput"
+                        @searchID="getsearchBarSelectID"
+                        :searchValue="searchInput"
+                        :searchbarSelectID="Number(searchBarSelectId)"
+                        class="mid:rounded-md"
+                    ></search-bar>
                 </div>
                 <div
                     class="block md:hidden"
@@ -73,12 +87,21 @@ export default {
   props: {},
   data() {
     return {
-      isMenuOpen: true
+      isMenuOpen: true,
+      searchInput: "",
+      searchBarSelectId: 0
+
     };
   },
   couputed: {},
   watch: {},
   methods: {
+    getSearchInput: function (value) {
+      this.searchInput = value
+    },
+    getsearchBarSelectID: function (value) {
+      this.searchBarSelectId = value
+    }
   },
   created() {
 

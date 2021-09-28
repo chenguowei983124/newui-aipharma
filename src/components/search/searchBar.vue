@@ -3,6 +3,7 @@
         <!-- 検索条件リスト -->
         <search-dropdown
             @getCheckedId="getCheckId"
+            :checkedID="Number(checkId)"
             class="h-10 md:ml-32 flex-none hidden md:block"
         ></search-dropdown>
 
@@ -10,6 +11,7 @@
         <!-- sp -->
         <input
             v-model="searchValue"
+            @change="getNewInput($event)"
             class="
                 block
                 md:hidden
@@ -35,6 +37,7 @@
         <!-- pc -->
         <input
             v-model="searchValue"
+            @change="getNewInput($event)"
             class="
                 hidden
                 md:block
@@ -96,20 +99,40 @@ import searchSvg from '../svgImage/searchSvg.vue'
 
 export default {
   components: { searchDropdown, searchSvg },
+  props: {
+    searchValue: {
+      type: String,
+      default: ""
+    },
+    searchbarSelectID: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
-      searchValue: '',
-      checkId: '1'
+      checkId: this.searchbarSelectID
+      // searchValue: '',
+      // checkId: '1'
     }
 
   },
+  watch: {
+    checkId: function () {
+      this.$emit("searchID", this.checkId)
+    }
+  },
   methods: {
+    getNewInput: function (e) {
+      console.log(e.target.value)
+      this.$emit("searchInput", e.target.value)
+    },
     // ========================================
     // 検索ボタン押下イベント
     // ========================================
     searchClick: function (event) {
       // すべて
-      if (this.checkId == 1) {
+      if (this.checkId == 0) {
         // 検索APIを呼び出し(画面入力値)
         this.$store.dispatch('saveSearchValue', this.searchValue)
 
@@ -117,25 +140,26 @@ export default {
         this.$router.push('/searchResultAll')
       }
       // DI ナレッジシェア
-      else if (this.checkId == 2) {
+      else if (this.checkId == 1) {
 
         this.$router.push('/searchResultAll')
       }
       // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
+      else if (this.checkId == 2) {
         this.$store.dispatch('searchOrganization', this.searchValue)
         this.$router.push('/searchOrganization')
+
       }
       // 症例（プレアボイド）
-      else if (this.checkId == 4) {
+      else if (this.checkId == 3) {
         this.$router.push('/searchOrganization')
       }
       // DI 辞書
-      else if (this.checkId == 5) {
+      else if (this.checkId == 4) {
         this.$router.push('/searchOrganization')
       }
       // 製薬企業情報
-      else if (this.checkId == 6) {
+      else if (this.checkId == 5) {
         this.$router.push('/searchOrganization')
       }
 

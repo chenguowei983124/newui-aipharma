@@ -50,25 +50,27 @@ export default {
     mutations: {
         basic(state, payload) {
             state[payload.key] = payload.value
+            // console.log(payload.value)
+            // console.log(state[payload.key])
         },
     },
 
     actions: {
         formScreenToggle({ commit, state }, value) {
-            console.log(value)
+            // console.log(value)
             commit('basic', { key: 'isFormScreen', value })
         },
         setMenuClick({ commit, state }, value) {
             commit('basic', { key: 'isMenuClick', value })
-            console.log(value)
+            // console.log(value)
         },
         setPortraitClick({ commit, state }, value) {
             commit('basic', { key: 'isPortraitClick', value })
-            console.log("isPortraitClick =" + value)
+            // console.log("isPortraitClick =" + value)
         },
         setManagementClick({ commit, state }, value) {
             commit('basic', { key: 'isManagementClick', value })
-            console.log("isManagementClick =" + value)
+            // console.log("isManagementClick =" + value)
         },
         getCommonInfo({ commit, state }) {
             // console.log("getCommonInfo =11")

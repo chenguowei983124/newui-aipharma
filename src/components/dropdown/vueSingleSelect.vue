@@ -245,8 +245,16 @@ export default {
         this.needUpdateOptionsScroll = true;
         this.updateVisibleOptions();
       }
-    }
 
+    },
+    // dispText(newValue) {
+    //   if (newValue == "") {
+    //     this.inputText = newValue
+    //     this.selectedIndex = null
+    //     this.$emit('selected', "");
+    //     this.$emit('dispText', this.inputText);
+    //   }
+    // }
   },
 
   computed: {
@@ -361,6 +369,7 @@ export default {
 
     onSelected() {
       this.$emit('selected', this.value);
+      // this.$emit('dispText', this.inputText);
     },
 
     onArrow(offset) {

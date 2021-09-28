@@ -8,9 +8,9 @@
                 md:block
                 mid:block
                 flex-grow
-                max-h-full
                 min-w-min
                 h-full
+                max-h-full
             "
         ></div>
         <!-- 中青背景 -->
@@ -72,21 +72,135 @@
                     placeholder="キーワードを入力"
                 />
             </div>
+            <!-- 1.5行目 -->
+            <div
+                class="flex flex-row mx-2 md:mx-0 text-xs font-bold text-white"
+            >
+                <!-- 検索対象 左-->
+                <div class="w-20 flex justify-center text-sm">検索対象</div>
+                <!-- 右 -->
+                <div class="flex-auto">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="flex flex-row space-x-3">
+                            <!-- 各施設のDB -->
+                            <div class="">
+                                <label
+                                    class="inline-flex items-center justify-end"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="form-checkbox"
+                                        checked
+                                    />
+                                    <span class="ml-0.5 text-xs"
+                                        >各施設のDB</span
+                                    >
+                                </label>
+                            </div>
+                            <!-- Q -->
+                            <div class="">
+                                <label
+                                    class="inline-flex items-center justify-end"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="form-checkbox"
+                                        checked
+                                    />
+                                    <span class="ml-0.5 text-xs">Q</span>
+                                </label>
+                            </div>
+                            <!-- A -->
+                            <div class="">
+                                <label
+                                    class="inline-flex items-center justify-end"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="form-checkbox"
+                                        checked
+                                    />
+                                    <span class="ml-0.5 text-xs">A</span>
+                                </label>
+                            </div>
+                            <!-- コメント -->
+                            <div class="">
+                                <label
+                                    class="inline-flex items-center justify-end"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="form-checkbox"
+                                        checked
+                                    />
+                                    <span class="ml-0.5 text-xs">コメント</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="flex flex-row space-x-3 md:ml-3">
+                            <div>
+                                <!-- 添付ファイル名 -->
+                                <label
+                                    class="inline-flex items-center justify-end"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="form-checkbox"
+                                        checked
+                                    />
+                                    <span class="ml-0.5 text-xs"
+                                        >添付ファイル名</span
+                                    >
+                                </label>
+                            </div>
+                            <div>
+                                <!-- 投稿者 -->
+                                <label
+                                    class="inline-flex items-center justify-end"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="form-checkbox"
+                                        checked
+                                    />
+                                    <span class="ml-0.5 text-xs">投稿者</span>
+                                </label>
+                            </div>
+                            <div>
+                                <!-- 最終編集者 -->
+                                <label
+                                    class="inline-flex items-center justify-end"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="form-checkbox"
+                                        checked
+                                    />
+                                    <span class="ml-0.5 text-xs"
+                                        >最終編集者</span
+                                    >
+                                </label>
+                            </div>
+                        </div>
+                        <div class="md:ml-3">
+                            <!-- 施設名（グルー施設用プ） -->
+                            <label class="inline-flex items-center justify-end">
+                                <input
+                                    type="checkbox"
+                                    class="form-checkbox"
+                                    checked
+                                />
+                                <span class="ml-0.5 text-xs"
+                                    >施設名（グルー施設用プ）</span
+                                >
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- 二行目 -->
             <div>
                 <div class="px-2">
-                    <!-- <Multiselect
-                        placeholder="#タグ"
-                        v-model="value"
-                        mode="tags"
-                        :closeOnSelect="false"
-                        :searchable="true"
-                        :createTag="true"
-                        :options="[
-                            { value: 'batman', label: 'Batman' },
-                            { value: 'robin', label: 'Robin' },
-                            { value: 'joker', label: 'Joker' },
-                        ]" -->
                     <Multiselect
                         v-model="value"
                         mode="tags"
@@ -170,16 +284,18 @@
                                 'bg-transparent absolute left-0 right-0 -bottom-px w-full h-px border-0 p-0 appearance-none outline-none text-transparent',
                             spacer: 'h-9 py-px box-content',
                         }"
-                    />
+                    ></Multiselect>
                 </div>
             </div>
             <!-- 三行目、四行目、五行目 -->
             <div
                 class="space-y-2 bg-backgroundMainSearch px-2"
+                ref="resetSelect"
                 :class="[isDetailClick ? 'block' : 'hidden']"
             >
                 <!-- 薬の分類 -->
                 <vue-single-select
+                    ref="medicines"
                     :name="'field1'"
                     :default-value="null"
                     :placeholder="'-- Choose an option --'"
@@ -195,6 +311,7 @@
 
                 <!-- 質問区分 -->
                 <vue-single-select
+                    ref="qDistinction"
                     :name="'field2'"
                     :default-value="null"
                     :placeholder="'-- Choose an option --'"
@@ -208,8 +325,9 @@
                     iconColor="#32a5dc"
                 ></vue-single-select>
 
-                <!-- 質問区分 -->
+                <!-- 施設 -->
                 <vue-single-select
+                    ref="facility"
                     :name="'field3'"
                     :default-value="null"
                     :placeholder="'-- Choose an option --'"
@@ -243,6 +361,7 @@
                             w-28
                             h-8
                         "
+                        @click="inputClear"
                     >
                         条件をクリア
                     </button>
@@ -256,8 +375,9 @@
                             flex flex-row
                             justify-center
                         "
+                        @click="sendInputInfo"
                     >
-                        <div class="mt-1">検索</div>
+                        <div class="mt-1">検 索</div>
                         <search-svg class="mt-1"></search-svg>
                     </button>
                 </div>
@@ -271,7 +391,8 @@
                             notoSansJpAndFourteenRegular
                             w-24
                             h-8
-                            pl-2.5
+                            pl-3
+                            mr-2
                             space-x-1
                             cursor-pointer
                         "
@@ -339,13 +460,18 @@ export default {
   components: { searchDropdown, searchSvg, TriangleDownSvg, Multiselect, vueSingleSelect },
   data() {
     return {
-      searchValue: '',
-      checkId: '',
+      searchText: null,
+      searchValue: "",
+      //   tagsValue: '',
+      checkId: "",
       isDetailClick: false,
       selectValue: "",
       selectValue2: "",
       selectValue3: "",
-      value: []
+      value: [],
+      //   dispText: "",
+      //   dispQDistinctionText: "",
+      //   dispFacilityText: "",
     }
 
   },
@@ -378,6 +504,29 @@ export default {
       return data.results.map((item) => {
         return { value: item.ProgrammingLanguage, label: item.ProgrammingLanguage }
       })
+    },
+    // getDispText: function (value) {
+    //   this.dispText = value
+    // },
+    // getDispQDistinctionText: function (value) {
+    //   this.dispQDistinctionText = value
+    // },
+    // getDispFacilityText: function (value) {
+    //   this.dispFacilityText = value
+    // },
+    inputClear() {
+      this.searchValue = ''
+      this.value = []
+      this.$refs.medicines.setValue(null)
+      this.$refs.qDistinction.setValue(null)
+      this.$refs.facility.setValue(null)
+      //   this.dispText = ""
+      //   this.dispQDistinctionText = ""
+      //   this.dispFacilityText = ""
+    },
+    sendInputInfo() {
+      console.log("hello")
+      //   this.$store.dispatch('setIsOrganizationSearch', !this.$store.getters.getIsOrganizationSearch)
     },
     setSelectValue(value) {
       this.selectValue = value
