@@ -1,5 +1,5 @@
 <template>
-    <div class="flex">
+    <div class="flex justify-center">
         <!-- 710*650 -->
         <div
             class="

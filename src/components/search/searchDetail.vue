@@ -525,7 +525,7 @@ export default {
       //   this.dispFacilityText = ""
     },
     sendInputInfo() {
-      console.log("hello")
+      this.$store.dispatch('getOrganizationSearchInfo')
       //   this.$store.dispatch('setIsOrganizationSearch', !this.$store.getters.getIsOrganizationSearch)
     },
     setSelectValue(value) {

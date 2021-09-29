@@ -32,37 +32,52 @@
         ></div>
     </div>
     <!-- 内容 -->
-    <div class="flex border-b-2 border-blue-200 mt-20 md:mt-5 md:h-20">
+    <div class="flex border-b-2 border-blue-200 mt-33.5 md:mt-5 md:h-20">
+        <!-- 左 -->
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
         <div class="flex flex-col w-full md:w-191.25 justify-center">
-            <div class="flex flex-row space-x-2">
-                <div class="text-googleTitle notoSansJpAndTwentyBold">
-                    組織内 DI 記録（Q&A）
-                </div>
-                <div class="hidden md:block mid:block">トレンドタグ</div>
+            <div class="flex flex-row space-x-2 items-center">
                 <div
                     class="
-                        rounded-full
-                        border-2 border-gray-400
-                        bg-gray-100
-                        h-6
-                        notoSansJpAndTwelveRegular
-                        pl-1
-                        pr-1
-                        text-center
-                        hidden
-                        md:block
-                        mid:block
+                        text-googleTitle
+                        notoSansJpAndTwentyBold
+                        font-black
+                        flex-none
+                        pl-2
+                        md:pl-0
                     "
-                    v-for="item in torenndoTab"
-                    :key="item"
                 >
-                    {{ item }}
+                    組織内 DI 記録（Q&A）
+                </div>
+                <div class="hidden md:block mid:block text-sm flex-none">
+                    トレンドタグ
+                </div>
+                <div class="flex flex-wrap space-x-1">
+                    <div
+                        class="
+                            rounded-full
+                            border-2 border-gray-400
+                            bg-gray-100
+                            h-6
+                            notoSansJpAndTwelveRegular
+                            pl-1
+                            pr-1
+                            text-center
+                            hidden
+                            md:block
+                            mid:block
+                        "
+                        v-for="item in torenndoTab"
+                        :key="item"
+                    >
+                        {{ item }}
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- 右 -->
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
@@ -85,10 +100,8 @@
         </div>
         <div class="flex-grow max-h-full min-w-min block"></div>
     </div>
-    <!-- <organization-init></organization-init> -->
     <!-- good-message-box -->
     <div
-        class="block mid:hidden md:hidden"
         :class="[
             $store.getters.getGoodMessageBox
                 ? 'block mt-2 w-full fixed z-20 bottom-20'
@@ -127,7 +140,7 @@ export default {
     return {
       isMenuOpen: true,
       isDetailButtonClick: false,
-      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"]
+      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"]
     };
   },
   methods: {
@@ -135,7 +148,6 @@ export default {
     // 詳細条件ボタン押下区分を取得
     // ========================================
     getDetailClick: function (data) {
-
       this.isDetailButtonClick = data
     }
   },

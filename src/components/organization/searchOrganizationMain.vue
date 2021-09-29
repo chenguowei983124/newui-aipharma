@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="$store.getters.organizationSearchInfo.searchWords != undefined">
         <div class="flex flex-row space-x-2 font-bold">
             検索条件：
             <div
@@ -12,58 +12,15 @@
             </div>
         </div>
         <!-- <div class="">検索条件：{{ $store.getters.getSearchValue }}</div> -->
-        <!-- pc -->
-        <div class="hidden md:block">
-            <div class="flex justify-between">
-                <div class="font-bold">
-                    該当：
-                    {{ $store.getters.organizationSearchInfo.allCount }}件
-                </div>
-                <div class="flex space-x-2">
-                    <div class="flex space-x-2">
-                        <!-- 順 区分 -->
-                        <vue-single-select
-                            class="w-56"
-                            :name="'field1'"
-                            :default-value="0"
-                            :placeholder="'-- Choose an option --'"
-                            :default-input-attribs="{ tabindex: 1 }"
-                            :default-options="
-                                $store.getters.getOrganizationDateSort
-                            "
-                            @selected="setSelectValue"
-                            :leftLableDisp="false"
-                            buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                            inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-1 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
-                        ></vue-single-select>
-                        <!-- 件 表示 区分 -->
-                        <vue-single-select
-                            class="w-32"
-                            :name="'field2'"
-                            :default-value="0"
-                            :placeholder="'-- Choose an option --'"
-                            :default-input-attribs="{ tabindex: 1 }"
-                            :default-options="
-                                $store.getters.getOrganizationCountSort
-                            "
-                            @selected="setSelectValue"
-                            :leftLableDisp="false"
-                            buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                            inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-1 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
-                        ></vue-single-select>
-                    </div>
-                </div>
+        <!-- pc/sp -->
+        <div class="flex justify-between flex-wrap space-y-1">
+            <div class="font-bold">
+                該当：
+                {{ $store.getters.organizationSearchInfo.allCount }}件
             </div>
-        </div>
-        <!-- sp -->
-        <div class="block md:hidden">
-            <div class="flex flex-col">
-                <div>
-                    該当：{{ $store.getters.organizationSearchInfo.allCount }}件
-                </div>
+            <div class="flex space-x-2">
                 <div class="flex space-x-2">
+                    <!-- 順 区分 -->
                     <vue-single-select
                         class="w-56"
                         :name="'field1'"
@@ -73,31 +30,31 @@
                         :default-options="
                             $store.getters.getOrganizationDateSort
                         "
-                        @selected="setSelectValue"
+                        @selected="setOrganizationDateSortValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-1 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none"
                     ></vue-single-select>
+                    <!-- 件 表示 区分 -->
                     <vue-single-select
                         class="w-32"
-                        :name="'field1'"
+                        :name="'field2'"
                         :default-value="0"
                         :placeholder="'-- Choose an option --'"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="
                             $store.getters.getOrganizationCountSort
                         "
-                        @selected="setSelectValue"
+                        @selected="setOrganizationCountSortValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-1 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none"
                     ></vue-single-select>
                 </div>
             </div>
         </div>
-
         <div class="space-y-2 mt-8">
             <!-- <div v-for="(item, index) in qaInfo" :key="index"> -->
             <!-- <div> -->
@@ -114,9 +71,28 @@
                         border-blueline
                     "
                 >
-                    <div class="searchResult_lable_ownFacility">
-                        <!-- 自施設 -->
-                        <!-- {{ item.group }} -->
+                    <!-- Group -->
+                    <div
+                        class="
+                            notoSansJpAndTwelveMedium
+                            text-white
+                            h-4
+                            flex-grow
+                            w-40
+                        "
+                    >
+                        <!-- <result-detail-row
+                            class=""
+                            :sites="item.group"
+                            :sub1="['group']"
+                        >
+                        </result-detail-row> -->
+                        <result-detail-row-item
+                            itemType="1"
+                            :typeKB="item.group"
+                            v-if="item.group != undefined"
+                            class="ml-5"
+                        ></result-detail-row-item>
                     </div>
                     <div class="p-4">
                         <!-- Q -->
@@ -139,19 +115,8 @@
                                 Q
                             </div>
                             <div class="flex-grow">
-                                <!-- ロキソプロフェン錠を通過する最小チューブは？ -->
                                 {{ item.question }}
                             </div>
-                            <!-- <div
-                            class="
-                                searchResult_lable_ownFacility
-                                hidden
-                                md:block
-                                mid:block
-                            "
-                        >
-                            自施設
-                        </div> -->
                         </div>
                         <!-- A -->
                         <div class="flex justify-between mt-5 items-start">
@@ -168,409 +133,314 @@
                             </div>
 
                             <div class="flex-grow break-all">
-                                {{ item.answer }}
-                                <!-- <div v-show="!(isDetailDisp === index)">
-                                    {{ item.AInfo[0] }}
+                                <!-- {{ item.answer }} -->
+                                <div v-show="!(isDetailDisp === index)">
+                                    {{ item.answer[0].info }}
                                 </div>
                                 <div
                                     v-show="isDetailDisp === index"
-                                    v-for="answerItem in item.AInfo"
+                                    v-for="answerItem in item.answer"
                                     :key="answerItem"
                                 >
-                                    {{ answerItem }}
-                                </div> -->
+                                    {{ answerItem.info }}
+                                </div>
                             </div>
                         </div>
-                        <!-- 更新情報 pc-->
-                        <div class="hidden md:block mid:block">
-                            <div class="flex justify-between pt-5">
-                                <div class="space-y-2 notoSansJpAndTwelveBold">
-                                    <div class="flex space-x-4">
-                                        <div>
-                                            最終編集日：{{
-                                                item.createdAt.replaceAll(
-                                                    '/',
-                                                    '.'
-                                                )
-                                            }}
-                                        </div>
-                                        <div>
-                                            質問日：{{
-                                                item.askedAt.replaceAll(
-                                                    '/',
-                                                    '.'
-                                                )
-                                            }}
-                                        </div>
+                        <!-- 更新情報 pc/sp-->
+                        <div class="flex flex-col pt-5">
+                            <div class="space-y-2 notoSansJpAndTwelveRegular">
+                                <div class="flex space-x-4">
+                                    <div>最終編集日：{{ item.createdAt }}</div>
+                                    <div>質問日：{{ item.askedAt }}</div>
+                                </div>
+                                <div class="flex flex-wrap space-x-2">
+                                    参考資料：
+                                    <div
+                                        v-for="referenceMaterials in item.referenceMaterials"
+                                        :key="referenceMaterials"
+                                    >
+                                        {{ referenceMaterials.name }}
                                     </div>
-                                    <div class="flex flex-wrap space-x-2">
-                                        参考資料：
-                                        <div
-                                            v-for="referenceMaterials in item.referenceMaterials"
-                                            :key="referenceMaterials"
+                                </div>
+                                <div
+                                    class="
+                                        flex flex-wrap
+                                        space-x-2
+                                        items-center
+                                    "
+                                >
+                                    出 典：
+                                    <div
+                                        v-for="urls in item.urls"
+                                        :key="urls"
+                                        class="
+                                            rounded-md
+                                            h-6
+                                            bg-blue-300
+                                            flex
+                                            justify-center
+                                            items-center
+                                            px-2
+                                            ml-2
+                                        "
+                                    >
+                                        <a
+                                            href="{{urls.url}}"
+                                            target="view_window"
+                                            >{{ urls.title }}</a
                                         >
-                                            {{ referenceMaterials.name }}
-                                        </div>
                                     </div>
-
-                                    <div>出 典：{{ item.referenceURL }}</div>
-                                    <div>PubMed：{{ item.pubmed }}</div>
-                                    <div class="flex flex-wrap space-x-2">
-                                        ファイル :
-                                        <div
-                                            v-for="documents in item.documents"
-                                            :key="documents"
+                                </div>
+                                <div>PubMed：{{ item.pubmed }}</div>
+                                <div
+                                    class="
+                                        flex flex-wrap
+                                        space-x-2
+                                        items-center
+                                    "
+                                >
+                                    ファイル :
+                                    <div
+                                        v-for="documents in item.documents"
+                                        :key="documents"
+                                        class="
+                                            rounded-md
+                                            h-6
+                                            bg-blue-300
+                                            flex
+                                            justify-center
+                                            items-center
+                                            px-2
+                                            ml-2
+                                        "
+                                    >
+                                        <a
+                                            href="{{documents.url}}"
+                                            target="view_window"
+                                            >{{ documents.name }}</a
+                                        >
+                                    </div>
+                                </div>
+                                <div>施設規模：{{ item.facilityScale }}</div>
+                            </div>
+                            <div class="flex flex-wrap space-x-2 mt-2">
+                                <div
+                                    class="
+                                        rounded-full
+                                        border-2 border-gray-400
+                                        bg-gray-100
+                                        h-6
+                                        notoSansJpAndTwelveRegular
+                                        text-center
+                                        pl-1
+                                        pr-1
+                                    "
+                                >
+                                    {{ '#ロキソニン' }}
+                                </div>
+                            </div>
+                            <div
+                                class="
+                                    flex flex-col
+                                    justify-end
+                                    items-end
+                                    mt-4
+                                    md:mt-0
+                                "
+                            >
+                                <div
+                                    class="
+                                        flex flex-row
+                                        space-x-2
+                                        items-baseline
+                                    "
+                                >
+                                    <div class="text-searchDropdown text-xs">
+                                        {{ item.viewCount }} view
+                                    </div>
+                                    <!-- good pc -->
+                                    <div
+                                        class="
+                                            relative
+                                            hidden
+                                            md:block
+                                            mid:block
+                                        "
+                                    >
+                                        <button
                                             class="
-                                                rounded-md
-                                                h-6
-                                                bg-blue-300
                                                 flex
                                                 justify-center
                                                 items-center
-                                                px-2
-                                                ml-2
-                                            "
-                                        >
-                                            <a
-                                                href="{{documents.url}}"
-                                                target="view_window"
-                                                >{{ documents.name }}</a
-                                            >
-                                        </div>
-                                    </div>
-                                    <div>
-                                        施設規模：{{ item.facilityScale }}
-                                    </div>
-                                    <div class="flex flex-wrap space-x-2">
-                                        <div
-                                            class="
-                                                rounded-full
-                                                border-2 border-gray-400
-                                                bg-gray-100
                                                 h-6
-                                                notoSansJpAndTwelveRegular
-                                                text-center
-                                                pl-1
-                                                pr-1
+                                                w-14
+                                                rounded
+                                                text-white
+                                                bg-whole
                                             "
-                                            v-for="keywordTags in item.keywordTags"
-                                            :key="keywordTags"
+                                            @click="ActicleDetail(index)"
                                         >
-                                            <!-- {{ item.tag }} -->
-                                            {{ keywordTags.name }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col justify-end">
-                                    <div
-                                        class="
-                                            flex flex-row
-                                            space-x-2
-                                            items-end
-                                        "
-                                    >
-                                        <div class="text-searchDropdown">
-                                            {{ item.view_count }} view
-                                        </div>
-                                        <!-- good -->
-                                        <div class="relative">
-                                            <button
-                                                class="
-                                                    flex
-                                                    justify-center
-                                                    items-center
-                                                    h-7.5
-                                                    w-14
-                                                    rounded
-                                                    text-white
-                                                    bg-whole
-                                                "
-                                                @click="ActicleDetail(index)"
-                                            >
-                                                <!-- @click="getRoeId(item.id)" -->
-                                                <!-- @click="openGoodMessageBox(index)" -->
-                                                <div>
-                                                    {{ item.feedbackGood }}
-                                                </div>
-                                                <good class=""></good>
-                                            </button>
-                                            <div v-show="activeIndex === index">
+                                            <!-- @click="getRoeId(item.id)" -->
+                                            <!-- @click="openGoodMessageBox(index)" -->
+                                            <div>
+                                                {{ item.feedbackGood }}
+                                            </div>
+                                            <good class=""></good>
+                                        </button>
+                                        <div v-show="activeIndex === index">
+                                            <div class="absolute bottom-8">
                                                 <div
-                                                    :class="[
-                                                        $store.getters
-                                                            .getGoodMessageBox
-                                                            ? 'block absolute bottom-8'
-                                                            : 'hidden',
-                                                    ]"
+                                                    class="
+                                                        w-44
+                                                        h-24
+                                                        bg-white
+                                                        border border-black
+                                                        rounded
+                                                    "
                                                 >
                                                     <div
                                                         class="
-                                                            w-44
-                                                            h-24
-                                                            bg-white
-                                                            border border-black
-                                                            rounded
+                                                            bg-gray-300
+                                                            h-1/4
+                                                            flex
+                                                            justify-between
+                                                            items-center
+                                                            px-2
                                                         "
                                                     >
+                                                        <div class="text-xs">
+                                                            理由をお聞かせください。
+                                                        </div>
                                                         <div
                                                             class="
-                                                                bg-gray-300
+                                                                cursor-pointer
+                                                            "
+                                                            @click="
+                                                                ActicleDetail(
+                                                                    index
+                                                                )
+                                                            "
+                                                        >
+                                                            <x-icon-svg></x-icon-svg>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="
+                                                            h-3/4
+                                                            flex flex-col
+                                                        "
+                                                    >
+                                                        <div class="h-3/4">
+                                                            <textarea
+                                                                v-model="
+                                                                    item.value
+                                                                "
+                                                                type="text"
+                                                                class="
+                                                                    text-xs
+                                                                    w-full
+                                                                    focus:outline-none
+                                                                "
+                                                                placeholder="（任意）"
+                                                            />
+                                                        </div>
+                                                        <div
+                                                            class="
                                                                 h-1/4
                                                                 flex
                                                                 justify-between
                                                                 items-center
-                                                                px-2
+                                                                px-1
                                                             "
                                                         >
                                                             <div
-                                                                class="text-xs"
-                                                            >
-                                                                理由をお聞かせください。
-                                                            </div>
-                                                            <div
                                                                 class="
-                                                                    cursor-pointer
+                                                                    text-xxss
+                                                                    text-red-600
+                                                                "
+                                                            >
+                                                                ※コメントは管理者に送信されます
+                                                            </div>
+                                                            <button
+                                                                class="
+                                                                    bg-gray-600
+                                                                    text-white
+                                                                    text-xxss
                                                                 "
                                                                 @click="
-                                                                    ActicleDetail(
+                                                                    sendGoodMessage(
                                                                         index
                                                                     )
                                                                 "
                                                             >
-                                                                <x-icon-svg></x-icon-svg>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="
-                                                                h-3/4
-                                                                flex flex-col
-                                                            "
-                                                        >
-                                                            <div class="h-3/4">
-                                                                <textarea
-                                                                    v-model="
-                                                                        item.value
-                                                                    "
-                                                                    type="text"
-                                                                    class="
-                                                                        text-xs
-                                                                        w-full
-                                                                        focus:outline-none
-                                                                    "
-                                                                    placeholder="（任意）"
-                                                                />
-                                                            </div>
-                                                            <div
-                                                                class="
-                                                                    h-1/4
-                                                                    flex
-                                                                    justify-between
-                                                                    items-center
-                                                                    px-1
-                                                                "
-                                                            >
-                                                                <div
-                                                                    class="
-                                                                        text-xxss
-                                                                        text-red-600
-                                                                    "
-                                                                >
-                                                                    ※コメントは管理者に送信されます
-                                                                </div>
-                                                                <button
-                                                                    class="
-                                                                        bg-gray-600
-                                                                        text-white
-                                                                        text-xxss
-                                                                    "
-                                                                    @click="
-                                                                        sendGoodMessage(
-                                                                            index
-                                                                        )
-                                                                    "
-                                                                >
-                                                                    送信
-                                                                </button>
-                                                            </div>
+                                                                送信
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- bad -->
-                                        <div
-                                            class="
-                                                flex
-                                                justify-center
-                                                items-center
-                                                h-7.5
-                                                w-14
-                                                rounded
-                                                text-white
-                                                bg-red-400
-                                            "
-                                        >
-                                            <div>{{ item.feedbackBad }}</div>
-                                            <bad></bad>
-                                        </div>
-                                        <!-- コメント -->
+                                    </div>
+                                    <!-- good sp-->
+                                    <div class="block md:hidden mid:hidden">
                                         <button
                                             class="
                                                 flex
                                                 justify-center
                                                 items-center
-                                                h-7.5
+                                                h-6
                                                 w-14
                                                 rounded
-                                                text-white
-                                                bg-yellow-300
-                                            "
-                                            @click="openCommentMessageBox"
-                                        >
-                                            <div>
-                                                {{ item.feedbackComment }}
-                                            </div>
-                                            <talk></talk>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 更新情報 sp-->
-                        <div class="block md:hidden mid:hidden">
-                            <div class="flex flex-col pt-5">
-                                <div class="space-y-2 notoSansJpAndTwelveBold">
-                                    <div class="flex space-x-4">
-                                        <div>
-                                            最終編集日：{{
-                                                item.createdAt.replaceAll(
-                                                    '/',
-                                                    '.'
-                                                )
-                                            }}
-                                        </div>
-                                        <div>
-                                            質問日：{{
-                                                item.askedAt.replaceAll(
-                                                    '/',
-                                                    '.'
-                                                )
-                                            }}
-                                        </div>
-                                    </div>
-                                    <div
-                                        v-for="referenceMaterials in item.referenceMaterials"
-                                        :key="referenceMaterials"
-                                    >
-                                        参考資料：{{ referenceMaterials.name }}
-                                    </div>
-                                    <div>出 典：{{ item.referenceURL }}</div>
-                                    <div>PubMed：{{ item.pubmed }}</div>
-                                    <div class="flex flex-wrap space-x-2">
-                                        ファイル :
-                                        <div
-                                            v-for="documents in item.documents"
-                                            :key="documents"
-                                            class="
-                                                rounded-md
-                                                h-6
-                                                bg-blue-300
-                                                flex
-                                                justify-center
-                                                items-center
-                                                px-2
-                                                ml-2
-                                            "
-                                        >
-                                            <a
-                                                href="{{documents.url}}"
-                                                target="view_window"
-                                                >{{ documents.name }}</a
-                                            >
-                                        </div>
-                                    </div>
-                                    <div>
-                                        施設規模：{{ item.facilityScale }}
-                                    </div>
-                                </div>
-                                <div
-                                    class="
-                                        mt-2
-                                        md:mt-0
-                                        rounded-full
-                                        border-2 border-gray-400
-                                        bg-gray-100
-                                        h-6
-                                        w-1/2
-                                        notoSansJpAndTwelveRegular
-                                        pl-1
-                                        pr-1
-                                        text-center
-                                    "
-                                >
-                                    {{ '#ロキソニン' }}
-                                </div>
-                                <div
-                                    class="
-                                        flex flex-col
-                                        justify-end
-                                        items-end
-                                        mt-4
-                                        md:mt-0
-                                    "
-                                >
-                                    <div class="flex flex-row space-x-2">
-                                        <div class="text-searchDropdown">
-                                            {{ '12345' }} view
-                                        </div>
-                                        <button
-                                            class="
-                                                flex
-                                                h-6
-                                                w-8
                                                 text-white
                                                 bg-whole
                                             "
                                             @click="openGoodMessageBox"
                                         >
+                                            <!-- click="ActicleDetail(index)" -->
+                                            <!-- @click="openGoodMessageBox" -->
                                             <div>{{ item.feedbackGood }}</div>
                                             <good></good>
                                         </button>
-
-                                        <div
-                                            class="
-                                                flex
-                                                h-6
-                                                w-8
-                                                text-white
-                                                bg-red-400
-                                            "
-                                        >
-                                            <div>{{ item.feedbackBad }}</div>
-                                            <bad></bad>
-                                        </div>
-                                        <button
-                                            class="
-                                                flex
-                                                h-6
-                                                w-8
-                                                text-white
-                                                bg-yellow-300
-                                            "
-                                            @click="openCommentMessageBox"
-                                        >
-                                            <div>
-                                                {{ item.feedbackComment }}
-                                            </div>
-                                            <talk></talk>
-                                        </button>
                                     </div>
+                                    <!-- bad -->
+                                    <div
+                                        class="
+                                            flex
+                                            justify-center
+                                            items-center
+                                            h-6
+                                            w-14
+                                            rounded
+                                            text-white
+                                            bg-red-400
+                                        "
+                                    >
+                                        <div>{{ item.feedbackBad }}</div>
+                                        <bad></bad>
+                                    </div>
+                                    <!-- comment -->
+                                    <button
+                                        class="
+                                            flex
+                                            justify-center
+                                            items-center
+                                            h-6
+                                            w-14
+                                            rounded
+                                            text-white
+                                            bg-yellow-300
+                                        "
+                                        @click="openCommentMessageBox"
+                                    >
+                                        <div>
+                                            {{ item.feedbackComment }}
+                                        </div>
+                                        <talk></talk>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                         <!-- 詳細情報 pc/sp -->
-                        <!-- <div :class="[isDetailDisp ? 'hidden' : 'block']"> -->
-                        <!-- <div class="hidden md:block mid:block"> -->
                         <div
                             :class="[
                                 isDetailDisp == index ? 'block' : 'hidden',
@@ -706,8 +576,12 @@
                                             キーワード
                                         </div>
                                         <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.keyword }}
+                                        <div
+                                            class="mr-2"
+                                            v-for="keywordTags in item.keywordTags"
+                                            :key="keywordTags"
+                                        >
+                                            {{ keywordTags.name }}
                                         </div>
                                     </div>
                                     <div class="flex md:w-1/2 border-b-2">
@@ -803,49 +677,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                    "
-                                >
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30">カスタム項目</div>
-                                        <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.custom_items }}
-                                        </div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30">カスタム項目</div>
-                                        <div class="w-2">:</div>
-                                        <div class=""></div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                    "
-                                >
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30">カスタム項目</div>
-                                        <div class="w-2">:</div>
-                                        <div class=""></div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30">PubMed</div>
-                                        <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.pubmed }}
-                                        </div>
-                                    </div>
-                                </div> -->
-
                                 <div
                                     class="
                                         md:flex md:flex-row
@@ -857,75 +688,12 @@
                                         <div class="w-30">備考</div>
                                         <div class="w-2">:</div>
                                         <div class="">
-                                            <!-- border-2
-                                                rounded-full
-                                                pl-1
-                                                pr-1 -->
                                             {{ item.note }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- </div> -->
-                        <!-- 詳細情報 sp -->
-                        <!-- <div :class="[isDetailDisp ? 'hidden' : 'block']"> -->
-                        <!-- <div class="block mid:hidden md:hidden">
-                        <div :class="[isDetailDisp ? 'block' : 'hidden']">
-                            <div class="flex flex-row justify-center">
-                                <div
-                                    class="
-                                        underline
-                                        notoSansJpAndTwelveRegular
-                                        text-grayline
-                                        flex
-                                        justify-center
-                                        items-center
-                                        cursor-pointer
-                                    "
-                                    @click="getDetailsDisp"
-                                >
-                                    詳細情報<triangle-down-svg
-                                        class="w-2 h-2"
-                                        :class="[
-                                            isDetailsDisp
-                                                ? 'transform rotate-180'
-                                                : '',
-                                        ]"
-                                        fill="#000000"
-                                        stroke="#ffffff"
-                                    ></triangle-down-svg>
-                                </div>
-                            </div>
-
-                            <div :class="[isDetailsDisp ? 'block' : 'hidden']">
-                                <div v-for="item in info" :key="item">
-                                    <div
-                                        class="
-                                            flex flex-row
-                                            notoSansJpAndFourteenRegular
-                                            text-grayline
-                                        "
-                                        :class="[
-                                            item.id == info.length
-                                                ? ''
-                                                : 'border-b-2 ',
-                                        ]"
-                                    >
-                                        <div class="flex flex-auto">
-                                            <div class="w-30">
-                                                {{ item.title }}
-                                            </div>
-                                            <div class="w-2">:</div>
-                                            <div>
-                                                {{ item.value }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                     </div>
                 </div>
 
@@ -944,7 +712,6 @@
                     "
                     @click="openDetailDisp(index)"
                 >
-                    <!-- @click="setDetailDisp" -->
                     <div
                         v-show="!(isDetailDisp === index)"
                         class="flex items-center"
@@ -955,7 +722,6 @@
                             stroke="#0099ff"
                         ></triangle-down-svg>
                         <div>開く</div>
-                        <!-- <div v-else>閉じる</div> -->
                     </div>
                     <div
                         v-show="isDetailDisp === index"
@@ -972,7 +738,7 @@
             </div>
         </div>
          <pagination
-            :page-count="8"
+            :page-count="getPageCount"
             :page-range="5"
             :margin-pages="1"
             :click-handler="clickCallback"
@@ -986,66 +752,7 @@
             nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
-
-        <div class="flex justify-center">{{ '1-20件 表示' }}</div>
-
-        <!-- <div class="h-full space-y-2.5 md:space-y-3.75">
-        <resut-tag
-            headerStyle="titleBgColorGray"
-            title="新着Q＆A"
-            titleStyle="newQaInfoTitle"
-            titleURL="/"
-        >
-            <result-detail-row
-                class="searchResult_detail_gray"
-                :sites="
-                    $store.getters.getSearchAllOrganizationDidDocument.details
-                "
-                :sub1="['group']"
-                :sub2="['title']"
-                :sub3="['states', 'date', 'view']"
-            >
-            </result-detail-row>
-        </resut-tag>
-        <resut-tag
-            headerStyle="titleBgColorGray"
-            title="よく見られているQ＆A"
-            titleStyle="newQaInfoTitle"
-            titleURL="/"
-        >
-            <result-detail-row
-                class="searchResult_detail_gray"
-                :sites="
-                    $store.getters.getSearchAllOrganizationDidDocument.details
-                "
-                :sub1="['group']"
-                :sub2="['title']"
-                :sub3="['states', 'date', 'view']"
-            >
-            </result-detail-row>
-        </resut-tag>
-    </div>
-    <div class="rounded border-2 border-blueline bg-cardViewCount">
-        <div>{{ 'トレンドタグ' }}</div>
-        <div class="flex flex-wrap">
-            <div
-                class="
-                    rounded-full
-                    border-2 border-gray-400
-                    bg-gray-100
-                    h-6
-                    notoSansJpAndTwelveRegular
-                    pl-1
-                    pr-1
-                    text-center
-                "
-                v-for="item in torenndoTab"
-                :key="item"
-            >
-                {{ item }}
-            </div>
-        </div>
-    </div> -->
+        <div class="flex justify-center mt-2">1-{{ pageCount }}件 表示</div>
     </div>
 </template>
 
@@ -1058,10 +765,10 @@ import Good from '../svgImage/good.vue'
 import bad from '../svgImage/bad.vue'
 import talk from '../svgImage/talk.vue'
 import xIconSvg from '../svgImage/xIconSvg.vue'
-// import Pagination from '../pagination/pagination.vue'
 import Pagination from '../pagination/pagiation.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../messageBox/goodMessageBox.vue'
+import ResultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
 import { ref, onBeforeUpdate, onUpdated } from 'vue'
 import { reactive, onMounted } from 'vue'
 
@@ -1084,11 +791,16 @@ export default {
     resutTag, resultDetailRow, carousel,
     Good, bad, talk, xIconSvg,
     Pagination, vueSingleSelect,
-    GoodMessageBox
+    GoodMessageBox, ResultDetailRowItem
   },
   props: {},
   data() {
     return {
+      // 順 区分 id
+      organizationDateSortValue: 0,
+      // 件 表示 区分 id
+      organizationCountSortValue: 0,
+      pageCount: 1,
       selectPage: 0,
       goodMessageBox: false,
       //   isDetailDisp: false,
@@ -1097,50 +809,28 @@ export default {
       isDetailsDisp: -1,
       activeIndex: -1,
       torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
-      qaInfo: [{
-        id: 1, group: '自施設', question: 'ロキソプロフェン錠が通過する最小チューブ径は？', answerList: '', answer: '8Fr です',
-        lastEditDate: '2021.08.10', questionDate: '2021.08.10', referenceData: '', referenceURL: '',
-        facilityScale: '企業', tag: '# ロキソニンの用途は', viewCount: '12345', goodViewCount: '99', badViewCount: '89', commentViewCount: '88',
-        QAID: '30013110', classificationOfDrugs: 'ロキソプロフェンロキソニン', questionClassification: 'ロキソプロフェンロキソニン', drugName: 'ロキソプロフェンロキソニン',
-        keyword: 'ロキソプロフェンロキソニン', questionerOccupation: 'ロキソプロフェンロキソニン', questionerClinicalDepartment: 'ロキソプロフェンロキソニン',
-        disclosureRange: 'ロキソプロフェンロキソニン', customItems1: 'ロキソプロフェンロキソニン', PubMed: 'ロキソプロフェンロキソニン', file: '', remarks: 'ロキソプロフェンロキソニン'
-      },
-      {
-        id: 2, group: '自施設', question: '冷シップ　種類は？', answerList: ['ＭＳ冷シップ', 'アドフィード', 'イドメシン', 'カトレップ', 'ゼポラス', 'セルタッチ', 'ナボール', 'フルルバン', 'ボルタレン', 'ミルタックス', 'モーラス', 'ロキソニン', 'ロコア', 'ヤクバン'],
-        answer: ' が代表的な冷湿布の先発医薬品名称です。 これに対応する後発医薬品も上市されているものがあります。',
-        lastEditDate: '2021.08.10', questionDate: '2021.08.10', referenceData: '', referenceURL: '',
-        facilityScale: '企業', tag: '# ロキソニンの用途は', viewCount: '54321', goodViewCount: '79', badViewCount: '69', commentViewCount: '88',
-        QAID: '30013112', classificationOfDrugs: 'ロキソプロフェンロキソニン', questionClassification: 'ロキソプロフェンロキソニン', drugName: 'ロキソプロフェンロキソニン',
-        keyword: 'ロキソプロフェンロキソニン', questionerOccupation: 'ロキソプロフェンロキソニン', questionerClinicalDepartment: 'ロキソプロフェンロキソニン',
-        disclosureRange: 'ロキソプロフェンロキソニン', customItems1: 'ロキソプロフェンロキソニン', PubMed: 'ロキソプロフェンロキソニン', file: '', remarks: 'ロキソプロフェンロキソニン'
-      }],
-      info: [
-        { id: 1, title: 'QA ID', value: '30013110' },
-        { id: 2, title: '薬の分類', value: 'ロキソプロフェンロキソニン' },
-        { id: 3, title: '質問区分', value: 'ロキソプロフェンロキソニン' },
-        { id: 4, title: '医薬品名', value: 'ロキソプロフェンロキソニン' },
-        { id: 5, title: 'キーワード', value: 'ロキソプロフェンロキソニン' },
-        { id: 6, title: '質問者- 職種', value: 'ロキソプロフェンロキソニン' },
-        { id: 7, title: '質問者- 診療科', value: 'ロキソプロフェンロキソニン' },
-        { id: 8, title: '公開範囲', value: 'ロキソプロフェンロキソニン' },
-        { id: 9, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 10, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 11, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 12, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 13, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 14, title: 'PubMed', value: 'ロキソプロフェンロキソニン' },
-        { id: 15, title: 'ファイル', value: 'ロキソプロフェンロキソニン' },
-        { id: 16, title: '備考', value: 'ロキソプロフェンロキソニン' },
-      ]
     };
   },
   mounted() {
-    this.$store.dispatch('getOrganizationSearchInfo')
+
   },
   watch: {},
-  computed: {},
+  computed: {
+    getPageCount() {
+      //   let page = 1;
+      if (this.organizationCountSortValue == '0') {
+        this.pageCount = 20
+      } else if (this.organizationCountSortValue == '1') {
+        this.pageCount = 50
+      } else if (this.organizationCountSortValue == '2') {
+        this.pageCount = 100
+      }
+      return Math.ceil(this.$store.getters.organizationSearchInfo.allCount / this.pageCount);
+    },
+  },
   methods: {
     getSelectPage(value) {
+      console.log('getSelectPage', value)
       this.selectPage = value
     },
     setDetailDisp() {
@@ -1159,11 +849,19 @@ export default {
       this.isDetailsDisp = this.isDetailsDisp == index ? -1 : index;
     },
     clickCallback() {
-      console.log(this.selectPage)
+      console.log(this.organizationCountSortValue)
     },
-    setSelectValue(value) {
-      this.selectValue = value
+    setOrganizationDateSortValue(value) {
+      console.log('setOrganizationDateSortValue', value)
+      this.organizationDateSortValue = value
     },
+    setOrganizationCountSortValue(value) {
+      console.log('setOrganizationCountSortValue', value)
+      this.organizationCountSortValue = value
+    },
+    // setSelectValue(value) {
+    //   this.selectValue = value
+    // },
     openGoodMessageBox(index) {
       //   console.log(this.$store.getters.getGoodMessageBox)
       this.$store.dispatch('setGoodMessageBox', !this.$store.getters.getGoodMessageBox)
