@@ -9,16 +9,22 @@
                 rounded-full
                 hover:opacity-50
                 active:opacity-50
+                flex
+                justify-center
+                items-center
             "
             @click="toTop"
         >
-            ▲
+            <!-- ▲ -->
+            <triangle-svg class=""></triangle-svg>
         </button>
     </div>
 </template>
 
 <script>
+import TriangleSvg from './svgImage/triangleSvg.vue'
 export default {
+  components: { TriangleSvg },
   emits: ['toTop'],
   methods: {
     toTop() {

@@ -1,5 +1,5 @@
 <template>
-    <div class="z-99">
+    <div class="z-75">
         <div
             class="
                 flex
@@ -10,15 +10,15 @@
                 cursor-pointer
             "
             @click="isDown = !isDown"
-            :class="[isDown ? 'rounded-tl-lg' : 'rounded-l-lg']"
+            :class="[isDown ? 'rounded-tl' : 'rounded-l']"
         >
             <a class="text-searchDropdown font-bold pl-2 text-xs NotoSansJp">
                  {{ itemList[checkedID][0].title }}
             </a>
-            <div class="ml-1 mr-1">
-                <triangle-down-svg v-if="isDown == false"></triangle-down-svg>
+            <div class="ml-1 mr-2">
+                <triangle-down-svg v-show="isDown == false"></triangle-down-svg>
                 <triangle-down-svg
-                    v-else
+                    v-show="isDown == true"
                     class="transform rotate-180"
                 ></triangle-down-svg>
             </div>
@@ -42,7 +42,7 @@
                     </div>
 
                     <!-- 未選択アイテム -->
-                    <div v-if="value.id != checkedID">
+                    <div v-if="value.id != checkedID" class="pl-2">
                         <div
                             class="flex hover:opacity-50"
                             @click="itemClick(value)"
@@ -56,8 +56,9 @@
                                     hover:text-googleTitle
                                     NotoSansJp
                                     text-sm
-                                    font-bold
+                                    font-semibold
                                     h-7.5
+                                    pl-1
                                 "
                                 >{{ value.title }}</a
                             >
@@ -69,9 +70,10 @@
                                     hover:text-googleTitle
                                     NotoSansJp
                                     text-sm
-                                    font-bold
+                                    font-semibold
                                     text-b
                                     h-7.5
+                                    pl-1
                                 "
                                 >{{ value.title }}</a
                             >
@@ -79,7 +81,7 @@
                     </div>
 
                     <!-- 選択したアイテム -->
-                    <div v-if="value.id == checkedID">
+                    <div v-if="value.id == checkedID" class="pl-2">
                         <div
                             class="flex hover:text-googleTitle"
                             @click="itemClick(value)"
@@ -92,9 +94,10 @@
                                     text-googleTitle
                                     NotoSansJp
                                     text-sm
-                                    font-bold
+                                    font-semibold
                                     hover:text-googleTitle
                                     h-7.5
+                                    pl-1
                                 "
                                 >{{ value.title }}</a
                             >
@@ -106,9 +109,10 @@
                                     text-googleTitle
                                     NotoSansJp
                                     text-sm
-                                    font-bold
+                                    font-semibold
                                     hover:text-googleTitle
                                     h-7.5
+                                    pl-1
                                 "
                                 >{{ value.title }}</a
                             >

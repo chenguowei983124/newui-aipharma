@@ -3,7 +3,7 @@
         <div class="flex-none">
             <div
                 class="
-                    rounded-md
+                    rounded-lg
                     bg-backgroundMain
                     md:w-50
                     h-121
@@ -15,10 +15,10 @@
                     <!-- 最初の行 -->
                     <div class="md:flex justify-between w-42.5 my-3.75">
                         <div class="h-12.5 flex flex-col justify-center">
-                            <div class="notoSansJpAndSixteenBold">
+                            <div class="notoSansJpAndSixteenRegular">
                                 {{ $store.getters.topManagementInfo.name }}
                             </div>
-                            <div class="notoSansJpAndTwelve">
+                            <div class="notoSansJpAndTwelveRegular">
                                 {{
                                     $store.getters.topManagementInfo.title ==
                                     'doctor'
@@ -43,7 +43,7 @@
                                         justify-center
                                         pt-2.5
                                         text-white
-                                        notoSansJpAndTwentyBold
+                                        notoSansJpAndTwentyNormal
                                     "
                                 >
                                     {{
@@ -58,7 +58,7 @@
                     <!-- 二行目 -->
                     <div
                         class="
-                            notoSansJpAndTwelveBold
+                            notoSansJpAndTwelveRegular
                             text-center
                             h-3.75
                             mb-3.75
@@ -71,7 +71,7 @@
                         class="
                             bg-backgroundMainSearch
                             text-center text-white
-                            notoSansJpAndTwelve
+                            notoSansJpAndFourteenRegular
                         "
                     >
                         <button class="h-5 w-42.5">
@@ -147,7 +147,7 @@
                     class="
                         h-31
                         w-42.5
-                        rounded-md
+                        rounded
                         border-personOrganizationButton
                         font-NotoSansJp
                         mb-3.75
@@ -158,7 +158,7 @@
                             text-white
                             font-bold
                             bg-personOrganizationButton
-                            rounded-t-lg
+                            rounded-t
                             h-7.5
                             pl-2.5
                             pt-1
@@ -169,7 +169,7 @@
                     <div
                         class="
                             bg-personGroupInformation
-                            rounded-b-lg
+                            rounded-b
                             border-personOrganizationButton border-2
                             grid
                             justify-items-start

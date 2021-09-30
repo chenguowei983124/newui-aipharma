@@ -13,7 +13,7 @@
                         @searchID="getsearchBarSelectID"
                         :searchValue="searchInput"
                         :searchbarSelectID="Number(searchBarSelectId)"
-                        class="mid:rounded-md"
+                        class="mid:rounded-lg"
                     ></search-bar>
                 </div>
 
@@ -31,7 +31,7 @@
                         @searchID="getsearchBarSelectID"
                         :searchValue="searchInput"
                         :searchbarSelectID="Number(searchBarSelectId)"
-                        class="mid:rounded-md"
+                        class="mid:rounded-lg"
                     ></search-bar>
                 </div>
                 <div

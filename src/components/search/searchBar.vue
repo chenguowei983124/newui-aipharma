@@ -73,7 +73,7 @@
                 active:opacity-100
                 active:bg-personInformationButton
                 text-white
-                md:rounded-tr-lg md:rounded-br-lg
+                md:rounded-tr md:rounded-br
                 my-4
                 w-10
                 md:w-17.5

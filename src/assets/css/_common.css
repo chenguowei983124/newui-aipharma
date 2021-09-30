@@ -57,7 +57,10 @@
 .notoSansJpAndTwentyBold{
     @apply font-NotoSansJp text-xl font-bold ;
 }
-
+/* font-family: NotoSansJp font-size: 20px font-weight: 400 */
+.notoSansJpAndTwentyNormal{
+    @apply font-NotoSansJp text-xl font-normal ;
+}
 
 /* font-family: Lato font-size: 12px font-weight: 700 */
 .latoAndTwentyBold{

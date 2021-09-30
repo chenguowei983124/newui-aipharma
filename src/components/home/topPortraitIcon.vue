@@ -10,8 +10,8 @@
             <div
                 class="
                     absolute
-                    border-2 border-black
-                    rounded-md
+                    border border-black
+                    rounded
                     bg-white
                     w-25
                     h-33.5
