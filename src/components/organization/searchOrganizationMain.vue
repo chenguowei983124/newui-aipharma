@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$store.getters.organizationSearchInfo.searchWords != undefined">
+    <div v-if="$store.getters.organizationSearchInfo != undefined">
         <div class="flex flex-row space-x-2 font-bold">
             検索条件：
             <div
@@ -769,7 +769,7 @@ import Pagination from '../pagination/pagiation.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
-import { ref, onBeforeUpdate, onUpdated } from 'vue'
+import { ref, onBeforeUpdate, onUpdated, onUnmounted } from 'vue'
 import { reactive, onMounted } from 'vue'
 
 export default {
@@ -786,6 +786,11 @@ export default {
   //     console.log(state)
   //     return state
   //   },
+  setup() {
+    onUnmounted(() => {
+
+    });
+  },
   components: {
     TriangleDownSvg,
     resutTag, resultDetailRow, carousel,
@@ -795,6 +800,7 @@ export default {
   },
   props: {},
   data() {
+    console.log(this.$store.getters.organizationSearchInfo)
     return {
       // 順 区分 id
       organizationDateSortValue: 0,
@@ -812,7 +818,7 @@ export default {
     };
   },
   mounted() {
-
+    this.$store.dispatch("clearOrganizationSearchInfo")
   },
   watch: {},
   computed: {

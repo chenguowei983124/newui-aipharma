@@ -183,7 +183,7 @@
                             </div>
                         </div>
                         <div class="md:ml-3">
-                            <!-- 施設名（グルー施設用プ） -->
+                            <!-- 施設名（グループ施設用） -->
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
@@ -191,7 +191,7 @@
                                     checked
                                 />
                                 <span class="ml-0.5 text-xs"
-                                    >施設名（グルー施設用プ）</span
+                                    >施設名（グループ施設用）</span
                                 >
                             </label>
                         </div>
