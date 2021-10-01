@@ -1,9 +1,20 @@
 <template>
     <div class="space-y-2">
         <!-- 1.5行目 -->
-        <div class="flex flex-row md:mx-0 text-xs font-bold text-white pt-2">
+        <div
+            class="
+                flex flex-row
+                md:mx-0
+                text-xs
+                font-bold
+                text-white
+                pt-2
+                justify-center
+                items-center
+            "
+        >
             <!-- 検索対象 左-->
-            <div class="w-20 flex justify-center text-sm">検索対象</div>
+            <div class="w-20 flex text-sm">検索対象</div>
             <!-- 右 -->
             <div class="flex-auto">
                 <div class="flex flex-col md:flex-row">

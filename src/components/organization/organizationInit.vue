@@ -65,7 +65,7 @@
                     v-for="item in torenndoTab"
                     :key="item"
                 >
-                    {{ item }}
+                    #{{ item }}
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@ export default {
   components: { ResutTag, ResultDetailRow },
   data() {
     return {
-      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
+      torenndoTab: ["ロキソニン", "ロキソ", "用途", "痛み止め", "ロキソニン", "ロキソ","ロキソニン", "ロキソ", "用途", "痛み止め", "ロキソニン", "ロキソ","ロキソニン", "ロキソ", "用途", "痛み止め", "ロキソニン", "ロキソ"],
     }
   }
 }
