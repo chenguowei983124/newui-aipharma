@@ -91,7 +91,6 @@
                             itemType="1"
                             :typeKB="item.group"
                             v-if="item.group != undefined"
-                            class="ml-5"
                         ></result-detail-row-item>
                     </div>
                     <div class="p-4">

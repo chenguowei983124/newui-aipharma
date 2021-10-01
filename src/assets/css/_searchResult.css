@@ -72,41 +72,41 @@
 }
 /* ラベル　告知 */
 .searchResult_lable_notice{
-    @apply notoSansJpAndTenMedium text-notice ring-notice w-16.25 h-4 ring-1;
+    @apply notoSansJpAndTenMedium text-notice ring-notice w-16.25 h-4 ring-1 block;
 }
 
 /* ラベル　view */
 .searchResult_lable_view{
-    @apply notoSansJpAndTwelveMedium text-view  w-16.25 h-4 text-center;
+    @apply notoSansJpAndTwelveMedium text-view  w-16.25 h-4 text-center block;
 }
 
 /* ラベル　AI */
 .searchResult_lable_Ai{
-    @apply notoSansJpAndTwelveMedium bg-toTop text-white w-17.5 h-4 text-center;
+    @apply notoSansJpAndTwelveMedium bg-toTop text-white w-17.5 h-4 text-center block;
 }
 
 /* ラベル　キーワード */
 .searchResult_lable_keyword{
-    @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center;
+    @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center block;
 }
 
 /* ラベル　確信度 タイトル */
 .searchResult_lable_certainty_title{
-    @apply notoSansJpAndTwelveRegular text-black h-4 text-right;
+    @apply notoSansJpAndTwelveRegular text-black h-4 text-right block;
 }
 
 /* ラベル　確信度 値 */
 .searchResult_lable_certainty_value{
-    @apply notoSansJpAndTwelveRegular text-view h-4 text-left;
+    @apply notoSansJpAndTwelveRegular text-view h-4 text-left block;
 }
 
 /* ラベル　自施設 値 */
 .searchResult_lable_ownFacility{
-    @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center;
+    @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center block;
 }
 /* ラベル　他施設 値 */
 .searchResult_lable_otherFacility{
-    @apply notoSansJpAndTwelveMedium bg-whole text-white w-17.5 h-4 text-center;
+    @apply notoSansJpAndTwelveMedium bg-whole text-white w-17.5 h-4 text-center block;
 }
 /* ラベル　日付 */
 .searchResult_date_title{
