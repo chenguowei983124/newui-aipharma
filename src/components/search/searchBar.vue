@@ -130,9 +130,10 @@ export default {
       this.checkId = 0
     } else if (this.$props.form == this.$constant.formList.DI) {
       this.checkId = 1
-    }
-    else if (this.$props.form == this.$constant.formList.OWN) {
+    } else if (this.$props.form == this.$constant.formList.OWN) {
       this.checkId = 2
+    } else if (this.$props.form == this.$constant.formList.PVD) {
+      this.checkId = 3
     }
   },
   computed: {
@@ -141,7 +142,11 @@ export default {
         return ""
       } else if (this.$props.form == this.$constant.formList.ALL) {
         return ""
+      } else if (this.$props.form == this.$constant.formList.DI) {
+        return "fixed w-full lm:w-270"
       } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "fixed w-full lm:w-270"
+      } else if (this.$props.form == this.$constant.formList.PVD) {
         return "fixed w-full lm:w-270"
       }
     },
@@ -150,7 +155,11 @@ export default {
         return "flex "
       } else if (this.$props.form == this.$constant.formList.ALL) {
         return "flex "
+      } else if (this.$props.form == this.$constant.formList.DI) {
+        return "flex"
       } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "flex"
+      } else if (this.$props.form == this.$constant.formList.PVD) {
         return "flex"
       }
     },
@@ -159,7 +168,11 @@ export default {
         return "bg-backgroundMainSearch flex rounded-none mid:rounded-md items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5"
       } else if (this.$props.form == this.$constant.formList.ALL) {
         return "bg-backgroundMainSearch flex items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5"
+      } else if (this.$props.form == this.$constant.formList.DI) {
+        return "bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 "
       } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 "
+      } else if (this.$props.form == this.$constant.formList.PVD) {
         return "bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 "
       }
     },
@@ -168,7 +181,11 @@ export default {
         return "bg-red-400 flex-grow"
       } else if (this.$props.form == this.$constant.formList.ALL) {
         return "bg-red-400 flex-grow"
+      } else if (this.$props.form == this.$constant.formList.DI) {
+        return "hidden"
       } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "hidden"
+      } else if (this.$props.form == this.$constant.formList.PVD) {
         return "hidden"
       }
     },
@@ -177,7 +194,11 @@ export default {
         return "bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none"
       } else if (this.$props.form == this.$constant.formList.ALL) {
         return "bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none"
+      } else if (this.$props.form == this.$constant.formList.DI) {
+        return " flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    "
       } else if (this.$props.form == this.$constant.formList.OWN) {
+        return " flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    "
+      } else if (this.$props.form == this.$constant.formList.PVD) {
         return " flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    "
       }
     },
@@ -203,7 +224,17 @@ export default {
           "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
           "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
           "focus:border-transparent "
+      } else if (this.$props.form == this.$constant.formList.DI) {
+        return "hidden md:block  h-10 w-10/12  " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent "
       } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "hidden md:block  h-10 w-10/12  " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent "
+      } else if (this.$props.form == this.$constant.formList.PVD) {
         return "hidden md:block  h-10 w-10/12  " +
           "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
           "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
@@ -221,7 +252,17 @@ export default {
           "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
           "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
           "focus:border-transparent "
+      } else if (this.$props.form == this.$constant.formList.DI) {
+        return "block md:hidden h-10 w-10/12 ml-2.5 " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent mr-2.5"
       } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "block md:hidden h-10 w-10/12 ml-2.5 " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent mr-2.5"
+      } else if (this.$props.form == this.$constant.formList.PVD) {
         return "block md:hidden h-10 w-10/12 ml-2.5 " +
           "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
           "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +

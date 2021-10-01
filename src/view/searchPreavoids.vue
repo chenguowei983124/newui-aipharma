@@ -1,6 +1,6 @@
 <template>
     <div>
-        <my-all-header></my-all-header>
+        <my-all-header :form="$constant.formList.PVD"></my-all-header>
         <!-- 内容 -->
         <search-preavoids-layout></search-preavoids-layout>
         <home-bottom-template class="mt-20"></home-bottom-template>

@@ -2,27 +2,14 @@
     <!-- 検索枠 -->
     <div class="flex">
         <!-- pcの場合 -->
-        <div
-            class="flex-auto hidden md:block mid:block"
-            :class="[isDetailButtonClick ? 'h-54' : 'h-24']"
-        >
+        <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-0">
             <search-bar
-                @isDetailClick="getDetailClick"
                 :form="$constant.formList.PVD"
+                @detailDisp="getDetailDisp"
+                @isDetailClick="getDetailClick"
             ></search-bar>
         </div>
-        <!-- SPの場合 -->
-        <div class="flex-auto h-30 block md:hidden mid:hidden">
-            <div
-                :class="[
-                    $store.getters.getIsMenuClick
-                        ? 'mt-12.5'
-                        : 'fixed w-full top-12.5 z-20',
-                ]"
-            >
-                <search-bar @isDetailClick="getDetailClick"></search-bar>
-            </div>
-        </div>
+
         <!-- spの場合、ヘッダー、検索枠の位置を替える -->
         <div
             class="block md:hidden mid:hidden"

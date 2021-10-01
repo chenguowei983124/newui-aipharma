@@ -10,7 +10,7 @@
             ></search-bar>
         </div>
 
-        <div class="h-65"></div>
+        <div class="h-44 md:h-65"></div>
     </div>
     <!-- 内容 -->
     <div class="flex border-b-2 border-blue-200 mt-33.5 md:mt-5 md:h-20">

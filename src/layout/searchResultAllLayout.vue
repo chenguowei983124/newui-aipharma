@@ -2,15 +2,14 @@
     <!-- 検索枠 -->
     <div class="flex">
         <!-- pcの場合 -->
-        <div class="flex-auto h-15 md:h-20">
+        <div
+            class="fixed flex-auto w-full pt-12.5 md:pt-15 md:top-0 z-20 md:z-0"
+        >
             <search-bar :form="$constant.formList.ALL"></search-bar>
         </div>
 
         <!-- spの場合、ヘッダー、検索枠の位置を替える -->
-        <div
-            class="block md:hidden"
-            :class="[$store.getters.getIsMenuClick ? '' : 'h-27.5']"
-        ></div>
+        <div class="h-27.5 md:h-40"></div>
     </div>
 
     <div class="flex">
