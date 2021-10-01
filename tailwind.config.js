@@ -251,7 +251,20 @@ module.exports = {
     },
     placeholderColor: {
       '32a5dcPlaceholderColor': '#32a5dc',
-    }
+    },
+    customForms: theme => ({
+      default: {
+        select: {
+          iconColor: theme('colors.balck'),
+        },
+        checkbox: {
+          iconColor: theme('colors.balck'),
+        },
+        radio: {
+          iconColor: theme('colors.balck'),
+        },
+      },
+    })
   },
   variants: {
     extend: {
@@ -265,5 +278,7 @@ module.exports = {
       display: ["group-hover", 'group-focus']
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/custom-forms'),
+  ],
 }

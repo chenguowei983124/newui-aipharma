@@ -191,7 +191,23 @@
                                         >
                                     </div>
                                 </div>
-                                <div>PubMed：{{ item.pubmed }}</div>
+                                <div class="flex">
+                                    PubMed：
+                                    <div
+                                        v-if="item.pubmed != ''"
+                                        class="hover:text-blue-400"
+                                    >
+                                        <a
+                                            href="https://www.ncbi.nlm.nih.gov/pubmed/{{
+                                            item.pubmed
+                                        }}"
+                                            target="view_window"
+                                            >https://www.ncbi.nlm.nih.gov/pubmed/{{
+                                                item.pubmed
+                                            }}</a
+                                        >
+                                    </div>
+                                </div>
                                 <div
                                     class="
                                         flex flex-wrap
@@ -490,7 +506,13 @@
                                         : 'hidden',
                                 ]"
                             >
-                                <div class="md:flex md:flex-row md:space-x-5">
+                                <div
+                                    class="
+                                        md:flex md:flex-row
+                                        md:space-x-5
+                                        items-end
+                                    "
+                                >
                                     <div
                                         class="
                                             flex

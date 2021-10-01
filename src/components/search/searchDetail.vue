@@ -1,7 +1,7 @@
 <template>
-    <div class="pt-2.5">
+    <div class="space-y-2">
         <!-- 1.5行目 -->
-        <div class="flex flex-row md:mx-0 text-xs font-bold text-white">
+        <div class="flex flex-row md:mx-0 text-xs font-bold text-white pt-2">
             <!-- 検索対象 左-->
             <div class="w-20 flex justify-center text-sm">検索対象</div>
             <!-- 右 -->
@@ -13,7 +13,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox"
+                                    class="form-checkbox text-white"
                                     checked
                                 />
                                 <span class="ml-0.5 text-xs">各施設のDB</span>
@@ -24,7 +24,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox"
+                                    class="form-checkbox text-white"
                                     checked
                                 />
                                 <span class="ml-0.5 text-xs">Q</span>
@@ -35,7 +35,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox"
+                                    class="form-checkbox text-white"
                                     checked
                                 />
                                 <span class="ml-0.5 text-xs">A</span>
@@ -46,7 +46,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox"
+                                    class="form-checkbox text-white"
                                     checked
                                 />
                                 <span class="ml-0.5 text-xs">コメント</span>
@@ -59,7 +59,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox"
+                                    class="form-checkbox text-white"
                                     checked
                                 />
                                 <span class="ml-0.5 text-xs"
@@ -72,7 +72,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox"
+                                    class="form-checkbox text-white"
                                     checked
                                 />
                                 <span class="ml-0.5 text-xs">投稿者</span>
@@ -83,7 +83,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox"
+                                    class="form-checkbox text-white"
                                     checked
                                 />
                                 <span class="ml-0.5 text-xs">最終編集者</span>
@@ -95,7 +95,7 @@
                         <label class="inline-flex items-center justify-end">
                             <input
                                 type="checkbox"
-                                class="form-checkbox"
+                                class="form-checkbox text-white"
                                 checked
                             />
                             <span class="ml-0.5 text-xs"
@@ -196,7 +196,7 @@
         </div>
         <!-- 三行目、四行目、五行目 -->
         <div
-            class="space-y-2 bg-backgroundMainSearch"
+            class="space-y-2 bg-backgroundMainSearch mx-2 md:mx-0"
             ref="resetSelect"
             :class="[isDetailClick ? 'block' : 'hidden']"
         >
@@ -212,7 +212,7 @@
                 leftLableTitle="薬の分類"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                 inputStyle="w-full text-left pl-20 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
+                                border border-transparent focus:outline-none "
                 iconColor="#32a5dc"
             ></vue-single-select>
 

@@ -57,7 +57,11 @@
             </div>
             <div class="flex">
                 <label class="inline-flex items-center justify-end">
-                    <input type="checkbox" class="form-checkbox" checked />
+                    <input
+                        type="checkbox"
+                        class="form-checkbox text-white"
+                        checked
+                    />
                     <span class="ml-2 text-xs">匿名で投稿</span>
                 </label>
             </div>

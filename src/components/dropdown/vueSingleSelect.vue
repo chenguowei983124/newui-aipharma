@@ -51,7 +51,7 @@
                     :data-index="index"
                     v-show="showAllOptions || option.isVisible"
                     :aria-selected="index === displaySelectedIndex"
-                    class="notoSansJpAndFourteenRegular h-8 pt-1.5"
+                    class="notoSansJpAndFourteenRegular h-8 pt-1.5 pl-2.5"
                 >
                     <span v-html="highlight(option.title)"></span>
                 </li>
@@ -111,7 +111,7 @@ export default {
     defaultDisabled: Boolean,
     leftLableStyle: {
       tpye: String,
-      default: "absolute mt-1 left-1 text-lg text-blueline notoSansJpAndFourteenBold"
+      default: "absolute mt-1 pl-2 left-1 text-lg text-blueline notoSansJpAndFourteenBold"
     },
     leftLableDisp: {
       type: Boolean,
@@ -511,7 +511,7 @@ export default {
     position: absolute;
     top: 0;
     height: 100%;
-    left: 2px;
+    left: 0.5px;
     right: 2px;
     pointer-events: none;
 }
