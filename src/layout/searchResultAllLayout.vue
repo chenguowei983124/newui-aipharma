@@ -2,29 +2,10 @@
     <!-- 検索枠 -->
     <div class="flex">
         <!-- pcの場合 -->
-        <div class="flex-auto h-15 md:h-20 hidden md:block">
-            <search-bar></search-bar>
+        <div class="flex-auto h-15 md:h-20">
+            <search-bar :form="$constant.formList.ALL"></search-bar>
         </div>
 
-        <!-- SPの場合 -->
-        <!-- <div
-            class="flex-auto h-15 md:h-20 block md:hidden"
-            :class="[
-                $store.getters.getIsMenuClick
-                    ? 'mt-12.5 fixed w-full top-12.5'
-                    : 'fixed w-full top-12.5',
-            ]"
-        > -->
-        <div
-            class="flex-auto h-15 md:h-20 block md:hidden"
-            :class="[
-                $store.getters.getIsMenuClick
-                    ? 'mt-12.5'
-                    : 'fixed w-full top-12.5 z-20',
-            ]"
-        >
-            <search-bar></search-bar>
-        </div>
         <!-- spの場合、ヘッダー、検索枠の位置を替える -->
         <div
             class="block md:hidden"

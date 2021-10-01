@@ -2,41 +2,32 @@
     <div class="mid:h-32">
         <logo> </logo>
     </div>
+
     <div class="flex">
         <div class="flex-grow w-25 max-h-full min-w-min hidden mid:block"></div>
         <div class="flex-grow mid:flex-shrink">
             <div class="flex flex-row">
-                <div class="flex-auto h-15 md:h-20 hidden md:block">
-                    <!-- <search-bar class="mid:rounded-md"></search-bar> -->
+                <div
+                    class="
+                        fixed
+                        md:static
+                        w-full
+                        md:flex-auto
+                        top-12.5
+                        md:top-0
+                        z-20
+                        md:z-0
+                    "
+                >
                     <search-bar
-                        @searchInput="getSearchInput"
-                        @searchID="getsearchBarSelectID"
-                        :searchValue="searchInput"
-                        :searchbarSelectID="Number(searchBarSelectId)"
+                        :form="$constant.formList.TOP"
                         class="mid:rounded-lg"
                     ></search-bar>
                 </div>
 
                 <div
-                    class="flex-auto h-15 md:h-20 block md:hidden"
-                    :class="[
-                        $store.getters.getIsMenuClick
-                            ? 'mt-12.5'
-                            : 'fixed w-full top-12.5 z-20',
-                    ]"
-                >
-                    <!-- <search-bar class="mid:rounded-md"></search-bar> -->
-                    <search-bar
-                        @searchInput="getSearchInput"
-                        @searchID="getsearchBarSelectID"
-                        :searchValue="searchInput"
-                        :searchbarSelectID="Number(searchBarSelectId)"
-                        class="mid:rounded-lg"
-                    ></search-bar>
-                </div>
-                <div
-                    class="block md:hidden"
-                    :class="[$store.getters.getIsMenuClick ? '' : 'h-24']"
+                    class="block md:hidden h-24"
+                    :class="[$store.getters.getIsMenuClick ? '' : '']"
                 ></div>
             </div>
 
@@ -87,21 +78,12 @@ export default {
   props: {},
   data() {
     return {
-      isMenuOpen: true,
-      searchInput: "",
-      searchBarSelectId: 0
-
+      isMenuOpen: true
     };
   },
   couputed: {},
   watch: {},
   methods: {
-    getSearchInput: function (value) {
-      this.searchInput = value
-    },
-    getsearchBarSelectID: function (value) {
-      this.searchBarSelectId = value
-    }
   },
   created() {
 

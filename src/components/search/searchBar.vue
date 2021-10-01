@@ -1,105 +1,104 @@
 <template>
-    <div class="bg-backgroundMainSearch flex items-center h-full">
-        <!-- 検索条件リスト -->
-        <search-dropdown
-            @getCheckedId="getCheckId"
-            :checkedID="Number(checkId)"
-            class="h-10 md:ml-32 flex-none hidden md:block"
-        ></search-dropdown>
+    <div class="group relative h-full z-99">
+        <div :class="searchBarFixedClass">
+            <div :class="searchBarStyleCless">
+                <!-- 左青背景 -->
+                <div :class="searchBarProStyleClass"></div>
+                <!-- 中青背景 -->
+                <div :class="searchBarMidStyleClass">
+                    <div :class="searchBarClass">
+                        <!-- 検索条件リスト -->
+                        <search-dropdown
+                            @getCheckedId="getCheckId"
+                            :checkedID="Number(checkId)"
+                            class="h-10 flex-none hidden md:block"
+                        ></search-dropdown>
 
-        <!-- 検索条件入力 -->
-        <!-- sp -->
-        <input
-            v-model="searchValue"
-            @change="getNewInput($event)"
-            class="
-                block
-                md:hidden
-                mid:hidden
-                h-10
-                w-10/12
-                ml-2.5
-                my-4
-                NotoSansJp-normal
-                text-xs
-                flex-grow
-                pl-4
-                placeholder-gray-500
-                focus:placeholder-opacity-0
-                border border-transparent
-                focus:outline-none
-                focus:ring-1 focus:ring-326EB5Lins
-                focus:border-transparent
-            "
-            type="text"
-            placeholder="キーワードを入力"
-        />
-        <!-- pc -->
-        <input
-            v-model="searchValue"
-            @change="getNewInput($event)"
-            class="
-                hidden
-                md:block
-                mid:block
-                h-10
-                w-10/12
-                ml-2.5
-                md:ml-0
-                md:w-full
-                my-4
-                NotoSansJp-normal
-                text-xs
-                flex-grow
-                pl-4
-                placeholder-gray-500
-                focus:placeholder-opacity-0
-                border border-transparent
-                focus:outline-none
-                focus:ring-1 focus:ring-326EB5Lins
-                focus:border-transparent
-            "
-            type="text"
-            placeholder="Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます"
-        />
+                        <!-- 検索条件入力 -->
+                        <!-- sp -->
+                        <!--  -->
+                        <input
+                            v-model="searchValue"
+                            @change="getNewInput($event)"
+                            :class="sreachBarSPInputClass"
+                            type="text"
+                            :placeholder="pcPlaceholder"
+                        />
+                        <!-- pc -->
+                        <input
+                            v-model="searchValue"
+                            @change="getNewInput($event)"
+                            :class="sreachBarPCInputClass"
+                            type="text"
+                            :placeholder="pcPlaceholder"
+                        />
 
-        <!-- 検索ボタン -->
-        <!-- <router-link class="h-12" to="/searchAllResult"> -->
-        <button
-            @click="searchClick"
-            class="
-                bg-searchBunnon
-                hover:bg-yellow-400
-                active:opacity-100
-                active:bg-personInformationButton
-                text-white
-                md:rounded-tr md:rounded-br
-                my-4
-                w-10
-                md:w-17.5
-                h-10
-                md:mr-32
-                flex-none
-                mr-2.5
-            "
-        >
-            <!-- 検索ボタンのアイコン -->
-            <div class="flex justify-center h-6">
-                <search-svg></search-svg>
+                        <!-- 検索ボタン -->
+                        <button
+                            @click="searchClick"
+                            :class="sreachBarButtonClass"
+                        >
+                            <!-- 検索ボタンのアイコン -->
+                            <div class="flex justify-center h-6">
+                                <search-svg></search-svg>
+                            </div>
+                        </button>
+                    </div>
+                    <div
+                        :class="
+                            detailDisp ? 'block' : 'hidden group-hover:block'
+                        "
+                        v-if="checkId == 1 && form != $constant.formList.TOP"
+                    >
+                        <search-di-knowledge
+                            :searchButtonClick="searchClick"
+                        ></search-di-knowledge>
+                    </div>
+                    <div
+                        :class="
+                            detailDisp ? 'block' : 'hidden group-hover:block '
+                        "
+                        v-if="checkId == 2 && form != $constant.formList.TOP"
+                    >
+                        <search-detail
+                            :searchButtonClick="searchClick"
+                        ></search-detail>
+                    </div>
+                    <div
+                        :class="
+                            detailDisp ? 'block' : 'hidden group-hover:block'
+                        "
+                        v-if="checkId == 3 && form != $constant.formList.TOP"
+                    >
+                        <search-preavoids
+                            :searchButtonClick="searchClick"
+                        ></search-preavoids>
+                    </div>
+                </div>
+                <!-- 右青背景 -->
+                <div :class="searchBarProStyleClass"></div>
             </div>
-        </button>
-        <!-- </router-link> -->
+        </div>
     </div>
 </template>
 
 <script>
 import searchDropdown from './searchDropdown.vue'
 import searchSvg from '../svgImage/searchSvg.vue'
-
+import searchDetail from './searchDetail.vue'
+import searchDiKnowledge from './searchDiKnowledge.vue'
+import searchPreavoids from './searchPreavoids.vue'
 
 export default {
-  components: { searchDropdown, searchSvg },
+  components: {
+    searchDropdown, searchSvg, searchDetail,
+    searchDiKnowledge, searchPreavoids
+  },
   props: {
+    form: {
+      type: String,
+      default: "TOP"
+    },
     searchValue: {
       type: String,
       default: ""
@@ -110,10 +109,11 @@ export default {
     }
   },
   data() {
+    console.log(this.searchbarSelectID)
     return {
-      checkId: this.searchbarSelectID
-      // searchValue: '',
-      // checkId: '1'
+      scroll: "",
+      checkId: this.searchbarSelectID,
+      detailDisp: true
     }
 
   },
@@ -122,15 +122,146 @@ export default {
       this.$emit("searchID", this.checkId)
     }
   },
+  mounted() {
+    window.addEventListener("scroll", this.menu)
+    if (this.$props.form == this.$constant.formList.TOP) {
+      this.checkId = 0
+    } else if (this.$props.form == this.$constant.formList.ALL) {
+      this.checkId = 0
+    } else if (this.$props.form == this.$constant.formList.DI) {
+      this.checkId = 1
+    }
+    else if (this.$props.form == this.$constant.formList.OWN) {
+      this.checkId = 2
+    }
+  },
+  computed: {
+    searchBarFixedClass: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return ""
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return ""
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "fixed w-full lm:w-270"
+      }
+    },
+    searchBarClass: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return "flex "
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return "flex "
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "flex"
+      }
+    },
+    searchBarStyleCless: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return "bg-backgroundMainSearch flex rounded-none mid:rounded-md items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5"
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return "bg-backgroundMainSearch flex items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5"
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 "
+      }
+    },
+    searchBarProStyleClass: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return "bg-red-400 flex-grow"
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return "bg-red-400 flex-grow"
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "hidden"
+      }
+    },
+    searchBarMidStyleClass: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return "bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none"
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return "bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none"
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return " flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    "
+      }
+    },
+
+    pcPlaceholder: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return "Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます"
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return "Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます"
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "キーワードを入力"
+      }
+    },
+
+    sreachBarPCInputClass: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return "hidden md:block  h-10 w-10/12  " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent "
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return "hidden md:block  h-10 w-10/12  " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent "
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "hidden md:block  h-10 w-10/12  " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent "
+      }
+    },
+    sreachBarSPInputClass: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return "block md:hidden h-10 w-10/12 ml-2.5 " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent "
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return "block md:hidden h-10 w-10/12 ml-2.5 " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent "
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "block md:hidden h-10 w-10/12 ml-2.5 " +
+          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
+          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
+          "focus:border-transparent mr-2.5"
+      }
+
+    },
+    sreachBarButtonClass: function () {
+      if (this.$props.form != this.$constant.formList.TOP && this.checkId != 0) {
+        return "hidden"
+      } else {
+        return "bg-searchBunnon hover:bg-yellow-400 active:opacity-100 active:bg-personInformationButton" +
+          "text-white  md:rounded-tr-lg md:rounded-br-lg w-10  md:w-17.5 h-10 flex-none mr-2.5"
+
+      }
+
+    }
+
+  },
   methods: {
     getNewInput: function (e) {
-      console.log(e.target.value)
+
+      console.log(this.searchValue)
       this.$emit("searchInput", e.target.value)
+    },
+    menu: function () {
+
+      this.srcoll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (this.srcoll > 0) {
+        this.detailDisp = false
+      } else {
+        this.detailDisp = true
+      }
+      this.$emit("detailDisp", this.detailDisp)
     },
     // ========================================
     // 検索ボタン押下イベント
     // ========================================
     searchClick: function (event) {
+      console.log("click")
       // すべて
       if (this.checkId == 0) {
         // 検索APIを呼び出し(画面入力値)
@@ -142,17 +273,22 @@ export default {
       // DI ナレッジシェア
       else if (this.checkId == 1) {
 
-        this.$router.push('/searchResultAll')
+        this.$router.push('/searchDiKnowledge')
       }
       // 組織内 DI 記録（Q&A）
       else if (this.checkId == 2) {
-        this.$store.dispatch('searchOrganization', this.searchValue)
-        this.$router.push('/searchOrganization')
+        if (this.$props.form == this.$constant.formList.TOP) {
+          this.$store.dispatch('searchOrganization', this.searchValue)
+          this.$router.push('/searchOrganization')
+        } else {
+          this.$store.dispatch('getOrganizationSearchInfo')
+        }
+
 
       }
       // 症例（プレアボイド）
       else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
+        this.$router.push('/searchPreavoids')
       }
       // DI 辞書
       else if (this.checkId == 4) {
@@ -163,13 +299,12 @@ export default {
         this.$router.push('/searchOrganization')
       }
 
-      // this.$router.push('/searchResultAll')
     },
     // ========================================
     // DropDown 選択したアイテムＩＤ取得
     // ========================================
-    getCheckId(data) {
-      this.checkId = data
+    getCheckId(value) {
+      this.checkId = value
     }
   }
 }

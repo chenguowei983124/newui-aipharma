@@ -1,17 +1,5 @@
 <template>
-    <div
-        class="
-            fixed
-            md:static
-            flex
-            justify-between
-            h-12.5
-            md:h-15
-            w-full
-            z-99
-            bg-white
-        "
-    >
+    <div :class="searchBarFixedClass">
         <div class="flex flex-row">
             <!-- first -->
             <div class="w-43.75 md:w-45 mid:w-52.5 block">
@@ -76,8 +64,25 @@ import portraitIcon from './header/portraitIcon.vue';
 import issueIcon from './header/issueIcon.vue';
 import managementIcon from './header/managementIcon.vue';
 export default {
+  props: {
+    form: {
+      type: String,
+      default: "TOP"
+    }
+  },
   components: { personalInfo, menuDropdownItem, portraitIcon, issueIcon, managementIcon },
+  computed: {
+    searchBarFixedClass: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return "fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-white"
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return "fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-white"
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return "fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white"
 
+      }
+    },
+  }
 }
 </script>
 

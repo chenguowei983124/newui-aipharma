@@ -1,9 +1,11 @@
 const { callWithErrorHandling } = require("vue");
 const svgToDataUri = require('mini-svg-data-uri');
-
+const path = require('path');
+const colors = require('tailwindcss/colors');
+const { fontFamily } = require('tailwindcss/defaultTheme');
 module.exports = {
   purge: [],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       backgroundImage: (theme) => ({
@@ -83,6 +85,7 @@ module.exports = {
         '50': '12.5rem',
         // 210px
         '52.5': '13.125rem',
+        '54': '13.25rem',
         '56.25': '14.0625rem',
         '63': '15.75rem',
         '64': '16rem',
@@ -99,6 +102,7 @@ module.exports = {
         // 484px
         '121': '30.25rem',
         '191.25': '47.8125rem',
+        '245': '61.25rem',
         '270': '67.5rem',
 
       },
@@ -191,8 +195,15 @@ module.exports = {
         'blueline': '#65bbe5',
         'grayline': '#999999',
         '326EB5Lins': '#326EB5',
-
-
+        cyan: colors.cyan,
+        fuchsia: colors.fuchsia,
+        lime: colors.lime,
+        orange: colors.orange,
+        'light-blue': colors.lightBlue,
+        'litepie-primary': colors.emerald,
+        'litepie-secondary': colors.coolGray,
+        'test-Range-From': 'rgb(239,150,1)',
+        'test-Range-Mid': 'rgb(250,220,170)',
       },
       fontSize: theme => theme('Size'),
       fontSize: {
@@ -211,6 +222,7 @@ module.exports = {
       }, fontFamily: {
         'Lato': 'Lato',
         'NotoSansJp': 'Noto Sans JP',
+        sans: ['Inter', ...fontFamily.sans]
       }, zIndex: {
         '0': 0,
         '10': 10,
@@ -229,9 +241,13 @@ module.exports = {
         'personOrganizationButton': '#f09600',
       }), screens: {
         'mid': '980px',
+        'lm': '1080px',
         // => @media (min-width: 640px) { ... }
 
       },
+      opacity: {
+        85: '0.85'
+      }
     },
     placeholderColor: {
       '32a5dcPlaceholderColor': '#32a5dc',
@@ -243,6 +259,10 @@ module.exports = {
       backgroundColor: ['active'],
       padding: ['hover'],
       maxHeight: ['focus'],
+      cursor: ['disabled'],
+      textOpacity: ['disabled'],
+      textColor: ['disabled'],
+      display: ["group-hover", 'group-focus']
     },
   },
   plugins: [],

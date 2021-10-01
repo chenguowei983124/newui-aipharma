@@ -2,34 +2,15 @@
     <!-- 検索枠 -->
     <div class="flex">
         <!-- pcの場合 -->
-        <div
-            class="flex-auto hidden md:block mid:block"
-            :class="[isDetailButtonClick ? 'h-72' : 'h-44']"
-        >
-            <search-bar @isDetailClick="getDetailClick"></search-bar>
+        <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-0">
+            <search-bar
+                :form="$constant.formList.OWN"
+                @detailDisp="getDetailDisp"
+                @isDetailClick="getDetailClick"
+            ></search-bar>
         </div>
-        <!-- SPの場合 -->
-        <div class="flex-auto h-30 block md:hidden mid:hidden">
-            <div
-                :class="[
-                    $store.getters.getIsMenuClick
-                        ? 'mt-12.5'
-                        : 'fixed w-full top-12.5 z-20',
-                ]"
-            >
-                <search-bar @isDetailClick="getDetailClick"></search-bar>
-            </div>
-            <!-- :class="[
-                $store.getters.getIsMenuClick
-                    ? 'mt-80 fixed w-full top-12.5'
-                    : 'fixed w-full top-12.5',
-            ]" -->
-        </div>
-        <!-- spの場合、ヘッダー、検索枠の位置を替える -->
-        <div
-            class="block md:hidden mid:hidden"
-            :class="[isDetailButtonClick ? 'h-65' : 'h-40']"
-        ></div>
+
+        <div class="h-65"></div>
     </div>
     <!-- 内容 -->
     <div class="flex border-b-2 border-blue-200 mt-33.5 md:mt-5 md:h-20">
@@ -125,7 +106,7 @@
 <script>
 import CommentMessageBox from '../components/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/messageBox/goodMessageBox.vue'
-import searchBar from '../components/search/searchDetail.vue'
+import searchBar from '../components/search/searchBar.vue'
 import searchOrganizationMain from "../components/organization/searchOrganizationMain.vue"
 import OrganizationInit from '../components/organization/organizationInit.vue'
 
@@ -149,6 +130,13 @@ export default {
     // ========================================
     getDetailClick: function (data) {
       this.isDetailButtonClick = data
+    },
+    // ========================================
+    // 詳細条件表示・非表示取得
+    // ======================================== 
+    getDetailDisp: function (value) {
+      console.log(value)
+      this.detailDisp = value
     }
   },
   created() {
