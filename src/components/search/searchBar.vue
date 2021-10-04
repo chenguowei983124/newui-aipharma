@@ -54,6 +54,7 @@
                             :searchButtonClick="searchClick"
                         ></search-di-knowledge>
                     </div>
+                    <!-- 組織内DI記録詳細条件 -->
                     <div
                         :class="
                             detailDisp ? 'block' : 'hidden group-hover:block '
@@ -61,9 +62,12 @@
                         v-if="checkId == 2 && form != $constant.formList.TOP"
                     >
                         <search-detail
+                            @tagValue="getOwnTagValue"
                             :searchButtonClick="searchClick"
                         ></search-detail>
                     </div>
+
+                    <!-- 症例詳細条件 -->
                     <div
                         :class="
                             detailDisp ? 'block' : 'hidden group-hover:block'
@@ -109,11 +113,11 @@ export default {
     }
   },
   data() {
-    console.log(this.searchbarSelectID)
     return {
       scroll: "",
       checkId: this.searchbarSelectID,
-      detailDisp: true
+      detailDisp: false,
+      ownTagVaule: []
     }
 
   },
@@ -136,12 +140,15 @@ export default {
       this.checkId = 3
     }
   },
+  destroyed() {
+    document.removeEventListener("scroll", this.menu);
+  },
   computed: {
     searchBarFixedClass: function () {
       if (this.$props.form == this.$constant.formList.TOP) {
         return ""
       } else if (this.$props.form == this.$constant.formList.ALL) {
-        return ""
+        return "fixed w-full lm:w-270"
       } else if (this.$props.form == this.$constant.formList.DI) {
         return "fixed w-full lm:w-270"
       } else if (this.$props.form == this.$constant.formList.OWN) {
@@ -275,7 +282,7 @@ export default {
         return "hidden"
       } else {
         return "bg-searchBunnon hover:bg-yellow-400 active:opacity-100 active:bg-personInformationButton" +
-          "text-white  md:rounded-tr-lg md:rounded-br-lg w-10  md:w-17.5 h-10 flex-none mr-2.5"
+          "text-white  md:rounded-tr md:rounded-br w-10  md:w-17.5 h-10 flex-none mr-2.5"
 
       }
 
@@ -283,13 +290,17 @@ export default {
 
   },
   methods: {
+    getOwnTagValue: function (value) {
+      this.ownTagVaule = value
+    },
     getNewInput: function (e) {
 
       console.log(this.searchValue)
       this.$emit("searchInput", e.target.value)
     },
     menu: function () {
-
+      console.log(this.detailDisp)
+      console.log(this.srcoll)
       this.srcoll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       if (this.srcoll > 0) {
         this.detailDisp = false
@@ -297,12 +308,13 @@ export default {
         this.detailDisp = true
       }
       this.$emit("detailDisp", this.detailDisp)
+
     },
     // ========================================
     // 検索ボタン押下イベント
     // ========================================
     searchClick: function (event) {
-      console.log("click")
+      console.log(this.ownTagVaule)
       // すべて
       if (this.checkId == 0) {
         // 検索APIを呼び出し(画面入力値)
@@ -319,10 +331,12 @@ export default {
       // 組織内 DI 記録（Q&A）
       else if (this.checkId == 2) {
         if (this.$props.form == this.$constant.formList.TOP) {
-          this.$store.dispatch('searchOrganization', this.searchValue)
+          this.$store.dispatch('searchOrganization', this.searchValue, this.ownTagVaule)
           this.$router.push('/searchOrganization')
         } else {
-          this.$store.dispatch('getOrganizationSearchInfo')
+          console.log(this.ownTagVaule)
+          this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
+          // this.$store.dispatch('getOrganizationSearchInfo')
         }
 
 

@@ -3,7 +3,7 @@
         <div class="flex flex-row h-screen justify-center">
             <div class="flex flex-col justify-between">
                 <div></div>
-                <notfound></notfound>
+                <login-layout></login-layout>
                 <home-bottom-template></home-bottom-template>
             </div>
         </div>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import notfound from '../layout/notfoundlayout.vue'
+import loginLayout from '../layout/loginlayout.vue'
 import homeBottomTemplate from '../components/homeBottomItem.vue'
 export default {
-  components: { notfound, homeBottomTemplate },
+  components: { loginLayout, homeBottomTemplate },
   props: {},
   couputed: {},
   watch: {},

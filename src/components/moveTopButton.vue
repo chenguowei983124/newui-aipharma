@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed block bottom-5 z-99">
+    <div v-show="isDisp" class="fixed block bottom-5 z-99">
         <button
             class="
                 h-15
@@ -26,6 +26,13 @@ import TriangleSvg from './svgImage/triangleSvg.vue'
 export default {
   components: { TriangleSvg },
   emits: ['toTop'],
+  data() {
+    return {
+
+    }
+
+  },
+
   methods: {
     toTop() {
       let currentScroll = document.documentElement.scrollTop,
@@ -40,5 +47,14 @@ export default {
       }
     }
   },
+  computed: {
+    isDisp: function () {
+      if (this.$router.currentRoute.value.name != "login" && this.$router.currentRoute.value.name != "error" && this.$router.currentRoute.value.name) {
+        return true
+      } else {
+        return false
+      }
+    }
+  }
 }
 </script>

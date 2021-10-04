@@ -1,7 +1,21 @@
 <template>
     <span v-if="itemType == '1'" :class="itemClass">{{ title }}</span>
     <span v-if="itemType == '2'" :class="itemClass">{{ itemValue }}</span>
-    <span v-if="itemType == '3'" :class="itemClass">{{ itemValue }}</span>
+    <!-- <span v-if="itemType == '3'" :class="itemClass"
+        ><router-link
+            :to="{ name: '/searchOrganization', params: { userId: 123 } }"
+            >{{ itemValue }}</router-link
+        ></span
+    > -->
+    <router-link
+        v-if="itemType == '3'"
+        :to="{
+            name: routerPath,
+            params: { id: id },
+        }"
+    >
+        <span :class="itemClass">{{ itemValue }}</span></router-link
+    >
     <span v-if="itemType == '4'" :class="itemClass"
         >{{ itemValue }}{{ itemTitle }}</span
     >
@@ -19,7 +33,7 @@ export default {
   // itemStyle:ディフォルト以外
   // addStyle:追加
   // itemTitle
-  props: { itemType: String, typeKB: String, itemStyle: String, addStyle: String, itemTitle: String, itemValue: String },
+  props: { itemType: String, typeKB: String, itemStyle: String, addStyle: String, itemTitle: String, itemValue: String, routerPath: String, id: String },
   data() {
     return {
       title: ''

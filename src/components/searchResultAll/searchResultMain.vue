@@ -13,6 +13,7 @@
             >
                 <result-detail-row
                     class="searchResult_detail_blue"
+                    routerPath="searchDiKnowledge"
                     :sites="$store.getters.getSearchAllDiKnowledge.details"
                     :sub1="['group']"
                     :sub2="['title']"
@@ -35,6 +36,7 @@
             >
                 <result-detail-row
                     class="searchResult_detail_blue"
+                    routerPath="searchOrganization"
                     :sites="
                         $store.getters.getSearchAllOrganizationDidDocument
                             .details
@@ -58,6 +60,7 @@
             >
                 <result-detail-row
                     class="searchResult_detail_blue"
+                    routerPath="searchPreavoids"
                     :sites="$store.getters.getSearchAllPreAvoid.details"
                     :sub1="['group']"
                     :sub2="['title']"

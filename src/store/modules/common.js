@@ -1,6 +1,7 @@
 export default {
     state: () => ({
         isFormScreen: false,
+        isLoadingShow: false,
         isMenuClick: false,
         isPortraitClick: false,
         isManagementClick: false,
@@ -18,6 +19,9 @@ export default {
     getters: {
         getIsMenuClick(state) {
             return state.isMenuClick
+        },
+        getIsLoadingShow(state) {
+            return state.isLoadingShow
         },
         getPortraitClick(state) {
             return state.isPortraitClick
@@ -59,6 +63,9 @@ export default {
         formScreenToggle({ commit, state }, value) {
             // console.log(value)
             commit('basic', { key: 'isFormScreen', value })
+        },
+        setIsLoadingShow({ commit, state }, value) {
+            commit('basic', { key: 'isLoadingShow', value })
         },
         setMenuClick({ commit, state }, value) {
             commit('basic', { key: 'isMenuClick', value })

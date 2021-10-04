@@ -91,6 +91,8 @@
                             :itemValue="row.title"
                             :itemStyle="resetTitle(midDetailStyle)"
                             addStyle="truncate"
+                            :routerPath="routerPath"
+                            :id="row.id"
                             v-if="row.title != undefined"
                         ></result-detail-row-item>
                     </div>
@@ -211,7 +213,11 @@ export default {
       default: "blueline"
     }, sub1: Array,
     sub2: Array,
-    sub3: Array
+    sub3: Array,
+    routerPath: {
+      type: String,
+      default: ""
+    }
   },
   data() {
     return {

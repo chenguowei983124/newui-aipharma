@@ -121,7 +121,7 @@
         <div>
             <div class="px-2 md:px-0">
                 <Multiselect
-                    v-model="value"
+                    v-model="tagValue"
                     mode="tags"
                     placeholder="#タグ"
                     :filterResults="false"
@@ -370,12 +370,18 @@ export default {
       selectValue: "",
       selectValue2: "",
       selectValue3: "",
-      value: [],
+      tagValue: [],
       //   dispText: "",
       //   dispQDistinctionText: "",
       //   dispFacilityText: "",
     }
 
+  },
+  watch: {
+    tagValue() {
+      console.log(this.tagValue)
+      this.$emit('tagValue', this.tagValue)
+    }
   },
   methods: {
     async fetchLanguages(query) {

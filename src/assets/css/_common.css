@@ -6,6 +6,10 @@
 .notoSansJpAndTenMedium{
     @apply font-NotoSansJp font-medium text-xxss ;
 }
+/* font-family: NotoSansJp font-size: 10px  font-weight: 500*/
+.notoSansJpAndTenNormal{
+    @apply font-NotoSansJp font-normal text-xxss ;
+}
 /* font-family: NotoSansJp font-size: 12px */
 .notoSansJpAndTwelveRegular{
     @apply font-NotoSansJp font-normal text-xs ;
@@ -61,6 +65,23 @@
 .notoSansJpAndTwentyNormal{
     @apply font-NotoSansJp text-xl font-normal ;
 }
+/* font-family: NotoSansJp font-size: 22px font-weight: 400 */
+.notoSansJpAndTwentyTwoNormal{
+    @apply font-NotoSansJp text-sxl font-normal ;
+}
+/* font-family: NotoSansJp font-size: 22px font-weight: 700 */
+.notoSansJpAndTwentyTwoBold{
+    @apply font-NotoSansJp text-sxl font-bold ;
+}
+/* font-family: NotoSansJp font-size: 22px font-weight: 400 */
+.notoSansJpAndTwentyFourNormal{
+    @apply font-NotoSansJp text-2xl font-normal ;
+}
+/* font-family: NotoSansJp font-size: 24px font-weight: 700 */
+.notoSansJpAndTwentyFourBold{
+    @apply font-NotoSansJp text-2xl font-bold ;
+}
+
 
 /* font-family: Lato font-size: 12px font-weight: 700 */
 .latoAndTwentyBold{
@@ -78,3 +99,5 @@
 .latoAndEighteenBold{
     @apply font-Lato text-lg font-bold ;
 }
+
+

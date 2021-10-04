@@ -71,7 +71,7 @@
                                 $store.getters.getIsMenuClick,
                         }"
                         @click="scrollToTop"
-                        to="/"
+                        to="/myhome"
                     >
                         <menu-logo-svg
                             class="
@@ -415,15 +415,15 @@ export default {
       itemType3: false,
       itemType4: false,
       menuItemList: [
-        { 'id': '1', 'title': 'TOP', 'itemStyle': 'item', 'path': '/' },
+        { 'id': '1', 'title': 'TOP', 'itemStyle': 'item', 'path': '/myhome' },
         { 'id': '2', 'title': 'お知らせ', 'itemStyle': 'item', 'path': '' },
         { 'id': '3', 'title': '掲示板', 'itemStyle': 'item', 'path': '' }
       ],
       menuItemList2: [
         { 'id': '1', 'title': 'データベース', 'itemStyle': 'title', 'path': '' },
-        { 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': '' },
-        { 'id': '3', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': 'searchOrganization' },
-        { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '' },
+        { 'id': '2', 'title': 'DI ナレッジシェア', 'itemStyle': 'item', 'path': '/searchDiKnowledge' },
+        { 'id': '3', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': '/searchOrganization' },
+        { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '/searchPreavoids' },
         { 'id': '5', 'title': 'DI 辞書', 'itemStyle': 'item', 'path': '' },
         { 'id': '6', 'title': '製薬企業情報', 'itemStyle': 'item', 'path': '' }],
       menuItemList3: [

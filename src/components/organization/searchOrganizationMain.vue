@@ -250,8 +250,14 @@
                                         pl-1
                                         pr-1
                                     "
+                                    v-for="keywordTags in item.keywordTags"
+                                    :key="keywordTags"
+                                    @click="sendMsgToParent(keywordTags.name)"
                                 >
-                                    {{ '#ロキソニン' }}
+                                                                        {{
+                                        keywordTags.name
+                                    }}
+                                                                    
                                 </div>
                             </div>
                             <div
@@ -790,7 +796,7 @@ import Pagination from '../pagination/pagiation.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
-import { ref, onBeforeUpdate, onUpdated, onUnmounted } from 'vue'
+import { ref, onBeforeUpdate, onUpdated, onUnmounted, nextTick } from 'vue'
 import { reactive, onMounted } from 'vue'
 
 export default {
@@ -835,11 +841,30 @@ export default {
       //   isDetailsDisp: false,
       isDetailsDisp: -1,
       activeIndex: -1,
-      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
+      //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
+      resultData: Object,
+      result: Object
+
     };
   },
   mounted() {
+
     this.$store.dispatch("clearOrganizationSearchInfo")
+    if (this.$route.params.id) {
+      let result = this.$serve.getOwn({ id: this.$route.params.id })
+      result.then((response) => {
+        this.$store.dispatch('setOrganizationSearchInfo', response)
+        this.resultData = response.data.allCount
+        console.log("response", response)
+        console.log(response.data.allCount)
+        if (response.data.allCount == 1) {
+          this.openDetailDisp("qa68555")
+        }
+
+      })
+    }
+
+
   },
   watch: {},
   computed: {
@@ -856,19 +881,22 @@ export default {
     },
   },
   methods: {
+    async getInitData() {
+      let result = this.$serve.getOwn({ id: this.$route.params.id })
+    },
     getSelectPage(value) {
       console.log('getSelectPage', value)
       this.selectPage = value
     },
-    setDetailDisp() {
-      //   console.log(this.isDetailDisp)
-      this.isDetailDisp = !this.isDetailDisp
+    sendMsgToParent: function (data) {
+      this.$emit("listenToChildEvent", data)
     },
     openDetailDisp(index) {
-      console.log(index)
-      console.log(this.isDetailDisp)
+      console.log("aaa", index)
+      console.log("bbb", this.isDetailDisp)
       //   this.isDetailDisp = !this.isDetailDisp
       this.isDetailDisp = this.isDetailDisp == index ? -1 : index;
+      console.log("isDetailDisp", this.isDetailDisp)
     },
     // getDetailsDisp() { this.isDetailsDisp = !this.isDetailsDisp },
     openDetailsDisp(index) {

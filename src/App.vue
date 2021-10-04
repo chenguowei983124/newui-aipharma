@@ -1,5 +1,6 @@
 <template>
-    <div class="flex">
+    <div class="flex h-screen">
+        <loading></loading>
         <div class="flex-grow max-h-full min-w-min bg-backgroundMain"></div>
         <div
             class="
@@ -24,9 +25,9 @@
 </template>
 <script>
 import moveTopButton from './components/moveTopButton.vue'
-
+import Loading from './view/loading.vue'
 export default {
-  components: { moveTopButton },
+  components: { moveTopButton, Loading },
   methods: {
     toTop() {
       let currentScroll = document.documentElement.scrollTop,
