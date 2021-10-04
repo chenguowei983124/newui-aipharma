@@ -199,7 +199,7 @@
                         itemType="1"
                         :typeKB="row.notificationType"
                         v-if="row.notificationType != undefined"
-                        addStyle="flex justify-center items-center mr-1.25 md:flex-none"
+                        addStyle="flex justify-center items-center mr-1.25 md:flex-none "
                     ></result-detail-row-item>
                     <!-- view数 -->
                     <result-detail-row-item

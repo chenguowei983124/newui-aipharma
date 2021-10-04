@@ -2,11 +2,12 @@
     <!-- 検索枠 -->
     <div class="flex">
         <!-- pcの場合 -->
-        <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-0">
+        <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
             <search-bar
                 :form="$constant.formList.OWN"
                 @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
+                v-bind:searchValue="parentMage"
             ></search-bar>
         </div>
 
@@ -23,7 +24,7 @@
                 <div
                     class="
                         text-googleTitle
-                        notoSansJpAndTwentyBold
+                        notoSansJpAndTwentyFourBold
                         font-black
                         flex-none
                         pl-2
@@ -41,19 +42,25 @@
                             rounded-full
                             border-2 border-gray-400
                             bg-gray-100
-                            h-6
+                            h-5.5
                             notoSansJpAndTwelveRegular
                             pl-1
                             pr-1
                             text-center
+                            
                             hidden
                             md:block
                             mid:block
+                            cursor-pointer
                         "
-                        v-for="item in torenndoTab"
+                        @click="searchTag(item)"
+                        v-for="item in $store.getters.getOrganizationSeartorenndoTab.torenndoTab.slice(
+                            0,
+                            5
+                        )"
                         :key="item"
                     >
-                        {{ item }}
+                        #{{ item }}
                     </div>
                 </div>
             </div>
@@ -73,10 +80,15 @@
                             : 'hidden',
                     ]" -->
                 <div>
-                    <search-organization-main></search-organization-main>
+                    <search-organization-main
+                        v-on:listenToChildEvent="showMsgToParent"
+                    ></search-organization-main>
                 </div>
-                <!-- <div>465456</div> -->
-                <div><organization-init></organization-init></div>
+                <div>
+                    <organization-init
+                        v-on:listenToChildEvent="showMsgToParent"
+                    ></organization-init>
+                </div>
             </div>
         </div>
         <div class="flex-grow max-h-full min-w-min block"></div>
@@ -121,7 +133,7 @@ export default {
     return {
       isMenuOpen: true,
       isDetailButtonClick: false,
-      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"]
+      parentMage: ""
     };
   },
   methods: {
@@ -135,8 +147,16 @@ export default {
     // 詳細条件表示・非表示取得
     // ======================================== 
     getDetailDisp: function (value) {
-      console.log(value)
+      //   console.log(value)
       this.detailDisp = value
+    },
+    searchTag: function (value) {
+      console.log('searchTag', value)
+      return this.parentMage = value
+    },
+    showMsgToParent: function (data) {
+      //   console.log("showMsgToParent", data)
+      return this.parentMage = data
     }
   },
   created() {

@@ -33,6 +33,8 @@ module.exports = {
         '3.25': '0.8125rem',
         // 15px
         '3.75': '0.9375rem',
+        // 22px
+        '5.5': '1.375rem',
         // 30px
         '7.5': '1.875rem',
         // 34px
@@ -267,7 +269,7 @@ module.exports = {
           iconColor: theme('colors.balck'),
         },
       },
-    })
+    }),
   },
   variants: {
     extend: {

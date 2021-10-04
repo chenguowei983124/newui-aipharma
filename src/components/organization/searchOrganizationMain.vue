@@ -1,6 +1,6 @@
 <template>
     <div v-if="$store.getters.organizationSearchInfo != undefined">
-        <div class="flex flex-row space-x-2 font-bold">
+        <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium">
             検索条件：
             <div
                 class=""
@@ -14,7 +14,7 @@
         <!-- <div class="">検索条件：{{ $store.getters.getSearchValue }}</div> -->
         <!-- pc/sp -->
         <div class="flex justify-between flex-wrap space-y-1">
-            <div class="font-bold">
+            <div class="notoSansJpAndFourteenMedium">
                 該当：
                 {{ $store.getters.organizationSearchInfo.allCount }}件
             </div>
@@ -32,9 +32,9 @@
                         "
                         @selected="setOrganizationDateSortValue"
                         :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
+                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 "
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
+                                border border-transparent focus:outline-none "
                     ></vue-single-select>
                     <!-- 件 表示 区分 -->
                     <vue-single-select
@@ -78,15 +78,10 @@
                             text-white
                             h-4
                             flex-grow
-                            w-40
+                            -ml-0.5
+                            -mt-0.5
                         "
                     >
-                        <!-- <result-detail-row
-                            class=""
-                            :sites="item.group"
-                            :sub1="['group']"
-                        >
-                        </result-detail-row> -->
                         <result-detail-row-item
                             itemType="1"
                             :typeKB="item.group"
@@ -106,32 +101,43 @@
                         >
                             <div
                                 class="
-                                    notoSansJpAndFifteenBold
+                                    notoSansJpAndTwentyFourBold
                                     text-blueline
                                     w-5
                                 "
                             >
                                 Q
                             </div>
-                            <div class="flex-grow">
+                            <div
+                                class="flex-grow notoSansJpAndSixteenBold ml-5"
+                            >
                                 {{ item.question }}
                             </div>
                         </div>
                         <!-- A -->
-                        <div class="flex justify-between mt-5 items-start">
+                        <div class="flex justify-between mt-5 items-center">
                             <div
-                                class="
-                                    notoSansJpAndFifteenBold
-                                    flex
-                                    w-5
-                                    h-6
-                                    text-cardPmadUpadte text-sm
-                                "
+                                class="flex w-5 h-6 text-cardPmadUpadte text-sm"
                             >
-                                <div class="flex items-center">A</div>
+                                <div
+                                    class="
+                                        flex
+                                        items-center
+                                        notoSansJpAndTwentyFourBold
+                                    "
+                                >
+                                    A
+                                </div>
                             </div>
 
-                            <div class="flex-grow break-all">
+                            <div
+                                class="
+                                    flex-grow
+                                    break-all
+                                    notoSansJpAndFourteenBold
+                                    ml-5
+                                "
+                            >
                                 <!-- {{ item.answer }} -->
                                 <div v-show="!(isDetailDisp === index)">
                                     {{ item.answer[0].info }}
@@ -147,7 +153,7 @@
                         </div>
                         <!-- 更新情報 pc/sp-->
                         <div class="flex flex-col pt-5">
-                            <div class="space-y-2 notoSansJpAndTwelveRegular">
+                            <div class="space-y-2 notoSansJpAndElevenRegular">
                                 <div class="flex space-x-4">
                                     <div>最終編集日：{{ item.createdAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
@@ -173,14 +179,18 @@
                                         v-for="urls in item.urls"
                                         :key="urls"
                                         class="
-                                            rounded-md
+                                            rounded-full
+                                            border-2 border-gray-300
+                                            bg-gray-100
                                             h-6
-                                            bg-blue-300
+                                            notoSansJpAndElevenRegular
+                                            pl-1
+                                            pr-1
+                                            text-center
                                             flex
-                                            justify-center
                                             items-center
-                                            px-2
-                                            ml-2
+                                            ml-1
+                                            cursor-pointer
                                         "
                                     >
                                         <a
@@ -219,14 +229,18 @@
                                         v-for="documents in item.documents"
                                         :key="documents"
                                         class="
-                                            rounded-md
+                                            rounded-full
+                                            border-2 border-gray-300
+                                            bg-gray-100
                                             h-6
-                                            bg-blue-300
+                                            notoSansJpAndElevenRegular
+                                            pl-1
+                                            pr-1
+                                            text-center
                                             flex
-                                            justify-center
                                             items-center
-                                            px-2
-                                            ml-2
+                                            ml-1
+                                            cursor-pointer
                                         "
                                     >
                                         <a
@@ -242,22 +256,23 @@
                                 <div
                                     class="
                                         rounded-full
-                                        border-2 border-gray-400
+                                        border-2 border-gray-300
                                         bg-gray-100
                                         h-6
-                                        notoSansJpAndTwelveRegular
-                                        text-center
+                                        notoSansJpAndElevenRegular
                                         pl-1
                                         pr-1
+                                        text-center
+                                        flex
+                                        items-center
+                                        mr-1
+                                        cursor-pointer
                                     "
                                     v-for="keywordTags in item.keywordTags"
                                     :key="keywordTags"
                                     @click="sendMsgToParent(keywordTags.name)"
                                 >
-                                                                        {{
-                                        keywordTags.name
-                                    }}
-                                                                    
+                                    #{{ keywordTags.name }}
                                 </div>
                             </div>
                             <div
@@ -293,7 +308,7 @@
                                                 flex
                                                 justify-center
                                                 items-center
-                                                h-6
+                                                h-7.5
                                                 w-14
                                                 rounded
                                                 text-white
@@ -301,8 +316,6 @@
                                             "
                                             @click="ActicleDetail(index)"
                                         >
-                                            <!-- @click="getRoeId(item.id)" -->
-                                            <!-- @click="openGoodMessageBox(index)" -->
                                             <div>
                                                 {{ item.feedbackGood }}
                                             </div>
@@ -409,7 +422,7 @@
                                                 flex
                                                 justify-center
                                                 items-center
-                                                h-6
+                                                h-7.5
                                                 w-14
                                                 rounded
                                                 text-white
@@ -417,8 +430,6 @@
                                             "
                                             @click="openGoodMessageBox"
                                         >
-                                            <!-- click="ActicleDetail(index)" -->
-                                            <!-- @click="openGoodMessageBox" -->
                                             <div>{{ item.feedbackGood }}</div>
                                             <good></good>
                                         </button>
@@ -429,7 +440,7 @@
                                             flex
                                             justify-center
                                             items-center
-                                            h-6
+                                            h-7.5
                                             w-14
                                             rounded
                                             text-white
@@ -445,7 +456,7 @@
                                             flex
                                             justify-center
                                             items-center
-                                            h-6
+                                            h-7.5
                                             w-14
                                             rounded
                                             text-white
@@ -468,40 +479,34 @@
                             ]"
                         >
                             <div class="flex flex-row justify-center text-sm">
-                                <!-- <div
-                                    class="
-                                        divide-y-4
-                                        divide-yellow-600
-                                        divide-dashed
-                                    "
-                                >
-                                    <div>1</div>
-                                    <div>2</div>
-                                </div> -->
-                                <div
-                                    class="
-                                        underline
-                                        notoSansJpAndTwelveRegular
-                                        text-grayline
-                                        flex
-                                        justify-center
-                                        items-center
-                                        cursor-pointer
-                                    "
-                                    @click="openDetailsDisp(index)"
-                                >
-                                    <!-- @click="getDetailsDisp" -->
-                                    詳細情報
-                                    <triangle-down-svg
-                                        class="w-2 h-2"
-                                        :class="[
-                                            isDetailsDisp === index
-                                                ? 'transform rotate-180'
-                                                : '',
-                                        ]"
-                                        fill="#000000"
-                                        stroke="#ffffff"
-                                    ></triangle-down-svg>
+                                <div class="box">
+                                    <span class="line"></span>
+                                    <span class="text"
+                                        ><div
+                                            class="
+                                                border-b border-black
+                                                notoSansJpAndTwelveRegular
+                                                text-grayline
+                                                flex
+                                                justify-center
+                                                items-center
+                                                cursor-pointer
+                                            "
+                                            @click="openDetailsDisp(index)"
+                                        >
+                                            詳細情報
+                                            <triangle-down-svg
+                                                class="w-2 h-2"
+                                                :class="[
+                                                    isDetailsDisp === index
+                                                        ? 'transform rotate-180'
+                                                        : '',
+                                                ]"
+                                                fill="#000000"
+                                                stroke="#ffffff"
+                                            ></triangle-down-svg></div
+                                    ></span>
+                                    <span class="line"></span>
                                 </div>
                             </div>
                             <div
@@ -827,7 +832,7 @@ export default {
   },
   props: {},
   data() {
-    console.log(this.$store.getters.organizationSearchInfo)
+    // console.log(this.$store.getters.organizationSearchInfo)
     return {
       // 順 区分 id
       organizationDateSortValue: 0,
@@ -848,19 +853,25 @@ export default {
     };
   },
   mounted() {
-
     this.$store.dispatch("clearOrganizationSearchInfo")
     if (this.$route.params.id) {
       let result = this.$serve.getOwn({ id: this.$route.params.id })
       result.then((response) => {
         this.$store.dispatch('setOrganizationSearchInfo', response)
         this.resultData = response.data.allCount
-        console.log("response", response)
-        console.log(response.data.allCount)
+        // console.log("response", response)
+        // console.log(response.data.allCount)
         if (response.data.allCount == 1) {
-          this.openDetailDisp("qa68555")
+          for (const key in response.data.qas) {
+            if (Object.hasOwnProperty.call(response.data.qas, key)) {
+              //   const element = response.data.qas[key];
+              console.log("element", key)
+              this.openDetailDisp(key)
+            }
+          }
+          //   console.log("response.data.qas", response.data.qas)
+          //   this.openDetailDisp("qa68555")
         }
-
       })
     }
 
@@ -945,5 +956,24 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style>
+.box {
+    height: 40px;
+    width: 100%;
+    /* background-color: wheat; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.line {
+    height: 2px;
+    flex-grow: 1;
+    /* background-color: red; */
+    border-top: 2px dashed rgba(100, 98, 98, 0.897);
+}
+
+.text {
+    margin: 0 5px;
+}
 </style>

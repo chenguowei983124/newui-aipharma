@@ -24,8 +24,9 @@
                     block
                     bg-backgroundMainSearch
                     text-white
-                    font-NotoSansJp font-medium
+                    font-NotoSansJp
                     text-xs text-center
+                    font-light
                     px-2
                     mt-1
                 "

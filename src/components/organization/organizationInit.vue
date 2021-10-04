@@ -41,28 +41,34 @@
         </div>
         <div
             class="
-                rounded
+                rounded-lg
                 border-2 border-blueline
                 bg-cardViewCount
-                mt-2.5
-                md:mt-3.75
+                my-2.5
+                md:my-3.75
                 p-2
+                text-sm
+                font-NotoSansJp
             "
         >
             <div>{{ 'トレンドタグ' }}</div>
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap mt-2">
                 <div
                     class="
                         rounded-full
-                        border-2 border-gray-400
+                        border-2 border-gray-300
                         bg-gray-100
                         h-6
                         notoSansJpAndTwelveRegular
                         pl-1
                         pr-1
                         text-center
+                        mr-1
+                        cursor-pointer
                     "
-                    v-for="item in torenndoTab"
+                    @click="sendMsgToParent(item)"
+                    v-for="item in $store.getters.getOrganizationSeartorenndoTab
+                        .torenndoTab"
                     :key="item"
                 >
                     #{{ item }}
@@ -77,12 +83,13 @@ import ResutTag from '../searchResult/resultTag.vue'
 import ResultDetailRow from '../searchResult/resultAllDetailRow.vue'
 export default {
   components: { ResutTag, ResultDetailRow },
-  data() {
-    return {
-      torenndoTab: ["ロキソニン", "ロキソ", "用途", "痛み止め", "ロキソニン", "ロキソ","ロキソニン", "ロキソ", "用途", "痛み止め", "ロキソニン", "ロキソ","ロキソニン", "ロキソ", "用途", "痛み止め", "ロキソニン", "ロキソ"],
-    }
+  methods: {
+    sendMsgToParent: function (data) {
+      this.$emit("listenToChildEvent", data)
+    },
   }
 }
+
 </script>
 
 <style>

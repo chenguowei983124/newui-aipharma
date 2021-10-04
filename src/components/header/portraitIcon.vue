@@ -21,7 +21,11 @@
                     }"
                 >
                     <div
-                        class="text-white notoSansJpAndFifteenBold md:text-base"
+                        class="
+                            text-white
+                            notoSansJpAndFifteenLight
+                            md:text-base
+                        "
                     >
                         {{ $store.getters.topManagementInfo.lastName }}
                     </div>
