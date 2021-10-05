@@ -247,6 +247,7 @@ module.exports = {
       }), screens: {
         'mid': '980px',
         'lm': '1080px',
+        'cs': '460px',
         // => @media (min-width: 640px) { ... }
 
       },

@@ -8,8 +8,8 @@
             my-5
             h-0
             invisible
-            md:visible
-            md:h-21
+            cs:visible
+            cs:h-21
             relative
         "
     >
@@ -31,8 +31,8 @@
             :speed="swiperOption.speed"
             :pagination="swiperOption.pagination"
             :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
-            :slides-per-view="2"
-            :space-between="-70"
+            :slidesPerView="swiperOption.slidesPerView"
+            :space-between="swiperOption.spaceBetween"
             :centeredSlides="true"
             :preloadImages="true"
             :updateOnImagesReady="true"
@@ -40,6 +40,8 @@
             :watchOverflow="true"
             :observer="true"
             :observeParents="true"
+            @resize="onResize"
+            @afterInit="onResize"
         >
             <!-- :breakpoints="breakpoints" -->
             <swiper-slide
@@ -125,10 +127,17 @@ export default {
       speed: 1000,
       pagination: {
         clickable: true
-      }
-    })
+      },
+      slidesPerView: 2,
+      spaceBetween: 5
+    });
+    const onResize = (handler) => {
+      const IMG_WIDTH = 234
+      swiperOption.slidesPerView = (handler.width / IMG_WIDTH).toFixed(2)
+    };
     return {
-      swiperOption
+      swiperOption,
+      onResize,
     }
   }
 }
@@ -142,7 +151,7 @@ export default {
 }
 .parallax-slide {
     z-index: 1;
-    left: 40px;
+    /* left: 40px; */
     text-align: center;
     font-size: 18px;
     background-color: rgb(153, 153, 153);
@@ -165,8 +174,8 @@ export default {
 }
 .swiper-slide img {
     display: block;
-    width: 288px;
-    height: 70px;
+    width: 234px;
+    height: 60px;
     z-index: 1;
 
     /* object-fit: cover; */
