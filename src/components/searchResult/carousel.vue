@@ -16,7 +16,7 @@
         <div class="nav-indicator prevArrow w-7.5 h-12 bg-cardTitlePmad">
             <icon-left class="w-4 mx-1 z-99 absolute"></icon-left>
         </div>
-        <div class="flex pl-7 pr-7.5 pt-1.75 absolute h-19.25 z-75">
+        <div class="flex pl-7 pr-7.5 pt-3 absolute h-18 z-75">
             <div
                 class="w-12.5 z-9 bg-gradient-to-r from-gray-900 bg-opacity-75"
             ></div>
@@ -56,7 +56,7 @@
         <div class="nav-indicator nextArrow w-7.5 h-12 bg-cardTitlePmad">
             <icon-right class="w-4 ml-2 mx-1 z-99 absolute"></icon-right>
         </div>
-        <div class="flex right-7 pt-1.75 absolute h-19.25 z-75">
+        <div class="flex right-7 pt-3 absolute h-18 z-75">
             <div
                 class="w-12.5 z-75 bg-gradient-to-l from-gray-900 bg-opacity-75"
             ></div>
