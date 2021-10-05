@@ -1,59 +1,15 @@
 <template>
     <!-- get_DIKnowledgeShare_search_info -->
-    <div v-if="$store.getters.dIKnowledgeShareSearchInfo != undefined">
+    <div v-if="$store.getters.dIKnowledgeShareSearchAIInfo != undefined">
         <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium">
             検索条件：
             <div
                 class=""
-                v-for="(searchWords, index) in $store.getters
-                    .dIKnowledgeShareSearchInfo.searchWords"
+                v-for="(searchAiWords, index) in $store.getters
+                    .dIKnowledgeShareSearchAIInfo.searchAiWords"
                 :key="index"
             >
-                {{ searchWords }}
-            </div>
-        </div>
-        <!-- <div class="">検索条件：{{ $store.getters.getSearchValue }}</div> -->
-        <!-- pc/sp -->
-        <div class="flex justify-between flex-wrap space-y-1">
-            <div class="notoSansJpAndFourteenMedium">
-                該当：
-                {{ $store.getters.dIKnowledgeShareSearchInfo.allCount }}件
-            </div>
-            <div class="flex space-x-2">
-                <div class="flex space-x-2">
-                    <!-- 順 区分 -->
-                    <vue-single-select
-                        class="w-56"
-                        :name="'field1'"
-                        :default-value="0"
-                        :placeholder="'-- Choose an option --'"
-                        :default-input-attribs="{ tabindex: 1 }"
-                        :default-options="
-                            $store.getters.getOrganizationDateSort
-                        "
-                        @selected="setOrganizationDateSortValue"
-                        :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 "
-                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none "
-                    ></vue-single-select>
-                    <!-- 件 表示 区分 -->
-                    <vue-single-select
-                        class="w-32"
-                        :name="'field2'"
-                        :default-value="0"
-                        :placeholder="'-- Choose an option --'"
-                        :default-input-attribs="{ tabindex: 1 }"
-                        :default-options="
-                            $store.getters.getOrganizationCountSort
-                        "
-                        @selected="setOrganizationCountSortValue"
-                        :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
-                    ></vue-single-select>
-                </div>
+                {{ searchAiWords }}
             </div>
         </div>
         <div class="space-y-2 mt-8">
@@ -61,27 +17,28 @@
             <!-- <div> -->
             <div
                 v-for="(item, index) in $store.getters
-                    .dIKnowledgeShareSearchInfo.qas"
+                    .dIKnowledgeShareSearchAIInfo.qasAi"
                 :key="index"
             >
                 <!-- {{ qaItems.facilityIdentificationNumber }} -->
-                <div class="border-2 rounded border-blueline">
+                <div class="border-2 rounded border-yellow-500">
                     <!-- Group -->
                     <div
                         class="
+                            bg-yellow-500
                             notoSansJpAndTwelveMedium
                             text-white
                             h-4
+                            w-25
                             flex-grow
                             -ml-0.5
                             -mt-0.5
+                            flex
+                            justify-center
+                            items-center
                         "
                     >
-                        <result-detail-row-item
-                            itemType="1"
-                            :typeKB="item.group"
-                            v-if="item.group != undefined"
-                        ></result-detail-row-item>
+                        {{ '☆AIのおすすめ' }}
                     </div>
                     <div class="p-4">
                         <!-- Q -->
@@ -89,7 +46,7 @@
                             class="
                                 flex
                                 justify-between
-                                border-b-2 border-blueline
+                                border-b-2 border-yellow-500
                                 items-center
                                 pb-5
                             "
@@ -278,15 +235,39 @@
                                 "
                             >
                                 <div
-                                    class="
-                                        flex flex-row
-                                        space-x-2
-                                        items-baseline
-                                    "
+                                    class="flex flex-row space-x-2 items-center"
                                 >
-                                    <div class="text-searchDropdown text-xs">
-                                        {{ item.viewCount }} view
+                                    <div class="">
+                                        <!-- certainty -->
+                                        <div
+                                            class="
+                                                text-black text-xs
+                                                font-bold
+                                                flex
+                                                justify-end
+                                            "
+                                        >
+                                            確信度　
+                                            <div
+                                                class="
+                                                    text-searchDropdown text-xs
+                                                "
+                                            >
+                                                {{ item.certainty }}％
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="
+                                                text-searchDropdown text-xs
+                                                font-bold
+                                                flex
+                                                justify-end
+                                            "
+                                        >
+                                            {{ item.viewCount }} view
+                                        </div>
                                     </div>
+
                                     <!-- good pc -->
                                     <div
                                         class="
@@ -722,8 +703,8 @@
                     </div>
                     <div
                         class="
-                            bg-cardViewCount
-                            text-center text-blueline
+                            bg-yellow-200
+                            text-center text-yellow-600
                             h-8
                             flex
                             justify-center
@@ -738,8 +719,8 @@
                         >
                             <triangle-down-svg
                                 class="w-4 h-4"
-                                fill="#0099ff"
-                                stroke="#0099ff"
+                                fill="#F79800"
+                                stroke="#F79800"
                             ></triangle-down-svg>
                             <div>開く</div>
                         </div>
@@ -749,74 +730,20 @@
                         >
                             <triangle-down-svg
                                 class="w-4 h-4 transform rotate-180"
-                                fill="#0099ff"
-                                stroke="#0099ff"
+                                fill="#F79800"
+                                stroke="#F79800"
                             ></triangle-down-svg>
                             <div>閉じる</div>
                         </div>
                     </div>
                 </div>
-
-                <!-- <div
-                    class="
-                        border-l-2 border-r-2 border-b-2
-                        rounded
-                        border-blueline
-                        bg-cardViewCount
-                        text-center text-blueline
-                        h-8
-                        flex
-                        justify-center
-                        items-center
-                        cursor-pointer
-                    "
-                    @click="openDetailDisp(index)"
-                >
-                    <div
-                        v-show="!(isDetailDisp === index)"
-                        class="flex items-center"
-                    >
-                        <triangle-down-svg
-                            class="w-4 h-4"
-                            fill="#0099ff"
-                            stroke="#0099ff"
-                        ></triangle-down-svg>
-                        <div>開く</div>
-                    </div>
-                    <div
-                        v-show="isDetailDisp === index"
-                        class="flex items-center"
-                    >
-                        <triangle-down-svg
-                            class="w-4 h-4 transform rotate-180"
-                            fill="#0099ff"
-                            stroke="#0099ff"
-                        ></triangle-down-svg>
-                        <div>閉じる</div>
-                    </div>
-                </div> -->
             </div>
         </div>
-         <pagination
-            :page-count="getPageCount"
-            :page-range="5"
-            :margin-pages="1"
-            :click-handler="clickCallback"
-            @input="getSelectPage"
-            :prev-text="'<'"
-            :next-text="'>'"
-            :container-class="'pagination'"
-            page-class="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            activeClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular bg-blueline text-white"
-            prevClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            class="flex justify-center space-x-1"
-        ></pagination>
-        <div class="flex justify-center mt-2">1-{{ pageCount }}件 表示</div>
     </div>
 </template>
 
 <script>
+
 import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
 import resutTag from '../searchResult/resultTag.vue'
 import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
@@ -831,26 +758,7 @@ import GoodMessageBox from '../messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
 import { ref, onBeforeUpdate, onUpdated, onUnmounted, nextTick } from 'vue'
 import { reactive, onMounted } from 'vue'
-
 export default {
-  //   setup() {
-  //     const state = reactive({
-  //       hits: {}
-  //     })
-  //     onMounted(async () => {
-  //       const data = await fetch(
-  //         'http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info'
-  //       )
-  //       state.hits = data.hits
-  //     })
-  //     console.log(state)
-  //     return state
-  //   },
-  setup() {
-    onUnmounted(() => {
-
-    });
-  },
   components: {
     TriangleDownSvg,
     resutTag, resultDetailRow, carousel,
@@ -860,7 +768,7 @@ export default {
   },
   props: {},
   data() {
-    // console.log(this.$store.getters.dIKnowledgeShareSearchInfo)
+    // console.log(this.$store.getters.organizationSearchInfo)
     return {
       // 順 区分 id
       organizationDateSortValue: 0,
@@ -916,7 +824,7 @@ export default {
       } else if (this.organizationCountSortValue == '2') {
         this.pageCount = 100
       }
-      return Math.ceil(this.$store.getters.dIKnowledgeShareSearchInfo.allCount / this.pageCount);
+      return Math.ceil(this.$store.getters.organizationSearchInfo.allCount / this.pageCount);
     },
   },
   methods: {

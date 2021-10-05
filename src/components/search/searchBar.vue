@@ -116,7 +116,7 @@ export default {
     return {
       scroll: "",
       checkId: this.searchbarSelectID,
-      detailDisp: false,
+      detailDisp: true,
       ownTagVaule: []
     }
 
@@ -325,7 +325,7 @@ export default {
       }
       // DI ナレッジシェア
       else if (this.checkId == 1) {
-
+        this.$store.dispatch('getdIKnowledgeShareSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
         this.$router.push('/searchDiKnowledge')
       }
       // 組織内 DI 記録（Q&A）

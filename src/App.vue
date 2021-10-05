@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-screen">
+    <div class="flex">
         <loading></loading>
         <div class="flex-grow max-h-full min-w-min bg-backgroundMain"></div>
         <div

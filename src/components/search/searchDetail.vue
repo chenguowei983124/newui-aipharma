@@ -121,6 +121,7 @@
         <div>
             <div class="px-2 md:px-0">
                 <Multiselect
+                    class="h-7.5"
                     v-model="tagValue"
                     mode="tags"
                     placeholder="#タグ"
@@ -147,7 +148,7 @@
                             'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
                         search: 'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white rounded pl-3.5',
                         tags: 'flex-grow flex-shrink flex flex-wrap items-center mt-1 pl-2',
-                        tag: 'bg-organization text-white notoSansJpAndTwelveRegular py-0.5 pl-2 rounded mr-1 mb-1 flex items-center whitespace-nowrap',
+                        tag: 'bg-gray-300 text-black notoSansJpAndTwelveRegular pl-2 rounded-full border-2 mr-1 mb-1 flex items-center whitespace-nowrap',
                         tagDisabled: 'pr-2 opacity-50',
                         tagRemove:
                             'flex items-center justify-center p-1 mx-0.5 rounded-sm hover:bg-black hover:bg-opacity-10 group',
@@ -273,8 +274,9 @@
             <div class="flex space-x-2">
                 <button
                     class="
+                        rounded
                         bg-personDataInfo
-                        text-black
+                        text-gray-700
                         notoSansJpAndSixteenBold
                         w-28
                         h-8
@@ -285,6 +287,7 @@
                 </button>
                 <button
                     class="
+                        rounded
                         bg-searchBunnon
                         text-white
                         notoSansJpAndSixteenBold
@@ -292,11 +295,12 @@
                         h-8
                         flex flex-row
                         justify-center
+                        items-center
                     "
                     @click="searchButtonClick"
                 >
-                    <div class="mt-1">検 索</div>
-                    <search-svg class="mt-1"></search-svg>
+                    <div class="">検 索</div>
+                    <search-svg class="ml-1"></search-svg>
                 </button>
             </div>
             <div class="hidden md:block mid:block">
@@ -304,6 +308,7 @@
                     class="
                         flex
                         items-center
+                        rounded
                         border-2 border-white
                         text-white text-center
                         notoSansJpAndFourteenRegular
@@ -321,6 +326,7 @@
                         :class="[isDetailClick ? 'transform rotate-180' : '']"
                         fill="#ffffff"
                         stroke="#ffffff"
+                        class="h-3 w-3"
                     ></triangle-down-svg>
                 </div>
             </div>

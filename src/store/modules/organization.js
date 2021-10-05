@@ -42,7 +42,8 @@ export default {
         },
         getOrganizationCountSort(state) {
             return state.organizationCountSort
-        }, getOrganizationSeartorenndoTab(state) {
+        },
+        getOrganizationSeartorenndoTab(state) {
             const organizationSeartorenndoTab = {
                 "torenndoTab": ["ロキソニン", "ロキソ", "用途", "痛み止め", "ロキソニン", "ロキソ", "ロキソニン",
                     "ロキソ", "用途", "痛み止め", "ロキソニン", "ロキソ", "ロキソニン", "ロキソ",
@@ -66,11 +67,11 @@ export default {
 
     actions: {
         async getOrganizationSearchInfo({ rootState, commit }, { inputSearchValue, tagValue, id }) {
-            console.log(inputSearchValue)
+            // console.log("getOrganizationSearchInfo", id)
+            // console.log(inputSearchValue)
             const info = await serve.getOwn({ id: id })
             // console.log(inputSearchValue)
-            console.log(info)
-            // console.log(id)
+            // console.log(info)
             // const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info`, {
             //     // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/get_organization_search_info`, {
             //     params: {

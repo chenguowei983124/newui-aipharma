@@ -64,13 +64,7 @@
                 :key="index"
             >
                 <!-- {{ qaItems.facilityIdentificationNumber }} -->
-                <div
-                    class="
-                        border-l-2 border-r-2 border-t-2
-                        rounded-sm
-                        border-blueline
-                    "
-                >
+                <div class="border-2 rounded border-blueline">
                     <!-- Group -->
                     <div
                         class="
@@ -115,10 +109,8 @@
                             </div>
                         </div>
                         <!-- A -->
-                        <div class="flex justify-between mt-5 items-center">
-                            <div
-                                class="flex w-5 h-6 text-cardPmadUpadte text-sm"
-                            >
+                        <div class="flex justify-between mt-5 items-start">
+                            <div class="flex w-5 h-6 text-yellow-500 text-sm">
                                 <div
                                     class="
                                         flex
@@ -135,7 +127,7 @@
                                     flex-grow
                                     break-all
                                     notoSansJpAndFourteenBold
-                                    ml-5
+                                    pl-5
                                 "
                             >
                                 <!-- {{ item.answer }} -->
@@ -152,7 +144,7 @@
                             </div>
                         </div>
                         <!-- 更新情報 pc/sp-->
-                        <div class="flex flex-col pt-5">
+                        <div class="flex flex-col pt-5 pl-10">
                             <div class="space-y-2 notoSansJpAndElevenRegular">
                                 <div class="flex space-x-4">
                                     <div>最終編集日：{{ item.createdAt }}</div>
@@ -484,7 +476,7 @@
                                     <span class="text"
                                         ><div
                                             class="
-                                                border-b border-black
+                                                border-b border-gray-500
                                                 notoSansJpAndTwelveRegular
                                                 text-grayline
                                                 flex
@@ -727,14 +719,49 @@
                             </div>
                         </div>
                     </div>
+                    <div
+                        class="
+                            bg-cardViewCount
+                            text-center text-blueline
+                            h-8
+                            flex
+                            justify-center
+                            items-center
+                            cursor-pointer
+                        "
+                        @click="openDetailDisp(index)"
+                    >
+                        <div
+                            v-show="!(isDetailDisp === index)"
+                            class="flex items-center"
+                        >
+                            <triangle-down-svg
+                                class="w-4 h-4"
+                                fill="#0099ff"
+                                stroke="#0099ff"
+                            ></triangle-down-svg>
+                            <div>開く</div>
+                        </div>
+                        <div
+                            v-show="isDetailDisp === index"
+                            class="flex items-center"
+                        >
+                            <triangle-down-svg
+                                class="w-4 h-4 transform rotate-180"
+                                fill="#0099ff"
+                                stroke="#0099ff"
+                            ></triangle-down-svg>
+                            <div>閉じる</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div
+                <!-- <div
                     class="
                         border-l-2 border-r-2 border-b-2
-                        rounded-sm
-                        bg-cardViewCount
+                        rounded
                         border-blueline
+                        bg-cardViewCount
                         text-center text-blueline
                         h-8
                         flex
@@ -766,7 +793,7 @@
                         ></triangle-down-svg>
                         <div>閉じる</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
          <pagination

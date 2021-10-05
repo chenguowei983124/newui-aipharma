@@ -24,6 +24,18 @@ const serve = {
         })
 
         return data
+    },
+    async getOwndIKnowledgeShare({ }) {
+        const data = await axios('/get_DIKnowledgeShare_search_info', {
+            method: 'get',
+            params: {
+                // id: id
+            }
+        })
+
+        return data
     }
+
+
 }
 export default serve

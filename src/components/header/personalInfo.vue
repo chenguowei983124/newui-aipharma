@@ -28,6 +28,7 @@
                     text-xs text-center
                     font-light
                     px-2
+                    py-0.5
                     mt-1
                 "
             >

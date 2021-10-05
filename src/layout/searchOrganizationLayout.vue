@@ -11,7 +11,7 @@
             ></search-bar>
         </div>
 
-        <div class="h-44 md:h-65"></div>
+        <div class="h-44 md:h-52.5"></div>
     </div>
     <!-- 内容 -->
     <div class="flex border-b-2 border-blue-200 mt-33.5 md:mt-5 md:h-20">
@@ -47,7 +47,6 @@
                             pl-1
                             pr-1
                             text-center
-                            
                             hidden
                             md:block
                             mid:block
@@ -56,7 +55,7 @@
                         @click="searchTag(item)"
                         v-for="item in $store.getters.getOrganizationSeartorenndoTab.torenndoTab.slice(
                             0,
-                            5
+                            8
                         )"
                         :key="item"
                     >
@@ -133,7 +132,7 @@ export default {
     return {
       isMenuOpen: true,
       isDetailButtonClick: false,
-      parentMage: ""
+      parentMage: "",
     };
   },
   methods: {

@@ -2,11 +2,12 @@
     <!-- 検索枠 -->
     <div class="flex">
         <!-- pcの場合 -->
-        <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-0">
+        <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
             <search-bar
                 :form="$constant.formList.DI"
                 @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
+                v-bind:searchValue="parentMage"
             ></search-bar>
         </div>
 
@@ -30,7 +31,7 @@
                         md:pl-0
                     "
                 >
-                    組織内 DI 記録（Q&A）
+                    DI ナレッジシェア
                 </div>
                 <div class="hidden md:block mid:block text-sm flex-none">
                     トレンドタグ
@@ -41,7 +42,7 @@
                             rounded-full
                             border-2 border-gray-400
                             bg-gray-100
-                            h-6
+                            h-5.5
                             notoSansJpAndTwelveRegular
                             pl-1
                             pr-1
@@ -49,11 +50,16 @@
                             hidden
                             md:block
                             mid:block
+                            cursor-pointer
                         "
-                        v-for="item in torenndoTab"
+                        @click="searchTag(item)"
+                        v-for="item in $store.getters.getOrganizationSeartorenndoTab.torenndoTab.slice(
+                            0,
+                            7
+                        )"
                         :key="item"
                     >
-                        {{ item }}
+                        #{{ item }}
                     </div>
                 </div>
             </div>
@@ -73,10 +79,16 @@
                             : 'hidden',
                     ]" -->
                 <div>
-                    <search-organization-main></search-organization-main>
+                    <search-di-knowledge-ai></search-di-knowledge-ai>
                 </div>
-                <!-- <div>465456</div> -->
-                <div><organization-init></organization-init></div>
+                <div>
+                    <search-di-knowledge-main></search-di-knowledge-main>
+                </div>
+                <div>
+                    <di-knowledge-init
+                        v-on:listenToChildEvent="showMsgToParent"
+                    ></di-knowledge-init>
+                </div>
             </div>
         </div>
         <div class="flex-grow max-h-full min-w-min block"></div>
@@ -107,13 +119,14 @@
 import CommentMessageBox from '../components/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/messageBox/goodMessageBox.vue'
 import searchBar from '../components/search/searchBar.vue'
-import searchOrganizationMain from "../components/organization/searchOrganizationMain.vue"
-import OrganizationInit from '../components/organization/organizationInit.vue'
+import SearchDiKnowledgeMain from "../components/diKnowledge/searchDiKnowledgeMain.vue"
+import DiKnowledgeInit from '../components/diKnowledge/diKnowledgeInit.vue'
+import SearchDiKnowledgeAi from '../components/diKnowledge/searchDiKnowledgeAi.vue'
 
 export default {
   components: {
     CommentMessageBox,
-    GoodMessageBox, searchBar, searchOrganizationMain, OrganizationInit
+    GoodMessageBox, searchBar, SearchDiKnowledgeMain, DiKnowledgeInit, SearchDiKnowledgeAi
   },
 
   props: {},
@@ -121,7 +134,7 @@ export default {
     return {
       isMenuOpen: true,
       isDetailButtonClick: false,
-      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"]
+      parentMage: "",
     };
   },
   methods: {
@@ -135,8 +148,16 @@ export default {
     // 詳細条件表示・非表示取得
     // ======================================== 
     getDetailDisp: function (value) {
-      console.log(value)
+      //   console.log(value)
       this.detailDisp = value
+    },
+    searchTag: function (value) {
+      console.log('searchTag', value)
+      return this.parentMage = value
+    },
+    showMsgToParent: function (data) {
+      //   console.log("showMsgToParent", data)
+      return this.parentMage = data
     }
   },
   created() {
