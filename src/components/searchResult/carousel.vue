@@ -47,7 +47,8 @@
                 v-for="image in images"
                 :key="image.id"
             >
-                <img :src="image.imageUrl" />
+                <img :src="image.imageUrl" alt="失敗時の表示文言" 
+                  onerror="this.onerror = null; this.src='/src/assets/image/swiper-error.png';"/>
             </swiper-slide>
         </swiper>
 
@@ -96,7 +97,7 @@ export default {
   }, setup() {
     const swiperOption = reactive({
       autoplay: {
-        delay: 300,
+        delay: 2000,
         disableOnInteraction: false
       },
       loop: true,
@@ -142,15 +143,16 @@ export default {
             imageUrl: img4
           }, {
             id: 5,
-            imageUrl: img4
+            imageUrl: "img4"
           }, {
             id: 6,
-            imageUrl: img4
+            imageUrl: "img4"
           }, {
             id: 7,
-            imageUrl: img4
+            imageUrl: "img4"
           }
         ]
+      
     },
   },
   created() {
