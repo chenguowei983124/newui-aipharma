@@ -336,6 +336,7 @@ export default {
         } else {
           console.log(this.ownTagVaule)
           this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
+          document.documentElement.scrollTop = 0
           // this.$store.dispatch('getOrganizationSearchInfo')
         }
 

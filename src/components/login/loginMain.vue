@@ -6,72 +6,73 @@
                 <div class="notoSansJpAndTwentyTwoBold text-center">
                     ログイン
                 </div>
-                <div class="mt-5">
-                    <input
-                        v-model="loginId"
-                        class="
-                            block
-                            h-10
-                            w-86.25
-                            NotoSansJp-normal
-                            text-xs
-                            flex-grow
-                            rounded-sm
-                            pl-4
-                            placeholder-gray-500
-                            focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent
-                            focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
-                            focus:border-transparent
-                        "
-                        type="text"
-                        placeholder="メールアドレスorユーザーID"
-                    />
-                </div>
-                <div class="mt-2.5">
-                    <input
-                        v-model="password"
-                        class="
-                            block
-                            h-10
-                            w-86.25
-                            NotoSansJp-normal
-                            text-xs
-                            flex-grow
-                            rounded-sm
-                            pl-4
-                            placeholder-gray-500
-                            focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent
-                            focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
-                            focus:border-transparent
-                        "
-                        type="password"
-                        placeholder="パスワード"
-                    />
-                </div>
-                <!-- ログインを記憶する -->
-                <div class="mt-3">
-                    <label class="inline-flex items-center justify-end">
-                        <input
-                            v-model="isRemember"
-                            type="checkbox"
-                            class="form-checkbox w-3 h-3 text-white ring-1"
-                            checked
-                        />
-                        <span class="ml-0.5 notoSansJpAndTwelveRegular"
-                            >ログインを記憶する</span
-                        >
-                    </label>
-                </div>
 
-                <!-- ログイン -->
-                <div class="flex justify-center mt-5">
-                    <button
+                <form action="">
+                    <div class="mt-5">
+                        <input
+                            v-model="loginId"
+                            class="
+                                block
+                                h-10
+                                w-86.25
+                                NotoSansJp-normal
+                                text-xs
+                                flex-grow
+                                rounded-sm
+                                pl-4
+                                placeholder-gray-500
+                                focus:placeholder-opacity-0
+                                ring-1
+                                border-transparent
+                                focus:outline-none
+                                focus:ring-1 focus:ring-326EB5Lins
+                                focus:border-transparent
+                            "
+                            type="text"
+                            placeholder="メールアドレスorユーザーID"
+                        />
+                    </div>
+                    <div class="mt-2.5">
+                        <input
+                            v-model="password"
+                            class="
+                                block
+                                h-10
+                                w-86.25
+                                NotoSansJp-normal
+                                text-xs
+                                flex-grow
+                                rounded-sm
+                                pl-4
+                                placeholder-gray-500
+                                focus:placeholder-opacity-0
+                                ring-1
+                                border-transparent
+                                focus:outline-none
+                                focus:ring-1 focus:ring-326EB5Lins
+                                focus:border-transparent
+                            "
+                            type="password"
+                            placeholder="パスワード"
+                        />
+                    </div>
+                    <!-- ログインを記憶する -->
+                    <div class="mt-3">
+                        <label class="inline-flex items-center justify-end">
+                            <input
+                                v-model="isRemember"
+                                type="checkbox"
+                                class="form-checkbox w-3 h-3 text-white ring-1"
+                                checked
+                            />
+                            <span class="ml-0.5 notoSansJpAndTwelveRegular"
+                                >ログインを記憶する</span
+                            >
+                        </label>
+                    </div>
+
+                    <input
+                        type="submit"
                         class="
                             bg-personOrganizationButton
                             hover:opacity-50
@@ -84,10 +85,9 @@
                             w-86.25
                         "
                         @click="loginClick"
-                    >
-                        ログイン
-                    </button>
-                </div>
+                        value="ログイン"
+                    />
+                </form>
 
                 <div class="flex mt-5">
                     <div
@@ -136,39 +136,60 @@
                 </div>
             </div>
         </div>
+        <Toast :message="message" v-if="showToast" />
     </div>
 </template>
 
 <script>
 import logo from './logo.vue'
+import Toast from './../alert/Toast.vue'
 export default {
   data() {
     return {
       loginId: "",
       password: "",
-      isRemember: false
+      isRemember: false,
+      showToast: false,
+      message: ""
+
     }
   },
   components: {
-    logo
+    logo, Toast
   },
   methods: {
+    triggerToast: function () {
+      this.showToast = true;
+      setTimeout(() => this.showToast = false, 3000)
+    },
     loginClick: function () {
-      const self = this;
-      // 第4步，若复选框被勾选了，就调用设置cookie方法，把当前的用户名和密码和过期时间存到cookie中
-      if (self.isRemember === true) {
-        // 传入账号名，密码，和保存天数（过期时间）3个参数
-        //  1/24/60 测试可用一分钟测试，这样看着会比较明显
-        self.setCookie(this.loginId, this.password, 1 / 24 / 60);
-        // self.setCookie(this.loginId, this.password, 7); // 这样就是7天过期时间
+      if (this.loginId == "" || this.password == "") {
+        this.message = "ログインに失敗しました。ユーザーIDまたはパスワードが間違っています。"
+        this.triggerToast()
+
+
+      } else {
+        let params = {
+          loginId: this.loginId,
+          password: this.password
+        }
+        this.$serve.postLogin(params)
+        const self = this;
+        // 第4步，若复选框被勾选了，就调用设置cookie方法，把当前的用户名和密码和过期时间存到cookie中
+        if (self.isRemember === true) {
+          // 传入账号名，密码，和保存天数（过期时间）3个参数
+          //  1/24/60 测试可用一分钟测试，这样看着会比较明显
+          self.setCookie(this.loginId, this.password, 1 / 24 / 60);
+          // self.setCookie(this.loginId, this.password, 7); // 这样就是7天过期时间
+        }
+        // 若没被勾选就及时清空Cookie，因为这个cookie有可能是上一次的未过期的cookie，所以要及时清除掉
+        else {
+          self.clearCookie();
+        }
+        // 当然，无论用户是否勾选了cookie，路由该跳转还是要跳转的
+        this.$router.push('/myhome');
+        localStorage.setItem('token', "123132");
       }
-      // 若没被勾选就及时清空Cookie，因为这个cookie有可能是上一次的未过期的cookie，所以要及时清除掉
-      else {
-        self.clearCookie();
-      }
-      // 当然，无论用户是否勾选了cookie，路由该跳转还是要跳转的
-      this.$router.push('/myhome');
-      localStorage.setItem('token', "123132");
       //   this.$router.push('/myhome')
 
     }, setCookie(loginId, password, exdays) {
@@ -202,6 +223,7 @@ export default {
     clearCookie: function () {
       this.setCookie("", "", -1); // 清空并设置天数为负1天
     },
+
   },
   props: {},
   couputed: {},
@@ -215,5 +237,5 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style>
 </style>
