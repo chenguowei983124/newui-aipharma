@@ -18,7 +18,7 @@
                         <!-- sp -->
                         <!--  -->
                         <input
-                            v-model="searchValue"
+                            v-model="searchValueInput"
                             @change="getNewInput($event)"
                             :class="sreachBarSPInputClass"
                             type="text"
@@ -26,7 +26,7 @@
                         />
                         <!-- pc -->
                         <input
-                            v-model="searchValue"
+                            v-model="searchValueInput"
                             @change="getNewInput($event)"
                             :class="sreachBarPCInputClass"
                             type="text"
@@ -40,7 +40,7 @@
                         >
                             <!-- 検索ボタンのアイコン -->
                             <div class="flex justify-center h-6">
-                                <search-svg></search-svg>
+                                <search-svg class="h-6 w-6"></search-svg>
                             </div>
                         </button>
                     </div>
@@ -61,9 +61,11 @@
                         "
                         v-if="checkId == 2 && form != $constant.formList.TOP"
                     >
+                        <!-- v-bind:message="parentMsg" -->
                         <search-detail
                             @tagValue="getOwnTagValue"
                             :searchButtonClick="searchClick"
+                            v-on:inputClearValue="showMsg"
                         ></search-detail>
                     </div>
 
@@ -92,6 +94,7 @@ import searchSvg from '../svgImage/searchSvg.vue'
 import searchDetail from './searchDetail.vue'
 import searchDiKnowledge from './searchDiKnowledge.vue'
 import searchPreavoids from './searchPreavoids.vue'
+import { reactive, toRefs, ref } from "vue";
 
 export default {
   components: {
@@ -103,9 +106,15 @@ export default {
       type: String,
       default: "TOP"
     },
-    searchValue: {
+    searchValueInput: {
       type: String,
       default: ""
+    },
+    // get searchValue() {
+    //   return this._searchValue
+    // },
+    set searchValue(value) {
+      this.searchValueInput = value
     },
     searchbarSelectID: {
       type: Number,
@@ -114,17 +123,21 @@ export default {
   },
   data() {
     return {
+      // searchValueInput: "",
+      // aaa: this.$props.searchValueInput,
+      userName: this.searchValueInput,
       scroll: "",
       checkId: this.searchbarSelectID,
       detailDisp: true,
-      ownTagVaule: []
+      ownTagVaule: [],
+      parentMsg: "",
     }
 
   },
   watch: {
     checkId: function () {
       this.$emit("searchID", this.checkId)
-    }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.menu)
@@ -294,10 +307,16 @@ export default {
       this.ownTagVaule = value
     },
     getNewInput: function (e) {
-
-      console.log(this.searchValue)
-      this.$emit("searchInput", e.target.value)
+      console.log(this.searchValueInput)
+      // console.log(e.target.value)
+      // this.$emit("searchInput", e.target.value)
     },
+    showMsg: function (data) {
+      console.log("this.$props.searchValueInput", this.$props.searchValueInput)
+      // toRefs()
+      // this.$props.searchValueInput = {}
+    },
+
     menu: function () {
       console.log(this.detailDisp)
       console.log(this.srcoll)
@@ -332,14 +351,14 @@ export default {
       else if (this.checkId == 2) {
         if (this.$props.form == this.$constant.formList.TOP) {
           this.$store.dispatch('searchOrganization', this.searchValue, this.ownTagVaule)
-          this.$router.push('/searchOrganization')
+          // this.$router.push('/searchOrganization')
         } else {
           console.log(this.ownTagVaule)
           this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
           document.documentElement.scrollTop = 0
           // this.$store.dispatch('getOrganizationSearchInfo')
         }
-
+        this.$router.push('/searchOrganization')
 
       }
       // 症例（プレアボイド）

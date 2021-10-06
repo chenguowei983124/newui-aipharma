@@ -881,11 +881,11 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("clearOrganizationSearchInfo")
+    // this.$store.dispatch("cleardIKnowledgeShareSearchInfo")
     if (this.$route.params.id) {
-      let result = this.$serve.getOwn({ id: this.$route.params.id })
+      let result = this.$serve.getOwndIKnowledgeShare({})
       result.then((response) => {
-        this.$store.dispatch('setOrganizationSearchInfo', response)
+        this.$store.dispatch('setdIKnowledgeShareSearchInfo', response)
         this.resultData = response.data.allCount
         // console.log("response", response)
         // console.log(response.data.allCount)

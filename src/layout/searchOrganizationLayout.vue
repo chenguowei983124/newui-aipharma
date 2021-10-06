@@ -7,7 +7,7 @@
                 :form="$constant.formList.OWN"
                 @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
-                v-bind:searchValue="parentMage"
+                v-bind:searchValueInput="parentMage"
             ></search-bar>
         </div>
 
@@ -20,7 +20,7 @@
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
         <div class="flex flex-col w-full md:w-191.25 justify-center">
-            <div class="flex flex-row space-x-2 items-center">
+            <div class="flex flex-row space-x-2 items-start">
                 <div
                     class="
                         text-googleTitle
@@ -42,10 +42,11 @@
                             rounded-full
                             border-2 border-gray-400
                             bg-gray-100
-                            h-5.5
+                            h-6
                             notoSansJpAndTwelveRegular
                             pl-1
                             pr-1
+                            mb-0.5
                             text-center
                             hidden
                             md:block
@@ -150,8 +151,9 @@ export default {
       this.detailDisp = value
     },
     searchTag: function (value) {
-      console.log('searchTag', value)
-      return this.parentMage = value
+      //   console.log('searchTag', value)
+      this.parentMage = value
+      this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
     },
     showMsgToParent: function (data) {
       //   console.log("showMsgToParent", data)

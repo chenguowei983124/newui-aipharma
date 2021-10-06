@@ -1,4 +1,5 @@
 <template>
+    <!--from parentMsg {{ message }} -->
     <div class="space-y-2">
         <!-- 1.5行目 -->
         <div
@@ -363,13 +364,16 @@ export default {
     searchButtonClick: {
       type: Function,
       default: () => { }
-    }
+    },
+    message: {
+      type: String,
+      default: ""
+    },
   },
   components: { searchDropdown, searchSvg, TriangleDownSvg, Multiselect, vueSingleSelect },
   data() {
     return {
       searchText: null,
-      searchValue: "",
       //   tagsValue: '',
       checkId: "",
       isDetailClick: false,
@@ -428,15 +432,15 @@ export default {
     // getDispFacilityText: function (value) {
     //   this.dispFacilityText = value
     // },
-    inputClear() {
-      this.searchValue = ''
-      this.value = []
+    inputClear(data) {
+      //   console.log(this.message)
+      this.$emit("inputClearValue", "")
+
+      this.tagValue = []
+
       this.$refs.medicines.setValue(null)
       this.$refs.qDistinction.setValue(null)
       this.$refs.facility.setValue(null)
-      //   this.dispText = ""
-      //   this.dispQDistinctionText = ""
-      //   this.dispFacilityText = ""
     }
     ,
     sendInputInfo() {

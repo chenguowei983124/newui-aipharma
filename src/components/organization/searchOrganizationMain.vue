@@ -22,7 +22,7 @@
                 <div class="flex space-x-2">
                     <!-- 順 区分 -->
                     <vue-single-select
-                        class="w-56"
+                        class="w-56 cursor-pointer"
                         :name="'field1'"
                         :default-value="0"
                         :placeholder="'-- Choose an option --'"
@@ -38,7 +38,7 @@
                     ></vue-single-select>
                     <!-- 件 表示 区分 -->
                     <vue-single-select
-                        class="w-32"
+                        class="w-32 cursor-pointer"
                         :name="'field2'"
                         :default-value="0"
                         :placeholder="'-- Choose an option --'"
@@ -947,10 +947,12 @@ export default {
     setOrganizationDateSortValue(value) {
       console.log('setOrganizationDateSortValue', value)
       this.organizationDateSortValue = value
+      this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
     },
     setOrganizationCountSortValue(value) {
       console.log('setOrganizationCountSortValue', value)
       this.organizationCountSortValue = value
+      this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
     },
     // setSelectValue(value) {
     //   this.selectValue = value

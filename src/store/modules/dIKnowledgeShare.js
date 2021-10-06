@@ -43,5 +43,9 @@ export default {
             commit('setdIKnowledgeShareSearchAIInfo', info)
 
         },
+        cleardIKnowledgeShareSearchInfo({ rootState, commit }) {
+            commit('setdIKnowledgeShareSearchInfo', {})
+            commit('setdIKnowledgeShareSearchAIInfo', {})
+        },
     }
 }

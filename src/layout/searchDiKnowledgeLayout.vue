@@ -20,7 +20,7 @@
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
         <div class="flex flex-col w-full md:w-191.25 justify-center">
-            <div class="flex flex-row space-x-2 items-center">
+            <div class="flex flex-row space-x-2 items-start">
                 <div
                     class="
                         text-googleTitle
