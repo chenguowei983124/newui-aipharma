@@ -34,14 +34,12 @@
             :slidesPerView="swiperOption.slidesPerView"
             :space-between="swiperOption.spaceBetween"
             :centeredSlides="true"
-            :preloadImages="true"
-            :updateOnImagesReady="true"
-            :updateOnWindowResize="true"
             :watchOverflow="true"
             :observer="true"
             :observeParents="true"
             @resize="onResize"
             @afterInit="onResize"
+            @update="onResize"
         >
             <!-- :breakpoints="breakpoints" -->
             <swiper-slide
@@ -85,28 +83,6 @@ export default {
     return {
       parallaxSwiperWidth: 0,
       images: [
-        {
-          id: 1,
-          imageUrl: img1
-        }, {
-          id: 2,
-          imageUrl: img2
-        }, {
-          id: 3,
-          imageUrl: img3
-        }, {
-          id: 4,
-          imageUrl: img4
-        }, {
-          id: 5,
-          imageUrl: img4
-        }, {
-          id: 6,
-          imageUrl: img4
-        }, {
-          id: 7,
-          imageUrl: img4
-        }
       ]
     }
 
@@ -120,7 +96,7 @@ export default {
   }, setup() {
     const swiperOption = reactive({
       autoplay: {
-        delay: 3000,
+        delay: 300,
         disableOnInteraction: false
       },
       loop: true,
@@ -139,7 +115,56 @@ export default {
       swiperOption,
       onResize,
     }
-  }
+  },
+  methods: {
+    sleep(msec) {
+      return new Promise(function(resolve) {
+    
+          setTimeout(function() {resolve()}, msec);
+          console.log('request API for images ');
+    
+      })
+    },
+    loadImages() {
+      console.log('loadImages')
+      this.images = [
+          {
+            id: 1,
+            imageUrl: img1
+          }, {
+            id: 2,
+            imageUrl: img2
+          }, {
+            id: 3,
+            imageUrl: img3
+          }, {
+            id: 4,
+            imageUrl: img4
+          }, {
+            id: 5,
+            imageUrl: img4
+          }, {
+            id: 6,
+            imageUrl: img4
+          }, {
+            id: 7,
+            imageUrl: img4
+          }
+        ]
+    },
+  },
+  created() {
+    // this.loadImages();
+    async function start(obj) {
+      const waitSec = 3
+      console.log('start');
+      await obj.sleep(waitSec * 1000);
+      console.log(waitSec + '秒経過しました！');
+      obj.loadImages();
+      console.log('done');
+    }
+    start(this);
+  },
 }
 </script>
 
