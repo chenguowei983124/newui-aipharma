@@ -3,15 +3,15 @@
         class="
             flex
             justify-between
-            bg-cardTitlePmad
-            mx-5
+            cs:bg-cardTitlePmad
+            cs:mx-5
             my-5
-            h-82.5
+            h-48
             cs:h-21
             relative
         "
     >
-        <div class="nav-indicator prevArrow w-7.5 h-12 bg-cardTitlePmad invisible cs:visible">
+        <div class="nav-indicator prevArrow cs:w-7.5 h-12 bg-cardTitlePmad invisible cs:visible">
             <icon-left class="w-4 mx-1 z-99 absolute"></icon-left>
         </div>
         <div class="flex pl-7 pr-7.5 pt-3 absolute h-18 z-75 invisible cs:visible">
@@ -62,7 +62,7 @@
             </swiper-slide>
         </swiper>
 
-        <div class="nav-indicator nextArrow w-7.5 h-12 bg-cardTitlePmad invisible cs:visible">
+        <div class="nav-indicator nextArrow cs:w-7.5 h-12 bg-cardTitlePmad invisible cs:visible">
             <icon-right class="w-4 ml-2 mx-1 z-99 absolute"></icon-right>
         </div>
         <div class="flex right-7 pt-3 absolute h-18 z-75 invisible cs:visible">
@@ -121,14 +121,15 @@ export default {
     const onResize = (handler) => {
       // console.log('onResize',handler)
       const IMG_WIDTH = 234
-      // const IMG_HEIGHT = 60
       if (handler.isHorizontal()) {
         swiperOption.slidesPerView = (handler.el.children[1].offsetWidth / (IMG_WIDTH + swiperOption.spaceBetween)).toFixed(2)
         // console.log('isHorizontal',handler.el.children[1].offsetWidth)
       } else {
+        // const IMG_HEIGHT = 60
         // swiperOption.slidesPerView = (handler.height / (IMG_HEIGHT + swiperOption.spaceBetween)).toFixed(2)
-        if (swiperOption.slidesPerView != 5.08) {
-          swiperOption.slidesPerView = 5.08
+        const sp = 3
+        if (swiperOption.slidesPerView != sp) {
+          swiperOption.slidesPerView = sp
         }
         
       }
