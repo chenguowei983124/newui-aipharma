@@ -6,17 +6,15 @@
             bg-cardTitlePmad
             mx-5
             my-5
-            h-0
-            invisible
-            cs:visible
+            h-82.5
             cs:h-21
             relative
         "
     >
-        <div class="nav-indicator prevArrow w-7.5 h-12 bg-cardTitlePmad">
+        <div class="nav-indicator prevArrow w-7.5 h-12 bg-cardTitlePmad invisible cs:visible">
             <icon-left class="w-4 mx-1 z-99 absolute"></icon-left>
         </div>
-        <div class="flex pl-7 pr-7.5 pt-3 absolute h-18 z-75">
+        <div class="flex pl-7 pr-7.5 pt-3 absolute h-18 z-75 invisible cs:visible">
             <div
                 class="w-12.5 z-9 bg-gradient-to-r from-gray-900 bg-opacity-75"
             ></div>
@@ -24,6 +22,7 @@
 
         <swiper
             class="parallax-slider"
+            id="sc"
             parallax
             grabCursor
             :autoplay="swiperOption.autoplay"
@@ -37,6 +36,14 @@
             :watchOverflow="true"
             :observer="true"
             :observeParents="true"
+            :breakpoints='{
+              1: {
+                direction: "vertical",
+              },
+              460: {
+                direction: "horizontal",
+              },
+            }'            
             @resize="onResize"
             @afterInit="onResize"
             @update="onResize"
@@ -44,18 +51,21 @@
             <!-- :breakpoints="breakpoints" -->
             <swiper-slide
                 class="parallax-slide"
+                :id="'ss'+image.id"
                 v-for="image in images"
                 :key="image.id"
             >
-                <img :src="image.imageUrl" alt="失敗時の表示文言" 
+              <a :href="image.url" target="_blank" rel="noopener noreferrer">
+                <img :id="'si'+image.id" :src="image.src" alt="失敗時の表示文言" 
                   onerror="this.onerror = null; this.src='/src/assets/image/swiper-error.png';"/>
+              </a>
             </swiper-slide>
         </swiper>
 
-        <div class="nav-indicator nextArrow w-7.5 h-12 bg-cardTitlePmad">
+        <div class="nav-indicator nextArrow w-7.5 h-12 bg-cardTitlePmad invisible cs:visible">
             <icon-right class="w-4 ml-2 mx-1 z-99 absolute"></icon-right>
         </div>
-        <div class="flex right-7 pt-3 absolute h-18 z-75">
+        <div class="flex right-7 pt-3 absolute h-18 z-75 invisible cs:visible">
             <div
                 class="w-12.5 z-75 bg-gradient-to-l from-gray-900 bg-opacity-75"
             ></div>
@@ -109,8 +119,20 @@ export default {
       spaceBetween: 5
     });
     const onResize = (handler) => {
+      // console.log('onResize',handler)
       const IMG_WIDTH = 234
-      swiperOption.slidesPerView = (handler.width / IMG_WIDTH).toFixed(2)
+      // const IMG_HEIGHT = 60
+      if (handler.isHorizontal()) {
+        swiperOption.slidesPerView = (handler.el.children[1].offsetWidth / (IMG_WIDTH + swiperOption.spaceBetween)).toFixed(2)
+        // console.log('isHorizontal',handler.el.children[1].offsetWidth)
+      } else {
+        // swiperOption.slidesPerView = (handler.height / (IMG_HEIGHT + swiperOption.spaceBetween)).toFixed(2)
+        if (swiperOption.slidesPerView != 5.08) {
+          swiperOption.slidesPerView = 5.08
+        }
+        
+      }
+      // console.log('swiperOption',swiperOption)
     };
     return {
       swiperOption,
@@ -131,41 +153,48 @@ export default {
       this.images = [
           {
             id: 1,
-            imageUrl: img1
+            src: img1,
+            url: 'http://www.google.com/'
           }, {
             id: 2,
-            imageUrl: img2
+            src: img2,
+            url: 'http://www.google.com/'
           }, {
             id: 3,
-            imageUrl: img3
+            src: img3,
+            url: 'http://www.google.com/'
           }, {
             id: 4,
-            imageUrl: img4
+            src: img4,
+            url: 'http://www.google.com/'
           }, {
             id: 5,
-            imageUrl: "img4"
+            src: "img4",
+            url: 'http://www.google.com/'
           }, {
             id: 6,
-            imageUrl: "img4"
+            src: "img4",
+            url: 'http://www.google.com/'
           }, {
             id: 7,
-            imageUrl: "img4"
+            src: "img4",
+            url: 'http://www.google.com/'
           }
         ]
       
     },
   },
   created() {
-    // this.loadImages();
-    async function start(obj) {
-      const waitSec = 3
-      console.log('start');
-      await obj.sleep(waitSec * 1000);
-      console.log(waitSec + '秒経過しました！');
-      obj.loadImages();
-      console.log('done');
-    }
-    start(this);
+    this.loadImages();
+    // async function start(obj) {
+    //   const waitSec = 1
+    //   console.log('start');
+    //   await obj.sleep(waitSec * 1000);
+    //   console.log(waitSec + '秒経過しました！');
+    //   obj.loadImages();
+    //   console.log('done');
+    // }
+    // start(this);
   },
 }
 </script>
@@ -219,7 +248,7 @@ export default {
     flex: none;
 } */
 .nav-indicator {
-    margin-top: 4%;
+    margin-top: 29px;
     flex: none;
 }
 </style>
