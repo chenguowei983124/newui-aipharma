@@ -68,9 +68,7 @@
                 lineStyle="grayline"
             >
                 <carousel class="mt-7 cs:mt-3 mb-3"></carousel>
-                <carousel-vertical
-                    class="block cs:hidden -mt-8"
-                ></carousel-vertical> </result-detail-row
+                </result-detail-row
         ></resut-tag>
 
         <!-- PMDA -->
@@ -140,11 +138,10 @@
 import resutTag from '../searchResult/resultTag.vue'
 import resultDetailRow from '../searchResult/resultDetailRow.vue'
 import carousel from '../searchResult/carousel.vue'
-import carouselVertical from '../searchResult/carouselVertical.vue'
 
 export default {
   components: {
-    resutTag, resultDetailRow, carousel, carouselVertical
+    resutTag, resultDetailRow, carousel
   },
   props: {},
   couputed: {},
