@@ -130,6 +130,10 @@ export default {
 
   props: {},
   data() {
+    // let searchWord = ''
+    // if (sessionStorage.searchValueInput) {
+    //   searchWord = sessionStorage.searchValueInput
+    // }
     return {
       isMenuOpen: true,
       isDetailButtonClick: false,
@@ -141,6 +145,7 @@ export default {
     // 詳細条件ボタン押下区分を取得
     // ========================================
     getDetailClick: function (data) {
+      console.log("getDetailClickdata", data)
       this.isDetailButtonClick = data
     },
     // ========================================
@@ -151,8 +156,12 @@ export default {
       this.detailDisp = value
     },
     searchTag: function (value) {
-      //   console.log('searchTag', value)
+      console.log('searchTag', value)
+      //   console.log("sessionStorage.searchValueInput01", sessionStorage.searchValueInput)
       this.parentMage = value
+      //   sessionStorage.searchValueInput = value
+      //   this.searchValueInput = value
+      //   console.log("sessionStorage.searchValueInput02", sessionStorage.searchValueInput)
       this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
     },
     showMsgToParent: function (data) {

@@ -108,7 +108,6 @@ export default {
     },
     searchValueInput: {
       type: String,
-      default: ""
     },
     // get searchValue() {
     //   return this._searchValue
@@ -122,10 +121,14 @@ export default {
     }
   },
   data() {
+    // let searchWord = ''
+    // if (sessionStorage.searchValueInput) {
+    //   searchWord = sessionStorage.searchValueInput
+    // }
     return {
-      // searchValueInput: "",
+      // searchValueInput: searchWord,
       // aaa: this.$props.searchValueInput,
-      userName: this.searchValueInput,
+      // userName: this.searchValueInput,
       scroll: "",
       checkId: this.searchbarSelectID,
       detailDisp: true,
@@ -308,18 +311,22 @@ export default {
     },
     getNewInput: function (e) {
       console.log(this.searchValueInput)
+      sessionStorage.searchValueInput = e.target.value
       // console.log(e.target.value)
       // this.$emit("searchInput", e.target.value)
     },
     showMsg: function (data) {
+
       console.log("this.$props.searchValueInput", this.$props.searchValueInput)
-      // toRefs()
-      // this.$props.searchValueInput = {}
+      console.log("this.searchValueInput", this.searchValueInput)
+
+      toRefs(this.$props.searchValueInput).set("")
+      // this.searchValueInput.set = ""
     },
 
     menu: function () {
-      console.log(this.detailDisp)
-      console.log(this.srcoll)
+      // console.log(this.detailDisp)
+      // console.log(this.srcoll)
       this.srcoll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       if (this.srcoll > 0) {
         this.detailDisp = false
@@ -337,7 +344,7 @@ export default {
       // すべて
       if (this.checkId == 0) {
         // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('saveSearchValue', this.searchValue)
+        this.$store.dispatch('saveSearchValue', this.searchValueInput)
 
         // 一括検索結果画面へ遷移
         this.$router.push('/searchResultAll')

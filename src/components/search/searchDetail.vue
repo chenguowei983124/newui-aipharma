@@ -434,7 +434,8 @@ export default {
     // },
     inputClear(data) {
       //   console.log(this.message)
-      this.$emit("inputClearValue", "")
+      this.$emit("inputClearValue", { clear: '' })
+      //   sessionStorage.removeItem("searchValueInput")
 
       this.tagValue = []
 

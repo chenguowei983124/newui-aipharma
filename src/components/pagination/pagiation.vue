@@ -15,7 +15,10 @@
 
         <li
             v-if="!(firstPageSelected() && hidePrevNext)"
-            :class="[prevClass, firstPageSelected() ? disabledClass : '']"
+            :class="[
+                prevClass,
+                firstPageSelected() ? 'disabled text-gray-400' : '',
+            ]"
         >
             <a
                 @click="prevPage()"
@@ -60,7 +63,10 @@
 
         <li
             v-if="!(lastPageSelected() && hidePrevNext)"
-            :class="[nextClass, lastPageSelected() ? disabledClass : '']"
+            :class="[
+                nextClass,
+                lastPageSelected() ? 'disabled text-gray-400' : '',
+            ]"
         >
             <a
                 @click="nextPage()"

@@ -132,14 +132,14 @@
                             >
                                 <!-- {{ item.answer }} -->
                                 <div
-                                    v-show="!(isDetailDisp === index)"
+                                    v-show="!(isDetailDisp[index] === index)"
                                     v-html="
                                         item.answer.toString().split('\n')[0]
                                     "
                                 ></div>
 
                                 <div
-                                    v-show="isDetailDisp === index"
+                                    v-show="isDetailDisp[index] === index"
                                     v-html="item.answer"
                                 ></div>
                             </div>
@@ -466,9 +466,12 @@
                             </div>
                         </div>
                         <!-- 詳細情報 pc/sp -->
+                        {{ isDetailDisp[index] }}
                         <div
                             :class="[
-                                isDetailDisp == index ? 'block' : 'hidden',
+                                isDetailDisp[index] == index
+                                    ? 'block'
+                                    : 'hidden',
                             ]"
                         >
                             <div class="flex flex-row justify-center text-sm">
@@ -491,7 +494,8 @@
                                             <triangle-down-svg
                                                 class="w-2 h-2"
                                                 :class="[
-                                                    isDetailsDisp === index
+                                                    isDetailsDisp[index] ===
+                                                    index
                                                         ? 'transform rotate-180'
                                                         : '',
                                                 ]"
@@ -504,7 +508,7 @@
                             </div>
                             <div
                                 :class="[
-                                    isDetailsDisp === index
+                                    isDetailsDisp[index] === index
                                         ? 'block'
                                         : 'hidden',
                                 ]"
@@ -733,7 +737,7 @@
                         @click="openDetailDisp(index)"
                     >
                         <div
-                            v-show="!(isDetailDisp === index)"
+                            v-show="!(isDetailDisp[index] === index)"
                             class="flex items-center"
                         >
                             <triangle-down-svg
@@ -744,7 +748,7 @@
                             <div>開く</div>
                         </div>
                         <div
-                            v-show="isDetailDisp === index"
+                            v-show="isDetailDisp[index] === index"
                             class="flex items-center"
                         >
                             <triangle-down-svg
@@ -756,51 +760,12 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div
-                    class="
-                        border-l-2 border-r-2 border-b-2
-                        rounded
-                        border-blueline
-                        bg-cardViewCount
-                        text-center text-blueline
-                        h-8
-                        flex
-                        justify-center
-                        items-center
-                        cursor-pointer
-                    "
-                    @click="openDetailDisp(index)"
-                >
-                    <div
-                        v-show="!(isDetailDisp === index)"
-                        class="flex items-center"
-                    >
-                        <triangle-down-svg
-                            class="w-4 h-4"
-                            fill="#0099ff"
-                            stroke="#0099ff"
-                        ></triangle-down-svg>
-                        <div>開く</div>
-                    </div>
-                    <div
-                        v-show="isDetailDisp === index"
-                        class="flex items-center"
-                    >
-                        <triangle-down-svg
-                            class="w-4 h-4 transform rotate-180"
-                            fill="#0099ff"
-                            stroke="#0099ff"
-                        ></triangle-down-svg>
-                        <div>閉じる</div>
-                    </div>
-                </div> -->
             </div>
         </div>
 
          <pagination
             :page-count="getPageCount"
-            :page-range="5"
+            :page-range="4"
             :margin-pages="1"
             :click-handler="clickCallback"
             @input="getSelectPage"
@@ -813,26 +778,11 @@
             nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
-        <div class="flex justify-center mt-2">1-{{ pageCount }}件 表示</div>
+        <!-- <div class="flex justify-center mt-2">1-{{ pageCount }}件 表示</div> -->
+        <div class="flex justify-center mt-2">
+            {{ $store.getters.organizationSearchInfo.allCount }}件 表示
+        </div>
     </div>
-    <table
-        border="2"
-        cellspacing="1"
-        cellpadding="1"
-        style="width: 500px；border-top: 1px solid #999;border-left: 1px solid #999;
-    
-    border-spacing: 0;"
-        summary="summary"
-    >
-        <tr>
-            <th>Month</th>
-            <th>Savings</th>
-        </tr>
-        <tr>
-            <td>January</td>
-            <td>$100</td>
-        </tr>
-    </table>
 </template>
 
 <script>
@@ -850,6 +800,7 @@ import GoodMessageBox from '../messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
 import { ref, onBeforeUpdate, onUpdated, onUnmounted, nextTick } from 'vue'
 import { reactive, onMounted } from 'vue'
+
 
 export default {
   //   setup() {
@@ -889,9 +840,9 @@ export default {
       selectPage: 0,
       goodMessageBox: false,
       //   isDetailDisp: false,
-      isDetailDisp: -1,
+      isDetailDisp: [],
       //   isDetailsDisp: false,
-      isDetailsDisp: -1,
+      isDetailsDisp: [],
       activeIndex: -1,
       //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
       resultData: Object,
@@ -951,15 +902,20 @@ export default {
     },
     openDetailDisp(index) {
       console.log("aaa", index)
-      console.log("bbb", this.isDetailDisp)
+      //   console.log("bbb", this.isDetailDisp[index])
       //   this.isDetailDisp = !this.isDetailDisp
-      this.isDetailDisp = this.isDetailDisp == index ? -1 : index;
+      //   this.isDetailDisp[index] = index
+
+      this.isDetailDisp[index] = this.isDetailDisp[index] == index ? [] : index;
+      if (this.isDetailsDisp[index] == index) {
+        this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index;
+      }
       console.log("isDetailDisp", this.isDetailDisp)
     },
     // getDetailsDisp() { this.isDetailsDisp = !this.isDetailsDisp },
     openDetailsDisp(index) {
       //   this.isDetailDisp = this.isDetailDisp == index ? -1 : index;
-      this.isDetailsDisp = this.isDetailsDisp == index ? -1 : index;
+      this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index;
     },
     clickCallback() {
       console.log(this.organizationCountSortValue)
