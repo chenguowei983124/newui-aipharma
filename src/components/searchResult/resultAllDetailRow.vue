@@ -178,7 +178,7 @@
                     <result-detail-row-item
                         itemType="4"
                         itemTitle=" view"
-                        :itemValue="row.viewCount"
+                        :itemValue="row.viewCount.toString()"
                         addStyle="md:flex-none "
                         v-if="row.viewCount != undefined && dispItem == 'view'"
                     ></result-detail-row-item>

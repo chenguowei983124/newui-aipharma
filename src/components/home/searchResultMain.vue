@@ -9,7 +9,9 @@
         >
             <result-detail-row
                 class="searchResult_detail_blue"
+                routerPath="searchNotice"
                 :sites="$store.getters.topNoticeInfo.details"
+                :sub2="['title']"
             >
             </result-detail-row>
         </resut-tag>
@@ -23,15 +25,19 @@
         >
             <div class="tab-a1 hidden">
                 <result-detail-row
+                    routerPath="searchNotice"
                     class="searchResult_detail_blue"
                     :sites="$store.getters.topNoticeInfo.details"
+                    :sub2="['title']"
                 >
                 </result-detail-row>
             </div>
             <div class="tab-a2 hidden">
                 <result-detail-row
                     class="searchResult_detail_blue"
+                    routerPath="searchBulletinBoard"
                     :sites="$store.getters.topBulletinBoardInfo.details"
+                    :sub2="['title']"
                 >
                 </result-detail-row>
             </div>
@@ -46,6 +52,8 @@
         >
             <result-detail-row
                 class="searchResult_detail_blue"
+                routerPath="searchBulletinBoard"
+                :sub2="['title']"
                 :sites="$store.getters.topBulletinBoardInfo.details"
             >
             </result-detail-row>
@@ -61,14 +69,17 @@
             subTitleURL="/"
             ><result-detail-row
                 class="searchResult_detail_gray"
-                :sites="$store.getters.topScientifiSocietyInfo.detail"
+                :sites="$store.getters.topScientifiSocietyInfo.details"
                 proDetailStyle="style2"
                 midDetailStyle="style2"
                 bakDetailStyle="style2"
                 lineStyle="grayline"
+                :sub1="['dateFrom', 'dateTo']"
+                :sub2="['title', 'urlTitle']"
             >
-                <carousel class="mt-7 cs:mt-3 mb-3"></carousel>
-                </result-detail-row
+                <carousel
+                    class="mt-7 cs:mt-3 mb-3"
+                ></carousel> </result-detail-row
         ></resut-tag>
 
         <!-- PMDA -->
@@ -81,6 +92,7 @@
             ><result-detail-row
                 class="searchResult_detail_gray"
                 lineStyle="grayline"
+                :sub2="['title']"
                 :sites="$store.getters.topPMDAInfo.details"
             >
             </result-detail-row

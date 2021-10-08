@@ -57,7 +57,7 @@ export default {
         basic(state, payload) {
             state[payload.key] = payload.value
             // state[payload.key] = payload.info.data
-            // console.log(payload.info.data)
+            // console.log("aaa", payload.info.data)
             // console.log(state[payload.key])
         },
         setOrganizationSearchInfo(state, info) {

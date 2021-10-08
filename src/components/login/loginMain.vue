@@ -136,13 +136,11 @@
                 </div>
             </div>
         </div>
-        <Toast :message="message" v-if="showToast" />
     </div>
 </template>
 
 <script>
 import logo from './logo.vue'
-import Toast from './../alert/Toast.vue'
 export default {
   data() {
     return {
@@ -155,18 +153,13 @@ export default {
     }
   },
   components: {
-    logo, Toast
+    logo
   },
   methods: {
-    triggerToast: function () {
-      this.showToast = true;
-      setTimeout(() => this.showToast = false, 3000)
-    },
     loginClick: function () {
       if (this.loginId == "" || this.password == "") {
         this.message = "ログインに失敗しました。ユーザーIDまたはパスワードが間違っています。"
-        this.triggerToast()
-
+        this.$toast.error(this.message, { position: "top-right" });
 
       } else {
         let params = {

@@ -134,15 +134,47 @@
             </div>
             <!-- sp 二行目 -->
             <div class="ml-2.5 md:ml-0 flex-grow truncate">
-                <span class="items-center truncate" :class="midAreaStyle">
-                    <!-- title text -->
-                    <!-- :to="{ path: row.linkUrl }" -->
-                    <router-link
-                        :to="{ path: '/' }"
-                        class="truncate hover:opacity-50 active:opacity-50"
+                <span
+                    class="items-center truncate"
+                    :class="midAreaStyle"
+                    v-for="dispItem in sub2"
+                    :key="dispItem"
+                >
+                    <!-- Router + ID  -->
+                    <div
+                        class="
+                            underline
+                            truncate
+                            hover:opacity-50
+                            active:opacity-50
+                        "
+                        v-show="dispItem == 'title' && row.id != undefined"
                     >
                         <result-detail-row-item
                             itemType="3"
+                            :itemValue="row.title"
+                            :routerPath="routerPath"
+                            :id="row.id"
+                            :addStyle="
+                                getLookedTitle(row.looked, midDetailStyle)
+                            "
+                            :itemStyle="resetTitle(midDetailStyle)"
+                            v-if="row.title != undefined"
+                        ></result-detail-row-item>
+                    </div>
+
+                    <!-- タイトルのみ  -->
+                    <div
+                        class="truncate"
+                        v-show="
+                            dispItem == 'title' &&
+                            row.title != undefined &&
+                            row.url != undefined &&
+                            row.urlTitle != undefined
+                        "
+                    >
+                        <result-detail-row-item
+                            itemType="7"
                             :itemValue="row.title"
                             :addStyle="
                                 getLookedTitle(row.looked, midDetailStyle)
@@ -150,14 +182,39 @@
                             :itemStyle="resetTitle(midDetailStyle)"
                             v-if="row.title != undefined"
                         ></result-detail-row-item>
-                    </router-link>
+                    </div>
 
-                    <result-detail-row-item
-                        itemType="3"
-                        :itemValue="row.urlTitle"
-                        addStyle="underline truncate hover:opacity-50 active:opacity-50"
-                        v-if="row.urlTitle != undefined"
-                    ></result-detail-row-item>
+                    <!-- 外部URL -->
+                    <div
+                        class="truncate hover:opacity-50 active:opacity-50"
+                        v-show="dispItem == 'title'"
+                    >
+                        <result-detail-row-item
+                            itemType="6"
+                            :itemValue="row.title"
+                            :linkUrl="row.url"
+                            addStyle="underline truncate hover:opacity-50 active:opacity-50"
+                            v-if="
+                                row.title != undefined &&
+                                row.urlTitle == undefined &&
+                                row.url != undefined
+                            "
+                        ></result-detail-row-item>
+                    </div>
+
+                    <!-- 外部URL -->
+                    <div
+                        class="truncate hover:opacity-50 active:opacity-50"
+                        v-show="dispItem == 'urlTitle'"
+                    >
+                        <result-detail-row-item
+                            itemType="6"
+                            :itemValue="row.urlTitle"
+                            :linkUrl="row.url"
+                            addStyle="underline truncate hover:opacity-50 active:opacity-50"
+                            v-if="row.urlTitle != undefined"
+                        ></result-detail-row-item>
+                    </div>
                     <!-- 要閲覧ラベル -->
                     <result-detail-row-item
                         itemType="1"
@@ -205,7 +262,7 @@
                     <result-detail-row-item
                         itemType="4"
                         itemTitle=" view"
-                        :itemValue="row.viewCount"
+                        :itemValue="row.viewCount.toString()"
                         addStyle="md:ml-2.5 md:flex-none"
                         v-if="row.viewCount != undefined"
                     ></result-detail-row-item>
@@ -238,6 +295,12 @@ export default {
     }, lineStyle: {
       type: String,
       default: "blueline"
+    }, sub1: Array,
+    sub2: Array,
+    sub3: Array,
+    routerPath: {
+      type: String,
+      default: ""
     }
   },
   methods: {

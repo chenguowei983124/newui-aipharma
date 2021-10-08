@@ -11,10 +11,32 @@
             relative
         "
     >
-        <div class="nav-indicator prevArrow cs:w-7.5 h-12 bg-cardTitlePmad invisible cs:visible">
+        <div
+            class="
+                nav-indicator
+                prevArrow
+                cs:w-7.5
+                h-12
+                bg-cardTitlePmad
+                invisible
+                cs:visible
+            "
+        >
             <icon-left class="w-4 mx-1 z-99 absolute"></icon-left>
         </div>
-        <div class="flex pl-7 pr-7.5 pt-3 absolute h-18 z-75 invisible cs:visible">
+        <div
+            class="
+                flex
+                pl-7
+                pr-7.5
+                pt-3
+                absolute
+                h-18
+                z-75
+                invisible
+                cs:visible
+            "
+        >
             <div
                 class="w-12.5 z-9 bg-gradient-to-r from-gray-900 bg-opacity-75"
             ></div>
@@ -36,14 +58,14 @@
             :watchOverflow="true"
             :observer="true"
             :observeParents="true"
-            :breakpoints='{
-              1: {
-                direction: "vertical",
-              },
-              460: {
-                direction: "horizontal",
-              },
-            }'            
+            :breakpoints="{
+                1: {
+                    direction: 'vertical',
+                },
+                460: {
+                    direction: 'horizontal',
+                },
+            }"
             @resize="onResize"
             @afterInit="onResize"
             @update="onResize"
@@ -51,18 +73,32 @@
             <!-- :breakpoints="breakpoints" -->
             <swiper-slide
                 class="parallax-slide"
-                :id="'ss'+image.id"
+                :id="'ss' + image.id"
                 v-for="image in images"
                 :key="image.id"
             >
-              <a :href="image.url" target="_blank" rel="noopener noreferrer">
-                <img :id="'si'+image.id" :src="image.src" alt="失敗時の表示文言" 
-                  onerror="this.onerror = null; this.src='/src/assets/image/swiper-error.png';"/>
-              </a>
+                <a :href="image.url" target="_blank" rel="noopener noreferrer">
+                    <img
+                        :id="'si' + image.id"
+                        :src="image.src"
+                        alt="失敗時の表示文言"
+                        onerror="this.onerror = null; this.src='/src/assets/image/swiper-error.png';"
+                    />
+                </a>
             </swiper-slide>
         </swiper>
 
-        <div class="nav-indicator nextArrow cs:w-7.5 h-12 bg-cardTitlePmad invisible cs:visible">
+        <div
+            class="
+                nav-indicator
+                nextArrow
+                cs:w-7.5
+                h-12
+                bg-cardTitlePmad
+                invisible
+                cs:visible
+            "
+        >
             <icon-right class="w-4 ml-2 mx-1 z-99 absolute"></icon-right>
         </div>
         <div class="flex right-7 pt-3 absolute h-18 z-75 invisible cs:visible">
@@ -131,7 +167,7 @@ export default {
         if (swiperOption.slidesPerView != sp) {
           swiperOption.slidesPerView = sp
         }
-        
+
       }
       // console.log('swiperOption',swiperOption)
     };
@@ -142,47 +178,47 @@ export default {
   },
   methods: {
     sleep(msec) {
-      return new Promise(function(resolve) {
-    
-          setTimeout(function() {resolve()}, msec);
-          console.log('request API for images ');
-    
+      return new Promise(function (resolve) {
+
+        setTimeout(function () { resolve() }, msec);
+        console.log('request API for images ');
+
       })
     },
     loadImages() {
-      console.log('loadImages')
+      console.log(this.$store.getters.topScientifiSocietyInfo)
       this.images = [
-          {
-            id: 1,
-            src: img1,
-            url: 'http://www.google.com/'
-          }, {
-            id: 2,
-            src: img2,
-            url: 'http://www.google.com/'
-          }, {
-            id: 3,
-            src: img3,
-            url: 'http://www.google.com/'
-          }, {
-            id: 4,
-            src: img4,
-            url: 'http://www.google.com/'
-          }, {
-            id: 5,
-            src: "img4",
-            url: 'http://www.google.com/'
-          }, {
-            id: 6,
-            src: "img4",
-            url: 'http://www.google.com/'
-          }, {
-            id: 7,
-            src: "img4",
-            url: 'http://www.google.com/'
-          }
-        ]
-      
+        {
+          id: 1,
+          src: this.$store.getters.topScientifiSocietyInfo.imageLists[0].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.imageLists[0].imageUrl
+        }, {
+          id: 2,
+          src: this.$store.getters.topScientifiSocietyInfo.imageLists[1].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.imageLists[1].imageUrl
+        }, {
+          id: 3,
+          src: this.$store.getters.topScientifiSocietyInfo.imageLists[2].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.imageLists[2].imageUrl
+        }, {
+          id: 4,
+          src: this.$store.getters.topScientifiSocietyInfo.imageLists[3].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.imageLists[3].imageUrl
+        }, {
+          id: 5,
+          src: "img4",
+          url: 'http://www.google.com/'
+        }, {
+          id: 6,
+          src: "img4",
+          url: 'http://www.google.com/'
+        }, {
+          id: 7,
+          src: "img4",
+          url: 'http://www.google.com/'
+        }
+      ]
+
     },
   },
   created() {
