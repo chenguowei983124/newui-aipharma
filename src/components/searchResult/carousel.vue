@@ -82,7 +82,7 @@
                         :id="'si' + image.id"
                         :src="image.src"
                         alt="失敗時の表示文言"
-                        onerror="this.onerror = null; this.src='/src/assets/image/swiper-error.png';"
+                        onerror="this.onerror = null; this.src='https://i.pinimg.com/originals/95/9d/5d/959d5d8322cae221666af63c1c816f1b.jpg';"
                     />
                 </a>
             </swiper-slide>
