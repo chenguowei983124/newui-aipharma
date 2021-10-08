@@ -1,12 +1,6 @@
 <template>
     <span v-if="itemType == '1'" :class="itemClass">{{ title }}</span>
     <span v-if="itemType == '2'" :class="itemClass">{{ itemValue }}</span>
-    <!-- <span v-if="itemType == '3'" :class="itemClass"
-        ><router-link
-            :to="{ name: '/searchOrganization', params: { userId: 123 } }"
-            >{{ itemValue }}</router-link
-        ></span
-    > -->
     <router-link
         v-if="itemType == '3'"
         :to="{
@@ -20,6 +14,15 @@
         >{{ itemValue }}{{ itemTitle }}</span
     >
     <span v-if="itemType == '5'" :class="itemClass">{{ itemValue }}</span>
+    <a
+        v-if="itemType == '6'"
+        :href="linkUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <span :class="itemClass">{{ itemValue }}</span>
+    </a>
+    <span v-if="itemType == '7'" :class="itemClass">{{ itemValue }}</span>
 </template>
 
 <script>
@@ -33,7 +36,10 @@ export default {
   // itemStyle:ディフォルト以外
   // addStyle:追加
   // itemTitle
-  props: { itemType: String, typeKB: String, itemStyle: String, addStyle: String, itemTitle: String, itemValue: String, routerPath: String, id: String },
+  props: {
+    itemType: String, typeKB: String, itemStyle: String, addStyle: String,
+    itemTitle: String, itemValue: String, routerPath: String, id: String, linkUrl: String
+  },
   data() {
     return {
       title: ''
@@ -44,6 +50,7 @@ export default {
   },
   setup(props) {
     const itemClass = computed(() => {
+
       const style = [];
       // ディフォルト以外
       if (props.itemStyle != undefined && props.itemStyle != "") {

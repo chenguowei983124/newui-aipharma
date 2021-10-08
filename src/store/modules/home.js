@@ -12,48 +12,44 @@ export default {
 
     getters: {
         topNoticeInfo(state) {
-            const noticeInfo =
-            {
-                "details": [
-                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加採用薬に○○が追加採用薬に○○が追加採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
-                    { group: 'whole', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
-                    { group: 'group', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
-                    { group: 'society', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', linkUrl: '' },
-                    { group: 'whole', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加採用薬に○○が追加されました。', browseRequired: 'notbrowsed', notificationType: 'notice', viewCount: '12345', linkUrl: '' }
-                ]
-            }
+            // const noticeInfo =
+            // {
+            //     "details": [
+            //         { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加採用薬に○○が追加採用薬に○○が追加採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', id: '1234' },
+            //         { group: 'whole', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', id: '123' },
+            //         { group: 'group', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', id: '123' },
+            //         { group: 'society', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', browseRequired: 'browse', notificationType: 'notice', viewCount: '12345', id: '123' },
+            //         { group: 'whole', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加採用薬に○○が追加されました。', browseRequired: 'notbrowsed', notificationType: 'notice', viewCount: '12345', id: '123' }
+            //     ]
+            // }
 
-            return noticeInfo;
+            return state.noticeInfo;
         },
         topBulletinBoardInfo(state) {
             const bulletinBoardInfo = {
                 "details": [
-                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
-                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
-                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
-                    { group: 'organization', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' },
-                    { group: 'organization', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', linkUrl: '' }
+                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', id: '123' },
+                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', id: '123' },
+                    { group: 'organization', looked: 'notLooked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', id: '123' },
+                    { group: 'organization', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', id: '123' },
+                    { group: 'organization', looked: 'Looked', date: '2021.01.01', title: '採用薬に○○が追加されました。', notificationType: 'query', viewCount: '12345', id: '123' }
                 ]
             }
 
-            return bulletinBoardInfo;
+            return state.bulletinBoardInfo;
         },
         topScientifiSocietyInfo(state) {
             const scientifiSocietyInfo = {
                 "details": [
-                    { dateFrom: '2021.01.01', dateTo: '2021.12.30', title: '一般社団法人妊娠と薬情報研究会。', urlTitle: 'e-ラーニングBASIC', linkUrl: '' },
-                    { dateFrom: '2021.01.01', dateTo: '', title: '福井県病院薬剤師会。', urlTitle: '血液腫瘍における感染症対策について考える ～福井県病院薬剤師会共催～', linkUrl: '' },
-                    { dateFrom: '2021.01.01', dateTo: '2021.12.30', title: '日本製薬医学会', urlTitle: '【ハイブリット開催】第12回日本製薬医学会年次大会', linkUrl: '' },
+                    { dateFrom: '2021.01.01', dateTo: '2021.12.30', title: '一般社団法人妊娠と薬情報研究会。', urlTitle: 'e-ラーニングBASIC', url: 'https://medical-tribune.co.jp/rensai/2021/0729537412/' },
+                    { dateFrom: '2021.01.01', dateTo: '', title: '福井県病院薬剤師会。', urlTitle: '血液腫瘍における感染症対策について考える ～福井県病院薬剤師会共催～', url: 'https://www.jstage.jst.go.jp/article/rinketsu/27/11/27_11_2085/_article/-char/ja/' },
+                    { dateFrom: '2021.01.01', dateTo: '2021.12.30', title: '日本製薬医学会', urlTitle: '【ハイブリット開催】第12回日本製薬医学会年次大会', url: 'https://medical-tribune.co.jp/rensai/2021/0729537412/' },
                 ],
                 "imageLists": [
-                    { imageUrl: 'organization', linkUrl: 'notLooked' },
-                    { imageUrl: 'organization', linkUrl: 'notLooked' },
-                    { imageUrl: 'organization', linkUrl: 'notLooked' },
-                    { imageUrl: 'organization', linkUrl: 'notLooked' },
-                    { imageUrl: 'organization', linkUrl: 'notLooked' },
-                    { imageUrl: 'organization', linkUrl: 'notLooked' },
-                    { imageUrl: 'organization', linkUrl: 'notLooked' },
-                    { imageUrl: 'organization', linkUrl: 'notLooked' },
+                    { imageUrl: 'https://www.kabanoki.net/wp-content/uploads/2020/03/2n-6.png', linkUrl: 'https://www.pmda.go.jp/index.html' },
+                    { imageUrl: 'https://www.kabanoki.net/wp-content/uploads/2020/03/2n-6.png', linkUrl: 'https://www.pmda.go.jp/index.html' },
+                    { imageUrl: 'https://www.kabanoki.net/wp-content/uploads/2020/03/2n-6.png', linkUrl: 'https://www.pmda.go.jp/index.html' },
+                    { imageUrl: 'https://www.kabanoki.net/wp-content/uploads/2020/03/2n-6.png', linkUrl: 'https://www.pmda.go.jp/index.html' },
 
                 ]
             }
@@ -62,11 +58,11 @@ export default {
             const pmdaInfo =
             {
                 "details": [
-                    { type: ['eventType', 'recruitment'], date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
-                    { type: 'recruitment', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
-                    { type: 'international', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'new', linkUrl: '' },
-                    { type: 'examination', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: 'update', linkUrl: '' },
-                    { type: 'rescue', date: '2021.01.01', title: '採用薬に○○が追加されました。', states: '', linkUrl: '' }
+                    { type: ['eventType', 'recruitment'], date: '2021.01.01', title: '一般競争入札公告（政府調達）（令和4年定期購読洋雑誌の調達）', states: 'new', url: 'https://www.pmda.go.jp/procurements/public-bidding/general-competition-government/0077.html' },
+                    { type: ['recruitment'], date: '2021.01.01', title: '令和2年度入札情報（政府調達）', states: 'new', url: 'https://www.pmda.go.jp/procurements/public-bidding/general-competition-government/0044.html' },
+                    { type: ['international'], date: '2021.01.01', title: '令和2年度入札情報（政府調達）', states: 'new', url: 'https://www.pmda.go.jp/procurements/public-bidding/general-competition-government/0044.html' },
+                    { type: ['examination'], date: '2021.01.01', title: '令和2年度入札情報（政府調達）', states: 'update', url: 'https://www.pmda.go.jp/procurements/public-bidding/general-competition-government/0044.html' },
+                    { type: ['rescue'], date: '2021.01.01', title: '令和2年度入札情報（政府調達）', states: '', url: 'https://www.pmda.go.jp/procurements/public-bidding/general-competition-government/0044.html' }
                 ]
             }
 
@@ -133,20 +129,43 @@ export default {
         setTopNotice(state, info) {
             state.noticeInfo = info
         },
+        setTopBulletinboardinfo(state, info) {
+            state.bulletinBoardInfo = info
+        },
+        setTopScientifisocietyInfo(state, info) {
+            state.scientifiSocietyInfo = info
+        }
     },
 
     actions: {
-        // async getTopNotice({ rootState, commit }) {
-        //     const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info`, {
-        //         params: {
-        //             // token: '123456',
-        //         }
-        //     })
-        //     commit('basic', { key: 'noticeInfo', info })
+        async getTopNotice({ rootState, commit }) {
+            const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_Noticel_info`, {
+                params: {
+                    // token: '123456',
+                }
+            })
+            commit('setTopNotice', info.data)
+            // commit('basic', { key: 'noticeInfo', info })
+        },
+
+        // getTopNotice({ rootState, commit }, userGroupId) {
+        // http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info
+
+        // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
+        //     params: {
+        //         token: rootState.apiToken,
+        //         user_group_id: userGroupId
+        //     }
+        // })
+        // commit('setTopNotice', info)
         // },
-
-        getTopNotice({ rootState, commit }, userGroupId) {
-            // http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info
+        async getTopBulletinBoardInfo({ rootState, commit }, userGroupId) {
+            const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_bulletinboard_info`, {
+                params: {
+                    // token: '123456',
+                }
+            })
+            commit('setTopBulletinboardinfo', info.data)
 
             // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
             //     params: {
@@ -156,23 +175,14 @@ export default {
             // })
             // commit('setTopNotice', info)
         },
-        getTopBulletinBoardInfo({ rootState, commit }, userGroupId) {
-            // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
-            //     params: {
-            //         token: rootState.apiToken,
-            //         user_group_id: userGroupId
-            //     }
-            // })
-            // commit('setTopNotice', info)
-        },
-        getScientifiSocietyInfoe({ rootState, commit }, userGroupId) {
-            // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {
-            //     params: {
-            //         token: rootState.apiToken,
-            //         user_group_id: userGroupId
-            //     }
-            // })
-            // commit('setTopNotice', info)
+        async getScientifiSocietyInfoe({ rootState, commit }, userGroupId) {
+            const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_scientifisociety_info`, {
+                params: {
+                    // token: rootState.apiToken,
+                    // user_group_id: userGroupId
+                }
+            })
+            commit('setTopScientifisocietyInfo', info)
         },
         getPmdaInfo({ rootState, commit }, userGroupId) {
             // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/todos`, {

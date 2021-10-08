@@ -5,6 +5,8 @@ import searchResultAll from '/src/view/searchResultAll.vue'
 import searchOrganization from '/src/view/searchOrganization.vue'
 import searchDiKnowledge from '/src/view/searchDiKnowledge.vue'
 import searchPreavoids from '/src/view/searchPreavoids.vue'
+import searchNotice from '/src/view/searchNotice.vue'
+import searchBulletinBoard from '/src/view/searchBulletinBoard.vue'
 import notFound from '/src/view/notFound.vue'
 import error from '/src/view/error.vue'
 
@@ -50,6 +52,20 @@ const routes = [
         path: '/searchPreavoids',
         name: 'searchPreavoids',
         component: searchPreavoids,
+        meta: {
+            requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+        }
+    }, {
+        path: '/searchNotice',
+        name: 'searchNotice',
+        component: searchNotice,
+        meta: {
+            requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+        }
+    }, {
+        path: '/searchBulletinBoard',
+        name: 'searchBulletinBoard',
+        component: searchBulletinBoard,
         meta: {
             requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
         }

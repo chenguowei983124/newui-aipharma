@@ -16,6 +16,7 @@
     "swiper": "^6.8.1",
     "vue": "^3.1.5",
     "vue-router": "^4.0.10",
+    "vue-toast-notification": "^2.0.1",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
