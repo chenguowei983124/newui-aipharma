@@ -131,16 +131,17 @@
                                 "
                             >
                                 <!-- {{ item.answer }} -->
-                                <div v-show="!(isDetailDisp === index)">
-                                    {{ item.answer[0].info }}
-                                </div>
+                                <div
+                                    v-show="!(isDetailDisp === index)"
+                                    v-html="
+                                        item.answer.toString().split('\n')[0]
+                                    "
+                                ></div>
+
                                 <div
                                     v-show="isDetailDisp === index"
-                                    v-for="answerItem in item.answer"
-                                    :key="answerItem"
-                                >
-                                    {{ answerItem.info }}
-                                </div>
+                                    v-html="item.answer"
+                                ></div>
                             </div>
                         </div>
                         <!-- 更新情報 pc/sp-->
@@ -796,6 +797,7 @@
                 </div> -->
             </div>
         </div>
+
          <pagination
             :page-count="getPageCount"
             :page-range="5"
@@ -813,6 +815,24 @@
         ></pagination>
         <div class="flex justify-center mt-2">1-{{ pageCount }}件 表示</div>
     </div>
+    <table
+        border="2"
+        cellspacing="1"
+        cellpadding="1"
+        style="width: 500px；border-top: 1px solid #999;border-left: 1px solid #999;
+    
+    border-spacing: 0;"
+        summary="summary"
+    >
+        <tr>
+            <th>Month</th>
+            <th>Savings</th>
+        </tr>
+        <tr>
+            <td>January</td>
+            <td>$100</td>
+        </tr>
+    </table>
 </template>
 
 <script>
@@ -1004,5 +1024,27 @@ export default {
 
 .text {
     margin: 0 5px;
+}
+.table {
+    border-top: 1px solid #999;
+
+    border-left: 1px solid #999;
+
+    border-spacing: 0;
+}
+table th {
+    padding: 10px 30px;
+
+    border-bottom: 1px solid #999;
+
+    border-right: 1px solid #999;
+}
+table td {
+    padding: 10px 30px;
+    border-left: 1px solid #999;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+
+    border-right: 1px solid #999;
 }
 </style>
