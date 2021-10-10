@@ -15,8 +15,21 @@ const style = [
     { "value": "3", "title": "様式3" },
     { "value": "4", "title": "副作用" }
 ]
+
+const searchParam={
+    "KEYWORD":"keyword",
+    "TAGS":"tags",
+    "MEDICINE":"medicine",
+    "QACATEGORY":"qacategory",
+    "FACILITY":"facility_flag",
+    "DETAILNUMBER":"detailNumber",
+    "SORT":"SORT",
+    "PAGE":"page",
+    "PAID":"qaId",
+}
 export default {
     searchResulstLable_organization,
     style,
-    formList
+    formList,
+    searchParam
 }

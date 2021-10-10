@@ -13,8 +13,7 @@ service.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
     config.headers = {
         // 'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Accept': 'application/json'
     }
     // config.transformRequest = [function (data) {
     //     return qs.stringify(data)
@@ -34,9 +33,13 @@ service.interceptors.response.use(response => {
     store.dispatch('setIsLoadingShow', false)
     const { response } = error
     if (response) {
+        console.log(response)
         switch (response.status) {
             case 400:
                 router.push({ name: 'error', params: { errorMessage: 'invalid access token error' } })
+                break
+            case 404:
+                router.push({ name: '404'})
                 break
             case 500:
                 router.push({ name: 'error', params: { errorMessage: 'Internal Server Error' } })

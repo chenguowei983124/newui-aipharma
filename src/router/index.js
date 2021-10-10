@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import store from '../store';
 import login from '/src/view/login.vue'
 import myHome from '/src/view/myHome.vue'
 import searchResultAll from '/src/view/searchResultAll.vue'
@@ -31,6 +32,13 @@ const routes = [
         path: '/searchResultAll',
         name: 'searchResultAll',
         component: searchResultAll,
+        meta: {
+            requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+        }
+    }, {
+        path: '/searchOrganization/:id',
+        name: 'searchOrganization',
+        component: searchOrganization,
         meta: {
             requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
         }
@@ -74,9 +82,16 @@ const routes = [
         name: 'error',
         component: error,
 
+    }, {
+        path: '/404',
+        name: '404',
+        component: notFound,
+
     }
     ,
-    { path: '/:path(.*)', component: notFound },
+    {   path: '/:path(.*)', 
+        name:'notfound',
+        component: notFound },
 ]
 
 
@@ -92,6 +107,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
+    if (from != to){
+       store.dispatch("clearOwnSearchParam")
+        
+    }
     if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
         // setTimeout(()=>{
         if (localStorage.getItem('token')) {  // localStorage获取当前的token是否存在

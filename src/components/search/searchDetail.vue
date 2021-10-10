@@ -217,11 +217,11 @@
             <vue-single-select
                 ref="medicines"
                 :name="'field1'"
-                :default-value="null"
+                :default-value="$store.getters.getMedicineID"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="{ tabindex: 1 }"
                 :default-options="$store.getters.getQa_classify_class"
-                @selected="setSelectValue"
+                @selected="setMedicineID"
                 leftLableTitle="薬の分類"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                 inputStyle="w-full text-left pl-20 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -233,11 +233,11 @@
             <vue-single-select
                 ref="qDistinction"
                 :name="'field2'"
-                :default-value="null"
+                :default-value="$store.getters.getQuestionID"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="{ tabindex: 1 }"
                 :default-options="$store.getters.qa_classify_subject"
-                @selected="setSelectValue2"
+                @selected="setQuestionID"
                 leftLableTitle="質問区分"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                 inputStyle="w-full text-left pl-20  notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -249,11 +249,11 @@
             <vue-single-select
                 ref="facility"
                 :name="'field3'"
-                :default-value="null"
+                :default-value="$store.getters.getFacilityID"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="{ tabindex: 1 }"
                 :default-options="$store.getters.qa_classify_facility"
-                @selected="setSelectValue3"
+                @selected="setFacilityID"
                 leftLableTitle="施設"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                 inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-20 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -358,157 +358,168 @@ import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
 import Multiselect from '@vueform/multiselect'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 
-
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { }
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
+        message: {
+            type: String,
+            default: '',
+        },
     },
-    message: {
-      type: String,
-      default: ""
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
     },
-  },
-  components: { searchDropdown, searchSvg, TriangleDownSvg, Multiselect, vueSingleSelect },
-  data() {
-    return {
-      searchText: null,
-      //   tagsValue: '',
-      checkId: "",
-      isDetailClick: false,
-      selectValue: "",
-      selectValue2: "",
-      selectValue3: "",
-      tagValue: [],
-      //   dispText: "",
-      //   dispQDistinctionText: "",
-      //   dispFacilityText: "",
-    }
-
-  },
-  watch: {
-    tagValue() {
-      console.log(this.tagValue)
-      this.$emit('tagValue', this.tagValue)
-    }
-  },
-  methods: {
-    async fetchLanguages(query) {
-      // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
-
-      let where = ''
-
-      if (query) {
-        where = '&where=' + encodeURIComponent(JSON.stringify({
-          "ProgrammingLanguage": {
-            "$regex": `${query}|${query.toUpperCase()}|${query[0].toUpperCase() + query.slice(1)}`
-          }
-        }))
-      }
-
-      const response = await fetch(
-        'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' + where,
-        {
-          headers: {
-            'X-Parse-Application-Id': 'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
-            'X-Parse-Master-Key': 'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
-          }
+    data() {
+        return {
+            searchText: null,
+            //   tagsValue: '',
+            checkId: '',
+            isDetailClick: false,
+            tagValue: this.$store.getters.getSearchTags,
         }
-      );
-
-      const data = await response.json(); // Here you have the data that you need
-
-      return data.results.map((item) => {
-        return { value: item.ProgrammingLanguage, label: item.ProgrammingLanguage }
-      })
     },
-    // getDispText: function (value) {
-    //   this.dispText = value
-    // },
-    // getDispQDistinctionText: function (value) {
-    //   this.dispQDistinctionText = value
-    // },
-    // getDispFacilityText: function (value) {
-    //   this.dispFacilityText = value
-    // },
-    inputClear(data) {
-      //   console.log(this.message)
-      this.$emit("inputClearValue", { clear: '' })
-      //   sessionStorage.removeItem("searchValueInput")
+    watch: {
+        tagValue() {
+            console.log(this.tagValue)
+            this.$store.dispatch('setSearchTags', this.tagValue)
+            this.$emit('tagValue', this.tagValue)
+        },
+    },
+    methods: {
+        async fetchLanguages(query) {
+            // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
 
-      this.tagValue = []
+            let where = ''
 
-      this.$refs.medicines.setValue(null)
-      this.$refs.qDistinction.setValue(null)
-      this.$refs.facility.setValue(null)
-    }
-    ,
-    sendInputInfo() {
-      //   this.$store.dispatch('getOrganizationSearchInfo')
-      //   this.$store.dispatch('setIsOrganizationSearch', !this.$store.getters.getIsOrganizationSearch)
-    },
-    setSelectValue(value) {
-      this.selectValue = value
-    },
-    setSelectValue2(value) {
-      this.selectValue2 = value
-    },
-    setSelectValue3(value) {
-      this.selectValue3 = value
-    },
-    // ========================================
-    // 詳細条件クリックイベント
-    // ========================================
-    detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit("isDetailClick", this.isDetailClick)
-    },
-    // ========================================
-    // 検索ボタン押下イベント
-    // ========================================
-    searchClick: function (event) {
+            if (query) {
+                where =
+                    '&where=' +
+                    encodeURIComponent(
+                        JSON.stringify({
+                            ProgrammingLanguage: {
+                                $regex: `${query}|${query.toUpperCase()}|${
+                                    query[0].toUpperCase() + query.slice(1)
+                                }`,
+                            },
+                        })
+                    )
+            }
 
-      // すべて
-      if (this.checkId == 1) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('searchAll', this.searchValue)
+            const response = await fetch(
+                'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' +
+                    where,
+                {
+                    headers: {
+                        'X-Parse-Application-Id':
+                            'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
+                        'X-Parse-Master-Key':
+                            'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
+                    },
+                }
+            )
 
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 2) {
-        this.$router.push('/searchResultAll')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // DI 辞書
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 6) {
-        this.$router.push('/searchOrganization')
-      }
+            const data = await response.json() // Here you have the data that you need
+            return data.results.map((item) => {
+                return {
+                    value: item.ProgrammingLanguage,
+                    label: item.ProgrammingLanguage,
+                }
+            })
+        },
+        // getDispText: function (value) {
+        //   this.dispText = value
+        // },
+        // getDispQDistinctionText: function (value) {
+        //   this.dispQDistinctionText = value
+        // },
+        // getDispFacilityText: function (value) {
+        //   this.dispFacilityText = value
+        // },
+        inputClear(data) {
+            //   console.log(this.message)
 
-      // this.$router.push('/searchResultAll')
+            this.tagValue = []
+
+            this.$refs.medicines.setValue(null)
+            this.$refs.qDistinction.setValue(null)
+            this.$refs.facility.setValue(null)
+
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.dispatch('setMedicineID', '')
+            this.$store.dispatch('setQuestionID', '')
+            this.$store.dispatch('setFacilityID', '')
+        },
+        sendInputInfo() {
+            //   this.$store.dispatch('getOrganizationSearchInfo')
+            //   this.$store.dispatch('setIsOrganizationSearch', !this.$store.getters.getIsOrganizationSearch)
+        },
+        setMedicineID(value) {
+            this.$store.dispatch('setMedicineID', value)
+        },
+        setQuestionID(value) {
+            this.$store.dispatch('setQuestionID', value)
+        },
+        setFacilityID(value) {
+            this.$store.dispatch('setFacilityID', value)
+        },
+        // ========================================
+        // 詳細条件クリックイベント
+        // ========================================
+        detailBottunClick: function (event) {
+            this.isDetailClick = !this.isDetailClick
+            this.$emit('isDetailClick', this.isDetailClick)
+        },
+        // ========================================
+        // 検索ボタン押下イベント
+        // ========================================
+        searchClick: function (event) {
+            // すべて
+            if (this.checkId == 1) {
+                // 検索APIを呼び出し(画面入力値)
+                this.$store.dispatch('searchAll', this.searchValue)
+
+                // 一括検索結果画面へ遷移
+                this.$router.push('/searchResultAll')
+            }
+            // DI ナレッジシェア
+            else if (this.checkId == 2) {
+                this.$router.push('/searchResultAll')
+            }
+            // 組織内 DI 記録（Q&A）
+            else if (this.checkId == 3) {
+                this.$router.push('/searchOrganization')
+            }
+            // 症例（プレアボイド）
+            else if (this.checkId == 4) {
+                this.$router.push('/searchOrganization')
+            }
+            // DI 辞書
+            else if (this.checkId == 5) {
+                this.$router.push('/searchOrganization')
+            }
+            // 製薬企業情報
+            else if (this.checkId == 6) {
+                this.$router.push('/searchOrganization')
+            }
+
+            // this.$router.push('/searchResultAll')
+        },
+        // ========================================
+        // DropDown 選択したアイテムＩＤ取得
+        // ========================================
+        getCheckId(data) {
+            this.checkId = data
+        },
     },
-    // ========================================
-    // DropDown 選択したアイテムＩＤ取得
-    // ========================================
-    getCheckId(data) {
-      this.checkId = data
-    }
-  }
 }
 </script>
 
-<style>
-</style>
+<style></style>

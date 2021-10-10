@@ -4,10 +4,12 @@
         <!-- pcの場合 -->
         <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
             <search-bar
+                ref="searchbar"
                 :form="$constant.formList.OWN"
                 @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
-                v-bind:searchValueInput="parentMage"
+                @searchResult="getSearchResult"
+                :searchValueInput="$store.getters.getSearchWord"
             ></search-bar>
         </div>
 
@@ -36,6 +38,7 @@
                 <div class="hidden md:block mid:block text-sm flex-none">
                     トレンドタグ
                 </div>
+                <!-- @click="searchTag(item)" -->
                 <div class="flex flex-wrap space-x-1">
                     <div
                         class="
@@ -74,13 +77,9 @@
         <div class="flex-grow max-h-full min-w-min block"></div>
         <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">
             <div class="grid grid-cols-1 gap-1 md:space-y-3.75">
-                <!-- :class="[
-                        $store.getters.getIsOrganizationSearch
-                            ? 'block'
-                            : 'hidden',
-                    ]" -->
                 <div>
                     <search-organization-main
+                        ref="main"
                         v-on:listenToChildEvent="showMsgToParent"
                     ></search-organization-main>
                 </div>
@@ -119,59 +118,68 @@
 import CommentMessageBox from '../components/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/messageBox/goodMessageBox.vue'
 import searchBar from '../components/search/searchBar.vue'
-import searchOrganizationMain from "../components/organization/searchOrganizationMain.vue"
+import searchOrganizationMain from '../components/organization/searchOrganizationMain.vue'
 import OrganizationInit from '../components/organization/organizationInit.vue'
 
 export default {
-  components: {
-    CommentMessageBox,
-    GoodMessageBox, searchBar, searchOrganizationMain, OrganizationInit
-  },
+    components: {
+        CommentMessageBox,
+        GoodMessageBox,
+        searchBar,
+        searchOrganizationMain,
+        OrganizationInit,
+    },
 
-  props: {},
-  data() {
-    // let searchWord = ''
-    // if (sessionStorage.searchValueInput) {
-    //   searchWord = sessionStorage.searchValueInput
-    // }
-    return {
-      isMenuOpen: true,
-      isDetailButtonClick: false,
-      parentMage: "",
-    };
-  },
-  methods: {
-    // ========================================
-    // 詳細条件ボタン押下区分を取得
-    // ========================================
-    getDetailClick: function (data) {
-      console.log("getDetailClickdata", data)
-      this.isDetailButtonClick = data
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+            isDetailButtonClick: false,
+            parentMage: '',
+        }
     },
-    // ========================================
-    // 詳細条件表示・非表示取得
-    // ======================================== 
-    getDetailDisp: function (value) {
-      //   console.log(value)
-      this.detailDisp = value
-    },
-    searchTag: function (value) {
-      console.log('searchTag', value)
-      //   console.log("sessionStorage.searchValueInput01", sessionStorage.searchValueInput)
-      this.parentMage = value
-      //   sessionStorage.searchValueInput = value
-      //   this.searchValueInput = value
-      //   console.log("sessionStorage.searchValueInput02", sessionStorage.searchValueInput)
-      this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
-    },
-    showMsgToParent: function (data) {
-      //   console.log("showMsgToParent", data)
-      return this.parentMage = data
-    }
-  },
-  created() {
+    mounted() {},
+    methods: {
+        getSearchResult: function (value) {
+            console.log('')
+            this.$refs.main.setSearchResult(value)
+        },
 
-  }
+        // ========================================
+        // 詳細条件ボタン押下区分を取得
+        // ========================================
+        getDetailClick: function (data) {
+            console.log('getDetailClickdata', data)
+            this.isDetailButtonClick = data
+        },
+        // ========================================
+        // 詳細条件表示・非表示取得
+        // ========================================
+        getDetailDisp: function (value) {
+            //   console.log(value)
+            this.detailDisp = value
+        },
+        searchTag: function (value) {
+            this.value = value
+            this.$store.dispatch('setSearchWord', value)
+            this.$store.dispatch('setSearchTags', '')
+            this.$store.dispatch('setMedicineID', '')
+            this.$store.dispatch('setQuestionID', '')
+            this.$store.dispatch('setFacilityID', '')
+            this.$store.dispatch('setPage', '')
+            this.$store.dispatch('setQAID', '')
+            this.$refs.searchbar.searchClick()
+        },
+        showMsgToParent: function (data) {
+            return (this.parentMage = data)
+        },
+    },
+    created() {
+        let param = sessionStorage.getItem('searchParam')
+        this.$store.dispatch(
+            'setSearchWord',
+            sessionStorage.getItem('searchWord')
+        )
+    },
 }
 </script>
-

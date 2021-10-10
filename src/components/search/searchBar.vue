@@ -17,6 +17,12 @@
                         <!-- 検索条件入力 -->
                         <!-- sp -->
                         <!--  -->
+                        <!-- <input
+                            v-model="searchValueInput"
+                            :class="sreachBarSPInputClass"
+                            type="text"
+                            :placeholder="pcPlaceholder"
+                        /> -->
                         <input
                             v-model="searchValueInput"
                             @change="getNewInput($event)"
@@ -27,10 +33,10 @@
                         <!-- pc -->
                         <input
                             v-model="searchValueInput"
-                            @change="getNewInput($event)"
                             :class="sreachBarPCInputClass"
                             type="text"
                             :placeholder="pcPlaceholder"
+                            @input="input"
                         />
 
                         <!-- 検索ボタン -->
@@ -94,303 +100,413 @@ import searchSvg from '../svgImage/searchSvg.vue'
 import searchDetail from './searchDetail.vue'
 import searchDiKnowledge from './searchDiKnowledge.vue'
 import searchPreavoids from './searchPreavoids.vue'
-import { reactive, toRefs, ref } from "vue";
+import { reactive, toRefs, ref } from 'vue'
 
 export default {
-  components: {
-    searchDropdown, searchSvg, searchDetail,
-    searchDiKnowledge, searchPreavoids
-  },
-  props: {
-    form: {
-      type: String,
-      default: "TOP"
+    components: {
+        searchDropdown,
+        searchSvg,
+        searchDetail,
+        searchDiKnowledge,
+        searchPreavoids,
     },
-    searchValueInput: {
-      type: String,
+    props: {
+        form: {
+            type: String,
+            default: 'TOP',
+        },
+        searchValueInput: {
+            type: String,
+        },
+        // get searchValue() {
+        //   return this._searchValue
+        // },
+        set searchValue(value) {
+            this.searchValueInput = value
+        },
+        searchbarSelectID: {
+            type: Number,
+            default: 0,
+        },
     },
-    // get searchValue() {
-    //   return this._searchValue
-    // },
-    set searchValue(value) {
-      this.searchValueInput = value
-    },
-    searchbarSelectID: {
-      type: Number,
-      default: 0
-    }
-  },
-  data() {
-    // let searchWord = ''
-    // if (sessionStorage.searchValueInput) {
-    //   searchWord = sessionStorage.searchValueInput
-    // }
-    return {
-      // searchValueInput: searchWord,
-      // aaa: this.$props.searchValueInput,
-      // userName: this.searchValueInput,
-      scroll: "",
-      checkId: this.searchbarSelectID,
-      detailDisp: true,
-      ownTagVaule: [],
-      parentMsg: "",
-    }
-
-  },
-  watch: {
-    checkId: function () {
-      this.$emit("searchID", this.checkId)
-    },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.menu)
-    if (this.$props.form == this.$constant.formList.TOP) {
-      this.checkId = 0
-    } else if (this.$props.form == this.$constant.formList.ALL) {
-      this.checkId = 0
-    } else if (this.$props.form == this.$constant.formList.DI) {
-      this.checkId = 1
-    } else if (this.$props.form == this.$constant.formList.OWN) {
-      this.checkId = 2
-    } else if (this.$props.form == this.$constant.formList.PVD) {
-      this.checkId = 3
-    }
-  },
-  destroyed() {
-    document.removeEventListener("scroll", this.menu);
-  },
-  computed: {
-    searchBarFixedClass: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return ""
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "fixed w-full lm:w-270"
-      } else if (this.$props.form == this.$constant.formList.DI) {
-        return "fixed w-full lm:w-270"
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return "fixed w-full lm:w-270"
-      } else if (this.$props.form == this.$constant.formList.PVD) {
-        return "fixed w-full lm:w-270"
-      }
-    },
-    searchBarClass: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return "flex "
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "flex "
-      } else if (this.$props.form == this.$constant.formList.DI) {
-        return "flex"
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return "flex"
-      } else if (this.$props.form == this.$constant.formList.PVD) {
-        return "flex"
-      }
-    },
-    searchBarStyleCless: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return "bg-backgroundMainSearch flex rounded-none mid:rounded-md items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5"
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "bg-backgroundMainSearch flex items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5"
-      } else if (this.$props.form == this.$constant.formList.DI) {
-        return "bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 "
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return "bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 "
-      } else if (this.$props.form == this.$constant.formList.PVD) {
-        return "bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 "
-      }
-    },
-    searchBarProStyleClass: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return "bg-red-400 flex-grow"
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "bg-red-400 flex-grow"
-      } else if (this.$props.form == this.$constant.formList.DI) {
-        return "hidden"
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return "hidden"
-      } else if (this.$props.form == this.$constant.formList.PVD) {
-        return "hidden"
-      }
-    },
-    searchBarMidStyleClass: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return "bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none"
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none"
-      } else if (this.$props.form == this.$constant.formList.DI) {
-        return " flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    "
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return " flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    "
-      } else if (this.$props.form == this.$constant.formList.PVD) {
-        return " flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    "
-      }
-    },
-
-    pcPlaceholder: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return "Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます"
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます"
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return "キーワードを入力"
-      }
-    },
-
-    sreachBarPCInputClass: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return "hidden md:block  h-10 w-10/12  " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent "
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "hidden md:block  h-10 w-10/12  " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent "
-      } else if (this.$props.form == this.$constant.formList.DI) {
-        return "hidden md:block  h-10 w-10/12  " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent "
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return "hidden md:block  h-10 w-10/12  " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent "
-      } else if (this.$props.form == this.$constant.formList.PVD) {
-        return "hidden md:block  h-10 w-10/12  " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent "
-      }
-    },
-    sreachBarSPInputClass: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return "block md:hidden h-10 w-10/12 ml-2.5 " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent "
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "block md:hidden h-10 w-10/12 ml-2.5 " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent "
-      } else if (this.$props.form == this.$constant.formList.DI) {
-        return "block md:hidden h-10 w-10/12 ml-2.5 " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent mr-2.5"
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return "block md:hidden h-10 w-10/12 ml-2.5 " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent mr-2.5"
-      } else if (this.$props.form == this.$constant.formList.PVD) {
-        return "block md:hidden h-10 w-10/12 ml-2.5 " +
-          "notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 " +
-          "focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins " +
-          "focus:border-transparent mr-2.5"
-      }
-
-    },
-    sreachBarButtonClass: function () {
-      if (this.$props.form != this.$constant.formList.TOP && this.checkId != 0) {
-        return "hidden"
-      } else {
-        return "bg-searchBunnon hover:bg-yellow-400 active:opacity-100 active:bg-personInformationButton" +
-          "text-white  md:rounded-tr md:rounded-br w-10  md:w-17.5 h-10 flex-none mr-2.5"
-
-      }
-
-    }
-
-  },
-  methods: {
-    getOwnTagValue: function (value) {
-      this.ownTagVaule = value
-    },
-    getNewInput: function (e) {
-      console.log(this.searchValueInput)
-      sessionStorage.searchValueInput = e.target.value
-      // console.log(e.target.value)
-      // this.$emit("searchInput", e.target.value)
-    },
-    showMsg: function (data) {
-
-      console.log("this.$props.searchValueInput", this.$props.searchValueInput)
-      console.log("this.searchValueInput", this.searchValueInput)
-
-      toRefs(this.$props.searchValueInput).set("")
-      // this.searchValueInput.set = ""
-    },
-
-    menu: function () {
-      // console.log(this.detailDisp)
-      // console.log(this.srcoll)
-      this.srcoll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      if (this.srcoll > 0) {
-        this.detailDisp = false
-      } else {
-        this.detailDisp = true
-      }
-      this.$emit("detailDisp", this.detailDisp)
-
-    },
-    // ========================================
-    // 検索ボタン押下イベント
-    // ========================================
-    searchClick: function (event) {
-      console.log(this.ownTagVaule)
-      // すべて
-      if (this.checkId == 0) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('saveSearchValue', this.searchValueInput)
-
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 1) {
-        this.$store.dispatch('getdIKnowledgeShareSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
-        this.$router.push('/searchDiKnowledge')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 2) {
-        if (this.$props.form == this.$constant.formList.TOP) {
-          this.$store.dispatch('searchOrganization', this.searchValue, this.ownTagVaule)
-          // this.$router.push('/searchOrganization')
-        } else {
-          console.log(this.ownTagVaule)
-          this.$store.dispatch('getOrganizationSearchInfo', { inputSearchValue: this.searchValue, tagValue: this.ownTagVaule })
-          document.documentElement.scrollTop = 0
-          // this.$store.dispatch('getOrganizationSearchInfo')
+    data() {
+        // let searchWord = ''
+        // if (sessionStorage.searchValueInput) {
+        //   searchWord = sessionStorage.searchValueInput
+        // }
+        return {
+            // searchValueInput: searchWord,
+            // aaa: this.$props.searchValueInput,
+            // userName: this.searchValueInput,
+            scroll: '',
+            checkId: this.searchbarSelectID,
+            detailDisp: true,
+            ownTagVaule: [],
+            parentMsg: '',
         }
-        this.$router.push('/searchOrganization')
-
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchPreavoids')
-      }
-      // DI 辞書
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-
     },
-    // ========================================
-    // DropDown 選択したアイテムＩＤ取得
-    // ========================================
-    getCheckId(value) {
-      this.checkId = value
-    }
-  }
+    watch: {
+        checkId: function () {
+            this.$emit('searchID', this.checkId)
+        },
+    },
+    mounted() {
+        window.addEventListener('scroll', this.menu)
+        if (this.$props.form == this.$constant.formList.TOP) {
+            this.checkId = 0
+        } else if (this.$props.form == this.$constant.formList.ALL) {
+            this.checkId = 0
+        } else if (this.$props.form == this.$constant.formList.DI) {
+            this.checkId = 1
+        } else if (this.$props.form == this.$constant.formList.OWN) {
+            this.checkId = 2
+        } else if (this.$props.form == this.$constant.formList.PVD) {
+            this.checkId = 3
+        }
+    },
+    destroyed() {
+        document.removeEventListener('scroll', this.menu)
+    },
+    computed: {
+        searchBarFixedClass: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return ''
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return 'fixed w-full lm:w-270'
+            } else if (this.$props.form == this.$constant.formList.DI) {
+                return 'fixed w-full lm:w-270'
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return 'fixed w-full lm:w-270'
+            } else if (this.$props.form == this.$constant.formList.PVD) {
+                return 'fixed w-full lm:w-270'
+            }
+        },
+        searchBarClass: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return 'flex '
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return 'flex '
+            } else if (this.$props.form == this.$constant.formList.DI) {
+                return 'flex'
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return 'flex'
+            } else if (this.$props.form == this.$constant.formList.PVD) {
+                return 'flex'
+            }
+        },
+        searchBarStyleCless: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return 'bg-backgroundMainSearch flex rounded-none mid:rounded-md items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5'
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return 'bg-backgroundMainSearch flex items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5'
+            } else if (this.$props.form == this.$constant.formList.DI) {
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
+            } else if (this.$props.form == this.$constant.formList.PVD) {
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
+            }
+        },
+        searchBarProStyleClass: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return 'bg-red-400 flex-grow'
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return 'bg-red-400 flex-grow'
+            } else if (this.$props.form == this.$constant.formList.DI) {
+                return 'hidden'
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return 'hidden'
+            } else if (this.$props.form == this.$constant.formList.PVD) {
+                return 'hidden'
+            }
+        },
+        searchBarMidStyleClass: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return 'bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none'
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return 'bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none'
+            } else if (this.$props.form == this.$constant.formList.DI) {
+                return ' flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    '
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return ' flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    '
+            } else if (this.$props.form == this.$constant.formList.PVD) {
+                return ' flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    '
+            }
+        },
+
+        pcPlaceholder: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return 'Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます'
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return 'Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます'
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return 'キーワードを入力'
+            }
+        },
+
+        sreachBarPCInputClass: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return (
+                    'hidden md:block  h-10 w-10/12  ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return (
+                    'hidden md:block  h-10 w-10/12  ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
+            } else if (this.$props.form == this.$constant.formList.DI) {
+                return (
+                    'hidden md:block  h-10 w-10/12  ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return (
+                    'hidden md:block  h-10 w-10/12  ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
+            } else if (this.$props.form == this.$constant.formList.PVD) {
+                return (
+                    'hidden md:block  h-10 w-10/12  ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
+            }
+        },
+        sreachBarSPInputClass: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return (
+                    'block md:hidden h-10 w-10/12 ml-2.5 ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return (
+                    'block md:hidden h-10 w-10/12 ml-2.5 ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
+            } else if (this.$props.form == this.$constant.formList.DI) {
+                return (
+                    'block md:hidden h-10 w-10/12 ml-2.5 ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent mr-2.5'
+                )
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return (
+                    'block md:hidden h-10 w-10/12 ml-2.5 ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent mr-2.5'
+                )
+            } else if (this.$props.form == this.$constant.formList.PVD) {
+                return (
+                    'block md:hidden h-10 w-10/12 ml-2.5 ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent mr-2.5'
+                )
+            }
+        },
+        sreachBarButtonClass: function () {
+            if (
+                this.$props.form != this.$constant.formList.TOP &&
+                this.checkId != 0
+            ) {
+                return 'hidden'
+            } else {
+                return (
+                    'bg-searchBunnon hover:bg-yellow-400 active:opacity-100 active:bg-personInformationButton' +
+                    'text-white  md:rounded-tr md:rounded-br w-10  md:w-17.5 h-10 flex-none mr-2.5'
+                )
+            }
+        },
+    },
+    methods: {
+        input: function (e) {
+            this.$store.dispatch('setSearchWord', e.target.value)
+        },
+        getOwnTagValue: function (value) {
+            this.ownTagVaule = value
+        },
+        getNewInput: function (e) {
+            console.log(this.searchValueInput)
+            sessionStorage.searchValueInput = e.target.value
+            // console.log(e.target.value)
+            // this.$emit("searchInput", e.target.value)
+        },
+        showMsg: function (data) {
+            // this.inputValue = ''
+            // console.log(
+            //     'this.$props.searchValueInput',
+            //     this.$props.searchValueInput
+            // )
+            // console.log('this.searchValueInput', this.searchValueInput)
+            // toRefs(this.$props.searchValueInput).set('')
+            // this.searchValueInput.set = ""
+        },
+
+        menu: function () {
+            // console.log(this.detailDisp)
+            // console.log(this.srcoll)
+            this.srcoll =
+                window.pageYOffset ||
+                document.documentElement.scrollTop ||
+                document.body.scrollTop
+            if (this.srcoll > 0) {
+                this.detailDisp = false
+            } else {
+                this.detailDisp = true
+            }
+            this.$emit('detailDisp', this.detailDisp)
+        },
+        // ========================================
+        // 検索ボタン押下イベント
+        // ========================================
+        searchClick: function (event) {
+            console.log('searchClick')
+
+            // すべて
+            if (this.checkId == 0) {
+                // 検索APIを呼び出し(画面入力値)
+                this.$store.dispatch('saveSearchValue', this.searchValueInput)
+
+                // 一括検索結果画面へ遷移
+                this.$router.push('/searchResultAll')
+            }
+            // DI ナレッジシェア
+            else if (this.checkId == 1) {
+                this.$store.dispatch('getdIKnowledgeShareSearchInfo', {
+                    inputSearchValue: this.searchValue,
+                    tagValue: this.ownTagVaule,
+                })
+                this.$router.push('/searchDiKnowledge')
+            }
+            // 組織内 DI 記録（Q&A）
+            else if (this.checkId == 2) {
+                console.log('SearchWord', this.$store.getters.getSearchWord)
+                // ============================================
+                // 画面入力した検索条件をセッションに退避
+                // ============================================
+                // キーワード
+                sessionStorage.setItem(
+                    this.$constant.searchParam.KEYWORD,
+                    this.$store.getters.getSearchWord == undefined
+                        ? ''
+                        : this.$store.getters.getSearchWord
+                )
+
+                // タグ
+                sessionStorage.setItem(
+                    this.$constant.searchParam.TAGS,
+                    this.$store.getters.getSearchTags
+                )
+
+                // 薬区分
+                sessionStorage.setItem(
+                    this.$constant.searchParam.MEDICINE,
+                    this.$store.getters.getMedicineID == undefined
+                        ? ''
+                        : this.$store.getters.getMedicineID
+                )
+
+                // 質問区分
+                sessionStorage.setItem(
+                    this.$constant.searchParam.QACATEGORY,
+                    this.$store.getters.getQuestionID == undefined
+                        ? ''
+                        : this.$store.getters.getQuestionID
+                )
+
+                // 施設
+                sessionStorage.setItem(
+                    this.$constant.searchParam.FACILITY,
+                    this.$store.getters.getFacilityID == undefined
+                        ? ''
+                        : this.$store.getters.getFacilityID
+                )
+                // ページ
+                sessionStorage.setItem(
+                    this.$constant.searchParam.PAGE,
+                    this.$store.getters.getPage
+                )
+
+                let params = {
+                    search: this.$store.getters.getSearchWord,
+                    tags:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? ''
+                            : this.$store.getters.getSearchTags
+                            ? this.$store.getters.getSearchTags.join(',')
+                            : '',
+                    medicine:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getMedicineID,
+                    qacategory:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '-1'
+                            : this.$store.getters.getQuestionID,
+                    facility_flag:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '-1'
+                            : this.$store.getters.getFacilityID,
+                    displayed:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getMaxCount,
+                    sort:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getSort,
+                    page:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getPage,
+                }
+                if (this.$props.form == this.$constant.formList.TOP) {
+                    this.$router.push({
+                        name: 'searchOrganization',
+                        params: { searchKB: 'top' },
+                    })
+                } else {
+                    let result = this.$serve.getOwnData(params)
+                    this.$emit('searchResult', result)
+                }
+            }
+            // 症例（プレアボイド）
+            else if (this.checkId == 3) {
+                this.$router.push('/searchPreavoids')
+            }
+            // DI 辞書
+            else if (this.checkId == 4) {
+                this.$router.push('/searchOrganization')
+            }
+            // 製薬企業情報
+            else if (this.checkId == 5) {
+                this.$router.push('/searchOrganization')
+            }
+        },
+        // ========================================
+        // DropDown 選択したアイテムＩＤ取得
+        // ========================================
+        getCheckId(value) {
+            this.checkId = value
+        },
+    },
 }
 </script>
 
-<style>
-</style>
+<style></style>
