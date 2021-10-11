@@ -515,7 +515,8 @@
                             >
                                 <div
                                     class="
-                                        md:flex md:flex-row md:space-x-5
+                                        md:flex md:flex-row
+                                        md:space-x-5
                                         items-end
                                     "
                                 >
@@ -560,7 +561,8 @@
                                 </div>
                                 <div
                                     class="
-                                        md:flex md:flex-row md:space-x-5
+                                        md:flex md:flex-row
+                                        md:space-x-5
                                         notoSansJpAndFourteenRegular
                                         text-grayline
                                     "
@@ -592,7 +594,8 @@
                                 </div>
                                 <div
                                     class="
-                                        md:flex md:flex-row md:space-x-5
+                                        md:flex md:flex-row
+                                        md:space-x-5
                                         notoSansJpAndFourteenRegular
                                         text-grayline
                                     "
@@ -622,7 +625,8 @@
                                 </div>
                                 <div
                                     class="
-                                        md:flex md:flex-row md:space-x-5
+                                        md:flex md:flex-row
+                                        md:space-x-5
                                         notoSansJpAndFourteenRegular
                                         text-grayline
                                     "
@@ -764,7 +768,6 @@
             :page-range="4"
             :margin-pages="1"
             @input="getSelectPage"
-            :value="$store.getters.getPage"
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
@@ -794,361 +797,379 @@ import GoodMessageBox from '../messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
 
 export default {
-    components: {
-        TriangleDownSvg,
-        resutTag,
-        resultDetailRow,
-        carousel,
-        Good,
-        bad,
-        talk,
-        xIconSvg,
-        Pagination,
-        vueSingleSelect,
-        GoodMessageBox,
-        ResultDetailRowItem,
-    },
-    props: {},
+  components: {
+    TriangleDownSvg,
+    resutTag,
+    resultDetailRow,
+    carousel,
+    Good,
+    bad,
+    talk,
+    xIconSvg,
+    Pagination,
+    vueSingleSelect,
+    GoodMessageBox,
+    ResultDetailRowItem,
+  },
+  props: {},
 
-    data() {
-        return {
-            // 順 区分 id
-            organizationDateSortValue: 0,
-            // 件 表示 区分 id
-            organizationCountSortValue: 0,
-            pageCount: 1,
-            selectPage: 1,
-            goodMessageBox: false,
-            //   isDetailDisp: false,
-            isDetailDisp: [],
-            //   isDetailsDisp: false,
-            isDetailsDisp: [],
-            activeIndex: -1,
-            //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
-            resultData: Object,
-            result: Object,
+  data() {
+    return {
+      // 順 区分 id
+      organizationDateSortValue: 0,
+      // 件 表示 区分 id
+      organizationCountSortValue: 0,
+      pageCount: 1,
+      selectPage: 1,
+      goodMessageBox: false,
+      //   isDetailDisp: false,
+      isDetailDisp: [],
+      //   isDetailsDisp: false,
+      isDetailsDisp: [],
+      activeIndex: -1,
+      //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
+      resultData: Object,
+      result: Object,
+    }
+  },
+  mounted() {
+    this.execSearch()
+  },
+  watch: {},
+  computed: {
+    getPageCount() {
+      //   let page = 1;
+      if (this.organizationCountSortValue == '0') {
+        this.pageCount = 20
+      } else if (this.organizationCountSortValue == '1') {
+        this.pageCount = 50
+      } else if (this.organizationCountSortValue == '2') {
+        this.pageCount = 100
+      }
+      this.$store.dispatch('setPage', this.pageCount)
+      return Math.ceil(
+        this.$store.getters.organizationSearchInfo.allCount /
+        this.pageCount
+      )
+    },
+    dispDetailRange: function () {
+      let start = 1
+      let end = ""
+      //   console.log(this.selectPage)
+      //   console.log("this.$store.getters.organizationSearchInfo", Object.keys(this.$store.getters.organizationSearchInfo.qas).length)
+      if (this.selectPage > 1) {
+        start = (this.selectPage - 1) * this.pageCount + 1
+      }
+      //   if (this.$store.getters.organizationSearchInfo.qas == "") {
+
+      end = start + Object.keys(this.$store.getters.organizationSearchInfo.qas).length
+      //   }
+      if (this.selectPage == 1) {
+        return start.toString()
+      } else {
+        return start.toString() + '-' + end.toString()
+      }
+    },
+  },
+  methods: {
+    execSearch(kb) {
+      document.documentElement.scrollTop = 0
+      // 検索条件リーセット
+      this.resetStore()
+      // 設定　NULL
+      console.log("設定　NULL")
+      this.openDetailDisp("")
+      console.log("kb", kb)
+      // QAID取得
+      let qaid = ''
+      let params
+      if (this.$route.params.id) {
+        qaid = this.$route.params.id
+        this.$store.dispatch('setQAID', qaid)
+        sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
+      } else if (this.$route.params.searchKB || kb == true) {
+        params = {
+          search: this.$store.getters.getSearchWord,
+          tags:
+            this.$props.form == this.$constant.formList.TOP
+              ? ''
+              : this.$store.getters.getSearchTags
+                ? this.$store.getters.getSearchTags.join(',')
+                : '',
+          medicine:
+            this.$props.form == this.$constant.formList.TOP
+              ? '1'
+              : this.$store.getters.getMedicineID,
+          qacategory:
+            this.$props.form == this.$constant.formList.TOP
+              ? '-1'
+              : this.$store.getters.getQuestionID,
+          facility_flag:
+            this.$props.form == this.$constant.formList.TOP
+              ? '-1'
+              : this.$store.getters.getFacilityID,
+          displayed:
+            this.$props.form == this.$constant.formList.TOP
+              ? '1'
+              : this.$store.getters.getMaxCount,
+          sort:
+            this.$props.form == this.$constant.formList.TOP
+              ? '1'
+              : this.$store.getters.getSort,
+          page:
+            this.$props.form == this.$constant.formList.TOP
+              ? '1'
+              : this.$store.getters.getPage,
         }
+      } else if (this.$store.getters.getQAID != '') {
+        qaid = this.$store.getters.getQAID
+      }
+
+      let result
+      // QAID存在チェック
+      if (qaid != '') {
+        result = this.$serve.getOwn({ id: qaid })
+      } else if (params != null) {
+        result = this.$serve.getOwnData(params)
+      }
+
+      this.setSearchResult(result)
+      // this.dispDetailRange()
     },
-    mounted() {
-        this.execSearch()
-    },
-    watch: {},
-    computed: {
-        getPageCount() {
-            //   let page = 1;
-            if (this.organizationCountSortValue == '0') {
-                this.pageCount = 20
-            } else if (this.organizationCountSortValue == '1') {
-                this.pageCount = 50
-            } else if (this.organizationCountSortValue == '2') {
-                this.pageCount = 100
+
+    setSearchResult: function (value) {
+      console.log("setSearchResult", value)
+      value.then((response) => {
+        //   console.log("setSearchResult", response)
+        this.$store.dispatch('setOrganizationSearchInfo', response)
+        // 1件のみの場合、全回答情報を表示
+        if (response.data.allCount == 1) {
+          for (const key in response.data.qas) {
+            if (Object.hasOwnProperty.call(response.data.qas, key)) {
+              this.openDetailDisp(key, response.data.allCount)
             }
-            this.$store.dispatch('setPage', this.pageCount)
-            return Math.ceil(
-                this.$store.getters.organizationSearchInfo.allCount /
-                    this.pageCount
+          }
+          let qaid = ''
+          if (this.$route.params.id) {
+            qaid = this.$route.params.id
+            this.$store.dispatch('setQAID', qaid)
+            sessionStorage.setItem(
+              this.$constant.searchParam.PAID,
+              qaid
             )
-        },
-        dispDetailRange: function () {
-            let start = 1
-            console.log(this.selectPage)
-            if (this.selectPage > 1) {
-                start = (this.selectPage - 1) * this.pageCount + 1
-            }
+          } else if (this.$store.getters.getQAID != '') {
+            qaid = this.$store.getters.getQAID
+          }
+          // ビュー件数更新
+          let params = {
+            id: qaid,
+          }
+          this.$serve.sendViewCount(params)
+        } else {
+          this.isDetailDisp = []
+        }
+      })
 
-            let end =
-                start +
-                this.$store.getters.organizationSearchInfo.searchWords.length +
-                1
-
-            return start.toString() + '-' + end.toString()
-        },
     },
-    methods: {
-        execSearch(kb) {
-            document.documentElement.scrollTop = 0
-            // 検索条件リーセット
-            this.resetStore()
-            console.log(kb)
-            // QAID取得
-            let qaid = ''
-            let params
-            if (this.$route.params.id) {
-                qaid = this.$route.params.id
-                this.$store.dispatch('setQAID', qaid)
-                sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
-            } else if (this.$route.params.searchKB || kb == true) {
-                params = {
-                    search: this.$store.getters.getSearchWord,
-                    tags:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? ''
-                            : this.$store.getters.getSearchTags
-                            ? this.$store.getters.getSearchTags.join(',')
-                            : '',
-                    medicine:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? '1'
-                            : this.$store.getters.getMedicineID,
-                    qacategory:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? '-1'
-                            : this.$store.getters.getQuestionID,
-                    facility_flag:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? '-1'
-                            : this.$store.getters.getFacilityID,
-                    displayed:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? '1'
-                            : this.$store.getters.getMaxCount,
-                    sort:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? '1'
-                            : this.$store.getters.getSort,
-                    page:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? '1'
-                            : this.$store.getters.getPage,
-                }
-            } else if (this.$store.getters.getQAID != '') {
-                qaid = this.$store.getters.getQAID
-            }
 
-            let result
-            // QAID存在チェック
-            if (qaid != '') {
-                result = this.$serve.getOwn({ id: qaid })
-            } else if (params != null) {
-                result = this.$serve.getOwnData(params)
-            }
-            this.setSearchResult(result)
-            // this.dispDetailRange()
-        },
-        setSearchResult: function (value) {
-            value.then((response) => {
-                this.$store.dispatch('setOrganizationSearchInfo', response)
+    // =====================================================
+    // セッションに退避した情報をリーセット
+    // =====================================================
+    resetStore: function () {
+      // セッション存在チェック
+      // キーワード
+      if (
+        sessionStorage.getItem(this.$constant.searchParam.KEYWORD) !=
+        undefined
+      ) {
+        this.$store.dispatch(
+          'setSearchWord',
+          sessionStorage.getItem(this.$constant.searchParam.KEYWORD)
+        )
+      } else {
+        this.$store.dispatch('setSearchWord', '')
+      }
 
-                // 1件のみの場合、全回答情報を表示
-                if (response.data.allCount == 1) {
-                    for (const key in response.data.qas) {
-                        if (
-                            Object.hasOwnProperty.call(response.data.qas, key)
-                        ) {
-                            this.openDetailDisp(key)
-                        }
-                    }
+      // タグ
+      // if (sessionStorage.getItem(this.$constant.searchParam.TAGS)) {
+      //     this.$store.dispatch(
+      //         'setSearchTags',
+      //         sessionStorage.getItem(this.$constant.searchParam.TAGS)
+      //     )
+      // }
 
-                    let qaid = ''
-                    if (this.$route.params.id) {
-                        qaid = this.$route.params.id
-                        this.$store.dispatch('setQAID', qaid)
-                        sessionStorage.setItem(
-                            this.$constant.searchParam.PAID,
-                            qaid
-                        )
-                    } else if (this.$store.getters.getQAID != '') {
-                        qaid = this.$store.getters.getQAID
-                    }
-                    // ビュー件数更新
-                    let params = {
-                        id: qaid,
-                    }
-                    this.$serve.sendViewCount(params)
-                }
-            })
-        },
+      // 薬区分
+      if (
+        sessionStorage.getItem(this.$constant.searchParam.MEDICINE) !=
+        undefined
+      ) {
+        this.$store.dispatch(
+          'setMedicineID',
+          sessionStorage.getItem(this.$constant.searchParam.MEDICINE)
+        )
+      } else {
+        this.$store.dispatch('setMedicineID', -1)
+      }
 
-        // =====================================================
-        // セッションに退避した情報をリーセット
-        // =====================================================
-        resetStore: function () {
-            // セッション存在チェック
-            // キーワード
-            if (
-                sessionStorage.getItem(this.$constant.searchParam.KEYWORD) !=
-                undefined
-            ) {
-                this.$store.dispatch(
-                    'setSearchWord',
-                    sessionStorage.getItem(this.$constant.searchParam.KEYWORD)
-                )
-            } else {
-                this.$store.dispatch('setSearchWord', '')
-            }
+      // 質問区分
+      if (
+        sessionStorage.getItem(this.$constant.searchParam.QACATEGORY) !=
+        undefined
+      ) {
+        this.$store.dispatch(
+          'setQuestionID',
+          sessionStorage.getItem(
+            this.$constant.searchParam.QACATEGORY
+          )
+        )
+      } else {
+        this.$store.dispatch('setQuestionID', -1)
+      }
 
-            // タグ
-            // if (sessionStorage.getItem(this.$constant.searchParam.TAGS)) {
-            //     this.$store.dispatch(
-            //         'setSearchTags',
-            //         sessionStorage.getItem(this.$constant.searchParam.TAGS)
-            //     )
-            // }
+      // 施設
+      if (
+        sessionStorage.getItem(this.$constant.searchParam.FACILITY) !=
+        undefined
+      ) {
+        this.$store.dispatch(
+          'setFacilityID',
+          sessionStorage.getItem(this.$constant.searchParam.FACILITY)
+        )
+      } else {
+        this.$store.dispatch('setFacilityID', -1)
+      }
 
-            // 薬区分
-            if (
-                sessionStorage.getItem(this.$constant.searchParam.MEDICINE) !=
-                undefined
-            ) {
-                this.$store.dispatch(
-                    'setMedicineID',
-                    sessionStorage.getItem(this.$constant.searchParam.MEDICINE)
-                )
-            } else {
-                this.$store.dispatch('setMedicineID', -1)
-            }
+      // ページ
+      if (
+        sessionStorage.getItem(this.$constant.searchParam.PAGE) !=
+        undefined
+      ) {
+        this.$store.dispatch(
+          'setPage',
+          sessionStorage.getItem(this.$constant.searchParam.PAGE)
+        )
+      } else {
+        this.$store.dispatch('setPage', 1)
+      }
 
-            // 質問区分
-            if (
-                sessionStorage.getItem(this.$constant.searchParam.QACATEGORY) !=
-                undefined
-            ) {
-                this.$store.dispatch(
-                    'setQuestionID',
-                    sessionStorage.getItem(
-                        this.$constant.searchParam.QACATEGORY
-                    )
-                )
-            } else {
-                this.$store.dispatch('setQuestionID', -1)
-            }
+      // 明細件数
+      if (
+        sessionStorage.getItem(
+          this.$constant.searchParam.DETAILNUMBER
+        ) != undefined
+      ) {
+        this.$store.dispatch(
+          'setMaxCount',
+          sessionStorage.getItem(
+            this.$constant.searchParam.DETAILNUMBER
+          )
+        )
+      } else {
+        this.$store.dispatch('setMaxCount', 0)
+      }
 
-            // 施設
-            if (
-                sessionStorage.getItem(this.$constant.searchParam.FACILITY) !=
-                undefined
-            ) {
-                this.$store.dispatch(
-                    'setFacilityID',
-                    sessionStorage.getItem(this.$constant.searchParam.FACILITY)
-                )
-            } else {
-                this.$store.dispatch('setFacilityID', -1)
-            }
+      // ソート順
+      if (
+        sessionStorage.getItem(this.$constant.searchParam.SORT) !=
+        undefined
+      ) {
+        this.$store.dispatch(
+          'setSort',
+          sessionStorage.getItem(this.$constant.searchParam.SORT)
+        )
+      } else {
+        this.$store.dispatch('setSort', 0)
+      }
 
-            // ページ
-            if (
-                sessionStorage.getItem(this.$constant.searchParam.PAGE) !=
-                undefined
-            ) {
-                this.$store.dispatch(
-                    'setPage',
-                    sessionStorage.getItem(this.$constant.searchParam.PAGE)
-                )
-            } else {
-                this.$store.dispatch('setPage', 1)
-            }
+      // QAID
+      if (
+        sessionStorage.getItem(this.$constant.searchParam.PAID) !=
+        undefined
+      ) {
+        this.$store.dispatch(
+          'setQAID',
+          sessionStorage.getItem(this.$constant.searchParam.PAID)
+        )
+      } else {
+        this.$store.dispatch('setQAID', '')
+      }
 
-            // 明細件数
-            if (
-                sessionStorage.getItem(
-                    this.$constant.searchParam.DETAILNUMBER
-                ) != undefined
-            ) {
-                this.$store.dispatch(
-                    'setMaxCount',
-                    sessionStorage.getItem(
-                        this.$constant.searchParam.DETAILNUMBER
-                    )
-                )
-            } else {
-                this.$store.dispatch('setMaxCount', 0)
-            }
-
-            // ソート順
-            if (
-                sessionStorage.getItem(this.$constant.searchParam.SORT) !=
-                undefined
-            ) {
-                this.$store.dispatch(
-                    'setSort',
-                    sessionStorage.getItem(this.$constant.searchParam.SORT)
-                )
-            } else {
-                this.$store.dispatch('setSort', 0)
-            }
-
-            // QAID
-            if (
-                sessionStorage.getItem(this.$constant.searchParam.PAID) !=
-                undefined
-            ) {
-                this.$store.dispatch(
-                    'setQAID',
-                    sessionStorage.getItem(this.$constant.searchParam.PAID)
-                )
-            } else {
-                this.$store.dispatch('setQAID', '')
-            }
-
-            // 検索結果をクリア
-            this.$store.dispatch('clearOrganizationSearchInfo')
-        },
-        // =====================================================
-        // 改ページのデータ検索
-        // =====================================================
-        getSelectPage(value) {
-            console.log('page', value)
-            this.selectPage = value
-            this.$store.dispatch('setPage', value)
-            this.execSearch(true)
-        },
-        sendMsgToParent: function (data) {
-            this.$emit('listenToChildEvent', data)
-        },
-        // =====================================================
-        // 開くボタン押下
-        // =====================================================
-        openDetailDisp(index) {
-            this.isDetailDisp[index] =
-                this.isDetailDisp[index] == index ? [] : index
-            if (this.isDetailsDisp[index] == index) {
-                this.isDetailsDisp[index] =
-                    this.isDetailsDisp[index] == index ? [] : index
-            }
-        },
-        // =====================================================
-        // 明細の詳細情報リンク押下
-        // =====================================================
-        openDetailsDisp(index) {
-            this.isDetailsDisp[index] =
-                this.isDetailsDisp[index] == index ? [] : index
-        },
-        clickCallback() {
-            console.log()
-        },
-        setOrganizationDateSortValue(value) {
-            this.organizationDateSortValue = value
-            this.$store.dispatch('setSort', value)
-            this.execSearch(true)
-        },
-        setOrganizationCountSortValue(value) {
-            this.organizationCountSortValue = value
-            this.$store.dispatch('setMaxCount', value)
-            this.execSearch(true)
-        },
-        openGoodMessageBox(index) {
-            this.$store.dispatch(
-                'setGoodMessageBox',
-                !this.$store.getters.getGoodMessageBox
-            )
-        },
-        openCommentMessageBox() {
-            this.$store.dispatch(
-                'setCommentMessageBox',
-                !this.$store.getters.getCommentMessageBox
-            )
-        },
-        getRoeId(id) {
-            console.log(id)
-        },
-        ActicleDetail(index) {
-            this.activeIndex = this.activeIndex == index ? -1 : index
-        },
-        sendGoodMessage(index) {
-            var v = this.qaInfo[index].value
-        },
+      // 検索結果をクリア
+      this.$store.dispatch('clearOrganizationSearchInfo')
     },
+    // =====================================================
+    // 改ページのデータ検索
+    // =====================================================
+    getSelectPage(value) {
+      console.log('page', value)
+      this.selectPage = value
+      //   this.$store.dispatch('setPage', value)
+      //   this.execSearch(true)
+    },
+    sendMsgToParent: function (data) {
+      this.$emit('listenToChildEvent', data)
+    },
+    // =====================================================
+    // 開くボタン押下
+    // =====================================================
+    openDetailDisp(index, count) {
+      //   console.log("count", count)
+      //   console.log("AAAthis.isDetailDisp[index]", this.isDetailDisp[index])
+      //   console.log("AAAindex", index)
+      // 1件のみの場合
+      if (count == 1) {
+        this.isDetailDisp[index] = index
+      } else {
+        this.isDetailDisp[index] = this.isDetailDisp[index] == index ? [] : index
+        if (this.isDetailsDisp[index] == index) {
+          this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index
+        }
+      }
+      //   console.log("BBBthis.isDetailDisp[index]", this.isDetailDisp[index])
+      //   console.log("BBBindex", index)
+    },
+    // =====================================================
+    // 明細の詳細情報リンク押下
+    // =====================================================
+    openDetailsDisp(index) {
+      this.isDetailsDisp[index] =
+        this.isDetailsDisp[index] == index ? [] : index
+    },
+    clickCallback() {
+      console.log()
+    },
+    setOrganizationDateSortValue(value) {
+      this.organizationDateSortValue = value
+      this.$store.dispatch('setSort', value)
+      this.execSearch(true)
+    },
+    setOrganizationCountSortValue(value) {
+      this.organizationCountSortValue = value
+      this.$store.dispatch('setMaxCount', value)
+      this.execSearch(true)
+    },
+    openGoodMessageBox(index) {
+      this.$store.dispatch(
+        'setGoodMessageBox',
+        !this.$store.getters.getGoodMessageBox
+      )
+    },
+    openCommentMessageBox() {
+      this.$store.dispatch(
+        'setCommentMessageBox',
+        !this.$store.getters.getCommentMessageBox
+      )
+    },
+    getRoeId(id) {
+      console.log(id)
+    },
+    ActicleDetail(index) {
+      this.activeIndex = this.activeIndex == index ? -1 : index
+    },
+    sendGoodMessage(index) {
+      var v = this.qaInfo[index].value
+    },
+  },
 }
 </script>
 <style>
