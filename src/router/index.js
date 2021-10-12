@@ -8,6 +8,7 @@ import searchDiKnowledge from '/src/view/searchDiKnowledge.vue'
 import searchPreavoids from '/src/view/searchPreavoids.vue'
 import searchNotice from '/src/view/searchNotice.vue'
 import searchBulletinBoard from '/src/view/searchBulletinBoard.vue'
+import newOrgDIRecord from '/src/view/newOrgDIRecord.vue'
 import notFound from '/src/view/notFound.vue'
 import error from '/src/view/error.vue'
 
@@ -74,6 +75,13 @@ const routes = [
         path: '/searchBulletinBoard',
         name: 'searchBulletinBoard',
         component: searchBulletinBoard,
+        meta: {
+            requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+        }
+    }, {
+        path: '/newOrgDIRecord',
+        name: 'newOrgDIRecord',
+        component: newOrgDIRecord,
         meta: {
             requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
         }
