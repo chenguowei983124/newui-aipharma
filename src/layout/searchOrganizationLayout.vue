@@ -142,7 +142,6 @@ export default {
     methods: {
         getSearchResult: function (value) {
             console.log('')
-            this.$refs.main.setSearchResult(value)
         },
 
         // ========================================

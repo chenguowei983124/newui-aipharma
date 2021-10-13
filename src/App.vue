@@ -12,9 +12,7 @@
                 bg-white
             "
         >
-            <!-- <keep-alive> -->
-            <router-view />
-            <!-- </keep-alive> -->
+            <router-view :key="$route.path" />
             <div class="flex justify-end mr-5">
                 <move-top-button></move-top-button>
             </div>
@@ -27,7 +25,23 @@ import moveTopButton from './components/moveTopButton.vue'
 import Loading from './view/loading.vue'
 export default {
     components: { moveTopButton, Loading },
+    provide() {
+        return {
+            reload: this.reload,
+        }
+    },
+    data() {
+        return {
+            RouterState: true,
+        }
+    },
     methods: {
+        reload() {
+            this.RouterState = false
+            this.$nextTick(() => {
+                this.RouterState = true
+            })
+        },
         toTop() {
             let currentScroll = document.documentElement.scrollTop,
                 int = setInterval(frame, 6)
@@ -52,7 +66,7 @@ export default {
                     JSON.parse(sessionStorage.getItem('store'))
                 )
             )
-            sessionStorage.removeItem('store')
+            // sessionStorage.removeItem('store')
         }
         //在页面刷新时将vuex里的信息保存到sessionStorage里
         window.addEventListener('beforeunload', () => {
