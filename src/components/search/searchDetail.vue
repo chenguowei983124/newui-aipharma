@@ -20,24 +20,14 @@
             <div class="flex-auto">
                 <div class="flex flex-col md:flex-row">
                     <div class="flex flex-row space-x-3">
-                        <!-- 各施設のDB -->
-                        <div class="">
-                            <label class="inline-flex items-center justify-end">
-                                <input
-                                    type="checkbox"
-                                    class="form-checkbox text-white"
-                                    checked
-                                />
-                                <span class="ml-0.5 text-xs">各施設のDB</span>
-                            </label>
-                        </div>
                         <!-- Q -->
                         <div class="">
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="$store.getters.getCheckQ"
+                                    @change="onCheckQChange"
                                 />
                                 <span class="ml-0.5 text-xs">Q</span>
                             </label>
@@ -48,7 +38,8 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="$store.getters.getCheckA"
+                                    @change="onChangeCheckA"
                                 />
                                 <span class="ml-0.5 text-xs">A</span>
                             </label>
@@ -59,7 +50,8 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="$store.getters.getCheckComment"
+                                    @change="onChangeCheckComment"
                                 />
                                 <span class="ml-0.5 text-xs">コメント</span>
                             </label>
@@ -72,7 +64,10 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="
+                                        $store.getters.getCheckAddFileName
+                                    "
+                                    @change="onChangeCheckAddFileName"
                                 />
                                 <span class="ml-0.5 text-xs"
                                     >添付ファイル名</span
@@ -85,7 +80,10 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="
+                                        $store.getters.getCheckContributor
+                                    "
+                                    @change="onChangeCheckContributor"
                                 />
                                 <span class="ml-0.5 text-xs">投稿者</span>
                             </label>
@@ -96,7 +94,8 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="$store.getters.getCheckLastEditer"
+                                    @change="onChangeCheckLastEditer"
                                 />
                                 <span class="ml-0.5 text-xs">最終編集者</span>
                             </label>
@@ -108,11 +107,22 @@
                             <input
                                 type="checkbox"
                                 class="form-checkbox text-white"
-                                checked
+                                :checked="$store.getters.getCheckFacilityName"
+                                @change="onChangeCheckFacilityName"
                             />
-                            <span class="ml-0.5 text-xs"
-                                >施設名（グループ施設用）</span
-                            >
+                            <span class="ml-0.5 text-xs">施設名</span>
+                        </label>
+                    </div>
+                    <div class="md:ml-3">
+                        <!-- 備考 -->
+                        <label class="inline-flex items-center justify-end">
+                            <input
+                                type="checkbox"
+                                class="form-checkbox text-white"
+                                :checked="$store.getters.getCheckNote"
+                                @change="onChangeCheckNote"
+                            />
+                            <span class="ml-0.5 text-xs">備考</span>
                         </label>
                     </div>
                 </div>
@@ -126,7 +136,7 @@
                     v-model="tagValue"
                     mode="tags"
                     placeholder="#タグ"
-                    :filterResults="false"
+                    :filterResults="true"
                     :minChars="1"
                     :resolveOnLoad="false"
                     :delay="0"
@@ -395,7 +405,7 @@ export default {
     methods: {
         async fetchLanguages(query) {
             // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
-
+            console.log(query)
             let where = ''
 
             if (query) {
@@ -433,15 +443,6 @@ export default {
                 }
             })
         },
-        // getDispText: function (value) {
-        //   this.dispText = value
-        // },
-        // getDispQDistinctionText: function (value) {
-        //   this.dispQDistinctionText = value
-        // },
-        // getDispFacilityText: function (value) {
-        //   this.dispFacilityText = value
-        // },
         inputClear(data) {
             //   console.log(this.message)
 
@@ -456,7 +457,60 @@ export default {
             this.$store.dispatch('setMedicineID', '')
             this.$store.dispatch('setQuestionID', '')
             this.$store.dispatch('setFacilityID', '')
+            this.$store.dispatch('setCheckQ', true)
+            console.log('resetSearch3', this.$store.getters.getCheckQ)
+            this.$store.dispatch('setCheckA', true)
+            this.$store.dispatch('setCheckComment', true)
+            this.$store.dispatch('setCheckAddFileName', true)
+            this.$store.dispatch('setCheckContributor', true)
+            this.$store.dispatch('setCheckLastEditer', true)
+            this.$store.dispatch('setCheckFacilityName', true)
+            this.$store.dispatch('setCheckNote', true)
         },
+        onCheckQChange() {
+            this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
+            console.log('resetSearch4', this.$store.getters.getCheckQ)
+        },
+        onChangeCheckA() {
+            this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
+        },
+        onChangeCheckComment() {
+            this.$store.dispatch(
+                'setCheckComment',
+                !this.$store.getters.getCheckComment
+            )
+        },
+        onChangeCheckAddFileName() {
+            this.$store.dispatch(
+                'setCheckAddFileName',
+                !this.$store.getters.getCheckAddFileName
+            )
+        },
+        onChangeCheckContributor() {
+            this.$store.dispatch(
+                'setCheckContributor',
+                !this.$store.getters.getCheckContributor
+            )
+        },
+        onChangeCheckLastEditer() {
+            this.$store.dispatch(
+                'setCheckLastEditer',
+                !this.$store.getters.getCheckLastEditer
+            )
+        },
+        onChangeCheckFacilityName() {
+            this.$store.dispatch(
+                'setCheckFacilityName',
+                !this.$store.getters.getCheckFacilityName
+            )
+        },
+        onChangeCheckNote() {
+            this.$store.dispatch(
+                'setCheckNote',
+                !this.$store.getters.getCheckNote
+            )
+        },
+
         sendInputInfo() {
             //   this.$store.dispatch('getOrganizationSearchInfo')
             //   this.$store.dispatch('setIsOrganizationSearch', !this.$store.getters.getIsOrganizationSearch)

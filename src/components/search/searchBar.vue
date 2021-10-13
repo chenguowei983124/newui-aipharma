@@ -397,52 +397,7 @@ export default {
             // 組織内 DI 記録（Q&A）
             else if (this.checkId == 2) {
                 console.log('SearchWord', this.$store.getters.getSearchWord)
-                // ============================================
-                // 画面入力した検索条件をセッションに退避
-                // ============================================
-                // キーワード
-                sessionStorage.setItem(
-                    this.$constant.searchParam.KEYWORD,
-                    this.$store.getters.getSearchWord == undefined
-                        ? ''
-                        : this.$store.getters.getSearchWord
-                )
-
-                // タグ
-                sessionStorage.setItem(
-                    this.$constant.searchParam.TAGS,
-                    this.$store.getters.getSearchTags
-                )
-
-                // 薬区分
-                sessionStorage.setItem(
-                    this.$constant.searchParam.MEDICINE,
-                    this.$store.getters.getMedicineID == undefined
-                        ? ''
-                        : this.$store.getters.getMedicineID
-                )
-
-                // 質問区分
-                sessionStorage.setItem(
-                    this.$constant.searchParam.QACATEGORY,
-                    this.$store.getters.getQuestionID == undefined
-                        ? ''
-                        : this.$store.getters.getQuestionID
-                )
-
-                // 施設
-                sessionStorage.setItem(
-                    this.$constant.searchParam.FACILITY,
-                    this.$store.getters.getFacilityID == undefined
-                        ? ''
-                        : this.$store.getters.getFacilityID
-                )
-                // ページ
-                sessionStorage.setItem(
-                    this.$constant.searchParam.PAGE,
-                    this.$store.getters.getPage
-                )
-
+                let getTimestamp = new Date().getTime()
                 let params = {
                     search: this.$store.getters.getSearchWord,
                     tags:
@@ -475,16 +430,53 @@ export default {
                         this.$props.form == this.$constant.formList.TOP
                             ? '1'
                             : this.$store.getters.getPage,
+                    checkQ:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? true
+                            : this.$store.getters.getCheckQ,
+                    checkA:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? true
+                            : this.$store.getters.getCheckA,
+                    checkComment:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? true
+                            : this.$store.getters.getCheckComment,
+                    checkAddFileName:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? true
+                            : this.$store.getters.getCheckAddFileName,
+                    checkContributor:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? true
+                            : this.$store.getters.getCheckContributor,
+                    checkLastEditer:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? true
+                            : this.$store.getters.getCheckLastEditer,
+                    checkFacilityName:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? true
+                            : this.$store.getters.getCheckFacilityName,
+                    checkNote:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? true
+                            : this.$store.getters.getCheckNote,
+                    timestamp: getTimestamp,
                 }
-                if (this.$props.form == this.$constant.formList.TOP) {
-                    this.$router.push({
-                        name: 'searchOrganization',
-                        params: { searchKB: 'top' },
-                    })
-                } else {
-                    let result = this.$serve.getOwnData(params)
-                    this.$emit('searchResult', result)
-                }
+                this.$router.push({
+                    path: '/searchOrganization',
+                    query: params,
+                })
+                // if (this.$props.form == this.$constant.formList.TOP) {
+                //     this.$router.push({
+                //         name: 'searchOrganization',
+                //         params: { searchKB: 'top' },
+                //     })
+                // } else {
+                //     let result = this.$serve.getOwnData(params)
+                //     this.$emit('searchResult', result)
+                // }
             }
             // 症例（プレアボイド）
             else if (this.checkId == 3) {
