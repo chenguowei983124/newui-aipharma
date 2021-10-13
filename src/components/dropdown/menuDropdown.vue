@@ -59,7 +59,6 @@
                             h-12.5
                             md:w-30
                             mid:w-37.5
-                            md:h-15
                             bg-white
                             flex
                             justify-start
@@ -429,7 +428,7 @@ export default {
       menuItemList3: [
         { 'id': '1', 'title': 'マイデータ', 'itemStyle': 'title', 'path': '' },
         { 'id': '2', 'title': '組織内DI 記録（Q&A）', 'itemStyle': 'item', 'path': '' },
-        { 'id': '3', 'title': '登録', 'itemStyle': 'subproject', 'path': '' },
+        { 'id': '3', 'title': '登録', 'itemStyle': 'subproject', 'path': '/newOrgDIRecord' },
         { 'id': '4', 'title': '症例（プレアボイド）', 'itemStyle': 'item', 'path': '' },
         { 'id': '5', 'title': '登録', 'itemStyle': 'subproject', 'path': '' },
         { 'id': '6', 'title': 'データ入出力', 'itemStyle': 'item', 'path': 'searchOrganization' }],

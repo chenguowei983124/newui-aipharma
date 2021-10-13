@@ -3,6 +3,7 @@ const formList = {
     TOP: 'top',
     ALL: 'all',
     DI: 'searchDiKnowledge',
+    NDI: 'newOrgDIRecord',
     OWN: 'searchOrganizantion',
     PVD: 'searchPreavoids',
 }
