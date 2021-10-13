@@ -104,6 +104,8 @@ module.exports = {
         '93.75': '23.4375rem',
         // 484px
         '121': '30.25rem',
+        // 720px
+        '180': '45rem',
         '191.25': '47.8125rem',
         '245': '61.25rem',
         '270': '67.5rem',
@@ -216,6 +218,8 @@ module.exports = {
         xxs: ['0.6875rem', { lineHeight: '0.875rem' }],
         // 13px
         mxs: ['0.8125rem', { lineHeight: '1rem' }],
+        // 14px
+        mxss: ['0.875rem', { lineHeight: '1rem' }],
         // 15px
         mxxs: ['0.9375rem', { lineHeight: '1rem' }],
         // 22px

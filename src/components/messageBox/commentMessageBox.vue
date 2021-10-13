@@ -125,9 +125,13 @@
                                         class="
                                             bg-personInformationButton
                                             rounded
+                                            w-6
+                                            h-6
                                         "
                                     >
-                                        <trash-icon-svg></trash-icon-svg>
+                                        <trash-icon-svg
+                                            class="w-6 h-5"
+                                        ></trash-icon-svg>
                                     </button>
                                 </div>
                             </div>

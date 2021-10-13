@@ -3,7 +3,7 @@
         <div class="flex-none">
             <div class="flex items-center relative">
                 <!-- Menu icon 30px*22.5px -->
-                <svg
+                <div
                     class="
                         w-12.5
                         h-12.5
@@ -12,38 +12,31 @@
                         bg-gray-400
                         cursor-pointer
                     "
-                    fill="none"
-                    stroke="white"
-                    viewBox="-4 -4 32 32"
                     @click="linkClick"
                     v-if="$store.getters.getIsMenuClick == false"
-                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    <!-- stroke-linecap="round"
-                        stroke-linejoin="round" -->
-                    <path stroke-width="2" d="M4 8h16M4 12h16M4 16h16"></path>
-                </svg>
+                    <ground-menu-svg></ground-menu-svg>
+                </div>
                 <!-- x icon -->
-                <svg
-                    class="w-12.5 h-12.5 md:w-15 md:h-15 md:ml-25 bg-gray-400"
+                <div
+                    class="
+                        w-12.5
+                        h-12.5
+                        md:w-15
+                        md:h-15
+                        md:ml-25
+                        bg-gray-400
+                        cursor-pointer
+                    "
                     :class="{
                         'absolute z-99 -bottom-12.5  md:top-0 md:-left-25':
                             $store.getters.getIsMenuClick,
                     }"
-                    fill="none"
-                    stroke="white"
-                    viewBox="-4 -4 32 32"
                     v-if="$store.getters.getIsMenuClick"
                     @click="linkClick"
-                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    ></path>
-                </svg>
+                    <ground-menu-x-svg></ground-menu-x-svg>
+                </div>
                 <!-- Logo img -->
                 <transition
                     enter-active-class="transition duration-150 ease-out transform"
@@ -402,9 +395,11 @@
 import { computed } from '@vue/runtime-core';
 import menuLogoSvg from '../svgImage/menuLogoSvg.vue';
 import iconDown from '../svgImage/iconDown.vue';
+import groundMenuXSvg from '../svgImage/groundMenuXSvg.vue';
+import groundMenuSvg from '../svgImage/groundMenuSvg.vue';
 export default {
   name: 'dropdown',
-  components: { menuLogoSvg, iconDown },
+  components: { menuLogoSvg, iconDown, groundMenuXSvg, groundMenuSvg },
   props: { isDispaly: false },
   data() {
     return {

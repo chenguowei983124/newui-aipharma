@@ -93,7 +93,7 @@
     @apply font-NotoSansJp text-2xl font-bold ;
 }
 /* font-family: NotoSansJp font-size: 28px font-weight: 700 */
-.notoSansJpAndTwentyFourBold{
+.notoSansJpAndTwentyEightBold{
     @apply font-NotoSansJp text-xxl font-bold ;
 }
 
