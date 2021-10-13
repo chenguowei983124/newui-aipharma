@@ -33,6 +33,9 @@
                 <label class="notoSansJpAndFourteenBold">
                   質問
                 </label>
+                <label v-show="!validation.question" style="color: red;">
+                  *
+                </label>
                 <input
                     v-model="base.question"
                     class="
@@ -58,26 +61,14 @@
                 <label class="notoSansJpAndFourteenBold">
                   回答
                 </label>
-                <input
+                <label v-show="!validation.answer" style="color: red;">
+                  *
+                </label>
+                <div class="rounded-sm ring-1">
+                  <tinymce-edit
                     v-model="base.answer.text"
-                    class="
-                        block
-                        h-10
-                        w-full
-                        NotoSansJp-normal
-                        rounded-sm
-                        pl-4
-                        placeholder-gray-500
-                        focus:placeholder-opacity-0
-                        ring-1
-                        border-transparent
-                        focus:outline-none
-                        focus:ring-1 focus:ring-326EB5Lins
-                        focus:border-transparent
-                    "
-                    type="textarea"
-                    placeholder=""
-                />
+                  ></tinymce-edit>
+                </div>
                 <div class="flex justify-end mt-1">
                   <input
                       v-model="base.answer.isKeep"
@@ -100,7 +91,7 @@
                       v-model="item.name"
                       class="                          
                           h-10
-                          w-70
+                          w-1/2
                           NotoSansJp-normal
                           rounded-sm
                           pl-4
@@ -120,7 +111,7 @@
                       class="
                           ml-5                      
                           h-10
-                          w-80
+                          w-1/2
                           NotoSansJp-normal
                           rounded-sm
                           pl-4
@@ -170,9 +161,14 @@
                 />
             </div>
             <div id="pmid" class="mt-3">
-                <label class="notoSansJpAndFourteenBold">
-                  PubMed
-                </label>
+                <a :href="url.pmid" target="_blank" class="flex">
+                  <label class="notoSansJpAndFourteenBold underline">
+                    PubMed
+                  </label>
+                  <external-link
+                      class="hover:opacity-50 active:opacity-50 w-1/5"
+                  ></external-link>
+                </a>
                 <input
                     v-model="base.pmid"
                     class="
@@ -195,9 +191,14 @@
                 />
             </div>
             <div id="doi" class="mt-3">
-                <label class="notoSansJpAndFourteenBold">
-                  J-STAGE
-                </label>
+                <a :href="url.doi" target="_blank" class="flex">
+                  <label class="notoSansJpAndFourteenBold underline">
+                    J-STAGE
+                  </label>
+                  <external-link
+                      class="hover:opacity-50 active:opacity-50"
+                  ></external-link>
+                </a>
                 <input
                     v-model="base.doi"
                     class="
@@ -277,6 +278,7 @@
             </div>
             <new-org-DI-record-buttons 
               parent="base"
+              :disableSave="!isValid"
               @onTmpSaveEvent="tmpSaveEvent"
               @onSaveEvent="saveEvent"
               >
@@ -292,7 +294,7 @@
               <label class="notoSansJpAndFourteenBold">
                 薬の分類
               </label>
-              <input
+              <!-- <input
                   v-model="detail.mediTypes"
                   class="
                       block
@@ -310,7 +312,89 @@
                   "
                   type="text"
                   placeholder=""
-              />
+              /> -->
+              <div class="px-2 md:px-0">
+                  <Multiselect
+                      class="h-7.5"
+                      v-model="detail.mediTypes"
+                      mode="tags"
+                      placeholder=""
+                      :filterResults="false"
+                      :minChars="1"
+                      :resolveOnLoad="false"
+                      :delay="0"
+                      :searchable="true"
+                      :options="multiSelectItemList"
+                      :classes="{
+                          container:
+                              'relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-gray-300 rounded bg-white text-base leading-snug outline-none',
+                          containerDisabled: 'cursor-default bg-gray-100',
+                          containerOpen: 'rounded-b-none',
+                          containerOpenTop: 'rounded-t-none',
+                          containerActive: 'ring ring-green-500 ring-opacity-30',
+                          singleLabel:
+                              'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
+                          multipleLabel:
+                              'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
+                          search: 'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white rounded pl-3.5',
+                          tags: 'flex-grow flex-shrink flex flex-wrap items-center mt-1 pl-2',
+                          tag: 'bg-gray-300 text-black notoSansJpAndTwelveRegular pl-2 rounded-full border-2 mr-1 mb-1 flex items-center whitespace-nowrap',
+                          tagDisabled: 'pr-2 opacity-50',
+                          tagRemove:
+                              'flex items-center justify-center p-1 mx-0.5 rounded-sm hover:bg-black hover:bg-opacity-10 group',
+                          tagRemoveIcon:
+                              'bg-multiselect-remove bg-center bg-no-repeat opacity-30 inline-block w-3 h-3 group-hover:opacity-60',
+                          tagsSearchWrapper:
+                              'inline-block relative mx-1 mb-1 flex-grow flex-shrink h-full',
+                          tagsSearch:
+                              'absolute inset-0 border-0 outline-none appearance-none p-0 text-base font-sans box-border w-full',
+                          tagsSearchCopy:
+                              'invisible whitespace-pre-wrap inline-block h-px',
+                          placeholder:
+                              'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 text-gray-400',
+                          caret: 'bg-multiselect-caret bg-center bg-no-repeat w-2.5 h-4 py-px box-content mr-3.5 relative z-10 opacity-40 flex-shrink-0 flex-grow-0 transition-transform transform pointer-events-none',
+                          caretOpen: 'rotate-180 pointer-events-auto',
+                          clear: 'pr-3.5 relative z-10 opacity-40 transition duration-300 flex-shrink-0 flex-grow-0 flex hover:opacity-80',
+                          clearIcon:
+                              'bg-multiselect-remove bg-center bg-no-repeat w-2.5 h-4 py-px box-content inline-block',
+                          spinner:
+                              'bg-multiselect-spinner bg-center bg-no-repeat w-4 h-4 z-10 mr-3.5 animate-spin flex-shrink-0 flex-grow-0',
+                          dropdown:
+                              'max-h-60 absolute -left-px -right-px bottom-0 transform translate-y-full border border-gray-300 -mt-px overflow-y-scroll z-50 bg-white flex flex-col rounded-b',
+                          dropdownTop:
+                              '-translate-y-full top-px bottom-auto flex-col-reverse rounded-b-none rounded-t',
+                          dropdownHidden: 'hidden',
+                          options: 'flex flex-col p-0 m-0 list-none',
+                          optionsTop: 'flex-col-reverse',
+                          group: 'p-0 m-0',
+                          groupLabel:
+                              'flex text-sm box-border items-center justify-start text-left py-1 px-3 font-semibold bg-gray-200 cursor-default leading-normal',
+                          groupLabelPointable: 'cursor-pointer',
+                          groupLabelPointed: 'bg-gray-300 text-gray-700',
+                          groupLabelSelected: 'bg-green-600 text-white',
+                          groupLabelDisabled:
+                              'bg-gray-100 text-gray-300 cursor-not-allowed',
+                          groupLabelSelectedPointed:
+                              'bg-green-600 text-white opacity-90',
+                          groupLabelSelectedDisabled:
+                              'text-green-100 bg-green-600 bg-opacity-50 cursor-not-allowed',
+                          groupOptions: 'p-0 m-0',
+                          option: 'flex items-center justify-start box-border text-left cursor-pointer text-base leading-snug py-2 px-3',
+                          optionPointed: 'text-gray-800 bg-gray-100',
+                          optionSelected: 'text-white bg-green-500',
+                          optionDisabled: 'text-gray-300 cursor-not-allowed',
+                          optionSelectedPointed:
+                              'text-white bg-green-500 opacity-90',
+                          optionSelectedDisabled:
+                              'text-green-100 bg-green-500 bg-opacity-50 cursor-not-allowed',
+                          noOptions: 'py-2 px-3 text-gray-600 bg-white',
+                          noResults: 'py-2 px-3 text-gray-600 bg-white',
+                          fakeInput:
+                              'bg-transparent absolute left-0 right-0 -bottom-px w-full h-px border-0 p-0 appearance-none outline-none text-transparent',
+                          spacer: 'h-9 py-px box-content',
+                      }"
+                  ></Multiselect>
+              </div>
             </div>
             <div id="quesClass" class="mt-3">
               <label class="notoSansJpAndFourteenBold">
@@ -532,25 +616,88 @@
               <label class="notoSansJpAndFourteenBold">
                 マルチセレクト項目
               </label>
-              <input
-                  v-model="detail.multiSelectItem"
-                  class="
-                      block
-                      w-full
-                      NotoSansJp-normal
-                      rounded-sm
-                      pl-4
-                      placeholder-gray-500
-                      focus:placeholder-opacity-0
-                      ring-1
-                      border-transparent
-                      focus:outline-none
-                      focus:ring-1 focus:ring-326EB5Lins
-                      focus:border-transparent
-                  "
-                  type="text"
-                  placeholder=""
-              />
+              <div class="px-2 md:px-0">
+                  <Multiselect
+                      class="h-7.5"
+                      v-model="detail.multiSelectItem"
+                      mode="tags"
+                      placeholder=""
+                      :filterResults="false"
+                      :minChars="1"
+                      :resolveOnLoad="false"
+                      :delay="0"
+                      :searchable="true"
+                      :options="multiSelectItemList"
+                      :classes="{
+                          container:
+                              'relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-gray-300 rounded bg-white text-base leading-snug outline-none',
+                          containerDisabled: 'cursor-default bg-gray-100',
+                          containerOpen: 'rounded-b-none',
+                          containerOpenTop: 'rounded-t-none',
+                          containerActive: 'ring ring-green-500 ring-opacity-30',
+                          singleLabel:
+                              'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
+                          multipleLabel:
+                              'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
+                          search: 'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white rounded pl-3.5',
+                          tags: 'flex-grow flex-shrink flex flex-wrap items-center mt-1 pl-2',
+                          tag: 'bg-gray-300 text-black notoSansJpAndTwelveRegular pl-2 rounded-full border-2 mr-1 mb-1 flex items-center whitespace-nowrap',
+                          tagDisabled: 'pr-2 opacity-50',
+                          tagRemove:
+                              'flex items-center justify-center p-1 mx-0.5 rounded-sm hover:bg-black hover:bg-opacity-10 group',
+                          tagRemoveIcon:
+                              'bg-multiselect-remove bg-center bg-no-repeat opacity-30 inline-block w-3 h-3 group-hover:opacity-60',
+                          tagsSearchWrapper:
+                              'inline-block relative mx-1 mb-1 flex-grow flex-shrink h-full',
+                          tagsSearch:
+                              'absolute inset-0 border-0 outline-none appearance-none p-0 text-base font-sans box-border w-full',
+                          tagsSearchCopy:
+                              'invisible whitespace-pre-wrap inline-block h-px',
+                          placeholder:
+                              'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 text-gray-400',
+                          caret: 'bg-multiselect-caret bg-center bg-no-repeat w-2.5 h-4 py-px box-content mr-3.5 relative z-10 opacity-40 flex-shrink-0 flex-grow-0 transition-transform transform pointer-events-none',
+                          caretOpen: 'rotate-180 pointer-events-auto',
+                          clear: 'pr-3.5 relative z-10 opacity-40 transition duration-300 flex-shrink-0 flex-grow-0 flex hover:opacity-80',
+                          clearIcon:
+                              'bg-multiselect-remove bg-center bg-no-repeat w-2.5 h-4 py-px box-content inline-block',
+                          spinner:
+                              'bg-multiselect-spinner bg-center bg-no-repeat w-4 h-4 z-10 mr-3.5 animate-spin flex-shrink-0 flex-grow-0',
+                          dropdown:
+                              'max-h-60 absolute -left-px -right-px bottom-0 transform translate-y-full border border-gray-300 -mt-px overflow-y-scroll z-50 bg-white flex flex-col rounded-b',
+                          dropdownTop:
+                              '-translate-y-full top-px bottom-auto flex-col-reverse rounded-b-none rounded-t',
+                          dropdownHidden: 'hidden',
+                          options: 'flex flex-col p-0 m-0 list-none',
+                          optionsTop: 'flex-col-reverse',
+                          group: 'p-0 m-0',
+                          groupLabel:
+                              'flex text-sm box-border items-center justify-start text-left py-1 px-3 font-semibold bg-gray-200 cursor-default leading-normal',
+                          groupLabelPointable: 'cursor-pointer',
+                          groupLabelPointed: 'bg-gray-300 text-gray-700',
+                          groupLabelSelected: 'bg-green-600 text-white',
+                          groupLabelDisabled:
+                              'bg-gray-100 text-gray-300 cursor-not-allowed',
+                          groupLabelSelectedPointed:
+                              'bg-green-600 text-white opacity-90',
+                          groupLabelSelectedDisabled:
+                              'text-green-100 bg-green-600 bg-opacity-50 cursor-not-allowed',
+                          groupOptions: 'p-0 m-0',
+                          option: 'flex items-center justify-start box-border text-left cursor-pointer text-base leading-snug py-2 px-3',
+                          optionPointed: 'text-gray-800 bg-gray-100',
+                          optionSelected: 'text-white bg-green-500',
+                          optionDisabled: 'text-gray-300 cursor-not-allowed',
+                          optionSelectedPointed:
+                              'text-white bg-green-500 opacity-90',
+                          optionSelectedDisabled:
+                              'text-green-100 bg-green-500 bg-opacity-50 cursor-not-allowed',
+                          noOptions: 'py-2 px-3 text-gray-600 bg-white',
+                          noResults: 'py-2 px-3 text-gray-600 bg-white',
+                          fakeInput:
+                              'bg-transparent absolute left-0 right-0 -bottom-px w-full h-px border-0 p-0 appearance-none outline-none text-transparent',
+                          spacer: 'h-9 py-px box-content',
+                      }"
+                  ></Multiselect>
+              </div>
             </div>
             <div id="textItem" class="mt-3">
               <label class="notoSansJpAndFourteenBold">
@@ -656,15 +803,25 @@
 import newOrgDIRecordButtons from './newOrgDIRecordButtons.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
+import tinymceEdit from './tinymceEdit.vue'
+import Multiselect from '@vueform/multiselect'
+import externalLink from '../svgImage/extarnalLink.vue'
 
 export default {
   components: {
     newOrgDIRecordButtons,
     vueSingleSelect,
     litepieDatepicker,
+    tinymceEdit,
+    Multiselect,
+    externalLink,
   },
   data() {
     return {
+      url: {
+        pmid: "https://www.pmda.go.jp/",
+        doi: "https://www.pmda.go.jp/",
+      },
       prefessionList:[
         { "value": "0", "title": "薬剤師" },
         { "value": "1", "title": "先生" },
@@ -674,6 +831,11 @@ export default {
         { "value": "0", "title": "男" },
         { "value": "1", "title": "女" },   
         { "value": "2", "title": "不明" },      
+      ],
+      multiSelectItemList: [
+        {label: "A", value: "a"},
+        {label: "B", value: "b"},
+        {label: "C", value: "c"},
       ],
       base: {
         question: "",
@@ -696,7 +858,7 @@ export default {
         ],
       },
       detail: {        
-        mediTypes: "",
+        mediTypes: [],
         quesClass: "",
         mediName: "",
         sideEffects: "",
@@ -749,6 +911,21 @@ export default {
     onAddSource: function () {
       this.base.source.push({name:"", url:""})
     },
+  },
+  computed: {
+    validation() {
+      const base = this.base
+      return {
+        question : !!base.question,
+        answer : !!base.answer.text,
+      }
+    },
+    isValid() {
+      var validation = this.validation
+      return Object.keys(validation).every(function (key) {
+        return validation[key]
+      })
+    }
   },
 }
 </script>

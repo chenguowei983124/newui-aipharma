@@ -3,7 +3,7 @@
     <input
         type="button"
         class="
-            bg-gray
+            bg-gray-200
             hover:opacity-50
             active:bg-personInformationButton
             active:opacity-100
@@ -12,27 +12,31 @@
             notoSansJpAndEighteenBold
             text-black
             w-86.25
+            disabled:cursor-not-allowed
         "
         @click="onTmpSave"
         value="下書き保存"
     />
     <input
         type="button"
-        class="
-            ml-2
-            bg-personOrganizationButton
-            hover:opacity-50
-            active:bg-personInformationButton
-            active:opacity-100
-            h-10
-            rounded-full
-            notoSansJpAndEighteenBold
-            text-white
-            w-86.25
+        :class="
+            'ml-2'
+            + ' bg-orange-400'
+            + ' hover:opacity-50'
+            + ' active:bg-personInformationButton'
+            + ' active:opacity-100'
+            + ' h-10'
+            + ' rounded-full'
+            + ' notoSansJpAndEighteenBold'
+            + ' text-white'
+            + ' w-86.25'
+            + ' disabled:cursor-not-allowed'
+            + ( disableSave ? ' opacity-50' : '' )
         "
+        :disabled="disableSave"
         @click="onSave"
         value="登録する"
-    />                
+    />
   </div>
 </template>
 
@@ -41,6 +45,7 @@
 export default {
   props: {
     parent: {},
+    disableSave: Boolean,
   },
   data() {
     return {
