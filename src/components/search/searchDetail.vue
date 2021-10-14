@@ -309,7 +309,6 @@
                         rounded
                         bg-searchBunnon
                         text-white
-                        notoSansJpAndSixteenBold
                         w-43.75
                         md:w-28
                         h-9.5
@@ -320,7 +319,7 @@
                     "
                     @click="searchButtonClick"
                 >
-                    <div class="">検 索</div>
+                    <div class="text-lg font-NotoSansJp font-bold">検 索</div>
                     <search-svg class="ml-1"></search-svg>
                 </button>
             </div>

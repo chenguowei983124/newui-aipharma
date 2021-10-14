@@ -23,12 +23,14 @@
                             type="text"
                             :placeholder="pcPlaceholder"
                         /> -->
+
+                        <!-- :placeholder="pcPlaceholder" -->
                         <input
                             v-model="searchValueInput"
                             @change="getNewInput($event)"
                             :class="sreachBarSPInputClass"
                             type="text"
-                            :placeholder="pcPlaceholder"
+                            placeholder="キーワードを入力"
                         />
                         <!-- pc -->
                         <input
@@ -49,6 +51,7 @@
                             </div>
                         </button>
                     </div>
+                    <!-- DIナレッジシェア -->
                     <div
                         :class="
                             detailDisp ? 'block' : 'hidden group-hover:block'
@@ -260,7 +263,7 @@ export default {
         )
       } else if (this.$props.form == this.$constant.formList.DI) {
         return (
-          'hidden md:block  h-10 w-10/12 ' +
+          'hidden md:block  h-10 w-10/12 rounded-r ' +
           'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
           'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
           'focus:border-transparent '
@@ -298,7 +301,7 @@ export default {
         )
       } else if (this.$props.form == this.$constant.formList.DI) {
         return (
-          'block md:hidden h-10 w-10/12 ml-2.5 ' +
+          'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
           'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
           'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
           'focus:border-transparent mr-2.5'

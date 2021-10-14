@@ -1,7 +1,7 @@
 <template>
     <!-- get_DIKnowledgeShare_search_info -->
     <div v-if="$store.getters.dIKnowledgeShareSearchInfo != undefined">
-        <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium">
+        <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium pb-1">
             検索条件：
             <div
                 class=""
@@ -28,9 +28,7 @@
                         :default-value="0"
                         :placeholder="'-- Choose an option --'"
                         :default-input-attribs="{ tabindex: 1 }"
-                        :default-options="
-                            $store.getters.getOrganizationDateSort
-                        "
+                        :default-options="$constant.organizationDateSort"
                         @selected="setOrganizationDateSortValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 "
@@ -44,9 +42,7 @@
                         :default-value="0"
                         :placeholder="'-- Choose an option --'"
                         :default-input-attribs="{ tabindex: 1 }"
-                        :default-options="
-                            $store.getters.getOrganizationCountSort
-                        "
+                        :default-options="$constant.organizationCountSort"
                         @selected="setOrganizationCountSortValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
@@ -57,15 +53,12 @@
             </div>
         </div>
         <div class="space-y-2 mt-8">
-            <!-- <div v-for="(item, index) in qaInfo" :key="index"> -->
-            <!-- <div> -->
             <div
                 v-for="(item, index) in $store.getters
                     .dIKnowledgeShareSearchInfo.qas"
                 :key="index"
             >
-                <!-- {{ qaItems.facilityIdentificationNumber }} -->
-                <div class="border-2 rounded border-blueline">
+                <div class="border-2 rounded-lg border-blueline">
                     <!-- Group -->
                     <div
                         class="
@@ -132,26 +125,49 @@
                                 "
                             >
                                 <!-- {{ item.answer }} -->
-                                <div v-show="!(isDetailDisp === index)">
-                                    {{ item.answer[0].info }}
-                                </div>
                                 <div
-                                    v-show="isDetailDisp === index"
-                                    v-for="answerItem in item.answer"
-                                    :key="answerItem"
-                                >
-                                    {{ answerItem.info }}
-                                </div>
+                                    v-show="
+                                        !(
+                                            isDetailDisp[
+                                                $store.getters
+                                                    .dIKnowledgeShareSearchInfo
+                                                    .qas[index].id
+                                            ] ===
+                                            $store.getters
+                                                .dIKnowledgeShareSearchInfo.qas[
+                                                index
+                                            ].id
+                                        )
+                                    "
+                                    v-html="
+                                        item.answer.toString().split('\n')[0]
+                                    "
+                                ></div>
+                                <div
+                                    v-show="
+                                        isDetailDisp[
+                                            $store.getters
+                                                .dIKnowledgeShareSearchInfo.qas[
+                                                index
+                                            ].id
+                                        ] ===
+                                        $store.getters
+                                            .dIKnowledgeShareSearchInfo.qas[
+                                            index
+                                        ].id
+                                    "
+                                    v-html="item.answer"
+                                ></div>
                             </div>
                         </div>
                         <!-- 更新情報 pc/sp-->
-                        <div class="flex flex-col pt-5 pl-10">
+                        <div class="flex flex-col pt-5 pl-0 md:pl-10">
                             <div class="space-y-2 notoSansJpAndElevenRegular">
                                 <div class="flex space-x-4">
                                     <div>最終編集日：{{ item.createdAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
                                 </div>
-                                <div class="flex flex-wrap space-x-2">
+                                <!-- <div class="flex flex-wrap space-x-2">
                                     参考資料：
                                     <div
                                         v-for="referenceMaterials in item.referenceMaterials"
@@ -159,7 +175,7 @@
                                     >
                                         {{ referenceMaterials.name }}
                                     </div>
-                                </div>
+                                </div> -->
                                 <div
                                     class="
                                         flex flex-wrap
@@ -167,7 +183,7 @@
                                         items-center
                                     "
                                 >
-                                    出 典：
+                                    出典・引用：
                                     <div
                                         v-for="urls in item.urls"
                                         :key="urls"
@@ -195,6 +211,24 @@
                                 </div>
                                 <div class="flex">
                                     PubMed：
+                                    <div
+                                        v-if="item.pubmed != ''"
+                                        class="hover:text-blue-400"
+                                    >
+                                        <a
+                                            href="https://www.ncbi.nlm.nih.gov/pubmed/{{
+                                            item.pubmed
+                                        }}"
+                                            target="view_window"
+                                            >https://www.ncbi.nlm.nih.gov/pubmed/{{
+                                                item.pubmed
+                                            }}</a
+                                        >
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    J-STAGE：
+                                    <!-- <div class="flex-none"></div> -->
                                     <div
                                         v-if="item.pubmed != ''"
                                         class="hover:text-blue-400"
@@ -299,8 +333,8 @@
                                         <button
                                             class="
                                                 flex
-                                                justify-center
                                                 items-center
+                                                justify-end
                                                 h-7.5
                                                 w-14
                                                 rounded
@@ -309,10 +343,10 @@
                                             "
                                             @click="ActicleDetail(index)"
                                         >
-                                            <div>
+                                            <div class="mr-3">
                                                 {{ item.feedbackGood }}
                                             </div>
-                                            <good class=""></good>
+                                            <good class="h-4 w-4 mr-1"></good>
                                         </button>
                                         <div v-show="activeIndex === index">
                                             <div class="absolute bottom-8">
@@ -413,7 +447,7 @@
                                         <button
                                             class="
                                                 flex
-                                                justify-center
+                                                justify-end
                                                 items-center
                                                 h-7.5
                                                 w-14
@@ -423,15 +457,17 @@
                                             "
                                             @click="openGoodMessageBox"
                                         >
-                                            <div>{{ item.feedbackGood }}</div>
-                                            <good></good>
+                                            <div class="mr-3">
+                                                {{ item.feedbackGood }}
+                                            </div>
+                                            <good class="h-4 w-4 mr-1"></good>
                                         </button>
                                     </div>
                                     <!-- bad -->
                                     <div
                                         class="
                                             flex
-                                            justify-center
+                                            justify-end
                                             items-center
                                             h-7.5
                                             w-14
@@ -440,14 +476,16 @@
                                             bg-red-400
                                         "
                                     >
-                                        <div>{{ item.feedbackBad }}</div>
-                                        <bad></bad>
+                                        <div class="mr-3">
+                                            {{ item.feedbackBad }}
+                                        </div>
+                                        <bad class="h-4 w-4 mr-1"></bad>
                                     </div>
                                     <!-- comment -->
                                     <button
                                         class="
                                             flex
-                                            justify-center
+                                            justify-end
                                             items-center
                                             h-7.5
                                             w-14
@@ -457,10 +495,11 @@
                                         "
                                         @click="openCommentMessageBox"
                                     >
-                                        <div>
+                                        <div class="mr-2">
                                             {{ item.feedbackComment }}
                                         </div>
-                                        <talk></talk>
+
+                                        <talk class="h-5 w-5 mr-1"></talk>
                                     </button>
                                 </div>
                             </div>
@@ -468,7 +507,15 @@
                         <!-- 詳細情報 pc/sp -->
                         <div
                             :class="[
-                                isDetailDisp == index ? 'block' : 'hidden',
+                                isDetailDisp[
+                                    $store.getters.dIKnowledgeShareSearchInfo
+                                        .qas[index].id
+                                ] ==
+                                $store.getters.dIKnowledgeShareSearchInfo.qas[
+                                    index
+                                ].id
+                                    ? 'block'
+                                    : 'hidden',
                             ]"
                         >
                             <div class="flex flex-row justify-center text-sm">
@@ -485,17 +532,30 @@
                                                 items-center
                                                 cursor-pointer
                                             "
-                                            @click="openDetailsDisp(index)"
+                                            @click="
+                                                openDetailsDisp(
+                                                    $store.getters
+                                                        .dIKnowledgeShareSearchInfo
+                                                        .qas[index].id
+                                                )
+                                            "
                                         >
                                             詳細情報
                                             <triangle-down-svg
                                                 class="w-2 h-2"
                                                 :class="[
-                                                    isDetailsDisp === index
+                                                    isDetailsDisp[
+                                                        $store.getters
+                                                            .dIKnowledgeShareSearchInfo
+                                                            .qas[index].id
+                                                    ] ===
+                                                    $store.getters
+                                                        .dIKnowledgeShareSearchInfo
+                                                        .qas[index].id
                                                         ? 'transform rotate-180'
                                                         : '',
                                                 ]"
-                                                fill="#000000"
+                                                fill="#6b7280"
                                                 stroke="#ffffff"
                                             ></triangle-down-svg></div
                                     ></span>
@@ -504,7 +564,14 @@
                             </div>
                             <div
                                 :class="[
-                                    isDetailsDisp === index
+                                    isDetailsDisp[
+                                        $store.getters
+                                            .dIKnowledgeShareSearchInfo.qas[
+                                            index
+                                        ].id
+                                    ] ===
+                                    $store.getters.dIKnowledgeShareSearchInfo
+                                        .qas[index].id
                                         ? 'block'
                                         : 'hidden',
                                 ]"
@@ -512,41 +579,35 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        md:space-x-5
-                                        items-end
+                                        notoSansJpAndFourteenRegular
+                                        text-grayline
+                                        border-b-2
                                     "
                                 >
-                                    <div
-                                        class="
-                                            flex
-                                            md:w-1/2
-                                            border-b-2
-                                            notoSansJpAndFourteenRegular
-                                            text-grayline
-                                        "
-                                    >
+                                    <div class="flex flex-auto">
                                         <div class="w-30 flex-none">QAID</div>
                                         <div class="w-2">:</div>
                                         <div class="">
                                             {{ item.facilityQaNumber }}
                                         </div>
                                     </div>
-                                    <div
-                                        class="
-                                            flex
-                                            md:w-1/2
-                                            border-b-2
-                                            notoSansJpAndFourteenRegular
-                                            text-grayline
-                                        "
-                                    >
+                                </div>
+                                <div
+                                    class="
+                                        md:flex md:flex-row
+                                        notoSansJpAndFourteenRegular
+                                        text-grayline
+                                        border-b-2
+                                    "
+                                >
+                                    <div class="flex flex-auto">
                                         <div class="w-30 flex-none">
                                             薬の分類
                                         </div>
                                         <div class="w-2">:</div>
                                         <div class="flex flex-wrap">
                                             <div
-                                                class=""
+                                                class="mr-2"
                                                 v-for="qaQaClassifyClasses in item.qaQaClassifyClasses"
                                                 :key="qaQaClassifyClasses"
                                             >
@@ -558,97 +619,195 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        md:space-x-5
                                         notoSansJpAndFourteenRegular
                                         text-grayline
+                                        border-b-2
                                     "
                                 >
-                                    <div class="flex md:w-1/2 border-b-2">
+                                    <div class="flex flex-auto">
                                         <div class="w-30 flex-none">
                                             質問区分
                                         </div>
                                         <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="categories in item.categories"
-                                            :key="categories"
-                                        >
-                                            {{ categories.name }}
-                                        </div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">医薬品</div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="medicineName in item.medicines"
-                                            :key="medicineName"
-                                        >
-                                            {{ medicineName.name }}
+                                        <div class="flex flex-wrap">
+                                            <div
+                                                class="mr-2"
+                                                v-for="categories in item.categories"
+                                                :key="categories"
+                                            >
+                                                {{ categories.name }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        md:space-x-5
                                         notoSansJpAndFourteenRegular
                                         text-grayline
+                                        border-b-2
                                     "
                                 >
-                                    <div class="flex md:w-1/2 border-b-2">
+                                    <div class="flex flex-auto">
+                                        <div class="w-30 flex-none">
+                                            医薬品名
+                                        </div>
+                                        <div class="w-2">:</div>
+                                        <div class="flex flex-wrap">
+                                            <div
+                                                class="mr-2"
+                                                v-for="medicineName in item.medicines"
+                                                :key="medicineName"
+                                            >
+                                                {{ medicineName.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="
+                                        md:flex md:flex-row
+                                        notoSansJpAndFourteenRegular
+                                        text-grayline
+                                        border-b-2
+                                    "
+                                >
+                                    <div class="flex flex-auto">
+                                        <div class="w-30 flex-none">
+                                            副作用名
+                                        </div>
+                                        <div class="w-2">:</div>
+                                        <div class="flex flex-wrap">
+                                            <div
+                                                class="mr-2"
+                                                v-for="medicineName in item.medicines"
+                                                :key="medicineName"
+                                            >
+                                                {{ medicineName.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div
+                                    class="
+                                        md:flex md:flex-row
+                                        notoSansJpAndFourteenRegular
+                                        text-grayline
+                                        border-b-2
+                                    "
+                                >
+                                    <div class="flex flex-auto">
                                         <div class="w-30 flex-none">
                                             キーワード
                                         </div>
                                         <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="keywordTags in item.keywordTags"
-                                            :key="keywordTags"
-                                        >
-                                            {{ keywordTags.name }}
+                                        <div class="flex flex-wrap">
+                                            <div
+                                                class="mr-2"
+                                                v-for="keywordTags in item.keywordTags"
+                                                :key="keywordTags"
+                                            >
+                                                {{ keywordTags.name }}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="flex md:w-1/2 border-b-2">
+                                </div> -->
+                                <div
+                                    class="
+                                        md:flex md:flex-row
+                                        notoSansJpAndFourteenRegular
+                                        text-grayline
+                                        border-b-2
+                                    "
+                                >
+                                    <div class="flex flex-auto">
                                         <div class="w-30 flex-none">
-                                            質問者- 職種
+                                            質問者 - 職種
                                         </div>
                                         <div class="w-2">:</div>
-                                        <div class="">
+                                        <div class="flex flex-wrap">
                                             {{ item.askedPersonClassName }}
+                                            <!-- <div
+                                                class="mr-2"
+                                                v-for="keywordTags in item.keywordTags"
+                                                :key="keywordTags"
+                                            >
+                                                {{ keywordTags.name }}
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        md:space-x-5
                                         notoSansJpAndFourteenRegular
                                         text-grayline
+                                        border-b-2
                                     "
                                 >
-                                    <div class="flex md:w-1/2 border-b-2">
+                                    <div class="flex flex-auto">
                                         <div class="w-30 flex-none">
-                                            質問者・診療科
+                                            質問者 - 診療科
                                         </div>
                                         <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="askedPersonMedicalDepartments in item.askedPersonMedicalDepartments"
-                                            :key="askedPersonMedicalDepartments"
-                                        >
-                                            {{
-                                                askedPersonMedicalDepartments.name
-                                            }}
+                                        <div class="flex flex-wrap">
+                                            <div
+                                                class="mr-2"
+                                                v-for="askedPersonMedicalDepartments in item.askedPersonMedicalDepartments"
+                                                :key="
+                                                    askedPersonMedicalDepartments
+                                                "
+                                            >
+                                                {{
+                                                    askedPersonMedicalDepartments.name
+                                                }}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="flex md:w-1/2 border-b-2">
+                                </div>
+                                <div
+                                    class="
+                                        md:flex md:flex-row
+                                        notoSansJpAndFourteenRegular
+                                        text-grayline
+                                        border-b-2
+                                    "
+                                >
+                                    <div class="flex flex-auto">
                                         <div class="w-30 flex-none">
-                                            公開範囲
+                                            参考資料
                                         </div>
                                         <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.shareScope }}
+                                        <div class="flex flex-wrap">
+                                            <div
+                                                class="mr-2"
+                                                v-for="referenceMaterials in item.referenceMaterials"
+                                                :key="referenceMaterials"
+                                            >
+                                                {{ referenceMaterials.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="
+                                        md:flex md:flex-row
+                                        notoSansJpAndFourteenRegular
+                                        text-grayline
+                                        border-b-2
+                                    "
+                                >
+                                    <div class="flex flex-auto">
+                                        <div class="w-30 flex-none">疾患名</div>
+                                        <div class="w-2">:</div>
+                                        <div class="flex flex-wrap">
+                                            <div
+                                                class="mr-2"
+                                                v-for="referenceMaterials in item.referenceMaterials"
+                                                :key="referenceMaterials"
+                                            >
+                                                {{ referenceMaterials.name }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -723,6 +882,75 @@
                     <div
                         class="
                             bg-cardViewCount
+                            rounded-b-lg
+                            text-center text-searchDropdown
+                            h-7.5
+                            flex
+                            justify-center
+                            items-center
+                            cursor-pointer
+                        "
+                        @click="
+                            openDetailDisp(
+                                $store.getters.dIKnowledgeShareSearchInfo.qas[
+                                    index
+                                ].id
+                            )
+                        "
+                    >
+                        <div
+                            v-show="
+                                !(
+                                    isDetailDisp[
+                                        $store.getters
+                                            .dIKnowledgeShareSearchInfo.qas[
+                                            index
+                                        ].id
+                                    ] ===
+                                    $store.getters.dIKnowledgeShareSearchInfo
+                                        .qas[index].id
+                                )
+                            "
+                            class="flex items-center"
+                        >
+                            <triangle-down-svg
+                                class="w-3 h-3"
+                                fill="#0099ff"
+                                stroke="#0099ff"
+                            ></triangle-down-svg>
+                            <div
+                                class="text-xs font-NotoSansJp font-medium mr-1"
+                            >
+                                開く
+                            </div>
+                        </div>
+                        <div
+                            v-show="
+                                isDetailDisp[
+                                    $store.getters.dIKnowledgeShareSearchInfo
+                                        .qas[index].id
+                                ] ===
+                                $store.getters.dIKnowledgeShareSearchInfo.qas[
+                                    index
+                                ].id
+                            "
+                            class="flex items-center"
+                        >
+                            <triangle-down-svg
+                                class="w-3 h-3 transform rotate-180"
+                                fill="#0099ff"
+                                stroke="#0099ff"
+                            ></triangle-down-svg>
+                            <div
+                                class="text-xs font-NotoSansJp font-medium mr-1"
+                            >
+                                閉じる
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div
+                        class="
+                            bg-cardViewCount
                             text-center text-blueline
                             h-8
                             flex
@@ -754,54 +982,14 @@
                             ></triangle-down-svg>
                             <div>閉じる</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-
-                <!-- <div
-                    class="
-                        border-l-2 border-r-2 border-b-2
-                        rounded
-                        border-blueline
-                        bg-cardViewCount
-                        text-center text-blueline
-                        h-8
-                        flex
-                        justify-center
-                        items-center
-                        cursor-pointer
-                    "
-                    @click="openDetailDisp(index)"
-                >
-                    <div
-                        v-show="!(isDetailDisp === index)"
-                        class="flex items-center"
-                    >
-                        <triangle-down-svg
-                            class="w-4 h-4"
-                            fill="#0099ff"
-                            stroke="#0099ff"
-                        ></triangle-down-svg>
-                        <div>開く</div>
-                    </div>
-                    <div
-                        v-show="isDetailDisp === index"
-                        class="flex items-center"
-                    >
-                        <triangle-down-svg
-                            class="w-4 h-4 transform rotate-180"
-                            fill="#0099ff"
-                            stroke="#0099ff"
-                        ></triangle-down-svg>
-                        <div>閉じる</div>
-                    </div>
-                </div> -->
             </div>
         </div>
-         <pagination
+        <pagination
             :page-count="getPageCount"
-            :page-range="5"
+            :page-range="4"
             :margin-pages="1"
-            :click-handler="clickCallback"
             @input="getSelectPage"
             :prev-text="'<'"
             :next-text="'>'"
@@ -810,9 +998,9 @@
             activeClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular bg-blueline text-white"
             prevClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
             nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            class="flex justify-center space-x-1"
+            class="flex justify-center space-x-1 mt-2"
         ></pagination>
-        <div class="flex justify-center mt-2">1-{{ pageCount }}件 表示</div>
+        <div class="flex justify-center mt-2">{{ dispDetailRange }}件 表示</div>
     </div>
 </template>
 
@@ -870,9 +1058,9 @@ export default {
       selectPage: 0,
       goodMessageBox: false,
       //   isDetailDisp: false,
-      isDetailDisp: -1,
+      isDetailDisp: [],
       //   isDetailsDisp: false,
-      isDetailsDisp: -1,
+      isDetailsDisp: [],
       activeIndex: -1,
       //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
       resultData: Object,
@@ -918,6 +1106,27 @@ export default {
       }
       return Math.ceil(this.$store.getters.dIKnowledgeShareSearchInfo.allCount / this.pageCount);
     },
+    dispDetailRange: function () {
+      let start = 1
+      let end = ''
+      if (this.selectPage > 1) {
+        start = (this.selectPage - 1) * this.pageCount + 1
+      }
+
+      if (this.$store.getters.dIKnowledgeShareSearchInfo.qas != undefined) {
+        end =
+          start +
+          Object.keys(this.$store.getters.dIKnowledgeShareSearchInfo.qas)
+            .length -
+          1
+      }
+
+      if (this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 1) {
+        return start.toString()
+      } else {
+        return start.toString() + '-' + end.toString()
+      }
+    },
   },
   methods: {
     async getInitData() {
@@ -930,17 +1139,33 @@ export default {
     sendMsgToParent: function (data) {
       this.$emit("listenToChildEvent", data)
     },
-    openDetailDisp(index) {
-      console.log("aaa", index)
-      console.log("bbb", this.isDetailDisp)
-      //   this.isDetailDisp = !this.isDetailDisp
-      this.isDetailDisp = this.isDetailDisp == index ? -1 : index;
-      console.log("isDetailDisp", this.isDetailDisp)
+    // =====================================================
+    // 開くボタン押下
+    // =====================================================
+    openDetailDisp(index, count) {
+      //   console.log("count", count)
+      //   console.log("AAAthis.isDetailDisp[index]", index)
+      //   console.log("AAAindex", index)
+      // 1件のみの場合
+      if (count == 1) {
+        this.isDetailDisp[index] = index
+      } else {
+        this.isDetailDisp[index] =
+          this.isDetailDisp[index] == index ? [] : index
+        if (this.isDetailsDisp[index] == index) {
+          this.isDetailsDisp[index] =
+            this.isDetailsDisp[index] == index ? [] : index
+        }
+      }
+      //   console.log("BBBthis.isDetailDisp[index]", this.isDetailDisp[index])
+      //   console.log("BBBindex", index)
     },
-    // getDetailsDisp() { this.isDetailsDisp = !this.isDetailsDisp },
+    // =====================================================
+    // 明細の詳細情報リンク押下
+    // =====================================================
     openDetailsDisp(index) {
-      //   this.isDetailDisp = this.isDetailDisp == index ? -1 : index;
-      this.isDetailsDisp = this.isDetailsDisp == index ? -1 : index;
+      this.isDetailsDisp[index] =
+        this.isDetailsDisp[index] == index ? [] : index
     },
     clickCallback() {
       console.log(this.organizationCountSortValue)
