@@ -1,118 +1,134 @@
 <template>
     <div class="space-y-2">
         <!-- 1.5行目 -->
-        <div
-            class="
-                flex flex-row
-                md:mx-0
-                text-xs
-                font-bold
-                text-white
-                pt-2
-                justify-center
-                items-center
-            "
-        >
+        <div class="flex flex-row mx-2 md:mx-0 font-bold text-white pt-2">
             <!-- 検索対象 左-->
-            <div class="w-20 flex text-sm">検索対象</div>
+            <div class="w-20 flex text-sm md:text-base">検索対象</div>
             <!-- 右 -->
-            <div class="flex-auto">
+            <div class="flex-auto flex pt-0.5">
                 <div class="flex flex-col md:flex-row">
-                    <div class="flex flex-row space-x-3">
-                        <!-- 各施設のDB -->
-                        <div class="">
-                            <label class="inline-flex items-center justify-end">
-                                <input
-                                    type="checkbox"
-                                    class="form-checkbox text-white"
-                                    checked
-                                />
-                                <span class="ml-0.5 text-xs">各施設のDB</span>
-                            </label>
-                        </div>
+                    <!-- <div class="flex flex-row space-x-0 md:space-x-6"> -->
+                    <div class="flex flex-row">
                         <!-- Q -->
-                        <div class="">
+                        <div class="w-28 md:w-13">
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="$store.getters.getCheckQ"
+                                    @change="onCheckQChange"
                                 />
-                                <span class="ml-0.5 text-xs">Q</span>
+                                <span class="ml-1 text-xs md:text-mxss">Q</span>
                             </label>
                         </div>
                         <!-- A -->
-                        <div class="">
+                        <div class="w-20 md:w-13">
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="$store.getters.getCheckA"
+                                    @change="onChangeCheckA"
                                 />
-                                <span class="ml-0.5 text-xs">A</span>
+                                <span class="ml-1 text-xs md:text-mxss">A</span>
                             </label>
                         </div>
                         <!-- コメント -->
-                        <div class="">
+                        <div class="w-20 md:w-20">
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="$store.getters.getCheckComment"
+                                    @change="onChangeCheckComment"
                                 />
-                                <span class="ml-0.5 text-xs">コメント</span>
+                                <span class="ml-1 text-xs md:text-mxss"
+                                    >コメント</span
+                                >
                             </label>
                         </div>
                     </div>
-                    <div class="flex flex-row space-x-3 md:ml-3">
-                        <div>
+                    <!-- <div class="flex flex-row space-x-5 md:ml-5"> -->
+                    <div class="flex flex-row">
+                        <div class="w-28 md:w-30">
                             <!-- 添付ファイル名 -->
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="
+                                        $store.getters.getCheckAddFileName
+                                    "
+                                    @change="onChangeCheckAddFileName"
                                 />
-                                <span class="ml-0.5 text-xs"
+                                <span class="ml-1 text-xs md:text-mxss"
                                     >添付ファイル名</span
                                 >
                             </label>
                         </div>
-                        <div>
+                        <div class="w-20 md:w-20">
                             <!-- 投稿者 -->
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="
+                                        $store.getters.getCheckContributor
+                                    "
+                                    @change="onChangeCheckContributor"
                                 />
-                                <span class="ml-0.5 text-xs">投稿者</span>
+                                <span class="ml-1 text-xs md:text-mxss"
+                                    >投稿者</span
+                                >
                             </label>
                         </div>
-                        <div>
+                        <div class="w-20 md:w-28">
                             <!-- 最終編集者 -->
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
                                     class="form-checkbox text-white"
-                                    checked
+                                    :checked="$store.getters.getCheckLastEditer"
+                                    @change="onChangeCheckLastEditer"
                                 />
-                                <span class="ml-0.5 text-xs">最終編集者</span>
+                                <span class="ml-1 text-xs md:text-mxss"
+                                    >最終編集者</span
+                                >
                             </label>
                         </div>
                     </div>
-                    <div class="md:ml-3">
+                    <!-- <div class="flex flex-row space-x-5 md:ml-5"> -->
+                    <div class="flex flex-row">
                         <!-- 施設名（グループ施設用） -->
-                        <label class="inline-flex items-center justify-end">
-                            <input
-                                type="checkbox"
-                                class="form-checkbox text-white"
-                                checked
-                            />
-                            <span class="ml-0.5 text-xs"
-                                >施設名（グループ施設用）</span
-                            >
-                        </label>
+                        <div class="w-28 md:w-20">
+                            <label class="inline-flex items-center justify-end">
+                                <input
+                                    type="checkbox"
+                                    class="form-checkbox text-white"
+                                    :checked="
+                                        $store.getters.getCheckFacilityName
+                                    "
+                                    @change="onChangeCheckFacilityName"
+                                />
+                                <span class="ml-1 text-xs md:text-mxss"
+                                    >施設名</span
+                                >
+                            </label>
+                        </div>
+                        <div class="w-20 md:w-16">
+                            <!-- 備考 -->
+                            <label class="inline-flex items-center justify-end">
+                                <input
+                                    type="checkbox"
+                                    class="form-checkbox text-white"
+                                    :checked="$store.getters.getCheckNote"
+                                    @change="onChangeCheckNote"
+                                />
+                                <span class="ml-1 text-xs md:text-mxss"
+                                    >備考</span
+                                >
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -206,61 +222,7 @@
                 ></Multiselect>
             </div>
         </div>
-        <!-- 三行目、四行目、五行目 -->
-        <div
-            class="space-y-2 bg-backgroundMainSearch mx-2 md:mx-0"
-            ref="resetSelect"
-            :class="[isDetailClick ? 'block' : 'hidden']"
-        >
-            <!-- 薬の分類 -->
-            <vue-single-select
-                ref="medicines"
-                :name="'field1'"
-                :default-value="null"
-                :placeholder="'-- Choose an option --'"
-                :default-input-attribs="{ tabindex: 1 }"
-                :default-options="$store.getters.getQa_classify_class"
-                @selected="setSelectValue"
-                leftLableTitle="薬の分類"
-                buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
-                inputStyle="w-full text-left pl-20 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none "
-                iconColor="#32a5dc"
-            ></vue-single-select>
-
-            <!-- 質問区分 -->
-            <vue-single-select
-                ref="qDistinction"
-                :name="'field2'"
-                :default-value="null"
-                :placeholder="'-- Choose an option --'"
-                :default-input-attribs="{ tabindex: 1 }"
-                :default-options="$store.getters.qa_classify_subject"
-                @selected="setSelectValue2"
-                leftLableTitle="質問区分"
-                buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
-                inputStyle="w-full text-left pl-20  notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
-                iconColor="#32a5dc"
-            ></vue-single-select>
-
-            <!-- 施設 -->
-            <vue-single-select
-                ref="facility"
-                :name="'field3'"
-                :default-value="null"
-                :placeholder="'-- Choose an option --'"
-                :default-input-attribs="{ tabindex: 1 }"
-                :default-options="$store.getters.qa_classify_facility"
-                @selected="setSelectValue3"
-                leftLableTitle="施設"
-                buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
-                inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-20 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
-                iconColor="#32a5dc"
-            ></vue-single-select>
-        </div>
-        <!-- 六行目　-->
+        <!-- 三行目 -->
         <div class="flex space-x-44 justify-center bg-backgroundMainSearch">
             <div class="flex space-x-2">
                 <button
@@ -269,8 +231,10 @@
                         bg-personDataInfo
                         text-gray-700
                         notoSansJpAndSixteenBold
-                        w-28
-                        h-8
+                        w-43.75
+                        md:w-28
+                        h-9.5
+                        md:h-8
                     "
                     @click="inputClear"
                 >
@@ -281,21 +245,22 @@
                         rounded
                         bg-searchBunnon
                         text-white
-                        notoSansJpAndSixteenBold
-                        w-28
-                        h-8
+                        w-43.75
+                        md:w-28
+                        h-9.5
+                        md:h-8
                         flex flex-row
                         justify-center
                         items-center
                     "
                     @click="searchButtonClick"
                 >
-                    <div class="">検 索</div>
+                    <div class="text-lg font-NotoSansJp font-bold">検 索</div>
                     <search-svg class="ml-1"></search-svg>
                 </button>
             </div>
         </div>
-        <!-- 七行目　-->
+        <!-- 四行目 -->
         <div
             class="bg-searchResultTitle rounded-b-lg block md:hidden mid:hidden"
         >

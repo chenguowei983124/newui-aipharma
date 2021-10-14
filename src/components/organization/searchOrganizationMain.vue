@@ -52,14 +52,11 @@
             </div>
         </div>
         <div class="space-y-2 mt-8">
-            <!-- <div v-for="(item, index) in qaInfo" :key="index"> -->
-            <!-- <div> -->
             <div
                 v-for="(item, index) in $store.getters.organizationSearchInfo
                     .qas"
                 :key="index"
             >
-                <!-- {{ qaItems.facilityIdentificationNumber }} -->
                 <div class="border-2 rounded-lg border-blueline">
                     <!-- Group -->
                     <div
@@ -128,14 +125,35 @@
                             >
                                 <!-- {{ item.answer }} -->
                                 <div
-                                    v-show="!(isDetailDisp[index] === index)"
+                                    v-show="
+                                        !(
+                                            isDetailDisp[
+                                                $store.getters
+                                                    .organizationSearchInfo.qas[
+                                                    index
+                                                ].id
+                                            ] ===
+                                            $store.getters
+                                                .organizationSearchInfo.qas[
+                                                index
+                                            ].id
+                                        )
+                                    "
                                     v-html="
                                         item.answer.toString().split('\n')[0]
                                     "
                                 ></div>
-
                                 <div
-                                    v-show="isDetailDisp[index] === index"
+                                    v-show="
+                                        isDetailDisp[
+                                            $store.getters
+                                                .organizationSearchInfo.qas[
+                                                index
+                                            ].id
+                                        ] ===
+                                        $store.getters.organizationSearchInfo
+                                            .qas[index].id
+                                    "
                                     v-html="item.answer"
                                 ></div>
                             </div>
@@ -485,12 +503,6 @@
                             </div>
                         </div>
                         <!-- 詳細情報 pc/sp -->
-                        <!-- {{
-                            isDetailDisp[
-                                $store.getters.organizationSearchInfo.qas[index]
-                                    .id
-                            ]
-                        }} -->
                         <div
                             :class="[
                                 isDetailDisp[
@@ -1536,8 +1548,8 @@ export default {
         #009a61 80%,
         transparent 80%
     );
-    background-size: 30px 3px; */
-    background-repeat: repeat-x;
+    background-size: 30px 3px; 
+    background-repeat: repeat-x; */
     height: 2px;
     flex-grow: 2;
     /* background-color: red; */

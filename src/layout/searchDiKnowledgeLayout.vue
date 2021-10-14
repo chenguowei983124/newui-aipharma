@@ -11,7 +11,7 @@
             ></search-bar>
         </div>
 
-        <div class="h-65"></div>
+        <div class="h-50 md:h-52.5"></div>
     </div>
     <!-- 内容 -->
     <div class="flex border-b-2 border-blue-200 mt-33.5 md:mt-5 md:h-20">
@@ -20,12 +20,12 @@
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
         <div class="flex flex-col w-full md:w-191.25 justify-center">
-            <div class="flex flex-row space-x-2 items-start">
+            <div class="flex flex-row space-x-2 items-center">
                 <div
                     class="
-                        text-googleTitle
-                        notoSansJpAndTwentyBold
-                        font-black
+                        text-googleTitle text-xl
+                        md:text-2xl
+                        font-NotoSansJp font-bold
                         flex-none
                         pl-2
                         md:pl-0
@@ -33,7 +33,16 @@
                 >
                     DI ナレッジシェア
                 </div>
-                <div class="hidden md:block mid:block text-sm flex-none">
+                <div
+                    class="
+                        hidden
+                        md:block
+                        mid:block
+                        text-sm
+                        flex-none
+                        font-NotoSansJp
+                    "
+                >
                     トレンドタグ
                 </div>
                 <div class="flex flex-wrap space-x-1">
@@ -42,7 +51,7 @@
                             rounded-full
                             border-2 border-gray-400
                             bg-gray-100
-                            h-5.5
+                            h-6
                             notoSansJpAndTwelveRegular
                             pl-1
                             pr-1
@@ -51,11 +60,12 @@
                             md:block
                             mid:block
                             cursor-pointer
+                            mt-1.25
                         "
                         @click="searchTag(item)"
                         v-for="item in $store.getters.getOrganizationSeartorenndoTab.torenndoTab.slice(
                             0,
-                            7
+                            5
                         )"
                         :key="item"
                     >
