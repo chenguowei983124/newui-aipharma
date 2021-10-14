@@ -69,23 +69,24 @@
 </template>
 
 <script>
-import personalInfo from './header/personalInfo.vue';
-import portraitIcon from './header/portraitIcon.vue';
-import issueIcon from './header/issueIcon.vue';
-import managementIcon from './header/managementIcon.vue';
-import menuDropdownItem from './dropdown/menuDropdown.vue';
+import personalInfo from './personalInfo.vue'
+import portraitIcon from './portraitIcon.vue'
+import issueIcon from './issueIcon.vue'
+import managementIcon from './managementIcon.vue'
+import menuDropdownItem from '../dropdown/menuDropdown.vue'
 export default {
-  components: { personalInfo, portraitIcon, menuDropdownItem, issueIcon, managementIcon },
-  props: {},
-  couputed: {},
-  watch: {},
-  methods: {
-
-  },
-  created() {
-
-  }
+    components: {
+        personalInfo,
+        portraitIcon,
+        menuDropdownItem,
+        issueIcon,
+        managementIcon,
+    },
+    props: {},
+    couputed: {},
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

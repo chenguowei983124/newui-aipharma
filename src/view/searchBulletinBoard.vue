@@ -8,20 +8,18 @@
 </template>
 
 <script>
-import myAllHeader from '../components/myAllHeader.vue';
+import myAllHeader from '../components/common/header/myAllHeader.vue'
 import searchOrganizationLayout from '../layout/searchOrganizationLayout.vue'
-import goodMessageBox from '../components/messageBox/goodMessageBox.vue'
-import commentMessageBox from '../components/messageBox/commentMessageBox.vue'
-import homeBottomTemplate from '../components/homeBottomItem.vue'
+import goodMessageBox from '../components/common/messageBox/goodMessageBox.vue'
+import commentMessageBox from '../components/common/messageBox/commentMessageBox.vue'
+import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
-  components: {
-    myAllHeader,
-    searchOrganizationLayout,
-    goodMessageBox,
-    commentMessageBox,
-    homeBottomTemplate
-  },
-
+    components: {
+        myAllHeader,
+        searchOrganizationLayout,
+        goodMessageBox,
+        commentMessageBox,
+        homeBottomTemplate,
+    },
 }
-
 </script>

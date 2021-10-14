@@ -147,25 +147,26 @@
 </template>
 
 <script>
-import resutTag from '../searchResult/resultTag.vue'
-import resultDetailRow from '../searchResult/resultDetailRow.vue'
-import carousel from '../searchResult/carousel.vue'
+import resutTag from '../common/searchResult/resultTag.vue'
+import resultDetailRow from '../common/searchResult/resultDetailRow.vue'
+import carousel from '../common/searchResult/carousel.vue'
 
 export default {
-  components: {
-    resutTag, resultDetailRow, carousel
-  },
-  props: {},
-  couputed: {},
-  watch: {},
-  mounted() {
-    this.$store.dispatch('getTopNotice')
-    this.$store.dispatch('getTopBulletinBoardInfo')
-    this.$store.dispatch('getScientifiSocietyInfoe')
-    this.$store.dispatch('getPmdaInfo')
-    this.$store.dispatch('getCommonInfo')
-  },
+    components: {
+        resutTag,
+        resultDetailRow,
+        carousel,
+    },
+    props: {},
+    couputed: {},
+    watch: {},
+    mounted() {
+        this.$store.dispatch('getTopNotice')
+        this.$store.dispatch('getTopBulletinBoardInfo')
+        this.$store.dispatch('getScientifiSocietyInfoe')
+        this.$store.dispatch('getPmdaInfo')
+        this.$store.dispatch('getCommonInfo')
+    },
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

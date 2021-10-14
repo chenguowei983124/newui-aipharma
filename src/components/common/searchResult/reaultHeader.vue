@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import externalLink from '../../components/common/svgImage/extarnalLink.vue'
+import externalLink from '../svgImage/extarnalLink.vue'
 export default {
     components: { externalLink },
     props: {

@@ -12,16 +12,13 @@
 
 <script>
 import error from '../layout/errorlayout.vue'
-import homeBottomTemplate from '../components/homeBottomItem.vue'
+import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
-  components: { error, homeBottomTemplate },
-  props: {},
-  couputed: {},
-  watch: {},
-  methods: {
-
-  },
-  created() {
-  }
+    components: { error, homeBottomTemplate },
+    props: {},
+    couputed: {},
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>

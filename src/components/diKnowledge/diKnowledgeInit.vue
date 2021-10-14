@@ -79,18 +79,16 @@
 </template>
 
 <script>
-import ResutTag from '../searchResult/resultTag.vue'
-import ResultDetailRow from '../searchResult/resultAllDetailRow.vue'
+import ResutTag from '../common/searchResult/resultTag.vue'
+import ResultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
 export default {
-  components: { ResutTag, ResultDetailRow },
-  methods: {
-    sendMsgToParent: function (data) {
-      this.$emit("listenToChildEvent", data)
+    components: { ResutTag, ResultDetailRow },
+    methods: {
+        sendMsgToParent: function (data) {
+            this.$emit('listenToChildEvent', data)
+        },
     },
-  }
 }
-
 </script>
 
-<style>
-</style>
+<style></style>

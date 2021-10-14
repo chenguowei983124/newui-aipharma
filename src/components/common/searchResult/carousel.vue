@@ -116,8 +116,8 @@ import 'swiper/components/navigation/navigation.scss'
 import 'swiper/swiper.scss'
 import { reactive } from '@vue/reactivity'
 SwiperCore.use([Navigation, Parallax, Autoplay])
-import iconLeft from '../../components/common/svgImage/iconLeft.vue'
-import iconRight from '../../components/common/svgImage/iconRight.vue'
+import iconLeft from '../svgImage/iconLeft.vue'
+import iconRight from '../svgImage/iconRight.vue'
 // import img1 from "../../assets/image/banner_cps2021.png"
 // import img2 from "../../assets/image/banner_jpds2020.png"
 // import img3 from "../../assets/image/banner_kanblo51.png"

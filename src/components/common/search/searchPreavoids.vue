@@ -171,7 +171,7 @@ import searchDropdown from './searchDropdown.vue'
 import searchSvg from '../svgImage/searchSvg.vue'
 import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
 import Multiselect from '@vueform/multiselect'
-import vueSingleSelect from '../../dropdown/vueSingleSelect.vue'
+import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
 import { ref } from 'vue'
 export default {

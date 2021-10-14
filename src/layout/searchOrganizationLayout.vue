@@ -124,8 +124,8 @@
 </template>
 
 <script>
-import CommentMessageBox from '../components/messageBox/commentMessageBox.vue'
-import GoodMessageBox from '../components/messageBox/goodMessageBox.vue'
+import CommentMessageBox from '../components/common/messageBox/commentMessageBox.vue'
+import GoodMessageBox from '../components/common/messageBox/goodMessageBox.vue'
 import searchBar from '../components/common/search/searchBar.vue'
 import searchOrganizationMain from '../components/organization/searchOrganizationMain.vue'
 import OrganizationInit from '../components/organization/organizationInit.vue'

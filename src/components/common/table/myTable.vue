@@ -1,4 +1,3 @@
-
 <template>
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -326,32 +325,30 @@
 </template>
 
 <script>
-
 const people = [
-  {
-    col1: 'false',
-    col2: '1',
-    col3: '2021.01.01',
-    col4: '2021.08.01',
-    col5: 'ロキソプロフェンNa',
-    col6: '薬剤性肝障害',
-    col7: '40歳代',
-    col8: '男',
-    col9: '入院',
-    col10: 'くも膜下出血',
-    col11: '脳出血でコイル塞栓術後経過観察の',
-    col12: '○○市民病院',
-    col13: 'ロキソプロフェンNa',
-  },
-  // More people...
+    {
+        col1: 'false',
+        col2: '1',
+        col3: '2021.01.01',
+        col4: '2021.08.01',
+        col5: 'ロキソプロフェンNa',
+        col6: '薬剤性肝障害',
+        col7: '40歳代',
+        col8: '男',
+        col9: '入院',
+        col10: 'くも膜下出血',
+        col11: '脳出血でコイル塞栓術後経過観察の',
+        col12: '○○市民病院',
+        col13: 'ロキソプロフェンNa',
+    },
+    // More people...
 ]
 
 export default {
-  setup() {
-    return {
-      people,
-    }
-  },
+    setup() {
+        return {
+            people,
+        }
+    },
 }
 </script>
-

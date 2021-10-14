@@ -8,16 +8,14 @@
 </template>
 
 <script>
-import myAllHeader from '../components/myAllHeader.vue';
+import myAllHeader from '../components/common/header/myAllHeader.vue'
 import newOrgDIRecordLayout from '../layout/newOrgDIRecordLayout.vue'
-import homeBottomTemplate from '../components/homeBottomItem.vue'
+import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
-  components: {
-    myAllHeader,
-    newOrgDIRecordLayout,
-    homeBottomTemplate
-  },
-
+    components: {
+        myAllHeader,
+        newOrgDIRecordLayout,
+        homeBottomTemplate,
+    },
 }
-
 </script>

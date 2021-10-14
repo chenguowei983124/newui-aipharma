@@ -115,31 +115,29 @@
 </template>
 
 <script>
-import resutTag from '../searchResult/resultTag.vue'
-import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
-import carousel from '../searchResult/carousel.vue'
-import googleItem from '../searchResult/googleItem.vue'
-import pharmaceuticalsItem from '../searchResult/pharmaceuticalsItem.vue'
-import jstageItem from '../searchResult/jstageItem.vue'
+import resutTag from '../common/searchResult/resultTag.vue'
+import resultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
+import carousel from '../common/searchResult/carousel.vue'
+import googleItem from '../common/searchResult/googleItem.vue'
+import pharmaceuticalsItem from '../common/searchResult/pharmaceuticalsItem.vue'
+import jstageItem from '../common/searchResult/jstageItem.vue'
 export default {
-  components: {
-    resutTag, resultDetailRow, carousel, googleItem, pharmaceuticalsItem, jstageItem
-  },
-  props: {},
-  data() {
-    return {
-
-    };
-  },
-  couputed: {},
-  watch: {},
-  methods: {
-
-  },
-  created() {
-
-  }
+    components: {
+        resutTag,
+        resultDetailRow,
+        carousel,
+        googleItem,
+        pharmaceuticalsItem,
+        jstageItem,
+    },
+    props: {},
+    data() {
+        return {}
+    },
+    couputed: {},
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

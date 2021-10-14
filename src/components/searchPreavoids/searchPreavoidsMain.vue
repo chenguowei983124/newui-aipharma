@@ -19,7 +19,7 @@
                     :default-value="0"
                     :placeholder="'-- Choose an option --'"
                     :default-input-attribs="{ tabindex: 1 }"
-                    :default-options="$store.getters.getOrganizationDateSort"
+                    :default-options="$constant.organizationDateSort"
                     @selected="setSelectValue"
                     :leftLableDisp="false"
                     buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
@@ -33,7 +33,7 @@
                     :default-value="0"
                     :placeholder="'-- Choose an option --'"
                     :default-input-attribs="{ tabindex: 1 }"
-                    :default-options="$store.getters.getOrganizationCountSort"
+                    :default-options="$constant.organizationCountSort"
                     @selected="setSelectValue"
                     :leftLableDisp="false"
                     buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
@@ -127,18 +127,17 @@
 </template>
 
 <script>
-import TriangleDownSvg from '../../components/common/svgImage/triangleDownSvg.vue'
-import resutTag from '../searchResult/resultTag.vue'
-import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
-import carousel from '../searchResult/carousel.vue'
-import Good from '../../components/common/svgImage/good.vue'
-import bad from '../../components/common/svgImage/bad.vue'
-import talk from '../../components/common/svgImage/talk.vue'
-import xIconSvg from '../../components/common/svgImage/xIconSvg.vue'
-import Pagination from '../pagination/pagiation.vue'
-import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
-import GoodMessageBox from '../messageBox/goodMessageBox.vue'
-import myTable from '../table/myTable.vue'
+import TriangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
+import resutTag from '../common/searchResult/resultTag.vue'
+import resultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
+import carousel from '../common/searchResult/carousel.vue'
+import Good from '../common/svgImage/good.vue'
+import bad from '../common/svgImage/bad.vue'
+import talk from '../common/svgImage/talk.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
+import Pagination from '../common/pagination/pagiation.vue'
+import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
+import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 
 export default {
     components: {
@@ -153,7 +152,6 @@ export default {
         Pagination,
         vueSingleSelect,
         GoodMessageBox,
-        myTable,
     },
     props: {},
     data() {

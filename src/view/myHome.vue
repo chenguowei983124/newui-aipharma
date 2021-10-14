@@ -7,20 +7,16 @@
 </template>
 
 <script>
-import myTopHeader from '../components/myTopHeader.vue'
+import myTopHeader from '../components/common/header/myTopHeader.vue'
 import homeMain from '../layout/homelayout.vue'
-import homeBottomTemplate from '../components/homeBottomItem.vue'
+import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
-  components: { myTopHeader, homeMain, homeBottomTemplate },
-  props: {},
-  couputed: {},
-  watch: {},
-  methods: {
-
-  },
-  created() {
-  }
+    components: { myTopHeader, homeMain, homeBottomTemplate },
+    props: {},
+    couputed: {},
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

@@ -21,7 +21,7 @@
     </div>
 </template>
 <script>
-import moveTopButton from './components/moveTopButton.vue'
+import moveTopButton from './components/common/moveTopButton.vue'
 import Loading from './view/loading.vue'
 export default {
     components: { moveTopButton, Loading },

@@ -57,39 +57,43 @@
 </template>
 
 <script>
-
-import menuDropdownItem from './dropdown/menuDropdown.vue';
-import personalInfo from './header/personalInfo.vue';
-import portraitIcon from './header/portraitIcon.vue';
-import issueIcon from './header/issueIcon.vue';
-import managementIcon from './header/managementIcon.vue';
+import menuDropdownItem from '../dropdown/menuDropdown.vue'
+import personalInfo from './personalInfo.vue'
+import portraitIcon from './portraitIcon.vue'
+import issueIcon from './issueIcon.vue'
+import managementIcon from './managementIcon.vue'
 export default {
-  props: {
-    form: {
-      type: String,
-      default: "top"
-    }
-  },
-  components: { personalInfo, menuDropdownItem, portraitIcon, issueIcon, managementIcon },
-  computed: {
-    searchBarFixedClass: function () {
-      if (this.$props.form == this.$constant.formList.TOP) {
-        return "fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-white"
-      } else if (this.$props.form == this.$constant.formList.ALL) {
-        return "fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white"
-      } else if (this.$props.form == this.$constant.formList.DI) {
-        return "fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white"
-      } else if (this.$props.form == this.$constant.formList.OWN) {
-        return "fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white"
-      } else if (this.$props.form == this.$constant.formList.PVD) {
-        return "fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white"
-      } else if (this.$props.form == this.$constant.formList.NDI) {
-        return "flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2"
-      }
+    props: {
+        form: {
+            type: String,
+            default: 'top',
+        },
     },
-  }
+    components: {
+        personalInfo,
+        menuDropdownItem,
+        portraitIcon,
+        issueIcon,
+        managementIcon,
+    },
+    computed: {
+        searchBarFixedClass: function () {
+            if (this.$props.form == this.$constant.formList.TOP) {
+                return 'fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-white'
+            } else if (this.$props.form == this.$constant.formList.ALL) {
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+            } else if (this.$props.form == this.$constant.formList.DI) {
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+            } else if (this.$props.form == this.$constant.formList.OWN) {
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+            } else if (this.$props.form == this.$constant.formList.PVD) {
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+            } else if (this.$props.form == this.$constant.formList.NDI) {
+                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
+            }
+        },
+    },
 }
 </script>
 
-<style>
-</style>
+<style></style>
