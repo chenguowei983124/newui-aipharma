@@ -1,16 +1,14 @@
 <template>
     <svg
+        id="_211012_ai_pharma_parts"
+        data-name="211012_ai_pharma_parts"
         xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+        viewBox="0 0 30 35"
     >
+        <rect class="cls-1" x="25" width="5" height="20" />
         <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"
+            class="cls-1"
+            d="M3.75,0A3.75,3.75,0,0,0,0,3.75v12.5A3.75,3.75,0,0,0,3.75,20h10V31.25a3.75,3.75,0,0,0,7.5,0V0H3.75Z"
         />
     </svg>
 </template>
@@ -31,4 +29,7 @@ export default {
 }
 </script>
 <style scoped>
+.cls-1 {
+    fill: #fff;
+}
 </style>

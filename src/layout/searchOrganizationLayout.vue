@@ -13,7 +13,7 @@
             ></search-bar>
         </div>
 
-        <div class="h-44 md:h-52.5"></div>
+        <div class="h-50 md:h-52.5"></div>
     </div>
     <!-- 内容 -->
     <div class="flex border-b-2 border-blue-200 mt-33.5 md:mt-5 md:h-20">
@@ -22,12 +22,12 @@
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
         <div class="flex flex-col w-full md:w-191.25 justify-center">
-            <div class="flex flex-row space-x-2 items-start">
+            <div class="flex flex-row space-x-2 items-center">
                 <div
                     class="
-                        text-googleTitle
-                        notoSansJpAndTwentyFourBold
-                        font-black
+                        text-googleTitle text-xl
+                        md:text-2xl
+                        font-NotoSansJp font-bold
                         flex-none
                         pl-2
                         md:pl-0
@@ -35,7 +35,16 @@
                 >
                     組織内 DI 記録（Q&A）
                 </div>
-                <div class="hidden md:block mid:block text-sm flex-none">
+                <div
+                    class="
+                        hidden
+                        md:block
+                        mid:block
+                        text-sm
+                        flex-none
+                        font-NotoSansJp
+                    "
+                >
                     トレンドタグ
                 </div>
                 <!-- @click="searchTag(item)" -->
@@ -49,17 +58,17 @@
                             notoSansJpAndTwelveRegular
                             pl-1
                             pr-1
-                            mb-0.5
                             text-center
                             hidden
                             md:block
                             mid:block
                             cursor-pointer
+                            mt-1.25
                         "
                         @click="searchTag(item)"
                         v-for="item in $store.getters.getOrganizationSeartorenndoTab.torenndoTab.slice(
                             0,
-                            8
+                            5
                         )"
                         :key="item"
                     >
@@ -122,63 +131,63 @@ import searchOrganizationMain from '../components/organization/searchOrganizatio
 import OrganizationInit from '../components/organization/organizationInit.vue'
 
 export default {
-    components: {
-        CommentMessageBox,
-        GoodMessageBox,
-        searchBar,
-        searchOrganizationMain,
-        OrganizationInit,
+  components: {
+    CommentMessageBox,
+    GoodMessageBox,
+    searchBar,
+    searchOrganizationMain,
+    OrganizationInit,
+  },
+
+  props: {},
+  data() {
+    return {
+      isMenuOpen: true,
+      isDetailButtonClick: false,
+      parentMage: '',
+    }
+  },
+  mounted() { },
+  methods: {
+    getSearchResult: function (value) {
+      console.log('')
     },
 
-    props: {},
-    data() {
-        return {
-            isMenuOpen: true,
-            isDetailButtonClick: false,
-            parentMage: '',
-        }
+    // ========================================
+    // 詳細条件ボタン押下区分を取得
+    // ========================================
+    getDetailClick: function (data) {
+      console.log('getDetailClickdata', data)
+      this.isDetailButtonClick = data
     },
-    mounted() {},
-    methods: {
-        getSearchResult: function (value) {
-            console.log('')
-        },
-
-        // ========================================
-        // 詳細条件ボタン押下区分を取得
-        // ========================================
-        getDetailClick: function (data) {
-            console.log('getDetailClickdata', data)
-            this.isDetailButtonClick = data
-        },
-        // ========================================
-        // 詳細条件表示・非表示取得
-        // ========================================
-        getDetailDisp: function (value) {
-            //   console.log(value)
-            this.detailDisp = value
-        },
-        searchTag: function (value) {
-            this.value = value
-            this.$store.dispatch('setSearchWord', value)
-            this.$store.dispatch('setSearchTags', '')
-            this.$store.dispatch('setMedicineID', '')
-            this.$store.dispatch('setQuestionID', '')
-            this.$store.dispatch('setFacilityID', '')
-            this.$store.dispatch('setPage', '')
-            this.$store.dispatch('setQAID', '')
-            this.$refs.searchbar.searchClick()
-        },
-        showMsgToParent: function (data) {
-            return (this.parentMage = data)
-        },
+    // ========================================
+    // 詳細条件表示・非表示取得
+    // ========================================
+    getDetailDisp: function (value) {
+      //   console.log(value)
+      this.detailDisp = value
     },
-    created() {
-        let param = sessionStorage.getItem('searchParam')
-        this.$store.dispatch(
-            'setSearchWord',
-            sessionStorage.getItem('searchWord')
-        )
+    searchTag: function (value) {
+      this.value = value
+      this.$store.dispatch('setSearchWord', value)
+      this.$store.dispatch('setSearchTags', '')
+      this.$store.dispatch('setMedicineID', '')
+      this.$store.dispatch('setQuestionID', '')
+      this.$store.dispatch('setFacilityID', '')
+      this.$store.dispatch('setPage', '')
+      this.$store.dispatch('setQAID', '')
+      this.$refs.searchbar.searchClick()
     },
+    showMsgToParent: function (data) {
+      return (this.parentMage = data)
+    },
+  },
+  created() {
+    let param = sessionStorage.getItem('searchParam')
+    this.$store.dispatch(
+      'setSearchWord',
+      sessionStorage.getItem('searchWord')
+    )
+  },
 }
 </script>
