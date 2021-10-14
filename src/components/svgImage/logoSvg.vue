@@ -75,7 +75,7 @@
         </svg>
     </div>
 </template>
-<style>
+<style scoped>
 .cls-1 {
     fill: #f39800;
 }
