@@ -137,15 +137,10 @@
         <!-- 二行目 -->
         <div>
             <div class="px-2 md:px-0">
+                <div class="hidden">{{ dispTagValue }}</div>
                 <Multiselect
-                    class="h-7.5"
                     v-model="tagValue"
                     mode="tags"
-                    placeholder="#タグ"
-                    :filterResults="true"
-                    :minChars="1"
-                    :resolveOnLoad="false"
-                    :delay="0"
                     :searchable="true"
                     :options="
                         async function (query) {
@@ -220,7 +215,7 @@
                             'bg-transparent absolute left-0 right-0 -bottom-px w-full h-px border-0 p-0 appearance-none outline-none text-transparent',
                         spacer: 'h-9 py-px box-content',
                     }"
-                ></Multiselect>
+                />
             </div>
         </div>
         <!-- 三行目、四行目、五行目 -->
@@ -309,6 +304,7 @@
                         rounded
                         bg-searchBunnon
                         text-white
+                        notoSansJpAndSixteenBold
                         w-43.75
                         md:w-28
                         h-9.5
@@ -319,7 +315,7 @@
                     "
                     @click="searchButtonClick"
                 >
-                    <div class="text-lg font-NotoSansJp font-bold">検 索</div>
+                    <div class="">検 索</div>
                     <search-svg class="ml-1"></search-svg>
                 </button>
             </div>
@@ -377,209 +373,221 @@ import Multiselect from '@vueform/multiselect'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { },
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
+        message: {
+            type: String,
+            default: '',
+        },
     },
-    message: {
-      type: String,
-      default: '',
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
     },
-  },
-  components: {
-    searchDropdown,
-    searchSvg,
-    TriangleDownSvg,
-    Multiselect,
-    vueSingleSelect,
-  },
-  data() {
-    return {
-      searchText: null,
-      //   tagsValue: '',
-      checkId: '',
-      isDetailClick: false,
-      tagValue: this.$store.getters.getSearchTags,
-    }
-  },
-  watch: {
-    tagValue() {
-      console.log(this.tagValue)
-      this.$store.dispatch('setSearchTags', this.tagValue)
-      this.$emit('tagValue', this.tagValue)
-    },
-  },
-  methods: {
-    async fetchLanguages(query) {
-      // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
-      console.log(query)
-      let where = ''
-
-      if (query) {
-        where =
-          '&where=' +
-          encodeURIComponent(
-            JSON.stringify({
-              ProgrammingLanguage: {
-                $regex: `${query}|${query.toUpperCase()}|${query[0].toUpperCase() + query.slice(1)
-                  }`,
-              },
-            })
-          )
-      }
-
-      const response = await fetch(
-        'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' +
-        where,
-        {
-          headers: {
-            'X-Parse-Application-Id':
-              'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
-            'X-Parse-Master-Key':
-              'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
-          },
-        }
-      )
-
-      const data = await response.json() // Here you have the data that you need
-      return data.results.map((item) => {
+    data() {
         return {
-          value: item.ProgrammingLanguage,
-          label: item.ProgrammingLanguage,
+            searchText: null,
+            checkId: '',
+            isDetailClick: false,
+            tagValue: this.$store.getters.getSearchTags,
         }
-      })
     },
-    inputClear(data) {
-      //   console.log(this.message)
+    watch: {
+        tagValue() {
+            this.$store.dispatch('setSearchTags', this.tagValue)
+            console.log('tagsValue', this.$store.getters.getSearchTags)
+            this.$emit('tagValue', this.tagValue)
+        },
+    },
+    computed: {
+        dispTagValue() {
+            this.tagValue = this.$store.getters.getSearchTags
+            return this.tagValue
+        },
+    },
+    methods: {
+        async fetchLanguages(query) {
+            // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
+            console.log(query)
+            let where = ''
 
-      this.tagValue = []
+            if (query) {
+                where =
+                    '&where=' +
+                    encodeURIComponent(
+                        JSON.stringify({
+                            ProgrammingLanguage: {
+                                $regex: `${query}|${query.toUpperCase()}|${
+                                    query[0].toUpperCase() + query.slice(1)
+                                }`,
+                            },
+                        })
+                    )
+            }
 
-      this.$refs.medicines.setValue(null)
-      this.$refs.qDistinction.setValue(null)
-      this.$refs.facility.setValue(null)
+            const response = await fetch(
+                'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' +
+                    where,
+                {
+                    headers: {
+                        'X-Parse-Application-Id':
+                            'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
+                        'X-Parse-Master-Key':
+                            'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
+                    },
+                }
+            )
 
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setSearchTags', [])
-      this.$store.dispatch('setMedicineID', '')
-      this.$store.dispatch('setQuestionID', '')
-      this.$store.dispatch('setFacilityID', '')
-      this.$store.dispatch('setCheckQ', true)
-      console.log('resetSearch3', this.$store.getters.getCheckQ)
-      this.$store.dispatch('setCheckA', true)
-      this.$store.dispatch('setCheckComment', true)
-      this.$store.dispatch('setCheckAddFileName', true)
-      this.$store.dispatch('setCheckContributor', true)
-      this.$store.dispatch('setCheckLastEditer', true)
-      this.$store.dispatch('setCheckFacilityName', true)
-      this.$store.dispatch('setCheckNote', true)
-    },
-    onCheckQChange() {
-      this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
-      console.log('resetSearch4', this.$store.getters.getCheckQ)
-    },
-    onChangeCheckA() {
-      this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
-    },
-    onChangeCheckComment() {
-      this.$store.dispatch(
-        'setCheckComment',
-        !this.$store.getters.getCheckComment
-      )
-    },
-    onChangeCheckAddFileName() {
-      this.$store.dispatch(
-        'setCheckAddFileName',
-        !this.$store.getters.getCheckAddFileName
-      )
-    },
-    onChangeCheckContributor() {
-      this.$store.dispatch(
-        'setCheckContributor',
-        !this.$store.getters.getCheckContributor
-      )
-    },
-    onChangeCheckLastEditer() {
-      this.$store.dispatch(
-        'setCheckLastEditer',
-        !this.$store.getters.getCheckLastEditer
-      )
-    },
-    onChangeCheckFacilityName() {
-      this.$store.dispatch(
-        'setCheckFacilityName',
-        !this.$store.getters.getCheckFacilityName
-      )
-    },
-    onChangeCheckNote() {
-      this.$store.dispatch(
-        'setCheckNote',
-        !this.$store.getters.getCheckNote
-      )
-    },
+            const data = await response.json() // Here you have the data that you need
+            return data.results.map((item) => {
+                return {
+                    value: item.ProgrammingLanguage,
+                    label: item.ProgrammingLanguage,
+                }
+            })
 
-    sendInputInfo() {
-      //   this.$store.dispatch('getOrganizationSearchInfo')
-      //   this.$store.dispatch('setIsOrganizationSearch', !this.$store.getters.getIsOrganizationSearch)
-    },
-    setMedicineID(value) {
-      this.$store.dispatch('setMedicineID', value)
-    },
-    setQuestionID(value) {
-      this.$store.dispatch('setQuestionID', value)
-    },
-    setFacilityID(value) {
-      this.$store.dispatch('setFacilityID', value)
-    },
-    // ========================================
-    // 詳細条件クリックイベント
-    // ========================================
-    detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit('isDetailClick', this.isDetailClick)
-    },
-    // ========================================
-    // 検索ボタン押下イベント
-    // ========================================
-    searchClick: function (event) {
-      // すべて
-      if (this.checkId == 1) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('searchAll', this.searchValue)
+            // return [
+            //     { value: 'batman', label: 'Batman' },
+            //     { value: 'robin', label: 'Robin' },
+            //     { value: 'joker', label: 'Joker' },
+            // ]
+        },
+        inputClear(data) {
+            //   console.log(this.message)
 
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 2) {
-        this.$router.push('/searchResultAll')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // DI 辞書
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 6) {
-        this.$router.push('/searchOrganization')
-      }
+            this.tagValue = []
 
-      // this.$router.push('/searchResultAll')
+            this.$refs.medicines.setValue(null)
+            this.$refs.qDistinction.setValue(null)
+            this.$refs.facility.setValue(null)
+
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.dispatch('setMedicineID', '')
+            this.$store.dispatch('setQuestionID', '')
+            this.$store.dispatch('setFacilityID', '')
+            this.$store.dispatch('setCheckQ', true)
+            console.log('resetSearch3', this.$store.getters.getCheckQ)
+            this.$store.dispatch('setCheckA', true)
+            this.$store.dispatch('setCheckComment', true)
+            this.$store.dispatch('setCheckAddFileName', true)
+            this.$store.dispatch('setCheckContributor', true)
+            this.$store.dispatch('setCheckLastEditer', true)
+            this.$store.dispatch('setCheckFacilityName', true)
+            this.$store.dispatch('setCheckNote', true)
+        },
+        onCheckQChange() {
+            this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
+            console.log('resetSearch4', this.$store.getters.getCheckQ)
+        },
+        onChangeCheckA() {
+            this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
+        },
+        onChangeCheckComment() {
+            this.$store.dispatch(
+                'setCheckComment',
+                !this.$store.getters.getCheckComment
+            )
+        },
+        onChangeCheckAddFileName() {
+            this.$store.dispatch(
+                'setCheckAddFileName',
+                !this.$store.getters.getCheckAddFileName
+            )
+        },
+        onChangeCheckContributor() {
+            this.$store.dispatch(
+                'setCheckContributor',
+                !this.$store.getters.getCheckContributor
+            )
+        },
+        onChangeCheckLastEditer() {
+            this.$store.dispatch(
+                'setCheckLastEditer',
+                !this.$store.getters.getCheckLastEditer
+            )
+        },
+        onChangeCheckFacilityName() {
+            this.$store.dispatch(
+                'setCheckFacilityName',
+                !this.$store.getters.getCheckFacilityName
+            )
+        },
+        onChangeCheckNote() {
+            this.$store.dispatch(
+                'setCheckNote',
+                !this.$store.getters.getCheckNote
+            )
+        },
+
+        sendInputInfo() {
+            //   this.$store.dispatch('getOrganizationSearchInfo')
+            //   this.$store.dispatch('setIsOrganizationSearch', !this.$store.getters.getIsOrganizationSearch)
+        },
+        setMedicineID(value) {
+            this.$store.dispatch('setMedicineID', value)
+        },
+        setQuestionID(value) {
+            this.$store.dispatch('setQuestionID', value)
+        },
+        setFacilityID(value) {
+            this.$store.dispatch('setFacilityID', value)
+        },
+        // ========================================
+        // 詳細条件クリックイベント
+        // ========================================
+        detailBottunClick: function (event) {
+            this.isDetailClick = !this.isDetailClick
+            this.$emit('isDetailClick', this.isDetailClick)
+        },
+        // ========================================
+        // 検索ボタン押下イベント
+        // ========================================
+        searchClick: function (event) {
+            // すべて
+            if (this.checkId == 1) {
+                // 検索APIを呼び出し(画面入力値)
+                this.$store.dispatch('searchAll', this.searchValue)
+
+                // 一括検索結果画面へ遷移
+                this.$router.push('/searchResultAll')
+            }
+            // DI ナレッジシェア
+            else if (this.checkId == 2) {
+                this.$router.push('/searchResultAll')
+            }
+            // 組織内 DI 記録（Q&A）
+            else if (this.checkId == 3) {
+                this.$router.push('/searchOrganization')
+            }
+            // 症例（プレアボイド）
+            else if (this.checkId == 4) {
+                this.$router.push('/searchOrganization')
+            }
+            // DI 辞書
+            else if (this.checkId == 5) {
+                this.$router.push('/searchOrganization')
+            }
+            // 製薬企業情報
+            else if (this.checkId == 6) {
+                this.$router.push('/searchOrganization')
+            }
+
+            // this.$router.push('/searchResultAll')
+        },
+        // ========================================
+        // DropDown 選択したアイテムＩＤ取得
+        // ========================================
+        getCheckId(data) {
+            this.checkId = data
+        },
     },
-    // ========================================
-    // DropDown 選択したアイテムＩＤ取得
-    // ========================================
-    getCheckId(data) {
-      this.checkId = data
-    },
-  },
 }
 </script>
 
