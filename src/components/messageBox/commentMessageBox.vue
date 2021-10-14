@@ -220,11 +220,11 @@
 </template>
 
 <script>
-import PencilAltIconSvg from '../common/svgImage/pencilAltIconSvg.vue'
-import TrashIconSvg from '../common/svgImage/trashIconSvg.vue'
-import SendMessageIconSvg from '../common/svgImage/sendMessageIconSvg.vue'
-import xIconSvg from '../common/svgImage/xIconSvg.vue'
-import CheckIconSvg from '../common/svgImage/checkIconSvg.vue'
+import PencilAltIconSvg from '../../components/common/svgImage/pencilAltIconSvg.vue'
+import TrashIconSvg from '../../components/common/svgImage/trashIconSvg.vue'
+import SendMessageIconSvg from '../../components/common/svgImage/sendMessageIconSvg.vue'
+import xIconSvg from '../../components/common/svgImage/xIconSvg.vue'
+import CheckIconSvg from '../../components/common/svgImage/checkIconSvg.vue'
 export default {
     components: {
         xIconSvg,

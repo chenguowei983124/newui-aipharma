@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import triangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
+import triangleDownSvg from '../../components/common/svgImage/logoSvg.vue'
 
 function escapeRegexp(value) {
     return value.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, '\\$&')

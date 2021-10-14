@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import xIconSvg from '../common/svgImage/xIconSvg.vue'
+import xIconSvg from '../../components/common/svgImage/xIconSvg.vue'
 export default {
     components: { xIconSvg },
     data() {

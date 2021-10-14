@@ -67,29 +67,27 @@
 
 <script>
 import logo from '../components/home/logo.vue'
-import searchBar from '../components/search/searchBar.vue'
+import searchBar from '../components/common/search/searchBar.vue'
 import dataManagementArea from '../components/home/dataManagementArea.vue'
-import searchResultMain from "../components/home/searchResultMain.vue"
+import searchResultMain from '../components/home/searchResultMain.vue'
 
 export default {
-  components: {
-    searchBar, logo, dataManagementArea, searchResultMain
-  },
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true
-    };
-  },
-  couputed: {},
-  watch: {},
-  methods: {
-  },
-  created() {
-
-  }
+    components: {
+        searchBar,
+        logo,
+        dataManagementArea,
+        searchResultMain,
+    },
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+        }
+    },
+    couputed: {},
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>
-<style scoped>
-</style>
-
+<style scoped></style>

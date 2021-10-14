@@ -125,8 +125,8 @@
 </template>
 
 <script>
-import checkSvg from '../common/svgImage/checkSvg.vue'
-import triangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
+import checkSvg from '../svgImage/checkSvg.vue'
+import triangleDownSvg from '../svgImage/triangleDownSvg.vue'
 
 export default {
     components: { checkSvg, triangleDownSvg },

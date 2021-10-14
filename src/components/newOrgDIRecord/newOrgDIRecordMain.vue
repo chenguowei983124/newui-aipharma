@@ -824,7 +824,7 @@
 <script>
 import newOrgDIRecordButtons from './newOrgDIRecordButtons.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
-import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
+import litepieDatepicker from '../common/dateRange/litepie-datepicker.vue'
 import tinymceEdit from './tinymceEdit.vue'
 import Multiselect from '@vueform/multiselect'
 import externalLink from '../common/svgImage/extarnalLink.vue'

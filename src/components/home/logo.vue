@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import logoImage from '../common/svgImage/logoSvg.vue'
+import logoImage from '../../components/common/svgImage/logoSvg.vue'
 export default {
     components: { logoImage },
     props: {},

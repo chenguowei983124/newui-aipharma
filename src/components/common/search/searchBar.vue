@@ -15,16 +15,6 @@
                         ></search-dropdown>
 
                         <!-- 検索条件入力 -->
-                        <!-- sp -->
-                        <!--  -->
-                        <!-- <input
-                            v-model="searchValueInput"
-                            :class="sreachBarSPInputClass"
-                            type="text"
-                            :placeholder="pcPlaceholder"
-                        /> -->
-
-                        <!-- :placeholder="pcPlaceholder" -->
                         <input
                             v-model="searchValueInput"
                             @change="getNewInput($event)"
@@ -98,8 +88,8 @@
 </template>
 
 <script>
-import searchDropdown from './searchDropdown.vue'
-import searchSvg from '../common/svgImage/searchSvg.vue'
+import searchDropdown from '../../common/search/searchDropdown.vue'
+import searchSvg from '../../common/svgImage/searchSvg.vue'
 import searchDetail from './searchDetail.vue'
 import searchDiKnowledge from './searchDiKnowledge.vue'
 import searchPreavoids from './searchPreavoids.vue'

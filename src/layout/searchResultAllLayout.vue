@@ -28,25 +28,21 @@
 </template>
 
 <script>
-import searchBar from '../components/search/searchBar.vue'
-import searchResultMain from "../components/searchResultAll/searchResultMain.vue"
+import searchBar from '../components/common/search/searchBar.vue'
+import searchResultMain from '../components/searchResultAll/searchResultMain.vue'
 
 export default {
-  components: {
-    searchBar, searchResultMain
-  },
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true
-    };
-  },
-  methods: {
-
-  },
-  created() {
-
-  }
+    components: {
+        searchBar,
+        searchResultMain,
+    },
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+        }
+    },
+    methods: {},
+    created() {},
 }
 </script>
-

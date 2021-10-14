@@ -369,11 +369,11 @@
 </template>
 
 <script>
-import menuLogoSvg from '../common/svgImage/menuLogoSvg.vue'
-import iconDown from '../common/svgImage/iconDown.vue'
-import groundMenuXSvg from '../common/svgImage/groundMenuXSvg.vue'
-import groundMenuSvg from '../common/svgImage/groundMenuSvg.vue'
-import HomeIconSvg from '../common/svgImage/homeIconSvg.vue'
+import menuLogoSvg from '../../components/common/svgImage/menuLogoSvg.vue'
+import iconDown from '../../components/common/svgImage/iconDown.vue'
+import groundMenuXSvg from '../../components/common/svgImage/groundMenuXSvg.vue'
+import groundMenuSvg from '../../components/common/svgImage/groundMenuSvg.vue'
+import HomeIconSvg from '../../components/common/svgImage/homeIconSvg.vue'
 export default {
     name: 'dropdown',
     components: {

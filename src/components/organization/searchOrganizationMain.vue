@@ -165,15 +165,7 @@
                                     <div>最終編集日：{{ item.createdAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
                                 </div>
-                                <!-- <div class="flex flex-wrap space-x-2">
-                                    参考資料：
-                                    <div
-                                        v-for="referenceMaterials in item.referenceMaterials"
-                                        :key="referenceMaterials"
-                                    >
-                                        {{ referenceMaterials.name }}
-                                    </div>
-                                </div> -->
+
                                 <div
                                     class="
                                         flex flex-wrap
@@ -937,14 +929,14 @@
 </template>
 
 <script>
-import TriangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
+import TriangleDownSvg from '../../components/common/svgImage/triangleDownSvg.vue'
 import resutTag from '../searchResult/resultTag.vue'
 import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
 import carousel from '../searchResult/carousel.vue'
-import Good from '../common/svgImage/good.vue'
-import bad from '../common/svgImage/bad.vue'
-import talk from '../common/svgImage/talk.vue'
-import xIconSvg from '../common/svgImage/xIconSvg.vue'
+import Good from '../../components/common/svgImage/good.vue'
+import bad from '../../components/common/svgImage/bad.vue'
+import talk from '../../components/common/svgImage/talk.vue'
+import xIconSvg from '../../components/common/svgImage/xIconSvg.vue'
 import Pagination from '../pagination/pagiation.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../messageBox/goodMessageBox.vue'

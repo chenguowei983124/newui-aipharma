@@ -246,7 +246,7 @@
 </template>
 
 <script>
-import iconDown from '../common/svgImage/iconDown.vue'
+import iconDown from '../../components/common/svgImage/iconDown.vue'
 export default {
     emits: ['clickDown'],
     components: { iconDown },

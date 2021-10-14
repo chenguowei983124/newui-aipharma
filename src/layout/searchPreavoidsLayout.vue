@@ -78,7 +78,6 @@
                 : 'hidden',
         ]"
     >
-        <!-- <div class="bg-blue-400">464645646465</div> -->
         <comment-message-box class=""></comment-message-box>
     </div>
 </template>
@@ -86,34 +85,39 @@
 <script>
 import CommentMessageBox from '../components/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/messageBox/goodMessageBox.vue'
-import searchBar from '../components/search/searchBar.vue'
-import searchPreavoidsMain from "../components/searchPreavoids/searchPreavoidsMain.vue"
+import searchBar from '../components/common/search/searchBar.vue'
+import searchPreavoidsMain from '../components/searchPreavoids/searchPreavoidsMain.vue'
 
 export default {
-  components: {
-    CommentMessageBox,
-    GoodMessageBox, searchBar, searchPreavoidsMain
-  },
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true,
-      isDetailButtonClick: false,
-      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"]
-    };
-  },
-  methods: {
-    // ========================================
-    // 詳細条件ボタン押下区分を取得
-    // ========================================
-    getDetailClick: function (data) {
-
-      this.isDetailButtonClick = data
-    }
-  },
-  created() {
-
-  }
+    components: {
+        CommentMessageBox,
+        GoodMessageBox,
+        searchBar,
+        searchPreavoidsMain,
+    },
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+            isDetailButtonClick: false,
+            torenndoTab: [
+                '#ロキソニン',
+                '#ロキソ',
+                '#用途',
+                '#痛み止め',
+                '#ロキソニン',
+                '#ロキソ',
+            ],
+        }
+    },
+    methods: {
+        // ========================================
+        // 詳細条件ボタン押下区分を取得
+        // ========================================
+        getDetailClick: function (data) {
+            this.isDetailButtonClick = data
+        },
+    },
+    created() {},
 }
 </script>
-

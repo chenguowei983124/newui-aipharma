@@ -126,68 +126,68 @@
 <script>
 import CommentMessageBox from '../components/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/messageBox/goodMessageBox.vue'
-import searchBar from '../components/search/searchBar.vue'
+import searchBar from '../components/common/search/searchBar.vue'
 import searchOrganizationMain from '../components/organization/searchOrganizationMain.vue'
 import OrganizationInit from '../components/organization/organizationInit.vue'
 
 export default {
-  components: {
-    CommentMessageBox,
-    GoodMessageBox,
-    searchBar,
-    searchOrganizationMain,
-    OrganizationInit,
-  },
-
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true,
-      isDetailButtonClick: false,
-      parentMage: '',
-    }
-  },
-  mounted() { },
-  methods: {
-    getSearchResult: function (value) {
-      console.log('')
+    components: {
+        CommentMessageBox,
+        GoodMessageBox,
+        searchBar,
+        searchOrganizationMain,
+        OrganizationInit,
     },
 
-    // ========================================
-    // 詳細条件ボタン押下区分を取得
-    // ========================================
-    getDetailClick: function (data) {
-      console.log('getDetailClickdata', data)
-      this.isDetailButtonClick = data
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+            isDetailButtonClick: false,
+            parentMage: '',
+        }
     },
-    // ========================================
-    // 詳細条件表示・非表示取得
-    // ========================================
-    getDetailDisp: function (value) {
-      //   console.log(value)
-      this.detailDisp = value
+    mounted() {},
+    methods: {
+        getSearchResult: function (value) {
+            console.log('')
+        },
+
+        // ========================================
+        // 詳細条件ボタン押下区分を取得
+        // ========================================
+        getDetailClick: function (data) {
+            console.log('getDetailClickdata', data)
+            this.isDetailButtonClick = data
+        },
+        // ========================================
+        // 詳細条件表示・非表示取得
+        // ========================================
+        getDetailDisp: function (value) {
+            //   console.log(value)
+            this.detailDisp = value
+        },
+        searchTag: function (value) {
+            this.value = value
+            this.$store.dispatch('setSearchWord', value)
+            this.$store.dispatch('setSearchTags', '')
+            this.$store.dispatch('setMedicineID', '')
+            this.$store.dispatch('setQuestionID', '')
+            this.$store.dispatch('setFacilityID', '')
+            this.$store.dispatch('setPage', '')
+            this.$store.dispatch('setQAID', '')
+            this.$refs.searchbar.searchClick()
+        },
+        showMsgToParent: function (data) {
+            return (this.parentMage = data)
+        },
     },
-    searchTag: function (value) {
-      this.value = value
-      this.$store.dispatch('setSearchWord', value)
-      this.$store.dispatch('setSearchTags', '')
-      this.$store.dispatch('setMedicineID', '')
-      this.$store.dispatch('setQuestionID', '')
-      this.$store.dispatch('setFacilityID', '')
-      this.$store.dispatch('setPage', '')
-      this.$store.dispatch('setQAID', '')
-      this.$refs.searchbar.searchClick()
+    created() {
+        let param = sessionStorage.getItem('searchParam')
+        this.$store.dispatch(
+            'setSearchWord',
+            sessionStorage.getItem('searchWord')
+        )
     },
-    showMsgToParent: function (data) {
-      return (this.parentMage = data)
-    },
-  },
-  created() {
-    let param = sessionStorage.getItem('searchParam')
-    this.$store.dispatch(
-      'setSearchWord',
-      sessionStorage.getItem('searchWord')
-    )
-  },
 }
 </script>
