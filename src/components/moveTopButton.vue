@@ -1,6 +1,24 @@
 <template>
     <div v-show="isDisp" class="fixed block bottom-5 z-99">
-        <button
+        <div
+            class="h-15 w-15 flex justify-center items-center cursor-pointer"
+            @click="toTop"
+        >
+            <svg
+                id="_211012_ai_pharma_parts"
+                data-name="211012_ai_pharma_parts"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 120 120"
+                class="hover:opacity-50 active:opacity-50"
+            >
+                <circle class="cls-1" cx="60" cy="60" r="60" />
+                <polygon
+                    class="cls-2"
+                    points="60 41.47 36 71.47 84 71.47 60 41.47"
+                />
+            </svg>
+        </div>
+        <!-- <button
             class="
                 h-15
                 w-15
@@ -15,9 +33,8 @@
             "
             @click="toTop"
         >
-            <!-- ▲ -->
             <triangle-svg class=""></triangle-svg>
-        </button>
+        </button> -->
     </div>
 </template>
 
@@ -58,3 +75,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+.cls-1 {
+    fill: #f09600;
+}
+.cls-2 {
+    fill: #fff;
+}
+</style>

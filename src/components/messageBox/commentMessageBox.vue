@@ -116,7 +116,9 @@
                                             rounded
                                         "
                                     >
-                                        <pencil-alt-icon-svg></pencil-alt-icon-svg>
+                                        <pencil-alt-icon-svg
+                                            class="w-6 h-6"
+                                        ></pencil-alt-icon-svg>
                                     </button>
                                 </div>
                                 <div class="flex justify-center items-center">

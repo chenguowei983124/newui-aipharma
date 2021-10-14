@@ -115,7 +115,7 @@
     <div
         :class="[
             $store.getters.getCommentMessageBox
-                ? 'block fixed w-full top-1/4 z-99'
+                ? 'block fixed top-1/4 z-99 left-0 right-0'
                 : 'hidden',
         ]"
     >

@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-between items-center">
         <div class="flex-none">
-            <div class="flex items-center relative">
+            <div class="flex relative">
                 <!-- Menu icon 30px*22.5px -->
                 <div
                     class="
@@ -54,8 +54,9 @@
                             mid:w-37.5
                             bg-white
                             flex
-                            justify-start
-                            md:justify-center
+                            mt-0
+                            md:mt-1.5
+                            justify-center
                             items-center
                         "
                         :class="{
@@ -107,14 +108,6 @@
         }"
         @click.self="linkClick"
     ></div>
-    <!-- <transition
-        enter-active-class="transition duration-150 ease-out transform"
-        enter-from-class="scale-95 opacity-0"
-        enter-to-class="scale-100 opacity-100"
-        leave-active-class="transition duration-150 ease-in transform"
-        leave-from-class="scale-100 opacity-100"
-        leave-to-class="scale-95 opacity-0"
-    > -->
     <div
         class="w-56.25 md:w-52.5 bg-gray-200"
         :class="{
@@ -135,20 +128,7 @@
         >
             <div class="flex items-center ml-3.75 cursor-pointer">
                 <!-- Home icon -->
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                </svg>
+                <home-icon-svg class="h-5 w-5"></home-icon-svg>
             </div>
             <!-- Triangle icon -->
             <div class="cursor-pointer mt-2.5 mr-3.75">
@@ -397,9 +377,10 @@ import menuLogoSvg from '../svgImage/menuLogoSvg.vue';
 import iconDown from '../svgImage/iconDown.vue';
 import groundMenuXSvg from '../svgImage/groundMenuXSvg.vue';
 import groundMenuSvg from '../svgImage/groundMenuSvg.vue';
+import HomeIconSvg from '../svgImage/homeIconSvg.vue';
 export default {
   name: 'dropdown',
-  components: { menuLogoSvg, iconDown, groundMenuXSvg, groundMenuSvg },
+  components: { menuLogoSvg, iconDown, groundMenuXSvg, groundMenuSvg, HomeIconSvg },
   props: { isDispaly: false },
   data() {
     return {
