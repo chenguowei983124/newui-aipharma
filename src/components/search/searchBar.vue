@@ -59,6 +59,7 @@
                         v-if="checkId == 1 && form != $constant.formList.TOP"
                     >
                         <search-di-knowledge
+                            @tagValue="getOwnTagValue"
                             :searchButtonClick="searchClick"
                         ></search-di-knowledge>
                     </div>
@@ -390,11 +391,83 @@ export default {
       }
       // DI ナレッジシェア
       else if (this.checkId == 1) {
-        this.$store.dispatch('getdIKnowledgeShareSearchInfo', {
-          inputSearchValue: this.searchValue,
-          tagValue: this.ownTagVaule,
+        // console.log('SearchWord', this.$store.getters.getSearchWord)
+        let getTimestamp = new Date().getTime()
+        let params = {
+          search: this.$store.getters.getSearchWord,
+          tags:
+            this.$props.form == this.$constant.formList.TOP
+              ? ''
+              : this.$store.getters.getSearchTags
+                ? this.$store.getters.getSearchTags.join(',')
+                : '',
+          medicine:
+            this.$props.form == this.$constant.formList.TOP
+              ? '1'
+              : this.$store.getters.getMedicineID,
+          qacategory:
+            this.$props.form == this.$constant.formList.TOP
+              ? '-1'
+              : this.$store.getters.getQuestionID,
+          facility_flag:
+            this.$props.form == this.$constant.formList.TOP
+              ? '-1'
+              : this.$store.getters.getFacilityID,
+          displayed:
+            this.$props.form == this.$constant.formList.TOP
+              ? '1'
+              : this.$store.getters.getMaxCount,
+          sort:
+            this.$props.form == this.$constant.formList.TOP
+              ? '1'
+              : this.$store.getters.getSort,
+          page:
+            this.$props.form == this.$constant.formList.TOP
+              ? '1'
+              : this.$store.getters.getPage,
+          checkQ:
+            this.$props.form == this.$constant.formList.TOP
+              ? true
+              : this.$store.getters.getCheckQ,
+          checkA:
+            this.$props.form == this.$constant.formList.TOP
+              ? true
+              : this.$store.getters.getCheckA,
+          checkComment:
+            this.$props.form == this.$constant.formList.TOP
+              ? true
+              : this.$store.getters.getCheckComment,
+          checkAddFileName:
+            this.$props.form == this.$constant.formList.TOP
+              ? true
+              : this.$store.getters.getCheckAddFileName,
+          checkContributor:
+            this.$props.form == this.$constant.formList.TOP
+              ? true
+              : this.$store.getters.getCheckContributor,
+          checkLastEditer:
+            this.$props.form == this.$constant.formList.TOP
+              ? true
+              : this.$store.getters.getCheckLastEditer,
+          checkFacilityName:
+            this.$props.form == this.$constant.formList.TOP
+              ? true
+              : this.$store.getters.getCheckFacilityName,
+          checkNote:
+            this.$props.form == this.$constant.formList.TOP
+              ? true
+              : this.$store.getters.getCheckNote,
+          timestamp: getTimestamp,
+        }
+        this.$router.push({
+          path: '/searchDiKnowledge',
+          query: params,
         })
-        this.$router.push('/searchDiKnowledge')
+        // this.$store.dispatch('getdIKnowledgeShareSearchInfo', {
+        //   inputSearchValue: this.searchValue,
+        //   tagValue: this.ownTagVaule,
+        // })
+        // this.$router.push('/searchDiKnowledge')
       }
       // 組織内 DI 記録（Q&A）
       else if (this.checkId == 2) {
