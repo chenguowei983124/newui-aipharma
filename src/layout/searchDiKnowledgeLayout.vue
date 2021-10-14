@@ -4,10 +4,12 @@
         <!-- pcの場合 -->
         <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
             <search-bar
+                ref="searchbar"
                 :form="$constant.formList.DI"
                 @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
-                v-bind:searchValue="parentMage"
+                @searchResult="getSearchResult"
+                :searchValueInput="$store.getters.getSearchWord"
             ></search-bar>
         </div>
 
@@ -83,16 +85,14 @@
         <div class="flex-grow max-h-full min-w-min block"></div>
         <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">
             <div class="grid grid-cols-1 gap-1 md:space-y-3.75">
-                <!-- :class="[
-                        $store.getters.getIsOrganizationSearch
-                            ? 'block'
-                            : 'hidden',
-                    ]" -->
                 <div>
                     <search-di-knowledge-ai></search-di-knowledge-ai>
                 </div>
                 <div>
-                    <search-di-knowledge-main></search-di-knowledge-main>
+                    <search-di-knowledge-main
+                        ref="main"
+                        v-on:listenToChildEvent="showMsgToParent"
+                    ></search-di-knowledge-main>
                 </div>
                 <div>
                     <di-knowledge-init
@@ -136,7 +136,11 @@ import SearchDiKnowledgeAi from '../components/diKnowledge/searchDiKnowledgeAi.v
 export default {
   components: {
     CommentMessageBox,
-    GoodMessageBox, searchBar, SearchDiKnowledgeMain, DiKnowledgeInit, SearchDiKnowledgeAi
+    GoodMessageBox,
+    searchBar,
+    SearchDiKnowledgeMain,
+    DiKnowledgeInit,
+    SearchDiKnowledgeAi
   },
 
   props: {},
@@ -144,10 +148,13 @@ export default {
     return {
       isMenuOpen: true,
       isDetailButtonClick: false,
-      parentMage: "",
+      parentMage: '',
     };
   },
   methods: {
+    getSearchResult: function (value) {
+      //   console.log('')
+    },
     // ========================================
     // 詳細条件ボタン押下区分を取得
     // ========================================
@@ -162,8 +169,15 @@ export default {
       this.detailDisp = value
     },
     searchTag: function (value) {
-      console.log('searchTag', value)
-      return this.parentMage = value
+      this.value = value
+      this.$store.dispatch('setSearchWord', value)
+      this.$store.dispatch('setSearchTags', '')
+      this.$store.dispatch('setMedicineID', '')
+      this.$store.dispatch('setQuestionID', '')
+      this.$store.dispatch('setFacilityID', '')
+      this.$store.dispatch('setPage', '')
+      this.$store.dispatch('setQAID', '')
+      this.$refs.searchbar.searchClick()
     },
     showMsgToParent: function (data) {
       //   console.log("showMsgToParent", data)
@@ -171,7 +185,11 @@ export default {
     }
   },
   created() {
-
+    let param = sessionStorage.getItem('searchParam')
+    this.$store.dispatch(
+      'setSearchWord',
+      sessionStorage.getItem('searchWord')
+    )
   }
 }
 </script>
