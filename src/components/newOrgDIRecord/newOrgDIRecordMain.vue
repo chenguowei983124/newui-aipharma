@@ -166,7 +166,7 @@
                     PubMed
                   </label>
                   <external-link
-                      class="hover:opacity-50 active:opacity-50 w-1/5"
+                      class="hover:opacity-50 active:opacity-50"
                   ></external-link>
                 </a>
                 <input
@@ -225,22 +225,28 @@
                   ファイル
                 </label>
                 <div v-for="(item, index) in base.file"
-                :key="index">
+                  :key="index">
                   <div class="flex justify-between">
-                    <input
-                        class="
-                            NotoSansJp-normal
-                            rounded-sm
-                            placeholder-gray-500
-                            focus:placeholder-opacity-0
-                            border-transparent
-                            focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
-                            focus:border-transparent
-                        "
-                        type="file"
-                        placeholder=""
-                    />
+                    <div class="flex">
+                      <label :for="'addFile_'+index" style="color: black;background-color: white;border: double 1px;">ファイルを選択してください</label>
+                      <input
+                          :id="'addFile_'+index"
+                          class="
+                              NotoSansJp-normal
+                              rounded-sm
+                              placeholder-gray-500
+                              focus:placeholder-opacity-0
+                              border-transparent
+                              focus:outline-none
+                              focus:ring-1 focus:ring-326EB5Lins
+                              focus:border-transparent
+                          "
+                          type="file"
+                          @change="onFileChange"
+                          style="display: none"
+                      />
+                      <p class="ml-2">{{item.name}}</p>
+                    </div>
                     <input
                         type="button"
                         class="
@@ -854,6 +860,7 @@ export default {
         file:[
           {
             name:"",
+            content:"",
           }
         ],
       },
@@ -880,6 +887,30 @@ export default {
     }
   },
   methods: {
+    onFileChange (e) {
+      console.log('onFileChange-1',e)
+      const idx = e.target.id.slice(e.target.id.lastIndexOf('_')+1)
+      if (e.target.files.length == 0)
+        return;
+      const fs = e.target.files
+      // document.getElementById(e.target.id).value = '';
+      this.addFile(fs,idx)
+      e.target.value = ''
+    },
+    addFile (files,idx) {
+      for (const file of files) {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        let f = {
+          name: file.name,
+        }
+        reader.onload = () => {
+          Object.assign(f, {content: reader.result})
+          // this.base.file.push(f)
+          this.base.file[idx] = f
+        }
+      }
+    },
     tmpSaveEvent(kind){
       if (kind == 'base') {
         console.log('tmpSaveEvent',this.base)
@@ -902,11 +933,16 @@ export default {
       this.detail.patientGender = value
     },
     onClearItem: function(list, index) {
-      if (list.length > 1)
+      if (list.length > 1){
         list.splice(index, 1)
+      } else {
+        Object.keys(list[0]).map(key => {
+          list[0][key] = null
+        });
+      }
     },
     onAddFile: function () {
-      this.base.file.push({name:""})
+      this.base.file.push({name:"", content:""})
     },
     onAddSource: function () {
       this.base.source.push({name:"", url:""})
