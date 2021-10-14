@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="flex border-b-2 border-blue-200">
+    <div class="flex border-b-2 border-blue-200" id="newDI_Title">
       <!-- 左 -->
-      <div id="top_block_left" class="flex-grow max-h-full min-w-min hidden md:block mid:block"/>
-      <div>
+      <div id="top_block_left" class="w-1/12 md:w-1/6"/>
+      <div id="Title" class="flex-grow w-full">
         <br/>
         <div class="text-googleTitle notoSansJpAndTwentyTwoBold">
             組織内DI 記録（Q&A） 登録
@@ -17,18 +17,18 @@
         <br/>
       </div>
       <!-- 右 -->
-      <div id="top_block_right" class="flex-grow max-h-full min-w-min hidden md:block mid:block"/>
+      <div id="top_block_right" class="w-1/12 md:w-1/6"/>
     </div>
-    <form action="">
-      <div class="flex">
-        <!-- 左 -->
-        <div id="bottom_block_left" class="flex-grow max-h-full min-w-min hidden md:block mid:block"/>
-        <div>
-          <!-- 基本情報 -->
-          <div id="base" class="pt-10">
-            <div class="text-googleTitle notoSansJpAndTwentyTwoBold text-center">
-                基本情報
-            </div>
+    <div class="flex" id="newDI_Content">
+      <!-- 左 -->
+      <div id="bottom_block_left" class="w-1/12 md:w-1/6"/>
+      <div id="Contents" class="flex-grow w-full">
+        <!-- 基本情報 -->
+        <div id="base" class="pt-10">
+          <div id="bTitle" class="text-googleTitle notoSansJpAndTwentyTwoBold text-center">
+              基本情報
+          </div>
+          <div id="bItems">
             <div id="question" class="mt-3">
                 <label class="notoSansJpAndFourteenBold">
                   質問
@@ -85,13 +85,16 @@
                 <label class="notoSansJpAndFourteenBold">
                   出典・引用
                 </label>
-                <div v-for="(item, index) in base.source"
-                :key="index" class="flex justify-between">
+                <div v-for="(item, index) in base.source" :key="index" 
+                  class="
+                    flex-wrap md:flex
+                    justify-between mt-2
+                  ">
                   <input
                       v-model="item.name"
                       class="                          
                           h-10
-                          w-1/2
+                          w-full md:w-1/2
                           NotoSansJp-normal
                           rounded-sm
                           pl-4
@@ -109,9 +112,11 @@
                   <input
                       v-model="item.url"
                       class="
-                          ml-5                      
+                          flex-grow   
                           h-10
-                          w-1/2
+                          mt-2 md:mt-0
+                          ml-0 md:ml-2
+                          w-full md:w-0
                           NotoSansJp-normal
                           rounded-sm
                           pl-4
@@ -129,8 +134,10 @@
                   <input
                       type="button"
                       class="
-                          ml-5   
-                          bg-gray-600
+                          mt-2 md:mt-0
+                          ml-0 md:ml-2
+                          md:w-1/12
+                          bg-gray-400
                           hover:opacity-50
                           active:bg-bg-gray-200
                           active:opacity-100
@@ -138,6 +145,7 @@
                           rounded-sm
                           notoSansJpAndTwelveBold
                           text-white
+                          border-b-2 border-gray-500 
                       "
                       @click="onClearItem(base.source, index)"
                       value="クリア"
@@ -146,15 +154,17 @@
                 <input
                     type="button"
                     class="
-                        bg-blue-400
+                        mt-2
+                        bg-blue-300
                         hover:opacity-50
                         active:bg-bg-gray-200
                         active:opacity-100
-                        h-5
+                        h-10 md:h-7
                         w-15
                         rounded-sm
                         notoSansJpAndTwelveBold
                         text-white
+                        border-b-2 border-blue-400
                     "
                     @click="onAddSource"
                     value="+追加"
@@ -226,39 +236,39 @@
                 </label>
                 <div v-for="(item, index) in base.file"
                   :key="index">
-                  <div class="flex justify-between">
+                  <div class="flex justify-between mt-1">
                     <div class="flex">
-                      <label :for="'addFile_'+index" style="color: black;background-color: white;border: double 1px;">ファイルを選択してください</label>
-                      <input
-                          :id="'addFile_'+index"
-                          class="
-                              NotoSansJp-normal
-                              rounded-sm
-                              placeholder-gray-500
-                              focus:placeholder-opacity-0
-                              border-transparent
-                              focus:outline-none
-                              focus:ring-1 focus:ring-326EB5Lins
-                              focus:border-transparent
-                          "
-                          type="file"
-                          @change="onFileChange"
-                          style="display: none"
-                      />
-                      <p class="ml-2">{{item.name}}</p>
+                      <label 
+                        :for="'addFile_'+index" 
+                        class=" 
+                            w-28
+                            bg-gray-300
+                            hover:opacity-50
+                            active:bg-bg-gray-200
+                            active:opacity-100
+                            rounded-sm
+                            notoSansJpAndFourteenBold
+                            text-black
+                            text-center
+                            border border-gray-600 
+                        "
+                      >ファイルを選択</label>
+                      <input :id="'addFile_'+index" class="hidden" type="file" @change="onFileChange"/>
+                      <p class="ml-2">{{!!item.name ? item.name : '※ファイルが選択されていません。'}}</p>
                     </div>
                     <input
                         type="button"
                         class="
                             ml-5   
-                            bg-gray-600
+                            bg-gray-400
                             hover:opacity-50
                             active:bg-bg-gray-200
                             active:opacity-100
-                            h-7
+                            h-6
                             rounded-sm
                             notoSansJpAndTwelveBold
                             text-white
+                            border-b-2 border-gray-500 
                         "
                         @click="onClearItem(base.file,index)"
                         value="クリア"
@@ -268,58 +278,43 @@
                 <input
                     type="button"
                     class="
-                        bg-blue-400
+                        mt-2
+                        bg-blue-300
                         hover:opacity-50
                         active:bg-bg-gray-200
                         active:opacity-100
-                        h-5
+                        h-10 md:h-7
                         w-15
                         rounded-sm
                         notoSansJpAndTwelveBold
                         text-white
+                        border-b-2 border-blue-400
                     "
                     @click="onAddFile"
                     value="+追加"
                 />
             </div>
-            <new-org-DI-record-buttons 
-              parent="base"
-              :disableSave="!isValid"
-              @onTmpSaveEvent="tmpSaveEvent"
-              @onSaveEvent="saveEvent"
-              >
-            </new-org-DI-record-buttons>
           </div>
-          <hr class="mt-10" >
-          <!-- 詳細情報 -->
-          <div id="detail" class="pt-10">
-            <div class="notoSansJpAndTwentyTwoBold text-center">
-                詳細情報
-            </div>
+          <new-org-DI-record-buttons id="bButtons"
+            parent="base"
+            :disableSave="!isValid"
+            @onTmpSaveEvent="tmpSaveEvent"
+            @onSaveEvent="saveEvent"
+            >
+          </new-org-DI-record-buttons>
+        </div>
+        <hr class="mt-10" >
+        <!-- 詳細情報 -->
+        <div id="detail" class="pt-10">
+          <div id="dTitle" class="notoSansJpAndTwentyTwoBold text-center">
+              詳細情報
+          </div>
+          <div id="dItems">
             <div id="mediTypes" class="mt-3">
               <label class="notoSansJpAndFourteenBold">
                 薬の分類
               </label>
-              <!-- <input
-                  v-model="detail.mediTypes"
-                  class="
-                      block
-                      w-full
-                      NotoSansJp-normal
-                      rounded-sm
-                      pl-4
-                      placeholder-gray-500
-                      focus:placeholder-opacity-0
-                      ring-1
-                      border-transparent
-                      focus:outline-none
-                      focus:ring-1 focus:ring-326EB5Lins
-                      focus:border-transparent
-                  "
-                  type="text"
-                  placeholder=""
-              /> -->
-              <div class="px-2 md:px-0">
+              <div id="msMediTypes">
                   <Multiselect
                       class="h-7.5"
                       v-model="detail.mediTypes"
@@ -502,9 +497,14 @@
                 <label class="notoSansJpAndFourteenBold">
                   質問者
                 </label>
-                <div class="flex justify-between">
+                <div class="
+                    justify-between
+                    flex-wrap md:flex
+                  ">
                   <vue-single-select
-                      class="w-1/2"
+                      class="
+                        w-full md:w-1/2
+                      "
                       :name="'prefessionList'"
                       :default-value="-1"
                       placeholder="職種"
@@ -519,8 +519,10 @@
                   <input
                       v-model="detail.questioner.department"
                       class="
-                          ml-2
-                          w-1/2
+                          flex-grow
+                          mt-2 md:mt-0
+                          ml-0 md:ml-2
+                          w-full md:w-0
                           NotoSansJp-normal
                           rounded-sm
                           placeholder-gray-500
@@ -541,7 +543,7 @@
                 患者性別
               </label>
               <vue-single-select
-                  class="w-1/2"
+                  class="w-full md:w-1/2"
                   :name="'patientGenderList'"
                   :default-value="-1"
                   :default-input-attribs="{ tabindex: 1 }"
@@ -622,7 +624,7 @@
               <label class="notoSansJpAndFourteenBold">
                 マルチセレクト項目
               </label>
-              <div class="px-2 md:px-0">
+              <div id="msMultiSelectItem">
                   <Multiselect
                       class="h-7.5"
                       v-model="detail.multiSelectItem"
@@ -757,7 +759,7 @@
               <label class="notoSansJpAndFourteenBold">
                 質問日
               </label>
-              <div class="w-1/3">
+              <div class="w-full md:w-1/3">
                 <litepie-datepicker
                       ref="datepicker"
                       :asSingle="true"
@@ -786,22 +788,22 @@
                   他施設（自施設、グループ施設以外）にも公開
                 </label>                
               </div>
-              <label class="ml-4 notoSansJpAndTwelveBold">
+              <label class="ml-4 notoSansJpAndTwelveBold" style="color: red;">
                 ※公開に同意する場合にのみチェックを入れてください
               </label>
             </div>
-            <new-org-DI-record-buttons 
-              parent="detail"
-              @onTmpSaveEvent="tmpSaveEvent"
-              @onSaveEvent="saveEvent"
-              >
-            </new-org-DI-record-buttons>
           </div>
+          <new-org-DI-record-buttons id="dButtons"
+            parent="detail"
+            @onTmpSaveEvent="tmpSaveEvent"
+            @onSaveEvent="saveEvent"
+            >
+          </new-org-DI-record-buttons>
         </div>
-        <!-- 右 -->
-        <div id="top_block_right" class="flex-grow max-h-full min-w-min hidden md:block mid:block"/>
       </div>
-    </form>
+      <!-- 右 -->
+      <div id="bottom_block_right" class="w-1/12 md:w-1/6"/>
+    </div>
   </div>
 </template>
 

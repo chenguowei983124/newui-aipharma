@@ -1,5 +1,5 @@
 <template>
-  <div class="flex mt-5">
+  <div class="flex-wrap md:flex justify-center mt-10">
     <input
         type="button"
         class="
@@ -7,11 +7,12 @@
             hover:opacity-50
             active:bg-personInformationButton
             active:opacity-100
+            border-b-2 border-gray-500 
             h-10
             rounded-full
             notoSansJpAndEighteenBold
             text-black
-            w-86.25
+            w-full md:w-5/12
             disabled:cursor-not-allowed
         "
         @click="onTmpSave"
@@ -20,16 +21,17 @@
     <input
         type="button"
         :class="
-            'ml-2'
+              'ml-0 md:ml-2 mt-2 md:mt-0 '
             + ' bg-orange-400'
             + ' hover:opacity-50'
             + ' active:bg-personInformationButton'
             + ' active:opacity-100'
+            + ' border-b-2 border-orange-700'
             + ' h-10'
             + ' rounded-full'
             + ' notoSansJpAndEighteenBold'
             + ' text-white'
-            + ' w-86.25'
+            + ' w-full md:w-5/12'
             + ' disabled:cursor-not-allowed'
             + ( disableSave ? ' opacity-50' : '' )
         "

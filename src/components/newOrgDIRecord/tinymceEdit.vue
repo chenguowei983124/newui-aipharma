@@ -19,7 +19,6 @@ export default {
   data () {
     return {
       tinymce_init: {
-        height: 200,
         menubar: false,
         branding: false,
         placeholder:'回答作成待ち',
@@ -27,6 +26,7 @@ export default {
         plugins: "link image code",
         toolbar:
           "undo redo | formatselect | bold italic backcolor | link image | code",
+        toolbar_mode: 'wrap',
         // image_list: [ ],
         // tinydrive_token_provider: "/jwt",
         images_upload_handler: 
