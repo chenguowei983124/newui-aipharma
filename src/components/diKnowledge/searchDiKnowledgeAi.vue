@@ -597,52 +597,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        items-end
-                                    "
-                                >
-                                    <div
-                                        class="
-                                            flex
-                                            md:w-1/2
-                                            border-b-2
-                                            notoSansJpAndFourteenRegular
-                                            text-grayline
-                                        "
-                                    >
-                                        <div class="w-30 flex-none">QAID</div>
-                                        <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.facilityQaNumber }}
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="
-                                            flex
-                                            md:w-1/2
-                                            border-b-2
-                                            notoSansJpAndFourteenRegular
-                                            text-grayline
-                                        "
-                                    >
-                                        <div class="w-30 flex-none">
-                                            薬の分類
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="flex flex-wrap">
-                                            <div
-                                                class=""
-                                                v-for="qaQaClassifyClasses in item.qaQaClassifyClasses"
-                                                :key="qaQaClassifyClasses"
-                                            >
-                                                {{ qaQaClassifyClasses.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+
                                 <div
                                     class="
                                         md:flex md:flex-row
@@ -715,30 +670,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
-                                    "
-                                >
-                                    <div class="flex flex-auto">
-                                        <div class="w-30 flex-none">
-                                            キーワード
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="flex flex-wrap">
-                                            <div
-                                                class="mr-2"
-                                                v-for="keywordTags in item.keywordTags"
-                                                :key="keywordTags"
-                                            >
-                                                {{ keywordTags.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+
                                 <div
                                     class="
                                         md:flex md:flex-row
@@ -754,13 +686,6 @@
                                         <div class="w-2">:</div>
                                         <div class="flex flex-wrap">
                                             {{ item.askedPersonClassName }}
-                                            <!-- <div
-                                                class="mr-2"
-                                                v-for="keywordTags in item.keywordTags"
-                                                :key="keywordTags"
-                                            >
-                                                {{ keywordTags.name }}
-                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -839,103 +764,6 @@
                                     </div>
                                 </div>
 
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                    "
-                                >
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            質問区分
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="categories in item.categories"
-                                            :key="categories"
-                                        >
-                                            {{ categories.name }}
-                                        </div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">医薬品</div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="medicineName in item.medicines"
-                                            :key="medicineName"
-                                        >
-                                            {{ medicineName.name }}
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                    "
-                                >
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            キーワード
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="keywordTags in item.keywordTags"
-                                            :key="keywordTags"
-                                        >
-                                            {{ keywordTags.name }}
-                                        </div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            質問者- 職種
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.askedPersonClassName }}
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                    "
-                                >
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            質問者・診療科
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="askedPersonMedicalDepartments in item.askedPersonMedicalDepartments"
-                                            :key="askedPersonMedicalDepartments"
-                                        >
-                                            {{
-                                                askedPersonMedicalDepartments.name
-                                            }}
-                                        </div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            公開範囲
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.shareScope }}
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div
                                     class="
                                         md:flex md:flex-row
@@ -1078,162 +906,174 @@
 </template>
 
 <script>
-
-import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
+import TriangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
 import resutTag from '../searchResult/resultTag.vue'
 import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
 import carousel from '../searchResult/carousel.vue'
-import Good from '../svgImage/good.vue'
-import bad from '../svgImage/bad.vue'
-import talk from '../svgImage/talk.vue'
-import xIconSvg from '../svgImage/xIconSvg.vue'
+import Good from '../common/svgImage/good.vue'
+import bad from '../common/svgImage/bad.vue'
+import talk from '../common/svgImage/talk.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
 import Pagination from '../pagination/pagiation.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
-import { ref, onBeforeUpdate, onUpdated, onUnmounted, nextTick } from 'vue'
-import { reactive, onMounted } from 'vue'
 export default {
-  components: {
-    TriangleDownSvg,
-    resutTag, resultDetailRow, carousel,
-    Good, bad, talk, xIconSvg,
-    Pagination, vueSingleSelect,
-    GoodMessageBox, ResultDetailRowItem
-  },
-  props: {},
-  data() {
-    // console.log(this.$store.getters.organizationSearchInfo)
-    return {
-      // 順 区分 id
-      organizationDateSortValue: 0,
-      // 件 表示 区分 id
-      organizationCountSortValue: 0,
-      pageCount: 1,
-      selectPage: 0,
-      goodMessageBox: false,
-      //   isDetailDisp: false,
-      isDetailDisp: [],
-      //   isDetailsDisp: false,
-      isDetailsDisp: [],
-      activeIndex: -1,
-      //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
-      resultData: Object,
-      result: Object
-
-    };
-  },
-  mounted() {
-    this.$store.dispatch("clearOrganizationSearchInfo")
-    if (this.$route.params.id) {
-      let result = this.$serve.getOwn({ id: this.$route.params.id })
-      result.then((response) => {
-        this.$store.dispatch('setOrganizationSearchInfo', response)
-        this.resultData = response.data.allCount
-        // console.log("response", response)
-        // console.log(response.data.allCount)
-        if (response.data.allCount == 1) {
-          for (const key in response.data.qas) {
-            if (Object.hasOwnProperty.call(response.data.qas, key)) {
-              //   const element = response.data.qas[key];
-              console.log("element", key)
-              this.openDetailDisp(key)
+    components: {
+        TriangleDownSvg,
+        resutTag,
+        resultDetailRow,
+        carousel,
+        Good,
+        bad,
+        talk,
+        xIconSvg,
+        Pagination,
+        vueSingleSelect,
+        GoodMessageBox,
+        ResultDetailRowItem,
+    },
+    props: {},
+    data() {
+        // console.log(this.$store.getters.organizationSearchInfo)
+        return {
+            // 順 区分 id
+            organizationDateSortValue: 0,
+            // 件 表示 区分 id
+            organizationCountSortValue: 0,
+            pageCount: 1,
+            selectPage: 0,
+            goodMessageBox: false,
+            //   isDetailDisp: false,
+            isDetailDisp: [],
+            //   isDetailsDisp: false,
+            isDetailsDisp: [],
+            activeIndex: -1,
+            //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
+            resultData: Object,
+            result: Object,
+        }
+    },
+    mounted() {
+        this.$store.dispatch('clearOrganizationSearchInfo')
+        if (this.$route.params.id) {
+            let result = this.$serve.getOwn({ id: this.$route.params.id })
+            result.then((response) => {
+                this.$store.dispatch('setOrganizationSearchInfo', response)
+                this.resultData = response.data.allCount
+                // console.log("response", response)
+                // console.log(response.data.allCount)
+                if (response.data.allCount == 1) {
+                    for (const key in response.data.qas) {
+                        if (
+                            Object.hasOwnProperty.call(response.data.qas, key)
+                        ) {
+                            //   const element = response.data.qas[key];
+                            console.log('element', key)
+                            this.openDetailDisp(key)
+                        }
+                    }
+                    //   console.log("response.data.qas", response.data.qas)
+                    //   this.openDetailDisp("qa68555")
+                }
+            })
+        }
+    },
+    watch: {},
+    computed: {
+        getPageCount() {
+            //   let page = 1;
+            if (this.organizationCountSortValue == '0') {
+                this.pageCount = 20
+            } else if (this.organizationCountSortValue == '1') {
+                this.pageCount = 50
+            } else if (this.organizationCountSortValue == '2') {
+                this.pageCount = 100
             }
-          }
-          //   console.log("response.data.qas", response.data.qas)
-          //   this.openDetailDisp("qa68555")
-        }
-      })
-    }
-
-
-  },
-  watch: {},
-  computed: {
-    getPageCount() {
-      //   let page = 1;
-      if (this.organizationCountSortValue == '0') {
-        this.pageCount = 20
-      } else if (this.organizationCountSortValue == '1') {
-        this.pageCount = 50
-      } else if (this.organizationCountSortValue == '2') {
-        this.pageCount = 100
-      }
-      return Math.ceil(this.$store.getters.organizationSearchInfo.allCount / this.pageCount);
+            return Math.ceil(
+                this.$store.getters.organizationSearchInfo.allCount /
+                    this.pageCount
+            )
+        },
     },
-  },
-  methods: {
-    async getInitData() {
-      let result = this.$serve.getOwn({ id: this.$route.params.id })
+    methods: {
+        async getInitData() {
+            let result = this.$serve.getOwn({ id: this.$route.params.id })
+        },
+        getSelectPage(value) {
+            console.log('getSelectPage', value)
+            this.selectPage = value
+        },
+        sendMsgToParent: function (data) {
+            this.$emit('listenToChildEvent', data)
+        },
+        openDetailDisp(index, count) {
+            console.log('count', count)
+            console.log('AAAthis.isDetailDisp[index]', index)
+            console.log('AAAindex', index)
+            // 1件のみの場合
+            if (count == 1) {
+                this.isDetailDisp[index] = index
+            } else {
+                this.isDetailDisp[index] =
+                    this.isDetailDisp[index] == index ? [] : index
+                if (this.isDetailsDisp[index] == index) {
+                    this.isDetailsDisp[index] =
+                        this.isDetailsDisp[index] == index ? [] : index
+                }
+            }
+        },
+        // getDetailsDisp() { this.isDetailsDisp = !this.isDetailsDisp },
+        openDetailsDisp(index) {
+            this.isDetailsDisp[index] =
+                this.isDetailsDisp[index] == index ? [] : index
+        },
+        clickCallback() {
+            console.log(this.organizationCountSortValue)
+        },
+        setOrganizationDateSortValue(value) {
+            console.log('setOrganizationDateSortValue', value)
+            this.organizationDateSortValue = value
+        },
+        setOrganizationCountSortValue(value) {
+            console.log('setOrganizationCountSortValue', value)
+            this.organizationCountSortValue = value
+        },
+        // setSelectValue(value) {
+        //   this.selectValue = value
+        // },
+        openGoodMessageBox(index) {
+            //   console.log(this.$store.getters.getGoodMessageBox)
+            this.$store.dispatch(
+                'setGoodMessageBox',
+                !this.$store.getters.getGoodMessageBox
+            )
+        },
+        openCommentMessageBox() {
+            //   console.log(this.$store.getters.getCommentMessageBox)
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
+        // getOrganizationSearchInfo() {
+        //   //   console.log(this.$store.getters.getOrganizationSearchInfo)
+        //   this.$store.dispatch('setOrganizationSearchInfo', !this.$store.getters.getCommentMessageBox)
+        // },
+        getRoeId(id) {
+            console.log(id)
+        },
+        ActicleDetail(index) {
+            //   this.activeIndex = index;
+            //   console.log(index)
+            this.activeIndex = this.activeIndex == index ? -1 : index
+        },
+        sendGoodMessage(index) {
+            var v = this.qaInfo[index].value
+            //   console.log(this.qaInfo[index].QAID)
+            //   console.log(v)
+        },
     },
-    getSelectPage(value) {
-      console.log('getSelectPage', value)
-      this.selectPage = value
-    },
-    sendMsgToParent: function (data) {
-      this.$emit("listenToChildEvent", data)
-    },
-    openDetailDisp(index, count) {
-      console.log("count", count)
-      console.log("AAAthis.isDetailDisp[index]", index)
-      console.log("AAAindex", index)
-      // 1件のみの場合
-      if (count == 1) {
-        this.isDetailDisp[index] = index
-      } else {
-        this.isDetailDisp[index] =
-          this.isDetailDisp[index] == index ? [] : index
-        if (this.isDetailsDisp[index] == index) {
-          this.isDetailsDisp[index] =
-            this.isDetailsDisp[index] == index ? [] : index
-        }
-      }
-    },
-    // getDetailsDisp() { this.isDetailsDisp = !this.isDetailsDisp },
-    openDetailsDisp(index) {
-      this.isDetailsDisp[index] =
-        this.isDetailsDisp[index] == index ? [] : index
-    },
-    clickCallback() {
-      console.log(this.organizationCountSortValue)
-    },
-    setOrganizationDateSortValue(value) {
-      console.log('setOrganizationDateSortValue', value)
-      this.organizationDateSortValue = value
-    },
-    setOrganizationCountSortValue(value) {
-      console.log('setOrganizationCountSortValue', value)
-      this.organizationCountSortValue = value
-    },
-    // setSelectValue(value) {
-    //   this.selectValue = value
-    // },
-    openGoodMessageBox(index) {
-      //   console.log(this.$store.getters.getGoodMessageBox)
-      this.$store.dispatch('setGoodMessageBox', !this.$store.getters.getGoodMessageBox)
-    },
-    openCommentMessageBox() {
-      //   console.log(this.$store.getters.getCommentMessageBox)
-      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
-    },
-    // getOrganizationSearchInfo() {
-    //   //   console.log(this.$store.getters.getOrganizationSearchInfo)
-    //   this.$store.dispatch('setOrganizationSearchInfo', !this.$store.getters.getCommentMessageBox)
-    // },
-    getRoeId(id) {
-      console.log(id)
-    },
-    ActicleDetail(index) {
-      //   this.activeIndex = index;
-      //   console.log(index)
-      this.activeIndex = this.activeIndex == index ? -1 : index;
-    },
-    sendGoodMessage(index) {
-      var v = this.qaInfo[index].value;
-      //   console.log(this.qaInfo[index].QAID)
-      //   console.log(v)
-    }
-  },
 }
 </script>
 <style scoped>

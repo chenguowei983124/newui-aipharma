@@ -39,40 +39,39 @@
 </template>
 
 <script>
-import TriangleSvg from './svgImage/triangleSvg.vue'
 export default {
-  components: { TriangleSvg },
-  emits: ['toTop'],
-  data() {
-    return {
+    emits: ['toTop'],
+    data() {
+        return {}
+    },
 
-    }
-
-  },
-
-  methods: {
-    toTop() {
-      let currentScroll = document.documentElement.scrollTop,
-        int = setInterval(frame, 6)
-      function frame() {
-        if (0 > currentScroll) {
-          clearInterval(int)
-        } else {
-          currentScroll = currentScroll - 12
-          document.documentElement.scrollTop = currentScroll
-        }
-      }
-    }
-  },
-  computed: {
-    isDisp: function () {
-      if (this.$router.currentRoute.value.name != "login" && this.$router.currentRoute.value.name != "error" && this.$router.currentRoute.value.name) {
-        return true
-      } else {
-        return false
-      }
-    }
-  }
+    methods: {
+        toTop() {
+            let currentScroll = document.documentElement.scrollTop,
+                int = setInterval(frame, 6)
+            function frame() {
+                if (0 > currentScroll) {
+                    clearInterval(int)
+                } else {
+                    currentScroll = currentScroll - 12
+                    document.documentElement.scrollTop = currentScroll
+                }
+            }
+        },
+    },
+    computed: {
+        isDisp: function () {
+            if (
+                this.$router.currentRoute.value.name != 'login' &&
+                this.$router.currentRoute.value.name != 'error' &&
+                this.$router.currentRoute.value.name
+            ) {
+                return true
+            } else {
+                return false
+            }
+        },
+    },
 }
 </script>
 <style scoped>

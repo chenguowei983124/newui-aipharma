@@ -42,21 +42,22 @@
 </template>
 
 <script>
-import xIconSvg from '../svgImage/xIconSvg.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
 export default {
-  components: { xIconSvg },
-  data() {
-    return {
-    }
-  },
-  methods: {
-    openGoodMessageBox() {
-      // console.log(this.$store.getters.getGoodMessageBox)
-      this.$store.dispatch('setGoodMessageBox', !this.$store.getters.getGoodMessageBox)
-    }
-  }
+    components: { xIconSvg },
+    data() {
+        return {}
+    },
+    methods: {
+        openGoodMessageBox() {
+            // console.log(this.$store.getters.getGoodMessageBox)
+            this.$store.dispatch(
+                'setGoodMessageBox',
+                !this.$store.getters.getGoodMessageBox
+            )
+        },
+    },
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -168,147 +168,163 @@
 
 <script>
 import searchDropdown from './searchDropdown.vue'
-import searchSvg from '../svgImage/searchSvg.vue'
-import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
+import searchSvg from '../common/svgImage/searchSvg.vue'
+import TriangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
 import Multiselect from '@vueform/multiselect'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
-import { ref } from 'vue';
+import { ref } from 'vue'
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { }
-    }
-  },
-  components: { searchDropdown, searchSvg, TriangleDownSvg, Multiselect, vueSingleSelect, litepieDatepicker },
-  data() {
-    return {
-      searchValue: '',
-      checkId: '',
-      isDetailClick: false,
-      selectValue: "",
-      selectValue2: "",
-      selectValue3: "",
-      value: [],
-      defaultValue: null,
-      defaultInputAttribs: {
-        tabindex: 1
-      }
-      , dispText: ""
-    }
-
-  },
-  methods: {
-    dateChanged: function ($event) {
-      console.log($event.target.value)
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
     },
-    clicking: function ($event) {
-      console.log("pushKafka");
-      console.log(this.$refs.inputDate)
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
+        litepieDatepicker,
     },
-    clearClick: function () {
-      console.log(this.$constant.style)
-      //   this.dispText = ""
-    },
-    getDispText: function (value) {
-      this.dispText = value
-    },
-    async fetchLanguages(query) {
-      // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
-
-      let where = ''
-
-      if (query) {
-        where = '&where=' + encodeURIComponent(JSON.stringify({
-          "ProgrammingLanguage": {
-            "$regex": `${query}|${query.toUpperCase()}|${query[0].toUpperCase() + query.slice(1)}`
-          }
-        }))
-      }
-
-      const response = await fetch(
-        'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' + where,
-        {
-          headers: {
-            'X-Parse-Application-Id': 'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
-            'X-Parse-Master-Key': 'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
-          }
+    data() {
+        return {
+            searchValue: '',
+            checkId: '',
+            isDetailClick: false,
+            selectValue: '',
+            selectValue2: '',
+            selectValue3: '',
+            value: [],
+            defaultValue: null,
+            defaultInputAttribs: {
+                tabindex: 1,
+            },
+            dispText: '',
         }
-      );
+    },
+    methods: {
+        dateChanged: function ($event) {
+            console.log($event.target.value)
+        },
+        clicking: function ($event) {
+            console.log('pushKafka')
+            console.log(this.$refs.inputDate)
+        },
+        clearClick: function () {
+            console.log(this.$constant.style)
+            //   this.dispText = ""
+        },
+        getDispText: function (value) {
+            this.dispText = value
+        },
+        async fetchLanguages(query) {
+            // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
 
-      const data = await response.json(); // Here you have the data that you need
+            let where = ''
 
-      return data.results.map((item) => {
-        return { value: item.ProgrammingLanguage, label: item.ProgrammingLanguage }
-      })
-    },
-    setSelectValue(value) {
-      this.selectValue = value
-    },
-    setSelectValue2(value) {
-      this.selectValue2 = value
-    },
-    setSelectValue3(value) {
-      this.selectValue3 = value
-    },
-    // ========================================
-    // 詳細条件クリックイベント
-    // ========================================
-    detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit("isDetailClick", this.isDetailClick)
-    },
-    // ========================================
-    // 検索ボタン押下イベント
-    // ========================================
-    searchClick: function (event) {
+            if (query) {
+                where =
+                    '&where=' +
+                    encodeURIComponent(
+                        JSON.stringify({
+                            ProgrammingLanguage: {
+                                $regex: `${query}|${query.toUpperCase()}|${
+                                    query[0].toUpperCase() + query.slice(1)
+                                }`,
+                            },
+                        })
+                    )
+            }
 
-      // すべて
-      if (this.checkId == 1) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('searchAll', this.searchValue)
+            const response = await fetch(
+                'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' +
+                    where,
+                {
+                    headers: {
+                        'X-Parse-Application-Id':
+                            'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
+                        'X-Parse-Master-Key':
+                            'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
+                    },
+                }
+            )
 
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 2) {
-        this.$router.push('/searchResultAll')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // DI 辞書
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 6) {
-        this.$router.push('/searchOrganization')
-      }
+            const data = await response.json() // Here you have the data that you need
+            return data.results.map((item) => {
+                return {
+                    value: item.ProgrammingLanguage,
+                    label: item.ProgrammingLanguage,
+                }
+            })
+        },
+        setSelectValue(value) {
+            this.selectValue = value
+        },
+        setSelectValue2(value) {
+            this.selectValue2 = value
+        },
+        setSelectValue3(value) {
+            this.selectValue3 = value
+        },
+        // ========================================
+        // 詳細条件クリックイベント
+        // ========================================
+        detailBottunClick: function (event) {
+            this.isDetailClick = !this.isDetailClick
+            this.$emit('isDetailClick', this.isDetailClick)
+        },
+        // ========================================
+        // 検索ボタン押下イベント
+        // ========================================
+        searchClick: function (event) {
+            // すべて
+            if (this.checkId == 1) {
+                // 検索APIを呼び出し(画面入力値)
+                this.$store.dispatch('searchAll', this.searchValue)
 
-      // this.$router.push('/searchResultAll')
+                // 一括検索結果画面へ遷移
+                this.$router.push('/searchResultAll')
+            }
+            // DI ナレッジシェア
+            else if (this.checkId == 2) {
+                this.$router.push('/searchResultAll')
+            }
+            // 組織内 DI 記録（Q&A）
+            else if (this.checkId == 3) {
+                this.$router.push('/searchOrganization')
+            }
+            // 症例（プレアボイド）
+            else if (this.checkId == 4) {
+                this.$router.push('/searchOrganization')
+            }
+            // DI 辞書
+            else if (this.checkId == 5) {
+                this.$router.push('/searchOrganization')
+            }
+            // 製薬企業情報
+            else if (this.checkId == 6) {
+                this.$router.push('/searchOrganization')
+            }
+
+            // this.$router.push('/searchResultAll')
+        },
+        // ========================================
+        // DropDown 選択したアイテムＩＤ取得
+        // ========================================
+        getCheckId(data) {
+            this.checkId = data
+        },
     },
-    // ========================================
-    // DropDown 選択したアイテムＩＤ取得
-    // ========================================
-    getCheckId(data) {
-      this.checkId = data
-    }
-  }, setup() {
-    const dateValue = ref([]);
-    return {
-      dateValue
-    }
-  }
+    setup() {
+        const dateValue = ref([])
+        return {
+            dateValue,
+        }
+    },
 }
 </script>
 
-<style>
-</style>
+<style></style>

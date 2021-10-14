@@ -688,30 +688,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
-                                    "
-                                >
-                                    <div class="flex flex-auto">
-                                        <div class="w-30 flex-none">
-                                            キーワード
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="flex flex-wrap">
-                                            <div
-                                                class="mr-2"
-                                                v-for="keywordTags in item.keywordTags"
-                                                :key="keywordTags"
-                                            >
-                                                {{ keywordTags.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+
                                 <div
                                     class="
                                         md:flex md:flex-row
@@ -727,13 +704,6 @@
                                         <div class="w-2">:</div>
                                         <div class="flex flex-wrap">
                                             {{ item.askedPersonClassName }}
-                                            <!-- <div
-                                                class="mr-2"
-                                                v-for="keywordTags in item.keywordTags"
-                                                :key="keywordTags"
-                                            >
-                                                {{ keywordTags.name }}
-                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -948,41 +918,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div
-                        class="
-                            bg-cardViewCount
-                            text-center text-blueline
-                            h-8
-                            flex
-                            justify-center
-                            items-center
-                            cursor-pointer
-                        "
-                        @click="openDetailDisp(index)"
-                    >
-                        <div
-                            v-show="!(isDetailDisp === index)"
-                            class="flex items-center"
-                        >
-                            <triangle-down-svg
-                                class="w-4 h-4"
-                                fill="#0099ff"
-                                stroke="#0099ff"
-                            ></triangle-down-svg>
-                            <div>開く</div>
-                        </div>
-                        <div
-                            v-show="isDetailDisp === index"
-                            class="flex items-center"
-                        >
-                            <triangle-down-svg
-                                class="w-4 h-4 transform rotate-180"
-                                fill="#0099ff"
-                                stroke="#0099ff"
-                            ></triangle-down-svg>
-                            <div>閉じる</div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -1005,14 +940,14 @@
 </template>
 
 <script>
-import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
+import TriangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
 import resutTag from '../searchResult/resultTag.vue'
 import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
 import carousel from '../searchResult/carousel.vue'
-import Good from '../svgImage/good.vue'
-import bad from '../svgImage/bad.vue'
-import talk from '../svgImage/talk.vue'
-import xIconSvg from '../svgImage/xIconSvg.vue'
+import Good from '../common/svgImage/good.vue'
+import bad from '../common/svgImage/bad.vue'
+import talk from '../common/svgImage/talk.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
 import Pagination from '../pagination/pagiation.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../messageBox/goodMessageBox.vue'
@@ -1021,414 +956,430 @@ import { ref, onBeforeUpdate, onUpdated, onUnmounted, nextTick } from 'vue'
 import { reactive, onMounted } from 'vue'
 
 export default {
-  //   setup() {
-  //     const state = reactive({
-  //       hits: {}
-  //     })
-  //     onMounted(async () => {
-  //       const data = await fetch(
-  //         'http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info'
-  //       )
-  //       state.hits = data.hits
-  //     })
-  //     console.log(state)
-  //     return state
-  //   },
-  setup() {
-    onUnmounted(() => {
-
-    });
-  },
-  components: {
-    TriangleDownSvg,
-    resutTag, resultDetailRow, carousel,
-    Good, bad, talk, xIconSvg,
-    Pagination, vueSingleSelect,
-    GoodMessageBox, ResultDetailRowItem
-  },
-  props: {},
-  data() {
-    // console.log(this.$store.getters.dIKnowledgeShareSearchInfo)
-    return {
-      // 順 区分 id
-      organizationDateSortValue: 0,
-      // 件 表示 区分 id
-      organizationCountSortValue: 0,
-      pageCount: 1,
-      selectPage: 0,
-      goodMessageBox: false,
-      //   isDetailDisp: false,
-      isDetailDisp: [],
-      //   isDetailsDisp: false,
-      isDetailsDisp: [],
-      activeIndex: -1,
-      //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
-      resultData: Object,
-      result: Object
-
-    };
-  },
-  mounted() {
-    if (JSON.stringify(this.$route.query) == '{}') {
-      this.initStore()
-      this.$store.dispatch('setdIKnowledgeShareSearchAIInfo', {})
-      this.$store.dispatch('setdIKnowledgeShareSearchInfo', {})
-    }
-
-    if (JSON.stringify(this.$route.query) !== '{}') {
-      this.execSearch()
-    }
-  },
-  watch: {
-    $route: function () {
-      if (JSON.stringify(this.$route.query) == '{}') {
-        this.initStore()
-        this.$store.dispatch('setdIKnowledgeShareSearchAIInfo', {})
-        this.$store.dispatch('setdIKnowledgeShareSearchInfo', {})
-      }
-      if (JSON.stringify(this.$route.query) !== '{}') {
-        console.log('router1')
-        this.resetSearchBar()
-        this.execSearch()
-      }
+    //   setup() {
+    //     const state = reactive({
+    //       hits: {}
+    //     })
+    //     onMounted(async () => {
+    //       const data = await fetch(
+    //         'http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info'
+    //       )
+    //       state.hits = data.hits
+    //     })
+    //     console.log(state)
+    //     return state
+    //   },
+    setup() {
+        onUnmounted(() => {})
     },
-  },
-  computed: {
-    getPageCount() {
-      //   let page = 1;
-      if (this.organizationCountSortValue == '0') {
-        this.pageCount = 20
-      } else if (this.organizationCountSortValue == '1') {
-        this.pageCount = 50
-      } else if (this.organizationCountSortValue == '2') {
-        this.pageCount = 100
-      }
-      this.$store.dispatch('setMaxCount', this.pageCount)
-      return Math.ceil(
-        this.$store.getters.dIKnowledgeShareSearchInfo.allCount,
-        this.pageCount
-      )
+    components: {
+        TriangleDownSvg,
+        resutTag,
+        resultDetailRow,
+        carousel,
+        Good,
+        bad,
+        talk,
+        xIconSvg,
+        Pagination,
+        vueSingleSelect,
+        GoodMessageBox,
+        ResultDetailRowItem,
     },
-    dispDetailRange: function () {
-      let start = 1
-      let end = ''
-      if (this.selectPage > 1) {
-        start = (this.selectPage - 1) * this.pageCount + 1
-      }
-
-      if (this.$store.getters.dIKnowledgeShareSearchInfo.qas != undefined) {
-        end =
-          start +
-          Object.keys(this.$store.getters.dIKnowledgeShareSearchInfo.qas)
-            .length -
-          1
-      }
-
-      if (this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 1) {
-        return start.toString()
-      } else {
-        return start.toString() + '-' + end.toString()
-      }
-    },
-  },
-  methods: {
-    execSearch(kb) {
-      // 設定　NULL
-      this.openDetailDisp('')
-      // QAID取得
-      let qaid = ''
-      let params
-
-      if (this.$route.query.id != undefined) {
-        qaid = this.$route.query.id
-        this.$store.dispatch('setQAID', qaid)
-        sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
-      } else if (this.$route.query.page != undefined) {
-        console.log('設定　NULL')
-        params = {
-          search: this.$store.getters.getSearchWord,
-          tags:
-            this.$props.form == this.$constant.formList.TOP
-              ? ''
-              : this.$store.getters.getSearchTags
-                ? this.$store.getters.getSearchTags.join(',')
-                : '',
-          medicine:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getMedicineID,
-          qacategory:
-            this.$props.form == this.$constant.formList.TOP
-              ? '-1'
-              : this.$store.getters.getQuestionID,
-          facility_flag:
-            this.$props.form == this.$constant.formList.TOP
-              ? '-1'
-              : this.$store.getters.getFacilityID,
-          displayed:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getMaxCount,
-          sort:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getSort,
-          page:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getPage,
+    props: {},
+    data() {
+        // console.log(this.$store.getters.dIKnowledgeShareSearchInfo)
+        return {
+            // 順 区分 id
+            organizationDateSortValue: 0,
+            // 件 表示 区分 id
+            organizationCountSortValue: 0,
+            pageCount: 1,
+            selectPage: 0,
+            goodMessageBox: false,
+            //   isDetailDisp: false,
+            isDetailDisp: [],
+            //   isDetailsDisp: false,
+            isDetailsDisp: [],
+            activeIndex: -1,
+            //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
+            resultData: Object,
+            result: Object,
         }
-      } else if (this.$store.getters.getQAID != '') {
-        qaid = this.$store.getters.getQAID
-      }
-
-      let result
-      // QAID存在チェック
-      if (qaid != '') {
-        result = this.$serve.getOwn({ id: qaid })
-      } else if (params != null) {
-        result = this.$serve.getOwnData(this.$route.query)
-      }
-
-      this.setSearchResult(result)
-      // this.dispDetailRange()
     },
+    mounted() {
+        if (JSON.stringify(this.$route.query) == '{}') {
+            this.initStore()
+            this.$store.dispatch('setdIKnowledgeShareSearchAIInfo', {})
+            this.$store.dispatch('setdIKnowledgeShareSearchInfo', {})
+        }
 
-    setSearchResult: function (value) {
-      value.then((response) => {
-        //   console.log("setSearchResult", response)
-        this.$store.dispatch('getdIKnowledgeShareSearchInfo', response)
-        // 1件のみの場合、全回答情報を表示
-        if (response.data.allCount == 1) {
-          //   for (const key in response.data.qas) {
-          //     if (
-          //       Object.hasOwnProperty.call(response.data.qas, key)
-          //     ) {
-          //       this.openDetailDisp(key, response.data.allCount)
-          //     }
-          //   }
-          this.openDetailDisp(response.data.qas.id, response.data.allCount)
-
-          let qaid = ''
-          if (this.$route.query.id) {
-            qaid = this.$route.query.id
-            this.$store.dispatch('setQAID', qaid)
-            sessionStorage.setItem(
-              this.$constant.searchParam.PAID,
-              qaid
+        if (JSON.stringify(this.$route.query) !== '{}') {
+            this.execSearch()
+        }
+    },
+    watch: {
+        $route: function () {
+            if (JSON.stringify(this.$route.query) == '{}') {
+                this.initStore()
+                this.$store.dispatch('setdIKnowledgeShareSearchAIInfo', {})
+                this.$store.dispatch('setdIKnowledgeShareSearchInfo', {})
+            }
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                console.log('router1')
+                this.resetSearchBar()
+                this.execSearch()
+            }
+        },
+    },
+    computed: {
+        getPageCount() {
+            //   let page = 1;
+            if (this.organizationCountSortValue == '0') {
+                this.pageCount = 20
+            } else if (this.organizationCountSortValue == '1') {
+                this.pageCount = 50
+            } else if (this.organizationCountSortValue == '2') {
+                this.pageCount = 100
+            }
+            this.$store.dispatch('setMaxCount', this.pageCount)
+            return Math.ceil(
+                this.$store.getters.dIKnowledgeShareSearchInfo.allCount,
+                this.pageCount
             )
-          } else if (this.$store.getters.getQAID != '') {
-            qaid = this.$store.getters.getQAID
-          }
-          // ビュー件数更新
-          let params = {
-            id: qaid,
-          }
-          this.$serve.sendViewCount(params)
-        } else {
-          this.isDetailDisp = []
-        }
-      })
-    },
-    // =====================================================
-    // セッションに退避した情報をリーセット
-    // =====================================================
-    resetSearchBar: function () {
-      this.initStore()
-      this.$store.dispatch('setSearchWord', this.$route.query.search)
-      this.$store.dispatch('setMedicineID', this.$route.query.medicine)
-      this.$store.dispatch('setQuestionID', this.$route.query.qacategory)
-      this.$store.dispatch(
-        'setFacilityID',
-        this.$route.query.facility_flag
-      )
-      this.$store.dispatch('setMaxCount', this.$route.query.displayed)
-      this.organizationDateSortValue = this.$route.query.sort
-      if (this.$route.query.displayed == 20) {
-        this.organizationCountSortValue = 0
-      } else if (this.$route.query.displayed == 50) {
-        this.organizationCountSortValue = 1
-      }
-      if (this.$route.query.displayed == 100) {
-        this.organizationCountSortValue = 2
-      }
-      this.$store.dispatch('setSort', this.$route.query.sort)
-      this.$store.dispatch('setPage', this.$route.query.page)
+        },
+        dispDetailRange: function () {
+            let start = 1
+            let end = ''
+            if (this.selectPage > 1) {
+                start = (this.selectPage - 1) * this.pageCount + 1
+            }
 
-      this.$store.dispatch(
-        'setCheckQ',
-        this.$route.query.checkQ.toString() === 'true',
-        true,
-        false
-      )
+            if (
+                this.$store.getters.dIKnowledgeShareSearchInfo.qas != undefined
+            ) {
+                end =
+                    start +
+                    Object.keys(
+                        this.$store.getters.dIKnowledgeShareSearchInfo.qas
+                    ).length -
+                    1
+            }
 
-      this.$store.dispatch(
-        'setCheckA',
-        this.$route.query.checkA.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckComment',
-        this.$route.query.checkComment.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckAddFileName',
-        this.$route.query.checkAddFileName.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckContributor',
-        this.$route.query.checkContributor.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckLastEditer',
-        this.$route.query.checkLastEditer.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckFacilityName',
-        this.$route.query.checkFacilityName.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckNote',
-        this.$route.query.checkNote.toString() === 'true',
-        true,
-        false
-      )
+            if (this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 1) {
+                return start.toString()
+            } else {
+                return start.toString() + '-' + end.toString()
+            }
+        },
     },
+    methods: {
+        execSearch(kb) {
+            // 設定　NULL
+            this.openDetailDisp('')
+            // QAID取得
+            let qaid = ''
+            let params
 
-    initStore() {
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setSearchTags', [])
-      this.$store.dispatch('setMedicineID', -1)
-      this.$store.dispatch('setQuestionID', -1)
-      this.$store.dispatch('setFacilityID', -1)
-      this.$store.dispatch('setPage', 1)
-      this.$store.dispatch('setSort', 0)
-      this.$store.dispatch('setMaxCount', 0)
-      this.$store.dispatch('setCheckQ', true)
-      this.$store.dispatch('setCheckA', true)
-      this.$store.dispatch('setCheckComment', true)
-      this.$store.dispatch('setCheckAddFileName', true)
-      this.$store.dispatch('setCheckContributor', true)
-      this.$store.dispatch('setCheckLastEditer', true)
-      this.$store.dispatch('setCheckFacilityName', true)
-      this.$store.dispatch('setCheckNote', true)
-    },
-    resetRouter() {
-      let getTimestamp = new Date().getTime()
-      let dispDetailNumber = 20
+            if (this.$route.query.id != undefined) {
+                qaid = this.$route.query.id
+                this.$store.dispatch('setQAID', qaid)
+                sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
+            } else if (this.$route.query.page != undefined) {
+                console.log('設定　NULL')
+                params = {
+                    search: this.$store.getters.getSearchWord,
+                    tags:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? ''
+                            : this.$store.getters.getSearchTags
+                            ? this.$store.getters.getSearchTags.join(',')
+                            : '',
+                    medicine:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getMedicineID,
+                    qacategory:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '-1'
+                            : this.$store.getters.getQuestionID,
+                    facility_flag:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '-1'
+                            : this.$store.getters.getFacilityID,
+                    displayed:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getMaxCount,
+                    sort:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getSort,
+                    page:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getPage,
+                }
+            } else if (this.$store.getters.getQAID != '') {
+                qaid = this.$store.getters.getQAID
+            }
 
-      if (this.organizationCountSortValue == 0) {
-        dispDetailNumber = 20
-      } else if (this.organizationCountSortValue == 1) {
-        dispDetailNumber = 50
-      } else if (this.organizationCountSortValue == 2) {
-        dispDetailNumber = 100
-      }
-      let params = {
-        search: this.$store.getters.getSearchWord,
-        tags: this.$store.getters.getSearchTags
-          ? this.$store.getters.getSearchTags.join(',')
-          : '',
-        medicine: this.$store.getters.getMedicineID,
-        qacategory: this.$store.getters.getQuestionID,
-        facility_flag: this.$store.getters.getFacilityID,
-        displayed: dispDetailNumber,
-        sort: this.$store.getters.getSort,
-        page: this.$store.getters.getPage,
-        checkQ: this.$store.getters.getCheckQ,
-        checkA: this.$store.getters.getCheckA,
-        checkComment: this.$store.getters.getCheckComment,
-        checkAddFileName: this.$store.getters.getCheckAddFileName,
-        checkContributor: this.$store.getters.getCheckContributor,
-        checkLastEditer: this.$store.getters.getCheckLastEditer,
-        checkFacilityName: this.$store.getters.getCheckFacilityName,
-        checkNote: this.$store.getters.getCheckNote,
-        timestamp: getTimestamp,
-      }
-      this.$router.push({
-        path: '/searchDiKnowledge',
-        query: params,
-      })
+            let result
+            // QAID存在チェック
+            if (qaid != '') {
+                result = this.$serve.getOwn({ id: qaid })
+            } else if (params != null) {
+                result = this.$serve.getOwnData(this.$route.query)
+            }
+
+            this.setSearchResult(result)
+            // this.dispDetailRange()
+        },
+
+        setSearchResult: function (value) {
+            value.then((response) => {
+                //   console.log("setSearchResult", response)
+                this.$store.dispatch('getdIKnowledgeShareSearchInfo', response)
+                // 1件のみの場合、全回答情報を表示
+                if (response.data.allCount == 1) {
+                    //   for (const key in response.data.qas) {
+                    //     if (
+                    //       Object.hasOwnProperty.call(response.data.qas, key)
+                    //     ) {
+                    //       this.openDetailDisp(key, response.data.allCount)
+                    //     }
+                    //   }
+                    this.openDetailDisp(
+                        response.data.qas.id,
+                        response.data.allCount
+                    )
+
+                    let qaid = ''
+                    if (this.$route.query.id) {
+                        qaid = this.$route.query.id
+                        this.$store.dispatch('setQAID', qaid)
+                        sessionStorage.setItem(
+                            this.$constant.searchParam.PAID,
+                            qaid
+                        )
+                    } else if (this.$store.getters.getQAID != '') {
+                        qaid = this.$store.getters.getQAID
+                    }
+                    // ビュー件数更新
+                    let params = {
+                        id: qaid,
+                    }
+                    this.$serve.sendViewCount(params)
+                } else {
+                    this.isDetailDisp = []
+                }
+            })
+        },
+        // =====================================================
+        // セッションに退避した情報をリーセット
+        // =====================================================
+        resetSearchBar: function () {
+            this.initStore()
+            this.$store.dispatch('setSearchWord', this.$route.query.search)
+            this.$store.dispatch('setMedicineID', this.$route.query.medicine)
+            this.$store.dispatch('setQuestionID', this.$route.query.qacategory)
+            this.$store.dispatch(
+                'setFacilityID',
+                this.$route.query.facility_flag
+            )
+            this.$store.dispatch('setMaxCount', this.$route.query.displayed)
+            this.organizationDateSortValue = this.$route.query.sort
+            if (this.$route.query.displayed == 20) {
+                this.organizationCountSortValue = 0
+            } else if (this.$route.query.displayed == 50) {
+                this.organizationCountSortValue = 1
+            }
+            if (this.$route.query.displayed == 100) {
+                this.organizationCountSortValue = 2
+            }
+            this.$store.dispatch('setSort', this.$route.query.sort)
+            this.$store.dispatch('setPage', this.$route.query.page)
+
+            this.$store.dispatch(
+                'setCheckQ',
+                this.$route.query.checkQ.toString() === 'true',
+                true,
+                false
+            )
+
+            this.$store.dispatch(
+                'setCheckA',
+                this.$route.query.checkA.toString() === 'true',
+                true,
+                false
+            )
+            this.$store.dispatch(
+                'setCheckComment',
+                this.$route.query.checkComment.toString() === 'true',
+                true,
+                false
+            )
+            this.$store.dispatch(
+                'setCheckAddFileName',
+                this.$route.query.checkAddFileName.toString() === 'true',
+                true,
+                false
+            )
+            this.$store.dispatch(
+                'setCheckContributor',
+                this.$route.query.checkContributor.toString() === 'true',
+                true,
+                false
+            )
+            this.$store.dispatch(
+                'setCheckLastEditer',
+                this.$route.query.checkLastEditer.toString() === 'true',
+                true,
+                false
+            )
+            this.$store.dispatch(
+                'setCheckFacilityName',
+                this.$route.query.checkFacilityName.toString() === 'true',
+                true,
+                false
+            )
+            this.$store.dispatch(
+                'setCheckNote',
+                this.$route.query.checkNote.toString() === 'true',
+                true,
+                false
+            )
+        },
+
+        initStore() {
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.dispatch('setMedicineID', -1)
+            this.$store.dispatch('setQuestionID', -1)
+            this.$store.dispatch('setFacilityID', -1)
+            this.$store.dispatch('setPage', 1)
+            this.$store.dispatch('setSort', 0)
+            this.$store.dispatch('setMaxCount', 0)
+            this.$store.dispatch('setCheckQ', true)
+            this.$store.dispatch('setCheckA', true)
+            this.$store.dispatch('setCheckComment', true)
+            this.$store.dispatch('setCheckAddFileName', true)
+            this.$store.dispatch('setCheckContributor', true)
+            this.$store.dispatch('setCheckLastEditer', true)
+            this.$store.dispatch('setCheckFacilityName', true)
+            this.$store.dispatch('setCheckNote', true)
+        },
+        resetRouter() {
+            let getTimestamp = new Date().getTime()
+            let dispDetailNumber = 20
+
+            if (this.organizationCountSortValue == 0) {
+                dispDetailNumber = 20
+            } else if (this.organizationCountSortValue == 1) {
+                dispDetailNumber = 50
+            } else if (this.organizationCountSortValue == 2) {
+                dispDetailNumber = 100
+            }
+            let params = {
+                search: this.$store.getters.getSearchWord,
+                tags: this.$store.getters.getSearchTags
+                    ? this.$store.getters.getSearchTags.join(',')
+                    : '',
+                medicine: this.$store.getters.getMedicineID,
+                qacategory: this.$store.getters.getQuestionID,
+                facility_flag: this.$store.getters.getFacilityID,
+                displayed: dispDetailNumber,
+                sort: this.$store.getters.getSort,
+                page: this.$store.getters.getPage,
+                checkQ: this.$store.getters.getCheckQ,
+                checkA: this.$store.getters.getCheckA,
+                checkComment: this.$store.getters.getCheckComment,
+                checkAddFileName: this.$store.getters.getCheckAddFileName,
+                checkContributor: this.$store.getters.getCheckContributor,
+                checkLastEditer: this.$store.getters.getCheckLastEditer,
+                checkFacilityName: this.$store.getters.getCheckFacilityName,
+                checkNote: this.$store.getters.getCheckNote,
+                timestamp: getTimestamp,
+            }
+            this.$router.push({
+                path: '/searchDiKnowledge',
+                query: params,
+            })
+        },
+        getSelectPage(value) {
+            console.log('getSelectPage', value)
+            this.selectPage = value
+        },
+        sendMsgToParent: function (data) {
+            this.$emit('listenToChildEvent', data)
+        },
+        // =====================================================
+        // 開くボタン押下
+        // =====================================================
+        openDetailDisp(index, count) {
+            //   console.log("count", count)
+            //   console.log("AAAthis.isDetailDisp[index]", index)
+            //   console.log("AAAindex", index)
+            // 1件のみの場合
+            if (count == 1) {
+                this.isDetailDisp[index] = index
+            } else {
+                this.isDetailDisp[index] =
+                    this.isDetailDisp[index] == index ? [] : index
+                if (this.isDetailsDisp[index] == index) {
+                    this.isDetailsDisp[index] =
+                        this.isDetailsDisp[index] == index ? [] : index
+                }
+            }
+            //   console.log("BBBthis.isDetailDisp[index]", this.isDetailDisp[index])
+            //   console.log("BBBindex", index)
+        },
+        // =====================================================
+        // 明細の詳細情報リンク押下
+        // =====================================================
+        openDetailsDisp(index) {
+            this.isDetailsDisp[index] =
+                this.isDetailsDisp[index] == index ? [] : index
+        },
+        clickCallback() {
+            console.log(this.organizationCountSortValue)
+        },
+        setOrganizationDateSortValue(value) {
+            console.log('setOrganizationDateSortValue', value)
+            this.organizationDateSortValue = value
+        },
+        setOrganizationCountSortValue(value) {
+            console.log('setOrganizationCountSortValue', value)
+            this.organizationCountSortValue = value
+        },
+        openGoodMessageBox(index) {
+            //   console.log(this.$store.getters.getGoodMessageBox)
+            this.$store.dispatch(
+                'setGoodMessageBox',
+                !this.$store.getters.getGoodMessageBox
+            )
+        },
+        openCommentMessageBox() {
+            //   console.log(this.$store.getters.getCommentMessageBox)
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
+        getRoeId(id) {
+            console.log(id)
+        },
+        ActicleDetail(index) {
+            //   this.activeIndex = index;
+            //   console.log(index)
+            this.activeIndex = this.activeIndex == index ? -1 : index
+        },
+        sendGoodMessage(index) {
+            var v = this.qaInfo[index].value
+            //   console.log(this.qaInfo[index].QAID)
+            //   console.log(v)
+        },
     },
-    getSelectPage(value) {
-      console.log('getSelectPage', value)
-      this.selectPage = value
-    },
-    sendMsgToParent: function (data) {
-      this.$emit("listenToChildEvent", data)
-    },
-    // =====================================================
-    // 開くボタン押下
-    // =====================================================
-    openDetailDisp(index, count) {
-      //   console.log("count", count)
-      //   console.log("AAAthis.isDetailDisp[index]", index)
-      //   console.log("AAAindex", index)
-      // 1件のみの場合
-      if (count == 1) {
-        this.isDetailDisp[index] = index
-      } else {
-        this.isDetailDisp[index] =
-          this.isDetailDisp[index] == index ? [] : index
-        if (this.isDetailsDisp[index] == index) {
-          this.isDetailsDisp[index] =
-            this.isDetailsDisp[index] == index ? [] : index
-        }
-      }
-      //   console.log("BBBthis.isDetailDisp[index]", this.isDetailDisp[index])
-      //   console.log("BBBindex", index)
-    },
-    // =====================================================
-    // 明細の詳細情報リンク押下
-    // =====================================================
-    openDetailsDisp(index) {
-      this.isDetailsDisp[index] =
-        this.isDetailsDisp[index] == index ? [] : index
-    },
-    clickCallback() {
-      console.log(this.organizationCountSortValue)
-    },
-    setOrganizationDateSortValue(value) {
-      console.log('setOrganizationDateSortValue', value)
-      this.organizationDateSortValue = value
-    },
-    setOrganizationCountSortValue(value) {
-      console.log('setOrganizationCountSortValue', value)
-      this.organizationCountSortValue = value
-    },
-    openGoodMessageBox(index) {
-      //   console.log(this.$store.getters.getGoodMessageBox)
-      this.$store.dispatch('setGoodMessageBox', !this.$store.getters.getGoodMessageBox)
-    },
-    openCommentMessageBox() {
-      //   console.log(this.$store.getters.getCommentMessageBox)
-      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
-    },
-    getRoeId(id) {
-      console.log(id)
-    },
-    ActicleDetail(index) {
-      //   this.activeIndex = index;
-      //   console.log(index)
-      this.activeIndex = this.activeIndex == index ? -1 : index;
-    },
-    sendGoodMessage(index) {
-      var v = this.qaInfo[index].value;
-      //   console.log(this.qaInfo[index].QAID)
-      //   console.log(v)
-    }
-  },
 }
 </script>
 <style scoped>

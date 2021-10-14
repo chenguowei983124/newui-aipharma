@@ -6,24 +6,19 @@
 </template>
 
 <script>
-import logoImage from '../svgImage/logoSvg.vue'
+import logoImage from '../common/svgImage/logoSvg.vue'
 export default {
-  components: { logoImage },
-  props: {},
-  data() {
-    return {
-      logoImage
-    };
-  },
-  couputed: {},
-  watch: {},
-  methods: {
-
-  },
-  created() {
-
-  }
+    components: { logoImage },
+    props: {},
+    data() {
+        return {
+            logoImage,
+        }
+    },
+    couputed: {},
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

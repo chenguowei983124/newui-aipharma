@@ -43,36 +43,35 @@
 </template>
 
 <script>
-import iconDown from '../svgImage/iconDown.vue';
+import iconDown from '../common/svgImage/iconDown.vue'
 export default {
-  components: { iconDown },
-  mounted() {
-    document.addEventListener("click", this.handleClickOutside);
-    document.addEventListener("keyup", this.handleClickOutside);
-    this.searchText = this.initial;
-  },
-  destroyed() {
-    document.removeEventListener("keyup", this.handleClickOutside);
-    document.removeEventListener("click", this.handleClickOutside);
-  },
-  data() {
-    return {
-      isDown: false,
-    };
-  },
-  methods: {
-    itemClick() {
-      this.isDown = !this.isDown
+    components: { iconDown },
+    mounted() {
+        document.addEventListener('click', this.handleClickOutside)
+        document.addEventListener('keyup', this.handleClickOutside)
+        this.searchText = this.initial
     },
-    handleClickOutside(e) {
-      if (this.$el.contains(e.target)) {
-        return;
-      }
-      this.isDown = false
-    }
-  },
+    destroyed() {
+        document.removeEventListener('keyup', this.handleClickOutside)
+        document.removeEventListener('click', this.handleClickOutside)
+    },
+    data() {
+        return {
+            isDown: false,
+        }
+    },
+    methods: {
+        itemClick() {
+            this.isDown = !this.isDown
+        },
+        handleClickOutside(e) {
+            if (this.$el.contains(e.target)) {
+                return
+            }
+            this.isDown = false
+        },
+    },
 }
 </script>
 
-<style>
-</style>
+<style></style>

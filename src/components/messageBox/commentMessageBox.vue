@@ -161,7 +161,8 @@
                                             focus:placeholder-opacity-0
                                             border border-transparent
                                             focus:outline-none
-                                            focus:ring-1 focus:ring-326EB5Lins
+                                            focus:ring-1
+                                            focus:ring-326EB5Lins
                                             focus:border-transparent
                                         "
                                         type="text"
@@ -202,9 +203,6 @@
                                         >
                                             <x-icon-svg></x-icon-svg>
                                         </button>
-                                        <!-- <button @click="deleteFruit(index)">
-                                            <x-icon-svg></x-icon-svg>
-                                        </button> -->
                                     </div>
                                 </div>
                             </div>
@@ -222,39 +220,60 @@
 </template>
 
 <script>
-import PencilAltIconSvg from '../svgImage/pencilAltIconSvg.vue'
-import TrashIconSvg from '../svgImage/trashIconSvg.vue'
-import SendMessageIconSvg from '../svgImage/sendMessageIconSvg.vue'
-import xIconSvg from '../svgImage/xIconSvg.vue'
-import CheckIconSvg from '../svgImage/checkIconSvg.vue'
+import PencilAltIconSvg from '../common/svgImage/pencilAltIconSvg.vue'
+import TrashIconSvg from '../common/svgImage/trashIconSvg.vue'
+import SendMessageIconSvg from '../common/svgImage/sendMessageIconSvg.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
+import CheckIconSvg from '../common/svgImage/checkIconSvg.vue'
 export default {
-  components: { xIconSvg, SendMessageIconSvg, PencilAltIconSvg, TrashIconSvg, CheckIconSvg, },
-  data() {
-    return {
-      itemList: [
-        { 'id': '1', 'title': '情報が古いです。更新情報があります。', 'time': '2020.12.14', 'manager': '施設管理者' },
-        { 'id': '2', 'title': '見ました。', 'time': '2020.12.14', 'manager': '施設管理者' },
-        { 'id': '3', 'title': '見ました。', 'time': '2020.12.14', 'manager': '施設管理者' },
-
-      ],
-    }
-  },
-  methods: {
-    deleteFruit: function (index) {
-      // 指定されたindexの要素を1つ削除します。
-      this.itemList.splice(index, 1)
+    components: {
+        xIconSvg,
+        SendMessageIconSvg,
+        PencilAltIconSvg,
+        TrashIconSvg,
+        CheckIconSvg,
     },
-    editAddCheckpointsTitle(item) {
-      item.isShow = !item.isShow
+    data() {
+        return {
+            itemList: [
+                {
+                    id: '1',
+                    title: '情報が古いです。更新情報があります。',
+                    time: '2020.12.14',
+                    manager: '施設管理者',
+                },
+                {
+                    id: '2',
+                    title: '見ました。',
+                    time: '2020.12.14',
+                    manager: '施設管理者',
+                },
+                {
+                    id: '3',
+                    title: '見ました。',
+                    time: '2020.12.14',
+                    manager: '施設管理者',
+                },
+            ],
+        }
     },
-    openCommentMessageBox() {
-      //   console.log(this.$store.getters.getCommentMessageBox)
-      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
-    }
-  }
+    methods: {
+        deleteFruit: function (index) {
+            // 指定されたindexの要素を1つ削除します。
+            this.itemList.splice(index, 1)
+        },
+        editAddCheckpointsTitle(item) {
+            item.isShow = !item.isShow
+        },
+        openCommentMessageBox() {
+            //   console.log(this.$store.getters.getCommentMessageBox)
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
+    },
 }
-
 </script>
 
-<style>
-</style>
+<style></style>

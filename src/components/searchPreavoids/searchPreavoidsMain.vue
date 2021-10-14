@@ -127,94 +127,167 @@
 </template>
 
 <script>
-import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
+import TriangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
 import resutTag from '../searchResult/resultTag.vue'
 import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
 import carousel from '../searchResult/carousel.vue'
-import Good from '../svgImage/good.vue'
-import bad from '../svgImage/bad.vue'
-import talk from '../svgImage/talk.vue'
-import xIconSvg from '../svgImage/xIconSvg.vue'
-// import Pagination from '../pagination/pagination.vue'
+import Good from '../common/svgImage/good.vue'
+import bad from '../common/svgImage/bad.vue'
+import talk from '../common/svgImage/talk.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
 import Pagination from '../pagination/pagiation.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../messageBox/goodMessageBox.vue'
 import myTable from '../table/myTable.vue'
 
 export default {
-  components: {
-    TriangleDownSvg,
-    resutTag, resultDetailRow, carousel,
-    Good, bad, talk, xIconSvg,
-    Pagination, vueSingleSelect,
-    GoodMessageBox, myTable
-  },
-  props: {},
-  data() {
-    return {
-      goodMessageBox: false,
-      isDetailDisp: false,
-      isDetailsDisp: false,
-      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
-      details: [
-        { index: 0, check: false, value1: "aa" },
-        { index: 1, check: false, value1: "aa" },
-        { index: 2, check: false, value1: "aa" },
-        { index: 3, check: false, value1: "aa" },
-        { index: 4, check: false, value1: "aa" },
-        { index: 5, check: false, value1: "aa" },
-        { index: 6, check: false, value1: "aa" },
-        { index: 7, check: false, value1: "aa" },
-        { index: 8, check: false, value1: "aa" },
-        { index: 9, check: false, value1: "aa" },
-        { index: 10, check: false, value1: "aa" },
-        { index: 11, check: false, value1: "aa" },
+    components: {
+        TriangleDownSvg,
+        resutTag,
+        resultDetailRow,
+        carousel,
+        Good,
+        bad,
+        talk,
+        xIconSvg,
+        Pagination,
+        vueSingleSelect,
+        GoodMessageBox,
+        myTable,
+    },
+    props: {},
+    data() {
+        return {
+            goodMessageBox: false,
+            isDetailDisp: false,
+            isDetailsDisp: false,
+            torenndoTab: [
+                '#ロキソニン',
+                '#ロキソ',
+                '#用途',
+                '#痛み止め',
+                '#ロキソニン',
+                '#ロキソ',
+            ],
+            details: [
+                { index: 0, check: false, value1: 'aa' },
+                { index: 1, check: false, value1: 'aa' },
+                { index: 2, check: false, value1: 'aa' },
+                { index: 3, check: false, value1: 'aa' },
+                { index: 4, check: false, value1: 'aa' },
+                { index: 5, check: false, value1: 'aa' },
+                { index: 6, check: false, value1: 'aa' },
+                { index: 7, check: false, value1: 'aa' },
+                { index: 8, check: false, value1: 'aa' },
+                { index: 9, check: false, value1: 'aa' },
+                { index: 10, check: false, value1: 'aa' },
+                { index: 11, check: false, value1: 'aa' },
+            ],
+            info: [
+                { id: 1, title: 'QA ID', value: '30013110' },
+                {
+                    id: 2,
+                    title: '薬の分類',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 3,
+                    title: '質問区分',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 4,
+                    title: '医薬品名',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 5,
+                    title: 'キーワード',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 6,
+                    title: '質問者- 職種',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 7,
+                    title: '質問者- 診療科',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 8,
+                    title: '公開範囲',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 9,
+                    title: 'カスタム項目',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 10,
+                    title: 'カスタム項目',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 11,
+                    title: 'カスタム項目',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 12,
+                    title: 'カスタム項目',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 13,
+                    title: 'カスタム項目',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 14,
+                    title: 'PubMed',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                {
+                    id: 15,
+                    title: 'ファイル',
+                    value: 'ロキソプロフェンロキソニン',
+                },
+                { id: 16, title: '備考', value: 'ロキソプロフェンロキソニン' },
+            ],
+        }
+    },
 
-      ],
-      info: [
-        { id: 1, title: 'QA ID', value: '30013110' },
-        { id: 2, title: '薬の分類', value: 'ロキソプロフェンロキソニン' },
-        { id: 3, title: '質問区分', value: 'ロキソプロフェンロキソニン' },
-        { id: 4, title: '医薬品名', value: 'ロキソプロフェンロキソニン' },
-        { id: 5, title: 'キーワード', value: 'ロキソプロフェンロキソニン' },
-        { id: 6, title: '質問者- 職種', value: 'ロキソプロフェンロキソニン' },
-        { id: 7, title: '質問者- 診療科', value: 'ロキソプロフェンロキソニン' },
-        { id: 8, title: '公開範囲', value: 'ロキソプロフェンロキソニン' },
-        { id: 9, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 10, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 11, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 12, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 13, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
-        { id: 14, title: 'PubMed', value: 'ロキソプロフェンロキソニン' },
-        { id: 15, title: 'ファイル', value: 'ロキソプロフェンロキソニン' },
-        { id: 16, title: '備考', value: 'ロキソプロフェンロキソニン' },
-      ]
-    };
-  },
-
-  watch: {},
-  methods: {
-    setDetailDisp() {
-      //   console.log(this.isDetailDisp)
-      this.isDetailDisp = !this.isDetailDisp
+    watch: {},
+    methods: {
+        setDetailDisp() {
+            //   console.log(this.isDetailDisp)
+            this.isDetailDisp = !this.isDetailDisp
+        },
+        getDetailsDisp() {
+            this.isDetailsDisp = !this.isDetailsDisp
+        },
+        clickCallback() {},
+        setSelectValue(value) {
+            this.selectValue = value
+        },
+        openGoodMessageBox() {
+            //   console.log(this.$store.getters.getGoodMessageBox)
+            this.$store.dispatch(
+                'setGoodMessageBox',
+                !this.$store.getters.getGoodMessageBox
+            )
+        },
+        openCommentMessageBox() {
+            //   console.log(this.$store.getters.getCommentMessageBox)
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
     },
-    getDetailsDisp() { this.isDetailsDisp = !this.isDetailsDisp },
-    clickCallback() {
-    },
-    setSelectValue(value) {
-      this.selectValue = value
-    },
-    openGoodMessageBox() {
-      //   console.log(this.$store.getters.getGoodMessageBox)
-      this.$store.dispatch('setGoodMessageBox', !this.$store.getters.getGoodMessageBox)
-    },
-    openCommentMessageBox() {
-      //   console.log(this.$store.getters.getCommentMessageBox)
-      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
-    }
-  }
-
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

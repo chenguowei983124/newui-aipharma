@@ -613,52 +613,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        items-end
-                                    "
-                                >
-                                    <div
-                                        class="
-                                            flex
-                                            md:w-1/2
-                                            border-b-2
-                                            notoSansJpAndFourteenRegular
-                                            text-grayline
-                                        "
-                                    >
-                                        <div class="w-30 flex-none">QAID</div>
-                                        <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.facilityQaNumber }}
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="
-                                            flex
-                                            md:w-1/2
-                                            border-b-2
-                                            notoSansJpAndFourteenRegular
-                                            text-grayline
-                                        "
-                                    >
-                                        <div class="w-30 flex-none">
-                                            薬の分類
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="flex flex-wrap">
-                                            <div
-                                                class=""
-                                                v-for="qaQaClassifyClasses in item.qaQaClassifyClasses"
-                                                :key="qaQaClassifyClasses"
-                                            >
-                                                {{ qaQaClassifyClasses.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+
                                 <div
                                     class="
                                         md:flex md:flex-row
@@ -731,30 +686,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
-                                    "
-                                >
-                                    <div class="flex flex-auto">
-                                        <div class="w-30 flex-none">
-                                            キーワード
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="flex flex-wrap">
-                                            <div
-                                                class="mr-2"
-                                                v-for="keywordTags in item.keywordTags"
-                                                :key="keywordTags"
-                                            >
-                                                {{ keywordTags.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+
                                 <div
                                     class="
                                         md:flex md:flex-row
@@ -770,13 +702,6 @@
                                         <div class="w-2">:</div>
                                         <div class="flex flex-wrap">
                                             {{ item.askedPersonClassName }}
-                                            <!-- <div
-                                                class="mr-2"
-                                                v-for="keywordTags in item.keywordTags"
-                                                :key="keywordTags"
-                                            >
-                                                {{ keywordTags.name }}
-                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -855,103 +780,6 @@
                                     </div>
                                 </div>
 
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                    "
-                                >
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            質問区分
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="categories in item.categories"
-                                            :key="categories"
-                                        >
-                                            {{ categories.name }}
-                                        </div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">医薬品</div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="medicineName in item.medicines"
-                                            :key="medicineName"
-                                        >
-                                            {{ medicineName.name }}
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                    "
-                                >
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            キーワード
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="keywordTags in item.keywordTags"
-                                            :key="keywordTags"
-                                        >
-                                            {{ keywordTags.name }}
-                                        </div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            質問者- 職種
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.askedPersonClassName }}
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- <div
-                                    class="
-                                        md:flex md:flex-row
-                                        md:space-x-5
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                    "
-                                >
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            質問者・診療科
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div
-                                            class="mr-2"
-                                            v-for="askedPersonMedicalDepartments in item.askedPersonMedicalDepartments"
-                                            :key="askedPersonMedicalDepartments"
-                                        >
-                                            {{
-                                                askedPersonMedicalDepartments.name
-                                            }}
-                                        </div>
-                                    </div>
-                                    <div class="flex md:w-1/2 border-b-2">
-                                        <div class="w-30 flex-none">
-                                            公開範囲
-                                        </div>
-                                        <div class="w-2">:</div>
-                                        <div class="">
-                                            {{ item.shareScope }}
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div
                                     class="
                                         md:flex md:flex-row
@@ -1090,7 +918,6 @@
                 </div>
             </div>
         </div>
-        <!-- :click-handler="clickCallback" -->
          <pagination
             :page-count="getPageCount"
             :page-range="4"
@@ -1105,20 +932,19 @@
             nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
-        <!-- <div class="flex justify-center mt-2">1-{{ pageCount }}件 表示</div> -->
         <div class="flex justify-center mt-2">{{ dispDetailRange }}件 表示</div>
     </div>
 </template>
 
 <script>
-import TriangleDownSvg from '../svgImage/triangleDownSvg.vue'
+import TriangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
 import resutTag from '../searchResult/resultTag.vue'
 import resultDetailRow from '../searchResult/resultAllDetailRow.vue'
 import carousel from '../searchResult/carousel.vue'
-import Good from '../svgImage/good.vue'
-import bad from '../svgImage/bad.vue'
-import talk from '../svgImage/talk.vue'
-import xIconSvg from '../svgImage/xIconSvg.vue'
+import Good from '../common/svgImage/good.vue'
+import bad from '../common/svgImage/bad.vue'
+import talk from '../common/svgImage/talk.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
 import Pagination from '../pagination/pagiation.vue'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../messageBox/goodMessageBox.vue'

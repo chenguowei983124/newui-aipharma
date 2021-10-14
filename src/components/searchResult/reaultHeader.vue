@@ -34,32 +34,27 @@
 </template>
 
 <script>
-import externalLink from '../../components/svgImage/extarnalLink.vue'
+import externalLink from '../../components/common/svgImage/extarnalLink.vue'
 export default {
-  components: { externalLink },
-  props: {
-    headerStyle: { type: String, defult: "" },
-    title: { type: String, defult: "" },
-    titleStyle: { type: String, defult: "" },
-    titleURL: { type: String, defult: "" },
-    subTitle: { type: String, defult: "" },
-    subTitleStyle: { type: String, defult: "" },
-    subTitleURL: { type: String, defult: "" },
-    rightStyle: { type: String, defult: "" },
-    countTitle: { type: String, defult: "" },
-    countStyle: { type: String, defult: "" },
-    iconType: { type: String, defult: "" },
-    iconUrl: { type: String, defult: "" }
-  },
-  couputed: {},
-  watch: {},
-  methods: {
-
-  },
-  created() {
-
-  }
+    components: { externalLink },
+    props: {
+        headerStyle: { type: String, defult: '' },
+        title: { type: String, defult: '' },
+        titleStyle: { type: String, defult: '' },
+        titleURL: { type: String, defult: '' },
+        subTitle: { type: String, defult: '' },
+        subTitleStyle: { type: String, defult: '' },
+        subTitleURL: { type: String, defult: '' },
+        rightStyle: { type: String, defult: '' },
+        countTitle: { type: String, defult: '' },
+        countStyle: { type: String, defult: '' },
+        iconType: { type: String, defult: '' },
+        iconUrl: { type: String, defult: '' },
+    },
+    couputed: {},
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>
