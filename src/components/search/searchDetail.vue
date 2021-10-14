@@ -141,6 +141,11 @@
                 <Multiselect
                     v-model="tagValue"
                     mode="tags"
+                    placeholder="#タグ"
+                    :filterResults="false"
+                    :minChars="1"
+                    :resolveOnLoad="false"
+                    :delay="0"
                     :searchable="true"
                     :options="
                         async function (query) {
