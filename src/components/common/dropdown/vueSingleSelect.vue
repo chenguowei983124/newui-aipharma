@@ -15,6 +15,7 @@
             aria-haspopup="listbox"
             @input="onInput"
             @keydown="onKeydown"
+            @keyup="onKeyup"
             @blur="onBlur"
             @mousedown.prevent="onMouseDownButton"
             class="relative"
@@ -354,6 +355,10 @@ export default {
           break
       }
     },
+    onKeyup(event) {
+        if (event.key == 'Enter')
+            this.$emit('selectItemByEnter', event)
+    },
 
     onBlur() {
       if (this.inputText === '') {
@@ -385,6 +390,7 @@ export default {
       this.inputText = this.options[this.selectedIndex].title
       this.optionsFiltered = false
       this.close()
+      this.$emit('selectItemByMouse', event)
     },
 
     onMouseDownButton() {
