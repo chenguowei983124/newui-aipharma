@@ -93,30 +93,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<!-- TODO: Tooltip implementasion-->
-<!--<style lang="scss">-->
-<!--.litepie-tooltip {-->
-<!--  &#45;&#45;litepie-datepicker: 0px;-->
-<!--  &:hover::before,-->
-<!--  &:hover::after {-->
-<!--    @apply block;-->
-<!--  }-->
-<!--  &::before {-->
-<!--    content: attr(data-tooltip); /* here's the magic */-->
-<!--    @apply absolute tracking-tight bottom-full text-xs hidden whitespace-nowrap px-1.5 py-1 rounded bg-litepie-secondary-700 text-white dark:bg-white dark:text-litepie-secondary-700;-->
-<!--  }-->
-<!--  &::after {-->
-<!--    content: '';-->
-<!--    @apply absolute left-2 top-0 w-3 h-3  shadow border border-black border-opacity-5 hidden bg-litepie-secondary-700 dark:bg-white;-->
-<!--    transform: translate(50%, -50%) rotate(135deg);-->
-<!--    clip-path: polygon(-->
-<!--      calc(var(&#45;&#45;litepie-datepicker) * -1) calc(var(&#45;&#45;litepie-datepicker) * -1),-->
-<!--      calc(100% + var(&#45;&#45;litepie-datepicker))-->
-<!--        calc(var(&#45;&#45;litepie-datepicker) * -1),-->
-<!--      calc(100% + var(&#45;&#45;litepie-datepicker))-->
-<!--        calc(100% + var(&#45;&#45;litepie-datepicker))-->
-<!--    );-->
-<!--  }-->
-<!--}-->
-<!--</style>-->

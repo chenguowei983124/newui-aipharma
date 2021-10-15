@@ -18,7 +18,6 @@
                     .dIKnowledgeShareSearchAIInfo.qasAi"
                 :key="index"
             >
-                <!-- {{ qaItems.facilityIdentificationNumber }} -->
                 <div class="border-2 rounded-lg border-yellow-500">
                     <!-- Group -->
                     <div
@@ -127,15 +126,6 @@
                                     <div>最終編集日：{{ item.createdAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
                                 </div>
-                                <!-- <div class="flex flex-wrap space-x-2">
-                                    参考資料：
-                                    <div
-                                        v-for="referenceMaterials in item.referenceMaterials"
-                                        :key="referenceMaterials"
-                                    >
-                                        {{ referenceMaterials.name }}
-                                    </div>
-                                </div> -->
                                 <div
                                     class="
                                         flex flex-wrap
@@ -188,7 +178,6 @@
                                 </div>
                                 <div class="flex">
                                     J-STAGE：
-                                    <!-- <div class="flex-none"></div> -->
                                     <div
                                         v-if="item.pubmed != ''"
                                         class="hover:text-blue-400"
@@ -919,161 +908,140 @@ import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 export default {
-    components: {
-        TriangleDownSvg,
-        resutTag,
-        resultDetailRow,
-        carousel,
-        Good,
-        bad,
-        talk,
-        xIconSvg,
-        Pagination,
-        vueSingleSelect,
-        GoodMessageBox,
-        ResultDetailRowItem,
-    },
-    props: {},
-    data() {
-        // console.log(this.$store.getters.organizationSearchInfo)
-        return {
-            // 順 区分 id
-            organizationDateSortValue: 0,
-            // 件 表示 区分 id
-            organizationCountSortValue: 0,
-            pageCount: 1,
-            selectPage: 0,
-            goodMessageBox: false,
-            //   isDetailDisp: false,
-            isDetailDisp: [],
-            //   isDetailsDisp: false,
-            isDetailsDisp: [],
-            activeIndex: -1,
-            //   torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
-            resultData: Object,
-            result: Object,
-        }
-    },
-    mounted() {
-        this.$store.dispatch('clearOrganizationSearchInfo')
-        if (this.$route.params.id) {
-            let result = this.$serve.getOwn({ id: this.$route.params.id })
-            result.then((response) => {
-                this.$store.dispatch('setOrganizationSearchInfo', response)
-                this.resultData = response.data.allCount
-                // console.log("response", response)
-                // console.log(response.data.allCount)
-                if (response.data.allCount == 1) {
-                    for (const key in response.data.qas) {
-                        if (
-                            Object.hasOwnProperty.call(response.data.qas, key)
-                        ) {
-                            //   const element = response.data.qas[key];
-                            console.log('element', key)
-                            this.openDetailDisp(key)
-                        }
-                    }
-                    //   console.log("response.data.qas", response.data.qas)
-                    //   this.openDetailDisp("qa68555")
-                }
-            })
-        }
-    },
-    watch: {},
-    computed: {
-        getPageCount() {
-            //   let page = 1;
-            if (this.organizationCountSortValue == '0') {
-                this.pageCount = 20
-            } else if (this.organizationCountSortValue == '1') {
-                this.pageCount = 50
-            } else if (this.organizationCountSortValue == '2') {
-                this.pageCount = 100
+  components: {
+    TriangleDownSvg,
+    resutTag,
+    resultDetailRow,
+    carousel,
+    Good,
+    bad,
+    talk,
+    xIconSvg,
+    Pagination,
+    vueSingleSelect,
+    GoodMessageBox,
+    ResultDetailRowItem,
+  },
+  props: {},
+  data() {
+    return {
+      // 順 区分 id
+      organizationDateSortValue: 0,
+      // 件 表示 区分 id
+      organizationCountSortValue: 0,
+      pageCount: 1,
+      selectPage: 0,
+      goodMessageBox: false,
+      //   isDetailDisp: false,
+      isDetailDisp: [],
+      //   isDetailsDisp: false,
+      isDetailsDisp: [],
+      activeIndex: -1,
+      resultData: Object,
+      result: Object,
+    }
+  },
+  mounted() {
+    this.$store.dispatch('clearOrganizationSearchInfo')
+    if (this.$route.params.id) {
+      let result = this.$serve.getOwn({ id: this.$route.params.id })
+      result.then((response) => {
+        this.$store.dispatch('setOrganizationSearchInfo', response)
+        this.resultData = response.data.allCount
+        if (response.data.allCount == 1) {
+          for (const key in response.data.qas) {
+            if (
+              Object.hasOwnProperty.call(response.data.qas, key)
+            ) {
+              console.log('element', key)
+              this.openDetailDisp(key)
             }
-            return Math.ceil(
-                this.$store.getters.organizationSearchInfo.allCount /
-                    this.pageCount
-            )
-        },
+          }
+        }
+      })
+    }
+  },
+  watch: {},
+  computed: {
+    getPageCount() {
+      //   let page = 1;
+      if (this.organizationCountSortValue == '0') {
+        this.pageCount = 20
+      } else if (this.organizationCountSortValue == '1') {
+        this.pageCount = 50
+      } else if (this.organizationCountSortValue == '2') {
+        this.pageCount = 100
+      }
+      return Math.ceil(
+        this.$store.getters.organizationSearchInfo.allCount /
+        this.pageCount
+      )
     },
-    methods: {
-        async getInitData() {
-            let result = this.$serve.getOwn({ id: this.$route.params.id })
-        },
-        getSelectPage(value) {
-            console.log('getSelectPage', value)
-            this.selectPage = value
-        },
-        sendMsgToParent: function (data) {
-            this.$emit('listenToChildEvent', data)
-        },
-        openDetailDisp(index, count) {
-            console.log('count', count)
-            console.log('AAAthis.isDetailDisp[index]', index)
-            console.log('AAAindex', index)
-            // 1件のみの場合
-            if (count == 1) {
-                this.isDetailDisp[index] = index
-            } else {
-                this.isDetailDisp[index] =
-                    this.isDetailDisp[index] == index ? [] : index
-                if (this.isDetailsDisp[index] == index) {
-                    this.isDetailsDisp[index] =
-                        this.isDetailsDisp[index] == index ? [] : index
-                }
-            }
-        },
-        // getDetailsDisp() { this.isDetailsDisp = !this.isDetailsDisp },
-        openDetailsDisp(index) {
-            this.isDetailsDisp[index] =
-                this.isDetailsDisp[index] == index ? [] : index
-        },
-        clickCallback() {
-            console.log(this.organizationCountSortValue)
-        },
-        setOrganizationDateSortValue(value) {
-            console.log('setOrganizationDateSortValue', value)
-            this.organizationDateSortValue = value
-        },
-        setOrganizationCountSortValue(value) {
-            console.log('setOrganizationCountSortValue', value)
-            this.organizationCountSortValue = value
-        },
-        // setSelectValue(value) {
-        //   this.selectValue = value
-        // },
-        openGoodMessageBox(index) {
-            //   console.log(this.$store.getters.getGoodMessageBox)
-            this.$store.dispatch(
-                'setGoodMessageBox',
-                !this.$store.getters.getGoodMessageBox
-            )
-        },
-        openCommentMessageBox() {
-            //   console.log(this.$store.getters.getCommentMessageBox)
-            this.$store.dispatch(
-                'setCommentMessageBox',
-                !this.$store.getters.getCommentMessageBox
-            )
-        },
-        // getOrganizationSearchInfo() {
-        //   //   console.log(this.$store.getters.getOrganizationSearchInfo)
-        //   this.$store.dispatch('setOrganizationSearchInfo', !this.$store.getters.getCommentMessageBox)
-        // },
-        getRoeId(id) {
-            console.log(id)
-        },
-        ActicleDetail(index) {
-            //   this.activeIndex = index;
-            //   console.log(index)
-            this.activeIndex = this.activeIndex == index ? -1 : index
-        },
-        sendGoodMessage(index) {
-            var v = this.qaInfo[index].value
-            //   console.log(this.qaInfo[index].QAID)
-            //   console.log(v)
-        },
+  },
+  methods: {
+    async getInitData() {
+      let result = this.$serve.getOwn({ id: this.$route.params.id })
     },
+    getSelectPage(value) {
+      console.log('getSelectPage', value)
+      this.selectPage = value
+    },
+    sendMsgToParent: function (data) {
+      this.$emit('listenToChildEvent', data)
+    },
+    openDetailDisp(index, count) {
+      console.log('count', count)
+      console.log('AAAthis.isDetailDisp[index]', index)
+      console.log('AAAindex', index)
+      // 1件のみの場合
+      if (count == 1) {
+        this.isDetailDisp[index] = index
+      } else {
+        this.isDetailDisp[index] =
+          this.isDetailDisp[index] == index ? [] : index
+        if (this.isDetailsDisp[index] == index) {
+          this.isDetailsDisp[index] =
+            this.isDetailsDisp[index] == index ? [] : index
+        }
+      }
+    },
+    openDetailsDisp(index) {
+      this.isDetailsDisp[index] =
+        this.isDetailsDisp[index] == index ? [] : index
+    },
+    clickCallback() {
+      console.log(this.organizationCountSortValue)
+    },
+    setOrganizationDateSortValue(value) {
+      console.log('setOrganizationDateSortValue', value)
+      this.organizationDateSortValue = value
+    },
+    setOrganizationCountSortValue(value) {
+      console.log('setOrganizationCountSortValue', value)
+      this.organizationCountSortValue = value
+    },
+    openGoodMessageBox(index) {
+      this.$store.dispatch(
+        'setGoodMessageBox',
+        !this.$store.getters.getGoodMessageBox
+      )
+    },
+    openCommentMessageBox() {
+      this.$store.dispatch(
+        'setCommentMessageBox',
+        !this.$store.getters.getCommentMessageBox
+      )
+    },
+    getRoeId(id) {
+      console.log(id)
+    },
+    ActicleDetail(index) {
+      this.activeIndex = this.activeIndex == index ? -1 : index
+    },
+    sendGoodMessage(index) {
+      var v = this.qaInfo[index].value
+    },
+  },
 }
 </script>
 <style scoped>

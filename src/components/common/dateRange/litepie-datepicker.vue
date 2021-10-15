@@ -50,58 +50,6 @@
                     v-model="pickerValue"
                     @keyup="keyUp"
                 />
-                <!-- <span
-                    class="
-                        absolute
-                        inset-y-0
-                        right-0
-                        inline-flex
-                        items-center
-                        rounded-md
-                        overflow-hidden
-                    "
-                >
-                    <button
-                        type="button"
-                        class="
-                            px-2
-                            py-1
-                            mr-1
-                            focus:outline-none
-                            text-litepie-secondary-400
-                            dark:text-opacity-70
-                            rounded-md
-                        "
-                        @click="
-                            pickerValue
-                                ? clearPicker()
-                                : $refs.LitepieInputRef.focus()
-                        "
-                    >
-                        <svg
-                            class="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                v-if="pickerValue"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="M6 18L18 6M6 6l12 12"
-                            ></path>
-                            <path
-                                v-else
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            ></path>
-                        </svg>
-                    </button>
-                </span> -->
             </label>
         </slot>
         <transition

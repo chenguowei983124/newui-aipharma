@@ -1,13 +1,55 @@
 <template>
-    <div class="">検索条件：{{ $store.getters.getSearchValue }}</div>
-    <div>該当：145件</div>
+    <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium">
+        検索条件：
+        <!-- <div
+            class=""
+            v-for="(searchWords, index) in $store.getters
+                .preavoidsSearchInfo.searchWords"
+            :key="index"
+        >
+            {{ searchWords }}
+        </div> -->
+    </div>
+    <!-- $store.getters.preavoidsSearchInfo.allCount -->
+    <div class="notoSansJpAndFourteenMedium">該当：{{}}件</div>
     <div class="">
         <div class="flex flex-wrap-reverse md:justify-between">
             <div class="flex space-x-2 mt-2 md:mt-0">
-                <button class="flex-none border-2 border-green-200">
-                    データダウンロード
-                </button>
-                <button class="flex-none border-2 border-blueline">
+                <div
+                    class="
+                        flex-none
+                        rounded
+                        border-2 border-green-400
+                        flex
+                        justify-center
+                    "
+                >
+                    <label class="inline-flex items-center justify-end mx-1">
+                        <input type="checkbox" class="" checked />
+                        <span
+                            class="
+                                ml-0.5
+                                text-mxs
+                                font-NotoSansJp
+                                text-green-600
+                                cursor-pointer
+                            "
+                            >選択データダウンロード</span
+                        >
+                    </label>
+                </div>
+
+                <button
+                    class="
+                        flex-none
+                        rounded
+                        border-2 border-blueline
+                        px-1
+                        text-mxs
+                        font-NotoSansJp
+                        text-blueline
+                    "
+                >
                     検索結果一覧ダウンロード
                 </button>
             </div>
@@ -44,11 +86,8 @@
         </div>
     </div>
 
-    <div class="flex flex-none">
+    <div class="mt-2">
         <my-table></my-table>
-        <div
-            class="border-l-2 border-r-2 border-t-2 rounded-sm border-blueline"
-        ></div>
     </div>
      <pagination
         :page-count="100"
@@ -66,64 +105,6 @@
     ></pagination>
 
     <div class="flex justify-center">{{ '1-20件 表示' }}</div>
-
-    <div class="h-full space-y-2.5 md:space-y-3.75">
-        <resut-tag
-            headerStyle="titleBgColorGray"
-            title="新着Q＆A"
-            titleStyle="newQaInfoTitle"
-            titleURL="/"
-        >
-            <result-detail-row
-                class="searchResult_detail_gray"
-                :sites="
-                    $store.getters.getSearchAllOrganizationDidDocument.details
-                "
-                :sub1="['group']"
-                :sub2="['title']"
-                :sub3="['states', 'date', 'view']"
-            >
-            </result-detail-row>
-        </resut-tag>
-        <resut-tag
-            headerStyle="titleBgColorGray"
-            title="よく見られているQ＆A"
-            titleStyle="newQaInfoTitle"
-            titleURL="/"
-        >
-            <result-detail-row
-                class="searchResult_detail_gray"
-                :sites="
-                    $store.getters.getSearchAllOrganizationDidDocument.details
-                "
-                :sub1="['group']"
-                :sub2="['title']"
-                :sub3="['states', 'date', 'view']"
-            >
-            </result-detail-row>
-        </resut-tag>
-    </div>
-    <div class="rounded border-2 border-blueline bg-cardViewCount">
-        <div>{{ 'トレンドタグ' }}</div>
-        <div class="flex flex-wrap">
-            <div
-                class="
-                    rounded-full
-                    border-2 border-gray-400
-                    bg-gray-100
-                    h-6
-                    notoSansJpAndTwelveRegular
-                    pl-1
-                    pr-1
-                    text-center
-                "
-                v-for="item in torenndoTab"
-                :key="item"
-            >
-                {{ item }}
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -138,154 +119,79 @@ import xIconSvg from '../common/svgImage/xIconSvg.vue'
 import Pagination from '../common/pagination/pagiation.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
+import myTable from '../common/table/myTable.vue'
 
 export default {
-    components: {
-        TriangleDownSvg,
-        resutTag,
-        resultDetailRow,
-        carousel,
-        Good,
-        bad,
-        talk,
-        xIconSvg,
-        Pagination,
-        vueSingleSelect,
-        GoodMessageBox,
-    },
-    props: {},
-    data() {
-        return {
-            goodMessageBox: false,
-            isDetailDisp: false,
-            isDetailsDisp: false,
-            torenndoTab: [
-                '#ロキソニン',
-                '#ロキソ',
-                '#用途',
-                '#痛み止め',
-                '#ロキソニン',
-                '#ロキソ',
-            ],
-            details: [
-                { index: 0, check: false, value1: 'aa' },
-                { index: 1, check: false, value1: 'aa' },
-                { index: 2, check: false, value1: 'aa' },
-                { index: 3, check: false, value1: 'aa' },
-                { index: 4, check: false, value1: 'aa' },
-                { index: 5, check: false, value1: 'aa' },
-                { index: 6, check: false, value1: 'aa' },
-                { index: 7, check: false, value1: 'aa' },
-                { index: 8, check: false, value1: 'aa' },
-                { index: 9, check: false, value1: 'aa' },
-                { index: 10, check: false, value1: 'aa' },
-                { index: 11, check: false, value1: 'aa' },
-            ],
-            info: [
-                { id: 1, title: 'QA ID', value: '30013110' },
-                {
-                    id: 2,
-                    title: '薬の分類',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 3,
-                    title: '質問区分',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 4,
-                    title: '医薬品名',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 5,
-                    title: 'キーワード',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 6,
-                    title: '質問者- 職種',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 7,
-                    title: '質問者- 診療科',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 8,
-                    title: '公開範囲',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 9,
-                    title: 'カスタム項目',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 10,
-                    title: 'カスタム項目',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 11,
-                    title: 'カスタム項目',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 12,
-                    title: 'カスタム項目',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 13,
-                    title: 'カスタム項目',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 14,
-                    title: 'PubMed',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                {
-                    id: 15,
-                    title: 'ファイル',
-                    value: 'ロキソプロフェンロキソニン',
-                },
-                { id: 16, title: '備考', value: 'ロキソプロフェンロキソニン' },
-            ],
-        }
-    },
+  components: {
+    TriangleDownSvg,
+    resutTag, resultDetailRow, carousel,
+    Good, bad, talk, xIconSvg,
+    Pagination, vueSingleSelect,
+    GoodMessageBox, myTable
+  },
+  props: {},
+  data() {
+    return {
+      goodMessageBox: false,
+      isDetailDisp: false,
+      isDetailsDisp: false,
+      torenndoTab: ["#ロキソニン", "#ロキソ", "#用途", "#痛み止め", "#ロキソニン", "#ロキソ"],
+      details: [
+        { index: 0, check: false, value1: "aa" },
+        { index: 1, check: false, value1: "aa" },
+        { index: 2, check: false, value1: "aa" },
+        { index: 3, check: false, value1: "aa" },
+        { index: 4, check: false, value1: "aa" },
+        { index: 5, check: false, value1: "aa" },
+        { index: 6, check: false, value1: "aa" },
+        { index: 7, check: false, value1: "aa" },
+        { index: 8, check: false, value1: "aa" },
+        { index: 9, check: false, value1: "aa" },
+        { index: 10, check: false, value1: "aa" },
+        { index: 11, check: false, value1: "aa" },
 
-    watch: {},
-    methods: {
-        setDetailDisp() {
-            //   console.log(this.isDetailDisp)
-            this.isDetailDisp = !this.isDetailDisp
-        },
-        getDetailsDisp() {
-            this.isDetailsDisp = !this.isDetailsDisp
-        },
-        clickCallback() {},
-        setSelectValue(value) {
-            this.selectValue = value
-        },
-        openGoodMessageBox() {
-            //   console.log(this.$store.getters.getGoodMessageBox)
-            this.$store.dispatch(
-                'setGoodMessageBox',
-                !this.$store.getters.getGoodMessageBox
-            )
-        },
-        openCommentMessageBox() {
-            //   console.log(this.$store.getters.getCommentMessageBox)
-            this.$store.dispatch(
-                'setCommentMessageBox',
-                !this.$store.getters.getCommentMessageBox
-            )
-        },
+      ],
+      info: [
+        { id: 1, title: 'QA ID', value: '30013110' },
+        { id: 2, title: '薬の分類', value: 'ロキソプロフェンロキソニン' },
+        { id: 3, title: '質問区分', value: 'ロキソプロフェンロキソニン' },
+        { id: 4, title: '医薬品名', value: 'ロキソプロフェンロキソニン' },
+        { id: 5, title: 'キーワード', value: 'ロキソプロフェンロキソニン' },
+        { id: 6, title: '質問者- 職種', value: 'ロキソプロフェンロキソニン' },
+        { id: 7, title: '質問者- 診療科', value: 'ロキソプロフェンロキソニン' },
+        { id: 8, title: '公開範囲', value: 'ロキソプロフェンロキソニン' },
+        { id: 9, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
+        { id: 10, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
+        { id: 11, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
+        { id: 12, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
+        { id: 13, title: 'カスタム項目', value: 'ロキソプロフェンロキソニン' },
+        { id: 14, title: 'PubMed', value: 'ロキソプロフェンロキソニン' },
+        { id: 15, title: 'ファイル', value: 'ロキソプロフェンロキソニン' },
+        { id: 16, title: '備考', value: 'ロキソプロフェンロキソニン' },
+      ]
+    };
+  },
+
+  watch: {},
+  methods: {
+    setDetailDisp() {
+      this.isDetailDisp = !this.isDetailDisp
     },
+    getDetailsDisp() { this.isDetailsDisp = !this.isDetailsDisp },
+    clickCallback() {
+    },
+    setSelectValue(value) {
+      this.selectValue = value
+    },
+    openGoodMessageBox() {
+      this.$store.dispatch('setGoodMessageBox', !this.$store.getters.getGoodMessageBox)
+    },
+    openCommentMessageBox() {
+      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
+    }
+  }
+
 }
 </script>
-<style scoped></style>
+<style scoped>
+</style>

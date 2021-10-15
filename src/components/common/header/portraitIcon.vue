@@ -9,7 +9,8 @@
                         rounded-full
                         h-9
                         w-9
-                        md:h-10 md:w-10
+                        md:h-10
+                        md:w-10
                         bg-backgroundMainSearch
                         flex
                         justify-center
@@ -71,7 +72,8 @@
                                     my-13
                                     md:ml-40
                                     mid:ml-47.5
-                                    md:pl-3.5 md:pb-1.5
+                                    md:pl-3.5
+                                    md:pb-1.5
                                 "
                                 v-if="$store.getters.getPortraitClick"
                             >
@@ -213,8 +215,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- <router-link :to="{ path: 'helloWorld' }"> -->
                                     <div
                                         v-for="item in $store.getters
                                             .topManagementItemUserList"
@@ -234,7 +234,6 @@
                                             {{ item.title }}
                                         </div>
                                     </div>
-                                    <!-- </router-link> -->
                                 </div>
                             </div>
                         </div>
@@ -248,21 +247,21 @@
 <script>
 import iconDown from '../svgImage/iconDown.vue'
 export default {
-    emits: ['clickDown'],
-    components: { iconDown },
-    data() {
-        return {
-            isDown: false,
-        }
+  emits: ['clickDown'],
+  components: { iconDown },
+  data() {
+    return {
+      isDown: false,
+    }
+  },
+  methods: {
+    clickDown() {
+      this.$store.dispatch(
+        'setPortraitClick',
+        !this.$store.getters.getPortraitClick
+      )
     },
-    methods: {
-        clickDown() {
-            this.$store.dispatch(
-                'setPortraitClick',
-                !this.$store.getters.getPortraitClick
-            )
-        },
-    },
+  },
 }
 </script>
 

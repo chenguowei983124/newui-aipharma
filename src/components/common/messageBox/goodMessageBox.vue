@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <div class="hidden md:block mid:block bg-red-400">44646546546545</div> -->
         <div class="block md:hidden mid:hidden">
             <div
                 class="
@@ -18,11 +17,6 @@
                             class="text-xs w-80 focus:outline-none"
                             placeholder="理由をお聞かせください（任意）"
                         />
-
-                        <!-- <div class="text-xs">理由をお聞かせください（任意）</div> -->
-                        <!-- <div class="text-xs text-red-600">
-                    ※コメントは管理者に送信されます
-                </div> -->
                         <div class="flex justify-between pr-2">
                             <div class="text-xs text-red-600">
                                 ※コメントは管理者に送信されます
@@ -44,19 +38,18 @@
 <script>
 import xIconSvg from '../svgImage/xIconSvg.vue'
 export default {
-    components: { xIconSvg },
-    data() {
-        return {}
+  components: { xIconSvg },
+  data() {
+    return {}
+  },
+  methods: {
+    openGoodMessageBox() {
+      this.$store.dispatch(
+        'setGoodMessageBox',
+        !this.$store.getters.getGoodMessageBox
+      )
     },
-    methods: {
-        openGoodMessageBox() {
-            // console.log(this.$store.getters.getGoodMessageBox)
-            this.$store.dispatch(
-                'setGoodMessageBox',
-                !this.$store.getters.getGoodMessageBox
-            )
-        },
-    },
+  },
 }
 </script>
 

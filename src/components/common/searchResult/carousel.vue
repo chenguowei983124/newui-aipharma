@@ -3,7 +3,8 @@
         class="
             flex
             justify-between
-            cs:bg-cardTitlePmad cs:mx-5
+            cs:bg-cardTitlePmad
+            cs:mx-5
             my-5
             h-48
             cs:h-21
@@ -69,7 +70,6 @@
             @afterInit="onResize"
             @update="onResize"
         >
-            <!-- :breakpoints="breakpoints" -->
             <swiper-slide
                 class="parallax-slide"
                 :id="'ss' + image.id"
@@ -112,138 +112,119 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import SwiperCore, { Navigation, Parallax, Autoplay } from 'swiper'
 import 'swiper/components/navigation/navigation.scss'
-// Import Swiper styles
 import 'swiper/swiper.scss'
 import { reactive } from '@vue/reactivity'
 SwiperCore.use([Navigation, Parallax, Autoplay])
 import iconLeft from '../svgImage/iconLeft.vue'
 import iconRight from '../svgImage/iconRight.vue'
-// import img1 from "../../assets/image/banner_cps2021.png"
-// import img2 from "../../assets/image/banner_jpds2020.png"
-// import img3 from "../../assets/image/banner_kanblo51.png"
-// import img4 from "../../assets/image/image7.jpeg"
 
 export default {
-    data() {
-        return {
-            parallaxSwiperWidth: 0,
-            images: [],
+  data() {
+    return {
+      parallaxSwiperWidth: 0,
+      images: [],
+    }
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+    iconLeft,
+    iconRight,
+  },
+  setup() {
+    const swiperOption = reactive({
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+      loop: true,
+      speed: 1000,
+      pagination: {
+        clickable: true,
+      },
+      slidesPerView: 2,
+      spaceBetween: 5,
+    })
+    const onResize = (handler) => {
+      const IMG_WIDTH = 234
+      if (handler.isHorizontal()) {
+        swiperOption.slidesPerView = (
+          handler.el.children[1].offsetWidth /
+          (IMG_WIDTH + swiperOption.spaceBetween)
+        ).toFixed(2)
+      } else {
+        const sp = 3
+        if (swiperOption.slidesPerView != sp) {
+          swiperOption.slidesPerView = sp
         }
+      }
+    }
+    return {
+      swiperOption,
+      onResize,
+    }
+  },
+  methods: {
+    sleep(msec) {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve()
+        }, msec)
+        console.log('request API for images ')
+      })
     },
-    components: {
-        Swiper,
-        SwiperSlide,
-        iconLeft,
-        iconRight,
-    },
-    setup() {
-        const swiperOption = reactive({
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-            },
-            loop: true,
-            speed: 1000,
-            pagination: {
-                clickable: true,
-            },
-            slidesPerView: 2,
-            spaceBetween: 5,
-        })
-        const onResize = (handler) => {
-            // console.log('onResize',handler)
-            const IMG_WIDTH = 234
-            if (handler.isHorizontal()) {
-                swiperOption.slidesPerView = (
-                    handler.el.children[1].offsetWidth /
-                    (IMG_WIDTH + swiperOption.spaceBetween)
-                ).toFixed(2)
-                // console.log('isHorizontal',handler.el.children[1].offsetWidth)
-            } else {
-                // const IMG_HEIGHT = 60
-                // swiperOption.slidesPerView = (handler.height / (IMG_HEIGHT + swiperOption.spaceBetween)).toFixed(2)
-                const sp = 3
-                if (swiperOption.slidesPerView != sp) {
-                    swiperOption.slidesPerView = sp
-                }
-            }
-            // console.log('swiperOption',swiperOption)
-        }
-        return {
-            swiperOption,
-            onResize,
-        }
-    },
-    methods: {
-        sleep(msec) {
-            return new Promise(function (resolve) {
-                setTimeout(function () {
-                    resolve()
-                }, msec)
-                console.log('request API for images ')
-            })
+    loadImages() {
+      console.log(this.$store.getters.topScientifiSocietyInfo)
+      this.images = [
+        {
+          id: 1,
+          src: this.$store.getters.topScientifiSocietyInfo
+            .imageLists[0].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo
+            .imageLists[0].imageUrl,
         },
-        loadImages() {
-            console.log(this.$store.getters.topScientifiSocietyInfo)
-            this.images = [
-                {
-                    id: 1,
-                    src: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[0].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[0].imageUrl,
-                },
-                {
-                    id: 2,
-                    src: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[1].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[1].imageUrl,
-                },
-                {
-                    id: 3,
-                    src: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[2].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[2].imageUrl,
-                },
-                {
-                    id: 4,
-                    src: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[3].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[3].imageUrl,
-                },
-                {
-                    id: 5,
-                    src: 'img4',
-                    url: 'http://www.google.com/',
-                },
-                {
-                    id: 6,
-                    src: 'img4',
-                    url: 'http://www.google.com/',
-                },
-                {
-                    id: 7,
-                    src: 'img4',
-                    url: 'http://www.google.com/',
-                },
-            ]
+        {
+          id: 2,
+          src: this.$store.getters.topScientifiSocietyInfo
+            .imageLists[1].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo
+            .imageLists[1].imageUrl,
         },
+        {
+          id: 3,
+          src: this.$store.getters.topScientifiSocietyInfo
+            .imageLists[2].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo
+            .imageLists[2].imageUrl,
+        },
+        {
+          id: 4,
+          src: this.$store.getters.topScientifiSocietyInfo
+            .imageLists[3].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo
+            .imageLists[3].imageUrl,
+        },
+        {
+          id: 5,
+          src: 'img4',
+          url: 'http://www.google.com/',
+        },
+        {
+          id: 6,
+          src: 'img4',
+          url: 'http://www.google.com/',
+        },
+        {
+          id: 7,
+          src: 'img4',
+          url: 'http://www.google.com/',
+        },
+      ]
     },
-    created() {
-        this.loadImages()
-        // async function start(obj) {
-        //   const waitSec = 1
-        //   console.log('start');
-        //   await obj.sleep(waitSec * 1000);
-        //   console.log(waitSec + '秒経過しました！');
-        //   obj.loadImages();
-        //   console.log('done');
-        // }
-        // start(this);
-    },
+  },
+  created() {
+    this.loadImages()
+  },
 }
 </script>
 
@@ -281,20 +262,7 @@ export default {
     width: 234px;
     height: 60px;
     z-index: 1;
-
-    /* object-fit: cover; */
 }
-/* .parallax-slide {
-    height: 80px !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: 30% !important;
-    margin-top: 1px;
-    margin-bottom: 4px;
-    flex: none;
-} */
 .nav-indicator {
     margin-top: 29px;
     flex: none;
