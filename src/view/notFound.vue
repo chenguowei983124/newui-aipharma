@@ -14,11 +14,11 @@
 import notfound from '../layout/notfoundlayout.vue'
 import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
-    components: { notfound, homeBottomTemplate },
-    props: {},
-    couputed: {},
-    watch: {},
-    methods: {},
-    created() {},
+  components: { notfound, homeBottomTemplate },
+  props: {},
+  couputed: {},
+  watch: {},
+  methods: {},
+  created() { },
 }
 </script>

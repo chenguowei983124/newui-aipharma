@@ -1,5 +1,5 @@
 <template>
-    <!--  -->
+    <!-- ロード -->
     <div
         class="
             fixed
