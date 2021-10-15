@@ -1,5 +1,4 @@
 /* フォント相関 */
-
 /* ラベル　組織内 */
 .searchResult_lable_organization{
     @apply notoSansJpAndTwelveMedium text-white bg-organization w-17.5 text-center ring-1 ring-organization;
@@ -48,7 +47,6 @@
 .searchResult_lable_examination{
     @apply notoSansJpAndTwelveMedium text-black bg-examination w-17.5 text-center ring-1 ring-examination;
 }
-/*---------------------------------------------------------------------------------------------------*/
 .dorpdownSubMenu {
     @apply border-t-2 border-white font-bold text-xl  ;
 }
@@ -136,10 +134,12 @@
 /* 新着Q＆Aタイトル */
 .newQaInfoTitle{
     @apply notoSansJpAndEighteenBold text-center text-white  hover:opacity-50 active:opacity-50;
-}
+    }
 /* 学会情報　その他の情報 */
 .searchResult_header_grayline{
-    @apply flex items-center  rounded-t-lg border-2 border-grayline text-center h-10 py-1 px-5 w-aut bg-white  space-x-2.5;
+    @apply flex items-center  rounded-t-lg    
+           border-2 border-grayline text-center h-10 py-1 px-5 w-auto    
+           bg-white  space-x-2.5;
 }
 /* 学会情報 ヘッダータイトル */
 .scientifiSocietyInfoTitle{
@@ -155,11 +155,13 @@
 }
 /* 新着Q＆A Topics */
 .organizationResult_header_bg_gray{
-    @apply flex justify-between h-10 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto text-white ;
+    @apply flex justify-between h-10 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
+    text-white ;
 }
 /* PMDA 医薬品更新情報　Topics */
 .searchResult_header_bg_gray{
-    @apply flex justify-between h-8 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto text-white ;
+    @apply flex justify-between h-8 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
+    text-white ;
 }
 #a1:checked ~ .tab-a1{
     @apply flex;
