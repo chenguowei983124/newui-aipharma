@@ -1,4 +1,5 @@
 const searchResulstLable_organization = 'organization'
+// メニューリスト
 const formList = {
     TOP: 'top',
     ALL: 'all',
@@ -7,6 +8,7 @@ const formList = {
     OWN: 'searchOrganizantion',
     PVD: 'searchPreavoids',
 }
+// 様式リスト
 const style = [
     { value: '0', title: '全様式' },
     { value: '1', title: '様式1' },
@@ -14,7 +16,7 @@ const style = [
     { value: '3', title: '様式3' },
     { value: '4', title: '副作用' },
 ]
-
+// パラメータリスト
 const searchParam = {
     KEYWORD: 'keyword',
     TAGS: 'tags',
@@ -26,6 +28,7 @@ const searchParam = {
     PAGE: 'page',
     PAID: 'qaId',
 }
+// 順 区分リスト
 const organizationDateSort = [
     { value: '0', title: '最終編集日が新しい順' },
     { value: '1', title: '最終編集日が古い' },
@@ -36,13 +39,13 @@ const organizationDateSort = [
     { value: '6', title: 'Q&A-ID昇順' },
     { value: '7', title: 'Q&A-ID降順' },
 ]
-
+// 件数表示 区分リスト
 const organizationCountSort = [
     { value: '0', title: '20件 表示' },
     { value: '1', title: '50件 表示' },
     { value: '2', title: '100件 表示' },
 ]
-
+// 入力タグ様式
 const multiselectCss = {
     container:
         'relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-gray-300 rounded bg-white text-base leading-snug outline-none',

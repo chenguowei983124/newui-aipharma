@@ -20,14 +20,15 @@ module.exports = {
         )}")`,
       }),
       spacing: {
-
         // 5px
         '1.25': '0.3125rem',
+        // 6px
         '1.5': '0.375rem',
+        // 7px
         '1.75': '0.4375rem',
         // 7.5px
         '1.875': '0.5625rem',
-
+        // 10px
         '2.5': '0.625rem',
         // 13px
         '3.25': '0.8125rem',
@@ -43,22 +44,37 @@ module.exports = {
         '9.5': '2.375rem',
         // 50px
         '12.5': '3.125rem',
+        // 52px
         '13': '3.25rem',
         // 55px
         '13.75': '3.4375rem',
+        // 60px
         '15': '3.75rem',
+        // 65px
         '16.25': '4.0625rem',
+        // 66px
         '16.5': '4.125rem',
+        // 67px
         '16.75': '4.1875rem',
+        // 68px
         '17': '4.25rem',
+        // 69
         '17.25': '4.3125rem',
+        // 70px
         '17.5': '4.375rem',
+        // 71px
         '17.75': '4.4375rem',
+        // 72px
         '18': '4.5rem',
+        // 73px
         '18.25': '4.5625rem',
+        // 74px
         '18.5': '4.625rem',
+        // 75px
         '18.75': '4.6875rem',
+        // 76px
         '19': '4.75rem',
+        // 77px
         '19.25': '4.8125rem',
         // 84px
         '21': '5.25rem',
@@ -66,7 +82,9 @@ module.exports = {
         '22.5': '5.625rem',
         // 100px
         '25': '6.25rem',
+        // 110px
         '27.5': '6.875rem',
+        // 120px
         '30': '7.5rem',
         // 124px
         '31': '7.75rem',
@@ -76,10 +94,15 @@ module.exports = {
         '37.5': '9.375rem',
         // 170px
         '42.5': '10.625rem',
+        // 175px
         '43.75': '10.9375rem',
+        // 180px
         '45': '11.25rem',
+        // 183px
         '45.75': '11.1875rem',
+        // 184px
         '46': '11.5rem',
+        // 185px
         '46.25': '11.5625rem',
         // 190px
         '47.5': '11.875rem',
@@ -87,16 +110,23 @@ module.exports = {
         '50': '12.5rem',
         // 210px
         '52.5': '13.125rem',
+        // 216px
         '54': '13.25rem',
+        // 225px
         '56.25': '14.0625rem',
+        // 252px
         '63': '15.75rem',
+        // 256px
         '64': '16rem',
+        // 260px
         '65': '16.25rem',
+        // 264px
         '66': '16.5rem',
         // 280px
         '70': '17.5rem',
         // 330px
         '82.5': '20.625rem',
+        // 345px
         '86.25': '21.5625rem',
         // 355px
         '88.75': '22.1875rem',
@@ -106,8 +136,11 @@ module.exports = {
         '121': '30.25rem',
         // 720px
         '180': '45rem',
+        // 765px
         '191.25': '47.8125rem',
+        // 980px
         '245': '61.25rem',
+        // 1080px
         '270': '67.5rem',
 
       },
@@ -118,7 +151,8 @@ module.exports = {
       maxHeight: {
         'full-18': 'calc(100% + 18px)',
         modal: 'calc(100% + 18px)'
-      }, backgroundColor: theme => ({
+      },
+      backgroundColor: theme => ({
         ...theme('colors'),
         'organization': '#326EB5',
         'whole': '#8cc85a',
@@ -146,12 +180,9 @@ module.exports = {
         // 組織内DI・症例 登録ボタン
         'personOrganizationButton': '#f09600',
         'searchBar': '#cce8f6',
-
-
         'backgroundMain': 'rgb(214, 237, 248)',
         'backgroundMainSearch': 'rgb(50, 165, 220)',
         'searchResultTitle': 'rgb(101, 187, 229)',
-        // 'personInfo': 'rgb(204, 204, 204)',
         'personDataInfo': 'rgb(230, 230, 230)',
         'personGroupInformation': 'rgb(253, 244, 229)',
         'personInformationButton': 'rgb(241, 90, 36)',
@@ -170,20 +201,20 @@ module.exports = {
         'cardViewCount': 'rgb(204, 233, 246)',
         'lock': 'rgba(0,0,0,0.2)',
 
-      }), textColor: theme => theme('colors'),
+      }),
+      textColor: theme => theme('colors'),
       textColor: {
         'notlooked': '#f09600',
         'view': '#32a5dc',
         'notice': '#666666',
         'CCE8F6': '#CCE8F6',
-
-
         'searchDropdown': 'rgb(58, 175, 226)',
         'cardPmadNew': 'rgb(212, 20, 90)',
         'cardPmadUpadte': 'rgb(241, 90, 36)',
         'dropdownListItem': 'rgb(102, 102, 102)',
         'googleTitle': 'rgb(50, 165,220)',
-      }, colors: {
+      },
+      colors: {
         'notice': '#666666',
         'notlooked': '#f09600',
         'browse': '#d4145a',
@@ -228,11 +259,13 @@ module.exports = {
         xxl: ['1.75rem', { lineHeight: '1.875rem' }],
         // 32px
         xll: ['1.75rem', { lineHeight: '1.875rem' }]
-      }, fontFamily: {
+      },
+      fontFamily: {
         'Lato': 'Lato',
         'NotoSansJp': 'Noto Sans JP',
         sans: ['Inter', ...fontFamily.sans]
-      }, zIndex: {
+      },
+      zIndex: {
         '0': 0,
         '10': 10,
         '20': 20,
@@ -244,16 +277,17 @@ module.exports = {
         '75': 75,
         '99': 99,
         'auto': 'auto',
-      }, borderColor: (theme) => ({
+      },
+      borderColor: (theme) => ({
         DEFAULT: theme('colors.gray.200', 'currentColor'),
         // 組織内DI・症例 登録ボタン、マイデータ 帯・境界線
         'personOrganizationButton': '#f09600',
-      }), screens: {
+      }),
+      screens: {
         'mid': '980px',
         'lm': '1080px',
         'cs': '460px',
         // => @media (min-width: 640px) { ... }
-
       },
       opacity: {
         85: '0.85'
