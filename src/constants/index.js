@@ -7,6 +7,7 @@ const formList = {
     NDI: 'newOrgDIRecord',
     OWN: 'searchOrganizantion',
     PVD: 'searchPreavoids',
+    BBS: 'searchBulletinBoard',
 }
 // 様式リスト
 const style = [
@@ -45,6 +46,58 @@ const organizationCountSort = [
     { value: '1', title: '50件 表示' },
     { value: '2', title: '100件 表示' },
 ]
+
+const managementitemList = [
+    { title: 'データ登録', itemStyle: 'title' },
+    {
+        title: '組織内DI 記録（Q&A）登録',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+    {
+        title: '症例（プレアボイド）登録',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+    { title: 'マイデータ', itemStyle: 'title' },
+    {
+        title: '組織内DI 記録（Q&A）',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+    {
+        title: '症例（プレアボイド）',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+    { title: '下書き一覧', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
+]
+
+const managementPcitemList = [
+    { title: 'データ登録', itemStyle: 'title' },
+    {
+        title: '組織内DI 記録 登録',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+    { title: '症例 登録', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
+    { title: 'マイデータ', itemStyle: 'title' },
+    {
+        title: '組織内DI 記録 ',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+    { title: '症例', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
+    { title: '下書き一覧', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
+]
+
+const topManagementItemUserList = [
+    { title: 'マイページ', routerPath: '/' },
+    { title: '施設切替', routerPath: '/' },
+    { title: '設定', routerPath: '/' },
+    { title: 'ログアウト', routerPath: '/' },
+]
+
 // 入力タグ様式
 const multiselectCss = {
     container:
@@ -119,4 +172,7 @@ export default {
     organizationDateSort,
     organizationCountSort,
     multiselectCss,
+    managementitemList,
+    managementPcitemList,
+    topManagementItemUserList,
 }

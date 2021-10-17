@@ -9,8 +9,7 @@
                         rounded-full
                         h-9
                         w-9
-                        md:h-10
-                        md:w-10
+                        md:h-10 md:w-10
                         bg-backgroundMainSearch
                         flex
                         justify-center
@@ -72,28 +71,31 @@
                                     my-13
                                     md:ml-40
                                     mid:ml-47.5
-                                    md:pl-3.5
-                                    md:pb-1.5
+                                    md:pl-3.5 md:pb-1.5
                                 "
                                 v-if="$store.getters.getPortraitClick"
                             >
                                 <div
-                                    v-for="item in $store.getters
-                                        .topManagementItemUserList"
+                                    v-for="item in $constant.topManagementItemUserList"
                                     :key="item"
                                 >
-                                    <div
-                                        class="
-                                            md:mt-1.5
-                                            text-black
-                                            font-bold
-                                            hover:opacity-50
-                                            active:opacity-50
-                                            cursor-pointer
-                                        "
+                                    <router-link
+                                        :to="item.routerPath"
+                                        @click="logoutClick"
                                     >
-                                        {{ item.title }}
-                                    </div>
+                                        <div
+                                            class="
+                                                md:mt-1.5
+                                                text-black
+                                                font-bold
+                                                hover:opacity-50
+                                                active:opacity-50
+                                                cursor-pointer
+                                            "
+                                        >
+                                            {{ item.title }}
+                                        </div>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -216,23 +218,27 @@
                                         </div>
                                     </div>
                                     <div
-                                        v-for="item in $store.getters
-                                            .topManagementItemUserList"
+                                        v-for="item in $constant.topManagementItemUserList"
                                         :key="item"
                                     >
-                                        <div
-                                            class="
-                                                h-9
-                                                flex
-                                                justify-center
-                                                items-center
-                                                cursor-pointer
-                                                border-t-2 border-black
-                                                font-NotoSansJp
-                                            "
+                                        <router-link
+                                            :to="item.routerPath"
+                                            @click="logoutClick"
                                         >
-                                            {{ item.title }}
-                                        </div>
+                                            <div
+                                                class="
+                                                    h-9
+                                                    flex
+                                                    justify-center
+                                                    items-center
+                                                    cursor-pointer
+                                                    border-t-2 border-black
+                                                    font-NotoSansJp
+                                                "
+                                            >
+                                                {{ item.title }}
+                                            </div>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -247,21 +253,24 @@
 <script>
 import iconDown from '../svgImage/iconDown.vue'
 export default {
-  emits: ['clickDown'],
-  components: { iconDown },
-  data() {
-    return {
-      isDown: false,
-    }
-  },
-  methods: {
-    clickDown() {
-      this.$store.dispatch(
-        'setPortraitClick',
-        !this.$store.getters.getPortraitClick
-      )
+    emits: ['clickDown'],
+    components: { iconDown },
+    data() {
+        return {
+            isDown: false,
+        }
     },
-  },
+    methods: {
+        clickDown() {
+            this.$store.dispatch(
+                'setPortraitClick',
+                !this.$store.getters.getPortraitClick
+            )
+        },
+        logoutClick() {
+            this.$serve.postLogout()
+        },
+    },
 }
 </script>
 

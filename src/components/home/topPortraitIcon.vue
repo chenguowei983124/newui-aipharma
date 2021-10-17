@@ -22,20 +22,22 @@
                 v-if="isDown"
             >
                 <div
-                    v-for="item in $store.getters.topManagementItemUserList"
+                    v-for="item in $constant.topManagementItemUserList"
                     :key="item"
                 >
-                    <div
-                        class="
-                            notoSansJpAndFourteenRegular
-                            hover:opacity-50
-                            active:opacity-50
-                            cursor-pointer
-                            ml-2.5
-                        "
-                    >
-                        {{ item.title }}
-                    </div>
+                    <router-link :to="item.routerPath" @click="logoutClick">
+                        <div
+                            class="
+                                notoSansJpAndFourteenRegular
+                                hover:opacity-50
+                                active:opacity-50
+                                cursor-pointer
+                                ml-2.5
+                            "
+                        >
+                            {{ item.title }}
+                        </div>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -54,6 +56,9 @@ export default {
     destroyed() {
         document.removeEventListener('keyup', this.handleClickOutside)
         document.removeEventListener('click', this.handleClickOutside)
+    },
+    logoutClick() {
+        this.$serve.postLogout()
     },
     data() {
         return {

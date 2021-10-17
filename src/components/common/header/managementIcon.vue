@@ -7,8 +7,7 @@
                 rounded-full
                 h-9
                 w-9
-                md:h-10
-                md:w-10
+                md:h-10 md:w-10
                 bg-personOrganizationButton
                 active:opacity-50
                 hover:opacity-50
@@ -58,8 +57,7 @@
                         v-if="$store.getters.getManagementClick"
                     >
                         <div
-                            v-for="item in $store.getters
-                                .topManagementitemLists"
+                            v-for="item in $constant.managementitemList"
                             :key="item"
                             class="h-9 font-NotoSansJp cursor-pointer"
                         >
@@ -78,21 +76,27 @@
                                 >
                                     {{ item.title }}
                                 </div>
-                                <div
+                                <router-link
                                     v-if="item.itemStyle == 'item'"
-                                    class="
-                                        border-t-2
-                                        border-personOrganizationButton
-                                        bg-yellow-50
-                                        h-9
-                                        pl-2.5
-                                        flex
-                                        items-center
-                                        font-light
-                                    "
+                                    :to="{
+                                        path: item.routerPath,
+                                    }"
                                 >
-                                    {{ item.title }}
-                                </div>
+                                    <div
+                                        class="
+                                            border-t-2
+                                            border-personOrganizationButton
+                                            bg-yellow-50
+                                            h-9
+                                            pl-2.5
+                                            flex
+                                            items-center
+                                            font-light
+                                        "
+                                    >
+                                        {{ item.title }}
+                                    </div>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -121,8 +125,7 @@
                             v-if="$store.getters.getManagementClick"
                         >
                             <div
-                                v-for="item in $store.getters
-                                    .topPcManagementitemLists"
+                                v-for="item in $constant.managementPcitemList"
                                 :key="item"
                                 class="h-9 font-NotoSansJp cursor-pointer"
                             >
@@ -140,26 +143,32 @@
                                     >
                                         {{ item.title }}
                                     </div>
-                                    <div
+                                    <router-link
                                         v-if="item.itemStyle == 'item'"
-                                        class="
-                                            bg-yellow-50
-                                            h-9
-                                            pl-2.5
-                                            flex
-                                            items-center
-                                            font-light
-                                        "
+                                        :to="{
+                                            path: item.routerPath,
+                                        }"
                                     >
                                         <div
                                             class="
-                                                hover:opacity-50
-                                                active:opacity-50
+                                                bg-yellow-50
+                                                h-9
+                                                pl-2.5
+                                                flex
+                                                items-center
+                                                font-light
                                             "
                                         >
-                                            {{ item.title }}
+                                            <div
+                                                class="
+                                                    hover:opacity-50
+                                                    active:opacity-50
+                                                "
+                                            >
+                                                {{ item.title }}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -172,12 +181,14 @@
 
 <script>
 export default {
-  methods: {
-    clickDown() {
-      this.$store.dispatch('setManagementClick', !this.$store.getters.getManagementClick
-      )
+    methods: {
+        clickDown() {
+            this.$store.dispatch(
+                'setManagementClick',
+                !this.$store.getters.getManagementClick
+            )
+        },
     },
-  }
 }
 </script>
 

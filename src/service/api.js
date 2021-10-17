@@ -1,4 +1,4 @@
-import axios from "./http";
+import axios from './http'
 // import axios from "axios";
 const serve = {
     //===========================
@@ -7,7 +7,16 @@ const serve = {
     async postLogin(data) {
         return await axios('/preavoid/postLogin', {
             method: 'post',
-            data: data
+            data: data,
+        })
+    },
+    //===========================
+    // ログアウト
+    //===========================
+    async postLogout(data) {
+        return await axios('/preavoid/postLogout', {
+            method: 'post',
+            data: data,
         })
     },
     //===========================
@@ -15,7 +24,7 @@ const serve = {
     //===========================
     async getTopNoticel() {
         const data = await axios('/preavoid/get_topmenu_Noticel_info', {
-            method: 'get'
+            method: 'get',
         })
 
         return data
@@ -25,7 +34,7 @@ const serve = {
     //===========================
     async getTopBulletinBoard() {
         const data = await axios('/preavoid/get_topmenu_BulletinBoard_info', {
-            method: 'get'
+            method: 'get',
         })
 
         return data
@@ -34,9 +43,12 @@ const serve = {
     // TOP画面　学会情報取得
     //===========================
     async getTopScientifiSociety() {
-        const data = await axios('/preavoid/get_topmenu_scientifiSociety_info', {
-            method: 'get'
-        })
+        const data = await axios(
+            '/preavoid/get_topmenu_scientifiSociety_info',
+            {
+                method: 'get',
+            }
+        )
 
         return data
     },
@@ -45,7 +57,7 @@ const serve = {
     //===========================
     async getTopPMDA() {
         const data = await axios('/preavoid/get_topmenu_PMDA_info', {
-            method: 'get'
+            method: 'get',
         })
 
         return data
@@ -53,10 +65,10 @@ const serve = {
     //===========================
     // リクエストされたQAのview数をインクリメントする
     //===========================
-    async sendViewCount(data){
+    async sendViewCount(data) {
         return await axios('/api/qa/increment_view_count', {
             method: 'post',
-            data: data
+            data: data,
         })
     },
     //===========================
@@ -66,8 +78,8 @@ const serve = {
         const data = await axios('/preavoid/get_organization_search_info', {
             method: 'get',
             params: {
-                id: id
-            }
+                id: id,
+            },
         })
 
         return data
@@ -78,8 +90,7 @@ const serve = {
     async getOwnData(param) {
         const data = await axios('/preavoid/get_organization_search_info', {
             method: 'get',
-            params: param
-
+            params: param,
         })
 
         return data
@@ -87,13 +98,17 @@ const serve = {
     async getOwndIKnowledgeShare(param) {
         const data = await axios('/preavoid/get_DIKnowledgeShare_search_info', {
             method: 'get',
-            params: param
-
+            params: param,
         })
 
         return data
-    }
+    },
+    async getTest() {
+        const data = await axios('/preavoid/get_topmenu_Noticel_info_test', {
+            method: 'get',
+        })
 
-
+        return data
+    },
 }
 export default serve

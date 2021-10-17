@@ -7,87 +7,86 @@
                     ログイン
                 </div>
 
-                <form action="">
-                    <div class="mt-5">
-                        <input
-                            v-model="loginId"
-                            class="
-                                block
-                                h-10
-                                w-86.25
-                                NotoSansJp-normal
-                                text-xs
-                                flex-grow
-                                rounded-sm
-                                pl-4
-                                placeholder-gray-500
-                                focus:placeholder-opacity-0
-                                ring-1
-                                border-transparent
-                                focus:outline-none
-                                focus:ring-1 focus:ring-326EB5Lins
-                                focus:border-transparent
-                            "
-                            type="text"
-                            placeholder="メールアドレスorユーザーID"
-                        />
-                    </div>
-                    <div class="mt-2.5">
-                        <input
-                            v-model="password"
-                            class="
-                                block
-                                h-10
-                                w-86.25
-                                NotoSansJp-normal
-                                text-xs
-                                flex-grow
-                                rounded-sm
-                                pl-4
-                                placeholder-gray-500
-                                focus:placeholder-opacity-0
-                                ring-1
-                                border-transparent
-                                focus:outline-none
-                                focus:ring-1 focus:ring-326EB5Lins
-                                focus:border-transparent
-                            "
-                            type="password"
-                            placeholder="パスワード"
-                        />
-                    </div>
-                    <!-- ログインを記憶する -->
-                    <div class="mt-3">
-                        <label class="inline-flex items-center justify-end">
-                            <input
-                                v-model="isRemember"
-                                type="checkbox"
-                                class="form-checkbox w-3 h-3 text-white ring-1"
-                                checked
-                            />
-                            <span class="ml-0.5 notoSansJpAndTwelveRegular"
-                                >ログインを記憶する</span
-                            >
-                        </label>
-                    </div>
-
+                <div class="mt-5">
                     <input
-                        type="submit"
+                        v-model="loginId"
                         class="
-                            bg-personOrganizationButton
-                            hover:opacity-50
-                            active:bg-personInformationButton
-                            active:opacity-100
+                            block
                             h-10
-                            rounded-sm
-                            notoSansJpAndEighteenBold
-                            text-white
                             w-86.25
+                            NotoSansJp-normal
+                            text-xs
+                            flex-grow
+                            rounded-sm
+                            pl-4
+                            placeholder-gray-500
+                            focus:placeholder-opacity-0
+                            ring-1
+                            border-transparent
+                            focus:outline-none
+                            focus:ring-1
+                            focus:ring-326EB5Lins
+                            focus:border-transparent
                         "
-                        @click="loginClick"
-                        value="ログイン"
+                        type="text"
+                        placeholder="メールアドレスorユーザーID"
                     />
-                </form>
+                </div>
+                <div class="mt-2.5">
+                    <input
+                        v-model="password"
+                        class="
+                            block
+                            h-10
+                            w-86.25
+                            NotoSansJp-normal
+                            text-xs
+                            flex-grow
+                            rounded-sm
+                            pl-4
+                            placeholder-gray-500
+                            focus:placeholder-opacity-0
+                            ring-1
+                            border-transparent
+                            focus:outline-none
+                            focus:ring-1
+                            focus:ring-326EB5Lins
+                            focus:border-transparent
+                        "
+                        type="password"
+                        placeholder="パスワード"
+                    />
+                </div>
+                <!-- ログインを記憶する -->
+                <div class="mt-3">
+                    <label class="inline-flex items-center justify-end">
+                        <input
+                            v-model="isRemember"
+                            type="checkbox"
+                            class="form-checkbox w-3 h-3 text-white ring-1"
+                            checked
+                        />
+                        <span class="ml-0.5 notoSansJpAndTwelveRegular"
+                            >ログインを記憶する</span
+                        >
+                    </label>
+                </div>
+
+                <input
+                    type="submit"
+                    class="
+                        bg-personOrganizationButton
+                        hover:opacity-50
+                        active:bg-personInformationButton active:opacity-100
+                        h-10
+                        rounded-sm
+                        notoSansJpAndEighteenBold
+                        text-white
+                        w-86.25
+                    "
+                    @click="loginClick"
+                    value="ログイン"
+                />
 
                 <div class="flex mt-5">
                     <div
@@ -142,93 +141,104 @@
 <script>
 import logo from './logo.vue'
 export default {
-  data() {
-    return {
-      loginId: "",
-      password: "",
-      isRemember: false,
-      showToast: false,
-      message: ""
-
-    }
-  },
-  components: {
-    logo
-  },
-  methods: {
-    loginClick: function () {
-      if (this.loginId == "" || this.password == "") {
-        this.message = "ログインに失敗しました。ユーザーIDまたはパスワードが間違っています。"
-        this.$toast.error(this.message, { position: "top-right" });
-
-      } else {
-        let params = {
-          loginId: this.loginId,
-          password: this.password
+    data() {
+        return {
+            loginId: '',
+            password: '',
+            isRemember: false,
+            showToast: false,
+            message: '',
         }
-        this.$serve.postLogin(params)
-        const self = this;
-        // 第4步，若复选框被勾选了，就调用设置cookie方法，把当前的用户名和密码和过期时间存到cookie中
-        if (self.isRemember === true) {
-          // 传入账号名，密码，和保存天数（过期时间）3个参数
-          //  1/24/60 测试可用一分钟测试，这样看着会比较明显
-          self.setCookie(this.loginId, this.password, 1 / 24 / 60);
-          // self.setCookie(this.loginId, this.password, 7); // 这样就是7天过期时间
-        }
-        // 若没被勾选就及时清空Cookie，因为这个cookie有可能是上一次的未过期的cookie，所以要及时清除掉
-        else {
-          self.clearCookie();
-        }
-        // 当然，无论用户是否勾选了cookie，路由该跳转还是要跳转的
-        this.$router.push('/myhome');
-        localStorage.setItem('token', "123132");
-      }
-      //   this.$router.push('/myhome')
-
-    }, setCookie(loginId, password, exdays) {
-      var exdate = new Date(); // 获取当前登录的时间
-      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); // 将当前登录的时间加上七天，就是cookie过期的时间，也就是保存的天数
-      // 字符串拼接cookie,因为cookie存储的形式是name=value的形式
-      window.document.cookie = "loginId" + "=" + loginId + ";path=/;expires=" + exdate.toGMTString();
-      window.document.cookie = "userPwd" + "=" + password + ";path=/;expires=" + exdate.toGMTString();
-      window.document.cookie = "isRemember" + "=" + this.isRemember + ";path=/;expires=" + exdate.toGMTString();
     },
-    // 第2步，若cookie中有用户名和密码的话，就通过两次切割取出来存到form表单中以供使用，若是没有就没有
-    getCookie: function () {
-      if (document.cookie.length > 0) {
-        var arr = document.cookie.split("; "); //因为是数组所以要切割。打印看一下就知道了
-        // console.log(arr,"切割");
-        for (var i = 0; i < arr.length; i++) {
-          var arr2 = arr[i].split("="); // 再次切割
-          // console.log(arr2,"切割2");
-          // // 判断查找相对应的值
-          if (arr2[0] === "loginId") {
-            this.loginId = arr2[1]; // 转存一份保存用户名和密码
-          } else if (arr2[0] === "userPwd") {
-            this.password = arr2[1];//可解密
-          } else if (arr2[0] === "isRemember") {
-            this.isRemember = Boolean(arr2[1]);
-          }
-        }
-      }
+    components: {
+        logo,
     },
-    // 清除cookie
-    clearCookie: function () {
-      this.setCookie("", "", -1); // 清空并设置天数为负1天
-    },
+    methods: {
+        loginClick: function () {
+            if (this.loginId == '' || this.password == '') {
+                this.message =
+                    'ログインに失敗しました。ユーザーIDまたはパスワードが間違っています。'
+                this.$toast.error(this.message, { position: 'top-right' })
+            } else {
+                let params = {
+                    loginId: this.loginId,
+                    password: this.password,
+                }
+                this.$serve.postLogin(params)
+                const self = this
 
-  },
-  props: {},
-  couputed: {},
-  watch: {
-    isRemember(val) {
-      val ? this.setCookie() : this.clearCookie();
-    }
-  },
-  mounted() {
-    this.getCookie();
-  },
+                if (self.isRemember === true) {
+                    // Cookie設定
+                    //  テスト時、1分に設定
+                    // self.setCookie(this.loginId, this.password, 1/24/60)
+                    self.setCookie(this.loginId, this.password, 7) // 7日に設定
+                } else {
+                    self.clearCookie()
+                }
+
+                this.$router.push('/myhome')
+                localStorage.setItem('token', '123132')
+            }
+        },
+        setCookie(loginId, password, exdays) {
+            console.log('setCookie')
+            var exdate = new Date() // 获取当前登录的时间
+            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays) // 将当前登录的时间加上七天，就是cookie过期的时间，也就是保存的天数
+
+            window.document.cookie =
+                'loginId' +
+                '=' +
+                loginId +
+                ';path=/;expires=' +
+                exdate.toGMTString()
+            window.document.cookie =
+                'userPwd' +
+                '=' +
+                password +
+                ';path=/;expires=' +
+                exdate.toGMTString()
+            window.document.cookie =
+                'isRemember' +
+                '=' +
+                this.isRemember +
+                ';path=/;expires=' +
+                exdate.toGMTString()
+        },
+        // cookieにユーザー情報があるかを確認、存在する場合、取得、なければ、なにもしない
+        getCookie: function () {
+            console.log(document.cookie)
+            if (document.cookie.length > 0) {
+                var arr = document.cookie.split('; ') //「；」で分割
+
+                for (var i = 0; i < arr.length; i++) {
+                    var arr2 = arr[i].split('=') // 「＝」で分割
+
+                    // 保存した情報を取得
+                    if (arr2[0] === 'loginId') {
+                        this.loginId = arr2[1] // 変数に設定
+                    } else if (arr2[0] === 'userPwd') {
+                        this.password = arr2[1] // 変数に設定
+                    } else if (arr2[0] === 'isRemember') {
+                        this.isRemember = Boolean(arr2[1])
+                    }
+                }
+            }
+        },
+        // 清除cookie
+        clearCookie: function () {
+            this.setCookie('', '', -1) // クリア　かつ　保存時間を「-1」に設定
+        },
+    },
+    props: {},
+    couputed: {},
+    watch: {
+        // isRemember(val) {
+        //     val ? this.setCookie() : this.clearCookie()
+        // },
+    },
+    mounted() {
+        this.getCookie()
+    },
 }
 </script>
-<style>
-</style>
+<style></style>

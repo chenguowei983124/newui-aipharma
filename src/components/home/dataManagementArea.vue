@@ -85,8 +85,7 @@
                         class="
                             bg-personInformationButton
                             hover:opacity-50
-                            active:bg-red-600
-                            active:opacity-100
+                            active:bg-red-600 active:opacity-100
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -100,8 +99,7 @@
                         class="
                             bg-personInformationButton
                             hover:opacity-50
-                            active:bg-red-600
-                            active:opacity-100
+                            active:bg-red-600 active:opacity-100
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -117,13 +115,13 @@
                         class="
                             bg-personOrganizationButton
                             hover:opacity-50
-                            active:bg-personInformationButton
-                            active:opacity-100
+                            active:bg-personInformationButton active:opacity-100
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
                             text-white
                         "
+                        @click="orgDiRecordClick"
                     >
                         組織内DI 記録 登録
                     </button>
@@ -132,8 +130,7 @@
                         class="
                             bg-personOrganizationButton
                             hover:opacity-50
-                            active:bg-personInformationButton
-                            active:opacity-100
+                            active:bg-personInformationButton active:opacity-100
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -194,29 +191,29 @@
 </template>
 
 <script>
-import TopPortraitIcon from '../home/topPortraitIcon.vue';
+import TopPortraitIcon from '../home/topPortraitIcon.vue'
 
 export default {
-  components: { TopPortraitIcon },
-  props: {},
-  data() {
-    return {
-      isDown: false,
-    };
-  },
-  couputed: {},
-  watch: {},
-  methods: {
-    itemClick() {
-      console.log(this.isDown)
-      this.isDown = !this.isDown
-      console.log(this.isDown)
+    components: { TopPortraitIcon },
+    props: {},
+    data() {
+        return {
+            isDown: false,
+        }
     },
-  },
-  created() {
-
-  }
+    couputed: {},
+    watch: {},
+    methods: {
+        itemClick() {
+            this.isDown = !this.isDown
+        },
+        orgDiRecordClick() {
+            this.$router.push({
+                path: '/newOrgDIRecord',
+            })
+        },
+    },
+    created() {},
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>

@@ -163,8 +163,8 @@ export default {
     mounted() {
         this.$store.dispatch('getTopNotice')
         this.$store.dispatch('getTopBulletinBoardInfo')
-        this.$store.dispatch('getScientifiSocietyInfoe')
-        this.$store.dispatch('getPmdaInfo')
+        this.$store.dispatch('getScientifiSocietyInfo')
+        this.$store.dispatch('getTopPMDA')
         this.$store.dispatch('getCommonInfo')
     },
 }
