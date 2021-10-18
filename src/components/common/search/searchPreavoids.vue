@@ -96,6 +96,7 @@
             <div class="flex space-x-2">
                 <button
                     class="
+                        border-b-2 border-gray-500
                         bg-personDataInfo
                         text-black
                         notoSansJpAndSixteenBold
@@ -108,6 +109,7 @@
                 </button>
                 <button
                     class="
+                        border-b-2 border-orange-600
                         bg-searchBunnon
                         text-white
                         notoSansJpAndSixteenBold

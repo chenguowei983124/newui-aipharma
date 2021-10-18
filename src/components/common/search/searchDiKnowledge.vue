@@ -158,6 +158,7 @@
                 <button
                     class="
                         rounded
+                        border-b-2 border-gray-500
                         bg-personDataInfo
                         text-gray-700
                         notoSansJpAndSixteenBold
@@ -173,6 +174,7 @@
                 <button
                     class="
                         rounded
+                        border-b-2 border-orange-600
                         bg-searchBunnon
                         text-white
                         w-43.75
