@@ -63,6 +63,50 @@ const serve = {
         return data
     },
     //===========================
+    // 一括検索結果画面　DI ナレッジシェア情報取得
+    //===========================
+    async getALLDiKnowledgeInfo(params) {
+        const data = await axios('/api/qa/get_bunch_DiKnowledge_info', {
+            method: 'get',
+            data: params,
+        })
+
+        return data
+    },
+    //===========================
+    // 一括検索結果画面　組織内 DI 記録情報取得
+    //===========================
+    async getALLOrganizationInfo() {
+        const data = await axios(
+            '/api/qa/get_bunch_OrganizationDiDocument_info',
+            {
+                method: 'get',
+            }
+        )
+
+        return data
+    },
+    //===========================
+    // 一括検索結果画面　おくすり事例情報取得
+    //===========================
+    async getALLMedicineCase_Info() {
+        const data = await axios('/api/qa/get_bunch_MedicineCase_info', {
+            method: 'get',
+        })
+
+        return data
+    },
+    //===========================
+    // 一括検索結果画面　一括検索結果画面のGoogle情報取得
+    //===========================
+    async getALLGoogle_Info() {
+        const data = await axios('/api/qa/search_google', {
+            method: 'get',
+        })
+
+        return data
+    },
+    //===========================
     // リクエストされたQAのview数をインクリメントする
     //===========================
     async sendViewCount(data) {

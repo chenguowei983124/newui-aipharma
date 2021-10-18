@@ -65,6 +65,7 @@ export default {
 
     actions: {
         async getTopNotice({ rootState, commit }) {
+            commit('setTopNotice', {})
             const info = await serve.getTopNoticel()
             commit('setTopNotice', info.data)
         },

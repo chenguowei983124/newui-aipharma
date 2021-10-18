@@ -17,7 +17,7 @@
                     :sites="$store.getters.getSearchAllDiKnowledge.details"
                     :sub1="['group']"
                     :sub2="['title']"
-                    :sub3="['Certainty']"
+                    :sub3="['certainty']"
                 >
                 </result-detail-row>
             </resut-tag>
@@ -29,7 +29,8 @@
                 rightStyle="count"
                 :countTitle="
                     '該当：' +
-                    $store.getters.getSearchAllOrganizationDidDocument.count +
+                    $store.getters.getSearchAllOrganizationDidDocument
+                        .allCount +
                     '件'
                 "
                 countStyle="searchResultAllCountLable"
@@ -54,7 +55,9 @@
                 titleURL="\"
                 rightStyle="count"
                 :countTitle="
-                    '該当：' + $store.getters.getSearchAllPreAvoid.count + '件'
+                    '該当：' +
+                    $store.getters.getSearchAllPreAvoid.allCount +
+                    '件'
                 "
                 countStyle="searchResultAllCountLable"
             >
@@ -135,9 +138,43 @@ export default {
         return {}
     },
     couputed: {},
-    watch: {},
-    methods: {},
-    created() {},
+    methods: {
+        async getDispData() {
+            if (this.$route.query.searchKey != undefined) {
+                this.$store.dispatch(
+                    'saveSearchValue',
+                    this.$route.query.searchKey
+                )
+            } else {
+                this.$store.dispatch('saveSearchValue', '')
+            }
+
+            this.$store.dispatch('searchALLLDiKnowledgeInfo')
+            this.$store.dispatch('searchALLLOrganizationInfo')
+        },
+    },
+    watch: {
+        $route: function () {
+            if (this.$route.path != '/searchResultAll') {
+                return
+            }
+            if (JSON.stringify(this.$route.query.searchKey) == '{}') {
+                this.$store.dispatch('saveSearchValue', '')
+            }
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                this.$store.dispatch(
+                    'saveSearchValue',
+                    this.$route.query.searchKey
+                )
+            }
+            this.$store.dispatch('searchALLLDiKnowledgeInfo')
+            this.$store.dispatch('searchALLLOrganizationInfo')
+            this.$store.dispatch('searchALLLPreAvoidInfo')
+        },
+    },
+    mounted() {
+        this.getDispData()
+    },
 }
 </script>
 <style scoped></style>
