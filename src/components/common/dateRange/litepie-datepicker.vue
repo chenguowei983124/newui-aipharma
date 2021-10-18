@@ -869,7 +869,7 @@ export default /*#__PURE__*/ defineComponent({
     };
 
     const clearPicker = () => {
-      console.log("clearPicker")
+      // console.log("clearPicker")
       pickerValue.value = '';
       if (useArray()) {
         emit('update:modelValue', []);

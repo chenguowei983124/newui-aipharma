@@ -335,7 +335,7 @@ export default {
   watch: {
     tagValue() {
       this.$store.dispatch('setSearchTags', this.tagValue)
-      console.log('tagsValue', this.$store.getters.getSearchTags)
+      // console.log('tagsValue', this.$store.getters.getSearchTags)
       this.$emit('tagValue', this.tagValue)
     },
   },
@@ -395,7 +395,7 @@ export default {
       this.$store.dispatch('setQuestionID', '')
       this.$store.dispatch('setFacilityID', '')
       this.$store.dispatch('setCheckQ', true)
-      console.log('resetSearch3', this.$store.getters.getCheckQ)
+      // console.log('resetSearch3', this.$store.getters.getCheckQ)
       this.$store.dispatch('setCheckA', true)
       this.$store.dispatch('setCheckComment', true)
       this.$store.dispatch('setCheckAddFileName', true)
@@ -406,7 +406,7 @@ export default {
     },
     onCheckQChange() {
       this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
-      console.log('resetSearch4', this.$store.getters.getCheckQ)
+      // console.log('resetSearch4', this.$store.getters.getCheckQ)
     },
     onChangeCheckA() {
       this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)

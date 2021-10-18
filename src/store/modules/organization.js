@@ -249,7 +249,6 @@ export default {
         },
         // 検索対象　Q
         setCheckQ({ commit, state }, value) {
-            console.log('setCheckQ', value)
             commit('basic', { key: 'checkQ', value })
         },
         // 検索対象　A

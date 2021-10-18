@@ -64,7 +64,7 @@
             headerStyle="titleOnlyUnderlineGrayLine"
             title="学会情報"
             titleStyle="scientifiSocietyInfoTitle"
-            subTitle="予約はこちら▹"
+            subTitle="予約はこちら"
             subTitleStyle="searchResult_header_reserveLink"
             subTitleURL="/"
             ><result-detail-row
@@ -152,26 +152,23 @@ import resultDetailRow from '../common/searchResult/resultDetailRow.vue'
 import carousel from '../common/searchResult/carousel.vue'
 
 export default {
-    components: {
-        resutTag,
-        resultDetailRow,
-        carousel,
-    },
-    props: {},
-    couputed: {},
-    watch: {},
-    setup() {
-        console.log('asdfasdf')
-    },
-    mounted() {
-        console.log('asdfasdf')
-        this.$store.dispatch('getTopNotice')
-        this.$store.dispatch('getTopBulletinBoardInfo')
-
-        this.$store.dispatch('getScientifiSocietyInfo')
-        this.$store.dispatch('getTopPMDA')
-        this.$store.dispatch('getCommonInfo')
-    },
+  components: {
+    resutTag,
+    resultDetailRow,
+    carousel,
+  },
+  props: {},
+  couputed: {},
+  watch: {},
+  setup() {
+  },
+  mounted() {
+    this.$store.dispatch('getTopNotice')
+    this.$store.dispatch('getTopBulletinBoardInfo')
+    this.$store.dispatch('getScientifiSocietyInfo')
+    this.$store.dispatch('getTopPMDA')
+    this.$store.dispatch('getCommonInfo')
+  },
 }
 </script>
 <style scoped></style>

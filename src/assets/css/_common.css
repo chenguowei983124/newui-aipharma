@@ -94,6 +94,10 @@
 .notoSansJpAndTwentyEightBold{
     @apply font-NotoSansJp text-xxl font-bold ;
 }
+/* font-family: NotoSansJp font-size: 30px font-weight: 700 */
+.notoSansJpAndThirtyBold{
+    @apply font-NotoSansJp text-3xl font-bold ;
+}
 /* font-family: Lato font-size: 12px font-weight: 700 */
 .latoAndTwentyBold{
     @apply font-Lato font-bold text-xs ;

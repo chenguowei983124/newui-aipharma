@@ -1000,7 +1000,7 @@ export default {
         this.$store.dispatch('setdIKnowledgeShareSearchInfo', {})
       }
       if (JSON.stringify(this.$route.query) !== '{}') {
-        console.log('router1')
+        // console.log('router1')
         this.resetSearchBar()
         this.execSearch()
       }
@@ -1060,7 +1060,7 @@ export default {
         this.$store.dispatch('setQAID', qaid)
         sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
       } else if (this.$route.query.page != undefined) {
-        console.log('設定　NULL')
+        // console.log('設定　NULL')
         params = {
           search: this.$store.getters.getSearchWord,
           tags:
@@ -1281,7 +1281,7 @@ export default {
       })
     },
     getSelectPage(value) {
-      console.log('getSelectPage', value)
+      //   console.log('getSelectPage', value)
       this.selectPage = value
     },
     sendMsgToParent: function (data) {
@@ -1307,14 +1307,11 @@ export default {
         this.isDetailsDisp[index] == index ? [] : index
     },
     clickCallback() {
-      console.log(this.organizationCountSortValue)
     },
     setOrganizationDateSortValue(value) {
-      console.log('setOrganizationDateSortValue', value)
       this.organizationDateSortValue = value
     },
     setOrganizationCountSortValue(value) {
-      console.log('setOrganizationCountSortValue', value)
       this.organizationCountSortValue = value
     },
     openGoodMessageBox(index) {

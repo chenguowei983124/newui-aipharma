@@ -244,7 +244,7 @@ export default {
   },
   watch: {
     tagValue() {
-      console.log(this.tagValue)
+      // console.log(this.tagValue)
       this.$emit('tagValue', this.tagValue)
     },
   },

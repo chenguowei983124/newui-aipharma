@@ -232,7 +232,7 @@ export default {
         }
       } else {
         if (midStyle == "style1") {
-          console.log("midStyle")
+          // console.log("midStyle")
           return "truncate underline md:whitespace-pre"
 
         }

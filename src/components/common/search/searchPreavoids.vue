@@ -207,14 +207,14 @@ export default {
   },
   methods: {
     dateChanged: function ($event) {
-      console.log($event.target.value)
+      // console.log($event.target.value)
     },
     clicking: function ($event) {
-      console.log('pushKafka')
-      console.log(this.$refs.inputDate)
+      // console.log('pushKafka')
+      // console.log(this.$refs.inputDate)
     },
     clearClick: function () {
-      console.log(this.$constant.style)
+      // console.log(this.$constant.style)
     },
     getDispText: function (value) {
       this.dispText = value

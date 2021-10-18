@@ -239,7 +239,7 @@ export default {
 
   watch: {
     defaultValue() {
-      console.log('default', this.defaultValue)
+      // console.log('default', this.defaultValue)
       if (this.defaultValue !== null) {
         let length = this.defaultOptions.length
         for (let index = 0; index < length; index++) {
@@ -356,8 +356,8 @@ export default {
       }
     },
     onKeyup(event) {
-        if (event.key == 'Enter')
-            this.$emit('selectItemByEnter', event)
+      if (event.key == 'Enter')
+        this.$emit('selectItemByEnter', event)
     },
 
     onBlur() {

@@ -1,6 +1,6 @@
 <template>
     <label class="flex flex-row flex-auto justify-between" :class="headerStyle">
-        <div class="justify-center h-full">
+        <div class="justify-center flex flex-row items-center h-full">
             <!-- 検索結果ヘッダータイトル -->
             <a :class="titleStyle" v-if="title != ''" :href="titleURL">{{
                 title
@@ -10,8 +10,14 @@
                 :class="subTitleStyle"
                 v-if="subTitle != ''"
                 :href="subTitleURL"
-                >{{ subTitle }}</a
+                class="flex flex-row items-center"
             >
+                <div>{{ subTitle }}</div>
+                <triangle-svg
+                    v-if="subTitle != '' && subTitle == '予約はこちら'"
+                    class="transform rotate-90 cls-1"
+                ></triangle-svg>
+            </a>
         </div>
         <div class="flex flex-col justify-end h-full" v-if="rightStyle != ''">
             <div class="" v-if="rightStyle == 'count'">
@@ -35,26 +41,33 @@
 
 <script>
 import externalLink from '../svgImage/extarnalLink.vue'
+import triangleSvg from '../svgImage/triangleSvg.vue'
 export default {
-    components: { externalLink },
-    props: {
-        headerStyle: { type: String, defult: '' },
-        title: { type: String, defult: '' },
-        titleStyle: { type: String, defult: '' },
-        titleURL: { type: String, defult: '' },
-        subTitle: { type: String, defult: '' },
-        subTitleStyle: { type: String, defult: '' },
-        subTitleURL: { type: String, defult: '' },
-        rightStyle: { type: String, defult: '' },
-        countTitle: { type: String, defult: '' },
-        countStyle: { type: String, defult: '' },
-        iconType: { type: String, defult: '' },
-        iconUrl: { type: String, defult: '' },
-    },
-    couputed: {},
-    watch: {},
-    methods: {},
-    created() {},
+  components: { externalLink, triangleSvg },
+  props: {
+    headerStyle: { type: String, defult: '' },
+    title: { type: String, defult: '' },
+    titleStyle: { type: String, defult: '' },
+    titleURL: { type: String, defult: '' },
+    subTitle: { type: String, defult: '' },
+    subTitleStyle: { type: String, defult: '' },
+    subTitleURL: { type: String, defult: '' },
+    rightStyle: { type: String, defult: '' },
+    countTitle: { type: String, defult: '' },
+    countStyle: { type: String, defult: '' },
+    iconType: { type: String, defult: '' },
+    iconUrl: { type: String, defult: '' },
+  },
+  couputed: {},
+  watch: {},
+  methods: {},
+  created() { },
 }
 </script>
-<style scoped></style>
+<style scoped>
+.cls-1 {
+    fill: rgb(58, 175, 226);
+    height: 8px;
+    width: 15px;
+}
+</style>

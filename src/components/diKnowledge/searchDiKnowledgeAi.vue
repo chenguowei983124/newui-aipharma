@@ -953,7 +953,7 @@ export default {
             if (
               Object.hasOwnProperty.call(response.data.qas, key)
             ) {
-              console.log('element', key)
+              //   console.log('element', key)
               this.openDetailDisp(key)
             }
           }
@@ -983,16 +983,12 @@ export default {
       let result = this.$serve.getOwn({ id: this.$route.params.id })
     },
     getSelectPage(value) {
-      console.log('getSelectPage', value)
       this.selectPage = value
     },
     sendMsgToParent: function (data) {
       this.$emit('listenToChildEvent', data)
     },
     openDetailDisp(index, count) {
-      console.log('count', count)
-      console.log('AAAthis.isDetailDisp[index]', index)
-      console.log('AAAindex', index)
       // 1件のみの場合
       if (count == 1) {
         this.isDetailDisp[index] = index
@@ -1010,14 +1006,11 @@ export default {
         this.isDetailsDisp[index] == index ? [] : index
     },
     clickCallback() {
-      console.log(this.organizationCountSortValue)
     },
     setOrganizationDateSortValue(value) {
-      console.log('setOrganizationDateSortValue', value)
       this.organizationDateSortValue = value
     },
     setOrganizationCountSortValue(value) {
-      console.log('setOrganizationCountSortValue', value)
       this.organizationCountSortValue = value
     },
     openGoodMessageBox(index) {
@@ -1033,7 +1026,6 @@ export default {
       )
     },
     getRoeId(id) {
-      console.log(id)
     },
     ActicleDetail(index) {
       this.activeIndex = this.activeIndex == index ? -1 : index
