@@ -19,56 +19,7 @@ export default {
             return state.bulletinBoardInfo
         },
         topScientifiSocietyInfo(state) {
-            const scientifiSocietyInfo = {
-                details: [
-                    {
-                        dateFrom: '2021.01.01',
-                        dateTo: '2021.12.30',
-                        title: '一般社団法人妊娠と薬情報研究会。',
-                        urlTitle: 'e-ラーニングBASIC',
-                        url: 'https://medical-tribune.co.jp/rensai/2021/0729537412/',
-                    },
-                    {
-                        dateFrom: '2021.01.01',
-                        dateTo: '',
-                        title: '福井県病院薬剤師会。',
-                        urlTitle:
-                            '血液腫瘍における感染症対策について考える ～福井県病院薬剤師会共催～',
-                        url: 'https://www.jstage.jst.go.jp/article/rinketsu/27/11/27_11_2085/_article/-char/ja/',
-                    },
-                    {
-                        dateFrom: '2021.01.01',
-                        dateTo: '2021.12.30',
-                        title: '日本製薬医学会',
-                        urlTitle:
-                            '【ハイブリット開催】第12回日本製薬医学会年次大会',
-                        url: 'https://medical-tribune.co.jp/rensai/2021/0729537412/',
-                    },
-                ],
-                imageLists: [
-                    {
-                        imageUrl:
-                            'https://www.kabanoki.net/wp-content/uploads/2020/03/2n-6.png',
-                        linkUrl: 'https://www.pmda.go.jp/index.html',
-                    },
-                    {
-                        imageUrl:
-                            'https://www.kabanoki.net/wp-content/uploads/2020/03/2n-6.png',
-                        linkUrl: 'https://www.pmda.go.jp/index.html',
-                    },
-                    {
-                        imageUrl:
-                            'https://www.kabanoki.net/wp-content/uploads/2020/03/2n-6.png',
-                        linkUrl: 'https://www.pmda.go.jp/index.html',
-                    },
-                    {
-                        imageUrl:
-                            'https://www.kabanoki.net/wp-content/uploads/2020/03/2n-6.png',
-                        linkUrl: 'https://www.pmda.go.jp/index.html',
-                    },
-                ],
-            }
-            return scientifiSocietyInfo
+            return state.scientifiSocietyInfo
         },
         topPMDAInfo(state) {
             return state.pmdaInfo
@@ -124,6 +75,7 @@ export default {
         },
         async getScientifiSocietyInfo({ rootState, commit }) {
             const info = await serve.getTopScientifiSociety()
+            console.log('getScientifiSocietyInfo', info)
             commit('setTopScientifisocietyInfo', info)
         },
         async getTopPMDA({ rootState, commit }) {

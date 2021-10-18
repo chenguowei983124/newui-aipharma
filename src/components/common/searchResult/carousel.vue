@@ -3,7 +3,8 @@
         class="
             flex
             justify-between
-            cs:bg-cardTitlePmad cs:mx-5
+            cs:bg-cardTitlePmad
+            cs:mx-5
             my-5
             h-48
             cs:h-21
@@ -118,97 +119,97 @@ import iconLeft from '../svgImage/iconLeft.vue'
 import iconRight from '../svgImage/iconRight.vue'
 
 export default {
-    data() {
-        return {
-            parallaxSwiperWidth: 0,
-            images: [],
+  data() {
+    return {
+      parallaxSwiperWidth: 0,
+      images: [],
+    }
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+    iconLeft,
+    iconRight,
+  },
+  setup() {
+    const swiperOption = reactive({
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+      loop: true,
+      speed: 1000,
+      pagination: {
+        clickable: true,
+      },
+      slidesPerView: 2,
+      spaceBetween: 5,
+    })
+    const onResize = (handler) => {
+      const IMG_WIDTH = 234
+      if (handler.isHorizontal()) {
+        swiperOption.slidesPerView = (
+          handler.el.children[1].offsetWidth /
+          (IMG_WIDTH + swiperOption.spaceBetween)
+        ).toFixed(2)
+      } else {
+        const sp = 3
+        if (swiperOption.slidesPerView != sp) {
+          swiperOption.slidesPerView = sp
         }
+      }
+    }
+    return {
+      swiperOption,
+      onResize,
+    }
+  },
+  methods: {
+    sleep(msec) {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve()
+        }, msec)
+        console.log('request API for images ')
+      })
     },
-    components: {
-        Swiper,
-        SwiperSlide,
-        iconLeft,
-        iconRight,
-    },
-    setup() {
-        const swiperOption = reactive({
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-            },
-            loop: true,
-            speed: 1000,
-            pagination: {
-                clickable: true,
-            },
-            slidesPerView: 2,
-            spaceBetween: 5,
-        })
-        const onResize = (handler) => {
-            const IMG_WIDTH = 234
-            if (handler.isHorizontal()) {
-                swiperOption.slidesPerView = (
-                    handler.el.children[1].offsetWidth /
-                    (IMG_WIDTH + swiperOption.spaceBetween)
-                ).toFixed(2)
-            } else {
-                const sp = 3
-                if (swiperOption.slidesPerView != sp) {
-                    swiperOption.slidesPerView = sp
-                }
-            }
-        }
-        return {
-            swiperOption,
-            onResize,
-        }
-    },
-    methods: {
-        sleep(msec) {
-            return new Promise(function (resolve) {
-                setTimeout(function () {
-                    resolve()
-                }, msec)
-                console.log('request API for images ')
-            })
+    loadImages() {
+      //   console.log("this.$store.getters.topScientifiSocietyInfo", this.$store.getters.topScientifiSocietyInfo.data.imageLists[0])
+      this.images = [
+        {
+          id: 1,
+          src: this.$store.getters.topScientifiSocietyInfo.data
+            .imageLists[0].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.data
+            .imageLists[0].imageUrl,
         },
-        loadImages() {
-            console.log(this.$store.getters.topScientifiSocietyInfo)
-            this.images = [
-                {
-                    id: 1,
-                    src: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[0].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[0].imageUrl,
-                },
-                {
-                    id: 2,
-                    src: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[1].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[1].imageUrl,
-                },
-                {
-                    id: 3,
-                    src: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[2].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[2].imageUrl,
-                },
-                {
-                    id: 4,
-                    src: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[3].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo
-                        .imageLists[3].imageUrl,
-                },
-            ]
+        {
+          id: 2,
+          src: this.$store.getters.topScientifiSocietyInfo.data
+            .imageLists[1].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.data
+            .imageLists[1].imageUrl,
         },
+        {
+          id: 3,
+          src: this.$store.getters.topScientifiSocietyInfo.data
+            .imageLists[2].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.data
+            .imageLists[2].imageUrl,
+        },
+        {
+          id: 4,
+          src: this.$store.getters.topScientifiSocietyInfo.data
+            .imageLists[3].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.data
+            .imageLists[3].imageUrl,
+        },
+      ]
     },
-    created() {
-        this.loadImages()
-    },
+  },
+  created() {
+    this.loadImages()
+  },
 }
 </script>
 

@@ -69,7 +69,7 @@
             subTitleURL="/"
             ><result-detail-row
                 class="searchResult_detail_gray"
-                :sites="$store.getters.topScientifiSocietyInfo.details"
+                :sites="$store.getters.topScientifiSocietyInfo.data.details"
                 proDetailStyle="style2"
                 midDetailStyle="style2"
                 bakDetailStyle="style2"
@@ -152,21 +152,21 @@ import resultDetailRow from '../common/searchResult/resultDetailRow.vue'
 import carousel from '../common/searchResult/carousel.vue'
 
 export default {
-    components: {
-        resutTag,
-        resultDetailRow,
-        carousel,
-    },
-    props: {},
-    couputed: {},
-    watch: {},
-    mounted() {
-        this.$store.dispatch('getTopNotice')
-        this.$store.dispatch('getTopBulletinBoardInfo')
-        this.$store.dispatch('getScientifiSocietyInfo')
-        this.$store.dispatch('getTopPMDA')
-        this.$store.dispatch('getCommonInfo')
-    },
+  components: {
+    resutTag,
+    resultDetailRow,
+    carousel,
+  },
+  props: {},
+  couputed: {},
+  watch: {},
+  mounted() {
+    this.$store.dispatch('getTopNotice')
+    this.$store.dispatch('getTopBulletinBoardInfo')
+    this.$store.dispatch('getScientifiSocietyInfo')
+    this.$store.dispatch('getTopPMDA')
+    this.$store.dispatch('getCommonInfo')
+  },
 }
 </script>
 <style scoped></style>
