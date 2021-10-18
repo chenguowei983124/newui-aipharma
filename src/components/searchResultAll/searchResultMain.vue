@@ -90,17 +90,18 @@
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="掲示板"
                 titleStyle="bulletinBoardInfoTitle"
-                titleURL="\"
+                titleURL="\searchBulletinBoard"
                 rightStyle="count"
                 :countTitle="
                     '該当：' +
-                    $store.getters.getSearchAllBulletinBoardInfo.count +
+                    $store.getters.getSearchAllBulletinBoardInfo.allCount +
                     '件'
                 "
                 countStyle="searchResultAllCountLable"
             >
                 <result-detail-row
                     class="searchResult_detail_blue"
+                    routerPath="searchBulletinBoard"
                     :sites="
                         $store.getters.getSearchAllBulletinBoardInfo.details
                     "
@@ -151,6 +152,8 @@ export default {
 
             this.$store.dispatch('searchALLLDiKnowledgeInfo')
             this.$store.dispatch('searchALLLOrganizationInfo')
+            this.$store.dispatch('searchALLLPreAvoidInfo')
+            this.$store.dispatch('searchALLBulletinBoardInfo')
         },
     },
     watch: {
@@ -170,6 +173,7 @@ export default {
             this.$store.dispatch('searchALLLDiKnowledgeInfo')
             this.$store.dispatch('searchALLLOrganizationInfo')
             this.$store.dispatch('searchALLLPreAvoidInfo')
+            this.$store.dispatch('searchALLBulletinBoardInfo')
         },
     },
     mounted() {

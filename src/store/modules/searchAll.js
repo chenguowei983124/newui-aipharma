@@ -7,7 +7,7 @@ export default {
         searchAllDiKnowledgeInfo: {},
         searchAllOrganizationDidDocument: { allCount: '' },
         searchAllPreAvoid: { allCount: '' },
-        searchAllbulletinBoardInfo: {},
+        searchAllbulletinBoardInfo: { allCount: '' },
     }),
 
     getters: {
@@ -25,51 +25,7 @@ export default {
         },
         // 掲示板の検索結果取得
         getSearchAllBulletinBoardInfo(state) {
-            return (state.searchAllbulletinBoardInfo = {
-                count: '456',
-                details: [
-                    {
-                        group: 'ownFacility',
-                        title: '痛み止めとして処方される痛み止めとして処方される痛み止めとして処方される',
-                        states: 'new',
-                        date: '2021.01.01',
-                        viewCount: '12345',
-                        linkUrl: '',
-                    },
-                    {
-                        group: 'otherFacility',
-                        title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯',
-                        states: 'new',
-                        date: '2021.01.01',
-                        viewCount: '12345',
-                        linkUrl: '',
-                    },
-                    {
-                        group: 'otherFacility',
-                        title: 'ロキソニンテープ 50mg の用途ロキソニンテープの用途◯◯◯◯◯◯',
-                        states: 'new',
-                        date: '2021.01.01',
-                        viewCount: '12345',
-                        linkUrl: '',
-                    },
-                    {
-                        group: 'group',
-                        title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯',
-                        states: 'update',
-                        date: '2021.01.01',
-                        viewCount: '12345',
-                        linkUrl: '',
-                    },
-                    {
-                        group: 'group',
-                        title: 'ロキソニンの用途については◯◯◯◯◯◯◯◯◯◯◯◯◯◯',
-                        states: 'update',
-                        date: '2021.01.01',
-                        viewCount: '12345',
-                        linkUrl: '',
-                    },
-                ],
-            })
+            return state.searchAllbulletinBoardInfo
         },
         searchAllGoogle(state) {
             const google = [
@@ -109,6 +65,9 @@ export default {
         },
         searchAllPreAvoidInfo(state, info) {
             state.searchAllPreAvoid = info
+        },
+        searchALLBulletinBoardInfo(state, info) {
+            state.searchAllbulletinBoardInfo = info
         },
         basic(state, payload) {
             state[payload.key] = payload.value
@@ -163,6 +122,20 @@ export default {
                 .then((response) => {
                     // 検索結果格納
                     commit('searchAllPreAvoidInfo', response.data)
+                })
+        },
+        // ========================================
+        // 掲示板情報取得API実行
+        // ========================================
+        async searchALLBulletinBoardInfo({ rootState, state, commit }) {
+            let params = {
+                searchKey: state.searchKey,
+            }
+            const info = await serve
+                .getALLBulletinBoard_Info(params)
+                .then((response) => {
+                    // 検索結果格納
+                    commit('searchALLBulletinBoardInfo', response.data)
                 })
         },
     },

@@ -97,6 +97,16 @@ const serve = {
         return data
     },
     //===========================
+    // 一括検索結果画面　掲示板情報取得
+    //===========================
+    async getALLBulletinBoard_Info() {
+        const data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
+            method: 'get',
+        })
+
+        return data
+    },
+    //===========================
     // 一括検索結果画面　一括検索結果画面のGoogle情報取得
     //===========================
     async getALLGoogle_Info() {
