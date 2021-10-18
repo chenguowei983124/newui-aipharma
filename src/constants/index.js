@@ -105,7 +105,7 @@ const multiselectCss = {
     containerDisabled: 'cursor-default bg-gray-100',
     containerOpen: 'rounded-b-none',
     containerOpenTop: 'rounded-t-none',
-    containerActive: 'ring ring-green-500 ring-opacity-30',
+    containerActive: '',
     singleLabel:
         'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
     multipleLabel:
