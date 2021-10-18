@@ -76,6 +76,9 @@ export default {
         async getScientifiSocietyInfo({ rootState, commit }) {
             const info = await serve.getTopScientifiSociety()
             console.log('getScientifiSocietyInfo', info)
+            commit('setTopScientifisocietyInfo', info.data)
+        },
+        setTopScientifiSociety({ rootState, commit }, info) {
             commit('setTopScientifisocietyInfo', info)
         },
         async getTopPMDA({ rootState, commit }) {
