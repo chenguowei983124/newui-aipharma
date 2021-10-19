@@ -71,12 +71,10 @@ export default {
         },
         async getTopBulletinBoardInfo({ rootState, commit }) {
             const info = await serve.getTopBulletinBoard()
-            console.log('setTopBulletinboardinfo', info)
             commit('setTopBulletinboardinfo', info.data)
         },
         async getScientifiSocietyInfo({ rootState, commit }) {
             const info = await serve.getTopScientifiSociety()
-            console.log('getScientifiSocietyInfo', info)
             commit('setTopScientifisocietyInfo', info.data)
         },
         setTopScientifiSociety({ rootState, commit }, info) {

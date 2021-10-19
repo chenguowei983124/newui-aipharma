@@ -114,11 +114,9 @@ export default {
         } else if (props.typeKB == 'notLooked') {
           // 17：未
           style.push('searchResult_lable_notLooked')
-        } else if (props.typeKB == 'Looked') {
-          // 17：未
-          style.push(
-            'hidden md:block invisible searchResult_lable_notLooked'
-          )
+        } else if (props.typeKB == 'looked') {
+          // 17：未 
+          style.push('md:notoSansJpAndTenMedium md:ring-1 md:ring-notlooked md:w-4 md:h-4 md:invisible')
         } else if (props.typeKB == 'eventType') {
           // 6:採 用
           style.push('searchResult_lable_eventType')
@@ -249,7 +247,7 @@ export default {
         // 17：未
         return '未'
       }
-      if (props.typeKB == 'Looked') {
+      if (props.typeKB == 'looked') {
         // 17：未
         return ' '
       }

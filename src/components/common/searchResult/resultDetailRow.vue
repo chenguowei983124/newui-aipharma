@@ -313,7 +313,7 @@ export default {
     },
     getLookedTitle(lookedKB, midStyle) {
       if (lookedKB != undefined) {
-        if (lookedKB == "Looked") {
+        if (lookedKB == "looked") {
           return "truncate underline md:whitespace-pre text-dropdownListItem"
         } else {
           return "truncate underline md:whitespace-pre"

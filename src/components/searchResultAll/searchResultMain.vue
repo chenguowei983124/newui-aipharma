@@ -111,7 +111,20 @@
                 >
                 </result-detail-row>
             </resut-tag>
-            <google-item></google-item>
+
+            <resut-tag
+                headerStyle="titleOnlyUnderlineBgColorGray"
+                title="Google"
+                titleStyle="pdmaInfoTitle"
+                rightStyle="icon"
+                iconUrl="https://www.google.co.jp/"
+            >
+                <result-external-linkdetail-row
+                    :sites="$store.getters.getSearchAllGoogleInfo.details"
+                ></result-external-linkdetail-row>
+            </resut-tag>
+
+            <!-- <google-item></google-item> -->
             <pharmaceuticals-item></pharmaceuticals-item>
             <jstage-item></jstage-item>
         </div>
@@ -121,64 +134,68 @@
 <script>
 import resutTag from '../common/searchResult/resultTag.vue'
 import resultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
+import resultExternalLinkdetailRow from '../common/searchResult/resultExternalLinkdetailRow.vue'
 import carousel from '../common/searchResult/carousel.vue'
 import googleItem from '../common/searchResult/googleItem.vue'
 import pharmaceuticalsItem from '../common/searchResult/pharmaceuticalsItem.vue'
 import jstageItem from '../common/searchResult/jstageItem.vue'
 export default {
-    components: {
-        resutTag,
-        resultDetailRow,
-        carousel,
-        googleItem,
-        pharmaceuticalsItem,
-        jstageItem,
-    },
-    props: {},
-    data() {
-        return {}
-    },
-    couputed: {},
-    methods: {
-        async getDispData() {
-            if (this.$route.query.searchKey != undefined) {
-                this.$store.dispatch(
-                    'saveSearchValue',
-                    this.$route.query.searchKey
-                )
-            } else {
-                this.$store.dispatch('saveSearchValue', '')
-            }
+  components: {
+    resutTag,
+    resultDetailRow,
+    resultExternalLinkdetailRow,
+    carousel,
+    googleItem,
+    pharmaceuticalsItem,
+    jstageItem,
+  },
+  props: {},
+  data() {
+    return {}
+  },
+  couputed: {},
+  methods: {
+    async getDispData() {
+      if (this.$route.query.searchKey != undefined) {
+        this.$store.dispatch(
+          'saveSearchValue',
+          this.$route.query.searchKey
+        )
+      } else {
+        this.$store.dispatch('saveSearchValue', '')
+      }
 
-            this.$store.dispatch('searchALLLDiKnowledgeInfo')
-            this.$store.dispatch('searchALLLOrganizationInfo')
-            this.$store.dispatch('searchALLLPreAvoidInfo')
-            this.$store.dispatch('searchALLBulletinBoardInfo')
-        },
+      this.$store.dispatch('searchALLLDiKnowledgeInfo')
+      this.$store.dispatch('searchALLLOrganizationInfo')
+      this.$store.dispatch('searchALLLPreAvoidInfo')
+      this.$store.dispatch('searchALLBulletinBoardInfo')
+      this.$store.dispatch('searchGoogleInfo')
     },
-    watch: {
-        $route: function () {
-            if (this.$route.path != '/searchResultAll') {
-                return
-            }
-            if (JSON.stringify(this.$route.query.searchKey) == '{}') {
-                this.$store.dispatch('saveSearchValue', '')
-            }
-            if (JSON.stringify(this.$route.query) !== '{}') {
-                this.$store.dispatch(
-                    'saveSearchValue',
-                    this.$route.query.searchKey
-                )
-            }
-            this.$store.dispatch('searchALLLDiKnowledgeInfo')
-            this.$store.dispatch('searchALLLOrganizationInfo')
-            this.$store.dispatch('searchALLLPreAvoidInfo')
-            this.$store.dispatch('searchALLBulletinBoardInfo')
-        },
+  },
+  watch: {
+    $route: function () {
+      if (this.$route.path != '/searchResultAll') {
+        return
+      }
+      if (JSON.stringify(this.$route.query.searchKey) == '{}') {
+        this.$store.dispatch('saveSearchValue', '')
+      }
+      if (JSON.stringify(this.$route.query) !== '{}') {
+        this.$store.dispatch(
+          'saveSearchValue',
+          this.$route.query.searchKey
+        )
+      }
+      this.$store.dispatch('searchALLLDiKnowledgeInfo')
+      this.$store.dispatch('searchALLLOrganizationInfo')
+      this.$store.dispatch('searchALLLPreAvoidInfo')
+      this.$store.dispatch('searchALLBulletinBoardInfo')
+      this.$store.dispatch('searchGoogleInfo')
     },
-    mounted() {
-        this.getDispData()
-    },
+  },
+  mounted() {
+    this.getDispData()
+  },
 }
 </script>
 <style scoped></style>

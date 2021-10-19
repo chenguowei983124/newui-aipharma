@@ -110,7 +110,7 @@ const serve = {
     // 一括検索結果画面　一括検索結果画面のGoogle情報取得
     //===========================
     async getALLGoogle_Info() {
-        const data = await axios('/api/qa/search_google', {
+        const data = await axios('/api/external/search_google', {
             method: 'get',
         })
 

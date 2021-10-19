@@ -1,68 +1,68 @@
 <template>
-    <div class="relative">
-        <div class="rounded-md border-gray-400">
-            <div class="rounded-t-lg bg-cardTitlePmad flex justify-between p-2">
-                <a class="searchResultCardHeaderStyleE ml-2.5">PubMed</a>
-                <a
-                    class="text-white"
-                    href="https://www.google.co.jp/"
-                    target="_blank"
-                    ><svg
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        ></path></svg
-                ></a>
-            </div>
-            <div
-                class="
-                    bg-white
-                    border-2 border-gray-400
-                    rounded-b-lg
-                    space-y-2
-                    p-4
-                    w-full
-                "
-            >
-                <ul class="w-full" v-for="item in sites" :key="item">
-                    <li class="flex space-x-2 w-full items-center">
-                        <div>
-                            <div>
-                                <a
-                                    class="
-                                        font-NotoSansJp font-bold
-                                        text-base
-                                        underline
-                                        text-googleTitle
-                                    "
-                                >
-                                    {{ item.link }}
-                                </a>
-                            </div>
-                            <div>
-                                <a class="font-NotoSansJp text-base">
-                                    {{ item.title }}
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    <!-- <div class="relative"> -->
+    <div class="rounded-md border-gray-400">
+        <div class="rounded-t-lg bg-cardTitlePmad flex justify-between p-2">
+            <a class="searchResultCardHeaderStyleE ml-2.5">PubMed</a>
+            <a
+                class="text-white"
+                href="https://www.google.co.jp/"
+                target="_blank"
+                ><svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    ></path></svg
+            ></a>
         </div>
         <div
+            class="
+                bg-white
+                border-2 border-gray-400
+                rounded-b-lg
+                space-y-2
+                p-4
+                w-full
+            "
+        >
+            <ul class="w-full" v-for="item in sites" :key="item">
+                <li class="flex space-x-2 w-full items-center">
+                    <div>
+                        <div>
+                            <a
+                                class="
+                                    font-NotoSansJp font-bold
+                                    text-base
+                                    underline
+                                    text-googleTitle
+                                "
+                            >
+                                {{ item.link }}
+                            </a>
+                        </div>
+                        <div>
+                            <a class="font-NotoSansJp text-base">
+                                {{ item.title }}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <div
             :class="{
                 'absolute rounded-md top-0 left-0 right-0 bottom-0 bg-lock z-0': true,
             }"
         ></div>
-    </div>
+    </div> -->
 </template>
 
 <script>

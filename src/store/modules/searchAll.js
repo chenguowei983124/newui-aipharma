@@ -8,6 +8,7 @@ export default {
         searchAllOrganizationDidDocument: { allCount: '' },
         searchAllPreAvoid: { allCount: '' },
         searchAllbulletinBoardInfo: { allCount: '' },
+        searchAllGoogleInfo: {},
     }),
 
     getters: {
@@ -27,29 +28,9 @@ export default {
         getSearchAllBulletinBoardInfo(state) {
             return state.searchAllbulletinBoardInfo
         },
-        searchAllGoogle(state) {
-            const google = [
-                {
-                    urlTitle: 'ロキソニン S（詳細）｜第一三共ヘルスケア',
-                    overview:
-                        '※プロドラッグ製剤とは、成分が体内で吸収されてから活性型に変化し、効果を発揮する仕組みの製剤です。ご利用のポイント．こんな時に。頭痛や生理痛など。突然くるつらい痛みに…',
-                    url: '',
-                },
-                {
-                    urlTitle:
-                        'ロキソニン錠 60mg の基本情報（薬効分類・副作用・添付文書',
-                    overview:
-                        'ロキソニン錠 60mg（一般名：ロキソプロフェンナトリウム水和物錠）の薬効分類・副作用・添付文書・薬価などを掲載しています。「処方薬辞典」は日経メディカルが運営する医療・医薬関係者向け医薬品検索データベースです。',
-                    url: '',
-                },
-                {
-                    urlTitle: 'ロキソプロフェン（内用）：ロキソニン',
-                    overview:
-                        'ロキソニンとは？ロキソプロフェンの効能、副作用等を説明、ジェネリックや薬価も',
-                    url: '',
-                },
-            ]
-            return google
+        // Googleの検索結果取得
+        getSearchAllGoogleInfo(state) {
+            return state.searchAllGoogleInfo
         },
         getSearchValue(state) {
             return state.searchKey
@@ -68,6 +49,10 @@ export default {
         },
         searchALLBulletinBoardInfo(state, info) {
             state.searchAllbulletinBoardInfo = info
+        },
+        setALLGoogleInfo(state, info) {
+            console.log("info", info)
+            state.searchAllGoogleInfo = info
         },
         basic(state, payload) {
             state[payload.key] = payload.value
@@ -106,7 +91,6 @@ export default {
                 .getALLOrganizationInfo(params)
                 .then((response) => {
                     // 検索結果格納
-                    console.log('own', response.data)
                     commit('searchAllOrganizationInfo', response.data)
                 })
         },
@@ -136,6 +120,21 @@ export default {
                 .then((response) => {
                     // 検索結果格納
                     commit('searchALLBulletinBoardInfo', response.data)
+                })
+        },
+        // ========================================
+        // Google情報取得API実行
+        // ========================================
+        async searchGoogleInfo({ rootState, state, commit }) {
+            let params = {
+                searchKey: state.searchKey,
+            }
+            const info = await serve
+                .getALLGoogle_Info(params)
+                .then((response) => {
+                    console.log('getALLGoogle_Info', response.data)
+                    // 検索結果格納
+                    commit('setALLGoogleInfo', response.data)
                 })
         },
     },

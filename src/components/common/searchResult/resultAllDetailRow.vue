@@ -10,7 +10,6 @@
                 md:flex
                 items-center
                 md:border-white
-                bg-red-400
             "
             :class="getLineStyle(index, lineStyle)"
             v-for="(row, index) in sites"
@@ -155,7 +154,6 @@
                             itemStyle="searchResult_lable_certainty_value"
                         ></result-detail-row-item>
                     </div>
-
                     <!-- 状態 -->
                     <result-detail-row-item
                         itemType="1"
@@ -174,7 +172,6 @@
                             v-if="row.date != undefined && dispItem == 'date'"
                         ></result-detail-row-item>
                     </div>
-
                     <!-- view数 -->
                     <result-detail-row-item
                         itemType="4"
@@ -228,7 +225,7 @@ export default {
   methods: {
     getLookedTitle(lookedKB, midStyle) {
       if (lookedKB != undefined) {
-        if (lookedKB == 'Looked') {
+        if (lookedKB == 'looked') {
           return 'truncate underline md:whitespace-pre text-dropdownListItem'
         } else {
           return 'truncate underline md:whitespace-pre'
