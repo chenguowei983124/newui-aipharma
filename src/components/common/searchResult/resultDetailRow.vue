@@ -346,7 +346,7 @@ export default {
         return null
       }
     }, getLineStyle(index, style, length) {
-      console.log("length", length)
+      // console.log("length", length)
       const line = []
       if (length > 1 && style == "blueline") {
         line.push("border-b-2 border-blueline")
