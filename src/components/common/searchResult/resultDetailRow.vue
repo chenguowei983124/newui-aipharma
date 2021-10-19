@@ -12,15 +12,16 @@
                 items-baseline
                 md:border-white
                 md:space-x-3
+                mx-1
             "
-            :class="getLineStyle(index, lineStyle)"
+            :class="getLineStyle(index, lineStyle, sites.length)"
             v-for="(row, index) in sites"
             :key="row"
         >
             <!-- sp 最初の行目 -->
             <div>
                 <div
-                    class="ml-2.5 md:ml-5 md:h-4 md:flex items-center"
+                    class="ml-2 md:ml-4 md:h-4 md:flex items-center"
                     :class="proAreaStyle"
                     v-if="objectCheck(row.type) == false"
                 >
@@ -344,12 +345,17 @@ export default {
       } else {
         return null
       }
-    }, getLineStyle(index, style) {
+    }, getLineStyle(index, style, length) {
+      console.log("length", length)
       const line = []
-      if (style == "blueline") {
+      if (length > 1 && style == "blueline") {
         line.push("border-b-2 border-blueline")
-      } else {
+      }
+      if (length > 1 && style != "blueline") {
         line.push("border-b-2 border-grayline")
+      }
+      if (length == "1") {
+        line.push("")
       }
 
       if (index == 4) {

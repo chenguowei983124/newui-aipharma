@@ -68,7 +68,7 @@ export default {
   },
   setup(props) {
     const resultHeaderStyle = computed(() => {
-      console.log('setup')
+      // console.log('setup')
       const style = []
       //   青背景
       if (props.headerStyle == 'titleExternalLinkColorGray') {
