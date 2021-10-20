@@ -40,8 +40,11 @@ module.exports = {
         '7.5': '1.875rem',
         // 34px
         '8.5': '2.125rem',
+
         // 38px
         '9.5': '2.375rem',
+        // 45px
+        '11.25': '2.8125rem',
         // 50px
         '12.5': '3.125rem',
         // 52px
@@ -76,6 +79,8 @@ module.exports = {
         '19': '4.75rem',
         // 77px
         '19.25': '4.8125rem',
+        // 78px
+        '19.5': '4.875rem',
         // 84px
         '21': '5.25rem',
         // 90px
@@ -128,6 +133,8 @@ module.exports = {
         '82.5': '20.625rem',
         // 345px
         '86.25': '21.5625rem',
+        // 350px
+        '87.5': '21.875rem',
         // 355px
         '88.75': '22.1875rem',
         // 375px
@@ -154,6 +161,7 @@ module.exports = {
       },
       backgroundColor: theme => ({
         ...theme('colors'),
+        'blueline': '#65bbe5',
         'downloadIcon': '#8CC85A',
         'organization': '#326EB5',
         'whole': '#8cc85a',
@@ -285,6 +293,8 @@ module.exports = {
         // 組織内DI・症例 登録ボタン、マイデータ 帯・境界線
         'personOrganizationButton': '#f09600',
         'downloadIcon': '#8CC85A',
+        'bluelineB': '#65B2D9',
+
       }),
       screens: {
         'mid': '980px',

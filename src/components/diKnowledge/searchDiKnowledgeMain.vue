@@ -982,6 +982,7 @@ export default {
     }
   },
   mounted() {
+    console.log("this.$route.query", this.$route.query)
     if (JSON.stringify(this.$route.query) == '{}') {
       this.initStore()
       this.$store.dispatch('setdIKnowledgeShareSearchAIInfo', {})
@@ -994,6 +995,9 @@ export default {
   },
   watch: {
     $route: function () {
+      if (this.$route.path != '/searchDiKnowledge') {
+        return
+      }
       if (JSON.stringify(this.$route.query) == '{}') {
         this.initStore()
         this.$store.dispatch('setdIKnowledgeShareSearchAIInfo', {})
