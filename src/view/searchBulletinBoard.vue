@@ -1,6 +1,6 @@
 <template>
     <div>
-        <my-all-header :form="$constant.formList.OWN"></my-all-header>
+        <my-all-header :form="$constant.formList.BBS"></my-all-header>
         <!-- 内容 -->
         <search-bulletin-board-layout></search-bulletin-board-layout>
         <home-bottom-template class="mt-20"></home-bottom-template>

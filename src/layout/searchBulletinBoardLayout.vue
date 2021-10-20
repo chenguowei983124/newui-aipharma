@@ -1,22 +1,56 @@
 <template>
     <!-- 検索枠 -->
-    <div class="flex">
+    <div id="searchBulletinBoardLayout" >
         <!-- pcの場合 -->
-        <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
+        <div id="search-bar" >
             <search-bar
                 ref="searchbar"
-                :form="$constant.formList.PVD"
-                @detailDisp="getDetailDisp"
-                @isDetailClick="getDetailClick"
-                @searchResult="getSearchResult"
+                :form="$constant.formList.BBS"
                 :searchValueInput="$store.getters.getSearchWord"
             ></search-bar>
+                <!-- @detailDisp="getDetailDisp"
+                @isDetailClick="getDetailClick"
+                @searchResult="getSearchResult" -->
         </div>
-
-        <div class="h-50 md:h-52.5"></div>
-    </div>
-    <div>
-        <div class="flex max-h-screen">
+        <div class="flex justify-between border-b-2 border-blue-200">
+            <div class="mx-auto my-5 text-googleTitle notoSansJpAndTwentyBold">
+                掲示板
+            </div>
+            <div class="flex mx-auto my-5">
+                <input
+                    type="button"
+                    class="
+                        w-15
+                        bg-red-600
+                        hover:opacity-50
+                        active:bg-bg-gray-200
+                        active:opacity-100
+                        rounded-md
+                        notoSansJpAndTwelveBold
+                        text-white
+                        border-b-2 border-gray-600
+                    "
+                    value="投　稿"
+                />
+                    <!-- @click="onClearItem(base.file, index)" -->
+                <input
+                    type="button"
+                    class="
+                        ml-2 w-18
+                        bg-blue-600
+                        hover:opacity-50
+                        active:bg-bg-gray-200
+                        active:opacity-100
+                        rounded-md
+                        notoSansJpAndTwelveBold
+                        text-white
+                        border-b-2 border-gray-600
+                    "
+                    value="下書き一覧"
+                />
+            </div>
+        </div>
+        <div id="BBS-Contents" class="flex">
             <a
                 class=""
                 :class="[dispFlg ? 'w-2/5' : 'flex-grow']"
@@ -34,7 +68,7 @@
 </template>
 
 <script>
-import bbsList from '../components/searchBBS/searchPreavoidsMain.vue'
+import bbsList from '../components/searchBBS/searchBulletinBoardMain.vue'
 import bbsTalking from '../components/searchBBS/searchBBSTalking.vue'
 import searchBar from '../components/common/search/searchBar.vue'
 export default {
@@ -49,7 +83,6 @@ export default {
     mounted() {},
     methods: {
         getClose(value) {
-            console.log(value)
             this.dispFlg = value
         },
     },

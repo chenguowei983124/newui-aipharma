@@ -79,6 +79,19 @@
                             :searchButtonClick="searchClick"
                         ></search-preavoids>
                     </div>
+
+                    <!-- 掲示板 -->
+                    <div
+                        :class="
+                            detailDisp ? 'block' : 'hidden group-hover:block'
+                        "
+                        v-if="checkId == 6 && form != $constant.formList.TOP"
+                    >
+                        <search-BBS-Title
+                            :searchButtonClick="searchClick"
+                            @clearSearchWordEvent="clearSearchWord"
+                        ></search-BBS-Title>
+                    </div>
                 </div>
                 <!-- 右青背景 -->
                 <div :class="searchBarProStyleClass"></div>
@@ -93,6 +106,7 @@ import searchSvg from '../../common/svgImage/searchSvg.vue'
 import searchDetail from './searchDetail.vue'
 import searchDiKnowledge from './searchDiKnowledge.vue'
 import searchPreavoids from './searchPreavoids.vue'
+import searchBBSTitle from './searchBBSTitle.vue'
 
 export default {
     components: {
@@ -101,6 +115,7 @@ export default {
         searchDetail,
         searchDiKnowledge,
         searchPreavoids,
+        searchBBSTitle,
     },
     props: {
         form: {
@@ -145,7 +160,7 @@ export default {
         } else if (this.$props.form == this.$constant.formList.PVD) {
             this.checkId = 3
         } else if (this.$props.form == this.$constant.formList.BBS) {
-            this.checkId = 3
+            this.checkId = 6
         }
     },
     destroyed() {
@@ -163,6 +178,8 @@ export default {
                 return 'fixed w-full lm:w-270'
             } else if (this.$props.form == this.$constant.formList.PVD) {
                 return 'fixed w-full lm:w-270'
+            } else if (this.$props.form == this.$constant.formList.BBS) {
+                return 'w-full lm:w-270'
             }
         },
         searchBarClass: function () {
@@ -175,6 +192,8 @@ export default {
             } else if (this.$props.form == this.$constant.formList.OWN) {
                 return 'flex'
             } else if (this.$props.form == this.$constant.formList.PVD) {
+                return 'flex'
+            } else if (this.$props.form == this.$constant.formList.BBS) {
                 return 'flex'
             }
         },
@@ -189,6 +208,8 @@ export default {
                 return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
             } else if (this.$props.form == this.$constant.formList.PVD) {
                 return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
+            } else if (this.$props.form == this.$constant.formList.BBS) {
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
             }
         },
         searchBarProStyleClass: function () {
@@ -201,6 +222,8 @@ export default {
             } else if (this.$props.form == this.$constant.formList.OWN) {
                 return 'hidden'
             } else if (this.$props.form == this.$constant.formList.PVD) {
+                return 'hidden'
+            } else if (this.$props.form == this.$constant.formList.BBS) {
                 return 'hidden'
             }
         },
@@ -215,6 +238,8 @@ export default {
                 return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch    '
             } else if (this.$props.form == this.$constant.formList.PVD) {
                 return ' flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    '
+            } else if (this.$props.form == this.$constant.formList.BBS) {
+                return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch    '
             }
         },
 
@@ -224,6 +249,8 @@ export default {
             } else if (this.$props.form == this.$constant.formList.ALL) {
                 return 'Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます'
             } else if (this.$props.form == this.$constant.formList.OWN) {
+                return 'キーワードを入力'
+            } else if (this.$props.form == this.$constant.formList.BBS) {
                 return 'キーワードを入力'
             }
         },
@@ -260,6 +287,13 @@ export default {
             } else if (this.$props.form == this.$constant.formList.PVD) {
                 return (
                     'hidden md:block  h-10 w-10/12  ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
+            } else if (this.$props.form == this.$constant.formList.BBS) {
+                return (
+                    'hidden md:block  h-10 w-10/12  rounded-r ' +
                     'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
                     'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
                     'focus:border-transparent '
@@ -302,6 +336,13 @@ export default {
                     'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
                     'focus:border-transparent mr-2.5'
                 )
+            } else if (this.$props.form == this.$constant.formList.BBS) {
+                return (
+                    'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent mr-2.5'
+                )
             }
         },
         sreachBarButtonClass: function () {
@@ -319,6 +360,9 @@ export default {
         },
     },
     methods: {
+        clearSearchWord(val) {
+            this.$store.dispatch('setSearchWord', val)
+        },
         input: function (e) {
             this.$store.dispatch('setSearchWord', e.target.value)
         },
@@ -518,6 +562,21 @@ export default {
             // 製薬企業情報
             else if (this.checkId == 5) {
                 this.$router.push('/searchOrganization')
+            }
+            // 掲示板
+            else if (this.checkId == 6) {
+                // console.log('searchBulletinBoard', this.$store.getters.getFilterBBS,this.$route)
+                let params = {}
+                if (!!this.searchValueInput) {
+                    params = {
+                        free_text: this.searchValueInput,
+                        timestamp: new Date().getTime(),
+                    }
+                }
+                this.$router.push({
+                    path: '/searchBulletinBoard',
+                    query: params,
+                })
             }
         },
         // DropDown 選択したアイテムＩＤ取得

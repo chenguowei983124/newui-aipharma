@@ -1,30 +1,21 @@
-import axios from './http'
-// import axios from "axios";
+// import axios from "./http";
+import axios from "axios";
 const serve = {
     //===========================
     // ログイン
     //===========================
     async postLogin(data) {
-        return await axios('/preavoid/postLogin', {
+        return await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/postLogin', {
             method: 'post',
-            data: data,
-        })
-    },
-    //===========================
-    // ログアウト
-    //===========================
-    async postLogout(data) {
-        return await axios('/preavoid/postLogout', {
-            method: 'post',
-            data: data,
+            data: data
         })
     },
     //===========================
     // TOP画面　お知らせ情報
     //===========================
     async getTopNoticel() {
-        const data = await axios('/preavoid/get_topmenu_Noticel_info', {
-            method: 'get',
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_Noticel_info', {
+            method: 'get'
         })
 
         return data
@@ -33,8 +24,8 @@ const serve = {
     // TOP画面　掲示板情報取得
     //===========================
     async getTopBulletinBoard() {
-        const data = await axios('/preavoid/get_topmenu_BulletinBoard_info', {
-            method: 'get',
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_BulletinBoard_info', {
+            method: 'get'
         })
 
         return data
@@ -43,12 +34,9 @@ const serve = {
     // TOP画面　学会情報取得
     //===========================
     async getTopScientifiSociety() {
-        const data = await axios(
-            '/preavoid/get_topmenu_scientifiSociety_info',
-            {
-                method: 'get',
-            }
-        )
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_scientifiSociety_info', {
+            method: 'get'
+        })
 
         return data
     },
@@ -56,8 +44,8 @@ const serve = {
     // TOP画面　PDMAリスト情報取得
     //===========================
     async getTopPMDA() {
-        const data = await axios('/preavoid/get_topmenu_PMDA_info', {
-            method: 'get',
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_PMDA_info', {
+            method: 'get'
         })
 
         return data
@@ -119,21 +107,21 @@ const serve = {
     //===========================
     // リクエストされたQAのview数をインクリメントする
     //===========================
-    async sendViewCount(data) {
-        return await axios('/api/qa/increment_view_count', {
+    async sendViewCount(data){
+        return await axios('http://mock-api.com/ZzRpqmne.mock/api/qa/increment_view_count', {
             method: 'post',
-            data: data,
+            data: data
         })
     },
     //===========================
     // 組織内DI記録検索結果取得（ID）
     //===========================
     async getOwn({ id }) {
-        const data = await axios('/preavoid/get_organization_search_info', {
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info', {
             method: 'get',
             params: {
-                id: id,
-            },
+                id: id
+            }
         })
 
         return data
@@ -142,27 +130,31 @@ const serve = {
     // 組織内DI記録検索結果取得（検索条件）
     //===========================
     async getOwnData(param) {
-        const data = await axios('/preavoid/get_organization_search_info', {
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info', {
             method: 'get',
-            params: param,
+            params: param
+
         })
 
         return data
     },
     async getOwndIKnowledgeShare(param) {
-        const data = await axios('/preavoid/get_DIKnowledgeShare_search_info', {
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_DIKnowledgeShare_search_info', {
             method: 'get',
-            params: param,
+            params: param
+
         })
 
         return data
     },
     async getTest() {
-        const data = await axios('/preavoid/get_topmenu_Noticel_info_test', {
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_Noticel_info_test', {
             method: 'get',
         })
 
         return data
     },
+
+
 }
 export default serve

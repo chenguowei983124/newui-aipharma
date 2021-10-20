@@ -162,6 +162,7 @@ export default {
         [{ id: '3', title: '症例（プレアボイド）', itemStyle: 'item' }],
         [{ id: '4', title: 'DI 辞書', itemStyle: 'item' }],
         [{ id: '5', title: '製薬企業情報', itemStyle: 'item' }],
+        [{ id: '6', title: '掲示板', itemStyle: 'item' }],
       ],
     }
   },

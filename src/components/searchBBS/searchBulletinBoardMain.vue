@@ -1,5 +1,8 @@
 <template>
     <div class="container mx-auto pt-12 h-191.25">
+        <div class="flex justify-end mb-2">
+            投稿順
+        </div>
         <mescroll-vue
             ref="mescroll"
             :down="mescrollDown"
@@ -7,17 +10,7 @@
             @init="mescrollInit"
         >
             <div class="relative overflow-hidden mb-8">
-                <!-- bg-gradient-to-r
-                        from-indigo-50
-                        to-indigo-100 -->
                 <div class="overflow-hidden">
-                    <!-- <div
-                        class="
-                            w-full
-                            bg-local bg-cover bg-center
-                            overflow-y-scroll
-                        "
-                    > -->
                     <div
                         class="h-20 border-2 bg-green-100"
                         v-for="(article, index) in articles"
@@ -33,7 +26,6 @@
                         >
                         </result-detail-row>
                     </div>
-                    <!-- </div> -->
                 </div>
             </div>
         </mescroll-vue>
@@ -80,6 +72,7 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next) {
+        console.log('beforeRouteEnter', to, from, next)
         // 如果没有配置顶部按钮或isBounce,则beforeRouteEnter不用写
         next((vm) => {
             // 滚动到原来的列表位置,恢复顶部按钮和isBounce的配置
@@ -87,18 +80,31 @@ export default {
         })
     },
     beforeRouteLeave(to, from, next) {
+        console.log('beforeRouteLeave', to, from, next)
         // 如果没有配置顶部按钮或isBounce,则beforeRouteLeave不用写
         // 记录列表滚动的位置,隐藏顶部按钮和isBounce的配置
         this.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave()
         next()
     },
-    watch: {},
+    watch: {
+        $route(to, from) {
+            // console.log('searchBulletinBoardMain watch',to, from)
+            if (to.path != '/searchBulletinBoard' || from.path != '/searchBulletinBoard') return
+            let parmas = to.query
+            Object.assign(parmas, this.$store.getters.getFilterBBS)
+            this.doSearch(parmas)
+        }
+    },
     methods: {
+        doSearch(params) {
+            console.log('doSearch',params)
+        },
         clickItem() {
             this.dispFlg = !this.dispFlg
         },
 
         mescrollInit(mescroll) {
+            console.log('mescrollInit',mescroll )
             this.mescroll = mescroll // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
         },
         upCallback(page, mescroll) {
@@ -136,18 +142,11 @@ export default {
             //         mescroll.endErr()
             //     })
         },
-        getDetail() {
-            this.$serve.getTest().then((response) => {
-                this.articles = response.data.details
-            })
-            console.log(this.articles)
-        },
-        // handleScrolledToBottem() {
-        //     console.log(this.articles)
-        // },
     },
-    mounted() {
-        // this.getDetail()
+    created() {
+        let parmas = this.$route.query
+        Object.assign(parmas, this.$store.getters.getFilterBBS)
+        this.doSearch(parmas)
     },
 }
 </script>

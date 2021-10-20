@@ -90,6 +90,8 @@ export default {
                 return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
             } else if (this.$props.form == this.$constant.formList.NDI) {
                 return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
+            } else if (this.$props.form == this.$constant.formList.BBS) {
+                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
             }
         },
     },

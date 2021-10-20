@@ -26,6 +26,7 @@ export default {
         checkLastEditer: true,
         checkFacilityName: true,
         checkNote: true,
+        filterBBS: {},
     }),
 
     getters: {
@@ -140,6 +141,9 @@ export default {
                 ],
             }
             return organizationSeartorenndoTab
+        },
+        getFilterBBS(state) {
+            return state.filterBBS
         },
     },
 
@@ -278,6 +282,10 @@ export default {
         // 検索対象　備考
         setCheckNote({ commit, state }, value) {
             commit('basic', { key: 'checkNote', value })
+        },
+        // タブ
+        setFilterBBS({ commit, state }, value) {
+            commit('basic', { key: 'filterBBS', value })
         },
     },
 }
