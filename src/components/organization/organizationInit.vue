@@ -10,10 +10,7 @@
             >
                 <result-detail-row
                     class="searchResult_detail_gray"
-                    :sites="
-                        $store.getters.getSearchAllOrganizationDidDocument
-                            .details
-                    "
+                    :sites="$store.getters.organizationNewQAInfo.details"
                     :sub1="['group']"
                     :sub2="['title']"
                     :sub3="['states', 'date', 'view']"
@@ -29,8 +26,7 @@
                 <result-detail-row
                     class="searchResult_detail_gray"
                     :sites="
-                        $store.getters.getSearchAllOrganizationDidDocument
-                            .details
+                        $store.getters.organizationLookcarefullyQAInfo.details
                     "
                     :sub1="['group']"
                     :sub2="['title']"
@@ -87,6 +83,10 @@ export default {
         sendMsgToParent: function (data) {
             this.$emit('listenToChildEvent', data)
         },
+    },
+    mounted() {
+        this.$store.dispatch('getOrganizationNewQAInfo')
+        this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
     },
 }
 </script>
