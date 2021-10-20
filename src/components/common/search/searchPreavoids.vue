@@ -6,29 +6,32 @@
                 :class="[isDetailClick ? 'block' : 'hidden']"
             >
                 <litepie-datepicker
-                    ref="datepicker"
+                    ref="datepickerFrom"
                     :asSingle="true"
                     i18n="ja"
                     v-model="dateValue"
                     :autoApply="false"
                     :formatter="{
-                        date: 'YYYY-MM-DD',
+                        date: 'YYYY.MM.DD',
                         month: 'MMM',
                     }"
+                    :leftLableDisp="true"
+                    leftLableTitle="期間（報告日）"
                 ></litepie-datepicker>
                 <div class="w-8 text-white text-center mt-1.5 font-black">
                     ―
                 </div>
                 <litepie-datepicker
-                    ref="datepicker"
+                    ref="datepickerTo"
                     :asSingle="true"
                     i18n="ja"
                     v-model="dateValue"
                     :autoApply="false"
                     :formatter="{
-                        date: 'YYYY-MM-DD',
+                        date: 'YYYY.MM.DD',
                         month: 'MMM',
                     }"
+                    :leftLableDisp="false"
                 ></litepie-datepicker>
                 <button></button>
                 <input
@@ -42,6 +45,7 @@
                         flex-none
                     "
                     type="button"
+                    @click="dateClear"
                     value="クリア"
                 />
             </div>
@@ -96,12 +100,15 @@
             <div class="flex space-x-2">
                 <button
                     class="
+                        rounded
                         border-b-2 border-gray-500
                         bg-personDataInfo
-                        text-black
+                        text-gray-700
                         notoSansJpAndSixteenBold
-                        w-28
-                        h-8
+                        w-43.75
+                        md:w-28
+                        h-9.5
+                        md:h-8
                     "
                     @click="clearClick"
                 >
@@ -109,19 +116,23 @@
                 </button>
                 <button
                     class="
+                        rounded
                         border-b-2 border-orange-600
                         bg-searchBunnon
                         text-white
                         notoSansJpAndSixteenBold
-                        w-28
-                        h-8
+                        w-43.75
+                        md:w-28
+                        h-9.5
+                        md:h-8
                         flex flex-row
                         justify-center
+                        items-center
                     "
                     @click="searchButtonClick"
                 >
-                    <div class="mt-1">検索</div>
-                    <search-svg class="mt-1"></search-svg>
+                    <div class="">検 索</div>
+                    <search-svg class="ml-1"></search-svg>
                 </button>
             </div>
             <div class="hidden md:block mid:block">
@@ -129,12 +140,13 @@
                     class="
                         flex
                         items-center
+                        rounded
                         border-2 border-white
                         text-white text-center
                         notoSansJpAndFourteenRegular
                         w-24
                         h-8
-                        pl-2.5
+                        pl-3
                         space-x-1
                         cursor-pointer
                     "
@@ -145,6 +157,7 @@
                         :class="[isDetailClick ? 'transform rotate-180' : '']"
                         fill="#ffffff"
                         stroke="#ffffff"
+                        class="h-3 w-3"
                     ></triangle-down-svg>
                 </div>
             </div>
@@ -208,6 +221,10 @@ export default {
     }
   },
   methods: {
+    dateClear: function () {
+      this.$refs.datepickerFrom.clearPicker()
+      this.$refs.datepickerTo.clearPicker()
+    },
     dateChanged: function ($event) {
       // console.log($event.target.value)
     },

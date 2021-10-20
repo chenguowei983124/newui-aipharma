@@ -154,6 +154,7 @@ module.exports = {
       },
       backgroundColor: theme => ({
         ...theme('colors'),
+        'downloadIcon': '#8CC85A',
         'organization': '#326EB5',
         'whole': '#8cc85a',
         'group': '#fa82a0',
@@ -204,6 +205,7 @@ module.exports = {
       }),
       textColor: theme => theme('colors'),
       textColor: {
+        'downloadIcon': '#88BF5A',
         'notlooked': '#f09600',
         'view': '#32a5dc',
         'notice': '#666666',
@@ -282,6 +284,7 @@ module.exports = {
         DEFAULT: theme('colors.gray.200', 'currentColor'),
         // 組織内DI・症例 登録ボタン、マイデータ 帯・境界線
         'personOrganizationButton': '#f09600',
+        'downloadIcon': '#8CC85A',
       }),
       screens: {
         'mid': '980px',

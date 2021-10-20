@@ -3,9 +3,9 @@
     <div class="flex">
         <!-- pcの場合 -->
         <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
+            <!-- @detailDisp="getDetailDisp" -->
             <search-bar
                 :form="$constant.formList.PVD"
-                @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
             ></search-bar>
         </div>
@@ -21,7 +21,9 @@
             <div
                 class="
                     text-googleTitle
-                    notoSansJpAndTwentyBold
+                    font-NotoSansJp
+                    text-xl
+                    md:text-2xl
                     font-black
                     flex-none
                     pl-2
@@ -35,6 +37,7 @@
                 <button
                     class="
                         rounded
+                        border-b-2 border-pink-800
                         bg-pink-600
                         text-white
                         notoSansJpAndFourteenMedium
@@ -48,7 +51,8 @@
                 <button
                     class="
                         rounded
-                        bg-blue-600
+                        border-b-2 border-blue-900
+                        bg-blue-700
                         text-white
                         notoSansJpAndFourteenMedium
                         w-20
@@ -61,7 +65,8 @@
                 <button
                     class="
                         rounded
-                        bg-blue-600
+                        border-b-2 border-blue-900
+                        bg-blue-700
                         text-white
                         notoSansJpAndFourteenMedium
                         w-13

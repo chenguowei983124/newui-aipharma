@@ -207,19 +207,13 @@
                                         {{ person.col3 }}
                                     </div>
                                 </td>
-                                <td class="whitespace-nowrap">
-                                    <span
-                                        class="
-                                            px-2
-                                            inline-flex
-                                            text-xs
-                                            leading-5
-                                            font-semibold
-                                            rounded-full
-                                            bg-green-100
-                                            text-green-800
-                                        "
-                                    >
+                                <td
+                                    class="
+                                        whitespace-nowrap
+                                        border-2 border-blueline
+                                    "
+                                >
+                                    <span class="text-sm text-gray-900">
                                         {{ person.col4 }}
                                     </span>
                                 </td>
@@ -279,7 +273,7 @@
                                 </td>
                                 <td
                                     class="
-                                        whitespace-nowrap
+                                        break-words
                                         text-sm text-gray-500
                                         border-2 border-blueline
                                     "
@@ -294,6 +288,32 @@
                                     "
                                 >
                                     {{ person.col12 }}
+                                    <br />
+                                    <div
+                                        class="
+                                            h-6
+                                            bg-blue-500
+                                            text-white
+                                            w-18
+                                            px-3
+                                            pt-0.5
+                                        "
+                                    >
+                                        自施設
+                                    </div>
+                                    <!-- <div
+                                        class="
+                                            notoSansJpAndTwelveMedium
+                                            text-white
+                                            h-4
+                                        "
+                                    > -->
+                                    <!-- <result-detail-row-item
+                                            itemType="1"
+                                            :typeKB="item.group"
+                                            v-if="item.group != undefined"
+                                        ></result-detail-row-item> -->
+                                    <!-- </div> -->
                                 </td>
                                 <td
                                     class="
@@ -301,19 +321,50 @@
                                         text-right text-sm
                                         font-medium
                                         border-2 border-blueline
+                                        space-y-1
                                     "
                                 >
                                     <button
-                                        class="w-10 h-10 bg-gray-300"
-                                    ></button>
+                                        class="
+                                            h-7.5
+                                            w-7.5
+                                            bg-downloadIcon
+                                            rounded
+                                            mx-1
+                                        "
+                                    >
+                                        <download-icon-svg
+                                            class="h-5 w-5 mx-1.25"
+                                        ></download-icon-svg>
+                                    </button>
                                     <br />
                                     <button
-                                        class="w-10 h-10 bg-gray-300"
-                                    ></button>
+                                        class="
+                                            h-7.5
+                                            w-7.5
+                                            bg-searchBunnon
+                                            rounded
+                                            mx-1
+                                        "
+                                    >
+                                        <edit-icon-svg
+                                            class="h-5 w-5 mx-1.25"
+                                        ></edit-icon-svg>
+                                    </button>
                                     <br />
                                     <button
-                                        class="w-10 h-10 bg-gray-300"
-                                    ></button>
+                                        class="
+                                            h-7.5
+                                            w-7.5
+                                            bg-personInformationButton
+                                            rounded
+                                            mx-1
+                                        "
+                                    >
+                                        <trash-icon-svg
+                                            class="h-5 w-5 mx-1.25"
+                                        ></trash-icon-svg>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -325,6 +376,9 @@
 </template>
 
 <script>
+import downloadIconSvg from '../svgImage/downloadIconSvg.vue'
+import EditIconSvg from '../svgImage/editIconSvg.vue'
+import TrashIconSvg from '../svgImage/trashIconSvg.vue'
 const people = [
   {
     col1: 'false',
@@ -405,6 +459,7 @@ const people = [
 ]
 
 export default {
+  components: { downloadIconSvg, TrashIconSvg, EditIconSvg },
   setup() {
     return {
       people,
