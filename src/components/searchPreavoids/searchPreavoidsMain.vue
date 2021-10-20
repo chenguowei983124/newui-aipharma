@@ -19,7 +19,7 @@
                     class="
                         flex-none
                         rounded
-                        border-2 border-green-400 border-b-4
+                        border-2 border-downloadIcon border-b-4
                         flex
                         justify-center
                     "
@@ -31,7 +31,7 @@
                                 ml-0.5
                                 text-mxs
                                 font-NotoSansJp
-                                text-green-600
+                                text-downloadIcon
                                 cursor-pointer
                             "
                             >選択データダウンロード</span

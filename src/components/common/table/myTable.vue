@@ -328,7 +328,7 @@
                                         class="
                                             h-7.5
                                             w-7.5
-                                            bg-green-300
+                                            bg-downloadIcon
                                             rounded
                                             mx-1
                                         "

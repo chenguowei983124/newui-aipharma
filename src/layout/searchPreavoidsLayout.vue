@@ -21,7 +21,9 @@
             <div
                 class="
                     text-googleTitle
-                    notoSansJpAndTwentyBold
+                    font-NotoSansJp
+                    text-xl
+                    md:text-2xl
                     font-black
                     flex-none
                     pl-2
