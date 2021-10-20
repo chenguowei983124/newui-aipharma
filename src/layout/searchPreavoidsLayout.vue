@@ -35,6 +35,7 @@
                 <button
                     class="
                         rounded
+                        border-b-2 border-pink-800
                         bg-pink-600
                         text-white
                         notoSansJpAndFourteenMedium
@@ -48,7 +49,8 @@
                 <button
                     class="
                         rounded
-                        bg-blue-600
+                        border-b-2 border-blue-900
+                        bg-blue-700
                         text-white
                         notoSansJpAndFourteenMedium
                         w-20
@@ -61,7 +63,8 @@
                 <button
                     class="
                         rounded
-                        bg-blue-600
+                        border-b-2 border-blue-900
+                        bg-blue-700
                         text-white
                         notoSansJpAndFourteenMedium
                         w-13

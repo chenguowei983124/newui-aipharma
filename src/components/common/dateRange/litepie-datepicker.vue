@@ -50,6 +50,9 @@
                     v-model="pickerValue"
                     @keyup="keyUp"
                 />
+                <div v-show="leftLableDisp" :class="leftLableStyle">
+                                        {{ leftLableTitle }}                
+                </div>
             </label>
         </slot>
         <transition
@@ -138,7 +141,7 @@
                                             sm:w-1
                                             h-1
                                             sm:h-8
-                                            bg-litepie-primary-500
+                                            bg-toTop
                                             rounded-xl
                                             shadow-inner
                                         "
@@ -268,15 +271,14 @@
                                             shadow-sm
                                             px-4
                                             py-2
-                                            bg-litepie-primary-600
+                                            bg-toTop
                                             text-base
                                             font-medium
                                             text-white
-                                            hover:bg-litepie-primary-700
+                                            hover:opacity-50
                                             focus:outline-none
-                                            focus:ring-2
-                                            focus:ring-offset-2
-                                            focus:ring-litepie-primary-500
+                                            focus:ring-2 focus:ring-offset-2
+                                            focus:opacity-50
                                             sm:ml-3
                                             sm:w-auto
                                             sm:text-sm
@@ -448,6 +450,19 @@ export default /*#__PURE__*/ defineComponent({
     }
   },
   props: {
+    leftLableStyle: {
+      tpye: String,
+      default:
+        'absolute mt-1 pl-2 left-1 top-1 text-lg text-blueline notoSansJpAndFourteenBold z-99',
+    },
+    leftLableDisp: {
+      type: Boolean,
+      default: true,
+    },
+    leftLableTitle: {
+      type: String,
+      default: '',
+    },
     overlay: Boolean,
     asSingle: Boolean,
     useRange: Boolean,
@@ -509,9 +524,9 @@ export default /*#__PURE__*/ defineComponent({
           pastMonth: 'Last Month'
         },
         footer: {
-          apply: 'Apply',
-          cancel: 'Cancel'
-        }
+          apply: '選択',
+          cancel: 'キャンセル',
+        },
       })
     }
   },
@@ -1289,7 +1304,7 @@ export default /*#__PURE__*/ defineComponent({
       }
       if (active) {
         classes = today
-          ? `text-litepie-primary-500 font-semibold dark:text-litepie-primary-400 rounded-full`
+          ? `text-notlooked font-semibold dark:text-litepie-primary-400 rounded-full`
           : disabled
             ? `text-litepie-secondary-600 font-normal disabled:text-litepie-secondary-500 disabled:cursor-not-allowed rounded-full`
             : date.isBetween(s, e, 'date', '()')
@@ -1302,23 +1317,23 @@ export default /*#__PURE__*/ defineComponent({
       if (s && e && !off) {
         if (date.isSame(s, 'date')) {
           classes = e.isAfter(s, 'date')
-            ? 'bg-litepie-primary-500 text-white font-bold rounded-l-full disabled:cursor-not-allowed'
-            : 'bg-litepie-primary-500 text-white font-bold rounded-r-full disabled:cursor-not-allowed';
+            ? 'bg-toTop text-white font-bold rounded-l-full disabled:cursor-not-allowed'
+            : 'bg-toTop text-white font-bold rounded-r-full disabled:cursor-not-allowed';
           if (s.isSame(e, 'date')) {
-            classes = `bg-litepie-primary-500 text-white font-bold rounded-full disabled:cursor-not-allowed`;
+            classes = `bg-toTop text-white font-bold rounded-full disabled:cursor-not-allowed`;
           }
         }
         if (date.isSame(e, 'date')) {
           classes = e.isAfter(s, 'date')
-            ? 'bg-litepie-primary-500 text-white font-bold rounded-r-full disabled:cursor-not-allowed'
-            : 'bg-litepie-primary-500 text-white font-bold rounded-l-full disabled:cursor-not-allowed';
+            ? 'bg-toTop text-white font-bold rounded-r-full disabled:cursor-not-allowed'
+            : 'bg-toTop text-white font-bold rounded-l-full disabled:cursor-not-allowed';
           if (s.isSame(e, 'date')) {
-            classes = `bg-litepie-primary-500 text-white font-bold rounded-full disabled:cursor-not-allowed`;
+            classes = `bg-toTop text-white font-bold rounded-full disabled:cursor-not-allowed`;
           }
         }
       } else if (s) {
         if (date.isSame(s, 'date') && !off) {
-          classes = `bg-litepie-primary-500 text-white font-bold rounded-full disabled:cursor-not-allowed`;
+          classes = `bg-toTop text-white font-bold rounded-full disabled:cursor-not-allowed`;
         }
       }
 

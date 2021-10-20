@@ -12,7 +12,7 @@
                 "
             >
                 <div class="shadow overflow-hidden border-b border-gray-200">
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200 w-245">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th
@@ -279,7 +279,7 @@
                                 </td>
                                 <td
                                     class="
-                                        whitespace-nowrap
+                                        break-words
                                         text-sm text-gray-500
                                         border-2 border-blueline
                                     "
@@ -303,12 +303,19 @@
                                         border-2 border-blueline
                                     "
                                 >
-                                    <button
-                                        class="w-10 h-10 bg-gray-300"
-                                    ></button>
+                                    <!-- <button>1</button>
+                                    <button>2</button>
+                                    <button>3</button> -->
+                                    <div class="h-7.5 w-7.5 rounded">
+                                        <button>
+                                            <download-icon-svg
+                                                class="h-7.5 w-7.5"
+                                            ></download-icon-svg>
+                                        </button>
+                                    </div>
                                     <br />
                                     <button
-                                        class="w-10 h-10 bg-gray-300"
+                                        class="w-10 h-10 bg-gray-300 rounded"
                                     ></button>
                                     <br />
                                     <button
@@ -325,6 +332,7 @@
 </template>
 
 <script>
+import downloadIconSvg from '../svgImage/downloadIconSvg.vue'
 const people = [
   {
     col1: 'false',
@@ -405,6 +413,7 @@ const people = [
 ]
 
 export default {
+  components: { downloadIconSvg },
   setup() {
     return {
       people,
