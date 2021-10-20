@@ -207,6 +207,11 @@ export default {
         return '要閲覧'
       }
 
+      if (props.typeKB == 'notbrowsed') {
+        // 8:要閲覧
+        return ''
+      }
+
       if (props.typeKB == 'notice') {
         // 9: 告　知
         return '告　知'
@@ -285,6 +290,8 @@ export default {
       if (props.typeKB == 'otherFacility') {
         // 17：他施設
         return '他施設'
+      } else {
+        return props.typeKB
       }
     })
     return {

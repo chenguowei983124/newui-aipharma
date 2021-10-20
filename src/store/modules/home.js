@@ -4,6 +4,7 @@ export default {
     state: () => ({
         noticeInfo: [],
         bulletinBoardInfo: [],
+        bbsTagsInfo: [],
         scientifiSocietyInfo: [],
         pmdaInfo: [],
         managementInfo: [],
@@ -17,6 +18,9 @@ export default {
         },
         topBulletinBoardInfo(state) {
             return state.bulletinBoardInfo
+        },
+        bbsTagsInfo(state) {
+            return state.bbsTagsInfo
         },
         topScientifiSocietyInfo(state) {
             return state.scientifiSocietyInfo
@@ -55,6 +59,9 @@ export default {
         setTopBulletinboardinfo(state, info) {
             state.bulletinBoardInfo = info
         },
+        setBbsTagsinfo(state, info) {
+            state.bbsTagsInfo = info
+        },
         setTopScientifisocietyInfo(state, info) {
             state.scientifiSocietyInfo = info
         },
@@ -64,13 +71,17 @@ export default {
     },
 
     actions: {
-        async getTopNotice({ rootState, commit }) {
+        async getTopNotice({ rootState, commit }, code) {
             commit('setTopNotice', {})
-            const info = await serve.getTopNoticel()
+            commit('setBbsTagsinfo', {})
+            const info = await serve.getTopNoticel(code)
             commit('setTopNotice', info.data)
+            if (!!info.data.master && !!info.data.master.tags) {
+                commit('setBbsTagsinfo', info.data.master.tags)
+            }
         },
-        async getTopBulletinBoardInfo({ rootState, commit }) {
-            const info = await serve.getTopBulletinBoard()
+        async getTopBulletinBoardInfo({ rootState, commit }, code) {
+            const info = await serve.getTopBulletinBoard(code)
             commit('setTopBulletinboardinfo', info.data)
         },
         async getScientifiSocietyInfo({ rootState, commit }) {

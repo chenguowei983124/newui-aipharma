@@ -1,5 +1,59 @@
 // import axios from "./http";
 import axios from "axios";
+const API_TIMEOUT = 2000
+const API_BASE = 'http://localhost:3000/'
+
+const exeAxios = (method, acURL, data) => {
+    return axios({ 
+        method: method, 
+        url: acURL,
+        data: data,
+        timeout : API_TIMEOUT,
+        validateStatus: function (status) {
+        return status < 500; // Resolve only if the status code is less than 500
+        },
+        withCredentials: true
+    })
+}
+const pathJoin = (pathArr) => {
+    return pathArr.map(function (path){
+      if (path[0] === "/"){
+        path = path.slice(1)
+      }
+      if (path[path.length - 1] === "/"){
+        path = path.slice(0, path.length - 1)
+      }
+      return path;
+    }).join("/")
+}
+const transDataformat = (resData) => {
+    let result = resData
+    const list = resData.data
+    let dt = []
+    
+    list.map((item) => {
+        const year = item.post.created_at.slice(0, 4) + "."
+        const month = item.post.created_at.slice(5, 7) + "."
+        const day = item.post.created_at.slice(8, 10)
+
+        const obj = {
+            browseRequired: (item.post.browseRequired || false) ? "browse" : "notbrowsed",
+            date: year + month + day,
+            group: item.post.scope,
+            id: item.post.id,
+            looked: Object.keys(item.post.feedback.mine).length > 0 ? "looked" : "notLooked",
+            notificationType: item.post.genre,
+            title: item.post.title,
+            viewCount: item.post.feedback.viewed,
+        }
+        dt.push(obj)
+    })
+    result.data = {
+        details: dt
+    }
+    console.log('transDataformat',result)
+    return result
+}
 const serve = {
     //===========================
     // ログイン
@@ -13,22 +67,65 @@ const serve = {
     //===========================
     // TOP画面　お知らせ情報
     //===========================
-    async getTopNoticel() {
-        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_Noticel_info', {
-            method: 'get'
-        })
+    async getTopNoticel(code) {
+        let data
+        if (!code){
+            data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_Noticel_info', {
+                method: 'get'
+            })
+        } else {
+            const queryStringData = {
+                code: code,
+                page: 1,
+                limit: 5
+            }
+            // API-index
+            let mtd = 'get'
+            let acURL = '/posts'
+            const queryString = new URLSearchParams(queryStringData).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}` 
+            console.log('getTopNoticel_url',url)
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const res = response.data;
+                data = transDataformat(res)
+            }            
+        }
 
+        console.log('getTopNoticel',data, code)
         return data
     },
     //===========================
     // TOP画面　掲示板情報取得
     //===========================
-    async getTopBulletinBoard() {
-        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_BulletinBoard_info', {
+    async getTopBulletinBoard(code) {
+        let data
+        if (!code){
+            data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_BulletinBoard_info', {
             method: 'get'
-        })
+            })
+        } else {
+            const queryStringData = {
+                code: code,
+                page: 1,
+                limit: 5,
+                genre: '掲示板'
+            }
+            // API-index
+            let mtd = 'get'
+            let acURL = '/posts'
+            const queryString = new URLSearchParams(queryStringData).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}` 
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const res = response.data;
+                data = transDataformat(res)
+            }            
+        }
 
+        console.log('getTopBulletinBoard',data, code)
         return data
+
     },
     //===========================
     // TOP画面　学会情報取得
@@ -148,7 +245,7 @@ const serve = {
         return data
     },
     async getTest() {
-        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_Noticel_info_test', {
+        const data = await axios('http://mock-api.com/ZzRpqmne.mock/preavoid/get_topmenu_Noticel_info', {
             method: 'get',
         })
 

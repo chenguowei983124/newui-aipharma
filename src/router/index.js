@@ -11,11 +11,17 @@ import searchBulletinBoard from '/src/view/searchBulletinBoard.vue'
 import newOrgDIRecord from '/src/view/newOrgDIRecord.vue'
 import notFound from '/src/view/notFound.vue'
 import error from '/src/view/error.vue'
+import Redirect from '/src/view/Redirect.vue'
 
 const routes = [
     {
         path: '/',
         redirect: '/login',
+    },
+    {
+      path: '/r',
+      name: 'redirect',
+      component: Redirect 
     },
     {
         path: '/login',

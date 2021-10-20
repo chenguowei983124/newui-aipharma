@@ -153,6 +153,37 @@ export default {
     logo,
   },
   methods: {
+    pathJoin(pathArr) {
+      return pathArr.map(function (path){
+        if (path[0] === "/"){
+          path = path.slice(1)
+        }
+        if (path[path.length - 1] === "/"){
+          path = path.slice(0, path.length - 1)
+        }
+        return path;
+      }).join("/")
+    },
+    AuthOIDC() {
+      
+        const AIPHARMA_URL = 'https://kit-furukawa-test.auth.ap-northeast-1.amazoncognito.com/'
+        const RETURN_TO = 'https://ai-pharma-dev.local/r/'
+        const OIDC_CLIENT_ID = '4tsjtgump87o2q23thk0bu793o'
+        const AUTH_PATH = '/oauth2/authorize'
+        const OIDC_SCOPE = ['openid']
+
+        const queryStringData = {
+          response_type: "code",
+          client_id: OIDC_CLIENT_ID,
+          redirect_uri: RETURN_TO,
+          scope: OIDC_SCOPE.join(' ')
+        }
+        const queryString = new URLSearchParams(queryStringData).toString()
+        const url = `${this.pathJoin([AIPHARMA_URL, AUTH_PATH])}?${queryString}`
+
+        console.log('login_url',url)
+        window.open(url, "_self")
+    },
     loginClick: function () {
       if (this.loginId == '' || this.password == '') {
         this.message =
@@ -175,7 +206,8 @@ export default {
           self.clearCookie()
         }
 
-        this.$router.push('/myhome')
+        this.AuthOIDC()
+        // this.$router.push('/myhome')
         localStorage.setItem('token', '123132')
       }
     },
