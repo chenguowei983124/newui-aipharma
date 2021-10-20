@@ -63,7 +63,7 @@
                     <result-detail-row-item
                         itemType="1"
                         :typeKB="row.states"
-                        :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                        :itemStyle="getPmdastatusDefaultStype(row.states)"
                         v-if="row.states != undefined"
                     ></result-detail-row-item>
                 </div>
@@ -127,7 +127,7 @@
                         <result-detail-row-item
                             itemType="1"
                             :typeKB="row.states"
-                            :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                            :itemStyle="getPmdastatusDefaultStype(row.states)"
                             v-if="row.states != undefined"
                         ></result-detail-row-item>
                     </div>
@@ -339,7 +339,7 @@ export default {
       } else {
         return dateFrom
       }
-    }, getPmdaStatesDefaultStype(states) {
+    }, getPmdastatusDefaultStype(states) {
       if (states == "") {
         return "w-12.5 block "
       } else {

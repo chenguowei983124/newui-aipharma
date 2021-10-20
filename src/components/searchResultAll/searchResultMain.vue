@@ -44,7 +44,7 @@
                     "
                     :sub1="['group']"
                     :sub2="['title']"
-                    :sub3="['states', 'date', 'view']"
+                    :sub3="['status', 'date', 'view']"
                 >
                 </result-detail-row>
             </resut-tag>
@@ -67,7 +67,7 @@
                     :sites="$store.getters.getSearchAllPreAvoid.details"
                     :sub1="['group']"
                     :sub2="['title']"
-                    :sub3="['states', 'date', 'view']"
+                    :sub3="['status', 'date', 'view']"
                 >
                 </result-detail-row>
             </resut-tag>
@@ -107,7 +107,7 @@
                     "
                     :sub1="['group']"
                     :sub2="['titleHeightAuto']"
-                    :sub3="['states', 'date', 'view']"
+                    :sub3="['status', 'date', 'view']"
                 >
                 </result-detail-row>
             </resut-tag>

@@ -6,7 +6,8 @@
                 pt-2.5
                 md:pt-1.25
                 space-y-1
-                md:space-x-3 md:space-y-0 md:flex
+                md:space-x-3 md:space-y-0
+                md:flex
                 items-center
                 md:border-white
             "
@@ -61,9 +62,9 @@
                     ></result-detail-row-item>
                     <result-detail-row-item
                         itemType="1"
-                        :typeKB="row.states"
-                        :itemStyle="getPmdaStatesDefaultStype(row.states)"
-                        v-if="row.states != undefined && dispItem == 'states'"
+                        :typeKB="row.status"
+                        :itemStyle="getPmdastatusDefaultStype(row.status)"
+                        v-if="row.status != undefined && dispItem == 'status'"
                     ></result-detail-row-item>
                 </div>
             </div>
@@ -156,14 +157,14 @@
                     <!-- 状態 -->
                     <result-detail-row-item
                         itemType="1"
-                        :typeKB="row.states"
-                        :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                        :typeKB="row.status"
+                        :itemStyle="getPmdastatusDefaultStype(row.status)"
                         addStyle=""
-                        v-if="row.states != undefined && dispItem == 'states'"
+                        v-if="row.status != undefined && dispItem == 'status'"
                     ></result-detail-row-item>
                     <!-- date -->
                     <!-- 状態無し -->
-                    <div :class="[row.states == '' ? '-ml-1.5 md:ml-0' : '']">
+                    <div :class="[row.status == '' ? '-ml-1.5 md:ml-0' : '']">
                         <result-detail-row-item
                             itemType="2"
                             :itemValue="row.date"
@@ -191,145 +192,145 @@ import resultDetailRowItem from './resultDetailRowItem.vue'
 import { computed } from '@vue/runtime-core'
 
 export default {
-    components: { resultDetailRowItem },
-    props: {
-        sites: Array,
-        proDetailStyle: {
-            type: String,
-            default: 'style1',
-        },
-        midDetailStyle: {
-            type: String,
-            default: 'style1',
-        },
-        bakDetailStyle: {
-            type: String,
-            default: 'style1',
-        },
-        lineStyle: {
-            type: String,
-            default: 'blueline',
-        },
-        sub1: Array,
-        sub2: Array,
-        sub3: Array,
-        routerPath: {
-            type: String,
-            default: '',
-        },
+  components: { resultDetailRowItem },
+  props: {
+    sites: Array,
+    proDetailStyle: {
+      type: String,
+      default: 'style1',
     },
-    data() {
-        return {}
+    midDetailStyle: {
+      type: String,
+      default: 'style1',
     },
-    methods: {
-        getLookedTitle(lookedKB, midStyle) {
-            if (lookedKB != undefined) {
-                if (lookedKB == 'looked') {
-                    return 'truncate underline md:whitespace-pre text-dropdownListItem'
-                } else {
-                    return 'truncate underline md:whitespace-pre'
-                }
-            } else {
-                if (midStyle == 'style1') {
-                    console.log('midStyle')
-                    return 'truncate underline md:whitespace-pre'
-                }
-                if (midStyle == 'style2') {
-                    return 'truncate block pl-2 md:pl-0'
-                }
-            }
-        },
-        resetTitle(midStyle) {
-            if (midStyle == 'style2') {
-                return 'searchResult_title_font_14 truncate block pl-2 md:pl-0'
-            }
-        },
-        getDateFrom(dateFrom, dateTo) {
-            if (dateTo != '') {
-                return dateFrom.concat(' - ')
-            } else {
-                return dateFrom
-            }
-        },
-        getPmdaStatesDefaultStype(states) {
-            if (states == '') {
-                return 'w-12.5 hidden md:block '
-            } else {
-                if (states == 'new') {
-                    return 'searchResult_lable_new_right md:mr-2.5'
-                } else {
-                    return 'searchResult_lable_update_right md:mr-2.5'
-                }
-                return null
-            }
-        },
-        getLineStyle(index, style) {
-            const line = []
-            if (style == 'blueline') {
-                // line.push('border-b-2 border-blueline')
-            } else {
-                line.push('border-b-2 border-grayline')
-            }
-
-            if (index == 4) {
-                return 'md:pb-4'
-            } else if (index == 0) {
-                line.push('md:pt-4')
-            }
-            return line
-        },
-        isDisp1(itemName, rowItem) {
-            if (rowItem == undefined) {
-                return false
-            }
-            this.sub1.forEach((element) => {
-                if (itemName == element) {
-                    return true
-                } else {
-                    return false
-                }
-            })
-        },
+    bakDetailStyle: {
+      type: String,
+      default: 'style1',
     },
-    setup(props) {
-        const proAreaStyle = computed(() => {
-            const style = []
-            if (props.proDetailStyle == 'style1') {
-                style.push('flex space-x-1.5 md:space-x-3 pl-2 md:pl-0')
-            }
-            if (props.proDetailStyle == 'style2') {
-                style.push('flex flex-row md:flex-col md:space-x-0 space-x-2 ')
-            }
-            return style
-        })
-
-        const midAreaStyle = computed(() => {
-            const style = []
-            if (props.midDetailStyle == 'style1') {
-                style.push('flex pl-2 md:pl-0')
-            }
-            if (props.proDetailStyle == 'style2') {
-                style.push('flex flex-col')
-            }
-            if (props.sub1 == undefined) {
-                style.push('ml-2 md:ml-5')
-            }
-            return style
-        })
-
-        const bakAreaStyle = computed(() => {
-            const style = []
-            if (props.bakDetailStyle == 'style1') {
-                style.push('flex')
-            }
-            return style
-        })
-
-        return {
-            proAreaStyle,
-            midAreaStyle,
-            bakAreaStyle,
+    lineStyle: {
+      type: String,
+      default: 'blueline',
+    },
+    sub1: Array,
+    sub2: Array,
+    sub3: Array,
+    routerPath: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {}
+  },
+  methods: {
+    getLookedTitle(lookedKB, midStyle) {
+      if (lookedKB != undefined) {
+        if (lookedKB == 'looked') {
+          return 'truncate underline md:whitespace-pre text-dropdownListItem'
+        } else {
+          return 'truncate underline md:whitespace-pre'
         }
+      } else {
+        if (midStyle == 'style1') {
+          console.log('midStyle')
+          return 'truncate underline md:whitespace-pre'
+        }
+        if (midStyle == 'style2') {
+          return 'truncate block pl-2 md:pl-0'
+        }
+      }
     },
+    resetTitle(midStyle) {
+      if (midStyle == 'style2') {
+        return 'searchResult_title_font_14 truncate block pl-2 md:pl-0'
+      }
+    },
+    getDateFrom(dateFrom, dateTo) {
+      if (dateTo != '') {
+        return dateFrom.concat(' - ')
+      } else {
+        return dateFrom
+      }
+    },
+    getPmdastatusDefaultStype(status) {
+      if (status == '') {
+        return 'w-12.5 hidden md:block '
+      } else {
+        if (status == 'new') {
+          return 'searchResult_lable_new_right md:mr-2.5'
+        } else {
+          return 'searchResult_lable_update_right md:mr-2.5'
+        }
+        return null
+      }
+    },
+    getLineStyle(index, style) {
+      const line = []
+      if (style == 'blueline') {
+        // line.push('border-b-2 border-blueline')
+      } else {
+        line.push('border-b-2 border-grayline')
+      }
+
+      if (index == 4) {
+        return 'md:pb-4'
+      } else if (index == 0) {
+        line.push('md:pt-4')
+      }
+      return line
+    },
+    isDisp1(itemName, rowItem) {
+      if (rowItem == undefined) {
+        return false
+      }
+      this.sub1.forEach((element) => {
+        if (itemName == element) {
+          return true
+        } else {
+          return false
+        }
+      })
+    },
+  },
+  setup(props) {
+    const proAreaStyle = computed(() => {
+      const style = []
+      if (props.proDetailStyle == 'style1') {
+        style.push('flex space-x-1.5 md:space-x-3 pl-2 md:pl-0')
+      }
+      if (props.proDetailStyle == 'style2') {
+        style.push('flex flex-row md:flex-col md:space-x-0 space-x-2 ')
+      }
+      return style
+    })
+
+    const midAreaStyle = computed(() => {
+      const style = []
+      if (props.midDetailStyle == 'style1') {
+        style.push('flex pl-2 md:pl-0')
+      }
+      if (props.proDetailStyle == 'style2') {
+        style.push('flex flex-col')
+      }
+      if (props.sub1 == undefined) {
+        style.push('ml-2 md:ml-5')
+      }
+      return style
+    })
+
+    const bakAreaStyle = computed(() => {
+      const style = []
+      if (props.bakDetailStyle == 'style1') {
+        style.push('flex')
+      }
+      return style
+    })
+
+    return {
+      proAreaStyle,
+      midAreaStyle,
+      bakAreaStyle,
+    }
+  },
 }
 </script>

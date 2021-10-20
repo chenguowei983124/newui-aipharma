@@ -13,7 +13,7 @@
                     :sites="$store.getters.organizationNewQAInfo.details"
                     :sub1="['group']"
                     :sub2="['title']"
-                    :sub3="['states', 'date', 'view']"
+                    :sub3="['status', 'date', 'view']"
                 >
                 </result-detail-row>
             </resut-tag>
@@ -30,7 +30,7 @@
                     "
                     :sub1="['group']"
                     :sub2="['title']"
-                    :sub3="['states', 'date', 'view']"
+                    :sub3="['status', 'date', 'view']"
                 >
                 </result-detail-row>
             </resut-tag>
@@ -78,16 +78,16 @@
 import ResutTag from '../common/searchResult/resultTag.vue'
 import ResultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
 export default {
-    components: { ResutTag, ResultDetailRow },
-    methods: {
-        sendMsgToParent: function (data) {
-            this.$emit('listenToChildEvent', data)
-        },
+  components: { ResutTag, ResultDetailRow },
+  methods: {
+    sendMsgToParent: function (data) {
+      this.$emit('listenToChildEvent', data)
     },
-    mounted() {
-        this.$store.dispatch('getOrganizationNewQAInfo')
-        this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
-    },
+  },
+  mounted() {
+    this.$store.dispatch('getOrganizationNewQAInfo')
+    this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
+  },
 }
 </script>
 

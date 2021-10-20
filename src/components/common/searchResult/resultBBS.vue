@@ -60,9 +60,9 @@
                     ></result-detail-row-item>
                     <result-detail-row-item
                         itemType="1"
-                        :typeKB="row.states"
-                        :itemStyle="getPmdaStatesDefaultStype(row.states)"
-                        v-if="row.states != undefined && dispItem == 'states'"
+                        :typeKB="row.status"
+                        :itemStyle="getPmdastatusDefaultStype(row.status)"
+                        v-if="row.status != undefined && dispItem == 'status'"
                     ></result-detail-row-item>
                 </div>
             </div>
@@ -156,14 +156,14 @@
                     <!-- 状態 -->
                     <result-detail-row-item
                         itemType="1"
-                        :typeKB="row.states"
-                        :itemStyle="getPmdaStatesDefaultStype(row.states)"
+                        :typeKB="row.status"
+                        :itemStyle="getPmdastatusDefaultStype(row.status)"
                         addStyle=""
-                        v-if="row.states != undefined && dispItem == 'states'"
+                        v-if="row.status != undefined && dispItem == 'status'"
                     ></result-detail-row-item>
                     <!-- date -->
                     <!-- 状態無し -->
-                    <div :class="[row.states == '' ? '-ml-1.5 md:ml-0' : '']">
+                    <div :class="[row.status == '' ? '-ml-1.5 md:ml-0' : '']">
                         <result-detail-row-item
                             itemType="2"
                             :itemValue="row.date"
@@ -252,11 +252,11 @@ export default {
         return dateFrom
       }
     },
-    getPmdaStatesDefaultStype(states) {
-      if (states == '') {
+    getPmdastatusDefaultStype(status) {
+      if (status == '') {
         return 'w-12.5 hidden md:block '
       } else {
-        if (states == 'new') {
+        if (status == 'new') {
           return 'searchResult_lable_new_right md:mr-2.5'
         } else {
           return 'searchResult_lable_update_right md:mr-2.5'

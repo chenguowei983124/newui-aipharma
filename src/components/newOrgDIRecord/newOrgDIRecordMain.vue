@@ -242,7 +242,7 @@
                     @click="onAddSource"
                     value="+追加"
                 />
-                <div class="w-auto inline-block">
+                <div class="w-21 inline-block mt-2">
                     <a
                         :href="url.pmid.lable"
                         target="_blank"
@@ -273,42 +273,44 @@
                         </div>
                     </a>
                 </div>
-                <div class="flex-wrap md:flex">
-                    <input
-                        v-model="base.pmid"
+                <!-- <div class="flex-wrap mt-2"> -->
+                <input
+                    v-model="base.pmid"
+                    class="
+                        mt-2
+                        block
+                        h-10
+                        w-full
+                        md:w-1/2
+                        NotoSansJp-normal
+                        rounded-sm
+                        pl-4
+                        placeholder-gray-500
+                        focus:placeholder-opacity-0
+                        ring-1
+                        border-transparent
+                        focus:outline-none
+                        focus:ring-1 focus:ring-326EB5Lins
+                        focus:border-transparent
+                    "
+                    type="text"
+                    placeholder="PMID"
+                    :onInput="onInputPmid"
+                />
+                <a :href="url.pmid.text" target="_blank" class="mt-2">
+                    <label
                         class="
-                            block
-                            h-10
-                            w-full
-                            md:w-1/2
-                            NotoSansJp-normal
-                            rounded-sm
-                            pl-4
-                            placeholder-gray-500
-                            focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent
-                            focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
-                            focus:border-transparent
+                            notoSansJpAndSixteenBold
+                            underline
+                            cursor-pointer
+                            break-words
                         "
-                        type="text"
-                        placeholder="PMID"
-                        :onInput="onInputPmid"
-                    />
-                    <a :href="url.pmid.text" target="_blank" class="ml-1">
-                        <label
-                            class="
-                                notoSansJpAndSixteenBold
-                                underline
-                                cursor-pointer
-                            "
-                        >
-                            {{ url.pmid.text }}
-                        </label>
-                    </a>
-                </div>
-                <div class="w-auto inline-block">
+                    >
+                        {{ url.pmid.text }}
+                    </label>
+                </a>
+                <!-- </div> -->
+                <div class="w-24 inline-block mt-2">
                     <a
                         :href="url.doi.lable"
                         target="_blank"
@@ -339,56 +341,77 @@
                         </div>
                     </a>
                 </div>
-                <div class="flex-wrap md:flex">
-                    <input
-                        v-model="base.doi"
+                <!-- <div class="flex-wrap md:flex"> -->
+                <input
+                    v-model="base.doi"
+                    class="
+                        mt-2
+                        block
+                        h-10
+                        w-full
+                        md:w-1/2
+                        NotoSansJp-normal
+                        rounded-sm
+                        pl-4
+                        placeholder-gray-500
+                        focus:placeholder-opacity-0
+                        ring-1
+                        border-transparent
+                        focus:outline-none
+                        focus:ring-1 focus:ring-326EB5Lins
+                        focus:border-transparent
+                    "
+                    type="text"
+                    placeholder="DOI"
+                    :onInput="onInputDoi"
+                />
+                <a :href="url.doi.text" target="_blank " class="ml-1 mt-2">
+                    <label
                         class="
-                            block
-                            h-10
-                            w-full
-                            md:w-1/2
-                            NotoSansJp-normal
-                            rounded-sm
-                            pl-4
-                            placeholder-gray-500
-                            focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent
-                            focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
-                            focus:border-transparent
+                            notoSansJpAndSixteenBold
+                            underline
+                            cursor-pointer
+                            break-words
                         "
-                        type="text"
-                        placeholder="DOI"
-                        :onInput="onInputDoi"
-                    />
-                    <a :href="url.doi.text" target="_blank" class="ml-1">
-                        <label
-                            class="
-                                notoSansJpAndSixteenBold
-                                underline
-                                cursor-pointer
-                            "
-                        >
-                            {{ url.doi.text }}
-                        </label>
-                    </a>
-                </div>
+                    >
+                        {{ url.doi.text }}
+                    </label>
+                </a>
+                <!-- </div> -->
+
                 <label class="notoSansJpAndSixteenBold"> ファイル </label>
+
                 <div v-for="(item, index) in base.file" :key="index">
-                    <div class="flex justify-between mt-1">
-                        <div class="flex">
+                    <div class="flex flex-row items-center">
+                        <p class="ml-1 font-NotoSansJp text-mxs truncate">
+                            {{ !!item.name ? item.name : '' }}
+                        </p>
+                        <div :class="!!item.name == '' ? 'hidden' : 'block'">
+                            <x-icon-svg
+                                class=""
+                                @click="onClearItem(base.file, index)"
+                            ></x-icon-svg>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-2">
+                        <div class="flex w-88.75 items-center">
                             <label
                                 :for="'addFile_' + index"
                                 class="
-                                    w-28
+                                    flex
+                                    items-center
+                                    w-29.5
+                                    h-7.5
+                                    whitespace-nowrap
                                     bg-gray-300
                                     hover:opacity-50
                                     active:bg-bg-gray-200
                                     active:opacity-100
                                     rounded-sm
-                                    notoSansJpAndFourteenBold
-                                    text-black text-center
+                                    font-NotoSansJp
+                                    px-2
+                                    text-sm text-black text-center
                                     border border-gray-600
                                 "
                                 >ファイルを選択</label
@@ -399,15 +422,23 @@
                                 type="file"
                                 @change="onFileChange"
                             />
-                            <p class="ml-2 font-NotoSansJp text-sm">
+                            <p class="ml-1 font-NotoSansJp text-mxs">
                                 {{
                                     !!item.name
-                                        ? item.name
+                                        ? ''
                                         : '※ファイルが選択されていません。'
                                 }}
                             </p>
+                            <div
+                                :class="!!item.name == '' ? 'block' : 'hidden'"
+                            >
+                                <x-icon-svg
+                                    class=""
+                                    @click="onClearItem(base.file, index)"
+                                ></x-icon-svg>
+                            </div>
                         </div>
-                        <input
+                        <!-- <input
                             type="button"
                             class="
                                 ml-5
@@ -423,7 +454,7 @@
                             "
                             @click="onClearItem(base.file, index)"
                             value="クリア"
-                        />
+                        /> -->
                     </div>
                 </div>
                 <input
@@ -696,6 +727,7 @@ import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../common/dateRange/litepie-datepicker.vue'
 import tinymceEdit from './tinymceEdit.vue'
 import multiselectEdit from './multiSelectEdit.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
 const URL_BASE_PMID = "https://www.ncbi.nlm.nih.gov/pubmed/"
 const URL_BASE_DOI = "http://www.google.com/"
 const URL_API_QIS = "https://aipharma-rev.kit-ai.jp/api/qa/get_qa_informations"
@@ -707,6 +739,7 @@ export default {
     litepieDatepicker,
     tinymceEdit,
     multiselectEdit,
+    xIconSvg
   },
   data() {
     return {
