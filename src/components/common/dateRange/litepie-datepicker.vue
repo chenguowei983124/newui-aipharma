@@ -442,11 +442,6 @@ export default /*#__PURE__*/ defineComponent({
             },
         },
     },
-    months: {
-        clear() {
-            this.pickerValue = ''
-        },
-    },
     props: {
         leftLableStyle: {
             tpye: String,
@@ -918,7 +913,6 @@ export default /*#__PURE__*/ defineComponent({
         }
 
         const clearPicker = () => {
-            // console.log("clearPicker")
             pickerValue.value = ''
             if (useArray()) {
                 emit('update:modelValue', [])
@@ -932,7 +926,8 @@ export default /*#__PURE__*/ defineComponent({
                 emit('update:modelValue', '')
             }
             applyValue.value = []
-            LitepieInputRef.value && LitepieInputRef.value.focus()
+            // LitepieInputRef.value && LitepieInputRef.value.focus()
+            leftLableDispFlg.value = true
         }
 
         /**
