@@ -12,7 +12,7 @@
                 "
             >
                 <div class="shadow overflow-hidden border-b border-gray-200">
-                    <table class="min-w-full divide-y divide-gray-200 w-245">
+                    <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th
@@ -207,19 +207,13 @@
                                         {{ person.col3 }}
                                     </div>
                                 </td>
-                                <td class="whitespace-nowrap">
-                                    <span
-                                        class="
-                                            px-2
-                                            inline-flex
-                                            text-xs
-                                            leading-5
-                                            font-semibold
-                                            rounded-full
-                                            bg-green-100
-                                            text-green-800
-                                        "
-                                    >
+                                <td
+                                    class="
+                                        whitespace-nowrap
+                                        border-2 border-blueline
+                                    "
+                                >
+                                    <span class="text-sm text-gray-900">
                                         {{ person.col4 }}
                                     </span>
                                 </td>
@@ -294,6 +288,32 @@
                                     "
                                 >
                                     {{ person.col12 }}
+                                    <br />
+                                    <div
+                                        class="
+                                            h-6
+                                            bg-blue-500
+                                            text-white
+                                            w-18
+                                            px-3
+                                            pt-0.5
+                                        "
+                                    >
+                                        自施設
+                                    </div>
+                                    <!-- <div
+                                        class="
+                                            notoSansJpAndTwelveMedium
+                                            text-white
+                                            h-4
+                                        "
+                                    > -->
+                                    <!-- <result-detail-row-item
+                                            itemType="1"
+                                            :typeKB="item.group"
+                                            v-if="item.group != undefined"
+                                        ></result-detail-row-item> -->
+                                    <!-- </div> -->
                                 </td>
                                 <td
                                     class="
@@ -301,26 +321,50 @@
                                         text-right text-sm
                                         font-medium
                                         border-2 border-blueline
+                                        space-y-1
                                     "
                                 >
-                                    <!-- <button>1</button>
-                                    <button>2</button>
-                                    <button>3</button> -->
-                                    <div class="h-7.5 w-7.5 rounded">
-                                        <button>
-                                            <download-icon-svg
-                                                class="h-7.5 w-7.5"
-                                            ></download-icon-svg>
-                                        </button>
-                                    </div>
+                                    <button
+                                        class="
+                                            h-7.5
+                                            w-7.5
+                                            bg-green-300
+                                            rounded
+                                            mx-1
+                                        "
+                                    >
+                                        <download-icon-svg
+                                            class="h-5 w-5 mx-1.25"
+                                        ></download-icon-svg>
+                                    </button>
                                     <br />
                                     <button
-                                        class="w-10 h-10 bg-gray-300 rounded"
-                                    ></button>
+                                        class="
+                                            h-7.5
+                                            w-7.5
+                                            bg-searchBunnon
+                                            rounded
+                                            mx-1
+                                        "
+                                    >
+                                        <edit-icon-svg
+                                            class="h-5 w-5 mx-1.25"
+                                        ></edit-icon-svg>
+                                    </button>
                                     <br />
                                     <button
-                                        class="w-10 h-10 bg-gray-300"
-                                    ></button>
+                                        class="
+                                            h-7.5
+                                            w-7.5
+                                            bg-personInformationButton
+                                            rounded
+                                            mx-1
+                                        "
+                                    >
+                                        <trash-icon-svg
+                                            class="h-5 w-5 mx-1.25"
+                                        ></trash-icon-svg>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -333,6 +377,8 @@
 
 <script>
 import downloadIconSvg from '../svgImage/downloadIconSvg.vue'
+import EditIconSvg from '../svgImage/editIconSvg.vue'
+import TrashIconSvg from '../svgImage/trashIconSvg.vue'
 const people = [
   {
     col1: 'false',
@@ -413,7 +459,7 @@ const people = [
 ]
 
 export default {
-  components: { downloadIconSvg },
+  components: { downloadIconSvg, TrashIconSvg, EditIconSvg },
   setup() {
     return {
       people,

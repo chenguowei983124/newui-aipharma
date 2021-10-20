@@ -3,9 +3,9 @@
     <div class="flex">
         <!-- pcの場合 -->
         <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
+            <!-- @detailDisp="getDetailDisp" -->
             <search-bar
                 :form="$constant.formList.PVD"
-                @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
             ></search-bar>
         </div>

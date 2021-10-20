@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium">
-        検索条件：
+        検索条件：ロキソニン　/　2021.09.10 - 2021.09.16
         <!-- <div
             class=""
             v-for="(searchWords, index) in $store.getters
@@ -11,7 +11,7 @@
         </div> -->
     </div>
     <!-- $store.getters.preavoidsSearchInfo.allCount -->
-    <div class="notoSansJpAndFourteenMedium">該当：{{}}件</div>
+    <div class="notoSansJpAndFourteenMedium">該当：{{ 236 }}件</div>
     <div class="">
         <div class="flex flex-wrap-reverse md:justify-between">
             <div class="flex space-x-2 mt-2 md:mt-0">
@@ -19,7 +19,7 @@
                     class="
                         flex-none
                         rounded
-                        border-2 border-green-400
+                        border-2 border-green-400 border-b-4
                         flex
                         justify-center
                     "
@@ -43,7 +43,7 @@
                     class="
                         flex-none
                         rounded
-                        border-2 border-blueline
+                        border-2 border-blueline border-b-4
                         px-1
                         text-mxs
                         font-NotoSansJp
