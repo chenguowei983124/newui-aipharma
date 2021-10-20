@@ -18,7 +18,7 @@
             </resut-tag>
             <resut-tag
                 headerStyle="titleBgColorGray"
-                title="よく見られているQ＆A &nbsp; &nbsp; &nbsp;  - 最近 1 ヶ月-"
+                title="よく見られているQ＆A  &nbsp; &nbsp;- 最近 1 ヶ月-"
                 titleStyle="newQaInfoTitle"
                 titleURL="/"
             >
