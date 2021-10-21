@@ -47,6 +47,7 @@
                         border-b-2 border-gray-600
                     "
                     value="下書き一覧"
+                    @click="getUnpublish"
                 />
             </div>
         </div>
@@ -54,9 +55,10 @@
             <a
                 class=""
                 :class="[dispFlg ? 'w-2/5' : 'flex-grow']"
-                @click="dispFlg = !dispFlg"
             >
-                <bbs-list></bbs-list>
+                <bbs-list
+                    @clickItemEvent="openDetail"
+                ></bbs-list>
             </a>
             <bbs-talking
                 class="w-full flex-grow-0"
@@ -82,8 +84,22 @@ export default {
     },
     mounted() {},
     methods: {
+        openDetail(val){
+            console.log('openDetail', val)
+            this.dispFlg = !this.dispFlg
+        },
         getClose(value) {
             this.dispFlg = value
+        },
+        getUnpublish() {
+            const params = {
+                publish: false,
+                timestamp: new Date().getTime(),
+            }
+            this.$router.push({
+                path: '/searchBulletinBoard',
+                query: params,
+            })            
         },
     },
     created() {},
