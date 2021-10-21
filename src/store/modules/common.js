@@ -14,6 +14,7 @@ export default {
             { "value": "3", "title": "グループ施設のみ" },
             { "value": "4", "title": "グループ施設+自施設" }
         ],
+        oidcCode:'',
     }),
 
     getters: {
@@ -48,7 +49,11 @@ export default {
             // ]
 
             // return state.qa_classify_facility
-        }
+        },
+        getOidcCode(state) {
+
+            return state.oidcCode
+        },
     },
 
     mutations: {
@@ -133,6 +138,9 @@ export default {
             ]
 
             commit('basic', { key: 'qa_classify_subject', value })
-        }
+        },
+        setOidcCode({ commit, state }, value) {
+            commit('basic', { key: 'oidcCode', value })
+        },
     },
 }
