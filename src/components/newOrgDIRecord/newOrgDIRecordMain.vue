@@ -88,84 +88,146 @@
                 <div>
                     <label class="notoSansJpAndSixteenBold"> 出典・引用 </label>
                     <div
+                        class="
+                            flex flex-col
+                            md:flex-row
+                            mt-2
+                            space-y-2
+                            md:space-y-0
+                        "
                         v-for="(item, index) in base.source"
                         :key="index"
-                        class="flex-wrap md:flex justify-between mt-2"
                     >
-                        <input
-                            v-model="item.name"
-                            class="
-                                h-10
-                                w-full
-                                md:w-1/2
-                                NotoSansJp-normal
-                                rounded-sm
-                                pl-4
-                                placeholder-gray-500
-                                focus:placeholder-opacity-0
-                                ring-1
-                                border-transparent
-                                focus:outline-none
-                                focus:ring-1 focus:ring-326EB5Lins
-                                focus:border-transparent
+                        <div class="">
+                            <input
+                                v-model="item.name"
+                                class="
+                                    h-10
+                                    w-88.75
+                                    md:w-87.5
+                                    NotoSansJp-normal
+                                    rounded-sm
+                                    pl-4
+                                    placeholder-gray-500
+                                    focus:placeholder-opacity-0
+                                    ring-1
+                                    border-transparent
+                                    focus:outline-none
+                                    focus:ring-1 focus:ring-326EB5Lins
+                                    focus:border-transparent
+                                "
+                                type="text"
+                                placeholder="書籍・参考サイト名"
+                            />
+                        </div>
+                        <div class="ml-0 md:ml-2.5">
+                            <input
+                                v-model="item.url"
+                                class="
+                                    h-10
+                                    w-88.75
+                                    md:w-87.5
+                                    NotoSansJp-normal
+                                    rounded-sm
+                                    pl-4
+                                    placeholder-gray-500
+                                    focus:placeholder-opacity-0
+                                    ring-1
+                                    border-transparent
+                                    focus:outline-none
+                                    focus:ring-1 focus:ring-326EB5Lins
+                                    focus:border-transparent
+                                "
+                                type="text"
+                                placeholder="URL（任意）"
+                            />
+                        </div>
+                        <div class="ml-2.5 hidden md:block">
+                            <input
+                                type="button"
+                                class="
+                                    w-11.25
+                                    bg-gray-400
+                                    hover:opacity-50
+                                    active:bg-bg-gray-200
+                                    active:opacity-100
+                                    h-7.5
+                                    md:h-10
+                                    rounded-md
+                                    notoSansJpAndTwelveBold
+                                    text-white
+                                    border-b-2 border-gray-500
+                                "
+                                @click="onClearItem(base.source, index)"
+                                value="クリア"
+                            />
+                        </div>
+                        <div
+                            class="flex"
+                            :class="
+                                base.source.length == index + 1
+                                    ? 'justify-between'
+                                    : 'justify-end'
                             "
-                            type="text"
-                            placeholder="書籍・参考サイト名"
-                        />
-                        <input
-                            v-model="item.url"
-                            class="
-                                flex-grow
-                                h-10
-                                mt-2
-                                md:mt-0
-                                ml-0
-                                md:ml-2
-                                w-full
-                                md:w-0
-                                NotoSansJp-normal
-                                rounded-sm
-                                pl-4
-                                placeholder-gray-500
-                                focus:placeholder-opacity-0
-                                ring-1
-                                border-transparent
-                                focus:outline-none
-                                focus:ring-1 focus:ring-326EB5Lins
-                                focus:border-transparent
-                            "
-                            type="text"
-                            placeholder="URL（任意）"
-                        />
-                        <input
-                            type="button"
-                            class="
-                                mt-2
-                                md:mt-0
-                                ml-0
-                                md:ml-2
-                                md:w-1/12
-                                bg-gray-400
-                                hover:opacity-50
-                                active:bg-bg-gray-200
-                                active:opacity-100
-                                h-10
-                                rounded-sm
-                                notoSansJpAndTwelveBold
-                                text-white
-                                border-b-2 border-gray-500
-                            "
-                            @click="onClearItem(base.source, index)"
-                            value="クリア"
-                        />
+                        >
+                            <div
+                                class="bg-blue-400 block md:hidden"
+                                :class="
+                                    base.source.length == index + 1
+                                        ? 'block'
+                                        : 'hidden'
+                                "
+                            >
+                                <input
+                                    type="button"
+                                    class="
+                                        bg-blueline
+                                        hover:opacity-50
+                                        active:bg-bg-gray-200
+                                        active:opacity-100
+                                        h-7
+                                        md:h-7.5
+                                        w-19.5
+                                        rounded
+                                        notoSansJpAndFourteenBold
+                                        text-white
+                                        border-b-2 border-bluelineB
+                                    "
+                                    @click="onAddSource"
+                                    value="+追加"
+                                />
+                            </div>
+                            <div class="bg-blue-500 block md:hidden">
+                                <input
+                                    type="button"
+                                    class="
+                                        w-11.25
+                                        bg-gray-400
+                                        hover:opacity-50
+                                        active:bg-bg-gray-200
+                                        active:opacity-100
+                                        h-7.5
+                                        md:h-10
+                                        rounded-md
+                                        notoSansJpAndTwelveBold
+                                        text-white
+                                        border-b-2 border-gray-500
+                                    "
+                                    @click="onClearItem(base.source, index)"
+                                    value="クリア"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <input
                     type="button"
                     class="
+                        hidden
+                        md:block
                         mt-2
-                        bg-blue-300
+                        bg-blueline
                         hover:opacity-50
                         active:bg-bg-gray-200
                         active:opacity-100
@@ -180,7 +242,7 @@
                     @click="onAddSource"
                     value="+追加"
                 />
-                <div class="w-auto inline-block">
+                <div class="w-21 inline-block mt-2">
                     <a
                         :href="url.pmid.lable"
                         target="_blank"
@@ -211,42 +273,44 @@
                         </div>
                     </a>
                 </div>
-                <div class="flex-wrap md:flex">
-                    <input
-                        v-model="base.pmid"
+                <!-- <div class="flex-wrap mt-2"> -->
+                <input
+                    v-model="base.pmid"
+                    class="
+                        mt-2
+                        block
+                        h-10
+                        w-full
+                        md:w-1/2
+                        NotoSansJp-normal
+                        rounded-sm
+                        pl-4
+                        placeholder-gray-500
+                        focus:placeholder-opacity-0
+                        ring-1
+                        border-transparent
+                        focus:outline-none
+                        focus:ring-1 focus:ring-326EB5Lins
+                        focus:border-transparent
+                    "
+                    type="text"
+                    placeholder="PMID"
+                    :onInput="onInputPmid"
+                />
+                <a :href="url.pmid.text" target="_blank" class="mt-2">
+                    <label
                         class="
-                            block
-                            h-10
-                            w-full
-                            md:w-1/2
-                            NotoSansJp-normal
-                            rounded-sm
-                            pl-4
-                            placeholder-gray-500
-                            focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent
-                            focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
-                            focus:border-transparent
+                            notoSansJpAndSixteenBold
+                            underline
+                            cursor-pointer
+                            break-words
                         "
-                        type="text"
-                        placeholder="PMID"
-                        :onInput="onInputPmid"
-                    />
-                    <a :href="url.pmid.text" target="_blank" class="ml-1">
-                        <label
-                            class="
-                                notoSansJpAndSixteenBold
-                                underline
-                                cursor-pointer
-                            "
-                        >
-                            {{ url.pmid.text }}
-                        </label>
-                    </a>
-                </div>
-                <div class="w-auto inline-block">
+                    >
+                        {{ url.pmid.text }}
+                    </label>
+                </a>
+                <!-- </div> -->
+                <div class="w-24 inline-block mt-2">
                     <a
                         :href="url.doi.lable"
                         target="_blank"
@@ -277,56 +341,77 @@
                         </div>
                     </a>
                 </div>
-                <div class="flex-wrap md:flex">
-                    <input
-                        v-model="base.doi"
+                <!-- <div class="flex-wrap md:flex"> -->
+                <input
+                    v-model="base.doi"
+                    class="
+                        mt-2
+                        block
+                        h-10
+                        w-full
+                        md:w-1/2
+                        NotoSansJp-normal
+                        rounded-sm
+                        pl-4
+                        placeholder-gray-500
+                        focus:placeholder-opacity-0
+                        ring-1
+                        border-transparent
+                        focus:outline-none
+                        focus:ring-1 focus:ring-326EB5Lins
+                        focus:border-transparent
+                    "
+                    type="text"
+                    placeholder="DOI"
+                    :onInput="onInputDoi"
+                />
+                <a :href="url.doi.text" target="_blank " class="ml-1 mt-2">
+                    <label
                         class="
-                            block
-                            h-10
-                            w-full
-                            md:w-1/2
-                            NotoSansJp-normal
-                            rounded-sm
-                            pl-4
-                            placeholder-gray-500
-                            focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent
-                            focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
-                            focus:border-transparent
+                            notoSansJpAndSixteenBold
+                            underline
+                            cursor-pointer
+                            break-words
                         "
-                        type="text"
-                        placeholder="DOI"
-                        :onInput="onInputDoi"
-                    />
-                    <a :href="url.doi.text" target="_blank" class="ml-1">
-                        <label
-                            class="
-                                notoSansJpAndSixteenBold
-                                underline
-                                cursor-pointer
-                            "
-                        >
-                            {{ url.doi.text }}
-                        </label>
-                    </a>
-                </div>
+                    >
+                        {{ url.doi.text }}
+                    </label>
+                </a>
+                <!-- </div> -->
+
                 <label class="notoSansJpAndSixteenBold"> ファイル </label>
+
                 <div v-for="(item, index) in base.file" :key="index">
-                    <div class="flex justify-between mt-1">
-                        <div class="flex">
+                    <div class="flex flex-row items-center">
+                        <p class="ml-1 font-NotoSansJp text-mxs truncate">
+                            {{ !!item.name ? item.name : '' }}
+                        </p>
+                        <div :class="!!item.name == '' ? 'hidden' : 'block'">
+                            <x-icon-svg
+                                class=""
+                                @click="onClearItem(base.file, index)"
+                            ></x-icon-svg>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-2">
+                        <div class="flex w-88.75 items-center">
                             <label
                                 :for="'addFile_' + index"
                                 class="
-                                    w-28
+                                    flex
+                                    items-center
+                                    w-29.5
+                                    h-7.5
+                                    whitespace-nowrap
                                     bg-gray-300
                                     hover:opacity-50
                                     active:bg-bg-gray-200
                                     active:opacity-100
                                     rounded-sm
-                                    notoSansJpAndFourteenBold
-                                    text-black text-center
+                                    font-NotoSansJp
+                                    px-2
+                                    text-sm text-black text-center
                                     border border-gray-600
                                 "
                                 >ファイルを選択</label
@@ -337,15 +422,23 @@
                                 type="file"
                                 @change="onFileChange"
                             />
-                            <p class="ml-2 font-NotoSansJp text-sm">
+                            <p class="ml-1 font-NotoSansJp text-mxs">
                                 {{
                                     !!item.name
-                                        ? item.name
+                                        ? ''
                                         : '※ファイルが選択されていません。'
                                 }}
                             </p>
+                            <div
+                                :class="!!item.name == '' ? 'block' : 'hidden'"
+                            >
+                                <x-icon-svg
+                                    class=""
+                                    @click="onClearItem(base.file, index)"
+                                ></x-icon-svg>
+                            </div>
                         </div>
-                        <input
+                        <!-- <input
                             type="button"
                             class="
                                 ml-5
@@ -361,14 +454,14 @@
                             "
                             @click="onClearItem(base.file, index)"
                             value="クリア"
-                        />
+                        /> -->
                     </div>
                 </div>
                 <input
                     type="button"
                     class="
                         mt-2
-                        bg-blue-300
+                        bg-blueline
                         hover:opacity-50
                         active:bg-bg-gray-200
                         active:opacity-100
@@ -634,6 +727,7 @@ import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../common/dateRange/litepie-datepicker.vue'
 import tinymceEdit from './tinymceEdit.vue'
 import multiselectEdit from './multiSelectEdit.vue'
+import xIconSvg from '../common/svgImage/xIconSvg.vue'
 const URL_BASE_PMID = "https://www.ncbi.nlm.nih.gov/pubmed/"
 const URL_BASE_DOI = "http://www.google.com/"
 const URL_API_QIS = "https://aipharma-rev.kit-ai.jp/api/qa/get_qa_informations"
@@ -645,6 +739,7 @@ export default {
     litepieDatepicker,
     tinymceEdit,
     multiselectEdit,
+    xIconSvg
   },
   data() {
     return {
@@ -838,7 +933,7 @@ export default {
 
 
       var result = JSON.parse('{"qa_classify_class":[{"id":"","name":"薬の分類"},{"id":1,"name":"医療用医薬品（内服薬）"},{"id":2,"name":"医療用医薬品（注射薬）"},{"id":3,"name":"医療用医薬品（外用薬-塗布）"},{"id":4,"name":"医療用医薬品（外用薬-貼付）"},{"id":5,"name":"医療用医薬品（外用薬-吸入）"},{"id":6,"name":"医療用医薬品（外用薬-点眼）"},{"id":7,"name":"医療用医薬品（外用薬-その他）"},{"id":8,"name":"医療用医薬品（歯科用）"},{"id":9,"name":"一般医薬品・要指導医薬品"},{"id":10,"name":"体外診断用医薬品"},{"id":11,"name":"治験薬"},{"id":12,"name":"医療機器・医療資材・衛生材料"},{"id":13,"name":"院内製剤・薬品"},{"id":14,"name":"食品"},{"id":15,"name":"不明"},{"id":16,"name":"その他"}],"approvals":[{"id":"","name":"全て"},{"id":0,"name":"未承認"},{"id":1,"name":"承認済"},{"id":2,"name":"見送り"}],"medicine_tags":["医薬品A","医薬品B","医薬品名","医薬品名２","ヨクネムール","med3","med1","med2","医薬品テスト","テスト","テスト薬2020/12/14","3,4-ジアミノピリジン　"],"keyword_tags":["キーワードA","キーワードB","キーワード①","キーワード②","key3","key1","key2","キーワードテスト"],"asked_person_medical_departments":["内科","外科","shinryou3","shinryou1","shinryou2","診療科テスト"],"qa_reference_material_lists":[{"id":"","name":"参考資料"},{"id":6,"name":"添付文書"},{"id":1,"name":"インタビューフォーム"},{"id":14,"name":"RMP"},{"id":15,"name":"製薬企業－資料（製品情報、配合変化表、患者資材等）"},{"id":16,"name":"製薬企業－コールセンター・MR"},{"id":17,"name":"製薬企業－ホームページ"},{"id":7,"name":"製薬会社"},{"id":9,"name":"書籍"},{"id":8,"name":"文献・論文"},{"id":2,"name":"会議録（学会要旨等）"},{"id":3,"name":"ガイドライン"},{"id":18,"name":"院内資料"},{"id":19,"name":"院内システム（部門システム等）"},{"id":5,"name":"資料"},{"id":10,"name":"ホームページ"},{"id":11,"name":"他病院・薬局の事例"},{"id":20,"name":"経験・症例"},{"id":21,"name":"専門医の意見・見解（エキスパート・オピニオン）"},{"id":4,"name":"質疑応答DB"},{"id":12,"name":"不明"},{"id":13,"name":"その他"}],"qa_category_lists":[{"id":"","name":"質問区分"},{"id":1,"name":"小児"},{"id":2,"name":"高齢者"},{"id":3,"name":"妊娠・授乳婦"},{"id":4,"name":"過敏症"},{"id":5,"name":"腎障害・透析"},{"id":6,"name":"肝障害"},{"id":7,"name":"配合変化・フィルター"},{"id":8,"name":"相互作用"},{"id":9,"name":"安定性・使用期限"},{"id":10,"name":"医薬品鑑別"},{"id":11,"name":"価格・処方制限"},{"id":12,"name":"警告・禁忌"},{"id":13,"name":"効能・効果"},{"id":14,"name":"採用の有無・請求方法"},{"id":15,"name":"手続き・制度"},{"id":16,"name":"製品不具合の調査"},{"id":17,"name":"資材関連"},{"id":18,"name":"処方の仕方"},{"id":19,"name":"製薬会社連絡"},{"id":20,"name":"組成・剤形・規格"},{"id":21,"name":"中毒"},{"id":22,"name":"調整方法"},{"id":23,"name":"TDM・体内動態"},{"id":24,"name":"副作用"},{"id":25,"name":"粉砕・簡易懸濁"},{"id":26,"name":"薬物治療・ガイドライン"},{"id":27,"name":"用法・用量"},{"id":28,"name":"漢方・生薬"},{"id":29,"name":"不明"},{"id":30,"name":"その他"},{"id":32,"name":"shi3"},{"id":33,"name":"shi1"},{"id":34,"name":"shi2"}],"asked_persons_class":[{"id":"","name":"職種"},{"id":1,"name":"患者・患者家族"},{"id":2,"name":"医師"},{"id":26,"name":"研修医師"},{"id":3,"name":"歯科医師"},{"id":27,"name":"研修歯科医師"},{"id":4,"name":"薬剤師"},{"id":5,"name":"看護師"},{"id":6,"name":"助産師"},{"id":7,"name":"理学療法士(PT)"},{"id":8,"name":"臨床工学技士(ME)"},{"id":9,"name":"臨床検査技師(CT)"},{"id":10,"name":"放射線技師(RT)"},{"id":11,"name":"栄養士"},{"id":12,"name":"ケアマネージャー"},{"id":13,"name":"保健師"},{"id":14,"name":"衛生検査技師"},{"id":15,"name":"作業療法士"},{"id":16,"name":"言語聴覚士"},{"id":17,"name":"救急救命士"},{"id":18,"name":"鍼灸師"},{"id":19,"name":"歯科衛生士"},{"id":20,"name":"歯科技工士"},{"id":21,"name":"事務"},{"id":24,"name":"SPD"},{"id":25,"name":"保育士"},{"id":22,"name":"不明"},{"id":23,"name":"その他"}],"patient_gender":[{"id":0,"name":"未選択"},{"id":1,"name":"男"},{"id":2,"name":"女"},{"id":3,"name":"不明"}],"side_effects":["副作用","副作用２","副作用3","副作用④","副作用③","huku3","huku1","huku2","あたらしい副作用"],"diseases":["疾患名","疾患名２","疾患名３","睡眠障害","睡眠睡眠睡眠睡眠睡眠不足","shikka3","shikkan1","shikkan2","あたらしい疾患名"],"custom_details":[{"id":1,"title":"シングルセレクト項目","data_type":"single","data":["シングルセレクト選択肢１","シングルセレクト選択肢２","3333333333"]},{"id":2,"title":"マルチセレクト項目","data_type":"multiple","data":["マルチセレクト選択肢１","マルチセレクト選択肢２"]},{"id":3,"title":"テキスト項目","data_type":"text"},{"id":5,"title":"マルチセレクトのテスト","data_type":"multiple","data":["マルチセレクトのテスト1","マルチセレクトのテスト2","マルチセレクトのテスト3","マルチセレクトのテスト4"]},{"id":6,"title":"マルチセレクト6","data_type":"multiple","data":["ワン","ツー","さん","ごー","ロックンロール","し"]},{"id":7,"title":"引用","data_type":"multiple","data":["ハンドブック","UP TO DATE","薬剤部本部からの情報"]},{"id":8,"title":"引用その他","data_type":"text"},{"id":12,"title":"カスタム項目シングル①②③④⑤⑥⑦⑧⑨⓪","data_type":"single","data":["カスタム選択肢１⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪","カスタム選択肢２⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪"]},{"id":13,"title":"マルチセレクト項目⓪①②③④⑤⑥⑦⑧⑨⓪","data_type":"multiple","data":["マルチ選択肢１⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪","マルチ選択肢２⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪①②③④⑤⑥⑦⑧⑨⓪"]},{"id":15,"title":"ms1015","data_type":"multiple","data":["a","b","c"]}],"status":"success"}')
-      console.log('get_qa_informations', result)
+      // console.log('get_qa_informations', result)
       this.qa_informations = result
     },
     initCustomDetails() {

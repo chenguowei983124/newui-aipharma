@@ -1327,7 +1327,7 @@ export default {
 .text {
     margin: 0 5px;
 }
-/* .table {
+.table {
     border-top: 1px solid #999;
 
     border-left: 1px solid #999;
@@ -1348,5 +1348,5 @@ table td {
     border-bottom: 1px solid #999;
 
     border-right: 1px solid #999;
-} */
+}
 </style>

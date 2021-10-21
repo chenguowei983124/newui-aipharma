@@ -6,6 +6,8 @@ export default {
         commentMessageBox: false,
         organizationSearchInfo: {},
         organizationSeartorenndoTab: {},
+        organizationNewQAInfo: {},
+        organizationLookcarefullyQAInfo: {},
         isOrganizationSearch: false,
 
         // 検索条件
@@ -111,6 +113,13 @@ export default {
         organizationSearchInfo(state) {
             return state.organizationSearchInfo
         },
+        organizationNewQAInfo(state) {
+            console.log('asdfa')
+            return state.organizationNewQAInfo
+        },
+        organizationLookcarefullyQAInfo(state) {
+            return state.organizationLookcarefullyQAInfo
+        },
         getOrganizationDateSort(state) {
             return state.organizationDateSort
         },
@@ -154,46 +163,48 @@ export default {
         setOrganizationSearchInfo(state, info) {
             state.organizationSearchInfo = info.data
         },
+        setOrganizationNewQAInfo(state, info) {
+            state.organizationNewQAInfo = info.data
+        },
+        setOrganizationLookcarefullyQAInfo(state, info) {
+            state.organizationLookcarefullyQAInfo = info.data
+        },
     },
 
     actions: {
+        //===========================
+        // 組織内DI記録検索結果取得（ID）
+        //===========================
         async getOrganizationSearchQaIdInfo(
             { rootState, commit },
             { inputSearchValue, tagValue, id }
         ) {
-            // console.log("getOrganizationSearchInfo", id)
-            // console.log(inputSearchValue)
             const info = await serve.getOwn({ id: id })
-            // console.log(inputSearchValue)
-            // console.log(info)
-            // const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info`, {
-            //     // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/get_organization_search_info`, {
-            //     params: {
-            //         id: id
-            //     }
-            // })
-            // console.log('getOrganizationSearchInfo', info)
-            // commit('basic', { key: 'organizationSearchInfo', info })
             commit('setOrganizationSearchInfo', info)
         },
+        //===========================
+        // 組織内DI記録検索結果取得（検索条件）
+        //===========================
         async getOrganizationSearchConditionsInfo(
             { rootState, commit },
             param
         ) {
-            // console.log("getOrganizationSearchInfo", id)
-            // console.log(inputSearchValue)
             const info = await serve.getOwnData(param)
-            // console.log(inputSearchValue)
-            // console.log(info)
-            // const info = await axios.get(`http://mock-api.com/ZzRpqmne.mock/preavoid/get_organization_search_info`, {
-            //     // const info = await axios.get(`${import.meta.env.VITE_APP_PREAVOID_API_URL}/get_organization_search_info`, {
-            //     params: {
-            //         id: id
-            //     }
-            // })
-            // console.log('getOrganizationSearchInfo', info)
-            // commit('basic', { key: 'organizationSearchInfo', info })
             commit('setOrganizationSearchInfo', info)
+        },
+        //===========================
+        // 組織内DI記録検索結果取得（新着QA）
+        //===========================
+        async getOrganizationNewQAInfo({ rootState, commit }) {
+            const info = await serve.getOwnNewQA()
+            commit('setOrganizationNewQAInfo', info)
+        },
+        //===========================
+        // 組織内DI記録検索結果取得（よく見られているQA）
+        //===========================
+        async getOrganizationLookcarefullyQAInfo({ rootState, commit }) {
+            const info = await serve.getOwnNewQA()
+            commit('setOrganizationLookcarefullyQAInfo', info)
         },
         setOrganizationSeartorenndoTab({ commit, state }, value) {
             commit('basic', { key: 'organizationSeartorenndoTab', value })

@@ -10,31 +10,26 @@
             >
                 <result-detail-row
                     class="searchResult_detail_gray"
-                    :sites="
-                        $store.getters.getSearchAllOrganizationDidDocument
-                            .details
-                    "
-                    :sub1="['group']"
+                    :sites="$store.getters.diKnowledgeShareNewQAInfo.details"
                     :sub2="['title']"
-                    :sub3="['states', 'date', 'view']"
+                    :sub3="['status', 'date', 'view']"
                 >
                 </result-detail-row>
             </resut-tag>
             <resut-tag
                 headerStyle="titleBgColorGray"
-                title="よく見られているQ＆A &nbsp; &nbsp; &nbsp;  - 最近 1 ヶ月-"
+                title="よく見られているQ＆A  &nbsp; &nbsp;- 最近 1 ヶ月-"
                 titleStyle="newQaInfoTitle"
                 titleURL="/"
             >
                 <result-detail-row
                     class="searchResult_detail_gray"
                     :sites="
-                        $store.getters.getSearchAllOrganizationDidDocument
+                        $store.getters.diKnowledgeShareLookcarefullyQAInfo
                             .details
                     "
-                    :sub1="['group']"
                     :sub2="['title']"
-                    :sub3="['states', 'date', 'view']"
+                    :sub3="['status', 'date', 'view']"
                 >
                 </result-detail-row>
             </resut-tag>
@@ -82,12 +77,16 @@
 import ResutTag from '../common/searchResult/resultTag.vue'
 import ResultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
 export default {
-    components: { ResutTag, ResultDetailRow },
-    methods: {
-        sendMsgToParent: function (data) {
-            this.$emit('listenToChildEvent', data)
-        },
+  components: { ResutTag, ResultDetailRow },
+  methods: {
+    sendMsgToParent: function (data) {
+      this.$emit('listenToChildEvent', data)
     },
+  },
+  mounted() {
+    this.$store.dispatch('getDiKnowledgeShareNewQAInfo')
+    this.$store.dispatch('getDiKnowledgeShareLookcarefullyQAInfo')
+  },
 }
 </script>
 
