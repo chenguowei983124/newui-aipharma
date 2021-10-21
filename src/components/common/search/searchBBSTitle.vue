@@ -204,12 +204,12 @@ export default {
       
       filterBBS: {
         targets:[
-          {name: 'title', title: 'タイトル',value: false},
-          {name: 'content', title: '内容',value: false},
-          {name: 'coment', title: 'コメント',value: false},
-          {name: 'creator', title: '投稿者',value: false},
-          {name: 'updater', title: '最終編集者',value: false},
-          {name: 'facility', title: '施設名',value: false},
+          {name: 'title', title: 'タイトル',value: true},
+          {name: 'content', title: '内容',value: true},
+          {name: 'coment', title: 'コメント',value: true},
+          {name: 'creator', title: '投稿者',value: true},
+          {name: 'updater', title: '最終編集者',value: true},
+          {name: 'facility', title: '施設名',value: true},
         ],
         tags:[
 
@@ -219,14 +219,15 @@ export default {
         create_to: ''
       },
       
-      tagList: [
-          'AA',
-          'BB',
-          'CC',
-          { label: 'A', value: 1 },
-          { label: 'B', value: 2 },
-          { label: 'C', value: 3 },
-      ],
+      tagList: this.$store.getters.bbsTagsInfo,
+    //    [
+    //       'AA',
+    //       'BB',
+    //       'CC',
+    //       { label: 'A', value: 1 },
+    //       { label: 'B', value: 2 },
+    //       { label: 'C', value: 3 },
+    //   ],
       scopeList: [
           { value: '0', title: '全体' },
           { value: '1', title: '学会' },
@@ -239,7 +240,7 @@ export default {
     }
   },
   methods: {
-    inputClear(data) {
+    inputClear() {
       
       this.filterBBS.targets.map(t => {
         t.value = false
@@ -262,11 +263,23 @@ export default {
       this.isDetailClick = !this.isDetailClick
     },
   },
+  created () {
+    //   console.log('setFilterBBS',this.$data.filterBBS)
+      this.$store.dispatch('setFilterBBS', this.$data.filterBBS)
+  },
   updated () {
     this.$nextTick(function () {
       // ビュー全体がレンダリングされた後にのみ実行されるコード
       this.$store.dispatch('setFilterBBS', this.$data.filterBBS)
     })    
+  },
+  watch: {
+    $route(to, from) {
+      if (to.path == '/searchBulletinBoard' || from.path != '/searchBulletinBoard') return
+
+    //   console.log('searchBBSTitle watch',to, from)
+      this.inputClear()
+    }
   },
 }
 </script>

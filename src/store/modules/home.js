@@ -76,8 +76,12 @@ export default {
             commit('setBbsTagsinfo', {})
             const info = await serve.getTopNoticel(code)
             commit('setTopNotice', info.data)
-            if (!!info.data.master && !!info.data.master.tags) {
-                commit('setBbsTagsinfo', info.data.master.tags)
+            if (!!info.master && !!info.master.tags) {
+                let taglist = []
+                info.master.tags.map(tag => {
+                    taglist.push(tag.name)
+                })
+                commit('setBbsTagsinfo', taglist)
             }
         },
         async getTopBulletinBoardInfo({ rootState, commit }, code) {
