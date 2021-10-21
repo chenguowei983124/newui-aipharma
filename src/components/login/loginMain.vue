@@ -211,10 +211,14 @@ export default {
                 } else {
                     self.clearCookie()
                 }
-
-                // this.AuthOIDC()
-                this.$router.push('/myhome')
-                localStorage.setItem('token', '123132')
+                if (!!import.meta.env.VITE_APP_IS_OIDC_AUTH && import.meta.env.VITE_APP_IS_OIDC_AUTH == 'true') {
+                    this.AuthOIDC()
+                    // console.log('env log1',typeof import.meta.env.VITE_APP_IS_OIDC_AUTH)
+                } else {
+                    this.$router.push('/myhome')
+                    localStorage.setItem('token', '123132')
+                    // console.log('env log2',import.meta.env.VITE_APP_PREAVOID_API_URL)
+                }
             }
         },
         setCookie(loginId, password, exdays) {
