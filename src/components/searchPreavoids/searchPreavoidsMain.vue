@@ -25,7 +25,12 @@
                     "
                 >
                     <label class="inline-flex items-center justify-end mx-1">
-                        <input type="checkbox" class="" checked />
+                        <div
+                            class="rounded h-3 w-3 border-2 border-downloadIcon"
+                        >
+                            <s-check-svg></s-check-svg>
+                        </div>
+
                         <span
                             class="
                                 ml-0.5
@@ -116,6 +121,7 @@ import Good from '../common/svgImage/good.vue'
 import bad from '../common/svgImage/bad.vue'
 import talk from '../common/svgImage/talk.vue'
 import xIconSvg from '../common/svgImage/xIconSvg.vue'
+import sCheckSvg from '../common/svgImage/sCheckSvg.vue'
 import Pagination from '../common/pagination/pagiation.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
@@ -125,7 +131,7 @@ export default {
   components: {
     TriangleDownSvg,
     resutTag, resultDetailRow, carousel,
-    Good, bad, talk, xIconSvg,
+    Good, bad, talk, xIconSvg, sCheckSvg,
     Pagination, vueSingleSelect,
     GoodMessageBox, myTable
   },

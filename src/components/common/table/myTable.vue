@@ -1,377 +1,355 @@
 <template>
-    <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div
-                class="
-                    py-2
-                    align-middle
-                    inline-block
-                    min-w-full
-                    sm:px-6
-                    lg:px-8
-                "
-            >
-                <div class="shadow overflow-hidden border-b border-gray-200">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th
-                                    scope="col"
+    <div class="overflow-x-auto">
+        <table class="w-245 min-w-full border-l border-t border-blueline">
+            <thead>
+                <tr class="flex bg-cardViewCount text-xs font-medium">
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-5.5
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        <input type="checkbox" name="" id="" />
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-8
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        様式
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-17.5
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        報告日
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-17.5
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        <div class="flex flex-col">
+                            <div>システム</div>
+                            <div>登録日</div>
+                        </div>
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-21
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        被疑薬
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-21
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        副作用名
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-12.5
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        年齢
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-8
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        性別
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-17
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        外来 / 入院
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-21
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        治療中の疾患
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-54
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        内容
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-30
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        投稿者
+                    </th>
+                    <th
+                        class="
+                            border-r border-b border-blueline
+                            w-12.5
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        管理
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    class="flex text-xs font-NotoSansJp"
+                    v-for="person in people"
+                    :key="person"
+                >
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-5.5
+                            flex-none flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        <input type="checkbox" name="" id="" />
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-8
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col2 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-17.5
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col3 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-17.5
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col4 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-21
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col5 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-21
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col6 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-12.5
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col7 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-8
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col8 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-17
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col9 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-21
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col10 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-54
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        {{ person.col11 }}
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-30
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        <div>
+                            <div class="flex flex-col text-xs">
+                                {{ person.col12 }}
+                                <div
                                     class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
+                                        mt-1
+                                        h-5
+                                        bg-blue-500
+                                        text-white
+                                        w-16
+                                        flex
+                                        justify-center
+                                        items-center
                                     "
                                 >
-                                    <input type="checkbox" name="" id="" />
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    様式
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    報告日
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    システム 登録日
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    被疑薬
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    副作用名
-                                </th>
+                                    自施設
+                                </div>
+                            </div>
 
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    年齢
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    性別
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    外来/入院
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    治療中の疾患
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    内容
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="
-                                        text-left text-xs
-                                        font-medium
-                                        text-gray-500
-                                        uppercase
-                                        tracking-wider
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    投稿者
-                                </th>
-                                <th
-                                    scope="col"
-                                    class="border-2 border-blueline"
-                                >
-                                    <span class="sr-only">管理</span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr v-for="person in people" :key="person.email">
-                                <td class="border-2 border-blueline">
-                                    <input type="checkbox" name="" id="" />
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-10 w-10">
-                                            {{ person.col2 }}
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    <div class="text-sm text-gray-900">
-                                        {{ person.col3 }}
-                                    </div>
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    <span class="text-sm text-gray-900">
-                                        {{ person.col4 }}
-                                    </span>
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        text-sm text-gray-500
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    {{ person.col5 }}
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        text-sm text-gray-500
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    {{ person.col6 }}
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        text-sm text-gray-500
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    {{ person.col7 }}
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        text-sm text-gray-500
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    {{ person.col8 }}
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        text-sm text-gray-500
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    {{ person.col9 }}
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        text-sm text-gray-500
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    {{ person.col10 }}
-                                </td>
-                                <td
-                                    class="
-                                        break-words
-                                        text-sm text-gray-500
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    {{ person.col11 }}
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        text-sm text-gray-500
-                                        border-2 border-blueline
-                                    "
-                                >
-                                    {{ person.col12 }}
-                                    <br />
-                                    <div
-                                        class="
-                                            h-6
-                                            bg-blue-500
-                                            text-white
-                                            w-18
-                                            px-3
-                                            pt-0.5
-                                        "
-                                    >
-                                        自施設
-                                    </div>
-                                    <!-- <div
-                                        class="
-                                            notoSansJpAndTwelveMedium
-                                            text-white
-                                            h-4
-                                        "
-                                    > -->
-                                    <!-- <result-detail-row-item
-                                            itemType="1"
-                                            :typeKB="item.group"
-                                            v-if="item.group != undefined"
-                                        ></result-detail-row-item> -->
-                                    <!-- </div> -->
-                                </td>
-                                <td
-                                    class="
-                                        whitespace-nowrap
-                                        text-right text-sm
-                                        font-medium
-                                        border-2 border-blueline
-                                        space-y-1
-                                    "
-                                >
-                                    <button
-                                        class="
-                                            h-7.5
-                                            w-7.5
-                                            bg-downloadIcon
-                                            rounded
-                                            mx-1
-                                        "
-                                    >
-                                        <download-icon-svg
-                                            class="h-5 w-5 mx-1.25"
-                                        ></download-icon-svg>
-                                    </button>
-                                    <br />
-                                    <button
-                                        class="
-                                            h-7.5
-                                            w-7.5
-                                            bg-searchBunnon
-                                            rounded
-                                            mx-1
-                                        "
-                                    >
-                                        <edit-icon-svg
-                                            class="h-5 w-5 mx-1.25"
-                                        ></edit-icon-svg>
-                                    </button>
-                                    <br />
-                                    <button
-                                        class="
-                                            h-7.5
-                                            w-7.5
-                                            bg-personInformationButton
-                                            rounded
-                                            mx-1
-                                        "
-                                    >
-                                        <trash-icon-svg
-                                            class="h-5 w-5 mx-1.25"
-                                        ></trash-icon-svg>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+                            <!-- <div
+                                
+                            >
+                                
+                            </div> -->
+                        </div>
+                    </td>
+                    <td
+                        class="
+                            border-r border-b border-blueline
+                            w-12.5
+                            flex-none flex
+                            justify-center
+                        "
+                    >
+                        <div class="flex flex-col space-y-1.25">
+                            <button
+                                class="
+                                    h-7.5
+                                    w-7.5
+                                    bg-downloadIcon
+                                    rounded
+                                    mx-1
+                                    mt-1
+                                "
+                            >
+                                <download-icon-svg
+                                    class="h-5 w-5 mx-1.25"
+                                ></download-icon-svg>
+                            </button>
+                            <button
+                                class="h-7.5 w-7.5 bg-searchBunnon rounded mx-1"
+                            >
+                                <edit-icon-svg
+                                    class="h-5 w-5 mx-1.25"
+                                ></edit-icon-svg>
+                            </button>
+                            <button
+                                class="
+                                    h-7.5
+                                    w-7.5
+                                    bg-personInformationButton
+                                    rounded
+                                    mx-1
+                                "
+                            >
+                                <trash-icon-svg
+                                    class="h-5 w-5 mx-1.25"
+                                ></trash-icon-svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
