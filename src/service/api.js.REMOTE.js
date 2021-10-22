@@ -2,7 +2,6 @@ import axios from './http'
 // import axios from "axios";
 const API_TIMEOUT = 5000
 const API_BASE = 'http://localhost:3000/'
-// const API_BASE = 'https://ai-pharma-bbs-be-stg.kit-ai.jp/'
 
 const exeAxios = (method, acURL, data) => {
     return axios({
@@ -59,9 +58,7 @@ const transDataformat = (resData) => {
     result.data = {
         details: dt,
     }
-
     console.log('transDataformat-after', result)
-
     return result
 }
 const serve = {
@@ -142,7 +139,6 @@ const serve = {
             }
         }
 
-        // console.log('getTopBulletinBoard',data)
         return data
     },
     //===========================
@@ -315,18 +311,6 @@ const serve = {
         })
 
         return data
-    },
-    async getPostList(queryStringData) {
-        const mtd = 'post'
-        const acURL = '/posts/search'
-        const flt = {
-            filter: queryStringData.filter,
-        }
-        delete queryStringData.filter
-        const queryString = new URLSearchParams(queryStringData).toString()
-        const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-        console.log('getPostList-filter', flt)
-        // return exeAxios(mtd, url, flt)
     },
 }
 export default serve

@@ -169,14 +169,14 @@ export default {
         },
         searchTag: function (value) {
             this.value = value
-            this.$store.dispatch('setSearchWord', value)
-            this.$store.dispatch('setSearchTags', '')
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', value)
             this.$store.dispatch('setMedicineID', '')
             this.$store.dispatch('setQuestionID', '')
             this.$store.dispatch('setFacilityID', '')
             this.$store.dispatch('setPage', '')
             this.$store.dispatch('setQAID', '')
-            this.$refs.searchbar.searchClick()
+            // this.$refs.searchbar.searchClick()
         },
         showMsgToParent: function (data) {
             return (this.parentMage = data)

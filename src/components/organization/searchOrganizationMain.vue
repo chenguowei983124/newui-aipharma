@@ -1000,8 +1000,9 @@ export default {
         },
     },
     computed: {
+        // 最大取得件数取得
         getPageCount() {
-            //   let page = 1;
+            // 選択したアイテムの数字を取得
             if (this.organizationCountSortValue == '0') {
                 this.pageCount = 20
             } else if (this.organizationCountSortValue == '1') {
@@ -1009,12 +1010,17 @@ export default {
             } else if (this.organizationCountSortValue == '2') {
                 this.pageCount = 100
             }
+
+            //
             this.$store.dispatch('setMaxCount', this.pageCount)
+
+            // ページ数を取得
             return Math.ceil(
                 this.$store.getters.organizationSearchInfo.allCount /
                     this.pageCount
             )
         },
+        // 明細部に表示明細のFROM-TO
         dispDetailRange: function () {
             let start = 1
             let end = ''
@@ -1099,6 +1105,7 @@ export default {
         resetSearchBar: function () {
             this.initStore()
             this.$store.dispatch('setSearchWord', this.$route.query.search)
+            console.log('tags', this.$route.query.tags)
             this.$store.dispatch(
                 'setSearchTags',
                 this.$route.query.tags.split(',')
