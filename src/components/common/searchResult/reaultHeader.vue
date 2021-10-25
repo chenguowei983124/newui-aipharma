@@ -68,6 +68,6 @@ export default {
 .cls-1 {
     fill: rgb(58, 175, 226);
     height: 8px;
-    width: 15px;
+    width: 12px;
 }
 </style>

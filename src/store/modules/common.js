@@ -5,6 +5,7 @@ export default {
         isMenuClick: false,
         isPortraitClick: false,
         isManagementClick: false,
+        isIssueIconClick: false,
         qa_classify_class: {},
         qa_classify_subject: {},
         qa_classify_facility: [
@@ -14,7 +15,7 @@ export default {
             { "value": "3", "title": "グループ施設のみ" },
             { "value": "4", "title": "グループ施設+自施設" }
         ],
-        oidcCode:'',
+        oidcCode: '',
     }),
 
     getters: {
@@ -29,8 +30,10 @@ export default {
         },
         getManagementClick(state) {
             return state.isManagementClick
-        }
-        ,
+        },
+        getIssueIconClick(state) {
+            return state.isIssueIconClick
+        },
         getQa_classify_class(state) {
 
             return state.qa_classify_class
@@ -82,6 +85,10 @@ export default {
         },
         setManagementClick({ commit, state }, value) {
             commit('basic', { key: 'isManagementClick', value })
+            // console.log("isManagementClick =" + value)
+        },
+        setIssueIconClick({ commit, state }, value) {
+            commit('basic', { key: 'isIssueIconClick', value })
             // console.log("isManagementClick =" + value)
         },
         getCommonInfo({ commit, state }) {

@@ -91,6 +91,20 @@ const managementPcitemList = [
     { title: '下書き一覧', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
 ]
 
+const issueIconitemList = [
+    { title: '投稿', itemStyle: 'title' },
+    {
+        title: 'お知らせ 登録',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+    {
+        title: '掲示板 登録',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord'
+    },
+]
+
 const topManagementItemUserList = [
     { title: 'マイページ', routerPath: '/' },
     { title: '施設切替', routerPath: '/' },
@@ -175,4 +189,5 @@ export default {
     managementitemList,
     managementPcitemList,
     topManagementItemUserList,
+    issueIconitemList
 }

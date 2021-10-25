@@ -12,7 +12,6 @@
                 items-baseline
                 md:border-white
                 md:space-x-3
-                mx-1
             "
             :class="getLineStyle(index, lineStyle, sites.length)"
             v-for="(row, index) in sites"
@@ -332,12 +331,11 @@ export default {
       if (midStyle == "style2") {
         return "searchResult_title_font_14 truncate block "
       }
-    }
-    , getDateFrom(dateFrom, dateTo) {
-      if (dateTo != "") {
-        return dateFrom.concat(" - ")
-      } else {
+    }, getDateFrom(dateFrom, dateTo) {
+      if (dateTo == "" || dateTo == 'undefined') {
         return dateFrom
+      } else {
+        return dateFrom.concat(" - ")
       }
     }, getPmdastatusDefaultStype(states) {
       if (states == "") {
@@ -349,7 +347,7 @@ export default {
       // console.log("length", length)
       const line = []
       if (length > 1 && style == "blueline") {
-        line.push("border-b-2 border-blueline")
+        line.push("border-b-2 border-blueline ")
       }
       if (length > 1 && style != "blueline") {
         line.push("border-b-2 border-grayline")
@@ -357,12 +355,14 @@ export default {
       if (length == "1") {
         line.push("")
       }
-
-      if (index == 4) {
-        return "md:pb-4"
-      } else if (index == 0) {
-        line.push("md:pt-4")
+      if (length == 5) {
+        if (index == 4) {
+          return "md:pb-4"
+        } else if (index == 0) {
+          line.push("md:pt-4")
+        }
       }
+
       return line
     }
   },

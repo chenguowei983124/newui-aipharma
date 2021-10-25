@@ -75,18 +75,18 @@ import issueIcon from './issueIcon.vue'
 import managementIcon from './managementIcon.vue'
 import menuDropdownItem from '../dropdown/menuDropdown.vue'
 export default {
-    components: {
-        personalInfo,
-        portraitIcon,
-        menuDropdownItem,
-        issueIcon,
-        managementIcon,
-    },
-    props: {},
-    couputed: {},
-    watch: {},
-    methods: {},
-    created() {},
+  components: {
+    personalInfo,
+    portraitIcon,
+    menuDropdownItem,
+    issueIcon,
+    managementIcon,
+  },
+  props: {},
+  couputed: {},
+  watch: {},
+  methods: {},
+  created() { },
 }
 </script>
 <style scoped></style>
