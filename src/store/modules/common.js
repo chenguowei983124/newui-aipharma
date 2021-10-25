@@ -103,6 +103,7 @@ export default {
         setStyles({ commit, state }, value) {
             commit('basic', { key: 'styles', value })
             console.log('styles =' + value)
+        },
         setIssueIconClick({ commit, state }, value) {
             commit('basic', { key: 'isIssueIconClick', value })
             // console.log("isManagementClick =" + value)
