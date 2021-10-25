@@ -291,6 +291,39 @@ const serve = {
 
         return data
     },
+    //===========================
+    // 症例検索結果取得（ID）
+    //===========================
+    async getPreavoidDataById(param) {
+        const data = await axios('/api/preavoid/search_preavoids', {
+            method: 'get',
+            params: param,
+        })
+
+        return data
+    },
+    //===========================
+    // 症例検索結果取得（検索条件）
+    //===========================
+    async getPreavoidDataByParams(param) {
+        const data = await axios('/api/preavoid/search_preavoids', {
+            method: 'get',
+            params: param,
+        })
+
+        return data
+    },
+    //===========================
+    // 症例検索結果削除（ID）
+    //===========================
+    async deletePreavoidData(param) {
+        const data = await axios('/api/preavoid/delete_preavoids', {
+            method: 'post',
+            params: param,
+        })
+
+        return data
+    },
     async getOwndIKnowledgeShare(param) {
         const data = await axios('/preavoid/get_DIKnowledgeShare_search_info', {
             method: 'get',

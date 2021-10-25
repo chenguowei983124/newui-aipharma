@@ -9,7 +9,6 @@
                 @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
                 @searchResult="getSearchResult"
-                :searchValueInput="$store.getters.getSearchWord"
             ></search-bar>
         </div>
 

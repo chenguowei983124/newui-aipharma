@@ -138,7 +138,7 @@
 /* 学会情報　その他の情報 */
 .searchResult_header_grayline{
     @apply flex items-center  rounded-t-lg    
-           border-2 border-grayline text-center h-10 py-1 px-5 w-auto    
+           border-2 border-grayline text-center h-10 py-1 px-2 md:px-4 w-auto    
            bg-white  space-x-2.5;
 }
 /* 学会情報 ヘッダータイトル */
