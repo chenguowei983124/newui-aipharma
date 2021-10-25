@@ -1,14 +1,13 @@
 <template>
     <!-- 検索枠 -->
-    <div id="searchBulletinBoardLayout" >
+    <div id="searchBulletinBoardLayout">
         <!-- pcの場合 -->
-        <div id="search-bar" >
+        <div id="search-bar">
             <search-bar
                 ref="searchbar"
                 :form="$constant.formList.BBS"
-                :searchValueInput="$store.getters.getSearchWord"
             ></search-bar>
-                <!-- @detailDisp="getDetailDisp"
+            <!-- @detailDisp="getDetailDisp"
                 @isDetailClick="getDetailClick"
                 @searchResult="getSearchResult" -->
         </div>
@@ -23,8 +22,7 @@
                         w-15
                         bg-red-600
                         hover:opacity-50
-                        active:bg-bg-gray-200
-                        active:opacity-100
+                        active:bg-bg-gray-200 active:opacity-100
                         rounded-md
                         notoSansJpAndTwelveBold
                         text-white
@@ -32,15 +30,15 @@
                     "
                     value="投　稿"
                 />
-                    <!-- @click="onClearItem(base.file, index)" -->
+                <!-- @click="onClearItem(base.file, index)" -->
                 <input
                     type="button"
                     class="
-                        ml-2 w-18
+                        ml-2
+                        w-18
                         bg-blue-600
                         hover:opacity-50
-                        active:bg-bg-gray-200
-                        active:opacity-100
+                        active:bg-bg-gray-200 active:opacity-100
                         rounded-md
                         notoSansJpAndTwelveBold
                         text-white
@@ -52,13 +50,8 @@
             </div>
         </div>
         <div id="BBS-Contents" class="flex">
-            <a
-                class=""
-                :class="[dispFlg ? 'w-2/5' : 'flex-grow']"
-            >
-                <bbs-list
-                    @clickItemEvent="openDetail"
-                ></bbs-list>
+            <a class="" :class="[dispFlg ? 'w-2/5' : 'flex-grow']">
+                <bbs-list @clickItemEvent="openDetail"></bbs-list>
             </a>
             <bbs-talking
                 class="w-full flex-grow-0"
@@ -84,7 +77,7 @@ export default {
     },
     mounted() {},
     methods: {
-        openDetail(val){
+        openDetail(val) {
             console.log('openDetail', val)
             this.dispFlg = !this.dispFlg
         },
@@ -99,7 +92,7 @@ export default {
             this.$router.push({
                 path: '/searchBulletinBoard',
                 query: params,
-            })            
+            })
         },
     },
     created() {},

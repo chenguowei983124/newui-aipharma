@@ -197,7 +197,7 @@
                 :default-value="$store.getters.getFacilityID"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="{ tabindex: 1 }"
-                :default-options="$store.getters.qa_classify_facility"
+                :default-options="$constant.qaClassifyFacility"
                 @selected="setFacilityID"
                 leftLableTitle="施設"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"

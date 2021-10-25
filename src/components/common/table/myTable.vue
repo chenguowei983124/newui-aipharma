@@ -12,7 +12,13 @@
                             justify-center
                         "
                     >
-                        <input type="checkbox" name="" id="" />
+                        <input
+                            type="checkbox"
+                            name=""
+                            id=""
+                            :checked="checkAll"
+                            @change="changeAll"
+                        />
                     </th>
                     <th
                         class="
@@ -154,8 +160,8 @@
             <tbody>
                 <tr
                     class="flex text-xs font-NotoSansJp"
-                    v-for="person in people"
-                    :key="person"
+                    v-for="row in displayList"
+                    :key="row"
                 >
                     <td
                         class="
@@ -166,8 +172,15 @@
                             justify-center
                         "
                     >
-                        <input type="checkbox" name="" id="" />
+                        <input
+                            type="checkbox"
+                            name=""
+                            id=""
+                            :checked="row.check"
+                            @change="onChangeCheckd(row.index)"
+                        />
                     </td>
+                    <!-- 様式 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -176,8 +189,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col2 }}
+                        {{ row.style }}
                     </td>
+                    <!-- 報告日 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -186,8 +200,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col3 }}
+                        {{ row.reportingAt }}
                     </td>
+                    <!-- 報告日システム登録日 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -196,8 +211,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col4 }}
+                        {{ row.createdAt }}
                     </td>
+                    <!-- 被疑薬 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -206,8 +222,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col5 }}
+                        {{ row.suspectedDrug }}
                     </td>
+                    <!-- 副作用名 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -216,8 +233,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col6 }}
+                        {{ row.sideEffectName }}
                     </td>
+                    <!-- 年齢 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -226,8 +244,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col7 }}
+                        {{ row.ageLevel }}
                     </td>
+                    <!-- 性別 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -236,8 +255,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col8 }}
+                        {{ row.genderId ? '男' : '女' }}
                     </td>
+                    <!-- 外来/ 入院 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -246,8 +266,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col9 }}
+                        {{ row.patientDivisionId }}
                     </td>
+                    <!-- 治療中の疾患 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -256,8 +277,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col10 }}
+                        {{ row.primaryDisease }}
                     </td>
+                    <!-- 内容 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -266,8 +288,9 @@
                             justify-center
                         "
                     >
-                        {{ person.col11 }}
+                        {{ row.comment }}
                     </td>
+                    <!-- 投稿者 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -278,7 +301,7 @@
                     >
                         <div>
                             <div class="flex flex-col text-xs">
-                                {{ person.col12 }}
+                                {{ row.name }}
                                 <div
                                     class="
                                         mt-1
@@ -302,6 +325,7 @@
                             </div> -->
                         </div>
                     </td>
+                    <!-- 管理 -->
                     <td
                         class="
                             border-r border-b border-blueline
@@ -323,6 +347,7 @@
                             >
                                 <download-icon-svg
                                     class="h-5 w-5 mx-1.25"
+                                    @click="rowDownload(row.id)"
                                 ></download-icon-svg>
                             </button>
                             <button
@@ -330,6 +355,7 @@
                             >
                                 <edit-icon-svg
                                     class="h-5 w-5 mx-1.25"
+                                    @click="rowEdit(row.id)"
                                 ></edit-icon-svg>
                             </button>
                             <button
@@ -343,6 +369,7 @@
                             >
                                 <trash-icon-svg
                                     class="h-5 w-5 mx-1.25"
+                                    @click="rowDelete(row.id)"
                                 ></trash-icon-svg>
                             </button>
                         </div>
@@ -357,91 +384,124 @@
 import downloadIconSvg from '../svgImage/downloadIconSvg.vue'
 import EditIconSvg from '../svgImage/editIconSvg.vue'
 import TrashIconSvg from '../svgImage/trashIconSvg.vue'
-const people = [
-  {
-    col1: 'false',
-    col2: '1',
-    col3: '2021.01.01',
-    col4: '2021.08.01',
-    col5: 'ロキソプロフェンNa',
-    col6: '薬剤性肝障害',
-    col7: '40歳代',
-    col8: '男',
-    col9: '入院',
-    col10: 'くも膜下出血',
-    col11: '脳出血でコイル塞栓術後経過観察のためHCU へ入室された患者。２０２０／２／６の検査データよりALP、ALT　γGTP 上昇があった。ALP 上昇が始まったのが2/3。それよりも前から使用されていた薬剤をALP 上昇のキーワードで副作用報告データ検索した。',
-    col12: '○○市民病院',
-    col13: '',
-  },
-  {
-    col1: 'false',
-    col2: '2',
-    col3: '2021.01.01',
-    col4: '2021.08.01',
-    col5: 'ロキソプロフェンNa',
-    col6: '薬剤性肝障害',
-    col7: '40歳代',
-    col8: '男',
-    col9: '入院',
-    col10: 'くも膜下出血',
-    col11: '脳出血でコイル塞栓術後経過観察の',
-    col12: '○○市民病院',
-    col13: '',
-  },
-  {
-    col1: 'false',
-    col2: '3',
-    col3: '2021.01.01',
-    col4: '2021.08.01',
-    col5: 'ロキソプロフェンNa',
-    col6: '薬剤性肝障害',
-    col7: '40歳代',
-    col8: '男',
-    col9: '入院',
-    col10: 'くも膜下出血',
-    col11: '脳出血でコイル塞栓術後経過観察の',
-    col12: '○○市民病院',
-    col13: '',
-  },
-  {
-    col1: 'false',
-    col2: '3',
-    col3: '2021.01.01',
-    col4: '2021.08.01',
-    col5: 'ロキソプロフェンNa',
-    col6: '薬剤性肝障害',
-    col7: '40歳代',
-    col8: '男',
-    col9: '入院',
-    col10: 'くも膜下出血',
-    col11: '脳出血でコイル塞栓術後経過観察の',
-    col12: '○○市民病院',
-    col13: '',
-  },
-  {
-    col1: 'false',
-    col2: '3',
-    col3: '2021.01.01',
-    col4: '2021.08.01',
-    col5: 'ロキソプロフェンNa',
-    col6: '薬剤性肝障害',
-    col7: '40歳代',
-    col8: '男',
-    col9: '入院',
-    col10: 'くも膜下出血',
-    col11: '脳出血でコイル塞栓術後経過観察の',
-    col12: '○○市民病院',
-    col13: '',
-  },
-  // More people...
-]
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import axios from 'axios'
+import 'sweetalert2/src/sweetalert2.scss'
 
 export default {
-  components: { downloadIconSvg, TrashIconSvg, EditIconSvg },
-  setup() {
-    return {
-      people,
-    }
-  },
+    components: { downloadIconSvg, TrashIconSvg, EditIconSvg },
+    props: {
+        detailList: Array,
+    },
+    data() {
+        return {
+            dispList: this.detailList,
+            checkAll: false,
+        }
+    },
+    computed: {
+        displayList: {
+            get: function () {
+                return this.detailList
+            },
+        },
+    },
+    methods: {
+        // 行チェック
+        onChangeCheckd(index) {
+            let data = this.$store.getters.getSearchPreavoidsInfo
+            data.searchData[index].check = !data.searchData[index].check
+            this.$store.dispatch('setPearchPreavoidsInfo', data)
+        },
+        // チェックALL
+        changeAll() {
+            console.log(this.checkAll)
+            this.checkAll = !this.checkAll
+            for (let index = 0; index < this.dispList.length; index++) {
+                this.dispList[index].check = this.checkAll
+            }
+
+            let data = this.$store.getters.getSearchPreavoidsInfo
+            for (let index = 0; index < data.searchData.length; index++) {
+                data.searchData[index].check = this.checkAll
+            }
+
+            this.$store.dispatch('setPearchPreavoidsInfo', data)
+        },
+        async rowDownload(id) {
+            const checkStartDate = new Date(sessionStorage.search_updated_from)
+            const checkEndDate = new Date(sessionStorage.search_updated_to)
+            const self = this
+            // if (
+            //     checkStartDate.toString() === 'Invalid Date' ||
+            //     checkEndDate.toString() === 'Invalid Date'
+            // ) {
+            //     sessionStorage.removeItem('search_updated_from')
+            //     sessionStorage.removeItem('search_updated_to')
+            // }
+            await axios
+                .get(
+                    `${
+                        import.meta.env.VITE_APP_PREAVOID_API_URL
+                    }/preavoid/search.xlsx`,
+                    {
+                        responseType: 'blob',
+                        dataType: 'binary',
+                        // params: {
+                        //     token: this.isApiToken,
+                        //     comment: sessionStorage.search_comment,
+                        //     updated_from: sessionStorage.search_updated_from,
+                        //     updated_to: sessionStorage.search_updated_to,
+                        //     style: sessionStorage.search_style,
+                        //     facility: sessionStorage.search_facility,
+                        // },
+                    },
+                    {
+                        Accept: 'application/octet-stream',
+                    }
+                )
+                .then((res) => {
+                    const filename = '123.xls'
+
+                    if (window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(res.data, filename)
+                    } else {
+                        const blob = new Blob([res.data], {
+                            type: 'application/octet-stream',
+                        })
+                        const link = document.createElement('a')
+                        link.href = window.URL.createObjectURL(blob)
+                        link.download = filename
+                        link.click()
+                    }
+                })
+        },
+        rowEdit(id) {},
+        rowDelete(id) {
+            Swal.fire({
+                text: '本当に削除してよろしいですか？',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '削除',
+                cancelButtonText: 'キャンセル',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log('削除')
+                    let params = {
+                        id: id,
+                    }
+                    this.$serve.deletePreavoidData(params)
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        },
+    },
 }
 </script>
+<style scoped></style>

@@ -5,13 +5,13 @@ const download = {
         const checkStartDate = new Date(sessionStorage.search_updated_from)
         const checkEndDate = new Date(sessionStorage.search_updated_to)
         const self = this
-        if (
-            checkStartDate.toString() === 'Invalid Date' ||
-            checkEndDate.toString() === 'Invalid Date'
-        ) {
-            sessionStorage.removeItem('search_updated_from')
-            sessionStorage.removeItem('search_updated_to')
-        }
+        // if (
+        //     checkStartDate.toString() === 'Invalid Date' ||
+        //     checkEndDate.toString() === 'Invalid Date'
+        // ) {
+        //     sessionStorage.removeItem('search_updated_from')
+        //     sessionStorage.removeItem('search_updated_to')
+        // }
         await axios
             .get(
                 `${process.env.PREAVOID_API_URL}/api_preavoid/v1/preavoid/search.xlsx`,
@@ -32,9 +32,10 @@ const download = {
                 }
             )
             .then((res) => {
-                const filename = this.getFileNameFromContentDisposition(
-                    res.headers['content-disposition']
-                )
+                const filename = '123.xls'
+                // this.getFileNameFromContentDisposition(
+                //     res.headers['content-disposition']
+                // )
                 if (window.navigator.msSaveOrOpenBlob) {
                     window.navigator.msSaveOrOpenBlob(res.data, filename)
                 } else {

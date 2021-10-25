@@ -98,6 +98,13 @@ const topManagementItemUserList = [
     { title: 'ログアウト', routerPath: '/' },
 ]
 
+const qaClassifyFacility = [
+    { value: '0', title: '全体' },
+    { value: '1', title: '自施設のみ' },
+    { value: '2', title: '他施設のみ' },
+    { value: '3', title: 'グループ施設のみ' },
+    { value: '4', title: 'グループ施設+自施設' },
+]
 // 入力タグ様式
 const multiselectCss = {
     container:
@@ -175,4 +182,5 @@ export default {
     managementitemList,
     managementPcitemList,
     topManagementItemUserList,
+    qaClassifyFacility,
 }

@@ -9,7 +9,7 @@
                     ref="datepickerFrom"
                     :asSingle="true"
                     i18n="ja"
-                    v-model="dateValue"
+                    v-model="dateValueFrom"
                     :autoApply="false"
                     :formatter="{
                         date: 'YYYY.MM.DD',
@@ -25,7 +25,7 @@
                     ref="datepickerTo"
                     :asSingle="true"
                     i18n="ja"
-                    v-model="dateValue"
+                    v-model="dateValueTo"
                     :autoApply="false"
                     :formatter="{
                         date: 'YYYY.MM.DD',
@@ -55,14 +55,15 @@
             class="space-y-2 bg-backgroundMainSearch pt-2"
             :class="[isDetailClick ? 'block' : 'hidden']"
         >
-            <!-- 質問区分 -->
+            <!-- 様式 -->
             <vue-single-select
-                :name="'field2'"
+                :name="'styles'"
+                ref="styles"
                 :default-value="defaultValue"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="defaultInputAttribs"
                 :default-options="$constant.style"
-                @selected="setSelectValue2"
+                @selected="setStyles"
                 leftLableTitle="様式"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                 inputStyle="w-full text-left pl-10  notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -72,12 +73,13 @@
 
             <!-- 質問区分 -->
             <vue-single-select
-                :name="'field3'"
+                :name="'facility'"
+                ref="facility"
                 :default-value="defaultValue"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="{ tabindex: 1 }"
-                :default-options="$store.getters.qa_classify_facility"
-                @selected="setSelectValue3"
+                :default-options="$constant.qaClassifyFacility"
+                @selected="setFacilityID"
                 leftLableTitle="施設"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                 inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-10 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -190,146 +192,80 @@ import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
 import { ref } from 'vue'
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { },
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
     },
-  },
-  components: {
-    searchDropdown,
-    searchSvg,
-    TriangleDownSvg,
-    Multiselect,
-    vueSingleSelect,
-    litepieDatepicker,
-  },
-  data() {
-    return {
-      searchValue: '',
-      checkId: '',
-      isDetailClick: false,
-      selectValue: '',
-      selectValue2: '',
-      selectValue3: '',
-      value: [],
-      defaultValue: null,
-      defaultInputAttribs: {
-        tabindex: 1,
-      },
-      dispText: '',
-    }
-  },
-  methods: {
-    dateClear: function () {
-      this.$refs.datepickerFrom.clearPicker()
-      this.$refs.datepickerTo.clearPicker()
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
+        litepieDatepicker,
     },
-    dateChanged: function ($event) {
-      // console.log($event.target.value)
-    },
-    clicking: function ($event) {
-      // console.log('pushKafka')
-      // console.log(this.$refs.inputDate)
-    },
-    clearClick: function () {
-      // console.log(this.$constant.style)
-    },
-    getDispText: function (value) {
-      this.dispText = value
-    },
-    async fetchLanguages(query) {
-      let where = ''
-      if (query) {
-        where =
-          '&where=' +
-          encodeURIComponent(
-            JSON.stringify({
-              ProgrammingLanguage: {
-                $regex: `${query}|${query.toUpperCase()}|${query[0].toUpperCase() + query.slice(1)
-                  }`,
-              },
-            })
-          )
-      }
-
-      const response = await fetch(
-        'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' +
-        where,
-        {
-          headers: {
-            'X-Parse-Application-Id':
-              'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
-            'X-Parse-Master-Key':
-              'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
-          },
-        }
-      )
-
-      const data = await response.json() // Here you have the data that you need
-      return data.results.map((item) => {
+    data() {
         return {
-          value: item.ProgrammingLanguage,
-          label: item.ProgrammingLanguage,
+            searchValue: '',
+            isDetailClick: false,
+            value: [],
+            defaultValue: null,
+            defaultInputAttribs: {
+                tabindex: 1,
+            },
+            dispText: '',
         }
-      })
     },
-    setSelectValue(value) {
-      this.selectValue = value
+    computed: {
+        dateValueFrom: {
+            get: function () {
+                return this.$store.getters.getDateValueFrom
+            },
+            set: function (value) {
+                return this.$store.dispatch('setDateValueFrom', value)
+            },
+        },
+        dateValueTo: {
+            get: function () {
+                return this.$store.getters.getDateValueTo
+            },
+            set: function (value) {
+                return this.$store.dispatch('setDateValueTo', value)
+            },
+        },
     },
-    setSelectValue2(value) {
-      this.selectValue2 = value
-    },
-    setSelectValue3(value) {
-      this.selectValue3 = value
-    },
-    // 詳細条件クリックイベント
-    detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit('isDetailClick', this.isDetailClick)
-    },
-    // 検索ボタン押下イベント
-    searchClick: function (event) {
-      // すべて
-      if (this.checkId == 1) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('searchAll', this.searchValue)
 
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 2) {
-        this.$router.push('/searchResultAll')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // DI 辞書
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 6) {
-        this.$router.push('/searchOrganization')
-      }
+    methods: {
+        dateClear: function () {
+            this.$refs.datepickerFrom.clearPicker()
+            this.$refs.datepickerTo.clearPicker()
+        },
+        clearClick: function () {
+            this.$refs.datepickerFrom.clearPicker()
+            this.$refs.datepickerTo.clearPicker()
+            this.$refs.facility.setValue(null)
+            this.$refs.styles.setValue(null)
+            this.$store.dispatch('setSearchWord', '')
+        },
+        getDispText: function (value) {
+            this.dispText = value
+        },
+        // 施設
+        setFacilityID(value) {
+            this.$store.dispatch('setFacilityID', value)
+        },
+        // 様式
+        setStyles(value) {
+            this.$store.dispatch('setStyles', value)
+        },
+        // 詳細条件クリックイベント
+        detailBottunClick: function (event) {
+            this.isDetailClick = !this.isDetailClick
+            this.$emit('isDetailClick', this.isDetailClick)
+        },
     },
-    // DropDown 選択したアイテムＩＤ取得
-    getCheckId(data) {
-      this.checkId = data
-    },
-  },
-  setup() {
-    const dateValue = ref([])
-    return {
-      dateValue,
-    }
-  },
 }
 </script>
 
