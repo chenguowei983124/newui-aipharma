@@ -4,7 +4,7 @@ export default {
     state: () => ({
         noticeInfo: [],
         bulletinBoardInfo: [],
-        bbsTagsInfo: [],
+        bbsDropDownInfo: [],
         scientifiSocietyInfo: [],
         pmdaInfo: [],
         managementInfo: [],
@@ -19,8 +19,8 @@ export default {
         topBulletinBoardInfo(state) {
             return state.bulletinBoardInfo
         },
-        bbsTagsInfo(state) {
-            return state.bbsTagsInfo
+        bbsDropDownInfo(state) {
+            return state.bbsDropDownInfo
         },
         topScientifiSocietyInfo(state) {
             return state.scientifiSocietyInfo
@@ -59,8 +59,8 @@ export default {
         setTopBulletinboardinfo(state, info) {
             state.bulletinBoardInfo = info
         },
-        setBbsTagsinfo(state, info) {
-            state.bbsTagsInfo = info
+        setBBSDropDowninfo(state, info) {
+            state.bbsDropDownInfo = info
         },
         setTopScientifisocietyInfo(state, info) {
             state.scientifiSocietyInfo = info
@@ -73,20 +73,46 @@ export default {
     actions: {
         async getTopNotice({ rootState, commit }, code) {
             commit('setTopNotice', {})
-            commit('setBbsTagsinfo', {})
             const info = await serve.getTopNoticel(code)
-            commit('setTopNotice', info.data)
-            if (!!info.master && !!info.master.tags) {
-                let taglist = []
-                info.master.tags.map(tag => {
-                    taglist.push(tag.name)
-                })
-                commit('setBbsTagsinfo', taglist)
+            if (!!info) {
+                commit('setTopNotice', info.data)
             }
         },
         async getTopBulletinBoardInfo({ rootState, commit }, code) {
+            commit('setTopBulletinboardinfo', {})
             const info = await serve.getTopBulletinBoard(code)
-            commit('setTopBulletinboardinfo', info.data)
+            if (!!info) {
+                commit('setTopBulletinboardinfo', info.data)
+            }
+        },
+        async getBBSDropDowninfo({ rootState, commit }, code) {
+            commit('setBBSDropDowninfo', {})
+            const tags = await serve.getTagsMaster(code)
+            const scops = [
+                { value: '0', title: '全体' },
+                { value: '1', title: '組織' },
+                { value: '2', title: 'グループ' },
+            ]
+            const genre_Info = [
+                { value: 'notice', title: '告知' },
+                { value: 'event', title: 'イベント' },
+                { value: 'other', title: 'その他' },
+            ]
+            const genre_BBS = [
+                { value: 'notice', title: '告知' },
+                { value: 'event', title: 'イベント' },
+                { value: 'query', title: '質問' },
+                { value: 'questionnaire', title: 'アンケート' },
+                { value: 'other', title: 'その他' },
+            ]
+            const bbsDropDowninfo = {
+                tags: tags,
+                scops: scops,
+                genre_Info: genre_Info,
+                genre_BBS: genre_BBS,
+            }
+            console.log('setBBSDropDowninfo', bbsDropDowninfo)
+            commit('setBBSDropDowninfo', bbsDropDowninfo)
         },
         async getScientifiSocietyInfo({ rootState, commit }) {
             const info = await serve.getTopScientifiSociety()

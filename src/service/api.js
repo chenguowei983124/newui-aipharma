@@ -1,8 +1,8 @@
 import axios from './http'
 // import axios from "axios";
 const API_TIMEOUT = 5000
-const API_BASE = 'http://localhost:3000/'
-// const API_BASE = 'https://ai-pharma-bbs-be-stg.kit-ai.jp/'
+// const API_BASE = 'http://localhost:3000/'
+const API_BASE = 'https://ai-pharma-bbs-be-stg.kit-ai.jp/'
 
 const exeAxios = (method, acURL, data) => {
     return axios({
@@ -28,41 +28,6 @@ const pathJoin = (pathArr) => {
             return path
         })
         .join('/')
-}
-const transDataformat = (resData) => {
-    let result = resData
-    const list = resData.data
-    let dt = []
-
-    list.map((item) => {
-        const year = item.post.created_at.slice(0, 4) + '.'
-        const month = item.post.created_at.slice(5, 7) + '.'
-        const day = item.post.created_at.slice(8, 10)
-
-        const obj = {
-            browseRequired:
-                item.post.browseRequired || false ? 'browse' : 'notbrowsed',
-            date: year + month + day,
-            group: item.post.scope,
-            id: item.post.id,
-            looked:
-                Object.keys(item.post.feedback.mine).length > 0
-                    ? 'looked'
-                    : 'notLooked',
-            notificationType: item.post.genre,
-            title: item.post.title,
-            viewCount: item.post.feedback.viewed,
-        }
-        dt.push(obj)
-    })
-    Object.assign(result, { data_bk: result.data })
-    result.data = {
-        details: dt,
-    }
-
-    console.log('transDataformat-after', result)
-
-    return result
 }
 const serve = {
     //===========================
@@ -100,14 +65,14 @@ const serve = {
             }
             // API-index
             let mtd = 'get'
-            let acURL = '/posts'
+            let acURL = '/posts/topmenu_info'
             const queryString = new URLSearchParams(queryStringData).toString()
             const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
             console.log('getTopNoticel_url', url)
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
-                const res = response.data
-                data = transDataformat(res)
+                data = response.data
+                console.log('getTopNoticel', data)
             }
         }
 
@@ -122,27 +87,52 @@ const serve = {
             data = await axios('/preavoid/get_topmenu_BulletinBoard_info', {
                 method: 'get',
             })
+            console.log('getTopBulletinBoard', data)
         } else {
             const queryStringData = {
                 code: code,
                 page: 1,
                 limit: 5,
-                genre: '掲示板',
+                division: 'BBS',
             }
             // API-index
             let mtd = 'get'
-            let acURL = '/posts'
+            let acURL = '/posts/topmenu_info'
             const queryString = new URLSearchParams(queryStringData).toString()
             const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            console.log('getTopNoticel_url', url)
+            console.log('getTopBulletinBoard_url', url)
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
-                const res = response.data
-                data = transDataformat(res)
+                data = response.data
+                console.log('getTopBulletinBoard', data)
+            }
+        }
+        return data
+    },
+    //===========================
+    // お知らせ,掲示板のtagsマスタデータ
+    //===========================
+    async getTagsMaster(code) {
+        let data = []
+        if (!!code) {
+            const queryStringData = {
+                code: code,
+            }
+            // API-index
+            let mtd = 'get'
+            let acURL = '/tags'
+            const queryString = new URLSearchParams(queryStringData).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            console.log('getTagsMaster_url', url)
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const tags = response.data.tags
+                tags.map(map => {
+                    data.push(map.name)
+                })
             }
         }
 
-        // console.log('getTopBulletinBoard',data)
         return data
     },
     //===========================
