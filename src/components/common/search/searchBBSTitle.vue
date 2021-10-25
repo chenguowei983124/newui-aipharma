@@ -219,7 +219,7 @@ export default {
         create_to: ''
       },
       
-      tagList: this.$store.getters.bbsTagsInfo,
+      tagList: this.$store.getters.bbsDropDownInfo.tags,
     //    [
     //       'AA',
     //       'BB',

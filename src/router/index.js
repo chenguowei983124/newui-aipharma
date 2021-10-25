@@ -19,7 +19,7 @@ const routes = [
         redirect: '/login',
     },
     {
-      path: '/r',
+      path: '/redirect',
       name: 'redirect',
       component: Redirect 
     },

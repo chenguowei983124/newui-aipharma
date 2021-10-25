@@ -170,7 +170,7 @@ export default {
         AuthOIDC() {
             const AIPHARMA_URL =
                 'https://kit-furukawa-test.auth.ap-northeast-1.amazoncognito.com/'
-            const RETURN_TO = 'https://ai-pharma-dev.local/r/'
+            const RETURN_TO = 'https://ai-pharma-dev.local/r.html'
             const OIDC_CLIENT_ID = '4tsjtgump87o2q23thk0bu793o'
             const AUTH_PATH = '/oauth2/authorize'
             const OIDC_SCOPE = ['openid']
