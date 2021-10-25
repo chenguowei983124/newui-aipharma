@@ -3,8 +3,8 @@
         class="
             flex
             justify-between
-            cs:bg-cardTitlePmad cs:mx-5
-            my-5
+            cs:bg-cardTitlePmad
+            cs:mx-5
             h-48
             cs:h-21
             relative
@@ -21,7 +21,7 @@
                 cs:visible
             "
         >
-            <icon-left class="w-4 mx-1 z-99 absolute"></icon-left>
+            <icon-left class="w-4 mx-1 z-20 absolute"></icon-left>
         </div>
         <div
             class="
@@ -31,13 +31,13 @@
                 pt-3
                 absolute
                 h-18
-                z-75
+                z-10
                 invisible
                 cs:visible
             "
         >
             <div
-                class="w-12.5 z-9 bg-gradient-to-r from-gray-900 bg-opacity-75"
+                class="w-12.5 z-10 bg-gradient-to-r from-gray-900 bg-opacity-75"
             ></div>
         </div>
 
@@ -97,9 +97,9 @@
                 cs:visible
             "
         >
-            <icon-right class="w-4 ml-2 mx-1 z-99 absolute"></icon-right>
+            <icon-right class="w-4 ml-2 mx-1 z-20 absolute"></icon-right>
         </div>
-        <div class="flex right-7 pt-3 absolute h-18 z-75 invisible cs:visible">
+        <div class="flex right-7 pt-3 absolute h-18 z-10 invisible cs:visible">
             <div
                 class="w-12.5 z-75 bg-gradient-to-l from-gray-900 bg-opacity-75"
             ></div>
@@ -118,88 +118,88 @@ import iconLeft from '../svgImage/iconLeft.vue'
 import iconRight from '../svgImage/iconRight.vue'
 
 export default {
-    data() {
-        return {
-            parallaxSwiperWidth: 0,
-            images: [],
+  data() {
+    return {
+      parallaxSwiperWidth: 0,
+      images: [],
+    }
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+    iconLeft,
+    iconRight,
+  },
+  setup() {
+    const swiperOption = reactive({
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+      loop: true,
+      speed: 1000,
+      pagination: {
+        clickable: true,
+      },
+      slidesPerView: 2,
+      spaceBetween: 5,
+    })
+    const onResize = (handler) => {
+      const IMG_WIDTH = 234
+      if (handler.isHorizontal()) {
+        swiperOption.slidesPerView = (
+          handler.el.children[1].offsetWidth /
+          (IMG_WIDTH + swiperOption.spaceBetween)
+        ).toFixed(2)
+      } else {
+        const sp = 3
+        if (swiperOption.slidesPerView != sp) {
+          swiperOption.slidesPerView = sp
         }
+      }
+    }
+    return {
+      swiperOption,
+      onResize,
+    }
+  },
+  methods: {
+    sleep(msec) {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve()
+        }, msec)
+        console.log('request API for images ')
+      })
     },
-    components: {
-        Swiper,
-        SwiperSlide,
-        iconLeft,
-        iconRight,
-    },
-    setup() {
-        const swiperOption = reactive({
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-            },
-            loop: true,
-            speed: 1000,
-            pagination: {
-                clickable: true,
-            },
-            slidesPerView: 2,
-            spaceBetween: 5,
+    loadImages() {
+      this.images = []
+      for (
+        let i = 0;
+        i <
+        this.$store.getters.topScientifiSocietyInfo.imageLists.length;
+        i++
+      ) {
+        this.images.push({
+          id: i,
+          src: this.$store.getters.topScientifiSocietyInfo.imageLists[
+            i
+          ].imageUrl,
+          url: this.$store.getters.topScientifiSocietyInfo.imageLists[
+            i
+          ].linkUrl,
         })
-        const onResize = (handler) => {
-            const IMG_WIDTH = 234
-            if (handler.isHorizontal()) {
-                swiperOption.slidesPerView = (
-                    handler.el.children[1].offsetWidth /
-                    (IMG_WIDTH + swiperOption.spaceBetween)
-                ).toFixed(2)
-            } else {
-                const sp = 3
-                if (swiperOption.slidesPerView != sp) {
-                    swiperOption.slidesPerView = sp
-                }
-            }
-        }
-        return {
-            swiperOption,
-            onResize,
-        }
+      }
     },
-    methods: {
-        sleep(msec) {
-            return new Promise(function (resolve) {
-                setTimeout(function () {
-                    resolve()
-                }, msec)
-                console.log('request API for images ')
-            })
-        },
-        loadImages() {
-            this.images = []
-            for (
-                let i = 0;
-                i <
-                this.$store.getters.topScientifiSocietyInfo.imageLists.length;
-                i++
-            ) {
-                this.images.push({
-                    id: i,
-                    src: this.$store.getters.topScientifiSocietyInfo.imageLists[
-                        i
-                    ].imageUrl,
-                    url: this.$store.getters.topScientifiSocietyInfo.imageLists[
-                        i
-                    ].imageUrl,
-                })
-            }
-        },
-    },
-    mounted() {
-        this.$serve.getTopScientifiSociety().then((response) => {
-            this.$store.dispatch('setTopScientifiSociety', response.data)
-            this.$nextTick(function () {
-                this.loadImages()
-            })
-        })
-    },
+  },
+  mounted() {
+    this.$serve.getTopScientifiSociety().then((response) => {
+      this.$store.dispatch('setTopScientifiSociety', response.data)
+      this.$nextTick(function () {
+        this.loadImages()
+      })
+    })
+  },
 }
 </script>
 

@@ -67,7 +67,8 @@
             subTitle="予約はこちら"
             subTitleStyle="searchResult_header_reserveLink"
             subTitleURL="/"
-            ><result-detail-row
+        >
+            <result-detail-row
                 class="searchResult_detail_gray"
                 :sites="$store.getters.topScientifiSocietyInfo.details"
                 proDetailStyle="style2"
@@ -77,9 +78,15 @@
                 :sub1="['dateFrom', 'dateTo']"
                 :sub2="['title', 'urlTitle']"
             >
-                <carousel
-                    class="mt-7 cs:mt-3 mb-3"
-                ></carousel> </result-detail-row
+                <div
+                    :class="[
+                        $store.getters.topScientifiSocietyInfo.details == ''
+                            ? 'py-3 mid:py-0 mid:pb-3'
+                            : 'py-3 ',
+                    ]"
+                >
+                    <carousel class=""></carousel>
+                </div> </result-detail-row
         ></resut-tag>
 
         <!-- PMDA -->
@@ -90,6 +97,9 @@
             rightStyle="icon"
             iconUrl="https://www.pmda.go.jp/"
             ><result-detail-row
+                :class="[
+                    $store.getters.topPMDAInfo.details == '' ? 'py-3 ' : '',
+                ]"
                 class="searchResult_detail_gray"
                 lineStyle="grayline"
                 :sub2="['title']"
@@ -97,6 +107,7 @@
             >
             </result-detail-row
         ></resut-tag>
+
         <div
             class="
                 md:grid md:grid-cols-2
@@ -164,8 +175,8 @@ export default {
   },
   mounted() {
     //   console.log('getOidcCode', this.$store.getters.getOidcCode)
-    this.$store.dispatch('getTopNotice',this.$store.getters.getOidcCode)
-    this.$store.dispatch('getTopBulletinBoardInfo',this.$store.getters.getOidcCode)
+    this.$store.dispatch('getTopNotice', this.$store.getters.getOidcCode)
+    this.$store.dispatch('getTopBulletinBoardInfo', this.$store.getters.getOidcCode)
     this.$store.dispatch('getScientifiSocietyInfo')
     this.$store.dispatch('getTopPMDA')
     this.$store.dispatch('getCommonInfo')

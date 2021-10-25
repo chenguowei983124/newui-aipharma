@@ -5,12 +5,24 @@ export default {
         isMenuClick: false,
         isPortraitClick: false,
         isManagementClick: false,
+        isIssueIconClick: false,
         qa_classify_class: {},
         qa_classify_subject: {},
+<<<<<<< HEAD
         oidcCode: '',
         dateValueFrom: '',
         dateValueTo: '',
         styles: '-1',
+=======
+        qa_classify_facility: [
+            { "value": "0", "title": "全体" },
+            { "value": "1", "title": "自施設のみ" },
+            { "value": "2", "title": "他施設のみ" },
+            { "value": "3", "title": "グループ施設のみ" },
+            { "value": "4", "title": "グループ施設+自施設" }
+        ],
+        oidcCode: '',
+>>>>>>> bf1d0221c21d90af03667f658bcb3b2b497f28be
     }),
 
     getters: {
@@ -26,6 +38,12 @@ export default {
         getManagementClick(state) {
             return state.isManagementClick
         },
+<<<<<<< HEAD
+=======
+        getIssueIconClick(state) {
+            return state.isIssueIconClick
+        },
+>>>>>>> bf1d0221c21d90af03667f658bcb3b2b497f28be
         getQa_classify_class(state) {
             return state.qa_classify_class
         },
@@ -85,6 +103,9 @@ export default {
         setStyles({ commit, state }, value) {
             commit('basic', { key: 'styles', value })
             console.log('styles =' + value)
+        setIssueIconClick({ commit, state }, value) {
+            commit('basic', { key: 'isIssueIconClick', value })
+            // console.log("isManagementClick =" + value)
         },
         getCommonInfo({ commit, state }) {
             // console.log("getCommonInfo =11")

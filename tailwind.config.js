@@ -294,6 +294,7 @@ module.exports = {
         DEFAULT: theme('colors.gray.200', 'currentColor'),
         // 組織内DI・症例 登録ボタン、マイデータ 帯・境界線
         'personOrganizationButton': '#f09600',
+        'personInformationButton': '#f15a24',
         'downloadIcon': '#8CC85A',
         'bluelineB': '#65B2D9',
 

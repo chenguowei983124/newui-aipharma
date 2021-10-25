@@ -7,7 +7,8 @@
                 rounded-full
                 h-9
                 w-9
-                md:h-10 md:w-10
+                md:h-10
+                md:w-10
                 bg-personOrganizationButton
                 active:opacity-50
                 hover:opacity-50
@@ -47,13 +48,7 @@
                 <!-- リスト -->
                 <div class="flex justify-center mt-12.5">
                     <div
-                        class="
-                            absolute
-                            border-2 border-personOrganizationButton
-                            bg-white
-                            w-88.75
-                            h-65
-                        "
+                        class="absolute w-88.75"
                         v-if="$store.getters.getManagementClick"
                     >
                         <div
@@ -63,6 +58,11 @@
                         >
                             <div class="">
                                 <div
+                                    :class="[
+                                        item.title == 'データ登録'
+                                            ? 'rounded-t border-t-2 border-personOrganizationButton'
+                                            : '',
+                                    ]"
                                     v-if="item.itemStyle == 'title'"
                                     class="
                                         bg-personOrganizationButton
@@ -71,7 +71,7 @@
                                         flex
                                         items-center
                                         text-white
-                                        font-light
+                                        font-medium
                                     "
                                 >
                                     {{ item.title }}
@@ -83,8 +83,15 @@
                                     }"
                                 >
                                     <div
+                                        :class="[
+                                            item.title == '下書き一覧'
+                                                ? 'rounded-b border-b-2'
+                                                : '',
+                                        ]"
                                         class="
-                                            border-t-2
+                                            border-b-2
+                                            border-l-2
+                                            border-r-2
                                             border-personOrganizationButton
                                             bg-yellow-50
                                             h-9
@@ -115,13 +122,7 @@
                 <div class="hidden md:block mid:block">
                     <div class="flex justify-end my-13 md:mr-28 mid:mr-37.5">
                         <div
-                            class="
-                                rounded-md
-                                border-2 border-personOrganizationButton
-                                bg-personOrganizationButton
-                                w-37.5
-                                mt-1
-                            "
+                            class="w-37.5 mt-1"
                             v-if="$store.getters.getManagementClick"
                         >
                             <div
@@ -131,14 +132,20 @@
                             >
                                 <div class="">
                                     <div
+                                        :class="[
+                                            item.title == 'データ登録'
+                                                ? 'rounded-t border-t-2 border-personOrganizationButton'
+                                                : '',
+                                        ]"
                                         v-if="item.itemStyle == 'title'"
                                         class="
+                                            bg-personOrganizationButton
                                             h-9
                                             pl-2.5
                                             flex
                                             items-center
                                             text-white
-                                            font-light
+                                            font-medium
                                         "
                                     >
                                         {{ item.title }}
@@ -152,12 +159,20 @@
                                         <div
                                             class="
                                                 bg-yellow-50
+                                                border-r-2
+                                                border-l-2
+                                                border-personOrganizationButton
                                                 h-9
                                                 pl-2.5
                                                 flex
                                                 items-center
                                                 font-light
                                             "
+                                            :class="[
+                                                item.title == '下書き一覧'
+                                                    ? 'rounded-b border-b-2'
+                                                    : '',
+                                            ]"
                                         >
                                             <div
                                                 class="
@@ -181,14 +196,14 @@
 
 <script>
 export default {
-    methods: {
-        clickDown() {
-            this.$store.dispatch(
-                'setManagementClick',
-                !this.$store.getters.getManagementClick
-            )
-        },
+  methods: {
+    clickDown() {
+      this.$store.dispatch(
+        'setManagementClick',
+        !this.$store.getters.getManagementClick
+      )
     },
+  },
 }
 </script>
 
