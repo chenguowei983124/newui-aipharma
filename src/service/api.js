@@ -197,22 +197,22 @@ const serve = {
     //===========================
     async getALLBulletinBoard_Info(params) {
         let data
-        if (!params.searchKey) {
-            data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
-                method: 'get',
-            })
-        } else {            
-            let mtd = 'get'
-            let acURL = '/posts/bunch_bulletin_board_info'
-            const queryString = new URLSearchParams(params).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            console.log('getALLBulletinBoard_Info', url)
-            const response = await exeAxios(mtd, url, null)
-            if (response.status == 200) {
-                data = response
-                console.log('bunch_bulletin_board_info', response)
-            }
+        // if (!params.searchKey) {
+        //     data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
+        //         method: 'get',
+        //     })
+        // } else {            
+        let mtd = 'get'
+        let acURL = '/posts/bunch_bulletin_board_info'
+        const queryString = new URLSearchParams(params).toString()
+        const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+        console.log('getALLBulletinBoard_Info', url)
+        const response = await exeAxios(mtd, url, null)
+        if (response.status == 200) {
+            data = response
+            console.log('bunch_bulletin_board_info', response)
         }
+        // }
 
         console.log('getALLBulletinBoard_Info', data)
         return data
