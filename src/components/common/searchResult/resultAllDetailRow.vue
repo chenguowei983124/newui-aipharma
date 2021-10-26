@@ -244,12 +244,11 @@ export default {
       if (midStyle == 'style2') {
         return 'searchResult_title_font_14 truncate block pl-2 md:pl-0'
       }
-    },
-    getDateFrom(dateFrom, dateTo) {
-      if (dateTo != '') {
-        return dateFrom.concat(' - ')
-      } else {
+    }, getDateFrom(dateFrom, dateTo) {
+      if (dateTo == "" || dateTo == 'undefined') {
         return dateFrom
+      } else {
+        return dateFrom.concat(" - ")
       }
     },
     getPmdastatusDefaultStype(status) {

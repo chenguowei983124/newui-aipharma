@@ -15,7 +15,7 @@
                         md:flex-auto
                         top-12.5
                         md:top-0
-                        z-20
+                        z-30
                         md:z-0
                     "
                 >
@@ -72,32 +72,32 @@ import dataManagementArea from '../components/home/dataManagementArea.vue'
 import searchResultMain from '../components/home/searchResultMain.vue'
 
 export default {
-    components: {
-        searchBar,
-        logo,
-        dataManagementArea,
-        searchResultMain,
-    },
-    props: {},
-    data() {
-        return {
-            isMenuOpen: true,
-        }
-    },
-    couputed: {},
-    watch: {},
-    methods: {},
-    created() {
-        if (!!import.meta.env.VITE_APP_IS_OIDC_AUTH && import.meta.env.VITE_APP_IS_OIDC_AUTH == 'true') {
-            if (!!this.$route.params.code) {
-                // console.log('setOidcCode', this.$route.params.code)
-                this.$store.dispatch('setOidcCode',this.$route.params.code)
-            }
-        } else {
-            this.$store.dispatch('setOidcCode', '')
-            // console.log('no code')
-        }
-    },
+  components: {
+    searchBar,
+    logo,
+    dataManagementArea,
+    searchResultMain,
+  },
+  props: {},
+  data() {
+    return {
+      isMenuOpen: true,
+    }
+  },
+  couputed: {},
+  watch: {},
+  methods: {},
+  created() {
+    if (!!import.meta.env.VITE_APP_IS_OIDC_AUTH && import.meta.env.VITE_APP_IS_OIDC_AUTH == 'true') {
+      if (!!this.$route.params.code) {
+        // console.log('setOidcCode', this.$route.params.code)
+        this.$store.dispatch('setOidcCode', this.$route.params.code)
+      }
+    } else {
+      this.$store.dispatch('setOidcCode', '')
+      // console.log('no code')
+    }
+  },
 }
 </script>
 <style scoped></style>

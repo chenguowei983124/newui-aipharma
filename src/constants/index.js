@@ -91,6 +91,20 @@ const managementPcitemList = [
     { title: '下書き一覧', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
 ]
 
+const issueIconitemList = [
+    { title: '投稿', itemStyle: 'title' },
+    {
+        title: 'お知らせ 登録',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+    {
+        title: '掲示板 登録',
+        itemStyle: 'item',
+        routerPath: '/newOrgDIRecord',
+    },
+]
+
 const topManagementItemUserList = [
     { title: 'マイページ', routerPath: '/' },
     { title: '施設切替', routerPath: '/' },
@@ -98,6 +112,13 @@ const topManagementItemUserList = [
     { title: 'ログアウト', routerPath: '/' },
 ]
 
+const qaClassifyFacility = [
+    { value: '0', title: '全体' },
+    { value: '1', title: '自施設のみ' },
+    { value: '2', title: '他施設のみ' },
+    { value: '3', title: 'グループ施設のみ' },
+    { value: '4', title: 'グループ施設+自施設' },
+]
 // 入力タグ様式
 const multiselectCss = {
     container:
@@ -175,4 +196,6 @@ export default {
     managementitemList,
     managementPcitemList,
     topManagementItemUserList,
+    qaClassifyFacility,
+    issueIconitemList,
 }

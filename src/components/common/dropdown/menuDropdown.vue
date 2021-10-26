@@ -59,9 +59,11 @@
                             md:mt-1.5
                             justify-center
                             items-center
+                            cursor-pointer
+                            mid:cursor-default
                         "
                         :class="{
-                            'absolute z-99 -bottom-12.5  md:w-37.5 left-12 md:top-0 md:left-15':
+                            'absolute z-99 -bottom-12.5  md:w-37.5 left-12 md:top-0 md:left-15 ':
                                 $store.getters.getIsMenuClick,
                         }"
                         @click="scrollToTop"
@@ -93,7 +95,7 @@
                                 text-xxs
                             "
                             :class="[
-                                $store.getters.getIsMenuClick ? 'hidden' : '',
+                                $store.getters.getIsMenuClick ? 'hidden ' : '',
                             ]"
                         >
                             {{ $store.getters.topManagementInfo.hospital }}

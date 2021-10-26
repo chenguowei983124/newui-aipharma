@@ -13,11 +13,10 @@
                             :checkedID="Number(checkId)"
                             class="h-10 flex-none hidden md:block"
                         ></search-dropdown>
-
+                        <!-- //@change="getNewInput($event)" -->
                         <!-- 検索条件入力 -->
                         <input
                             v-model="searchValueInput"
-                            @change="getNewInput($event)"
                             :class="sreachBarSPInputClass"
                             type="text"
                             placeholder="キーワードを入力"
@@ -122,12 +121,6 @@ export default {
             type: String,
             default: 'TOP',
         },
-        searchValueInput: {
-            type: String,
-        },
-        set searchValue(value) {
-            this.searchValueInput = value
-        },
         searchbarSelectID: {
             type: Number,
             default: 0,
@@ -167,6 +160,14 @@ export default {
         document.removeEventListener('scroll', this.menu)
     },
     computed: {
+        searchValueInput: {
+            get: function () {
+                this.$store.getters.getSearchWord
+            },
+            set: function (value) {
+                this.$store.dispatch('setSearchWord', value)
+            },
+        },
         searchBarFixedClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
                 return ''
@@ -553,7 +554,44 @@ export default {
             }
             // 症例（プレアボイド）
             else if (this.checkId == 3) {
-                this.$router.push('/searchPreavoids')
+                let getTimestamp = new Date().getTime()
+                let params = {
+                    search: this.$store.getters.getSearchWord,
+                    dateFrom:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? ''
+                            : this.$store.getters.getDateValueFrom,
+                    dateTo:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? ''
+                            : this.$store.getters.getDateValueTo,
+                    styles:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? ''
+                            : this.$store.getters.getStyles,
+
+                    facility_flag:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '-1'
+                            : this.$store.getters.getFacilityID,
+                    displayed:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getMaxCount,
+                    sort:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getSort,
+                    page:
+                        this.$props.form == this.$constant.formList.TOP
+                            ? '1'
+                            : this.$store.getters.getPage,
+                    timestamp: getTimestamp,
+                }
+                this.$router.push({
+                    path: '/searchPreavoids',
+                    query: params,
+                })
             }
             // DI 辞書
             else if (this.checkId == 4) {
