@@ -74,7 +74,6 @@ export default {
       ]
     };
   },
-  couputed: {},
   watch: {},
   methods: {
 

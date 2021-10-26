@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store'
 import login from '/src/view/login.vue'
 import myHome from '/src/view/myHome.vue'
+import notification from '/src/view/notification.vue'
+import bulletinBoard from '/src/view/bulletinBoard.vue'
 import searchResultAll from '/src/view/searchResultAll.vue'
 import searchOrganization from '/src/view/searchOrganization.vue'
 import searchDiKnowledge from '/src/view/searchDiKnowledge.vue'
@@ -19,9 +21,11 @@ const routes = [
         redirect: '/login',
     },
     {
-      path: '/redirect',
-      name: 'redirect',
-      component: Redirect 
+
+        path: '/redirect',
+        name: 'redirect',
+        component: Redirect
+
     },
     {
         path: '/login',
@@ -32,6 +36,24 @@ const routes = [
         path: '/myHome',
         name: 'myHome',
         component: myHome,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // お知らせ画面
+    {
+        path: '/notification',
+        name: 'notification',
+        component: notification,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // 掲示板画面
+    {
+        path: '/bulletinBoard',
+        name: 'bulletinBoard',
+        component: bulletinBoard,
         meta: {
             requireAuth: true,
         },

@@ -83,7 +83,6 @@ export default {
     managementIcon,
   },
   props: {},
-  couputed: {},
   watch: {},
   methods: {},
   created() { },

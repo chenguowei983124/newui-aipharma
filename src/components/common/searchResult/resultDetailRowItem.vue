@@ -10,6 +10,17 @@
     >
         <span :class="itemClass">{{ itemValue }}</span></router-link
     >
+    <router-link
+        v-if="itemType == '8'"
+        :to="{
+            name: routerPath,
+            query: { id: id },
+        }"
+    >
+        <span :class="itemClass" class="font-NotoSansJp"
+            >Q:{{ itemValue }}</span
+        ></router-link
+    >
     <span v-if="itemType == '4'" :class="itemClass"
         >{{ itemValue }}{{ itemTitle }}</span
     >
@@ -281,7 +292,7 @@ export default {
       }
       if (props.typeKB == 'CertaintyTitle') {
         // 17：確信度
-        return '確信度:'
+        return '確信度';
       }
       if (props.typeKB == 'ownFacility') {
         // 17：自施設

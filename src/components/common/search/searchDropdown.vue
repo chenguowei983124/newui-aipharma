@@ -166,7 +166,6 @@ export default {
       ],
     }
   },
-  couputed: {},
   watch: {},
   methods: {
     itemClick(value) {

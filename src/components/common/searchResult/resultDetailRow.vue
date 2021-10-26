@@ -1,5 +1,6 @@
 <template>
-    <div class="md:pt-0 mid:pt-3.5">
+    <div class="py-3.5">
+        <!-- {{ sites.length }} -->
         <!-- itemType 1:ラベル 2:日付 3:タイトル -->
         <div
             class="
@@ -7,11 +8,10 @@
                 md:pt-0
                 mid:pt-0
                 space-y-1.5
-                md:space-y-0
-                md:flex
+                md:space-y-0 md:flex
                 items-baseline
-                md:border-white
-                md:space-x-3
+                md:border-white md:space-x-3
+                mx-0.5
             "
             :class="getLineStyle(index, lineStyle, sites.length)"
             v-for="(row, index) in sites"
@@ -77,8 +77,7 @@
                             flex
                             md:block
                             space-x-2
-                            md:space-y-1.5 md:space-x-0
-                            md:pb-1.25
+                            md:space-y-1.5 md:space-x-0 md:pb-1.25
                         "
                     >
                         <div
@@ -231,8 +230,7 @@
                     ml-2.5
                     md:ml-0
                     pb-2
-                    md:pb-0
-                    md:pr-5
+                    md:pb-0 md:pr-5
                     flex-none
                     md:h-4
                     items-center
@@ -346,23 +344,13 @@ export default {
     }, getLineStyle(index, style, length) {
       // console.log("length", length)
       const line = []
-      if (length > 1 && style == "blueline") {
+
+      if (length != index + 1 && style == "blueline") {
         line.push("border-b-2 border-blueline ")
       }
-      if (length > 1 && style != "blueline") {
+      if (length != index + 1 && style != "blueline") {
         line.push("border-b-2 border-grayline")
       }
-      if (length == "1") {
-        line.push("")
-      }
-      if (length == 5) {
-        if (index == 4) {
-          return "md:pb-4"
-        } else if (index == 0) {
-          line.push("md:pt-4")
-        }
-      }
-
       return line
     }
   },

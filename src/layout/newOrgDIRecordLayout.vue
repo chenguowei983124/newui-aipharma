@@ -1,5 +1,5 @@
 <template>
-  <new-org-DI-record-main></new-org-DI-record-main>
+    <new-org-DI-record-main></new-org-DI-record-main>
 </template>
 
 <script>
@@ -15,7 +15,6 @@ export default {
       // isMenuOpen: true
     };
   },
-  couputed: {},
   watch: {},
   methods: {
 

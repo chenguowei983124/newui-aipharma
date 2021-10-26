@@ -16,7 +16,6 @@ import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
   components: { notfound, homeBottomTemplate },
   props: {},
-  couputed: {},
   watch: {},
   methods: {},
   created() { },

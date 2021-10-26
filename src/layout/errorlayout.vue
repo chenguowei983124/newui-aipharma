@@ -22,7 +22,6 @@ export default {
       errorMessage: ""
     };
   },
-  couputed: {},
   watch: {},
   mounted() {
     console.log(this.$route.params)

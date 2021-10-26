@@ -30,15 +30,15 @@ export default {
         },
         // management
         topManagementInfo(state) {
-            const managementInfo = {
-                lastName: '木村',
-                name: '木村 太郎',
-                title: 'doctor',
-                hospital: '◯◯◯◯◯◯大学病院',
-                authority: '管 理 者',
-            }
+            // const managementInfo = {
+            //     lastName: '木村',
+            //     name: '木村 太郎',
+            //     title: 'doctor',
+            //     hospital: '◯◯◯◯◯◯大学病院',
+            //     authority: '管 理 者',
+            // }
 
-            return managementInfo
+            return state.managementInfo
         },
         // managementGroup
         topManagementItemList(state) {
@@ -67,6 +67,9 @@ export default {
         },
         setTopPmda(state, info) {
             state.pmdaInfo = info
+        },
+        setTopManagementInfo(state, info) {
+            state.managementInfo = info
         },
     },
 
@@ -113,6 +116,10 @@ export default {
             }
             console.log('setBBSDropDowninfo', bbsDropDowninfo)
             commit('setBBSDropDowninfo', bbsDropDowninfo)
+        },
+        async getTopManagementInfo({ rootState, commit }, code) {
+            const info = await serve.getManagementInfo(code)
+            commit('setTopManagementInfo', info.data)
         },
         async getScientifiSocietyInfo({ rootState, commit }) {
             const info = await serve.getTopScientifiSociety()
