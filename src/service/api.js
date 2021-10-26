@@ -1,8 +1,8 @@
 import axios from './http'
 // import axios from "axios";
 const API_TIMEOUT = 5000
-// const API_BASE = 'http://localhost:3000/'
-const API_BASE = 'https://ai-pharma-bbs-be-stg.kit-ai.jp/'
+const API_BASE = 'http://localhost:3000/'
+// const API_BASE = 'https://ai-pharma-bbs-be-stg.kit-ai.jp/'
 
 const exeAxios = (method, acURL, data) => {
     return axios({
@@ -68,11 +68,11 @@ const serve = {
             let acURL = '/posts/topmenu_info'
             const queryString = new URLSearchParams(queryStringData).toString()
             const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            console.log('getTopNoticel_url', url)
+            // console.log('getTopNoticel_url', url)
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
-                data = response.data
-                console.log('getTopNoticel', data)
+                data = response
+                // console.log('getTopNoticel', data)
             }
         }
 
@@ -87,7 +87,7 @@ const serve = {
             data = await axios('/preavoid/get_topmenu_BulletinBoard_info', {
                 method: 'get',
             })
-            console.log('getTopBulletinBoard', data)
+            // console.log('getTopBulletinBoard', data)
         } else {
             const queryStringData = {
                 code: code,
@@ -100,10 +100,10 @@ const serve = {
             let acURL = '/posts/topmenu_info'
             const queryString = new URLSearchParams(queryStringData).toString()
             const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            console.log('getTopBulletinBoard_url', url)
+            // console.log('getTopBulletinBoard_url', url)
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
-                data = response.data
+                data = response
                 console.log('getTopBulletinBoard', data)
             }
         }
@@ -195,11 +195,26 @@ const serve = {
     //===========================
     // 一括検索結果画面　掲示板情報取得
     //===========================
-    async getALLBulletinBoard_Info() {
-        const data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
-            method: 'get',
-        })
+    async getALLBulletinBoard_Info(params) {
+        let data
+        if (!params.searchKey) {
+            data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
+                method: 'get',
+            })
+        } else {            
+            let mtd = 'get'
+            let acURL = '/posts/bunch_bulletin_board_info'
+            const queryString = new URLSearchParams(params).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            console.log('getALLBulletinBoard_Info', url)
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                data = response
+                console.log('bunch_bulletin_board_info', response)
+            }
+        }
 
+        console.log('getALLBulletinBoard_Info', data)
         return data
     },
     //===========================
@@ -316,7 +331,7 @@ const serve = {
         const queryString = new URLSearchParams(queryStringData).toString()
         const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
         console.log('getPostList-filter', flt)
-        // return exeAxios(mtd, url, flt)
+        return exeAxios(mtd, url, flt)
     },
 }
 export default serve

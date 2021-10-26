@@ -111,7 +111,7 @@ export default {
                 genre_Info: genre_Info,
                 genre_BBS: genre_BBS,
             }
-            console.log('setBBSDropDowninfo', bbsDropDowninfo)
+            // console.log('setBBSDropDowninfo', bbsDropDowninfo)
             commit('setBBSDropDowninfo', bbsDropDowninfo)
         },
         async getScientifiSocietyInfo({ rootState, commit }) {
