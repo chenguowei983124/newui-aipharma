@@ -1,18 +1,16 @@
 <template>
     <div class="space-y-4">
         <div
-            class="flex flex-wrap mt-7.5 md:mt-8 md:mx-5 space-y-1 md:space-y-0"
+            class="
+                flex flex-col
+                md:flex-row
+                mt-7.5
+                md:mt-8 md:mx-5
+                space-y-1
+                md:space-y-0
+            "
         >
-            <div
-                class="
-                    w-93.75
-                    md:w-25
-                    font-NotoSansJp
-                    text-base
-                    md:text-xl
-                    font-bold
-                "
-            >
+            <div class="w-25 font-NotoSansJp text-base md:text-xl font-bold">
                 検索結果：
             </div>
             <div
@@ -24,49 +22,22 @@
                     font-bold
                 "
             >
-                <div
-                    v-for="item in $store.getters
-                        .getSearchAllOrganizationDidDocument.searchWords"
-                    :key="item"
-                    class="mr-2"
-                >
+                <div v-for="item in searchResults" :key="item" class="mr-2">
                     {{ item }}
                 </div>
             </div>
         </div>
-        <!-- <div
-            class="
-                searchResultAllTitleAndValue
-                mt-7.5
-                md:mt-8 md:mx-5
-                flex flex-row
-            "
-        >
-            <div class="">検索結果：</div>
-            <div
-                v-for="item in $store.getters
-                    .getSearchAllOrganizationDidDocument.searchWords"
-                :key="item"
-                class="mr-2"
-            >
-                {{ item }}
-            </div>
-        </div> -->
-
         <div class="h-full space-y-2.5 md:space-y-3.75">
             <resut-tag
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="DI ナレッジシェア"
                 titleStyle="bulletinBoardInfoTitle"
-                titleURL="\"
+                titleURL="/searchDiKnowledge"
             >
-                <!-- :sub1="['group']"
-                    :sub2="['title']"
-                    :sub3="['certainty']" -->
                 <result-detail-row
                     class="searchResult_detail_blue"
                     routerPath="searchDiKnowledge"
-                    :sites="AAAA"
+                    :sites="diKnowledge"
                     :sub1="['keyword']"
                     :sub2="['question']"
                     :sub3="['certainty']"
@@ -78,14 +49,9 @@
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="組織内 DI 記録（Q&A）"
                 titleStyle="bulletinBoardInfoTitle"
-                titleURL="\"
+                titleURL="/searchOrganization"
                 rightStyle="count"
-                :countTitle="
-                    '該当：' +
-                    $store.getters.getSearchAllOrganizationDidDocument
-                        .allCount +
-                    '件'
-                "
+                :countTitle="'該当：' + searchOrganizationCount + '件'"
                 countStyle="searchResultAllCountLable"
             >
                 <result-detail-row
@@ -106,13 +72,9 @@
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="症例（プレアボイド）"
                 titleStyle="bulletinBoardInfoTitle"
-                titleURL="\"
+                titleURL="/searchPreavoids"
                 rightStyle="count"
-                :countTitle="
-                    '該当：' +
-                    $store.getters.getSearchAllPreAvoid.allCount +
-                    '件'
-                "
+                :countTitle="'該当：' + preAvoidCount + '件'"
                 countStyle="searchResultAllCountLable"
             >
                 <result-detail-row
@@ -144,13 +106,9 @@
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="掲示板"
                 titleStyle="bulletinBoardInfoTitle"
-                titleURL="\searchBulletinBoard"
+                titleURL="/searchBulletinBoard"
                 rightStyle="count"
-                :countTitle="
-                    '該当：' +
-                    $store.getters.getSearchAllBulletinBoardInfo.allCount +
-                    '件'
-                "
+                :countTitle="'該当：' + bulletinBoardInfoCount + '件'"
                 countStyle="searchResultAllCountLable"
             >
                 <result-detail-row
@@ -208,33 +166,63 @@ export default {
     return {}
   },
   computed: {
-    AAAA: {
+    diKnowledge: {
       get: function () {
-        var BBBB = []
-        console.log("this.$store.getters.getSearchAIDiKnowledge", this.$store.getters.getSearchAIDiKnowledge)
-
+        var diKnowledgeitems = []
         if (this.$store.getters.getSearchAIDiKnowledge != undefined) {
           if (Object.keys(this.$store.getters.getSearchAIDiKnowledge).length !== 0) {
-            BBBB.push(this.$store.getters.getSearchAIDiKnowledge)
+            diKnowledgeitems.push(this.$store.getters.getSearchAIDiKnowledge)
           }
         }
-
-        // console.log(BBBB)
         if (this.$store.getters.getSearchAllDiKnowledge.details != undefined) {
           if (Object.keys(this.$store.getters.getSearchAllDiKnowledge.details).length !== 0) {
             for (var i in this.$store.getters.getSearchAllDiKnowledge.details) {
-              BBBB.push(this.$store.getters.getSearchAllDiKnowledge.details[i])
+              diKnowledgeitems.push(this.$store.getters.getSearchAllDiKnowledge.details[i])
             }
           }
         }
 
-        // console.log("222", BBBB)
-        return BBBB
+        return diKnowledgeitems
       },
-      //   set: function (newValue) {
-      //     this.innerValue = newValue
-      //   },
     },
+    searchResults: {
+      get: function () {
+        if (this.$store.getters.getSearchAllOrganizationDidDocument.details != undefined) {
+          if (Object.keys(this.$store.getters.getSearchAllOrganizationDidDocument.searchWords).length !== 0) {
+            return this.$store.getters.getSearchAllOrganizationDidDocument.searchWords
+          }
+        } else {
+          return this.$store.getters.getSearchAllDiKnowledge.searchWords
+        }
+      }
+    },
+    searchOrganizationCount: {
+      get: function () {
+        if (this.$store.getters.getSearchAllOrganizationDidDocument.allCount != undefined) {
+          return this.$store.getters.getSearchAllOrganizationDidDocument.allCount
+        } else {
+          return 0
+        }
+      }
+    },
+    preAvoidCount: {
+      get: function () {
+        if (this.$store.getters.getSearchAllPreAvoid.allCount != undefined) {
+          return this.$store.getters.getSearchAllPreAvoid.allCount
+        } else {
+          return 0
+        }
+      }
+    },
+    bulletinBoardInfoCount: {
+      get: function () {
+        if (this.$store.getters.getSearchAllBulletinBoardInfo.allCount != undefined) {
+          return this.$store.getters.getSearchAllBulletinBoardInfo.allCount
+        } else {
+          return 0
+        }
+      }
+    }
   },
   methods: {
     async getDispData() {

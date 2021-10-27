@@ -15,7 +15,6 @@ export default {
             return state.dIKnowledgeShareSearchInfo
         },
         diKnowledgeShareNewQAInfo(state) {
-            console.log('asdfa')
             return state.diKnowledgeShareNewQAInfo
         },
         diKnowledgeShareLookcarefullyQAInfo(state) {
@@ -26,17 +25,9 @@ export default {
         setdIKnowledgeShareSearchInfo(state, info) {
             // state.dIKnowledgeShareSearchAIInfo = info.data.ai
             state.dIKnowledgeShareSearchInfo = info.data.search
-            console.log(
-                'state.dIKnowledgeShareSearchInfo',
-                state.dIKnowledgeShareSearchInfo
-            )
         },
         setdIKnowledgeShareSearchAIInfo(state, info) {
             state.dIKnowledgeShareSearchAIInfo = info.data.ai
-            console.log(
-                'state.dIKnowledgeShareSearchAIInfo',
-                state.dIKnowledgeShareSearchAIInfo
-            )
         },
         setDiKnowledgeShareNewQAInfo(state, info) {
             state.diKnowledgeShareNewQAInfo = info.data

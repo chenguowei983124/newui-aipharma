@@ -1,8 +1,8 @@
 import axios from './http'
 // import axios from "axios";
 const API_TIMEOUT = 5000
-const API_BASE = 'http://localhost:3000/'
-// const API_BASE = 'https://ai-pharma-bbs-be-stg.kit-ai.jp/'
+// const API_BASE = 'http://localhost:3000/'
+const API_BASE = 'https://ai-pharma-bbs-be-stg.kit-ai.jp/'
 
 const exeAxios = (method, acURL, data) => {
     return axios({
@@ -256,20 +256,20 @@ const serve = {
     async getALLBulletinBoard_Info(params) {
         let data
         // if (!params.searchKey) {
-        //     data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
-        //         method: 'get',
-        //     })
-        // } else {            
-        let mtd = 'get'
-        let acURL = '/posts/bunch_bulletin_board_info'
-        const queryString = new URLSearchParams(params).toString()
-        const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-        console.log('getALLBulletinBoard_Info', url)
-        const response = await exeAxios(mtd, url, null)
-        if (response.status == 200) {
-            data = response
-            console.log('bunch_bulletin_board_info', response)
-        }
+        data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
+            method: 'get',
+        })
+        // } else {
+        //     let mtd = 'get'
+        //     let acURL = '/posts/bunch_bulletin_board_info'
+        //     const queryString = new URLSearchParams(params).toString()
+        //     const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+        //     console.log('getALLBulletinBoard_Info', url)
+        //     const response = await exeAxios(mtd, url, null)
+        //     if (response.status == 200) {
+        //         data = response
+        //         console.log('bunch_bulletin_board_info', response)
+        //     }
         // }
 
         console.log('getALLBulletinBoard_Info', data)

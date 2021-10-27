@@ -47,7 +47,6 @@ export default {
             state.searchAllDiKnowledgeInfo = info
         },
         searchAIDiInfo(state, info) {
-            console.log("searchAIDiInfo", info)
             state.searchAIDiKnowledgeInfo = info
         },
         searchAllOrganizationInfo(state, info) {
@@ -101,7 +100,6 @@ export default {
                     // 検索結果格納
                     commit('searchAIDiInfo', response.data)
                 })
-            console.log("searchAIDiInfo", info)
         },
         // ========================================
         // 組織内 DI 記録（Q&A）API実行

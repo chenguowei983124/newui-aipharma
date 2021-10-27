@@ -3,7 +3,6 @@
         id="_211012_ai_pharma_parts"
         data-name="211012_ai_pharma_parts"
         xmlns="http://www.w3.org/2000/svg"
-        stroke="rgb(58, 175, 226)"
         viewBox="0 0 35 35"
     >
         <path

@@ -3,9 +3,12 @@
         id="_211012_ai_pharma_parts"
         data-name="211012_ai_pharma_parts"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 30 30"
+        viewBox="0 0 24 24"
     >
-        <path class="cls-1" d="M30,6,15,21,0,6H10.5V0h9V6ZM0,24v6H30V24Z" />
+        <path
+            class="cls-1"
+            d="M22,2V22H2V2H22m2-2H0V24H24V0ZM19.06,9.06,16.94,6.94,10,13.88,7.06,10.94,4.94,13.06,10,18.12Z"
+        />
     </svg>
 </template>
 
@@ -17,6 +20,6 @@ export default {
 
 <style scoped>
 .cls-1 {
-    fill: #fff;
+    fill: #8cc85a;
 }
 </style>

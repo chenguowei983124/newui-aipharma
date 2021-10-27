@@ -172,13 +172,24 @@
                             justify-center
                         "
                     >
-                        <input
-                            type="checkbox"
-                            name=""
-                            id=""
-                            :checked="row.check"
-                            @change="onChangeCheckd(row.index)"
-                        />
+                        <!-- {{ row.facilityIdentificationNumber }} -->
+                        <div v-if="row.facilityIdentificationNumber == 1">
+                            <input
+                                type="checkbox"
+                                name="checkbox2"
+                                value="aaa"
+                                disabled
+                            />
+                        </div>
+                        <div v-else>
+                            <input
+                                type="checkbox"
+                                name=""
+                                id=""
+                                :checked="row.check"
+                                @change="onChangeCheckd(row.index)"
+                            />
+                        </div>
                     </td>
                     <!-- 様式 -->
                     <td
@@ -302,7 +313,7 @@
                         <div>
                             <div class="flex flex-col text-xs">
                                 {{ row.name }}
-                                <div
+                                <!-- <div
                                     class="
                                         mt-1
                                         h-5
@@ -315,7 +326,7 @@
                                     "
                                 >
                                     自施設
-                                </div>
+                                </div> -->
                                 <result-detail-row-item
                                     itemType="1"
                                     :typeKB="
@@ -398,133 +409,132 @@ import axios from 'axios'
 import 'sweetalert2/src/sweetalert2.scss'
 
 export default {
-    components: {
-        downloadIconSvg,
-        TrashIconSvg,
-        EditIconSvg,
-        resultDetailRowItem,
+  components: {
+    downloadIconSvg,
+    TrashIconSvg,
+    EditIconSvg,
+    resultDetailRowItem,
+  },
+  props: {
+    detailList: Array,
+  },
+  data() {
+    return {
+      dispList: this.detailList,
+      checkAll: false,
+    }
+  },
+  computed: {
+    displayList: {
+      get: function () {
+        return this.detailList
+      },
     },
-    props: {
-        detailList: Array,
+  },
+  methods: {
+    groupKB(kb) {
+      if (kb == '0') {
+        return 'ownFacility'
+      } else if (kb == '1') {
+        return 'otherFacility'
+      } else if (kb == '2') {
+        return 'group'
+      }
     },
-    data() {
-        return {
-            dispList: this.detailList,
-            checkAll: false,
-        }
+    // 行チェック
+    onChangeCheckd(index) {
+      let data = this.$store.getters.getSearchPreavoidsInfo
+      data.searchData[index].check = !data.searchData[index].check
+      this.$store.dispatch('setPearchPreavoidsInfo', data)
     },
-    computed: {
-        displayList: {
-            get: function () {
-                return this.detailList
-            },
-        },
-    },
-    methods: {
-        groupKB(kb) {
-            if (kb == '0') {
-                return 'ownFacility'
-            } else if (kb == '1') {
-                return 'otherFacilit'
-            } else if (kb == '2') {
-                return 'group'
-            }
-        },
-        // 行チェック
-        onChangeCheckd(index) {
-            let data = this.$store.getters.getSearchPreavoidsInfo
-            data.searchData[index].check = !data.searchData[index].check
-            this.$store.dispatch('setPearchPreavoidsInfo', data)
-        },
-        // チェックALL
-        changeAll() {
-            console.log(this.checkAll)
-            this.checkAll = !this.checkAll
-            for (let index = 0; index < this.dispList.length; index++) {
-                this.dispList[index].check = this.checkAll
-            }
+    // チェックALL
+    changeAll() {
+      console.log(this.checkAll)
+      this.checkAll = !this.checkAll
+      for (let index = 0; index < this.dispList.length; index++) {
+        this.dispList[index].check = this.checkAll
+      }
 
-            let data = this.$store.getters.getSearchPreavoidsInfo
-            for (let index = 0; index < data.searchData.length; index++) {
-                data.searchData[index].check = this.checkAll
-            }
+      let data = this.$store.getters.getSearchPreavoidsInfo
+      for (let index = 0; index < data.searchData.length; index++) {
+        data.searchData[index].check = this.checkAll
+      }
 
-            this.$store.dispatch('setPearchPreavoidsInfo', data)
-        },
-        async rowDownload(id) {
-            const checkStartDate = new Date(sessionStorage.search_updated_from)
-            const checkEndDate = new Date(sessionStorage.search_updated_to)
-            const self = this
-            // if (
-            //     checkStartDate.toString() === 'Invalid Date' ||
-            //     checkEndDate.toString() === 'Invalid Date'
-            // ) {
-            //     sessionStorage.removeItem('search_updated_from')
-            //     sessionStorage.removeItem('search_updated_to')
-            // }
-            await axios
-                .get(
-                    `${
-                        import.meta.env.VITE_APP_PREAVOID_API_URL
-                    }/preavoid/search.xlsx`,
-                    {
-                        responseType: 'blob',
-                        dataType: 'binary',
-                        // params: {
-                        //     token: this.isApiToken,
-                        //     comment: sessionStorage.search_comment,
-                        //     updated_from: sessionStorage.search_updated_from,
-                        //     updated_to: sessionStorage.search_updated_to,
-                        //     style: sessionStorage.search_style,
-                        //     facility: sessionStorage.search_facility,
-                        // },
-                    },
-                    {
-                        Accept: 'application/octet-stream',
-                    }
-                )
-                .then((res) => {
-                    const filename = '123.xls'
+      this.$store.dispatch('setPearchPreavoidsInfo', data)
+    },
+    async rowDownload(id) {
+      const checkStartDate = new Date(sessionStorage.search_updated_from)
+      const checkEndDate = new Date(sessionStorage.search_updated_to)
+      const self = this
+      // if (
+      //     checkStartDate.toString() === 'Invalid Date' ||
+      //     checkEndDate.toString() === 'Invalid Date'
+      // ) {
+      //     sessionStorage.removeItem('search_updated_from')
+      //     sessionStorage.removeItem('search_updated_to')
+      // }
+      await axios
+        .get(
+          `${import.meta.env.VITE_APP_PREAVOID_API_URL
+          }/preavoid/search.xlsx`,
+          {
+            responseType: 'blob',
+            dataType: 'binary',
+            // params: {
+            //     token: this.isApiToken,
+            //     comment: sessionStorage.search_comment,
+            //     updated_from: sessionStorage.search_updated_from,
+            //     updated_to: sessionStorage.search_updated_to,
+            //     style: sessionStorage.search_style,
+            //     facility: sessionStorage.search_facility,
+            // },
+          },
+          {
+            Accept: 'application/octet-stream',
+          }
+        )
+        .then((res) => {
+          const filename = '123.xls'
 
-                    if (window.navigator.msSaveOrOpenBlob) {
-                        window.navigator.msSaveOrOpenBlob(res.data, filename)
-                    } else {
-                        const blob = new Blob([res.data], {
-                            type: 'application/octet-stream',
-                        })
-                        const link = document.createElement('a')
-                        link.href = window.URL.createObjectURL(blob)
-                        link.download = filename
-                        link.click()
-                    }
-                })
-        },
-        rowEdit(id) {},
-        rowDelete(id) {
-            Swal.fire({
-                text: '本当に削除してよろしいですか？',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '削除',
-                cancelButtonText: 'キャンセル',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log('削除')
-                    let params = {
-                        id: id,
-                    }
-                    this.$serve.deletePreavoidData(params)
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                }
+          if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(res.data, filename)
+          } else {
+            const blob = new Blob([res.data], {
+              type: 'application/octet-stream',
             })
-        },
+            const link = document.createElement('a')
+            link.href = window.URL.createObjectURL(blob)
+            link.download = filename
+            link.click()
+          }
+        })
     },
+    rowEdit(id) { },
+    rowDelete(id) {
+      Swal.fire({
+        text: '本当に削除してよろしいですか？',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '削除',
+        cancelButtonText: 'キャンセル',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log('削除')
+          let params = {
+            id: id,
+          }
+          this.$serve.deletePreavoidData(params)
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+    },
+  },
 }
 </script>
 <style scoped></style>

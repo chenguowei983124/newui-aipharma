@@ -70,7 +70,7 @@ export default {
         },
         // 検索対象　Q
         getCheckQ(state) {
-            console.log('getCheckQ', state.checkQ)
+            // console.log('getCheckQ', state.checkQ)
             return state.checkQ
         },
         // 検索対象　A
@@ -114,7 +114,6 @@ export default {
             return state.organizationSearchInfo
         },
         organizationNewQAInfo(state) {
-            console.log('asdfa')
             return state.organizationNewQAInfo
         },
         organizationLookcarefullyQAInfo(state) {

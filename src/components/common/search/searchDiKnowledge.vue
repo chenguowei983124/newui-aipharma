@@ -193,7 +193,7 @@
             </div>
         </div>
         <!-- 四行目 -->
-        <div
+        <!-- <div
             class="bg-searchResultTitle rounded-b-lg block md:hidden mid:hidden"
         >
             <div
@@ -207,7 +207,7 @@
                     stroke="#ffffff"
                 ></triangle-down-svg>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

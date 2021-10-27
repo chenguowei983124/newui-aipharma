@@ -1105,83 +1105,83 @@ export default {
     },
     // セッションに退避した情報をリーセット
     resetSearchBar: function () {
+
       this.initStore()
-      this.$store.dispatch('setSearchWord', this.$route.query.search)
-      console.log('this.$route.query.search', this.$route.query.search)
-      //   console.log('tags', this.$route.query.tags)
-      this.$store.dispatch(
-        'setSearchTags',
-        this.$route.query.tags.split(',')
-      )
-      //   console.log('resetSearchBar', this.$store.getters.getSearchTags)
-      this.$store.dispatch('setMedicineID', this.$route.query.medicine)
-      this.$store.dispatch('setQuestionID', this.$route.query.qacategory)
-      this.$store.dispatch(
-        'setFacilityID',
-        this.$route.query.facility_flag
-      )
-      this.$store.dispatch('setMaxCount', this.$route.query.displayed)
-      this.organizationDateSortValue = this.$route.query.sort
-      if (this.$route.query.displayed == 20) {
-        this.organizationCountSortValue = 0
-      } else if (this.$route.query.displayed == 50) {
-        this.organizationCountSortValue = 1
-      }
-      if (this.$route.query.displayed == 100) {
-        this.organizationCountSortValue = 2
-      }
-      this.$store.dispatch('setSort', this.$route.query.sort)
-      this.$store.dispatch('setPage', this.$route.query.page)
+      console.log("this.$route.query.id", this.$route.query.id)
+      if (this.$route.query.id == undefined) {
 
-      this.$store.dispatch(
-        'setCheckQ',
-        this.$route.query.checkQ.toString() === 'true',
-        true,
-        false
-      )
 
-      this.$store.dispatch(
-        'setCheckA',
-        this.$route.query.checkA.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckComment',
-        this.$route.query.checkComment.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckAddFileName',
-        this.$route.query.checkAddFileName.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckContributor',
-        this.$route.query.checkContributor.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckLastEditer',
-        this.$route.query.checkLastEditer.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckFacilityName',
-        this.$route.query.checkFacilityName.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckNote',
-        this.$route.query.checkNote.toString() === 'true',
-        true,
-        false
-      )
+        this.$store.dispatch('setSearchWord', this.$route.query.search)
+        //   console.log('this.$route.query.search', this.$route.query.search)
+        console.log('tags', this.$route.query.tags)
+        this.$store.dispatch('setSearchTags', this.$route.query.tags.split(','))
+        //   console.log('resetSearchBar', this.$store.getters.getSearchTags)
+        this.$store.dispatch('setMedicineID', this.$route.query.medicine)
+        this.$store.dispatch('setQuestionID', this.$route.query.qacategory)
+        this.$store.dispatch('setFacilityID', this.$route.query.facility_flag)
+        this.$store.dispatch('setMaxCount', this.$route.query.displayed)
+        this.organizationDateSortValue = this.$route.query.sort
+        if (this.$route.query.displayed == 20) {
+          this.organizationCountSortValue = 0
+        } else if (this.$route.query.displayed == 50) {
+          this.organizationCountSortValue = 1
+        }
+        if (this.$route.query.displayed == 100) {
+          this.organizationCountSortValue = 2
+        }
+        this.$store.dispatch('setSort', this.$route.query.sort)
+        this.$store.dispatch('setPage', this.$route.query.page)
+
+        this.$store.dispatch(
+          'setCheckQ',
+          this.$route.query.checkQ.toString() === 'true',
+          true,
+          false
+        )
+
+        this.$store.dispatch(
+          'setCheckA',
+          this.$route.query.checkA.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckComment',
+          this.$route.query.checkComment.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckAddFileName',
+          this.$route.query.checkAddFileName.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckContributor',
+          this.$route.query.checkContributor.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckLastEditer',
+          this.$route.query.checkLastEditer.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckFacilityName',
+          this.$route.query.checkFacilityName.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckNote',
+          this.$route.query.checkNote.toString() === 'true',
+          true,
+          false
+        )
+      }
     },
 
     initStore() {

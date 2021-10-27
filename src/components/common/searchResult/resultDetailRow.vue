@@ -153,7 +153,7 @@
                             itemType="3"
                             :itemValue="row.title"
                             :routerPath="routerPath"
-                            :id="row.id"
+                            :id="String(row.id)"
                             :addStyle="
                                 getLookedTitle(row.looked, midDetailStyle)
                             "
