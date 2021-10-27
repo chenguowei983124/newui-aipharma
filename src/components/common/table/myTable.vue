@@ -266,7 +266,7 @@
                             justify-center
                         "
                     >
-                        {{ row.patientDivisionId }}
+                        {{ row.patientDivisionId == '1' ? '外来' : '入院' }}
                     </td>
                     <!-- 治療中の疾患 -->
                     <td
@@ -316,6 +316,14 @@
                                 >
                                     自施設
                                 </div>
+                                <result-detail-row-item
+                                    itemType="1"
+                                    :typeKB="
+                                        groupKB(
+                                            row.facilityIdentificationNumber
+                                        )
+                                    "
+                                ></result-detail-row-item>
                             </div>
 
                             <!-- <div
@@ -383,13 +391,19 @@
 <script>
 import downloadIconSvg from '../svgImage/downloadIconSvg.vue'
 import EditIconSvg from '../svgImage/editIconSvg.vue'
+import resultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
 import TrashIconSvg from '../svgImage/trashIconSvg.vue'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import axios from 'axios'
 import 'sweetalert2/src/sweetalert2.scss'
 
 export default {
-    components: { downloadIconSvg, TrashIconSvg, EditIconSvg },
+    components: {
+        downloadIconSvg,
+        TrashIconSvg,
+        EditIconSvg,
+        resultDetailRowItem,
+    },
     props: {
         detailList: Array,
     },
@@ -407,6 +421,15 @@ export default {
         },
     },
     methods: {
+        groupKB(kb) {
+            if (kb == '0') {
+                return 'ownFacility'
+            } else if (kb == '1') {
+                return 'otherFacilit'
+            } else if (kb == '2') {
+                return 'group'
+            }
+        },
         // 行チェック
         onChangeCheckd(index) {
             let data = this.$store.getters.getSearchPreavoidsInfo
