@@ -5,17 +5,17 @@
             <div class="w-20 flex text-sm md:text-base">検索対象</div>
             <!-- 右 -->
             <div class="flex flex-col md:flex-row pt-0.5"
-                 v-for="(item, index) in filterBBS.targets"
-                 :key="index"
+                 v-for="(value, name) in targetCBS"
+                 :key="name"
             >
-                <div :id="'st_'+item.name" class="w-1/3 md:ml-2 md:w-auto" >
+                <div :id="'st_'+name" class="w-1/3 md:ml-2 md:w-auto" >
                     <label class="inline-flex items-center justify-end">
                         <input
                             type="checkbox"
                             class="form-checkbox text-white"
-                            v-model="$data['filterBBS']['targets'][index].value"
+                            v-model="$data['filterBBS']['targets'][name]"
                         />
-                        <span class="ml-1 text-xs md:text-mxss">{{item.title}}</span>
+                        <span class="ml-1 text-xs md:text-mxss">{{value}}</span>
                     </label>
                 </div>
             </div>
@@ -201,16 +201,24 @@ export default {
   },
   data() {
     return {
-      
+      targetCBS: {
+        title: 'タイトル',
+        content: '内容',
+        coment:  'コメント',
+        creator: '投稿者',
+        updater: '最終編集者',
+        facility: '施設名',
+      },
+
       filterBBS: {
-        targets:[
-          {name: 'title', title: 'タイトル',value: true},
-          {name: 'content', title: '内容',value: true},
-          {name: 'coment', title: 'コメント',value: true},
-          {name: 'creator', title: '投稿者',value: true},
-          {name: 'updater', title: '最終編集者',value: true},
-          {name: 'facility', title: '施設名',value: true},
-        ],
+        targets: {
+          title: true,
+          content: true,
+          coment: true,
+          creator: true,
+          updater: true,
+          facility: true,
+        },
         tags:[
 
         ],
@@ -228,23 +236,29 @@ export default {
     //       { label: 'B', value: 2 },
     //       { label: 'C', value: 3 },
     //   ],
-      scopeList: [
-          { value: '0', title: '全体' },
-          { value: '1', title: '学会' },
-          { value: '2', title: 'グループ' },
-      ],
-      searchText: null,
-      checkId: '',
+      scopeList: this.$store.getters.bbsDropDownInfo.scops,
+      // [
+      //     { value: '0', title: '全体' },
+      //     { value: '1', title: '学会' },
+      //     { value: '2', title: 'グループ' },
+      // ],
+      // searchText: null,
+      // checkId: '',
       isDetailClick: false,
-      tagValue: this.$store.getters.getSearchTags,
+      // tagValue: this.$store.getters.getSearchTags,
     }
   },
   methods: {
     inputClear() {
       
-      this.filterBBS.targets.map(t => {
-        t.value = false
-      })
+      // this.filterBBS.targets.map(t => {
+      //   t.value = false
+      // })
+      let tgs = this.filterBBS.targets
+      Object.keys(tgs).map(key => {
+        tgs[key] = false
+      });
+
       this.filterBBS.tags = []
       this.filterBBS.scope = ''
       this.filterBBS.create_from = ''
@@ -264,7 +278,7 @@ export default {
     },
   },
   created () {
-    //   console.log('setFilterBBS',this.$data.filterBBS)
+      console.log('setFilterBBS',this.$data.filterBBS)
       this.$store.dispatch('setFilterBBS', this.$data.filterBBS)
   },
   updated () {
