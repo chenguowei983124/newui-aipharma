@@ -21,7 +21,6 @@ import managementIcon from '../header/managementIcon.vue'
 export default {
   components: { portraitIcon, issueIcon, managementIcon },
   props: {},
-  couputed: {},
   watch: {},
   methods: {
   },

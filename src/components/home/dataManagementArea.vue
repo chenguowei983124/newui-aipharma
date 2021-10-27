@@ -19,12 +19,7 @@
                                 {{ $store.getters.topManagementInfo.name }}
                             </div>
                             <div class="notoSansJpAndTwelveRegular">
-                                {{
-                                    $store.getters.topManagementInfo.title ==
-                                    'doctor'
-                                        ? '先生'
-                                        : ''
-                                }}
+                                {{ $store.getters.topManagementInfo.title }}
                             </div>
                         </div>
 
@@ -194,26 +189,28 @@
 import TopPortraitIcon from '../home/topPortraitIcon.vue'
 
 export default {
-    components: { TopPortraitIcon },
-    props: {},
-    data() {
-        return {
-            isDown: false,
-        }
+  components: { TopPortraitIcon },
+  props: {},
+  data() {
+    return {
+      isDown: false,
+    }
+  },
+  watch: {},
+  methods: {
+    itemClick() {
+      this.isDown = !this.isDown
     },
-    couputed: {},
-    watch: {},
-    methods: {
-        itemClick() {
-            this.isDown = !this.isDown
-        },
-        orgDiRecordClick() {
-            this.$router.push({
-                path: '/newOrgDIRecord',
-            })
-        },
+    orgDiRecordClick() {
+      this.$router.push({
+        path: '/newOrgDIRecord',
+      })
     },
-    created() {},
+  },
+  created() { },
+  mounted() {
+    this.$store.dispatch('getTopManagementInfo')
+  }
 }
 </script>
 <style scoped></style>

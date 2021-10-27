@@ -6,10 +6,11 @@
             headerStyle="titleOnlyUnderlineBgColorBlue"
             title="お知らせ"
             titleStyle="bulletinBoardInfoTitle"
+            titleURL="notification"
         >
             <result-detail-row
                 class="searchResult_detail_blue"
-                routerPath="searchNotice"
+                routerPath="notification"
                 :sites="$store.getters.topNoticeInfo.details"
                 :sub2="['title']"
             >
@@ -25,7 +26,7 @@
         >
             <div class="tab-a1 hidden">
                 <result-detail-row
-                    routerPath="searchNotice"
+                    routerPath="notification"
                     class="searchResult_detail_blue"
                     :sites="$store.getters.topNoticeInfo.details"
                     :sub2="['title']"
@@ -35,7 +36,7 @@
             <div class="tab-a2 hidden">
                 <result-detail-row
                     class="searchResult_detail_blue"
-                    routerPath="searchBulletinBoard"
+                    routerPath="bulletinBoard"
                     :sites="$store.getters.topBulletinBoardInfo.details"
                     :sub2="['title']"
                 >
@@ -49,10 +50,11 @@
             headerStyle="titleOnlyUnderlineBgColorBlue"
             title="掲示板"
             titleStyle="bulletinBoardInfoTitle"
+            titleURL="bulletinBoard"
         >
             <result-detail-row
                 class="searchResult_detail_blue"
-                routerPath="searchBulletinBoard"
+                routerPath="bulletinBoard"
                 :sub2="['title']"
                 :sites="$store.getters.topBulletinBoardInfo.details"
             >
@@ -169,7 +171,6 @@ export default {
     carousel,
   },
   props: {},
-  couputed: {},
   watch: {},
   setup() {
   },

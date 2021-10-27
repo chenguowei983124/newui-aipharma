@@ -45,30 +45,29 @@
 import logo from '../components/login/logo.vue'
 
 export default {
-    components: {
-        logo,
+  components: {
+    logo,
+  },
+  props: {},
+  data() {
+    return {
+      isMenuOpen: true,
+    }
+  },
+  watch: {},
+  methods: {
+    backClick: function () {
+      if (
+        localStorage.getItem('token') != '' ||
+        localStorage.getItem('token') != undefined
+      ) {
+        this.$router.push('/myhome')
+      } else {
+        this.$router.push('/')
+      }
     },
-    props: {},
-    data() {
-        return {
-            isMenuOpen: true,
-        }
-    },
-    couputed: {},
-    watch: {},
-    methods: {
-        backClick: function () {
-            if (
-                localStorage.getItem('token') != '' ||
-                localStorage.getItem('token') != undefined
-            ) {
-                this.$router.push('/myhome')
-            } else {
-                this.$router.push('/')
-            }
-        },
-    },
-    created() {},
+  },
+  created() { },
 }
 </script>
 <style scoped></style>

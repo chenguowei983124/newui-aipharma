@@ -1,8 +1,57 @@
 <template>
-    <div>
-        <div class="searchResultAllTitleAndValue mt-7.5 md:mt-12.5">
-            検索結果：{{ $store.getters.getSearchValue }}
+    <div class="space-y-4">
+        <div
+            class="flex flex-wrap mt-7.5 md:mt-8 md:mx-5 space-y-1 md:space-y-0"
+        >
+            <div
+                class="
+                    w-93.75
+                    md:w-25
+                    font-NotoSansJp
+                    text-base
+                    md:text-xl
+                    font-bold
+                "
+            >
+                検索結果：
+            </div>
+            <div
+                class="
+                    flex-auto flex flex-row
+                    font-NotoSansJp
+                    text-lg
+                    md:text-xl
+                    font-bold
+                "
+            >
+                <div
+                    v-for="item in $store.getters
+                        .getSearchAllOrganizationDidDocument.searchWords"
+                    :key="item"
+                    class="mr-2"
+                >
+                    {{ item }}
+                </div>
+            </div>
         </div>
+        <!-- <div
+            class="
+                searchResultAllTitleAndValue
+                mt-7.5
+                md:mt-8 md:mx-5
+                flex flex-row
+            "
+        >
+            <div class="">検索結果：</div>
+            <div
+                v-for="item in $store.getters
+                    .getSearchAllOrganizationDidDocument.searchWords"
+                :key="item"
+                class="mr-2"
+            >
+                {{ item }}
+            </div>
+        </div> -->
 
         <div class="h-full space-y-2.5 md:space-y-3.75">
             <resut-tag
@@ -11,16 +60,20 @@
                 titleStyle="bulletinBoardInfoTitle"
                 titleURL="\"
             >
+                <!-- :sub1="['group']"
+                    :sub2="['title']"
+                    :sub3="['certainty']" -->
                 <result-detail-row
                     class="searchResult_detail_blue"
                     routerPath="searchDiKnowledge"
-                    :sites="$store.getters.getSearchAllDiKnowledge.details"
-                    :sub1="['group']"
-                    :sub2="['title']"
+                    :sites="AAAA"
+                    :sub1="['keyword']"
+                    :sub2="['question']"
                     :sub3="['certainty']"
                 >
                 </result-detail-row>
             </resut-tag>
+
             <resut-tag
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="組織内 DI 記録（Q&A）"
@@ -48,6 +101,7 @@
                 >
                 </result-detail-row>
             </resut-tag>
+
             <resut-tag
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="症例（プレアボイド）"
@@ -153,7 +207,35 @@ export default {
   data() {
     return {}
   },
-  couputed: {},
+  computed: {
+    AAAA: {
+      get: function () {
+        var BBBB = []
+        console.log("this.$store.getters.getSearchAIDiKnowledge", this.$store.getters.getSearchAIDiKnowledge)
+
+        if (this.$store.getters.getSearchAIDiKnowledge != undefined) {
+          if (Object.keys(this.$store.getters.getSearchAIDiKnowledge).length !== 0) {
+            BBBB.push(this.$store.getters.getSearchAIDiKnowledge)
+          }
+        }
+
+        // console.log(BBBB)
+        if (this.$store.getters.getSearchAllDiKnowledge.details != undefined) {
+          if (Object.keys(this.$store.getters.getSearchAllDiKnowledge.details).length !== 0) {
+            for (var i in this.$store.getters.getSearchAllDiKnowledge.details) {
+              BBBB.push(this.$store.getters.getSearchAllDiKnowledge.details[i])
+            }
+          }
+        }
+
+        // console.log("222", BBBB)
+        return BBBB
+      },
+      //   set: function (newValue) {
+      //     this.innerValue = newValue
+      //   },
+    },
+  },
   methods: {
     async getDispData() {
       if (this.$route.query.searchKey != undefined) {
@@ -166,6 +248,7 @@ export default {
       }
 
       this.$store.dispatch('searchALLLDiKnowledgeInfo')
+      this.$store.dispatch('searchAIDiKnowledgeInfo')
       this.$store.dispatch('searchALLLOrganizationInfo')
       this.$store.dispatch('searchALLLPreAvoidInfo')
       this.$store.dispatch('searchALLBulletinBoardInfo')
@@ -187,6 +270,7 @@ export default {
         )
       }
       this.$store.dispatch('searchALLLDiKnowledgeInfo')
+      this.$store.dispatch('searchAIDiKnowledgeInfo')
       this.$store.dispatch('searchALLLOrganizationInfo')
       this.$store.dispatch('searchALLLPreAvoidInfo')
       this.$store.dispatch('searchALLBulletinBoardInfo')
