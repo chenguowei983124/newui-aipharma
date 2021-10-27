@@ -29,6 +29,41 @@ const pathJoin = (pathArr) => {
         })
         .join('/')
 }
+const transDataformat = (resData) => {
+    let result = resData
+    const list = resData.data
+    let dt = []
+
+    list.map((item) => {
+        const year = item.post.created_at.slice(0, 4) + '.'
+        const month = item.post.created_at.slice(5, 7) + '.'
+        const day = item.post.created_at.slice(8, 10)
+
+        const obj = {
+            browseRequired:
+                item.post.browseRequired || false ? 'browse' : 'notbrowsed',
+            date: year + month + day,
+            group: item.post.scope,
+            id: item.post.id,
+            looked:
+                Object.keys(item.post.feedback.mine).length > 0
+                    ? 'looked'
+                    : 'notLooked',
+            notificationType: item.post.genre,
+            title: item.post.title,
+            viewCount: item.post.feedback.viewed,
+        }
+        dt.push(obj)
+    })
+    Object.assign(result, { data_bk: result.data })
+    result.data = {
+        details: dt,
+    }
+
+    // console.log('transDataformat-after', result)
+
+    return result
+}
 const serve = {
     //===========================
     // ログイン
@@ -159,27 +194,50 @@ const serve = {
         return data
     },
     //===========================
-    // 一括検索結果画面　DI ナレッジシェア情報取得
+    // TOP画面　個人情報取得
     //===========================
-    async getALLDiKnowledgeInfo(params) {
-        const data = await axios('/api/qa/get_bunch_DiKnowledge_info', {
+    async getManagementInfo() {
+        const data = await axios('/oauth/userinfo', {
             method: 'get',
-            data: params,
         })
 
         return data
     },
     //===========================
+    // 一括検索結果画面　DI ナレッジシェア情報取得
+    //===========================
+    async getALLDiKnowledgeInfo(params) {
+        // const data = await axios('/api/qa/get_bunch_DiKnowledge_info', {
+        const data = await axios('/api/qa/search_keyword_q', {
+            method: 'post',
+            data: params,
+        })
+        // console.log("getALLDiKnowledgeInfo", data)
+        return data
+    },
+    //===========================
+    // 一括検索結果画面　DI ナレッジシェア AI 情報取得
+    //===========================
+    async getAIDiKnowledgeInfo(params) {
+        // const data = await axios('/api/qa/get_bunch_DiKnowledge_info', {
+        const data = await axios('/api/nlc/search_similar_q', {
+            method: 'post',
+            data: params,
+        })
+        console.log("getAIDiKnowledgeInfo", data)
+        return data
+    },
+    //===========================
     // 一括検索結果画面　組織内 DI 記録情報取得
     //===========================
-    async getALLOrganizationInfo() {
+    async getALLOrganizationInfo(params) {
         const data = await axios(
-            '/api/qa/get_bunch_OrganizationDiDocument_info',
+            '/api/qa/search_di_record',
             {
-                method: 'get',
+                method: 'post',
+                params: params
             }
         )
-
         return data
     },
     //===========================

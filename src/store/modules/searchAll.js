@@ -5,6 +5,7 @@ export default {
         searchKey: '',
         organizationInfo: {},
         searchAllDiKnowledgeInfo: {},
+        searchAIDiKnowledgeInfo: {},
         searchAllOrganizationDidDocument: { allCount: '' },
         searchAllPreAvoid: { allCount: '' },
         searchAllbulletinBoardInfo: { allCount: '' },
@@ -15,6 +16,10 @@ export default {
         // DI ナレッジシェアの検索結果取得
         getSearchAllDiKnowledge(state) {
             return state.searchAllDiKnowledgeInfo
+        },
+        // DI ナレッジシェアのAI検索結果取得
+        getSearchAIDiKnowledge(state) {
+            return state.searchAIDiKnowledgeInfo
         },
         // 組織内 DI 記録（Q&A）の検索結果取得
         getSearchAllOrganizationDidDocument(state) {
@@ -41,6 +46,10 @@ export default {
         searchAllDiKnowledgeInfo(state, info) {
             state.searchAllDiKnowledgeInfo = info
         },
+        searchAIDiInfo(state, info) {
+            console.log("searchAIDiInfo", info)
+            state.searchAIDiKnowledgeInfo = info
+        },
         searchAllOrganizationInfo(state, info) {
             state.searchAllOrganizationDidDocument = info
         },
@@ -51,7 +60,6 @@ export default {
             state.searchAllbulletinBoardInfo = info
         },
         setALLGoogleInfo(state, info) {
-            console.log("info", info)
             state.searchAllGoogleInfo = info
         },
         basic(state, payload) {
@@ -71,7 +79,7 @@ export default {
         // ========================================
         async searchALLLDiKnowledgeInfo({ rootState, state, commit }) {
             let params = {
-                searchKey: state.searchKey,
+                question: state.searchKey,
             }
             const info = await serve
                 .getALLDiKnowledgeInfo(params)
@@ -81,11 +89,26 @@ export default {
                 })
         },
         // ========================================
-        // DI ナレッジシェアAPI実行
+        // DI ナレッジシェア AI API実行
+        // ========================================
+        async searchAIDiKnowledgeInfo({ rootState, state, commit }) {
+            let params = {
+                question: state.searchKey,
+            }
+            const info = await serve
+                .getAIDiKnowledgeInfo(params)
+                .then((response) => {
+                    // 検索結果格納
+                    commit('searchAIDiInfo', response.data)
+                })
+            console.log("searchAIDiInfo", info)
+        },
+        // ========================================
+        // 組織内 DI 記録（Q&A）API実行
         // ========================================
         async searchALLLOrganizationInfo({ rootState, state, commit }) {
             let params = {
-                searchKey: state.searchKey,
+                question: state.searchKey,
             }
             const info = await serve
                 .getALLOrganizationInfo(params)
@@ -132,7 +155,7 @@ export default {
             const info = await serve
                 .getALLGoogle_Info(params)
                 .then((response) => {
-                    console.log('getALLGoogle_Info', response.data)
+                    // console.log('getALLGoogle_Info', response.data)
                     // 検索結果格納
                     commit('setALLGoogleInfo', response.data)
                 })

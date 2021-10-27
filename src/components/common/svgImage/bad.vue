@@ -18,7 +18,6 @@
 export default {
   components: {},
   props: {},
-  couputed: {},
   watch: {},
   methods: {
 

@@ -14,11 +14,10 @@
 import loginLayout from '../layout/loginlayout.vue'
 import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
-    components: { loginLayout, homeBottomTemplate },
-    props: {},
-    couputed: {},
-    watch: {},
-    methods: {},
-    created() {},
+  components: { loginLayout, homeBottomTemplate },
+  props: {},
+  watch: {},
+  methods: {},
+  created() { },
 }
 </script>

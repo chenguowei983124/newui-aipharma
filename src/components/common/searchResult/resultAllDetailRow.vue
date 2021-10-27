@@ -1,28 +1,53 @@
 <template>
-    <div class="md:pt-3.5">
+    <div class="py-1 md:py-3.5">
         <!-- itemType 1:ラベル 2:日付 3:タイトル -->
         <div
             class="
                 pt-2.5
-                md:pt-1.25
-                space-y-1
-                md:space-x-3 md:space-y-0
-                md:flex
-                items-center
-                md:border-white
+                md:pt-0
+                mid:pt-0
+                space-y-1.5
+                md:space-y-0 md:flex
+                items-baseline
+                md:border-white md:space-x-3
+                mx-0.5
             "
-            :class="getLineStyle(index, lineStyle)"
+            :class="getLineStyle(index, lineStyle, sites.length)"
             v-for="(row, index) in sites"
             :key="row"
         >
             <!-- sp 最初の行目 -->
-            <div class="md:ml-5 md:h-4 items-center" v-if="sub1 != undefined">
+            <div
+                class="md:ml-5 md:h-4 items-center"
+                v-if="sub1 != undefined"
+                :class="[row.confidence != undefined ? 'mb-0 md:mb-4' : '']"
+            >
                 <div
                     class="md:flex"
                     v-for="dispItem in sub1"
                     :key="dispItem"
                     :class="proAreaStyle"
                 >
+                    <div class="">
+                        <div
+                            v-if="
+                                row.id != undefined &&
+                                dispItem == 'keyword' &&
+                                row.confidence == undefined
+                            "
+                            class="searchResult_lable_ownFacility"
+                        >
+                            キーワード
+                        </div>
+                        <div
+                            v-if="row.confidence != undefined"
+                            class="searchResult_lable_Ai"
+                        >
+                            AI
+                        </div>
+                    </div>
+
+                    <!-- {{ row.confidence }} -->
                     <!-- 属性ラベル -->
                     <result-detail-row-item
                         itemType="1"
@@ -76,6 +101,28 @@
                     v-for="dispItem in sub2"
                     :key="dispItem"
                 >
+                    <!-- question text -->
+                    <div
+                        class="
+                            underline
+                            truncate
+                            hover:opacity-50
+                            active:opacity-50
+                        "
+                        v-show="dispItem == 'question'"
+                    >
+                        <!-- {{ row.question }} -->
+                        <result-detail-row-item
+                            itemType="8"
+                            :itemValue="row.question"
+                            :itemStyle="resetTitle(midDetailStyle)"
+                            addStyle="truncate"
+                            :routerPath="routerPath"
+                            :id="String(row.id)"
+                            v-if="row.question != undefined"
+                        ></result-detail-row-item>
+                    </div>
+
                     <!-- title text -->
                     <div
                         class="
@@ -92,7 +139,7 @@
                             :itemStyle="resetTitle(midDetailStyle)"
                             addStyle="truncate"
                             :routerPath="routerPath"
-                            :id="row.id"
+                            :id="String(row.id)"
                             v-if="row.title != undefined"
                         ></result-detail-row-item>
                     </div>
@@ -110,7 +157,7 @@
                     <result-detail-row-item
                         itemType="3"
                         :itemValue="row.urlTitle"
-                        addStyle="underline truncate pl-2 md:pl-0"
+                        addStyle="underline truncate "
                         v-if="row.urlTitle != undefined"
                     ></result-detail-row-item>
                     <result-detail-row-item
@@ -136,22 +183,22 @@
                             itemType="1"
                             typeKB="CertaintyTitle"
                             v-if="
-                                row.certainty != undefined &&
-                                row.certainty != '' &&
+                                row.confidence != undefined &&
+                                row.confidence != '' &&
                                 dispItem == 'certainty'
                             "
                         ></result-detail-row-item>
                         <result-detail-row-item
                             itemType="4"
                             typeKB="CertaintyValue"
-                            :itemValue="String(row.certainty)"
+                            :itemValue="String(row.confidence)"
                             itemTitle="%"
                             v-if="
-                                row.certainty != undefined &&
-                                row.certainty != '' &&
+                                row.confidence != undefined &&
+                                row.confidence != '' &&
                                 dispItem == 'certainty'
                             "
-                            itemStyle="searchResult_lable_certainty_value"
+                            itemStyle="searchResult_lable_certainty_value ml-2"
                         ></result-detail-row-item>
                     </div>
                     <!-- 状態 -->
@@ -236,13 +283,13 @@ export default {
           return 'truncate underline md:whitespace-pre'
         }
         if (midStyle == 'style2') {
-          return 'truncate block pl-2 md:pl-0'
+          return 'truncate block '
         }
       }
     },
     resetTitle(midStyle) {
       if (midStyle == 'style2') {
-        return 'searchResult_title_font_14 truncate block pl-2 md:pl-0'
+        return 'searchResult_title_font_14 truncate block '
       }
     }, getDateFrom(dateFrom, dateTo) {
       if (dateTo == "" || dateTo == 'undefined') {
@@ -263,18 +310,14 @@ export default {
         return null
       }
     },
-    getLineStyle(index, style) {
+    getLineStyle(index, style, length) {
       const line = []
-      if (style == 'blueline') {
-        // line.push('border-b-2 border-blueline')
-      } else {
-        line.push('border-b-2 border-grayline')
-      }
 
-      if (index == 4) {
-        return 'md:pb-4'
-      } else if (index == 0) {
-        line.push('md:pt-4')
+      if (length != index + 1 && style == "blueline") {
+        line.push("border-b-2 border-blueline ")
+      }
+      if (length != index + 1 && style != "blueline") {
+        line.push("border-b-2 border-grayline")
       }
       return line
     },
@@ -295,7 +338,7 @@ export default {
     const proAreaStyle = computed(() => {
       const style = []
       if (props.proDetailStyle == 'style1') {
-        style.push('flex space-x-1.5 md:space-x-3 pl-2 md:pl-0')
+        style.push('flex space-x-1.5 md:space-x-0 ')
       }
       if (props.proDetailStyle == 'style2') {
         style.push('flex flex-row md:flex-col md:space-x-0 space-x-2 ')
@@ -306,7 +349,7 @@ export default {
     const midAreaStyle = computed(() => {
       const style = []
       if (props.midDetailStyle == 'style1') {
-        style.push('flex pl-2 md:pl-0')
+        style.push('flex ')
       }
       if (props.proDetailStyle == 'style2') {
         style.push('flex flex-col')

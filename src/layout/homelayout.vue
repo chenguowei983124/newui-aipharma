@@ -84,7 +84,6 @@ export default {
       isMenuOpen: true,
     }
   },
-  couputed: {},
   watch: {},
   methods: {},
   created() {

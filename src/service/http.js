@@ -45,8 +45,17 @@ service.interceptors.response.use(
                         params: { errorMessage: 'invalid access token error' },
                     })
                     break
+                case 403:
+                    router.push({
+                        name: 'error',
+                        params: { errorMessage: '表示権限がありません' },
+                    })
+                    break
                 case 404:
-                    router.push({ name: '404' })
+                    router.push({
+                        name: 'error',
+                        params: { errorMessage: '存在しないQAを参照しています' },
+                    })
                     break
                 case 500:
                     router.push({

@@ -7,8 +7,7 @@
                     class="
                         w-12.5
                         h-12.5
-                        md:w-15
-                        md:h-15
+                        md:w-15 md:h-15
                         bg-gray-400
                         cursor-pointer
                     "
@@ -22,9 +21,7 @@
                     class="
                         w-12.5
                         h-12.5
-                        md:w-15
-                        md:h-15
-                        md:ml-25
+                        md:w-15 md:h-15 md:ml-25
                         bg-gray-400
                         cursor-pointer
                     "
@@ -401,8 +398,8 @@ export default {
       itemType4: false,
       menuItemList: [
         { id: '1', title: 'TOP', itemStyle: 'item', path: '/myhome' },
-        { id: '2', title: 'お知らせ', itemStyle: 'item', path: '' },
-        { id: '3', title: '掲示板', itemStyle: 'item', path: '' },
+        { id: '2', title: 'お知らせ', itemStyle: 'item', path: '/notification' },
+        { id: '3', title: '掲示板', itemStyle: 'item', path: '/bulletinBoard' },
       ],
       menuItemList2: [
         {
@@ -475,7 +472,6 @@ export default {
       ],
     }
   },
-  couputed: {},
   watch: {},
   methods: {
     linkClick() {

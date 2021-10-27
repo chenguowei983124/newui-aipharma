@@ -14,7 +14,6 @@ export default {
       logoImage,
     }
   },
-  couputed: {},
   watch: {},
   methods: {},
   created() { },

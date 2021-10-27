@@ -10,7 +10,6 @@ export default {
   name: 'navbar',
   components: { menuDropdownItem },
   props: {},
-  couputed: {},
   watch: {},
   methods: {
 

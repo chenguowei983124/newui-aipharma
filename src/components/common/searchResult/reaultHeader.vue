@@ -2,7 +2,7 @@
     <label class="flex flex-row flex-auto justify-between" :class="headerStyle">
         <div class="justify-center flex flex-row items-center h-full">
             <!-- 検索結果ヘッダータイトル -->
-            <a :class="titleStyle" v-if="title != ''" :href="titleURL">{{
+            <a :class="titleStyle" v-if="title != ''" :href="'#' + titleURL">{{
                 title
             }}</a>
 
@@ -58,7 +58,6 @@ export default {
     iconType: { type: String, defult: '' },
     iconUrl: { type: String, defult: '' },
   },
-  couputed: {},
   watch: {},
   methods: {},
   created() { },
