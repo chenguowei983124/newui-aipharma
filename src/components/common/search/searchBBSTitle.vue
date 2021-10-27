@@ -236,15 +236,16 @@ export default {
     //       { label: 'B', value: 2 },
     //       { label: 'C', value: 3 },
     //   ],
-      scopeList: [
-          { value: '0', title: '全体' },
-          { value: '1', title: '学会' },
-          { value: '2', title: 'グループ' },
-      ],
-      searchText: null,
-      checkId: '',
+      scopeList: this.$store.getters.bbsDropDownInfo.scops,
+      // [
+      //     { value: '0', title: '全体' },
+      //     { value: '1', title: '学会' },
+      //     { value: '2', title: 'グループ' },
+      // ],
+      // searchText: null,
+      // checkId: '',
       isDetailClick: false,
-      tagValue: this.$store.getters.getSearchTags,
+      // tagValue: this.$store.getters.getSearchTags,
     }
   },
   methods: {
