@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto pt-12 h-191.25">
+    <div class="container mx-auto pt-12 h-191.25" id="div_postList">
         <div class="flex justify-end mb-2">
             <vue-single-select
                 class="w-1/4"
@@ -91,7 +91,7 @@ export default {
         },
         empty: {
           //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
-          warpId: 'xxid', //父布局的id (1.3.5版本支持传入dom元素)
+          warpId: 'div_postList', //父布局的id (1.3.5版本支持传入dom元素)
           icon: './static/mescroll/mescroll-empty.png', //图标,默认null,支持网络图
           tip: '暂无相关数据~', //提示
         },
