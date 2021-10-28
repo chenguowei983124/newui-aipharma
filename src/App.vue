@@ -1,13 +1,12 @@
 <template>
-    <div class="flex">
+    <div class="flex min-h-screen">
         <loading></loading>
         <div class="flex-grow max-h-full min-w-min bg-backgroundMain"></div>
         <div
             class="
                 relative
                 flex-shrink
-                md:block
-                md:overflow-x-auto
+                md:block md:overflow-x-auto
                 w-full
                 md:w-270
                 bg-white

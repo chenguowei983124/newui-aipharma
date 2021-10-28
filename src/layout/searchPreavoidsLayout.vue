@@ -11,7 +11,8 @@
         </div>
 
         <!-- spの場合、ヘッダー、検索枠の位置を替える -->
-        <div class="h-50 md:h-52.5"></div>
+        <!-- <div class="h-50 md:h-52.5"></div> -->
+        <div class="h-70"></div>
     </div>
     <div class="flex border-b-2 border-blue-200 mt-20 md:mt-5 h-10 md:h-15">
         <div

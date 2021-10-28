@@ -66,7 +66,6 @@
                             v-on:inputClearValue="showMsg"
                         ></search-detail>
                     </div>
-
                     <!-- 症例詳細条件 -->
                     <div
                         :class="
@@ -78,7 +77,6 @@
                             :searchButtonClick="searchClick"
                         ></search-preavoids>
                     </div>
-
                     <!-- 掲示板 -->
                     <div
                         :class="
@@ -206,9 +204,9 @@ export default {
       } else if (this.$props.form == this.$constant.formList.DI) {
         return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
       } else if (this.$props.form == this.$constant.formList.OWN) {
-        return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
+        return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-lg md:rounded-b-none '
       } else if (this.$props.form == this.$constant.formList.PVD) {
-        return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
+        return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-lg md:rounded-b-none'
       } else if (this.$props.form == this.$constant.formList.BBS) {
         return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
       }
@@ -236,9 +234,9 @@ export default {
       } else if (this.$props.form == this.$constant.formList.DI) {
         return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch    '
       } else if (this.$props.form == this.$constant.formList.OWN) {
-        return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch    '
+        return ' flex-grow md:flex-none  h-full w-180'
       } else if (this.$props.form == this.$constant.formList.PVD) {
-        return ' flex-grow md:flex-none  h-full w-191.25 bg-backgroundMainSearch    '
+        return ' flex-grow md:flex-none  h-full w-191.25'
       } else if (this.$props.form == this.$constant.formList.BBS) {
         return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch    '
       }

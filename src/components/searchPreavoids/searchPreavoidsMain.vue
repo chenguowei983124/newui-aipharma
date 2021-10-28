@@ -131,7 +131,6 @@ import Pagination from '../common/pagination/pagiation.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 import myTable from '../common/table/myTable.vue'
-import axios from 'axios'
 export default {
     components: {
         TriangleDownSvg,

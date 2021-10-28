@@ -25,7 +25,7 @@
             {{ leftLableTitle }}
         </div>
         <i
-            class="absolute flex justify-center pt-2"
+            class="absolute flex justify-center"
             :class="buttonStyle"
             @mousedown.prevent="onMouseDownButton"
         >
@@ -113,7 +113,7 @@ export default {
     leftLableStyle: {
       tpye: String,
       default:
-        'absolute mt-1 pl-2 left-1 text-lg text-blueline notoSansJpAndFourteenBold',
+        'absolute mt-1.25 pl-2 left-1 text-lg text-blueline notoSansJpAndFourteenBold',
     },
     leftLableDisp: {
       type: Boolean,
