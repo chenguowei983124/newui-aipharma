@@ -162,7 +162,7 @@ const serve = {
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
                 const tags = response.data.tags
-                tags.map(map => {
+                tags.map((map) => {
                     data.push(map.name)
                 })
             }
@@ -224,20 +224,17 @@ const serve = {
             method: 'post',
             data: params,
         })
-        console.log("getAIDiKnowledgeInfo", data)
+        console.log('getAIDiKnowledgeInfo', data)
         return data
     },
     //===========================
     // 一括検索結果画面　組織内 DI 記録情報取得
     //===========================
     async getALLOrganizationInfo(params) {
-        const data = await axios(
-            '/api/qa/search_di_record',
-            {
-                method: 'post',
-                params: params
-            }
-        )
+        const data = await axios('/api/qa/search_di_record', {
+            method: 'post',
+            params: params,
+        })
         return data
     },
     //===========================
@@ -392,6 +389,17 @@ const serve = {
     async deletePreavoidData(param) {
         const data = await axios('/api/preavoid/delete_preavoids', {
             method: 'post',
+            params: param,
+        })
+
+        return data
+    },
+    //===========================
+    // 症例検索結果ダウンロード（ID）
+    //===========================
+    async downloadPreavoidData(param) {
+        const data = await axios('/api/preavoid/search.xlsx', {
+            method: 'get',
             params: param,
         })
 

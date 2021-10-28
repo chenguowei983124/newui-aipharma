@@ -11,13 +11,25 @@ const service = axios.create({
 service.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token')
-        config.headers = {
-            // 'Authorization': `Bearer ${token}`,
-            Accept: 'application/json',
+        if (store.getters.getDownload == true) {
+            store.dispatch('setDownload', false)
+            config.responseType = 'blob'
+            config.dataType = 'binary'
+            config.headers = {
+                // 'Authorization': `Bearer ${token}`,
+                Accept: 'application/octet-stream',
+            }
+        } else {
+            config.headers = {
+                // 'Authorization': `Bearer ${token}`,
+                Accept: 'application/json',
+            }
         }
+
         // config.transformRequest = [function (data) {
         //     return qs.stringify(data)
         // }]
+
         store.dispatch('setIsLoadingShow', true)
         return config
     },
@@ -54,7 +66,9 @@ service.interceptors.response.use(
                 case 404:
                     router.push({
                         name: 'error',
-                        params: { errorMessage: '存在しないQAを参照しています' },
+                        params: {
+                            errorMessage: '存在しないQAを参照しています',
+                        },
                     })
                     break
                 case 500:

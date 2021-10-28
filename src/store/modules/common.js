@@ -20,9 +20,13 @@ export default {
             { value: '4', title: 'グループ施設+自施設' },
         ],
         oidcCode: '',
+        download: false,
     }),
 
     getters: {
+        getDownload(state) {
+            return state.download
+        },
         getIsMenuClick(state) {
             return state.isMenuClick
         },
@@ -49,11 +53,11 @@ export default {
         },
         // 対象期間From
         getDateValueFrom(state) {
-            return state.DateValueFrom
+            return state.dateValueFrom
         },
         // 対象期間To
         getDateValueTo(state) {
-            return state.DateValueTo
+            return state.dateValueTo
         },
         // 様式
         getStyles(state) {
@@ -73,6 +77,9 @@ export default {
         },
         setIsLoadingShow({ commit, state }, value) {
             commit('basic', { key: 'isLoadingShow', value })
+        },
+        setDownload({ commit }, value) {
+            commit('basic', { key: 'download', value })
         },
         setMenuClick({ commit, state }, value) {
             commit('basic', { key: 'isMenuClick', value })
