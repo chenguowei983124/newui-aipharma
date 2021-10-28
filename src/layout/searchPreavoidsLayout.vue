@@ -14,75 +14,7 @@
         <!-- <div class="h-50 md:h-52.5"></div> -->
         <div class="h-70"></div>
     </div>
-    <div class="flex border-b-2 border-blue-200 mt-20 md:mt-5 h-10 md:h-15">
-        <div
-            class="flex-grow max-h-full min-w-min hidden md:block mid:block"
-        ></div>
-        <div class="flex w-full md:w-191.25 justify-between pr-2 md:pr-0">
-            <div
-                class="
-                    text-googleTitle
-                    font-NotoSansJp
-                    text-xl
-                    md:text-2xl
-                    font-black
-                    flex-none
-                    pl-2
-                    md:pl-0
-                    w-12
-                "
-            >
-                症例
-            </div>
-            <div class="flex flex-row space-x-2">
-                <button
-                    class="
-                        rounded
-                        border-b-2 border-pink-800
-                        bg-pink-600
-                        text-white
-                        notoSansJpAndFourteenMedium
-                        w-17
-                        h-7.5
-                        px-1
-                    "
-                >
-                    症例登録
-                </button>
-                <button
-                    class="
-                        rounded
-                        border-b-2 border-blue-900
-                        bg-blue-700
-                        text-white
-                        notoSansJpAndFourteenMedium
-                        w-20
-                        h-7.5
-                        px-1
-                    "
-                >
-                    下書き一覧
-                </button>
-                <button
-                    class="
-                        rounded
-                        border-b-2 border-blue-900
-                        bg-blue-700
-                        text-white
-                        notoSansJpAndFourteenMedium
-                        w-13
-                        h-7.5
-                        px-1
-                    "
-                >
-                    入出力
-                </button>
-            </div>
-        </div>
-        <div
-            class="flex-grow max-h-full min-w-min hidden md:block mid:block"
-        ></div>
-    </div>
+
     <!-- 内容 -->
     <div class="flex pt-8">
         <div class="flex-grow max-h-full min-w-min block"></div>
@@ -139,29 +71,26 @@
 
 <script>
 import searchBar from '../components/common/search/searchBar.vue'
-import searchPreavoidsMain from "../components/searchPreavoids/searchPreavoidsMain.vue"
+import searchPreavoidsMain from '../components/searchPreavoids/searchPreavoidsMain.vue'
 
 export default {
-  components: {
-    searchBar, searchPreavoidsMain
-  },
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true,
-      isDetailButtonClick: false,
-    };
-  },
-  methods: {
-    // 詳細条件ボタン押下区分を取得
-    getDetailClick: function (data) {
-
-      this.isDetailButtonClick = data
-    }
-  },
-  created() {
-
-  }
+    components: {
+        searchBar,
+        searchPreavoidsMain,
+    },
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+            isDetailButtonClick: false,
+        }
+    },
+    methods: {
+        // 詳細条件ボタン押下区分を取得
+        getDetailClick: function (data) {
+            this.isDetailButtonClick = data
+        },
+    },
+    created() {},
 }
 </script>
-

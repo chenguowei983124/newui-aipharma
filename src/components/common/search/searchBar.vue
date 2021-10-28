@@ -280,7 +280,11 @@ export default {
             }
         },
         searchBarStyleClessaaa: function () {
-            return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-lg md:rounded-b-none border-b-2'
+            if (this.$props.form == this.$constant.formList.PVD) {
+                return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-lg md:rounded-b-none border-b-2'
+            } else {
+                return 'hidden'
+            }
         },
         searchBarProStyleClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
