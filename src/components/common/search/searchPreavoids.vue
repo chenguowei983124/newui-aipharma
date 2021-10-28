@@ -1,6 +1,6 @@
 <template>
-    <div class="pt-2">
-        <div>
+    <div class="pt-2 rounded-lg md:rounded-none">
+        <div class="mx-2 md:mx-0 space-y-2">
             <div
                 class="flex space-x-2"
                 :class="[isDetailClick ? 'block' : 'hidden']"
@@ -52,7 +52,7 @@
         </div>
         <!-- 三行目、四行目、五行目 -->
         <div
-            class="space-y-2 bg-backgroundMainSearch pt-2"
+            class="space-y-2 bg-backgroundMainSearch pt-2 mx-2 md:mx-0"
             :class="[isDetailClick ? 'block' : 'hidden']"
         >
             <!-- 様式 -->
@@ -66,12 +66,12 @@
                 @selected="setStyles"
                 leftLableTitle="様式"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
-                inputStyle="w-full text-left pl-10  notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
+                inputStyle="w-full text-left pl-12 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                                border border-transparent focus:outline-none flex justify-items-center  "
                 iconColor="#32a5dc"
             ></vue-single-select>
 
-            <!-- 質問区分 -->
+            <!-- 施設区分 -->
             <vue-single-select
                 :name="'facility'"
                 ref="facility"
@@ -82,8 +82,8 @@
                 @selected="setFacilityID"
                 leftLableTitle="施設"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
-                inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-10 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
+                inputStyle="w-full text-left pl-12 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                                border border-transparent focus:outline-none  flex justify-items-center "
                 iconColor="#32a5dc"
             ></vue-single-select>
         </div>
@@ -166,7 +166,14 @@
         </div>
         <!-- 七行目　-->
         <div
-            class="bg-searchResultTitle rounded-b-lg block md:hidden mid:hidden"
+            class="
+                bg-searchResultTitle
+                rounded-b-lg
+                block
+                md:hidden
+                mid:hidden
+                mt-2
+            "
         >
             <div
                 class="flex h-8 justify-center items-center cursor-pointer"
@@ -192,80 +199,80 @@ import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
 import { ref } from 'vue'
 export default {
-    props: {
-        searchButtonClick: {
-            type: Function,
-            default: () => {},
-        },
+  props: {
+    searchButtonClick: {
+      type: Function,
+      default: () => { },
     },
-    components: {
-        searchDropdown,
-        searchSvg,
-        TriangleDownSvg,
-        Multiselect,
-        vueSingleSelect,
-        litepieDatepicker,
+  },
+  components: {
+    searchDropdown,
+    searchSvg,
+    TriangleDownSvg,
+    Multiselect,
+    vueSingleSelect,
+    litepieDatepicker,
+  },
+  data() {
+    return {
+      searchValue: '',
+      isDetailClick: true,
+      value: [],
+      defaultValue: null,
+      defaultInputAttribs: {
+        tabindex: 1,
+      },
+      dispText: '',
+    }
+  },
+  computed: {
+    dateValueFrom: {
+      get: function () {
+        return this.$store.getters.getDateValueFrom
+      },
+      set: function (value) {
+        return this.$store.dispatch('setDateValueFrom', value)
+      },
     },
-    data() {
-        return {
-            searchValue: '',
-            isDetailClick: false,
-            value: [],
-            defaultValue: null,
-            defaultInputAttribs: {
-                tabindex: 1,
-            },
-            dispText: '',
-        }
+    dateValueTo: {
+      get: function () {
+        return this.$store.getters.getDateValueTo
+      },
+      set: function (value) {
+        return this.$store.dispatch('setDateValueTo', value)
+      },
     },
-    computed: {
-        dateValueFrom: {
-            get: function () {
-                return this.$store.getters.getDateValueFrom
-            },
-            set: function (value) {
-                return this.$store.dispatch('setDateValueFrom', value)
-            },
-        },
-        dateValueTo: {
-            get: function () {
-                return this.$store.getters.getDateValueTo
-            },
-            set: function (value) {
-                return this.$store.dispatch('setDateValueTo', value)
-            },
-        },
-    },
+  },
 
-    methods: {
-        dateClear: function () {
-            this.$refs.datepickerFrom.clearPicker()
-            this.$refs.datepickerTo.clearPicker()
-        },
-        clearClick: function () {
-            this.$refs.datepickerFrom.clearPicker()
-            this.$refs.datepickerTo.clearPicker()
-            this.$refs.facility.setValue(null)
-            this.$refs.styles.setValue(null)
-            this.$store.dispatch('setSearchWord', '')
-        },
-        getDispText: function (value) {
-            this.dispText = value
-        },
-        // 施設
-        setFacilityID(value) {
-            this.$store.dispatch('setFacilityID', value)
-        },
-        // 様式
-        setStyles(value) {
-            this.$store.dispatch('setStyles', value)
-        },
-        // 詳細条件クリックイベント
-        detailBottunClick: function (event) {
-            this.isDetailClick = !this.isDetailClick
-            this.$emit('isDetailClick', this.isDetailClick)
-        },
+  methods: {
+    dateClear: function () {
+      this.$refs.datepickerFrom.clearPicker()
+      this.$refs.datepickerTo.clearPicker()
     },
+    clearClick: function () {
+      this.$refs.datepickerFrom.clearPicker()
+      this.$refs.datepickerTo.clearPicker()
+      this.$refs.facility.setValue(null)
+      this.$refs.styles.setValue(null)
+      this.$store.dispatch('setSearchWord', '')
+    },
+    getDispText: function (value) {
+      this.dispText = value
+    },
+    // 施設
+    setFacilityID(value) {
+      this.$store.dispatch('setFacilityID', value)
+    },
+    // 様式
+    setStyles(value) {
+      this.$store.dispatch('setStyles', value)
+    },
+    // 詳細条件クリックイベント
+    detailBottunClick: function (event) {
+      this.isDetailClick = !this.isDetailClick
+      this.$emit('isDetailClick', this.isDetailClick)
+    },
+  },
 }
 </script>
 
