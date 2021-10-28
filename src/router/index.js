@@ -11,6 +11,7 @@ import searchPreavoids from '/src/view/searchPreavoids.vue'
 import searchNotice from '/src/view/searchNotice.vue'
 import searchBulletinBoard from '/src/view/searchBulletinBoard.vue'
 import newOrgDIRecord from '/src/view/newOrgDIRecord.vue'
+import newBbsRecord from '/src/view/newBbsRecord.vue'
 import notFound from '/src/view/notFound.vue'
 import error from '/src/view/error.vue'
 import Redirect from '/src/view/Redirect.vue'
@@ -21,11 +22,9 @@ const routes = [
         redirect: '/login',
     },
     {
-
         path: '/redirect',
         name: 'redirect',
-        component: Redirect
-
+        component: Redirect,
     },
     {
         path: '/login',
@@ -118,6 +117,14 @@ const routes = [
         path: '/newOrgDIRecord',
         name: 'newOrgDIRecord',
         component: newOrgDIRecord,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    {
+        path: '/newBbsRecord',
+        name: 'newBbsRecord',
+        component: newBbsRecord,
         meta: {
             requireAuth: true,
         },

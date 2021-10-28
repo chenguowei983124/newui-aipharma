@@ -100,6 +100,7 @@
                             notoSansJpAndSixteenblack
                             text-white
                         "
+                        @click="bbsRecordClick"
                     >
                         掲示板 登録
                     </button>
@@ -189,28 +190,33 @@
 import TopPortraitIcon from '../home/topPortraitIcon.vue'
 
 export default {
-  components: { TopPortraitIcon },
-  props: {},
-  data() {
-    return {
-      isDown: false,
-    }
-  },
-  watch: {},
-  methods: {
-    itemClick() {
-      this.isDown = !this.isDown
+    components: { TopPortraitIcon },
+    props: {},
+    data() {
+        return {
+            isDown: false,
+        }
     },
-    orgDiRecordClick() {
-      this.$router.push({
-        path: '/newOrgDIRecord',
-      })
+    watch: {},
+    methods: {
+        itemClick() {
+            this.isDown = !this.isDown
+        },
+        orgDiRecordClick() {
+            this.$router.push({
+                path: '/newOrgDIRecord',
+            })
+        },
+        bbsRecordClick() {
+            this.$router.push({
+                path: '/newBbsRecord',
+            })
+        },
     },
-  },
-  created() { },
-  mounted() {
-    this.$store.dispatch('getTopManagementInfo')
-  }
+    created() {},
+    mounted() {
+        this.$store.dispatch('getTopManagementInfo')
+    },
 }
 </script>
 <style scoped></style>

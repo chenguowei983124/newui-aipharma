@@ -25,15 +25,14 @@
     <editor
         api-key="wymbw7u3lecjz7f30u9h8j0b174d0zrusk9f2j7ey9eu3xlz"
         initialValue="<p>Initial editor content</p>"
-        v-model="data"
+        v-model="sdfasdfsadf"
         :init="{
             selector: 'textarea#drive-demo',
             // plugins: 'image media link tinydrive code imagetools',
             height: 200,
             menubar: false,
-            statusbar: false,
-            //content_style: `p{line-height: 1;} body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;line-height: 1.0; margin: 1rem;}`,
-            //content_css: '/mycontent.css',
+            statusbar: true,
+            content_css: 'dark',
             plugins:
                 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap  mentions quickbars linkchecker emoticons advtable export',
             toolbar:
@@ -42,23 +41,16 @@
             images_upload_handler: images_upload_handler,
         }"
     />
-    <!-- <div class="border-r-2 border-l-2 border-b-2 h-8 flex justify-end">
-        <button class="bg-green-500 rounded">
-            <send-message-icon-svg></send-message-icon-svg>
-        </button>
-    </div> -->
 </template>
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
-import SendMessageIconSvg from '../common/svgImage/sendMessageIconSvg.vue'
 const UPLOAD_URL = 'http://localhost:8002/upload'
 
 export default {
     name: 'tinymceEdit',
     components: {
         editor: Editor,
-        SendMessageIconSvg,
     },
     data() {
         return {
@@ -166,4 +158,67 @@ export default {
     },
 }
 </script>
-<style></style>
+
+<style scoped>
+/* .body {
+    line-height: 2px;
+}
+div.card h1,
+.tox div.card h1 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 8px;
+    padding: 0;
+    line-height: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+} */
+/* textarea#mentions {
+    height: 350px;
+}
+
+div.card,
+.tox div.card {
+    width: 240px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(34, 47, 62, 0.1);
+    padding: 8px;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+div.card::after,
+.tox div.card::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+div.card h1,
+.tox div.card h1 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 8px;
+    padding: 0;
+    line-height: normal;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+div.card p,
+.tox div.card p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+div.card img.avatar,
+.tox div.card img.avatar {
+    width: 48px;
+    height: 48px;
+    margin-right: 8px;
+    float: left;
+} */
+</style>

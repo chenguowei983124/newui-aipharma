@@ -119,6 +119,24 @@ const qaClassifyFacility = [
     { value: '3', title: 'グループ施設のみ' },
     { value: '4', title: 'グループ施設+自施設' },
 ]
+
+const bbsScops = [
+    { value: '0', title: '全体' },
+    { value: '1', title: '組織' },
+    { value: '2', title: 'グループ' },
+]
+const bbsGenreInfo = [
+    { value: 'notice', title: '告知' },
+    { value: 'event', title: 'イベント' },
+    { value: 'other', title: 'その他' },
+]
+const bbsGenre = [
+    { value: 'notice', title: '告知' },
+    { value: 'event', title: 'イベント' },
+    { value: 'query', title: '質問' },
+    { value: 'questionnaire', title: 'アンケート' },
+    { value: 'other', title: 'その他' },
+]
 // 入力タグ様式
 const multiselectCss = {
     container:
@@ -198,4 +216,6 @@ export default {
     topManagementItemUserList,
     qaClassifyFacility,
     issueIconitemList,
+    bbsScops,
+    bbsGenre,
 }
