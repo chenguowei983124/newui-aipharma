@@ -106,6 +106,7 @@
         :page-range="5"
         :margin-pages="1"
         :click-handler="clickCallback"
+        :value="$store.getters.getPage"
         @input="getSelectPage"
         :prev-text="'<'"
         :next-text="'>'"
@@ -495,6 +496,7 @@ export default {
         },
         // 改ページのデータ検索
         getSelectPage(value) {
+            this.$store.dispatch('setPage', value)
             this.selectPage = value
         },
         getSelectDispNumber(value) {
