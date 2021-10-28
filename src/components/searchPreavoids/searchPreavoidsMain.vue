@@ -131,6 +131,8 @@ import Pagination from '../common/pagination/pagiation.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 import myTable from '../common/table/myTable.vue'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 export default {
     components: {
         TriangleDownSvg,
@@ -264,6 +266,14 @@ export default {
                 if (data.searchData[index].check == true) {
                     checkList.push(data.searchData[index].id)
                 }
+            }
+            if (checkList.length == 0) {
+                Swal.fire(
+                    '',
+                    '一件もチェックされてないため、ダウンロードできません.',
+                    'info'
+                )
+                return
             }
             let params = {
                 id: checkList.join(','),

@@ -405,7 +405,6 @@ import EditIconSvg from '../svgImage/editIconSvg.vue'
 import resultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
 import TrashIconSvg from '../svgImage/trashIconSvg.vue'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-import axios from 'axios'
 import 'sweetalert2/src/sweetalert2.scss'
 
 export default {
@@ -505,7 +504,7 @@ export default {
                         id: id,
                     }
                     this.$serve.deletePreavoidData(params)
-                    Swal.fire('Deleted!')
+                    Swal.fire('', '削除されました.', 'success')
                     let getTimestamp = new Date().getTime()
                     params = {
                         search: this.$store.getters.getSearchWord,
