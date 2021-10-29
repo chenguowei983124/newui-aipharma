@@ -73,7 +73,7 @@
                     :default-value="0"
                     :placeholder="'-- Choose an option --'"
                     :default-input-attribs="{ tabindex: 1 }"
-                    :default-options="$constant.organizationDateSort"
+                    :default-options="$constant.preavoidsDateSort"
                     @selected="setSelectValue"
                     :leftLableDisp="false"
                     buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
@@ -466,7 +466,6 @@ export default {
                 dateFrom: this.$store.getters.getDateValueFrom,
                 dateTo: this.$store.getters.getDateValueTo,
                 styles: this.$store.getters.getStyles,
-
                 facility_flag: this.$store.getters.getFacilityID,
                 displayed: this.$store.getters.getMaxCount,
                 sort: this.$store.getters.getSort,

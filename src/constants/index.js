@@ -32,13 +32,20 @@ const searchParam = {
 // 順 区分リスト
 const organizationDateSort = [
     { value: '0', title: '最終編集日が新しい順' },
-    { value: '1', title: '最終編集日が古い' },
+    { value: '1', title: '最終編集日が古い順' },
     { value: '2', title: 'Goodが多い順' },
     { value: '3', title: 'Badが多い順' },
     { value: '4', title: 'コメント数が多い順' },
     { value: '5', title: 'コメント数が少ない順' },
     { value: '6', title: 'Q&A-ID昇順' },
     { value: '7', title: 'Q&A-ID降順' },
+]
+// 順 区分リスト
+const preavoidsDateSort = [
+    { value: '0', title: '投稿日が新しい順' },
+    { value: '1', title: '投稿日が古い順' },
+    { value: '2', title: '登録日が新しい順' },
+    { value: '3', title: '登録日が古い順' },
 ]
 // 件数表示 区分リスト
 const organizationCountSort = [
@@ -218,4 +225,5 @@ export default {
     issueIconitemList,
     bbsScops,
     bbsGenre,
+    preavoidsDateSort,
 }
