@@ -12,7 +12,7 @@
 
         <!-- spの場合、ヘッダー、検索枠の位置を替える -->
         <!-- <div class="h-50 md:h-52.5"></div> -->
-        <div class="h-70"></div>
+        <div class="h-80"></div>
     </div>
 
     <!-- 内容 -->
@@ -74,23 +74,23 @@ import searchBar from '../components/common/search/searchBar.vue'
 import searchPreavoidsMain from '../components/searchPreavoids/searchPreavoidsMain.vue'
 
 export default {
-    components: {
-        searchBar,
-        searchPreavoidsMain,
+  components: {
+    searchBar,
+    searchPreavoidsMain,
+  },
+  props: {},
+  data() {
+    return {
+      isMenuOpen: true,
+      isDetailButtonClick: false,
+    }
+  },
+  methods: {
+    // 詳細条件ボタン押下区分を取得
+    getDetailClick: function (data) {
+      this.isDetailButtonClick = data
     },
-    props: {},
-    data() {
-        return {
-            isMenuOpen: true,
-            isDetailButtonClick: false,
-        }
-    },
-    methods: {
-        // 詳細条件ボタン押下区分を取得
-        getDetailClick: function (data) {
-            this.isDetailButtonClick = data
-        },
-    },
-    created() {},
+  },
+  created() { },
 }
 </script>

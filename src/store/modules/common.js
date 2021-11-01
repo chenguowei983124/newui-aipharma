@@ -91,34 +91,26 @@ export default {
         },
         setMenuClick({ commit, state }, value) {
             commit('basic', { key: 'isMenuClick', value })
-            // console.log(value)
         },
         setPortraitClick({ commit, state }, value) {
             commit('basic', { key: 'isPortraitClick', value })
-            // console.log("isPortraitClick =" + value)
         },
         setManagementClick({ commit, state }, value) {
             commit('basic', { key: 'isManagementClick', value })
-            // console.log("isManagementClick =" + value)
         },
         setDateValueFrom({ commit, state }, value) {
             commit('basic', { key: 'dateValueFrom', value })
-            console.log('dateValueFrom =' + value)
         },
         setDateValueTo({ commit, state }, value) {
             commit('basic', { key: 'dateValueTo', value })
-            console.log('dateValueTo =' + value)
         },
         setStyles({ commit, state }, value) {
             commit('basic', { key: 'styles', value })
-            console.log('styles =' + value)
         },
         setIssueIconClick({ commit, state }, value) {
             commit('basic', { key: 'isIssueIconClick', value })
-            // console.log("isManagementClick =" + value)
         },
         getCommonInfo({ commit, state }) {
-            // console.log("getCommonInfo =11")
             let value = [
                 { value: '0', title: '医療用医薬品（内服薬）' },
                 { value: '1', title: '医療用医薬品（注射薬）' },
