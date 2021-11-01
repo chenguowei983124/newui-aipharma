@@ -281,18 +281,19 @@ export default {
     },
     props: { qaId: '', rowIndex: 0 },
     computed: {
-        async getCommentData() {
+        getCommentData() {
             get: {
                 if (this.$store.getters.getCommentMessageBox) {
-                    let params = {
-                        id: this.qaId,
-                    }
-                    await this.$serve.getComment(params).then((res) => {
-                        this.$store.dispatch(
-                            'setCommentInfo',
-                            res.data.resultInfo
-                        )
-                    })
+                    this.searchMessage()
+                    // let params = {
+                    //     id: this.qaId,
+                    // }
+                    // await this.$serve.getComment(params).then((res) => {
+                    //     this.$store.dispatch(
+                    //         'setCommentInfo',
+                    //         res.data.resultInfo
+                    //     )
+                    // })
                 }
             }
         },
@@ -335,13 +336,13 @@ export default {
                             Swal.fire('', res.data.message, 'success')
 
                             // 指定されたindexの要素を1つ削除します。
-                            this.itemList = this.$store.getters.getCommentInfo
-                            this.itemList.splice(index, 1)
-                            this.$store.dispatch(
-                                'setCommentInfo',
-                                this.itemList
-                            )
-
+                            // this.itemList = this.$store.getters.getCommentInfo
+                            // this.itemList.splice(index, 1)
+                            // this.$store.dispatch(
+                            //     'setCommentInfo',
+                            //     this.itemList
+                            // )
+                            this.searchMessage()
                             // Good,Bad,comment更新
                             // GOOd
                             this.$store.getters.organizationSearchInfo.qas[
@@ -382,34 +383,29 @@ export default {
                     position: 'top-right',
                 })
 
-                // 登録したコメントを表示
-                let row = {
-                    comment: res.data.qaFeedback.fbComment,
-                    createdDate: res.data.qaFeedback.createdAt,
-                    id: res.data.qaFeedback.id,
-                    updateDate: res.data.qaFeedback.updatedAt,
-                    userId: res.data.qaFeedback.userId,
-                    userName: res.data.qaFeedback.fbComment,
-                }
-                this.itemList = this.$store.getters.getCommentInfo
-                this.itemList.push(row)
-                this.$store.dispatch('setCommentInfo', this.itemList)
+                // // 登録したコメントを表示
+                // let row = {
+                //     comment: res.data.qaFeedback.fbComment,
+                //     createdDate: res.data.qaFeedback.createdAt,
+                //     id: res.data.qaFeedback.id,
+                //     updateDate: res.data.qaFeedback.updatedAt,
+                //     userId: res.data.qaFeedback.userId,
+                //     userName: res.data.qaFeedback.fbComment,
+                // }
+                // this.itemList = this.$store.getters.getCommentInfo
+                // this.itemList.push(row)
+                // this.$store.dispatch('setCommentInfo', this.itemList)
+                this.searchMessage()
 
                 // Good,Bad,comment更新
                 // GOOd
                 this.$store.getters.organizationSearchInfo.qas[
                     this.rowIndex
-                ].feedbackGood =
-                    this.$store.getters.organizationSearchInfo.qas[
-                        this.rowIndex
-                    ].feedbackGood + res.data.goodFeedbackCount
+                ].feedbackGood = res.data.goodFeedbackCount
                 // bad
                 this.$store.getters.organizationSearchInfo.qas[
                     this.rowIndex
-                ].feedbackBad =
-                    this.$store.getters.organizationSearchInfo.qas[
-                        this.rowIndex
-                    ].feedbackBad + res.data.badFeedbackCount
+                ].feedbackBad = res.data.badFeedbackCount
 
                 //comment
                 this.$store.getters.organizationSearchInfo.qas[
@@ -431,19 +427,18 @@ export default {
                 })
             })
 
-            this.itemList = this.$store.getters.getCommentInfo
-            this.itemList[index].comment = this.editComment
-            this.$store.dispatch('setCommentInfo', this.itemList)
-
+            // this.itemList = this.$store.getters.getCommentInfo
+            // this.itemList[index].comment = this.editComment
+            // this.$store.dispatch('setCommentInfo', this.itemList)
+            this.searchMessage()
             this.editAddCheckpointsTitle(item)
         },
-        searchMessage() {
+        async searchMessage() {
             let params = {
                 id: this.qaId,
             }
-            this.$serve.getComment(params).then((res) => {
-                console.log(res.data.resultInfo)
-                this.itemList = res.data.resultInfo
+            await this.$serve.getComment(params).then((res) => {
+                this.$store.dispatch('setCommentInfo', res.data.resultInfo)
             })
         },
     },

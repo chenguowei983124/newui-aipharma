@@ -1,6 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store'
 import login from '/src/view/login.vue'
+import sendResetPasswordMail from '/src/view/sendResetPasswordMail.vue'
+import sendResetPassword from '/src/view/sendResetPassword.vue'
+import setPassword from '/src/view/setPassword.vue'
 import myHome from '/src/view/myHome.vue'
 import notification from '/src/view/notification.vue'
 import bulletinBoard from '/src/view/bulletinBoard.vue'
@@ -30,6 +33,21 @@ const routes = [
         path: '/login',
         name: 'login',
         component: login,
+    },
+    {
+        path: '/sendResetPasswordMail',
+        name: 'sendResetPasswordMail',
+        component: sendResetPasswordMail,
+    },
+    {
+        path: '/sendResetPassword',
+        name: 'sendResetPassword',
+        component: sendResetPassword,
+    },
+    {
+        path: '/setPassword',
+        name: 'setPassword',
+        component: setPassword,
     },
     {
         path: '/myHome',

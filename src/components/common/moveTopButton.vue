@@ -49,6 +49,10 @@ export default {
                 this.$router.currentRoute.value.name != 'error' &&
                 this.$router.currentRoute.value.name != 'notfound' &&
                 this.$router.currentRoute.value.name != '404' &&
+                this.$router.currentRoute.value.name !=
+                    'sendResetPasswordMail' &&
+                this.$router.currentRoute.value.name != 'sendResetPassword' &&
+                this.$router.currentRoute.value.name != 'setPassword' &&
                 this.$router.currentRoute.value.name
             ) {
                 return true

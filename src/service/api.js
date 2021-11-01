@@ -75,6 +75,35 @@ const serve = {
         })
     },
     //===========================
+    // リーセットパスワードメール送信
+    //===========================
+    async postResetPasswordMail(data) {
+        return await axios('/account/user/password', {
+            method: 'post',
+            data: data,
+        })
+    },
+    //===========================
+    // リーセットパスワード送信
+    //===========================
+    async postResetPassword(data) {
+        return await axios('/account/user/password', {
+            method: 'post',
+
+            data: data,
+        })
+    },
+    //===========================
+    // セットパスワード送信
+    //===========================
+    async patchSetPassword(data) {
+        return await axios('/account/user/password', {
+            method: 'patch',
+
+            data: data,
+        })
+    },
+    //===========================
     // ログアウト
     //===========================
     async postLogout(data) {
@@ -399,7 +428,7 @@ const serve = {
     //===========================
     async downloadPreavoidData(param) {
         const data = await axios('/api/preavoid/search.xlsx', {
-            method: 'get',
+            method: 'post',
             params: param,
         })
 

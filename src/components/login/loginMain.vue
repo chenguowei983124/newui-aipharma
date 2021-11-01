@@ -14,18 +14,17 @@
                             block
                             h-10
                             w-86.25
-                            NotoSansJp-normal
-                            text-xs
+                            notoSansJpAndTwelveRegular
                             flex-grow
                             rounded-sm
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1
+                            ring-1 ring-grayline
                             border-transparent
                             focus:outline-none
                             focus:ring-1
-                            focus:ring-326EB5Lins
+                            focus:ring-grayline
                             focus:border-transparent
                         "
                         type="text"
@@ -39,18 +38,17 @@
                             block
                             h-10
                             w-86.25
-                            NotoSansJp-normal
-                            text-xs
+                            notoSansJpAndTwelveRegular
                             flex-grow
                             rounded-sm
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1
+                            ring-1 ring-grayline
                             border-transparent
                             focus:outline-none
                             focus:ring-1
-                            focus:ring-326EB5Lins
+                            focus:ring-grayline
                             focus:border-transparent
                         "
                         type="password"
@@ -63,10 +61,16 @@
                         <input
                             v-model="isRemember"
                             type="checkbox"
-                            class="form-checkbox w-3 h-3 text-white ring-1"
+                            class="
+                                form-checkbox
+                                w-3
+                                h-3
+                                text-white
+                                ring-1 ring-grayline
+                            "
                             checked
                         />
-                        <span class="ml-0.5 notoSansJpAndTwelveRegular"
+                        <span class="ml-1 notoSansJpAndTwelveRegular"
                             >ログインを記憶する</span
                         >
                     </label>
@@ -83,18 +87,20 @@
                         notoSansJpAndEighteenBold
                         text-white
                         w-86.25
+                        mt-3
                     "
                     @click="loginClick"
                     value="ログイン"
                 />
 
-                <div class="flex mt-5">
+                <div class="flex mt-5 justify-center">
                     <div
                         class="
                             w-4
                             h-4
                             block
                             rounded-full
+                            notoSansJpAndTenMedium
                             border-2 border-blueline
                             text-xs text-blueline text-center
                             p2-1
@@ -102,36 +108,35 @@
                     >
                         ?
                     </div>
-                    <div
+                    <router-link
                         class="
                             notoSansJpAndTwelveRegular
                             text-blueline
                             underline
+                            ml-1
                         "
+                        to="/sendResetPasswordMail"
                     >
                         パスワードを忘れた場合
-                    </div>
+                    </router-link>
                 </div>
 
                 <div class="mt-15">
-                    <div
+                    <input
+                        type="submit"
                         class="
-                            notoSansJpAndTwelveRegular
-                            text-blueline
-                            underline
-                            text-center
+                            bg-blueline
+                            hover:opacity-50
+                            active:bg-blueline active:opacity-100
+                            h-10
+                            rounded-sm
+                            notoSansJpAndEighteenBold
+                            text-white
+                            w-86.25
                         "
-                    >
-                        新規参画のお申込み
-                    </div>
-                </div>
-                <div>
-                    <div class="notoSansJpAndTenNormal mt-2 text-center">
-                        AI-PHARMAへの新規参画申込みは施設単位でのお申込みとなります。
-                    </div>
-                    <div class="notoSansJpAndTenNormal mt-2 text-center">
-                        個人単位でのお申込みは行っておりませんのでご了承ください。
-                    </div>
+                        @click="signUp"
+                        value="新規登録はこちら"
+                    />
                 </div>
             </div>
         </div>
@@ -211,7 +216,10 @@ export default {
                 } else {
                     self.clearCookie()
                 }
-                if (!!import.meta.env.VITE_APP_IS_OIDC_AUTH && import.meta.env.VITE_APP_IS_OIDC_AUTH == 'true') {
+                if (
+                    !!import.meta.env.VITE_APP_IS_OIDC_AUTH &&
+                    import.meta.env.VITE_APP_IS_OIDC_AUTH == 'true'
+                ) {
                     this.AuthOIDC()
                     // console.log('env log1',typeof import.meta.env.VITE_APP_IS_OIDC_AUTH)
                 } else {
