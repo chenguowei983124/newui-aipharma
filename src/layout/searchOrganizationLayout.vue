@@ -111,7 +111,7 @@
         <good-message-box></good-message-box>
     </div>
     <!-- comment-message-box -->
-    <div
+    <!-- <div
         :class="[
             $store.getters.getCommentMessageBox
                 ? 'block fixed top-1/4 z-99 left-0 right-0'
@@ -119,11 +119,11 @@
         ]"
     >
         <comment-message-box class=""></comment-message-box>
-    </div>
+    </div> -->
 </template>
 
 <script>
-import CommentMessageBox from '../components/common/messageBox/commentMessageBox.vue'
+// import CommentMessageBox from '../components/common/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/common/messageBox/goodMessageBox.vue'
 import searchBar from '../components/common/search/searchBar.vue'
 import searchOrganizationMain from '../components/organization/searchOrganizationMain.vue'
@@ -131,7 +131,7 @@ import OrganizationInit from '../components/organization/organizationInit.vue'
 
 export default {
     components: {
-        CommentMessageBox,
+        // CommentMessageBox,
         GoodMessageBox,
         searchBar,
         searchOrganizationMain,

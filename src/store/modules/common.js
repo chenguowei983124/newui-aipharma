@@ -8,6 +8,7 @@ export default {
         isIssueIconClick: false,
         qa_classify_class: {},
         qa_classify_subject: {},
+        commentInfo: {},
         oidcCode: '',
         dateValueFrom: '',
         dateValueTo: '',
@@ -63,11 +64,18 @@ export default {
         getStyles(state) {
             return state.styles
         },
+        // コメント情報
+        getCommentInfo(state) {
+            return state.commentInfo
+        },
     },
 
     mutations: {
         basic(state, payload) {
             state[payload.key] = payload.value
+        },
+        setCommnet(state, info) {
+            state.commentInfo = info
         },
     },
 
@@ -167,6 +175,9 @@ export default {
         },
         setOidcCode({ commit, state }, value) {
             commit('basic', { key: 'oidcCode', value })
+        },
+        setCommentInfo({ commit }, value) {
+            commit('setCommnet', value)
         },
     },
 }

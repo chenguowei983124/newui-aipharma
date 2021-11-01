@@ -10,7 +10,9 @@
                 h-80
                 border-2 border-black
                 items-center
-                bg-gray-200
+                bg-commentBgColor
+                rounded-lg
+                overflow-hidden
             "
         >
             <div
@@ -18,70 +20,97 @@
                     flex flex-row
                     justify-between
                     items-center
-                    bg-gray-400
+                    bg-garyTitle
+                    notoSansJpAndEighteenBold
                     h-10
                     w-full
                     px-2
+                    rounded-t-lg
                 "
             >
                 <div class="">コメント</div>
-                <button @click="openCommentMessageBox">
+                <button @click="closeCommentMessageBox">
                     <x-icon-svg></x-icon-svg>
                 </button>
             </div>
             <!-- 630*108 -->
             <div
                 class="
-                    w-80
-                    mid:w-11/12
+                    w-11/12
                     h-13.75
                     flex flex-row
+                    mt-2
                     border
                     rounded
                     border-black
                     bg-white
                 "
             >
-                <div class="flex-auto p-1">
-                    <input
+                <div class="flex-auto p-1 notoSansJpAndTwelveRegular">
+                    <textarea
+                        v-model="inputComment"
+                        rows="2"
+                        class="
+                            block
+                            w-full
+                            NotoSansJp-normal
+                            rounded-sm
+                            pl-4
+                            placeholder-gray-500
+                            focus:placeholder-opacity-0
+                            ring-1
+                            border-transparent
+                            focus:outline-none
+                            focus:ring-1
+                            focus:ring-326EB5Lins
+                            focus:border-transparent
+                        "
                         type="text"
                         placeholder="コメントを入力"
-                        class="h-full w-full"
-                    />
+                    ></textarea>
+                    <!-- <textarea
+                        rows="2"
+                        v-model="inputComment"
+                        placeholder="コメントを入力"
+                        class="h-full w-full pr-10"
+                    /> -->
                 </div>
                 <div class="w-10 flex items-center justify-center">
-                    <button class="bg-green-500 rounded">
+                    <button class="bg-green-500 rounded" @click="sendMessage">
                         <send-message-icon-svg></send-message-icon-svg>
                     </button>
                 </div>
             </div>
-            <div class="flex">
-                <label class="inline-flex items-center justify-end">
-                    <input
-                        type="checkbox"
-                        class="form-checkbox text-white"
-                        checked
-                    />
-                    <span class="ml-2 text-xs">匿名で投稿</span>
-                </label>
+            <div class="w-11/12 flex justify-end mt-1">
+                <!-- <label class="inline-flex items-center"> -->
+                <input
+                    type="checkbox"
+                    class="form-checkbox text-white"
+                    checked
+                />
+                <span class="ml-2 text-xs">匿名で投稿</span>
+                <!-- </label> -->
             </div>
+            <div class="hidden">{{ getCommentData }}</div>
             <!-- 630*144 -->
-            <div class="space-y-2 mid:w-11/12">
-                <div v-for="(items, index) in itemList" :key="items" class="">
+            <div class="space-y-2 w-11/12 overflow-auto mt-1">
+                <div
+                    v-for="(items, index) in getItemList"
+                    :key="items"
+                    class=""
+                >
                     <div
                         class="
                             p-2
-                            w-80
-                            mid:w-full
+                            w-full
                             flex flex-col
-                            border
                             rounded
                             text-xs
                             bg-white
                         "
                     >
                         <div
-                            class="h-2/3 flex flex-row"
+                            class="h-2/3 flex flex-row justify-between"
                             :class="[items.isShow ? 'hidden' : 'block']"
                         >
                             <div class="w-60">
@@ -90,13 +119,13 @@
                                     v-show="!items.isShow"
                                     style="word-break-word;"
                                 >
-                                    {{ items.title }}
+                                    {{ items.comment }}
                                 </p>
                                 <input
                                     class="w-60 h-full"
                                     type="text"
                                     v-show="items.isShow"
-                                    v-model="items.title"
+                                    v-model="items.comment"
                                 />
                             </div>
                             <div
@@ -108,7 +137,13 @@
                                     space-x-2
                                 "
                             >
-                                <div class="flex justify-center items-center">
+                                <div
+                                    class="flex justify-center items-center"
+                                    v-if="
+                                        this.$store.getters.topManagementInfo
+                                            .user_id == items.userId
+                                    "
+                                >
                                     <button
                                         @click="editAddCheckpointsTitle(items)"
                                         class="
@@ -121,9 +156,15 @@
                                         ></pencil-alt-icon-svg>
                                     </button>
                                 </div>
-                                <div class="flex justify-center items-center">
+                                <div
+                                    class="flex justify-center items-center"
+                                    v-if="
+                                        this.$store.getters.topManagementInfo
+                                            .user_id == items.userId
+                                    "
+                                >
                                     <button
-                                        @click="deleteFruit(index)"
+                                        @click="deleteFruit(index, items)"
                                         class="
                                             bg-personInformationButton
                                             rounded
@@ -142,11 +183,10 @@
                             class="h-2/3 flex flex-row"
                             :class="[items.isShow ? 'block' : 'hidden']"
                         >
-                            <div class="w-80 mid:w-full">
+                            <div class="w-full">
                                 <div
                                     class="
-                                        w-80
-                                        mid:w-full
+                                        w-full
                                         flex
                                         justify-between
                                         border-0 border-black
@@ -161,12 +201,13 @@
                                             focus:placeholder-opacity-0
                                             border border-transparent
                                             focus:outline-none
-                                            focus:ring-1 focus:ring-326EB5Lins
+                                            focus:ring-1
+                                            focus:ring-326EB5Lins
                                             focus:border-transparent
                                         "
                                         type="text"
                                         v-show="items.isShow"
-                                        v-model="items.title"
+                                        v-model="editComment"
                                     />
                                     <div
                                         class="
@@ -174,13 +215,17 @@
                                             flex
                                             justify-end
                                             space-x-2
-                                            mr-5
+                                            mr-1
                                             mid:mr-0
                                         "
                                     >
                                         <button
                                             @click="
-                                                editAddCheckpointsTitle(items)
+                                                editMessage(
+                                                    items.id,
+                                                    index,
+                                                    items
+                                                )
                                             "
                                             class="bg-green-400 rounded"
                                         >
@@ -207,8 +252,8 @@
                             </div>
                         </div>
                         <div class="h-1/3 flex justify-end items-center pt-2">
-                            投稿日時 :{{ items.time }} 投稿者 :{{
-                                items.manager
+                            投稿日時 :{{ items.createdDate }} 投稿者 :{{
+                                items.userName
                             }}
                         </div>
                     </div>
@@ -224,53 +269,184 @@ import TrashIconSvg from '../svgImage/trashIconSvg.vue'
 import SendMessageIconSvg from '../svgImage/sendMessageIconSvg.vue'
 import xIconSvg from '../svgImage/xIconSvg.vue'
 import CheckIconSvg from '../svgImage/checkIconSvg.vue'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 export default {
-  components: {
-    xIconSvg,
-    SendMessageIconSvg,
-    PencilAltIconSvg,
-    TrashIconSvg,
-    CheckIconSvg,
-  },
-  data() {
-    return {
-      itemList: [
-        {
-          id: '1',
-          title: '情報が古いです。更新情報があります。',
-          time: '2020.12.14',
-          manager: '施設管理者',
-        },
-        {
-          id: '2',
-          title: '見ました。',
-          time: '2020.12.14',
-          manager: '施設管理者',
-        },
-        {
-          id: '3',
-          title: '見ました。',
-          time: '2020.12.14',
-          manager: '施設管理者',
-        },
-      ],
-    }
-  },
-  methods: {
-    deleteFruit: function (index) {
-      // 指定されたindexの要素を1つ削除します。
-      this.itemList.splice(index, 1)
+    components: {
+        xIconSvg,
+        SendMessageIconSvg,
+        PencilAltIconSvg,
+        TrashIconSvg,
+        CheckIconSvg,
     },
-    editAddCheckpointsTitle(item) {
-      item.isShow = !item.isShow
+    props: { qaId: '', rowIndex: 0 },
+    computed: {
+        async getCommentData() {
+            get: {
+                if (this.$store.getters.getCommentMessageBox) {
+                    let params = {
+                        id: this.qaId,
+                    }
+                    await this.$serve.getComment(params).then((res) => {
+                        this.$store.dispatch(
+                            'setCommentInfo',
+                            res.data.resultInfo
+                        )
+                    })
+                }
+            }
+        },
+        getItemList() {
+            console.log(this.$store.getters.getCommentInfo)
+            console.log(this.$store.getters.topManagementInfo)
+            return this.$store.getters.getCommentInfo
+        },
     },
-    openCommentMessageBox() {
-      this.$store.dispatch(
-        'setCommentMessageBox',
-        !this.$store.getters.getCommentMessageBox
-      )
+
+    data() {
+        return {
+            itemList: [],
+            editComment: '',
+            inputComment: '',
+        }
     },
-  },
+    Activated() {
+        console.log('Activated')
+    },
+    methods: {
+        deleteFruit: function (index, items) {
+            Swal.fire({
+                text: '本当に削除してよろしいですか？',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '65bbe5',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '削除',
+                cancelButtonText: 'キャンセル',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log('削除')
+                    let params = {
+                        id: items.id,
+                    }
+                    this.$serve.deleteComment(params).then((res) => {
+                        console.log(res)
+                        if (res.data.status == 'success') {
+                            Swal.fire('', res.data.message, 'success')
+
+                            // 指定されたindexの要素を1つ削除します。
+                            this.itemList = this.$store.getters.getCommentInfo
+                            this.itemList.splice(index, 1)
+                            this.$store.dispatch(
+                                'setCommentInfo',
+                                this.itemList
+                            )
+
+                            // Good,Bad,comment更新
+                            // GOOd
+                            this.$store.getters.organizationSearchInfo.qas[
+                                this.rowIndex
+                            ].feedbackGood = res.data.goodFeedbackCount
+                            // bad
+                            this.$store.getters.organizationSearchInfo.qas[
+                                this.rowIndex
+                            ].feedbackBad = res.data.badFeedbackCount
+
+                            //comment
+                            this.$store.getters.organizationSearchInfo.qas[
+                                this.rowIndex
+                            ].feedbackComment = res.data.commentFeedbackCount
+                        }
+                    })
+                }
+            })
+        },
+        editAddCheckpointsTitle(item) {
+            item.isShow = !item.isShow
+            this.editComment = item.comment
+        },
+        closeCommentMessageBox() {
+            this.inputComment = ''
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
+        sendMessage() {
+            let params = {
+                id: this.qaId,
+                fbComment: this.inputComment,
+            }
+            this.$serve.sendComment(params).then((res) => {
+                this.$toast.success(res.data.message, {
+                    position: 'top-right',
+                })
+
+                // 登録したコメントを表示
+                let row = {
+                    comment: res.data.qaFeedback.fbComment,
+                    createdDate: res.data.qaFeedback.createdAt,
+                    id: res.data.qaFeedback.id,
+                    updateDate: res.data.qaFeedback.updatedAt,
+                    userId: res.data.qaFeedback.userId,
+                    userName: res.data.qaFeedback.fbComment,
+                }
+                this.itemList = this.$store.getters.getCommentInfo
+                this.itemList.push(row)
+                this.$store.dispatch('setCommentInfo', this.itemList)
+
+                // Good,Bad,comment更新
+                // GOOd
+                this.$store.getters.organizationSearchInfo.qas[
+                    this.rowIndex
+                ].feedbackGood =
+                    this.$store.getters.organizationSearchInfo.qas[
+                        this.rowIndex
+                    ].feedbackGood + res.data.goodFeedbackCount
+                // bad
+                this.$store.getters.organizationSearchInfo.qas[
+                    this.rowIndex
+                ].feedbackBad =
+                    this.$store.getters.organizationSearchInfo.qas[
+                        this.rowIndex
+                    ].feedbackBad + res.data.badFeedbackCount
+
+                //comment
+                this.$store.getters.organizationSearchInfo.qas[
+                    this.rowIndex
+                ].feedbackComment = res.data.commentFeedbackCount
+                console.log(this.itemList)
+
+                this.inputComment = ''
+            })
+        },
+        editMessage(id, index, item) {
+            let params = {
+                feedbackId: id,
+                fbComment: this.editComment,
+            }
+            this.$serve.updateComment(params).then((res) => {
+                this.$toast.success(res.data.message, {
+                    position: 'top-right',
+                })
+            })
+
+            this.itemList = this.$store.getters.getCommentInfo
+            this.itemList[index].comment = this.editComment
+            this.$store.dispatch('setCommentInfo', this.itemList)
+
+            this.editAddCheckpointsTitle(item)
+        },
+        searchMessage() {
+            let params = {
+                id: this.qaId,
+            }
+            this.$serve.getComment(params).then((res) => {
+                console.log(res.data.resultInfo)
+                this.itemList = res.data.resultInfo
+            })
+        },
+    },
 }
 </script>
 

@@ -197,8 +197,8 @@ const serve = {
     // TOP画面　個人情報取得
     //===========================
     async getManagementInfo() {
-        const data = await axios('/oauth/userinfo', {
-            method: 'get',
+        const data = await axios('/account/api/general/send_user_info', {
+            method: 'post',
         })
 
         return data
@@ -403,6 +403,56 @@ const serve = {
             params: param,
         })
 
+        return data
+    },
+    //===========================
+    // Good/Badの送信
+    //===========================
+    async sendFeedback(params) {
+        const data = await axios('/api/qa/send_qa_feedback', {
+            method: 'post',
+            data: params,
+        })
+        return data
+    },
+    //===========================
+    // コメント取得
+    //===========================
+    async getComment(params) {
+        const data = await axios('/api/qa/get_comments', {
+            method: 'get',
+            data: params,
+        })
+        return data
+    },
+    //===========================
+    // コメント送信
+    //===========================
+    async sendComment(params) {
+        const data = await axios('/api/qa/send_qa_comment', {
+            method: 'post',
+            data: params,
+        })
+        return data
+    },
+    //===========================
+    // コメント送信
+    //===========================
+    async updateComment(params) {
+        const data = await axios('/api/qa/update_comment', {
+            method: 'post',
+            data: params,
+        })
+        return data
+    },
+    //===========================
+    // コメント削除
+    //===========================
+    async deleteComment(params) {
+        const data = await axios('/api/qa/delete_comment', {
+            method: 'post',
+            data: params,
+        })
         return data
     },
     async getOwndIKnowledgeShare(param) {
