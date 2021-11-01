@@ -79,9 +79,7 @@
                         inset-0
                         z-50
                         overflow-y-auto
-                        sm:overflow-visible
-                        sm:static
-                        sm:z-auto
+                        sm:overflow-visible sm:static sm:z-auto
                         bg-white
                         dark:bg-litepie-secondary-800
                         sm:rounded-lg
@@ -90,20 +88,20 @@
                 >
                     <div
                         class="
+                            mt-10
+                            md:mt-0
                             litepie-datepicker
                             static
                             sm:relative
                             w-full
                             bg-white
-                            sm:rounded-lg
-                            sm:shadow-sm
+                            sm:rounded-lg sm:shadow-sm
                             border-0
                             sm:border
                             border-black border-opacity-10
                             px-3
                             py-3
-                            sm:px-1
-                            sm:py-1.5
+                            sm:px-1 sm:py-1.5
                             dark:bg-litepie-secondary-800
                             dark:border-litepie-secondary-700
                             dark:border-opacity-100
@@ -204,8 +202,7 @@
                                         sm:w-80
                                         overflow-hidden
                                         mt-3
-                                        sm:mt-0
-                                        sm:ml-2
+                                        sm:mt-0 sm:ml-2
                                     "
                                 >
                                     <!--            Header-->
@@ -281,11 +278,10 @@
                                             text-white
                                             hover:opacity-50
                                             focus:outline-none
-                                            focus:ring-2 focus:ring-offset-2
+                                            focus:ring-2
+                                            focus:ring-offset-2
                                             focus:opacity-50
-                                            sm:ml-3
-                                            sm:w-auto
-                                            sm:text-sm
+                                            sm:ml-3 sm:w-auto sm:text-sm
                                             dark:ring-offset-litepie-secondary-800
                                             disabled:cursor-not-allowed
                                         "
@@ -322,10 +318,7 @@
                                             focus:ring-2
                                             focus:ring-offset-2
                                             focus:ring-litepie-primary-500
-                                            sm:mt-0
-                                            sm:ml-3
-                                            sm:w-auto
-                                            sm:text-sm
+                                            sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
                                             dark:ring-offset-litepie-secondary-800
                                         "
                                         v-text="options.footer.cancel"
@@ -369,10 +362,7 @@
                                             focus:ring-2
                                             focus:ring-offset-2
                                             focus:ring-litepie-primary-500
-                                            sm:mt-0
-                                            sm:ml-3
-                                            sm:w-auto
-                                            sm:text-sm
+                                            sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
                                             dark:ring-offset-litepie-secondary-800
                                         "
                                         v-text="options.footer.cancel"

@@ -25,7 +25,7 @@
             {{ leftLableTitle }}
         </div>
         <i
-            class="absolute flex justify-center"
+            class="absolute flex justify-center pt-2"
             :class="buttonStyle"
             @mousedown.prevent="onMouseDownButton"
         >
@@ -239,7 +239,7 @@ export default {
 
   watch: {
     defaultValue() {
-      // console.log('default', this.defaultValue)
+      // console.log('this.defaultValuethis.defaultValue ', this.defaultValue)
       if (this.defaultValue !== null) {
         let length = this.defaultOptions.length
         for (let index = 0; index < length; index++) {
@@ -384,7 +384,6 @@ export default {
     },
 
     onClickOptions(event) {
-      // console.log("asdfasd")
       let optionEl = closest(event.target, '[data-index]')
       this.selectedIndex = parseInt(optionEl.getAttribute('data-index'))
       this.inputText = this.options[this.selectedIndex].title

@@ -218,7 +218,7 @@ export default {
       searchValue: '',
       isDetailClick: true,
       value: [],
-      defaultValue: null,
+      defaultValue: 0,
       defaultInputAttribs: {
         tabindex: 1,
       },

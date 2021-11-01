@@ -13,7 +13,7 @@
         </div>
         <div class="flex flex-row">
             <!-- third -->
-            <div class="flex items-center">
+            <div class="flex items-center border-b-2 md:border-b-0">
                 <div
                     class="
                         w-37.5
@@ -63,38 +63,38 @@ import portraitIcon from './portraitIcon.vue'
 import issueIcon from './issueIcon.vue'
 import managementIcon from './managementIcon.vue'
 export default {
-    props: {
-        form: {
-            type: String,
-            default: 'top',
-        },
+  props: {
+    form: {
+      type: String,
+      default: 'top',
     },
-    components: {
-        personalInfo,
-        menuDropdownItem,
-        portraitIcon,
-        issueIcon,
-        managementIcon,
+  },
+  components: {
+    personalInfo,
+    menuDropdownItem,
+    portraitIcon,
+    issueIcon,
+    managementIcon,
+  },
+  computed: {
+    searchBarFixedClass: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return 'fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-white'
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+      } else if (this.$props.form == this.$constant.formList.DI) {
+        return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+      } else if (this.$props.form == this.$constant.formList.PVD) {
+        return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+      } else if (this.$props.form == this.$constant.formList.NDI) {
+        return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
+      } else if (this.$props.form == this.$constant.formList.BBS) {
+        return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
+      }
     },
-    computed: {
-        searchBarFixedClass: function () {
-            if (this.$props.form == this.$constant.formList.TOP) {
-                return 'fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-white'
-            } else if (this.$props.form == this.$constant.formList.ALL) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
-            } else if (this.$props.form == this.$constant.formList.DI) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
-            } else if (this.$props.form == this.$constant.formList.OWN) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
-            } else if (this.$props.form == this.$constant.formList.PVD) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
-            } else if (this.$props.form == this.$constant.formList.NDI) {
-                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
-            } else if (this.$props.form == this.$constant.formList.BBS) {
-                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
-            }
-        },
-    },
+  },
 }
 </script>
 

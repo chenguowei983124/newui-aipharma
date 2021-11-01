@@ -339,8 +339,6 @@ export default {
     },
 
     sreachBarPCInputClass: function () {
-      console.log("this.checkId", this.checkId)
-      console.log("this.$props.form", this.$props.form)
       if (this.$props.form == this.$constant.formList.TOP) {
         return (
           'hidden md:block  h-10 w-10/12 ' +
@@ -454,7 +452,7 @@ export default {
         )
       } else if (this.$props.form == this.$constant.formList.PVD) {
         return (
-          'block md:hidden h-10 w-10/12 ml-2.5 ' +
+          'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
           'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
           'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
           'focus:border-transparent mr-2.5'
@@ -742,6 +740,9 @@ export default {
     // DropDown 選択したアイテムＩＤ取得
     getCheckId(value) {
       this.checkId = value
+      this.$store.dispatch("setDateValueFrom", "")
+      this.$store.dispatch("setDateValueTo", "")
+
     },
   },
 }
