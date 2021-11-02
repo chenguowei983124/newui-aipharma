@@ -298,7 +298,7 @@ const serve = {
         //     }
         // }
 
-        console.log('getALLBulletinBoard_Info', data)
+        // console.log('getALLBulletinBoard_Info', data)
         return data
     },
     //===========================

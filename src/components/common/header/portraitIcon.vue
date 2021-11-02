@@ -210,11 +210,16 @@
                                                     justify-center
                                                 "
                                             >
-                                                {{
-                                                    $store.getters
-                                                        .topManagementInfo
-                                                        .authority
-                                                }}
+                                                <div
+                                                    v-if="
+                                                        $store.getters
+                                                            .topManagementInfo
+                                                            .role == 'user'
+                                                    "
+                                                >
+                                                    利 用 者
+                                                </div>
+                                                <div v-else>管 理 者</div>
                                             </div>
                                         </div>
                                     </div>
