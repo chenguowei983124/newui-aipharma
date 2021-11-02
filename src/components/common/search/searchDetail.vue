@@ -16,7 +16,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox text-white"
+                                        class="form-checkbox ring-1 text-white"
                                         :checked="$store.getters.getCheckQ"
                                         @change="onCheckQChange"
                                     />
@@ -32,7 +32,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox text-white"
+                                        class="form-checkbox ring-1 text-white"
                                         :checked="$store.getters.getCheckA"
                                         @change="onChangeCheckA"
                                     />
@@ -48,7 +48,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox text-white"
+                                        class="form-checkbox ring-1 text-white"
                                         :checked="
                                             $store.getters.getCheckComment
                                         "
@@ -68,7 +68,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox text-white"
+                                        class="form-checkbox ring-1 text-white"
                                         :checked="
                                             $store.getters.getCheckAddFileName
                                         "
@@ -86,7 +86,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox text-white"
+                                        class="form-checkbox ring-1 text-white"
                                         :checked="
                                             $store.getters.getCheckContributor
                                         "
@@ -104,7 +104,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox text-white"
+                                        class="form-checkbox ring-1 text-white"
                                         :checked="
                                             $store.getters.getCheckLastEditer
                                         "
@@ -124,7 +124,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox text-white"
+                                        class="form-checkbox ring-1 text-white"
                                         :checked="
                                             $store.getters.getCheckFacilityName
                                         "
@@ -142,7 +142,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox text-white"
+                                        class="form-checkbox ring-1 text-white"
                                         :checked="$store.getters.getCheckNote"
                                         @change="onChangeCheckNote"
                                     />
