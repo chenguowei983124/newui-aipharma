@@ -391,6 +391,17 @@ const serve = {
         return data
     },
     //===========================
+    // 組織内DI記録検索結果取得（QA用のタグをサジェスト）
+    //===========================
+    async getSuggestTags(param) {
+        const data = await axios('/api/qa/suggest_tags', {
+            method: 'post',
+            params: param,
+        })
+
+        return data
+    },
+    //===========================
     // 症例検索結果取得（ID）
     //===========================
     async getPreavoidDataById(param) {
