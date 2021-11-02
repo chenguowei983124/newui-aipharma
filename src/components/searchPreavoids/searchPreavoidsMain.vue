@@ -103,12 +103,12 @@
         <div class="mt-2">
             <my-table :detailList="dispDetailInfo"></my-table>
         </div>
-        <!-- :click-handler="clickCallback" -->
+        <!-- :click-handler="clickCallback" 
+        :value="$store.getters.getPage"-->
          <pagination
             :page-count="getPageCount"
             :page-range="5"
             :margin-pages="1"
-            :value="$store.getters.getPage"
             @input="getSelectPage"
             :prev-text="'<'"
             :next-text="'>'"
@@ -152,13 +152,19 @@ export default {
   props: {},
   data() {
     return {
+      // 順 区分 id
       preavoidsDateSort: 0,
+      // 件 表示 区分 id[index]
       organizationCountSort: 0,
+      // GOOD ICON クリックを区別する
       goodMessageBox: false,
-      selectValue: '',
+      // selectValue: '',
+      // 件 初期値
       pageCount: 20,
+      // 件 選ぶ
       selectPage: 1,
-      selectDispNumber: 0,
+      // 件 初期値[index]
+      // selectDispNumber: 0,
     }
   },
   unmounted() {
@@ -166,11 +172,9 @@ export default {
   },
   watch: {
     $route: function () {
-      console.log('preavoidwatch1')
       if (this.$route.path != '/searchPreavoids') {
         return
       }
-      console.log('preavoidwatch')
       if (JSON.stringify(this.$route.query) == '{}') {
         this.initStore()
         this.$store.dispatch('clearPreavoidsInfo', {})
@@ -185,11 +189,11 @@ export default {
     // 最大取得件数取得
     getPageCount() {
       // 選択したアイテムの数字を取得
-      if (this.selectDispNumber == '0') {
+      if (this.organizationCountSort == '0') {
         this.pageCount = 20
-      } else if (this.selectDispNumber == '1') {
+      } else if (this.organizationCountSort == '1') {
         this.pageCount = 50
-      } else if (this.selectDispNumber == '2') {
+      } else if (this.organizationCountSort == '2') {
         this.pageCount = 100
       }
 
@@ -244,13 +248,10 @@ export default {
       ) {
         // console.log(start + this.pageCount)
 
-        if (
-          start + this.pageCount >
-          this.$store.getters.getSearchPreavoidsInfo.searchData.length
-        ) {
+        if (start + this.pageCount > this.$store.getters.getSearchPreavoidsInfo.searchData.length) {
           end =
             this.$store.getters.getSearchPreavoidsInfo.searchData
-              .length - 1
+              .length
         } else {
           end = start + this.pageCount - 1
         }
@@ -307,22 +308,17 @@ export default {
     },
     async allDownload(id) {
       this.$store.dispatch('setDownload', true)
+      let data = this.$store.getters.getSearchPreavoidsInfo
+      let checkList = []
+      for (let index = 0; index < data.searchData.length; index++) {
+        checkList.push(data.searchData[index].id)
+
+      }
       let params = {
-        updated_from: new Date(
-          this.$store.getters.getDateValueFrom
-        ).toLocaleDateString(),
-        updated_to: new Date(
-          this.$store.getters.getDateValueTo
-        ).toLocaleDateString(),
-        comment: this.$store.getters.getSearchValue,
-        style: this.$store.getters.getStyles,
-        facility: this.$store.getters.getFacilityID,
+        id: checkList
       }
       await this.$serve.downloadPreavoidData(params).then((res) => {
         const filename = '123.xls'
-        // const filename = this.getFileNameFromContentDisposition(
-        //     res.headers['content-disposition']
-        // )
         if (window.navigator.msSaveOrOpenBlob) {
           window.navigator.msSaveOrOpenBlob(res.data, filename)
         } else {
@@ -372,47 +368,50 @@ export default {
       }
 
       result.then((response) => {
-        let searchData = []
-        for (let i = 0; i < response.data.searchData.length; i++) {
-          searchData[i] = {
-            index: i,
-            check: false,
-            ageLevel: response.data.searchData[i].ageLevel,
-            comment: response.data.searchData[i].comment,
-            createdAt: response.data.searchData[i].createdAt,
-            facilityIdentificationNumber:
-              response.data.searchData[i]
-                .facilityIdentificationNumber,
-            facilityScaleName:
-              response.data.searchData[i].facilityScaleName,
-            genderId: response.data.searchData[i].genderId,
-            id: response.data.searchData[i].id,
-            name: response.data.searchData[i].name,
-            patientDivisionId:
-              response.data.searchData[i].patientDivisionId,
-            prefectureId: response.data.searchData[i].prefectureId,
-            prefectureName:
-              response.data.searchData[i].prefectureName,
-            primaryDisease:
-              response.data.searchData[i].primaryDisease,
-            reportingAt: response.data.searchData[i].reportingAt,
-            sideEffectName:
-              response.data.searchData[i].sideEffectName,
-            style: response.data.searchData[i].style,
-            suspectedDrug:
-              response.data.searchData[i].suspectedDrug,
-            title: response.data.searchData[i].title,
-            updatedAt: response.data.searchData[i].updatedAt,
-            userGroupId: response.data.searchData[i].userGroupId,
-            userGroupName:
-              response.data.searchData[i].userGroupName,
+        if (response.data != "") {
+          let searchData = []
+          for (let i = 0; i < response.data.searchData.length; i++) {
+            searchData[i] = {
+              index: i,
+              check: false,
+              ageLevel: response.data.searchData[i].ageLevel,
+              comment: response.data.searchData[i].comment,
+              createdAt: response.data.searchData[i].createdAt,
+              facilityIdentificationNumber:
+                response.data.searchData[i]
+                  .facilityIdentificationNumber,
+              facilityScaleName:
+                response.data.searchData[i].facilityScaleName,
+              genderId: response.data.searchData[i].genderId,
+              id: response.data.searchData[i].id,
+              name: response.data.searchData[i].name,
+              patientDivisionId:
+                response.data.searchData[i].patientDivisionId,
+              prefectureId: response.data.searchData[i].prefectureId,
+              prefectureName:
+                response.data.searchData[i].prefectureName,
+              primaryDisease:
+                response.data.searchData[i].primaryDisease,
+              reportingAt: response.data.searchData[i].reportingAt,
+              sideEffectName:
+                response.data.searchData[i].sideEffectName,
+              style: response.data.searchData[i].style,
+              suspectedDrug:
+                response.data.searchData[i].suspectedDrug,
+              title: response.data.searchData[i].title,
+              updatedAt: response.data.searchData[i].updatedAt,
+              userGroupId: response.data.searchData[i].userGroupId,
+              userGroupName:
+                response.data.searchData[i].userGroupName,
+            }
           }
+          let dispResult = {
+            dataCount: response.data.dataCount,
+            searchData: searchData,
+          }
+          this.$store.dispatch('setPearchPreavoidsInfo', dispResult)
         }
-        let dispResult = {
-          dataCount: response.data.dataCount,
-          searchData: searchData,
-        }
-        this.$store.dispatch('setPearchPreavoidsInfo', dispResult)
+
       })
     },
     // 初期化検索条件
@@ -442,7 +441,7 @@ export default {
       this.$store.dispatch('setMaxCount', this.$route.query.displayed)
       this.preavoidsDateSort = this.$route.query.sort
 
-      this.selectDispNumber = this.$route.query.sort
+      // this.selectDispNumber = this.$route.query.sort
       if (this.$route.query.displayed == 20) {
         this.organizationCountSort = 0
       } else if (this.$route.query.displayed == 50) {
@@ -506,8 +505,8 @@ export default {
     },
     // ソート順
     setPreavoidsDateSortValue(value) {
+      console.log("setPreavoidsDateSortValue", value)
       this.preavoidsDateSort = value
-      //   console.log(value)
       this.$store.dispatch('setSort', value)
       this.resetRouter()
     },

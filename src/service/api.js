@@ -427,9 +427,9 @@ const serve = {
     // 症例検索結果ダウンロード（ID）
     //===========================
     async downloadPreavoidData(param) {
-        const data = await axios('/api/preavoid/search.xlsx', {
+        const data = await axios('/api/preavoid/download_search_info', {
             method: 'post',
-            params: param,
+            data: param,
         })
 
         return data

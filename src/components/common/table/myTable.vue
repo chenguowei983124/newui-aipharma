@@ -198,9 +198,19 @@
                             w-8
                             flex-none flex
                             justify-center
+                            pt-2
+                            font-bold
                         "
                     >
-                        {{ row.style }}
+                        <div v-if="row.style == 1" class="text-view">
+                            {{ row.style }}
+                        </div>
+                        <div v-if="row.style == 2" class="text-notlooked">
+                            {{ row.style }}
+                        </div>
+                        <div v-if="row.style == 3" class="text-G8CC85A">
+                            {{ row.style }}
+                        </div>
                     </td>
                     <!-- 報告日 -->
                     <td
@@ -209,6 +219,7 @@
                             w-17.5
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.reportingAt }}
@@ -220,6 +231,7 @@
                             w-17.5
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.createdAt }}
@@ -231,6 +243,7 @@
                             w-21
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.suspectedDrug }}
@@ -242,6 +255,7 @@
                             w-21
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.sideEffectName }}
@@ -253,6 +267,7 @@
                             w-12.5
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.ageLevel }}
@@ -264,6 +279,7 @@
                             w-8
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.genderId ? '男' : '女' }}
@@ -275,6 +291,7 @@
                             w-17
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.patientDivisionId == '1' ? '外来' : '入院' }}
@@ -286,6 +303,7 @@
                             w-21
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.primaryDisease }}
@@ -297,6 +315,7 @@
                             w-54
                             flex-none flex
                             justify-center
+                            pt-2
                         "
                     >
                         {{ row.comment }}
@@ -309,7 +328,7 @@
                             flex-none flex
                             justify-start
                             pl-2
-                            pb-2
+                            py-2
                         "
                     >
                         <div>
@@ -353,6 +372,7 @@
                             w-12.5
                             flex-none flex
                             justify-center
+                            py-2
                         "
                     >
                         <div>
@@ -463,7 +483,7 @@ export default {
     },
     // チェックALL
     changeAll() {
-      console.log(this.checkAll)
+      //   console.log(this.checkAll)
       this.checkAll = !this.checkAll
       for (let index = 0; index < this.dispList.length; index++) {
         this.dispList[index].check = this.checkAll

@@ -15,7 +15,6 @@ const style = [
     { value: '1', title: '様式1' },
     { value: '2', title: '様式2' },
     { value: '3', title: '様式3' },
-    { value: '4', title: '副作用' },
 ]
 // パラメータリスト
 const searchParam = {

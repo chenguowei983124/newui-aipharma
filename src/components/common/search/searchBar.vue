@@ -172,6 +172,7 @@ import searchDetail from './searchDetail.vue'
 import searchDiKnowledge from './searchDiKnowledge.vue'
 import searchPreavoids from './searchPreavoids.vue'
 import searchBBSTitle from './searchBBSTitle.vue'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 export default {
   components: {
@@ -181,6 +182,7 @@ export default {
     searchDiKnowledge,
     searchPreavoids,
     searchBBSTitle,
+    Swal
   },
   props: {
     form: {
@@ -674,6 +676,17 @@ export default {
       }
       // 症例（プレアボイド）
       else if (this.checkId == 3) {
+        // console.log("this.$constant.formList.TOP", this.$constant.formList.TOP)
+        if (this.$store.getters.getDateValueFrom != '' && this.$store.getters.getDateValueTo != '') {
+          if (this.$store.getters.getDateValueFrom >= this.$store.getters.getDateValueTo) {
+            Swal.fire(
+              '',
+              '期間（報告日）入力不正',
+              'info'
+            )
+            return
+          }
+        }
         let getTimestamp = new Date().getTime()
         let params = {
           search: this.$store.getters.getSearchWord,
@@ -685,27 +698,30 @@ export default {
             this.$props.form == this.$constant.formList.TOP
               ? ''
               : this.$store.getters.getDateValueTo,
+          // 様式
           styles:
             this.$props.form == this.$constant.formList.TOP
-              ? ''
+              ? '0'
               : this.$store.getters.getStyles,
-
+          // 施設
           facility_flag:
             this.$props.form == this.$constant.formList.TOP
-              ? '-1'
+              ? '0'
               : this.$store.getters.getFacilityID,
+          // 表示件数
           displayed:
             this.$props.form == this.$constant.formList.TOP
-              ? '1'
+              ? '20'
               : this.$store.getters.getMaxCount,
+          // ソート順    
           sort:
             this.$props.form == this.$constant.formList.TOP
-              ? '1'
+              ? '0'
               : this.$store.getters.getSort,
-          page:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getPage,
+          // page:
+          //   this.$props.form == this.$constant.formList.TOP
+          //     ? '1'
+          //     : this.$store.getters.getPage,
           timestamp: getTimestamp,
         }
         this.$router.push({

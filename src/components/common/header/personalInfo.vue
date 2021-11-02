@@ -3,7 +3,7 @@
         <div class="py-2 h-7.5">
             <div class="flex space-x-2 items-baseline whitespace-nowrap">
                 <a class="font-NotoSansJp font-bold text-base">
-                    {{ $store.getters.topManagementInfo.name }}</a
+                    {{ $store.getters.topManagementInfo.user_name }}</a
                 >
                 <a class="font-NotoSansJp font-normal text-xs">
                     {{

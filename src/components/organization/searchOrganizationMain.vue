@@ -960,411 +960,412 @@ import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 import CommentMessageBox from '../common/messageBox/commentMessageBox.vue'
 export default {
-    components: {
-        TriangleDownSvg,
-        resutTag,
-        resultDetailRow,
-        carousel,
-        Good,
-        bad,
-        talk,
-        xIconSvg,
-        Pagination,
-        vueSingleSelect,
-        GoodMessageBox,
-        ResultDetailRowItem,
-        CommentMessageBox,
-    },
-    props: {},
+  components: {
+    TriangleDownSvg,
+    resutTag,
+    resultDetailRow,
+    carousel,
+    Good,
+    bad,
+    talk,
+    xIconSvg,
+    Pagination,
+    vueSingleSelect,
+    GoodMessageBox,
+    ResultDetailRowItem,
+    CommentMessageBox,
+  },
+  props: {},
+  data() {
+    return {
+      // 順 区分 id
+      organizationDateSortValue: 0,
+      // 件 表示 区分 id
+      organizationCountSortValue: 0,
+      pageCount: 20,
+      selectPage: 1,
+      goodMessageBox: false,
+      isDetailDisp: [],
+      isDetailsDisp: [],
+      activeIndex: -1,
+      resultData: Object,
+      result: Object,
+      qaId: '',
+      rowIndex: 0,
+    }
+  },
+  unmounted() {
+    this.initStore()
+  },
+  mounted() {
+    if (JSON.stringify(this.$route.query) == '{}') {
+      this.initStore()
+      this.$store.dispatch('setOrganizationSearchInfo', {})
+    }
 
-    data() {
-        return {
-            // 順 区分 id
-            organizationDateSortValue: 0,
-            // 件 表示 区分 id
-            organizationCountSortValue: 0,
-            pageCount: 20,
-            selectPage: 1,
-            goodMessageBox: false,
-            isDetailDisp: [],
-            isDetailsDisp: [],
-            activeIndex: -1,
-            resultData: Object,
-            result: Object,
-            qaId: '',
-            rowIndex: 0,
-        }
+    if (JSON.stringify(this.$route.query) !== '{}') {
+      //   console.log("start this.resetSearchBar()")
+      this.resetSearchBar()
+      this.execSearch()
+    }
+  },
+  watch: {
+    $route: function () {
+      if (this.$route.path != '/searchOrganization') {
+        return
+      }
+      if (JSON.stringify(this.$route.query) == '{}') {
+        this.initStore()
+        this.$store.dispatch('setOrganizationSearchInfo', {})
+      }
+      if (JSON.stringify(this.$route.query) !== '{}') {
+        this.resetSearchBar()
+        this.execSearch()
+      }
     },
-    mounted() {
-        if (JSON.stringify(this.$route.query) == '{}') {
-            this.initStore()
-            this.$store.dispatch('setOrganizationSearchInfo', {})
-        }
+  },
+  computed: {
+    // 最大取得件数取得
+    getPageCount() {
+      // 選択したアイテムの数字を取得
+      if (this.organizationCountSortValue == '0') {
+        this.pageCount = 20
+      } else if (this.organizationCountSortValue == '1') {
+        this.pageCount = 50
+      } else if (this.organizationCountSortValue == '2') {
+        this.pageCount = 100
+      }
 
-        if (JSON.stringify(this.$route.query) !== '{}') {
-            //   console.log("start this.resetSearchBar()")
-            this.resetSearchBar()
-            this.execSearch()
-        }
-    },
-    unmounted() {
-        console.log('unmounted')
-    },
-    watch: {
-        $route: function () {
-            if (this.$route.path != '/searchOrganization') {
-                return
-            }
-            if (JSON.stringify(this.$route.query) == '{}') {
-                this.initStore()
-                this.$store.dispatch('setOrganizationSearchInfo', {})
-            }
-            if (JSON.stringify(this.$route.query) !== '{}') {
-                this.resetSearchBar()
-                this.execSearch()
-            }
-        },
-    },
-    computed: {
-        // 最大取得件数取得
-        getPageCount() {
-            // 選択したアイテムの数字を取得
-            if (this.organizationCountSortValue == '0') {
-                this.pageCount = 20
-            } else if (this.organizationCountSortValue == '1') {
-                this.pageCount = 50
-            } else if (this.organizationCountSortValue == '2') {
-                this.pageCount = 100
-            }
+      //
+      this.$store.dispatch('setMaxCount', this.pageCount)
 
-            //
-            this.$store.dispatch('setMaxCount', this.pageCount)
+      // ページ数を取得
+      return Math.ceil(
+        this.$store.getters.organizationSearchInfo.allCount /
+        this.pageCount
+      )
+    },
+    // 明細部に表示明細のFROM-TO
+    dispDetailRange: function () {
+      let start = 1
+      let end = ''
+      if (this.selectPage > 1) {
+        start = (this.selectPage - 1) * this.pageCount + 1
+      }
 
-            // ページ数を取得
-            return Math.ceil(
-                this.$store.getters.organizationSearchInfo.allCount /
-                    this.pageCount
+      if (this.$store.getters.organizationSearchInfo.qas != undefined) {
+        end =
+          start +
+          Object.keys(this.$store.getters.organizationSearchInfo.qas)
+            .length -
+          1
+      }
+
+      if (this.$store.getters.organizationSearchInfo.allCount == 1) {
+        return start.toString()
+      } else {
+        return start.toString() + '-' + end.toString()
+      }
+    },
+  },
+  methods: {
+    execSearch(kb) {
+      // 設定　NULL
+      this.openDetailDisp('')
+      // QAID取得
+      let qaid = ''
+      let params
+
+      if (this.$route.query.id != undefined) {
+        qaid = this.$route.query.id
+        this.$store.dispatch('setQAID', qaid)
+        sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
+      } else if (this.$store.getters.getQAID != '') {
+        qaid = this.$store.getters.getQAID
+      }
+
+      let result
+      // QAID存在チェック
+      if (qaid != '') {
+        result = this.$serve.getOwn({ id: qaid })
+      } else if (this.$route.query.page != undefined) {
+        result = this.$serve.getOwnData(this.$route.query)
+      }
+
+      this.setSearchResult(result)
+    },
+
+    setSearchResult: function (value) {
+      if (value != "") {
+        value.then((response) => {
+          this.$store.dispatch('setOrganizationSearchInfo', response)
+          // 1件のみの場合、全回答情報を表示
+          if (response.data.allCount == 1) {
+            this.openDetailDisp(
+              response.data.qas.id,
+              response.data.allCount
             )
-        },
-        // 明細部に表示明細のFROM-TO
-        dispDetailRange: function () {
-            let start = 1
-            let end = ''
-            if (this.selectPage > 1) {
-                start = (this.selectPage - 1) * this.pageCount + 1
-            }
 
-            if (this.$store.getters.organizationSearchInfo.qas != undefined) {
-                end =
-                    start +
-                    Object.keys(this.$store.getters.organizationSearchInfo.qas)
-                        .length -
-                    1
-            }
-
-            if (this.$store.getters.organizationSearchInfo.allCount == 1) {
-                return start.toString()
-            } else {
-                return start.toString() + '-' + end.toString()
-            }
-        },
-    },
-    methods: {
-        execSearch(kb) {
-            // 設定　NULL
-            this.openDetailDisp('')
-            // QAID取得
             let qaid = ''
-            let params
-
-            if (this.$route.query.id != undefined) {
-                qaid = this.$route.query.id
-                this.$store.dispatch('setQAID', qaid)
-                sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
+            if (this.$route.query.id) {
+              qaid = this.$route.query.id
+              this.$store.dispatch('setQAID', qaid)
+              sessionStorage.setItem(
+                this.$constant.searchParam.PAID,
+                qaid
+              )
             } else if (this.$store.getters.getQAID != '') {
-                qaid = this.$store.getters.getQAID
+              qaid = this.$store.getters.getQAID
             }
-
-            let result
-            // QAID存在チェック
-            if (qaid != '') {
-                result = this.$serve.getOwn({ id: qaid })
-            } else if (this.$route.query.page != undefined) {
-                result = this.$serve.getOwnData(this.$route.query)
-            }
-
-            this.setSearchResult(result)
-        },
-
-        setSearchResult: function (value) {
-            value.then((response) => {
-                this.$store.dispatch('setOrganizationSearchInfo', response)
-                // 1件のみの場合、全回答情報を表示
-                if (response.data.allCount == 1) {
-                    this.openDetailDisp(
-                        response.data.qas.id,
-                        response.data.allCount
-                    )
-
-                    let qaid = ''
-                    if (this.$route.query.id) {
-                        qaid = this.$route.query.id
-                        this.$store.dispatch('setQAID', qaid)
-                        sessionStorage.setItem(
-                            this.$constant.searchParam.PAID,
-                            qaid
-                        )
-                    } else if (this.$store.getters.getQAID != '') {
-                        qaid = this.$store.getters.getQAID
-                    }
-                    // ビュー件数更新
-                    let params = {
-                        id: qaid,
-                    }
-                    this.$serve.sendViewCount(params)
-                } else {
-                    this.isDetailDisp = []
-                }
-            })
-        },
-        // セッションに退避した情報をリーセット
-        resetSearchBar: function () {
-            this.initStore()
-            console.log('this.$route.query.id', this.$route.query.id)
-            if (this.$route.query.id == undefined) {
-                this.$store.dispatch('setSearchWord', this.$route.query.search)
-                //   console.log('this.$route.query.search', this.$route.query.search)
-                console.log('tags', this.$route.query.tags)
-                this.$store.dispatch(
-                    'setSearchTags',
-                    this.$route.query.tags.split(',')
-                )
-                //   console.log('resetSearchBar', this.$store.getters.getSearchTags)
-                this.$store.dispatch(
-                    'setMedicineID',
-                    this.$route.query.medicine
-                )
-                this.$store.dispatch(
-                    'setQuestionID',
-                    this.$route.query.qacategory
-                )
-                this.$store.dispatch(
-                    'setFacilityID',
-                    this.$route.query.facility_flag
-                )
-                this.$store.dispatch('setMaxCount', this.$route.query.displayed)
-                this.organizationDateSortValue = this.$route.query.sort
-                if (this.$route.query.displayed == 20) {
-                    this.organizationCountSortValue = 0
-                } else if (this.$route.query.displayed == 50) {
-                    this.organizationCountSortValue = 1
-                }
-                if (this.$route.query.displayed == 100) {
-                    this.organizationCountSortValue = 2
-                }
-                this.$store.dispatch('setSort', this.$route.query.sort)
-                this.$store.dispatch('setPage', this.$route.query.page)
-
-                this.$store.dispatch(
-                    'setCheckQ',
-                    this.$route.query.checkQ.toString() === 'true',
-                    true,
-                    false
-                )
-
-                this.$store.dispatch(
-                    'setCheckA',
-                    this.$route.query.checkA.toString() === 'true',
-                    true,
-                    false
-                )
-                this.$store.dispatch(
-                    'setCheckComment',
-                    this.$route.query.checkComment.toString() === 'true',
-                    true,
-                    false
-                )
-                this.$store.dispatch(
-                    'setCheckAddFileName',
-                    this.$route.query.checkAddFileName.toString() === 'true',
-                    true,
-                    false
-                )
-                this.$store.dispatch(
-                    'setCheckContributor',
-                    this.$route.query.checkContributor.toString() === 'true',
-                    true,
-                    false
-                )
-                this.$store.dispatch(
-                    'setCheckLastEditer',
-                    this.$route.query.checkLastEditer.toString() === 'true',
-                    true,
-                    false
-                )
-                this.$store.dispatch(
-                    'setCheckFacilityName',
-                    this.$route.query.checkFacilityName.toString() === 'true',
-                    true,
-                    false
-                )
-                this.$store.dispatch(
-                    'setCheckNote',
-                    this.$route.query.checkNote.toString() === 'true',
-                    true,
-                    false
-                )
-            }
-        },
-
-        initStore() {
-            this.$store.dispatch('setSearchWord', '')
-            this.$store.dispatch('setSearchTags', [])
-            this.$store.dispatch('setMedicineID', -1)
-            this.$store.dispatch('setQuestionID', -1)
-            this.$store.dispatch('setFacilityID', -1)
-            this.$store.dispatch('setPage', 1)
-            this.$store.dispatch('setSort', 0)
-            this.$store.dispatch('setMaxCount', 0)
-            this.$store.dispatch('setCheckQ', true)
-            this.$store.dispatch('setCheckA', true)
-            this.$store.dispatch('setCheckComment', true)
-            this.$store.dispatch('setCheckAddFileName', true)
-            this.$store.dispatch('setCheckContributor', true)
-            this.$store.dispatch('setCheckLastEditer', true)
-            this.$store.dispatch('setCheckFacilityName', true)
-            this.$store.dispatch('setCheckNote', true)
-        },
-        resetRouter() {
-            let getTimestamp = new Date().getTime()
-            let dispDetailNumber = 20
-
-            if (this.organizationCountSortValue == 0) {
-                dispDetailNumber = 20
-            } else if (this.organizationCountSortValue == 1) {
-                dispDetailNumber = 50
-            } else if (this.organizationCountSortValue == 2) {
-                dispDetailNumber = 100
-            }
+            // ビュー件数更新
             let params = {
-                search: this.$store.getters.getSearchWord,
-                tags: this.$store.getters.getSearchTags
-                    ? this.$store.getters.getSearchTags.join(',')
-                    : '',
-                medicine: this.$store.getters.getMedicineID,
-                qacategory: this.$store.getters.getQuestionID,
-                facility_flag: this.$store.getters.getFacilityID,
-                displayed: dispDetailNumber,
-                sort: this.$store.getters.getSort,
-                page: this.$store.getters.getPage,
-                checkQ: this.$store.getters.getCheckQ,
-                checkA: this.$store.getters.getCheckA,
-                checkComment: this.$store.getters.getCheckComment,
-                checkAddFileName: this.$store.getters.getCheckAddFileName,
-                checkContributor: this.$store.getters.getCheckContributor,
-                checkLastEditer: this.$store.getters.getCheckLastEditer,
-                checkFacilityName: this.$store.getters.getCheckFacilityName,
-                checkNote: this.$store.getters.getCheckNote,
-                timestamp: getTimestamp,
+              id: qaid,
             }
-            this.$router.push({
-                path: '/searchOrganization',
-                query: params,
-            })
-        },
-        // 改ページのデータ検索
-        getSelectPage(value) {
-            //   console.log('page', value)
-            this.selectPage = value
-            //   console.log(value)
-            this.$store.dispatch('setPage', value)
-            this.resetRouter()
-        },
-        sendMsgToParent: function (data) {
-            this.$emit('listenToChildEvent', data)
-        },
-        // 開くボタン押下
-        openDetailDisp(index, count) {
-            // 1件のみの場合
-            if (count == 1) {
-                this.isDetailDisp[index] = index
-            } else {
-                this.isDetailDisp[index] =
-                    this.isDetailDisp[index] == index ? [] : index
-                if (this.isDetailsDisp[index] == index) {
-                    this.isDetailsDisp[index] =
-                        this.isDetailsDisp[index] == index ? [] : index
-                }
-            }
-        },
-        // 明細の詳細情報リンク押下
-        openDetailsDisp(index) {
-            this.isDetailsDisp[index] =
-                this.isDetailsDisp[index] == index ? [] : index
-        },
-        clickCallback() {
-            //   console.log()
-        },
-        setOrganizationDateSortValue(value) {
-            this.organizationDateSortValue = value
-            //   console.log(value)
-            this.$store.dispatch('setSort', value)
-            this.resetRouter()
-        },
-        setOrganizationCountSortValue(value) {
-            this.organizationCountSortValue = value
-            this.resetRouter()
-        },
-        openGoodMessageBox(type, index) {
-            let params = {
-                fbType: type,
-                qaId: this.$store.getters.organizationSearchInfo.qas[index].id,
-            }
-            this.$serve.sendFeedback(params).then((res) => {
-                console.log(res)
-                if (res.data.status == 'create') {
-                    this.$toast.success(res.data.message, {
-                        position: 'top-right',
-                    })
-                    this.$store.getters.organizationSearchInfo.qas[
-                        index
-                    ].feedbackGood =
-                        this.$store.getters.organizationSearchInfo.qas[index]
-                            .feedbackGood + res.data.goodFeedbackCount
-                    this.$store.getters.organizationSearchInfo.qas[
-                        index
-                    ].feedbackBad =
-                        this.$store.getters.organizationSearchInfo.qas[index]
-                            .feedbackBad + res.data.badFeedbackCount
-                    this.$store.getters.organizationSearchInfo.qas[
-                        index
-                    ].feedbackComment = res.data.commentFeedbackCount
-                }
-            })
-            //   this.$store.dispatch(
-            //     'setGoodMessageBox',
-            //     !this.$store.getters.getGoodMessageBox
-            //   )
-        },
-        openCommentMessageBox(index) {
-            this.qaId = this.$store.getters.organizationSearchInfo.qas[index].id
-            this.rowIndex = index
-            console.log(this.qaId)
-            this.$store.dispatch(
-                'setCommentMessageBox',
-                !this.$store.getters.getCommentMessageBox
-            )
-        },
-        getRoeId(id) {
-            //   console.log(id)
-        },
-        ActicleDetail(index) {
-            this.activeIndex = this.activeIndex == index ? -1 : index
-        },
-        sendGoodMessage(index) {
-            var v = this.qaInfo[index].value
-        },
+            this.$serve.sendViewCount(params)
+          } else {
+            this.isDetailDisp = []
+          }
+        })
+      }
     },
+    // セッションに退避した情報をリーセット
+    resetSearchBar: function () {
+      this.initStore()
+      console.log('this.$route.query.id', this.$route.query.id)
+      if (this.$route.query.id == undefined) {
+        this.$store.dispatch('setSearchWord', this.$route.query.search)
+        //   console.log('this.$route.query.search', this.$route.query.search)
+        console.log('tags', this.$route.query.tags)
+        this.$store.dispatch(
+          'setSearchTags',
+          this.$route.query.tags.split(',')
+        )
+        //   console.log('resetSearchBar', this.$store.getters.getSearchTags)
+        this.$store.dispatch(
+          'setMedicineID',
+          this.$route.query.medicine
+        )
+        this.$store.dispatch(
+          'setQuestionID',
+          this.$route.query.qacategory
+        )
+        this.$store.dispatch(
+          'setFacilityID',
+          this.$route.query.facility_flag
+        )
+        this.$store.dispatch('setMaxCount', this.$route.query.displayed)
+        this.organizationDateSortValue = this.$route.query.sort
+        if (this.$route.query.displayed == 20) {
+          this.organizationCountSortValue = 0
+        } else if (this.$route.query.displayed == 50) {
+          this.organizationCountSortValue = 1
+        }
+        if (this.$route.query.displayed == 100) {
+          this.organizationCountSortValue = 2
+        }
+        this.$store.dispatch('setSort', this.$route.query.sort)
+        this.$store.dispatch('setPage', this.$route.query.page)
+
+        this.$store.dispatch(
+          'setCheckQ',
+          this.$route.query.checkQ.toString() === 'true',
+          true,
+          false
+        )
+
+        this.$store.dispatch(
+          'setCheckA',
+          this.$route.query.checkA.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckComment',
+          this.$route.query.checkComment.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckAddFileName',
+          this.$route.query.checkAddFileName.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckContributor',
+          this.$route.query.checkContributor.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckLastEditer',
+          this.$route.query.checkLastEditer.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckFacilityName',
+          this.$route.query.checkFacilityName.toString() === 'true',
+          true,
+          false
+        )
+        this.$store.dispatch(
+          'setCheckNote',
+          this.$route.query.checkNote.toString() === 'true',
+          true,
+          false
+        )
+      }
+    },
+
+    initStore() {
+      this.$store.dispatch('setSearchWord', '')
+      this.$store.dispatch('setSearchTags', [])
+      this.$store.dispatch('setMedicineID', -1)
+      this.$store.dispatch('setQuestionID', -1)
+      this.$store.dispatch('setFacilityID', -1)
+      this.$store.dispatch('setPage', 1)
+      this.$store.dispatch('setSort', 0)
+      this.$store.dispatch('setMaxCount', 0)
+      this.$store.dispatch('setCheckQ', true)
+      this.$store.dispatch('setCheckA', true)
+      this.$store.dispatch('setCheckComment', true)
+      this.$store.dispatch('setCheckAddFileName', true)
+      this.$store.dispatch('setCheckContributor', true)
+      this.$store.dispatch('setCheckLastEditer', true)
+      this.$store.dispatch('setCheckFacilityName', true)
+      this.$store.dispatch('setCheckNote', true)
+    },
+    resetRouter() {
+      let getTimestamp = new Date().getTime()
+      let dispDetailNumber = 20
+
+      if (this.organizationCountSortValue == 0) {
+        dispDetailNumber = 20
+      } else if (this.organizationCountSortValue == 1) {
+        dispDetailNumber = 50
+      } else if (this.organizationCountSortValue == 2) {
+        dispDetailNumber = 100
+      }
+      let params = {
+        search: this.$store.getters.getSearchWord,
+        tags: this.$store.getters.getSearchTags
+          ? this.$store.getters.getSearchTags.join(',')
+          : '',
+        medicine: this.$store.getters.getMedicineID,
+        qacategory: this.$store.getters.getQuestionID,
+        facility_flag: this.$store.getters.getFacilityID,
+        displayed: dispDetailNumber,
+        sort: this.$store.getters.getSort,
+        page: this.$store.getters.getPage,
+        checkQ: this.$store.getters.getCheckQ,
+        checkA: this.$store.getters.getCheckA,
+        checkComment: this.$store.getters.getCheckComment,
+        checkAddFileName: this.$store.getters.getCheckAddFileName,
+        checkContributor: this.$store.getters.getCheckContributor,
+        checkLastEditer: this.$store.getters.getCheckLastEditer,
+        checkFacilityName: this.$store.getters.getCheckFacilityName,
+        checkNote: this.$store.getters.getCheckNote,
+        timestamp: getTimestamp,
+      }
+      this.$router.push({
+        path: '/searchOrganization',
+        query: params,
+      })
+    },
+    // 改ページのデータ検索
+    getSelectPage(value) {
+      //   console.log('page', value)
+      this.selectPage = value
+      //   console.log(value)
+      this.$store.dispatch('setPage', value)
+      this.resetRouter()
+    },
+    sendMsgToParent: function (data) {
+      this.$emit('listenToChildEvent', data)
+    },
+    // 開くボタン押下
+    openDetailDisp(index, count) {
+      // 1件のみの場合
+      if (count == 1) {
+        this.isDetailDisp[index] = index
+      } else {
+        this.isDetailDisp[index] =
+          this.isDetailDisp[index] == index ? [] : index
+        if (this.isDetailsDisp[index] == index) {
+          this.isDetailsDisp[index] =
+            this.isDetailsDisp[index] == index ? [] : index
+        }
+      }
+    },
+    // 明細の詳細情報リンク押下
+    openDetailsDisp(index) {
+      this.isDetailsDisp[index] =
+        this.isDetailsDisp[index] == index ? [] : index
+    },
+    clickCallback() {
+      //   console.log()
+    },
+    setOrganizationDateSortValue(value) {
+      this.organizationDateSortValue = value
+      //   console.log(value)
+      this.$store.dispatch('setSort', value)
+      this.resetRouter()
+    },
+    setOrganizationCountSortValue(value) {
+      this.organizationCountSortValue = value
+      this.resetRouter()
+    },
+    openGoodMessageBox(type, index) {
+      let params = {
+        fbType: type,
+        qaId: this.$store.getters.organizationSearchInfo.qas[index].id,
+      }
+      this.$serve.sendFeedback(params).then((res) => {
+        console.log(res)
+        if (res.data.status == 'create') {
+          this.$toast.success(res.data.message, {
+            position: 'top-right',
+          })
+          this.$store.getters.organizationSearchInfo.qas[
+            index
+          ].feedbackGood =
+            this.$store.getters.organizationSearchInfo.qas[index]
+              .feedbackGood + res.data.goodFeedbackCount
+          this.$store.getters.organizationSearchInfo.qas[
+            index
+          ].feedbackBad =
+            this.$store.getters.organizationSearchInfo.qas[index]
+              .feedbackBad + res.data.badFeedbackCount
+          this.$store.getters.organizationSearchInfo.qas[
+            index
+          ].feedbackComment = res.data.commentFeedbackCount
+        }
+      })
+      //   this.$store.dispatch(
+      //     'setGoodMessageBox',
+      //     !this.$store.getters.getGoodMessageBox
+      //   )
+    },
+    openCommentMessageBox(index) {
+      this.qaId = this.$store.getters.organizationSearchInfo.qas[index].id
+      this.rowIndex = index
+      console.log(this.qaId)
+      this.$store.dispatch(
+        'setCommentMessageBox',
+        !this.$store.getters.getCommentMessageBox
+      )
+    },
+    getRoeId(id) {
+      //   console.log(id)
+    },
+    ActicleDetail(index) {
+      this.activeIndex = this.activeIndex == index ? -1 : index
+    },
+    sendGoodMessage(index) {
+      var v = this.qaInfo[index].value
+    },
+  },
 }
 </script>
 <style scoped>

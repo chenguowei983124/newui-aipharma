@@ -5,6 +5,7 @@
                 class="flex space-x-2"
                 :class="[isDetailClick ? 'block' : 'hidden']"
             >
+                <!-- "placement ? 'place-left' : 'place-right'" -->
                 <litepie-datepicker
                     ref="datepickerFrom"
                     :asSingle="true"
@@ -15,7 +16,7 @@
                         date: 'YYYY.MM.DD',
                         month: 'MMM',
                     }"
-                    :leftLableDisp="true"
+                    :leftLableDisp="dateValueFrom != '' ? false : true"
                     leftLableTitle="期間（報告日）"
                 ></litepie-datepicker>
                 <div class="w-8 text-white text-center mt-1.5 font-black">
@@ -57,6 +58,7 @@
         >
             <!-- 様式 -->
             <vue-single-select
+                class="cursor-pointer"
                 :name="'styles'"
                 ref="styles"
                 :default-value="defaultValue"
@@ -73,6 +75,7 @@
 
             <!-- 施設区分 -->
             <vue-single-select
+                class="cursor-pointer"
                 :name="'facility'"
                 ref="facility"
                 :default-value="defaultValue"
@@ -252,8 +255,8 @@ export default {
     clearClick: function () {
       this.$refs.datepickerFrom.clearPicker()
       this.$refs.datepickerTo.clearPicker()
-      this.$refs.facility.setValue(null)
-      this.$refs.styles.setValue(null)
+      this.$refs.facility.setValue('0')
+      this.$refs.styles.setValue('0')
       this.$store.dispatch('setSearchWord', '')
     },
     getDispText: function (value) {

@@ -222,6 +222,7 @@ module.exports = {
                 view: '#32a5dc',
                 notice: '#666666',
                 CCE8F6: '#CCE8F6',
+                G8CC85A: '#8CC85A',
                 searchDropdown: 'rgb(58, 175, 226)',
                 cardPmadNew: 'rgb(212, 20, 90)',
                 cardPmadUpadte: 'rgb(241, 90, 36)',

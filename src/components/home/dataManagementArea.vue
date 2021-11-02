@@ -16,7 +16,7 @@
                     <div class="md:flex justify-between w-42.5 my-3.75">
                         <div class="h-12.5 flex flex-col justify-center">
                             <div class="notoSansJpAndSixteenRegular">
-                                {{ $store.getters.topManagementInfo.name }}
+                                {{ $store.getters.topManagementInfo.user_name }}
                             </div>
                             <div class="notoSansJpAndTwelveRegular">
                                 {{ $store.getters.topManagementInfo.title }}
@@ -190,33 +190,33 @@
 import TopPortraitIcon from '../home/topPortraitIcon.vue'
 
 export default {
-    components: { TopPortraitIcon },
-    props: {},
-    data() {
-        return {
-            isDown: false,
-        }
+  components: { TopPortraitIcon },
+  props: {},
+  data() {
+    return {
+      isDown: false,
+    }
+  },
+  watch: {},
+  methods: {
+    itemClick() {
+      this.isDown = !this.isDown
     },
-    watch: {},
-    methods: {
-        itemClick() {
-            this.isDown = !this.isDown
-        },
-        orgDiRecordClick() {
-            this.$router.push({
-                path: '/newOrgDIRecord',
-            })
-        },
-        bbsRecordClick() {
-            this.$router.push({
-                path: '/newBbsRecord',
-            })
-        },
+    orgDiRecordClick() {
+      this.$router.push({
+        path: '/newOrgDIRecord',
+      })
     },
-    created() {},
-    mounted() {
-        this.$store.dispatch('getTopManagementInfo')
+    bbsRecordClick() {
+      this.$router.push({
+        path: '/newBbsRecord',
+      })
     },
+  },
+  created() { },
+  mounted() {
+    this.$store.dispatch('getTopManagementInfo')
+  },
 }
 </script>
 <style scoped></style>
