@@ -409,6 +409,7 @@
                 </tr>
             </tbody>
         </table>
+        <div></div>
     </div>
 </template>
 
@@ -417,126 +418,131 @@ import downloadIconSvg from '../svgImage/downloadIconSvg.vue'
 import EditIconSvg from '../svgImage/editIconSvg.vue'
 import resultDetailRowItem from '../searchResult/resultDetailRowItem.vue'
 import TrashIconSvg from '../svgImage/trashIconSvg.vue'
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
 
 export default {
-  components: {
-    downloadIconSvg,
-    TrashIconSvg,
-    EditIconSvg,
-    resultDetailRowItem,
-  },
-  props: {
-    detailList: Array,
-  },
-  data() {
-    return {
-      dispList: this.detailList,
-      checkAll: false,
-    }
-  },
-  computed: {
-    displayList: {
-      get: function () {
-        this.checkAll = false
-        return this.detailList
-      },
+    components: {
+        downloadIconSvg,
+        TrashIconSvg,
+        EditIconSvg,
+        resultDetailRowItem,
+        alert,
     },
-  },
-  mounted() { },
-  methods: {
-    groupKB(kb) {
-      if (kb == '0') {
-        return 'ownFacility'
-      } else if (kb == '1') {
-        return 'otherFacility'
-      } else if (kb == '2') {
-        return 'group'
-      }
+    props: {
+        detailList: Array,
     },
-    // 行チェック
-    onChangeCheckd(index) {
-      let data = this.$store.getters.getSearchPreavoidsInfo
-      data.searchData[index].check = !data.searchData[index].check
-      this.$store.dispatch('setPearchPreavoidsInfo', data)
-    },
-    // チェックALL
-    changeAll() {
-      console.log(this.checkAll)
-      this.checkAll = !this.checkAll
-      for (let index = 0; index < this.dispList.length; index++) {
-        this.dispList[index].check = this.checkAll
-      }
-
-      let data = this.$store.getters.getSearchPreavoidsInfo
-      for (let index = 0; index < data.searchData.length; index++) {
-        data.searchData[index].check = this.checkAll
-      }
-
-      this.$store.dispatch('setPearchPreavoidsInfo', data)
-    },
-    async rowDownload(id) {
-      this.$store.dispatch('setDownload', true)
-
-      let params = {
-        id: id,
-      }
-      await this.$serve.downloadPreavoidData(params).then((res) => {
-        const filename = '123.xls'
-        // const filename = this.getFileNameFromContentDisposition(
-        //     res.headers['content-disposition']
-        // )
-        if (window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(res.data, filename)
-        } else {
-          const blob = new Blob([res.data], {
-            type: 'application/octet-stream',
-          })
-          const link = document.createElement('a')
-          link.href = window.URL.createObjectURL(blob)
-          link.download = filename
-          link.click()
+    data() {
+        return {
+            dispList: this.detailList,
+            checkAll: false,
         }
-      })
     },
-    rowEdit(id) { },
-    rowDelete(id) {
-      Swal.fire({
-        text: '本当に削除してよろしいですか？',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '削除',
-        cancelButtonText: 'キャンセル',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log('削除')
-          let params = {
-            id: id,
-          }
-          this.$serve.deletePreavoidData(params)
-          Swal.fire('', '削除されました.', 'success')
-          let getTimestamp = new Date().getTime()
-          params = {
-            search: this.$store.getters.getSearchWord,
-            dateFrom: this.$store.getters.getDateValueFrom,
-            dateTo: this.$store.getters.getDateValueTo,
-            styles: this.$store.getters.getStyles,
-            facility_flag: this.$store.getters.getFacilityID,
-            displayed: this.$store.getters.getMaxCount,
-            sort: this.$store.getters.getSort,
-            timestamp: getTimestamp,
-          }
-          this.$router.push({
-            path: '/searchPreavoids',
-            query: params,
-          })
-        }
-      })
+    computed: {
+        displayList: {
+            get: function () {
+                this.checkAll = false
+                return this.detailList
+            },
+        },
     },
-  },
+    mounted() {},
+    methods: {
+        groupKB(kb) {
+            if (kb == '0') {
+                return 'ownFacility'
+            } else if (kb == '1') {
+                return 'otherFacility'
+            } else if (kb == '2') {
+                return 'group'
+            }
+        },
+        // 行チェック
+        onChangeCheckd(index) {
+            let data = this.$store.getters.getSearchPreavoidsInfo
+            data.searchData[index].check = !data.searchData[index].check
+            this.$store.dispatch('setPearchPreavoidsInfo', data)
+        },
+        // チェックALL
+        changeAll() {
+            console.log(this.checkAll)
+            this.checkAll = !this.checkAll
+            for (let index = 0; index < this.dispList.length; index++) {
+                this.dispList[index].check = this.checkAll
+            }
+
+            let data = this.$store.getters.getSearchPreavoidsInfo
+            for (let index = 0; index < data.searchData.length; index++) {
+                data.searchData[index].check = this.checkAll
+            }
+
+            this.$store.dispatch('setPearchPreavoidsInfo', data)
+        },
+        async rowDownload(id) {
+            this.$store.dispatch('setDownload', true)
+
+            let params = {
+                id: id,
+            }
+            await this.$serve.downloadPreavoidData(params).then((res) => {
+                const filename = '123.xls'
+                // const filename = this.getFileNameFromContentDisposition(
+                //     res.headers['content-disposition']
+                // )
+                if (window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(res.data, filename)
+                } else {
+                    const blob = new Blob([res.data], {
+                        type: 'application/octet-stream',
+                    })
+                    const link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = filename
+                    link.click()
+                }
+            })
+        },
+        rowEdit(id) {},
+        rowDelete(id) {
+            this.$swal
+                .fire({
+                    text: '本当に削除してよろしいですか？',
+                    icon: '',
+                    showCancelButton: true,
+                    cancelButtonText: 'キャンセル',
+                    confirmButtonText: '削除',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('削除')
+                        let params = {
+                            id: id,
+                        }
+                        this.$serve.deletePreavoidData(params)
+                        this.$swal.fire({
+                            text: '削除されました。',
+                            icon: '',
+                            showCancelButton: false,
+                            cancelButtonText: 'キャンセル',
+                            confirmButtonText: 'OK',
+                        })
+                        // Swal.fire('', '削除されました.', 'success')
+                        let getTimestamp = new Date().getTime()
+                        params = {
+                            search: this.$store.getters.getSearchWord,
+                            dateFrom: this.$store.getters.getDateValueFrom,
+                            dateTo: this.$store.getters.getDateValueTo,
+                            styles: this.$store.getters.getStyles,
+                            facility_flag: this.$store.getters.getFacilityID,
+                            displayed: this.$store.getters.getMaxCount,
+                            sort: this.$store.getters.getSort,
+                            timestamp: getTimestamp,
+                        }
+                        this.$router.push({
+                            path: '/searchPreavoids',
+                            query: params,
+                        })
+                    }
+                })
+        },
+    },
 }
 </script>
-<style scoped></style>

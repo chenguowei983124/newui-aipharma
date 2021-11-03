@@ -134,398 +134,400 @@ import Pagination from '../common/pagination/pagiation.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 import myTable from '../common/table/myTable.vue'
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+// import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import 'sweetalert2/src/sweetalert2.scss'
 // import { ref, reactive, toRefs, onBeforeMount,// 在组件挂载之前执行的函数 onMounted, onBeforeUpdate,// 在组件修改之前执行的函数 onUpdated, onBeforeUnmount,// 在组件卸载之前执行的函数 onUnmounted } from "vue";
 export default {
-  components: {
-    TriangleDownSvg,
-    downloadBatchIconSvg,
-    resutTag,
-    xIconSvg,
-    sCheckSvg,
-    Pagination,
-    vueSingleSelect,
-    GoodMessageBox,
-    myTable,
-  },
-  props: {},
-  data() {
-    return {
-      preavoidsDateSort: 0,
-      organizationCountSort: 0,
-      goodMessageBox: false,
-      selectValue: '',
-      pageCount: 20,
-      selectPage: 1,
-      selectDispNumber: 0,
-    }
-  },
-  unmounted() {
-    this.initStore()
-  },
-  watch: {
-    $route: function () {
-      console.log('preavoidwatch1')
-      if (this.$route.path != '/searchPreavoids') {
-        return
-      }
-      console.log('preavoidwatch')
-      if (JSON.stringify(this.$route.query) == '{}') {
+    components: {
+        TriangleDownSvg,
+        downloadBatchIconSvg,
+        resutTag,
+        xIconSvg,
+        sCheckSvg,
+        Pagination,
+        vueSingleSelect,
+        GoodMessageBox,
+        myTable,
+    },
+    props: {},
+    data() {
+        return {
+            preavoidsDateSort: 0,
+            organizationCountSort: 0,
+            goodMessageBox: false,
+            selectValue: '',
+            pageCount: 20,
+            selectPage: 1,
+            selectDispNumber: 0,
+        }
+    },
+    unmounted() {
         this.initStore()
-        this.$store.dispatch('clearPreavoidsInfo', {})
-      }
-      if (JSON.stringify(this.$route.query) !== '{}') {
-        this.resetSearchBar()
-        this.execSearch()
-      }
     },
-  },
-  computed: {
-    // 最大取得件数取得
-    getPageCount() {
-      // 選択したアイテムの数字を取得
-      if (this.selectDispNumber == '0') {
-        this.pageCount = 20
-      } else if (this.selectDispNumber == '1') {
-        this.pageCount = 50
-      } else if (this.selectDispNumber == '2') {
-        this.pageCount = 100
-      }
-
-      //
-      this.$store.dispatch('setMaxCount', this.pageCount)
-
-      // ページ数を取得
-      return Math.ceil(
-        this.$store.getters.getSearchPreavoidsInfo.searchData.length /
-        this.pageCount
-      )
+    watch: {
+        $route: function () {
+            console.log('preavoidwatch1')
+            if (this.$route.path != '/searchPreavoids') {
+                return
+            }
+            console.log('preavoidwatch')
+            if (JSON.stringify(this.$route.query) == '{}') {
+                this.initStore()
+                this.$store.dispatch('clearPreavoidsInfo', {})
+            }
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                this.resetSearchBar()
+                this.execSearch()
+            }
+        },
     },
-    dispDetailInfo: function () {
-      document.documentElement.scrollTop = 0
-      let dispDetail = []
-      let maxLoopCount = 0
-      // 1ページに表示した明細件数を取得
-      if (
-        this.$store.getters.getSearchPreavoidsInfo.searchData.length >
-        this.selectPage * this.pageCount
-      ) {
-        maxLoopCount = this.pageCount
-      } else {
-        maxLoopCount =
-          this.$store.getters.getSearchPreavoidsInfo.searchData
-            .length -
-          (this.selectPage - 1) * this.pageCount
-      }
-      // console.log(maxLoopCount)
-      // 検索結果から明細を抽出
-      for (let i = 0; i < maxLoopCount; i++) {
-        dispDetail[i] =
-          this.$store.getters.getSearchPreavoidsInfo.searchData[
-          (this.selectPage - 1) * this.pageCount + i
-          ]
-      }
-      // console.log('dispDetail', dispDetail)
-      return dispDetail
+    computed: {
+        // 最大取得件数取得
+        getPageCount() {
+            // 選択したアイテムの数字を取得
+            if (this.selectDispNumber == '0') {
+                this.pageCount = 20
+            } else if (this.selectDispNumber == '1') {
+                this.pageCount = 50
+            } else if (this.selectDispNumber == '2') {
+                this.pageCount = 100
+            }
+
+            //
+            this.$store.dispatch('setMaxCount', this.pageCount)
+
+            // ページ数を取得
+            return Math.ceil(
+                this.$store.getters.getSearchPreavoidsInfo.searchData.length /
+                    this.pageCount
+            )
+        },
+        dispDetailInfo: function () {
+            document.documentElement.scrollTop = 0
+            let dispDetail = []
+            let maxLoopCount = 0
+            // 1ページに表示した明細件数を取得
+            if (
+                this.$store.getters.getSearchPreavoidsInfo.searchData.length >
+                this.selectPage * this.pageCount
+            ) {
+                maxLoopCount = this.pageCount
+            } else {
+                maxLoopCount =
+                    this.$store.getters.getSearchPreavoidsInfo.searchData
+                        .length -
+                    (this.selectPage - 1) * this.pageCount
+            }
+            // console.log(maxLoopCount)
+            // 検索結果から明細を抽出
+            for (let i = 0; i < maxLoopCount; i++) {
+                dispDetail[i] =
+                    this.$store.getters.getSearchPreavoidsInfo.searchData[
+                        (this.selectPage - 1) * this.pageCount + i
+                    ]
+            }
+            // console.log('dispDetail', dispDetail)
+            return dispDetail
+        },
+        // 明細部に表示明細のFROM-TO
+        dispDetailRange: function () {
+            let start = 1
+            let end = ''
+            if (this.selectPage > 1) {
+                start = (this.selectPage - 1) * this.pageCount + 1
+            }
+
+            // console.log(this.$store.getters.getSearchPreavoidsInfo.searchData)
+            if (
+                this.$store.getters.getSearchPreavoidsInfo.searchData !=
+                undefined
+            ) {
+                // console.log(start + this.pageCount)
+
+                if (
+                    start + this.pageCount >
+                    this.$store.getters.getSearchPreavoidsInfo.searchData.length
+                ) {
+                    end =
+                        this.$store.getters.getSearchPreavoidsInfo.searchData
+                            .length - 1
+                } else {
+                    end = start + this.pageCount - 1
+                }
+            }
+
+            if (
+                this.$store.getters.getSearchPreavoidsInfo.searchData.length ==
+                1
+            ) {
+                return start.toString()
+            } else {
+                return start.toString() + '-' + end.toString()
+            }
+        },
     },
-    // 明細部に表示明細のFROM-TO
-    dispDetailRange: function () {
-      let start = 1
-      let end = ''
-      if (this.selectPage > 1) {
-        start = (this.selectPage - 1) * this.pageCount + 1
-      }
+    methods: {
+        async selectedDownload(id) {
+            this.$store.dispatch('setDownload', true)
+            let data = this.$store.getters.getSearchPreavoidsInfo
+            let checkList = []
+            for (let index = 0; index < data.searchData.length; index++) {
+                if (data.searchData[index].check == true) {
+                    checkList.push(data.searchData[index].id)
+                }
+            }
+            if (checkList.length == 0) {
+                this.$swal.fire(
+                    '',
+                    '一件もチェックされてないため、ダウンロードできません。'
+                )
+                return
+            }
+            let params = {
+                id: checkList.join(','),
+            }
+            await this.$serve.downloadPreavoidData(params).then((res) => {
+                const filename = '123.xls'
+                // const filename = this.getFileNameFromContentDisposition(
+                //     res.headers['content-disposition']
+                // )
+                if (window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(res.data, filename)
+                } else {
+                    const blob = new Blob([res.data], {
+                        type: 'application/octet-stream',
+                    })
+                    const link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = filename
+                    link.click()
+                }
+            })
+        },
+        async allDownload(id) {
+            this.$store.dispatch('setDownload', true)
+            let params = {
+                updated_from: new Date(
+                    this.$store.getters.getDateValueFrom
+                ).toLocaleDateString(),
+                updated_to: new Date(
+                    this.$store.getters.getDateValueTo
+                ).toLocaleDateString(),
+                comment: this.$store.getters.getSearchValue,
+                style: this.$store.getters.getStyles,
+                facility: this.$store.getters.getFacilityID,
+            }
+            await this.$serve.downloadPreavoidData(params).then((res) => {
+                const filename = '123.xls'
+                // const filename = this.getFileNameFromContentDisposition(
+                //     res.headers['content-disposition']
+                // )
+                if (window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(res.data, filename)
+                } else {
+                    const blob = new Blob([res.data], {
+                        type: 'application/octet-stream',
+                    })
+                    const link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = filename
+                    link.click()
+                }
+            })
+        },
+        getFileNameFromContentDisposition(disposition) {
+            const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+            const matches = filenameRegex.exec(disposition)
+            if (matches != null && matches[1]) {
+                const fileName = matches[1].replace(/['"]/g, '')
+                return decodeURI(fileName)
+            } else {
+                return null
+            }
+        },
+        execSearch() {
+            this.$store.dispatch('setPearchPreavoidsInfo', {
+                searchData: [],
+                dataCount: 0,
+            })
 
-      // console.log(this.$store.getters.getSearchPreavoidsInfo.searchData)
-      if (
-        this.$store.getters.getSearchPreavoidsInfo.searchData !=
-        undefined
-      ) {
-        // console.log(start + this.pageCount)
+            // QAID取得
+            let qaid = ''
 
-        if (
-          start + this.pageCount >
-          this.$store.getters.getSearchPreavoidsInfo.searchData.length
-        ) {
-          end =
-            this.$store.getters.getSearchPreavoidsInfo.searchData
-              .length - 1
-        } else {
-          end = start + this.pageCount - 1
+            if (this.$route.query.id != undefined) {
+                qaid = this.$route.query.id
+                this.$store.dispatch('setQAID', qaid)
+                sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
+            } else if (this.$store.getters.getQAID != '') {
+                qaid = this.$store.getters.getQAID
+            }
+
+            let result
+            // QAID存在チェック
+            if (qaid != '') {
+                result = this.$serve.getPreavoidDataById({ id: qaid })
+            } else if (this.$route.query.sort != undefined) {
+                result = this.$serve.getPreavoidDataByParams(this.$route.query)
+            }
+
+            result.then((response) => {
+                let searchData = []
+                for (let i = 0; i < response.data.searchData.length; i++) {
+                    searchData[i] = {
+                        index: i,
+                        check: false,
+                        ageLevel: response.data.searchData[i].ageLevel,
+                        comment: response.data.searchData[i].comment,
+                        createdAt: response.data.searchData[i].createdAt,
+                        facilityIdentificationNumber:
+                            response.data.searchData[i]
+                                .facilityIdentificationNumber,
+                        facilityScaleName:
+                            response.data.searchData[i].facilityScaleName,
+                        genderId: response.data.searchData[i].genderId,
+                        id: response.data.searchData[i].id,
+                        name: response.data.searchData[i].name,
+                        patientDivisionId:
+                            response.data.searchData[i].patientDivisionId,
+                        prefectureId: response.data.searchData[i].prefectureId,
+                        prefectureName:
+                            response.data.searchData[i].prefectureName,
+                        primaryDisease:
+                            response.data.searchData[i].primaryDisease,
+                        reportingAt: response.data.searchData[i].reportingAt,
+                        sideEffectName:
+                            response.data.searchData[i].sideEffectName,
+                        style: response.data.searchData[i].style,
+                        suspectedDrug:
+                            response.data.searchData[i].suspectedDrug,
+                        title: response.data.searchData[i].title,
+                        updatedAt: response.data.searchData[i].updatedAt,
+                        userGroupId: response.data.searchData[i].userGroupId,
+                        userGroupName:
+                            response.data.searchData[i].userGroupName,
+                    }
+                }
+                let dispResult = {
+                    dataCount: response.data.dataCount,
+                    searchData: searchData,
+                }
+                this.$store.dispatch('setPearchPreavoidsInfo', dispResult)
+            })
+        },
+        // 初期化検索条件
+        initStore() {
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setStyles', -1)
+            this.$store.dispatch('setFacilityID', -1)
+            this.$store.dispatch('setDateValueFrom', '')
+            this.$store.dispatch('setDateValueTo', '')
+            this.$store.dispatch('setPage', 1)
+            this.$store.dispatch('setSort', 0)
+            this.$store.dispatch('setMaxCount', 0)
+        },
+        // リーセット検索バー
+        resetSearchBar: function () {
+            this.$store.dispatch('setSearchWord', this.$route.query.search)
+            // 対象期間FROM
+            this.$store.dispatch('setDateValueFrom', this.$route.query.dateFrom)
+            // 対象期間TO
+            this.$store.dispatch('setDateValueTo', this.$route.query.dateTo)
+            // 様式
+            this.$store.dispatch('setStyles', this.$route.query.styles)
+            // 施設
+            this.$store.dispatch(
+                'setFacilityID',
+                this.$route.query.facility_flag
+            )
+
+            // 1ページ表示に表示件数設定
+            this.$store.dispatch('setMaxCount', this.$route.query.displayed)
+            this.preavoidsDateSort = this.$route.query.sort
+
+            this.selectDispNumber = this.$route.query.sort
+            if (this.$route.query.displayed == 20) {
+                this.organizationCountSort = 0
+            } else if (this.$route.query.displayed == 50) {
+                this.organizationCountSort = 1
+            }
+            if (this.$route.query.displayed == 100) {
+                this.organizationCountSort = 2
+            }
+            this.$store.dispatch('setSort', this.$route.query.sort)
+            // ページネーション
+            this.$store.dispatch('setPage', this.$route.query.page)
+        },
+        resetRouter() {
+            let getTimestamp = new Date().getTime()
+            let dispDetailNumber = 20
+
+            if (this.organizationCountSort == 0) {
+                dispDetailNumber = 20
+            } else if (this.organizationCountSort == 1) {
+                dispDetailNumber = 50
+            } else if (this.organizationCountSort == 2) {
+                dispDetailNumber = 100
+            }
+            // console.log("dispDetailNumber", dispDetailNumber)
+            let params = {
+                search: this.$store.getters.getSearchWord,
+                dateFrom: this.$store.getters.getDateValueFrom,
+                dateTo: this.$store.getters.getDateValueTo,
+                styles: this.$store.getters.getStyles,
+                facility_flag: this.$store.getters.getFacilityID,
+                // displayed: this.$store.getters.getMaxCount,
+                displayed: dispDetailNumber,
+                sort: this.$store.getters.getSort,
+                timestamp: getTimestamp,
+            }
+            this.$router.push({
+                path: '/searchPreavoids',
+                query: params,
+            })
+        },
+        // 改ページのデータ検索
+        getSelectPage(value) {
+            this.$store.dispatch('setPage', value)
+            this.selectPage = value
+        },
+        getSelectDispNumber(value) {
+            this.organizationCountSort = value
+            // this.$store.dispatch('setMaxCount', value)
+            this.resetRouter()
+        },
+        setSelectValue(value) {
+            this.selectValue = value
+            this.$store.dispatch('setSort', value)
+            this.resetRouter()
+        },
+        openCommentMessageBox() {
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
+        // ソート順
+        setPreavoidsDateSortValue(value) {
+            this.preavoidsDateSort = value
+            //   console.log(value)
+            this.$store.dispatch('setSort', value)
+            this.resetRouter()
+        },
+    },
+    mounted() {
+        if (JSON.stringify(this.$route.query) == '{}') {
+            this.initStore()
+            this.$store.dispatch('setPearchPreavoidsInfo', {
+                searchData: [],
+                dataCount: 0,
+            })
         }
-      }
 
-      if (
-        this.$store.getters.getSearchPreavoidsInfo.searchData.length ==
-        1
-      ) {
-        return start.toString()
-      } else {
-        return start.toString() + '-' + end.toString()
-      }
-    },
-  },
-  methods: {
-    async selectedDownload(id) {
-      this.$store.dispatch('setDownload', true)
-      let data = this.$store.getters.getSearchPreavoidsInfo
-      let checkList = []
-      for (let index = 0; index < data.searchData.length; index++) {
-        if (data.searchData[index].check == true) {
-          checkList.push(data.searchData[index].id)
+        if (JSON.stringify(this.$route.query) !== '{}') {
+            this.resetSearchBar()
+            this.execSearch()
         }
-      }
-      if (checkList.length == 0) {
-        Swal.fire(
-          '',
-          '一件もチェックされてないため、ダウンロードできません.',
-          'info'
-        )
-        return
-      }
-      let params = {
-        id: checkList.join(','),
-      }
-      await this.$serve.downloadPreavoidData(params).then((res) => {
-        const filename = '123.xls'
-        // const filename = this.getFileNameFromContentDisposition(
-        //     res.headers['content-disposition']
-        // )
-        if (window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(res.data, filename)
-        } else {
-          const blob = new Blob([res.data], {
-            type: 'application/octet-stream',
-          })
-          const link = document.createElement('a')
-          link.href = window.URL.createObjectURL(blob)
-          link.download = filename
-          link.click()
-        }
-      })
     },
-    async allDownload(id) {
-      this.$store.dispatch('setDownload', true)
-      let params = {
-        updated_from: new Date(
-          this.$store.getters.getDateValueFrom
-        ).toLocaleDateString(),
-        updated_to: new Date(
-          this.$store.getters.getDateValueTo
-        ).toLocaleDateString(),
-        comment: this.$store.getters.getSearchValue,
-        style: this.$store.getters.getStyles,
-        facility: this.$store.getters.getFacilityID,
-      }
-      await this.$serve.downloadPreavoidData(params).then((res) => {
-        const filename = '123.xls'
-        // const filename = this.getFileNameFromContentDisposition(
-        //     res.headers['content-disposition']
-        // )
-        if (window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(res.data, filename)
-        } else {
-          const blob = new Blob([res.data], {
-            type: 'application/octet-stream',
-          })
-          const link = document.createElement('a')
-          link.href = window.URL.createObjectURL(blob)
-          link.download = filename
-          link.click()
-        }
-      })
-    },
-    getFileNameFromContentDisposition(disposition) {
-      const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
-      const matches = filenameRegex.exec(disposition)
-      if (matches != null && matches[1]) {
-        const fileName = matches[1].replace(/['"]/g, '')
-        return decodeURI(fileName)
-      } else {
-        return null
-      }
-    },
-    execSearch() {
-      this.$store.dispatch('setPearchPreavoidsInfo', {
-        searchData: [],
-        dataCount: 0,
-      })
-
-      // QAID取得
-      let qaid = ''
-
-      if (this.$route.query.id != undefined) {
-        qaid = this.$route.query.id
-        this.$store.dispatch('setQAID', qaid)
-        sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
-      } else if (this.$store.getters.getQAID != '') {
-        qaid = this.$store.getters.getQAID
-      }
-
-      let result
-      // QAID存在チェック
-      if (qaid != '') {
-        result = this.$serve.getPreavoidDataById({ id: qaid })
-      } else if (this.$route.query.sort != undefined) {
-        result = this.$serve.getPreavoidDataByParams(this.$route.query)
-      }
-
-      result.then((response) => {
-        let searchData = []
-        for (let i = 0; i < response.data.searchData.length; i++) {
-          searchData[i] = {
-            index: i,
-            check: false,
-            ageLevel: response.data.searchData[i].ageLevel,
-            comment: response.data.searchData[i].comment,
-            createdAt: response.data.searchData[i].createdAt,
-            facilityIdentificationNumber:
-              response.data.searchData[i]
-                .facilityIdentificationNumber,
-            facilityScaleName:
-              response.data.searchData[i].facilityScaleName,
-            genderId: response.data.searchData[i].genderId,
-            id: response.data.searchData[i].id,
-            name: response.data.searchData[i].name,
-            patientDivisionId:
-              response.data.searchData[i].patientDivisionId,
-            prefectureId: response.data.searchData[i].prefectureId,
-            prefectureName:
-              response.data.searchData[i].prefectureName,
-            primaryDisease:
-              response.data.searchData[i].primaryDisease,
-            reportingAt: response.data.searchData[i].reportingAt,
-            sideEffectName:
-              response.data.searchData[i].sideEffectName,
-            style: response.data.searchData[i].style,
-            suspectedDrug:
-              response.data.searchData[i].suspectedDrug,
-            title: response.data.searchData[i].title,
-            updatedAt: response.data.searchData[i].updatedAt,
-            userGroupId: response.data.searchData[i].userGroupId,
-            userGroupName:
-              response.data.searchData[i].userGroupName,
-          }
-        }
-        let dispResult = {
-          dataCount: response.data.dataCount,
-          searchData: searchData,
-        }
-        this.$store.dispatch('setPearchPreavoidsInfo', dispResult)
-      })
-    },
-    // 初期化検索条件
-    initStore() {
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setStyles', -1)
-      this.$store.dispatch('setFacilityID', -1)
-      this.$store.dispatch('setDateValueFrom', '')
-      this.$store.dispatch('setDateValueTo', '')
-      this.$store.dispatch('setPage', 1)
-      this.$store.dispatch('setSort', 0)
-      this.$store.dispatch('setMaxCount', 0)
-    },
-    // リーセット検索バー
-    resetSearchBar: function () {
-      this.$store.dispatch('setSearchWord', this.$route.query.search)
-      // 対象期間FROM
-      this.$store.dispatch('setDateValueFrom', this.$route.query.dateFrom)
-      // 対象期間TO
-      this.$store.dispatch('setDateValueTo', this.$route.query.dateTo)
-      // 様式
-      this.$store.dispatch('setStyles', this.$route.query.styles)
-      // 施設
-      this.$store.dispatch('setFacilityID', this.$route.query.facility_flag)
-
-      // 1ページ表示に表示件数設定
-      this.$store.dispatch('setMaxCount', this.$route.query.displayed)
-      this.preavoidsDateSort = this.$route.query.sort
-
-      this.selectDispNumber = this.$route.query.sort
-      if (this.$route.query.displayed == 20) {
-        this.organizationCountSort = 0
-      } else if (this.$route.query.displayed == 50) {
-        this.organizationCountSort = 1
-      }
-      if (this.$route.query.displayed == 100) {
-        this.organizationCountSort = 2
-      }
-      this.$store.dispatch('setSort', this.$route.query.sort)
-      // ページネーション
-      this.$store.dispatch('setPage', this.$route.query.page)
-    },
-    resetRouter() {
-      let getTimestamp = new Date().getTime()
-      let dispDetailNumber = 20
-
-      if (this.organizationCountSort == 0) {
-        dispDetailNumber = 20
-      } else if (this.organizationCountSort == 1) {
-        dispDetailNumber = 50
-      } else if (this.organizationCountSort == 2) {
-        dispDetailNumber = 100
-      }
-      // console.log("dispDetailNumber", dispDetailNumber)
-      let params = {
-        search: this.$store.getters.getSearchWord,
-        dateFrom: this.$store.getters.getDateValueFrom,
-        dateTo: this.$store.getters.getDateValueTo,
-        styles: this.$store.getters.getStyles,
-        facility_flag: this.$store.getters.getFacilityID,
-        // displayed: this.$store.getters.getMaxCount,
-        displayed: dispDetailNumber,
-        sort: this.$store.getters.getSort,
-        timestamp: getTimestamp,
-      }
-      this.$router.push({
-        path: '/searchPreavoids',
-        query: params,
-      })
-    },
-    // 改ページのデータ検索
-    getSelectPage(value) {
-      this.$store.dispatch('setPage', value)
-      this.selectPage = value
-    },
-    getSelectDispNumber(value) {
-      this.organizationCountSort = value
-      // this.$store.dispatch('setMaxCount', value)
-      this.resetRouter()
-    },
-    setSelectValue(value) {
-      this.selectValue = value
-      this.$store.dispatch('setSort', value)
-      this.resetRouter()
-    },
-    openCommentMessageBox() {
-      this.$store.dispatch(
-        'setCommentMessageBox',
-        !this.$store.getters.getCommentMessageBox
-      )
-    },
-    // ソート順
-    setPreavoidsDateSortValue(value) {
-      this.preavoidsDateSort = value
-      //   console.log(value)
-      this.$store.dispatch('setSort', value)
-      this.resetRouter()
-    },
-  },
-  mounted() {
-    if (JSON.stringify(this.$route.query) == '{}') {
-      this.initStore()
-      this.$store.dispatch('setPearchPreavoidsInfo', {
-        searchData: [],
-        dataCount: 0,
-      })
-    }
-
-    if (JSON.stringify(this.$route.query) !== '{}') {
-      this.resetSearchBar()
-      this.execSearch()
-    }
-  },
 }
 </script>
 <style scoped></style>
