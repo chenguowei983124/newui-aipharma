@@ -439,12 +439,13 @@ export default {
     computed: {
         displayList: {
             get: function () {
-                this.checkAll = false
                 return this.detailList
             },
         },
     },
-    mounted() {},
+    mounted() {
+        this.checkAll = false
+    },
     methods: {
         groupKB(kb) {
             if (kb == '0') {
