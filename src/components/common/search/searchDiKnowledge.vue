@@ -13,7 +13,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox text-white"
+                                    class="form-checkbox ring-1 text-white"
                                     :checked="$store.getters.getCheckQ"
                                     @change="onCheckQChange"
                                 />
@@ -25,7 +25,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox text-white"
+                                    class="form-checkbox ring-1 text-white"
                                     :checked="$store.getters.getCheckA"
                                     @change="onChangeCheckA"
                                 />
@@ -37,7 +37,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox text-white"
+                                    class="form-checkbox ring-1 text-white"
                                     :checked="$store.getters.getCheckComment"
                                     @change="onChangeCheckComment"
                                 />
@@ -53,7 +53,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox text-white"
+                                    class="form-checkbox ring-1 text-white"
                                     :checked="
                                         $store.getters.getCheckAddFileName
                                     "
@@ -69,7 +69,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox text-white"
+                                    class="form-checkbox ring-1 text-white"
                                     :checked="
                                         $store.getters.getCheckContributor
                                     "
@@ -85,7 +85,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox text-white"
+                                    class="form-checkbox ring-1 text-white"
                                     :checked="$store.getters.getCheckLastEditer"
                                     @change="onChangeCheckLastEditer"
                                 />
@@ -101,7 +101,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox text-white"
+                                    class="form-checkbox ring-1 text-white"
                                     :checked="
                                         $store.getters.getCheckFacilityName
                                     "
@@ -117,7 +117,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox text-white"
+                                    class="form-checkbox ring-1 text-white"
                                     :checked="$store.getters.getCheckNote"
                                     @change="onChangeCheckNote"
                                 />

@@ -71,19 +71,12 @@
                             h-28
                             border-2 border-blueline
                             notoSansJpAndTwelveRegular
-                            overflow-auto
                             w-86.25
-                            p-1
+                            p-1.5
+                            scrollbarStyle scrollbarStyle-1
                         "
                     >
-                        <div
-                            class="
-                                border-2 border-dotted
-                                w-full
-                                border-grayline
-                                p-0.5
-                            "
-                        >
+                        <div class="w-full border-grayline p-0.5 scrollbar">
                             <div class="">Ai-PHARMA 利用規約</div>
                             <br />
                             <div class="">
@@ -94,14 +87,14 @@
                 </div>
                 <!-- ログインを記憶する -->
                 <div class="mt-3 flex justify-center">
-                    <label class="inline-flex items-center justify-end">
+                    <label class="inline-flex items-center">
                         <input
                             v-model="isAgree"
                             type="checkbox"
                             class="form-checkbox w-3 h-3 text-white ring-1"
                             checked
                         />
-                        <span class="ml-0.5 notoSansJpAndTwelveRegular"
+                        <span class="ml-1 notoSansJpAndTwelveRegular pb-0.5"
                             >同意する</span
                         >
                     </label>
@@ -111,6 +104,8 @@
                         type="button"
                         class="
                             bg-personOrganizationButton
+                            rounded-b-sm
+                            border-b-2 border-personInformationButton
                             hover:opacity-50
                             active:bg-personInformationButton active:opacity-100
                             h-10
@@ -134,66 +129,88 @@
 <script>
 import logo from './logo.vue'
 export default {
-    data() {
-        return {
-            password: '',
-            passwordConfirmation: '',
-            isAgree: false,
+  data() {
+    return {
+      password: '',
+      passwordConfirmation: '',
+      isAgree: false,
+    }
+  },
+  components: {
+    logo,
+  },
+  computed: {
+    isDisabled() {
+      if (
+        this.password == '' ||
+        this.passwordConfirmation == '' ||
+        this.isAgree == false
+      ) {
+        return true
+      } else {
+        return false
+      }
+    },
+    buttonDisabledStyle() {
+      if (
+        this.password == '' ||
+        this.passwordConfirmation == '' ||
+        this.isAgree == false
+      ) {
+        return 'opacity-50'
+      } else {
+        return ''
+      }
+    },
+  },
+  methods: {
+    sendNewPassword: function () {
+      if (this.password !== this.passwordConfirmation) {
+        this.$toast.error(
+          '入力したパスワードが一致しないため、再入力してください。',
+          {
+            position: 'top-right',
+          }
+        )
+      } else {
+        let params = {
+          reset_password_token:
+            this.$route.query.reset_password_token,
+          password: this.password,
+          password_confirmation: this.passwordConfirmation,
         }
+        this.$serve.patchSetPassword(params).then((res) => {
+          this.$toast.success(res.data.message, {
+            position: 'top-right',
+          })
+          this.$router.push('/')
+        })
+      }
     },
-    components: {
-        logo,
-    },
-    computed: {
-        isDisabled() {
-            if (
-                this.password == '' ||
-                this.passwordConfirmation == '' ||
-                this.isAgree == false
-            ) {
-                return true
-            } else {
-                return false
-            }
-        },
-        buttonDisabledStyle() {
-            if (
-                this.password == '' ||
-                this.passwordConfirmation == '' ||
-                this.isAgree == false
-            ) {
-                return 'opacity-50'
-            } else {
-                return ''
-            }
-        },
-    },
-    methods: {
-        sendNewPassword: function () {
-            if (this.password !== this.passwordConfirmation) {
-                this.$toast.error(
-                    '入力したパスワードが一致しないため、再入力してください。',
-                    {
-                        position: 'top-right',
-                    }
-                )
-            } else {
-                let params = {
-                    reset_password_token:
-                        this.$route.query.reset_password_token,
-                    password: this.password,
-                    password_confirmation: this.passwordConfirmation,
-                }
-                this.$serve.patchSetPassword(params).then((res) => {
-                    this.$toast.success(res.data.message, {
-                        position: 'top-right',
-                    })
-                    this.$router.push('/')
-                })
-            }
-        },
-    },
-    props: {},
+  },
+  props: {},
 }
 </script>
-<style></style>
+<style scoped>
+.scrollbarStyle {
+    overflow: auto;
+}
+.scrollbar {
+    width: 320px;
+}
+.scrollbarStyle-1::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+}
+.scrollbarStyle-1::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    background-color: #999999;
+    border: 2px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}
+.scrollbarStyle-1::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    background: #e6e6e6;
+}
+</style>

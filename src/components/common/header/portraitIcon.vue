@@ -169,7 +169,8 @@
                                             <div class="">
                                                 {{
                                                     $store.getters
-                                                        .topManagementInfo.Name
+                                                        .topManagementInfo
+                                                        .user_name
                                                 }}
                                             </div>
                                             <div class="text-xs">
@@ -209,11 +210,16 @@
                                                     justify-center
                                                 "
                                             >
-                                                {{
-                                                    $store.getters
-                                                        .topManagementInfo
-                                                        .authority
-                                                }}
+                                                <div
+                                                    v-if="
+                                                        $store.getters
+                                                            .topManagementInfo
+                                                            .role == 'user'
+                                                    "
+                                                >
+                                                    利 用 者
+                                                </div>
+                                                <div v-else>管 理 者</div>
                                             </div>
                                         </div>
                                     </div>
@@ -253,24 +259,24 @@
 <script>
 import iconDown from '../svgImage/iconDown.vue'
 export default {
-    emits: ['clickDown'],
-    components: { iconDown },
-    data() {
-        return {
-            isDown: false,
-        }
+  emits: ['clickDown'],
+  components: { iconDown },
+  data() {
+    return {
+      isDown: false,
+    }
+  },
+  methods: {
+    clickDown() {
+      this.$store.dispatch(
+        'setPortraitClick',
+        !this.$store.getters.getPortraitClick
+      )
     },
-    methods: {
-        clickDown() {
-            this.$store.dispatch(
-                'setPortraitClick',
-                !this.$store.getters.getPortraitClick
-            )
-        },
-        logoutClick() {
-            this.$serve.postLogout()
-        },
+    logoutClick() {
+      this.$serve.postLogout()
     },
+  },
 }
 </script>
 

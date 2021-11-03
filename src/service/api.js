@@ -298,7 +298,7 @@ const serve = {
         //     }
         // }
 
-        console.log('getALLBulletinBoard_Info', data)
+        // console.log('getALLBulletinBoard_Info', data)
         return data
     },
     //===========================
@@ -391,6 +391,17 @@ const serve = {
         return data
     },
     //===========================
+    // 組織内DI記録検索結果取得（QA用のタグをサジェスト）
+    //===========================
+    async getSuggestTags(param) {
+        const data = await axios('/api/qa/suggest_tags', {
+            method: 'post',
+            params: param,
+        })
+
+        return data
+    },
+    //===========================
     // 症例検索結果取得（ID）
     //===========================
     async getPreavoidDataById(param) {
@@ -427,9 +438,9 @@ const serve = {
     // 症例検索結果ダウンロード（ID）
     //===========================
     async downloadPreavoidData(param) {
-        const data = await axios('/api/preavoid/search.xlsx', {
+        const data = await axios('/api/preavoid/download_search_info', {
             method: 'post',
-            params: param,
+            data: param,
         })
 
         return data

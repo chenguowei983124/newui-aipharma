@@ -222,6 +222,7 @@ module.exports = {
                 view: '#32a5dc',
                 notice: '#666666',
                 CCE8F6: '#CCE8F6',
+                G8CC85A: '#8CC85A',
                 searchDropdown: 'rgb(58, 175, 226)',
                 cardPmadNew: 'rgb(212, 20, 90)',
                 cardPmadUpadte: 'rgb(241, 90, 36)',
@@ -322,6 +323,7 @@ module.exports = {
                 },
                 checkbox: {
                     iconColor: theme('colors.balck'),
+                    icon: '<svg fill="none" stroke="rgb(0, 0, 0)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>'
                 },
                 radio: {
                     iconColor: theme('colors.balck'),
