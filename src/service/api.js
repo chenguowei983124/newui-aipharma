@@ -510,17 +510,33 @@ const serve = {
 
         return data
     },
+    // async getPostList(queryStringData) {
+    //     const mtd = 'post'
+    //     const acURL = '/posts/search'
+    //     const flt = {
+    //         filter: queryStringData.filter,
+    //     }
+    //     delete queryStringData.filter
+    //     const queryString = new URLSearchParams(queryStringData).toString()
+    //     const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+    //     console.log('getPostList-filter', flt)
+    //     return exeAxios(mtd, url, flt)
+    // },
     async getPostList(queryStringData) {
-        const mtd = 'post'
-        const acURL = '/posts/search'
-        const flt = {
-            filter: queryStringData.filter,
-        }
-        delete queryStringData.filter
-        const queryString = new URLSearchParams(queryStringData).toString()
-        const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-        console.log('getPostList-filter', flt)
-        return exeAxios(mtd, url, flt)
+        const data = await axios('/posts/search', {
+            method: 'post',
+        })
+        return data
+        // const mtd = 'post'
+        // const acURL = '/posts/search'
+        // const flt = {
+        //     filter: queryStringData.filter,
+        // }
+        // delete queryStringData.filter
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        // const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+        // console.log('getPostList-filter', flt)
+        // return exeAxios(mtd, url, flt)
     },
 }
 export default serve
