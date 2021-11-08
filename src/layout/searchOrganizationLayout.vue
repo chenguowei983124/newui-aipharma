@@ -165,14 +165,28 @@ export default {
             //   console.log(value)
             this.detailDisp = value
         },
+        refreshOptions(id) {
+            // this.$refs.searchbar.$refs.ownDetail.$refs.mult.select([
+            //     { value: 1, label: 'ファモチジン' },
+            //     { value: 2, label: 'ファモセット注' },
+            //     { value: 4, label: '用途' },
+            // ])
+            // this.$nextTick(() => {
+            //     console.log('★6')
+            //     let vv = []
+            //     vv = this.$store.getters.getSearchTags
+            //     vv.push(id)
+            //     this.$store.dispatch('setSearchTags', vv)
+            // })
+        },
         searchTag: function (value) {
             this.value = value
             this.$store.dispatch('setSearchWord', '')
-            let vv = []
-            vv = this.$store.getters.getSearchTags
-            vv.push(value.value)
+            // let vv = []
+            // vv = this.$store.getters.getSearchTags
+            // vv.push(value.value)
 
-            this.$store.dispatch('setSearchTags', vv)
+            // this.$store.dispatch('setSearchTags', vv)
             let aa = []
             aa = this.$store.getters.getSearchTagsLable
             console.log('ovalue.label', value.label)
@@ -180,7 +194,13 @@ export default {
             console.log('list', aa)
             this.$store.dispatch('setSearchTagsLable', aa)
 
-            // this.$refs.searchbar.$refs.ownDetail.$refs.setMult(value.value)
+            // this.$refs.searchbar.$refs.ownDetail.$refs.mult.select([
+            //     { value: 1, label: 'ファモチジン' },
+            //     { value: 2, label: 'ファモセット注' },
+            //     { value: 4, label: '用途' },
+            // ])
+
+            this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
 
             this.$store.dispatch('setMedicineID', '')
             this.$store.dispatch('setQuestionID', '')

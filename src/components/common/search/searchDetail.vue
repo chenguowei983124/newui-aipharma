@@ -161,7 +161,7 @@
                     <div class="">{{ dispTagValue }}</div>
                     <Multiselect
                         ref="mult"
-                        v-model="dispTagValue"
+                        v-model="tagValue"
                         mode="tags"
                         placeholder="#タグ"
                         :filterResults="true"
@@ -368,10 +368,12 @@ export default {
             isDetailClick: false,
             tagValue: this.$store.getters.getSearchTags,
             tagTimer: '',
+            dispSelect: [],
         }
     },
     watch: {
         tagValue() {
+            console.log('★3')
             this.$store.dispatch('setSearchTags', this.tagValue)
             this.$emit('tagValue', this.tagValue)
         },
@@ -379,19 +381,12 @@ export default {
     computed: {
         dispTagValue() {
             console.log('★１')
-            return this.$store.getters.getSearchTags
-            // this.tagValue = this.$store.getters.getSearchTags
-            // return this.tagValue
+            // return this.$store.getters.getSearchTags
+            this.tagValue = this.$store.getters.getSearchTags
+            return this.tagValue
         },
     },
     methods: {
-        refreshOptions(id) {
-            console.log('★6')
-            let vv = []
-            vv = this.$store.getters.getSearchTags
-            vv.push(id)
-            this.$store.dispatch('setSearchTags', vv)
-        },
         async fetchLanguages(query) {
             console.log('query', query)
             let list = []
@@ -400,38 +395,20 @@ export default {
             console.log('searchTagsList', searchTagsList)
             let result = {}
             if (query == null) {
-                // let torenndoTab = [
-                //     { value: 1, label: 'ロキソニン' },
-                //     { value: 2, label: '用途' },
-                //     { value: 3, label: '用途7' },
-                // ]
-                // result = torenndoTab.map((item) => {
-                //     return {
-                //         value: item.value,
-                //         label: item.label,
-                //     }
-                // })
-                console.log('★２')
-                // for (let i = 0; i < searchTagsList.length; i++) {
-                let response = await this.$serve.getSuggestTags('aa')
-                result = response.data.map((item) => {
-                    return {
-                        value: item.tagId,
-                        label: item.name,
-                    }
-                })
+                for (let i = 0; i < searchTagsList.length; i++) {
+                    let response = await this.$serve.getSuggestTags(i)
+                    result = response.data.map((item) => {
+                        return {
+                            value: item.tagId,
+                            label: item.name,
+                        }
+                    })
+                }
 
-                // .then((response) => {
-                //   consope.log("sdfdsfdsAAAAAAAAAAAAAAAAAAAAAAAAAfsdfsd")
-                //     result = response.data.map((item) => {
-                //         return {
-                //             value: item.tagId,
-                //             label: item.name,
-                //         }
-                //     })
-                // })
-                // consope.log("sdfdsfdsfsdfsd")
-                // }
+                if (searchTagsList.length > 0) {
+                    this.$store.dispatch('setSearchTagsLable', [])
+                    this.$refs.mult.select(result)
+                }
             } else {
                 await this.$serve.getSuggestTags(query).then((response) => {
                     result = response.data.map((item) => {
@@ -445,36 +422,26 @@ export default {
 
             return result
         },
-        setMult(id) {
-            let aa = this.$store.getters.getSearchTagsLable
-            aa.push('sdfa')
-            this.$store.dispatch('setSearchTagsLable', aa)
-            this.$refs.mult.refreshOptions(this.refreshOptions(id))
-        },
+
         inputClear(data) {
-            let aa = this.$store.getters.getSearchTagsLable
-            aa.push('sdfa')
-            this.$store.dispatch('setSearchTagsLable', aa)
-            this.$refs.mult.refreshOptions(this.refreshOptions())
-            // this.$refs.mult.open()
-            // this.tagValue = []
-            // this.$refs.medicines.setValue(null)
-            // this.$refs.qDistinction.setValue(null)
-            // this.$refs.facility.setValue(null)
-            // this.$store.dispatch('setSearchWord', '')
-            // this.$store.dispatch('setSearchTags', [])
-            // this.$store.dispatch('setMedicineID', '')
-            // this.$store.dispatch('setQuestionID', '')
-            // this.$store.dispatch('setFacilityID', '')
-            // this.$store.dispatch('setCheckQ', true)
-            // // console.log('resetSearch3', this.$store.getters.getCheckQ)
-            // this.$store.dispatch('setCheckA', true)
-            // this.$store.dispatch('setCheckComment', true)
-            // this.$store.dispatch('setCheckAddFileName', true)
-            // this.$store.dispatch('setCheckContributor', true)
-            // this.$store.dispatch('setCheckLastEditer', true)
-            // this.$store.dispatch('setCheckFacilityName', true)
-            // this.$store.dispatch('setCheckNote', true)
+            this.tagValue = []
+            this.$refs.medicines.setValue(null)
+            this.$refs.qDistinction.setValue(null)
+            this.$refs.facility.setValue(null)
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.dispatch('setMedicineID', '')
+            this.$store.dispatch('setQuestionID', '')
+            this.$store.dispatch('setFacilityID', '')
+            this.$store.dispatch('setCheckQ', true)
+            // console.log('resetSearch3', this.$store.getters.getCheckQ)
+            this.$store.dispatch('setCheckA', true)
+            this.$store.dispatch('setCheckComment', true)
+            this.$store.dispatch('setCheckAddFileName', true)
+            this.$store.dispatch('setCheckContributor', true)
+            this.$store.dispatch('setCheckLastEditer', true)
+            this.$store.dispatch('setCheckFacilityName', true)
+            this.$store.dispatch('setCheckNote', true)
         },
         multiselectValue(value) {
             console.log(value)
