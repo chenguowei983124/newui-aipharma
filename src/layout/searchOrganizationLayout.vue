@@ -64,14 +64,13 @@
                             cursor-pointer
                             mt-1.25
                         "
-                        @click="searchTag(item)"
-                        v-for="item in $store.getters.getOrganizationSeartorenndoTab.torenndoTab.slice(
-                            0,
-                            5
-                        )"
-                        :key="item"
+                        @click="searchTag(value)"
+                        v-for="(value, key, index) in $store.getters
+                            .getOrganizationSeartorenndoTab.torenndoTab"
+                        :key="index"
                     >
-                        #{{ item }}
+                                                #{{ value.label }}              
+                             
                     </div>
                 </div>
             </div>
@@ -169,7 +168,20 @@ export default {
         searchTag: function (value) {
             this.value = value
             this.$store.dispatch('setSearchWord', '')
-            this.$store.dispatch('setSearchTags', value)
+            let vv = []
+            vv = this.$store.getters.getSearchTags
+            vv.push(value.value)
+
+            this.$store.dispatch('setSearchTags', vv)
+            let aa = []
+            aa = this.$store.getters.getSearchTagsLable
+            console.log('ovalue.label', value.label)
+            aa.push(value.label)
+            console.log('list', aa)
+            this.$store.dispatch('setSearchTagsLable', aa)
+
+            // this.$refs.searchbar.$refs.ownDetail.$refs.setMult(value.value)
+
             this.$store.dispatch('setMedicineID', '')
             this.$store.dispatch('setQuestionID', '')
             this.$store.dispatch('setFacilityID', '')

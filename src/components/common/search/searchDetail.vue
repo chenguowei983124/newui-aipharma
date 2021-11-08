@@ -158,14 +158,15 @@
             <!-- 二行目 -->
             <div>
                 <div class="px-2 md:px-0">
-                    <div class="hidden">{{ dispTagValue }}</div>
+                    <div class="">{{ dispTagValue }}</div>
                     <Multiselect
-                        v-model="tagValue"
+                        ref="mult"
+                        v-model="dispTagValue"
                         mode="tags"
                         placeholder="#タグ"
-                        :filterResults="false"
+                        :filterResults="true"
                         :minChars="1"
-                        :resolveOnLoad="false"
+                        :resolveOnLoad="true"
                         :delay="0"
                         :searchable="true"
                         :options="
@@ -343,177 +344,236 @@ import Multiselect from '@vueform/multiselect'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { },
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
+        message: {
+            type: String,
+            default: '',
+        },
     },
-    message: {
-      type: String,
-      default: '',
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
     },
-  },
-  components: {
-    searchDropdown,
-    searchSvg,
-    TriangleDownSvg,
-    Multiselect,
-    vueSingleSelect,
-  },
-  data() {
-    return {
-      searchText: null,
-      checkId: '',
-      isDetailClick: false,
-      tagValue: this.$store.getters.getSearchTags,
-    }
-  },
-  watch: {
-    tagValue() {
-      this.$store.dispatch('setSearchTags', this.tagValue)
-      this.$emit('tagValue', this.tagValue)
+    data() {
+        return {
+            searchText: null,
+            checkId: '',
+            isDetailClick: false,
+            tagValue: this.$store.getters.getSearchTags,
+            tagTimer: '',
+        }
     },
-  },
-  computed: {
-    dispTagValue() {
-      this.tagValue = this.$store.getters.getSearchTags
-      return this.tagValue
+    watch: {
+        tagValue() {
+            this.$store.dispatch('setSearchTags', this.tagValue)
+            this.$emit('tagValue', this.tagValue)
+        },
     },
-  },
-  methods: {
-    async fetchLanguages(query) {
-      let result = {}
-      await this.$serve.getSuggestTags(query).then((response) => {
-        result = response.data.map((item) => {
-          return {
-            value: item.tagId,
-            label: item.name,
-          }
-        })
-      })
+    computed: {
+        dispTagValue() {
+            console.log('★１')
+            return this.$store.getters.getSearchTags
+            // this.tagValue = this.$store.getters.getSearchTags
+            // return this.tagValue
+        },
+    },
+    methods: {
+        refreshOptions(id) {
+            console.log('★6')
+            let vv = []
+            vv = this.$store.getters.getSearchTags
+            vv.push(id)
+            this.$store.dispatch('setSearchTags', vv)
+        },
+        async fetchLanguages(query) {
+            console.log('query', query)
+            let list = []
+            let searchTagsList = []
+            searchTagsList = this.$store.getters.getSearchTagsLable
+            console.log('searchTagsList', searchTagsList)
+            let result = {}
+            if (query == null) {
+                // let torenndoTab = [
+                //     { value: 1, label: 'ロキソニン' },
+                //     { value: 2, label: '用途' },
+                //     { value: 3, label: '用途7' },
+                // ]
+                // result = torenndoTab.map((item) => {
+                //     return {
+                //         value: item.value,
+                //         label: item.label,
+                //     }
+                // })
+                console.log('★２')
+                // for (let i = 0; i < searchTagsList.length; i++) {
+                let response = await this.$serve.getSuggestTags('aa')
+                result = response.data.map((item) => {
+                    return {
+                        value: item.tagId,
+                        label: item.name,
+                    }
+                })
 
-      return result
-    },
-    inputClear(data) {
-      this.tagValue = []
+                // .then((response) => {
+                //   consope.log("sdfdsfdsAAAAAAAAAAAAAAAAAAAAAAAAAfsdfsd")
+                //     result = response.data.map((item) => {
+                //         return {
+                //             value: item.tagId,
+                //             label: item.name,
+                //         }
+                //     })
+                // })
+                // consope.log("sdfdsfdsfsdfsd")
+                // }
+            } else {
+                await this.$serve.getSuggestTags(query).then((response) => {
+                    result = response.data.map((item) => {
+                        return {
+                            value: item.tagId,
+                            label: item.name,
+                        }
+                    })
+                })
+            }
 
-      this.$refs.medicines.setValue(null)
-      this.$refs.qDistinction.setValue(null)
-      this.$refs.facility.setValue(null)
+            return result
+        },
+        setMult(id) {
+            let aa = this.$store.getters.getSearchTagsLable
+            aa.push('sdfa')
+            this.$store.dispatch('setSearchTagsLable', aa)
+            this.$refs.mult.refreshOptions(this.refreshOptions(id))
+        },
+        inputClear(data) {
+            let aa = this.$store.getters.getSearchTagsLable
+            aa.push('sdfa')
+            this.$store.dispatch('setSearchTagsLable', aa)
+            this.$refs.mult.refreshOptions(this.refreshOptions())
+            // this.$refs.mult.open()
+            // this.tagValue = []
+            // this.$refs.medicines.setValue(null)
+            // this.$refs.qDistinction.setValue(null)
+            // this.$refs.facility.setValue(null)
+            // this.$store.dispatch('setSearchWord', '')
+            // this.$store.dispatch('setSearchTags', [])
+            // this.$store.dispatch('setMedicineID', '')
+            // this.$store.dispatch('setQuestionID', '')
+            // this.$store.dispatch('setFacilityID', '')
+            // this.$store.dispatch('setCheckQ', true)
+            // // console.log('resetSearch3', this.$store.getters.getCheckQ)
+            // this.$store.dispatch('setCheckA', true)
+            // this.$store.dispatch('setCheckComment', true)
+            // this.$store.dispatch('setCheckAddFileName', true)
+            // this.$store.dispatch('setCheckContributor', true)
+            // this.$store.dispatch('setCheckLastEditer', true)
+            // this.$store.dispatch('setCheckFacilityName', true)
+            // this.$store.dispatch('setCheckNote', true)
+        },
+        multiselectValue(value) {
+            console.log(value)
+        },
+        onCheckQChange() {
+            this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
+            // console.log('resetSearch4', this.$store.getters.getCheckQ)
+        },
+        onChangeCheckA() {
+            this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
+        },
+        onChangeCheckComment() {
+            this.$store.dispatch(
+                'setCheckComment',
+                !this.$store.getters.getCheckComment
+            )
+        },
+        onChangeCheckAddFileName() {
+            this.$store.dispatch(
+                'setCheckAddFileName',
+                !this.$store.getters.getCheckAddFileName
+            )
+        },
+        onChangeCheckContributor() {
+            this.$store.dispatch(
+                'setCheckContributor',
+                !this.$store.getters.getCheckContributor
+            )
+        },
+        onChangeCheckLastEditer() {
+            this.$store.dispatch(
+                'setCheckLastEditer',
+                !this.$store.getters.getCheckLastEditer
+            )
+        },
+        onChangeCheckFacilityName() {
+            this.$store.dispatch(
+                'setCheckFacilityName',
+                !this.$store.getters.getCheckFacilityName
+            )
+        },
+        onChangeCheckNote() {
+            this.$store.dispatch(
+                'setCheckNote',
+                !this.$store.getters.getCheckNote
+            )
+        },
 
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setSearchTags', [])
-      this.$store.dispatch('setMedicineID', '')
-      this.$store.dispatch('setQuestionID', '')
-      this.$store.dispatch('setFacilityID', '')
-      this.$store.dispatch('setCheckQ', true)
-      // console.log('resetSearch3', this.$store.getters.getCheckQ)
-      this.$store.dispatch('setCheckA', true)
-      this.$store.dispatch('setCheckComment', true)
-      this.$store.dispatch('setCheckAddFileName', true)
-      this.$store.dispatch('setCheckContributor', true)
-      this.$store.dispatch('setCheckLastEditer', true)
-      this.$store.dispatch('setCheckFacilityName', true)
-      this.$store.dispatch('setCheckNote', true)
-    },
-    multiselectValue(value) {
-      console.log(value)
-    },
-    onCheckQChange() {
-      this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
-      // console.log('resetSearch4', this.$store.getters.getCheckQ)
-    },
-    onChangeCheckA() {
-      this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
-    },
-    onChangeCheckComment() {
-      this.$store.dispatch(
-        'setCheckComment',
-        !this.$store.getters.getCheckComment
-      )
-    },
-    onChangeCheckAddFileName() {
-      this.$store.dispatch(
-        'setCheckAddFileName',
-        !this.$store.getters.getCheckAddFileName
-      )
-    },
-    onChangeCheckContributor() {
-      this.$store.dispatch(
-        'setCheckContributor',
-        !this.$store.getters.getCheckContributor
-      )
-    },
-    onChangeCheckLastEditer() {
-      this.$store.dispatch(
-        'setCheckLastEditer',
-        !this.$store.getters.getCheckLastEditer
-      )
-    },
-    onChangeCheckFacilityName() {
-      this.$store.dispatch(
-        'setCheckFacilityName',
-        !this.$store.getters.getCheckFacilityName
-      )
-    },
-    onChangeCheckNote() {
-      this.$store.dispatch(
-        'setCheckNote',
-        !this.$store.getters.getCheckNote
-      )
-    },
+        sendInputInfo() {},
+        setMedicineID(value) {
+            this.$store.dispatch('setMedicineID', value)
+        },
+        setQuestionID(value) {
+            this.$store.dispatch('setQuestionID', value)
+        },
+        setFacilityID(value) {
+            this.$store.dispatch('setFacilityID', value)
+        },
+        // 詳細条件クリックイベント
+        detailBottunClick: function (event) {
+            this.isDetailClick = !this.isDetailClick
+            this.$emit('isDetailClick', this.isDetailClick)
+        },
+        // 検索ボタン押下イベント
+        searchClick: function (event) {
+            // すべて
+            if (this.checkId == 1) {
+                // 検索APIを呼び出し(画面入力値)
+                this.$store.dispatch('searchAll', this.searchValue)
 
-    sendInputInfo() { },
-    setMedicineID(value) {
-      this.$store.dispatch('setMedicineID', value)
+                // 一括検索結果画面へ遷移
+                this.$router.push('/searchResultAll')
+            }
+            // DI ナレッジシェア
+            else if (this.checkId == 2) {
+                this.$router.push('/searchResultAll')
+            }
+            // 組織内 DI 記録（Q&A）
+            else if (this.checkId == 3) {
+                this.$router.push('/searchOrganization')
+            }
+            // 症例（プレアボイド）
+            else if (this.checkId == 4) {
+                this.$router.push('/searchOrganization')
+            }
+            // DI 辞書
+            else if (this.checkId == 5) {
+                this.$router.push('/searchOrganization')
+            }
+            // 製薬企業情報
+            else if (this.checkId == 6) {
+                this.$router.push('/searchOrganization')
+            }
+        },
+        // DropDown 選択したアイテムＩＤ取得
+        getCheckId(data) {
+            this.checkId = data
+        },
     },
-    setQuestionID(value) {
-      this.$store.dispatch('setQuestionID', value)
-    },
-    setFacilityID(value) {
-      this.$store.dispatch('setFacilityID', value)
-    },
-    // 詳細条件クリックイベント
-    detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit('isDetailClick', this.isDetailClick)
-    },
-    // 検索ボタン押下イベント
-    searchClick: function (event) {
-      // すべて
-      if (this.checkId == 1) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('searchAll', this.searchValue)
-
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 2) {
-        this.$router.push('/searchResultAll')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // DI 辞書
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 6) {
-        this.$router.push('/searchOrganization')
-      }
-    },
-    // DropDown 選択したアイテムＩＤ取得
-    getCheckId(data) {
-      this.checkId = data
-    },
-  },
 }
 </script>
 
