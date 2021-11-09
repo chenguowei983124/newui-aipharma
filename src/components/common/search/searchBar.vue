@@ -98,10 +98,10 @@
                 <!-- 左青背景 -->
                 <div :class="searchBarProStyleClass"></div>
                 <search-preavoid-title
-                    v-if="checkId == 3 && form != $constant.formList.TOP"
+                    v-if="form == this.$constant.formList.PVD"
                 ></search-preavoid-title>
                 <search-bbs-title-bar
-                    v-if="checkId == 6 && form != $constant.formList.TOP"
+                    v-if="form == this.$constant.formList.BBS"
                 ></search-bbs-title-bar>
                 <div :class="searchBarProStyleClass"></div>
             </div>
