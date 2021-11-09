@@ -25,7 +25,7 @@
             {{ leftLableTitle }}
         </div>
         <i
-            class="absolute flex justify-center pt-2"
+            class="absolute flex justify-center pt-2 cursor-pointer"
             :class="buttonStyle"
             @mousedown.prevent="onMouseDownButton"
         >

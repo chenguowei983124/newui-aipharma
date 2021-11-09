@@ -13,13 +13,13 @@ export default {
         // 検索条件
         searchWord: '', // キーワード
         searchTags: [], // タブ
-        medicineID: '-1', // 薬区分
-        questionID: '-1', // 質問区分
-        facilityID: '-1', // 施設
+        medicineID: '', // 薬区分
+        questionID: '', // 質問区分
+        facilityID: '0', // 施設
         page: '1', // ページ
         QAID: '', // QAID
         sort: '0', // ソート順
-        maxCount: '0', // 表示件数
+        maxCount: '20', // 表示件数
         checkQ: true,
         checkA: true,
         checkComment: true,
@@ -29,7 +29,7 @@ export default {
         checkFacilityName: true,
         checkNote: true,
         filterBBS: {},
-        searchTagsLable: [], // タブ
+        searchTagsLable: [], // タブname
     }),
 
     getters: {
@@ -133,11 +133,10 @@ export default {
         },
         getOrganizationSeartorenndoTab(state) {
             const organizationSeartorenndoTab = {
-                torenndoTab: [
-                    { value: 1, label: 'ロキソニン' },
-                    { value: 2, label: '用途' },
-                    { value: 3, label: '用途7' },
-                ],
+                torenndoTab: [{ value: 1, label: 'ファモチジン' },
+                { value: 2, label: 'ファモセット注' },
+                { value: 3, label: 'ロキソニン' },
+                { value: 4, label: '用途' },],
             }
             return organizationSeartorenndoTab
         },

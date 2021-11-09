@@ -91,45 +91,45 @@ import bbsList from '../components/searchBBS/searchBulletinBoardMain.vue'
 import bbsTalking from '../components/searchBBS/searchBBSTalking.vue'
 import searchBar from '../components/common/search/searchBar.vue'
 export default {
-    components: { bbsList, bbsTalking, searchBar },
+  components: { bbsList, bbsTalking, searchBar },
 
-    props: {},
-    data() {
-        return {
-            isDetailButtonClick: true,
-            isScroll: true,
-            dispFlg: false,
-            id: '',
-        }
+  props: {},
+  data() {
+    return {
+      isDetailButtonClick: true,
+      isScroll: true,
+      dispFlg: false,
+      id: '',
+    }
+  },
+  mounted() { },
+  methods: {
+    // 詳細条件ボタン押下区分を取得
+    getDetailDisp: function (data) {
+      console.log('asdf'.data)
+      this.isDetailButtonClick = data
     },
-    mounted() {},
-    methods: {
-        // 詳細条件ボタン押下区分を取得
-        getDetailDisp: function (data) {
-            console.log('asdf')
-            this.isDetailButtonClick = data
-        },
-        getScroll: function (value) {
-            this.isScroll = value
-        },
-        openDetail(val) {
-            this.id = val
-            this.dispFlg = true
-        },
-        getClose(value) {
-            this.dispFlg = value
-        },
-        getUnpublish() {
-            const params = {
-                publish: false,
-                timestamp: new Date().getTime(),
-            }
-            this.$router.push({
-                path: '/searchBulletinBoard',
-                query: params,
-            })
-        },
+    getScroll: function (value) {
+      this.isScroll = value
     },
-    created() {},
+    openDetail(val) {
+      this.id = val
+      this.dispFlg = true
+    },
+    getClose(value) {
+      this.dispFlg = value
+    },
+    getUnpublish() {
+      const params = {
+        publish: false,
+        timestamp: new Date().getTime(),
+      }
+      this.$router.push({
+        path: '/searchBulletinBoard',
+        query: params,
+      })
+    },
+  },
+  created() { },
 }
 </script>

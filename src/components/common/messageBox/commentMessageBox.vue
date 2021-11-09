@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center">
+    <div class="flex justify-center relative top-1/4">
         <!-- 710*650 -->
         <div
             class="
@@ -24,12 +24,13 @@
                     notoSansJpAndEighteenBold
                     h-10
                     w-full
-                    px-2
+                    px-8
+                    py-2
                     rounded-t-lg
                 "
             >
                 <div class="">コメント</div>
-                <button @click="closeCommentMessageBox">
+                <button @click="closeCommentMessageBox()">
                     <x-icon-svg></x-icon-svg>
                 </button>
             </div>
@@ -88,6 +89,7 @@
                     type="checkbox"
                     class="form-checkbox text-white"
                     checked
+                    v-model="flag"
                 />
                 <span class="ml-2 text-xs">匿名で投稿</span>
                 <!-- </label> -->
@@ -192,7 +194,6 @@
                                         justify-between
                                         border-0 border-black
                                         text-xs
-                                        bg-blue-400
                                     "
                                 >
                                     <textarea
@@ -312,6 +313,7 @@ export default {
       itemList: [],
       editComment: '',
       inputComment: '',
+      flag: 'true',
     }
   },
   Activated() {
@@ -333,35 +335,37 @@ export default {
           let params = {
             id: items.id,
           }
-          this.$serve.deleteComment(params).then((res) => {
-            console.log(res)
-            if (res.data.status == 'success') {
-              Swal.fire('', res.data.message, 'success')
+          if (params != '') {
+            this.$serve.deleteComment(params).then((res) => {
+              console.log(res)
+              if (res.data.status == 'success') {
+                Swal.fire('', res.data.message, 'success')
 
-              // 指定されたindexの要素を1つ削除します。
-              // this.itemList = this.$store.getters.getCommentInfo
-              // this.itemList.splice(index, 1)
-              // this.$store.dispatch(
-              //     'setCommentInfo',
-              //     this.itemList
-              // )
-              this.searchMessage()
-              // Good,Bad,comment更新
-              // GOOd
-              this.$store.getters.organizationSearchInfo.qas[
-                this.rowIndex
-              ].feedbackGood = res.data.goodFeedbackCount
-              // bad
-              this.$store.getters.organizationSearchInfo.qas[
-                this.rowIndex
-              ].feedbackBad = res.data.badFeedbackCount
+                // 指定されたindexの要素を1つ削除します。
+                // this.itemList = this.$store.getters.getCommentInfo
+                // this.itemList.splice(index, 1)
+                // this.$store.dispatch(
+                //     'setCommentInfo',
+                //     this.itemList
+                // )
+                this.searchMessage()
+                // Good,Bad,comment更新
+                // GOOd
+                this.$store.getters.organizationSearchInfo.qas[
+                  this.rowIndex
+                ].feedbackGood = res.data.goodFeedbackCount
+                // bad
+                this.$store.getters.organizationSearchInfo.qas[
+                  this.rowIndex
+                ].feedbackBad = res.data.badFeedbackCount
 
-              //comment
-              this.$store.getters.organizationSearchInfo.qas[
-                this.rowIndex
-              ].feedbackComment = res.data.commentFeedbackCount
-            }
-          })
+                //comment
+                this.$store.getters.organizationSearchInfo.qas[
+                  this.rowIndex
+                ].feedbackComment = res.data.commentFeedbackCount
+              }
+            })
+          }
         }
       })
     },
@@ -380,6 +384,7 @@ export default {
       let params = {
         id: this.qaId,
         fbComment: this.inputComment,
+        checkboxFlag: this.flag
       }
       this.$serve.sendComment(params).then((res) => {
         this.$toast.success(res.data.message, {

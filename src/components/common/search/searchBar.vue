@@ -62,6 +62,7 @@
                         <!-- v-bind:message="parentMsg" -->
                         <search-detail
                             ref="ownDetail"
+                            @isOrgDetailClick="getIsOrgDetailClick"
                             @tagValue="getOwnTagValue"
                             :searchButtonClick="searchClick"
                             v-on:inputClearValue="showMsg"
@@ -555,23 +556,27 @@ export default {
         let getTimestamp = new Date().getTime()
         let params = {
           search: this.$store.getters.getSearchWord,
+          // タグ
           tags:
             this.$props.form == this.$constant.formList.TOP
               ? ''
               : this.$store.getters.getSearchTags
                 ? this.$store.getters.getSearchTags.join(',')
                 : '',
+          // 薬の分類
           medicine:
             this.$props.form == this.$constant.formList.TOP
-              ? '1'
+              ? ''
               : this.$store.getters.getMedicineID,
+          // 質問区分
           qacategory:
             this.$props.form == this.$constant.formList.TOP
-              ? '-1'
+              ? ''
               : this.$store.getters.getQuestionID,
+          // 施設
           facility_flag:
             this.$props.form == this.$constant.formList.TOP
-              ? '-1'
+              ? '0'
               : this.$store.getters.getFacilityID,
           displayed:
             this.$props.form == this.$constant.formList.TOP
@@ -714,6 +719,12 @@ export default {
     getIsDetailClick(value) {
       this.$emit('isDetailClick', value)
     },
+    //  組織内 DI 記録（Q&A）詳細条件 フラグ
+    getIsOrgDetailClick(value) {
+      console.log('getIsOrgDetailClick', value)
+      this.$emit('isOrgDetailClick', value)
+    },
+
   },
 }
 </script>

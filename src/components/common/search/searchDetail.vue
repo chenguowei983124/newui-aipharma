@@ -2,7 +2,17 @@
     <div class="pt-2 rounded-lg md:rounded-none">
         <div class="space-y-2">
             <!-- 1.5行目 -->
-            <div class="flex flex-row mx-2 md:mx-0 font-bold text-white pt-2">
+            <div
+                class="
+                    flex flex-row
+                    mx-2
+                    md:mx-0
+                    font-medium
+                    text-white
+                    font-NotoSansJp
+                    pt-2
+                "
+            >
                 <!-- 検索対象 左-->
                 <div class="w-20 flex text-sm md:text-base">検索対象</div>
                 <!-- 右 -->
@@ -158,7 +168,7 @@
             <!-- 二行目 -->
             <div>
                 <div class="px-2 md:px-0">
-                    <div class="">{{ dispTagValue }}</div>
+                    <div class="hidden">{{ dispTagValue }}</div>
                     <Multiselect
                         ref="mult"
                         v-model="tagValue"
@@ -180,9 +190,15 @@
             </div>
             <!-- 三行目、四行目、五行目 -->
             <div
-                class="space-y-2 bg-backgroundMainSearch mx-2 md:mx-0"
+                class="
+                    space-y-2
+                    bg-backgroundMainSearch
+                    mx-2
+                    md:mx-0
+                    font-NotoSansJp
+                "
                 ref="resetSelect"
-                :class="[isDetailClick ? 'block' : 'hidden']"
+                :class="[isOrgDetailClick ? 'block' : 'hidden']"
             >
                 <!-- 薬の分類 -->
                 <vue-single-select
@@ -301,7 +317,7 @@
                         <div>詳細条件</div>
                         <triangle-down-svg
                             :class="[
-                                isDetailClick ? 'transform rotate-180' : '',
+                                isOrgDetailClick ? 'transform rotate-180' : '',
                             ]"
                             fill="#ffffff"
                             stroke="#ffffff"
@@ -326,7 +342,9 @@
                 >
                     <triangle-down-svg
                         class="w-4 h-4"
-                        :class="[isDetailClick ? 'transform rotate-180' : '']"
+                        :class="[
+                            isOrgDetailClick ? 'transform rotate-180' : '',
+                        ]"
                         fill="#ffffff"
                         stroke="#ffffff"
                     ></triangle-down-svg>
@@ -365,7 +383,7 @@ export default {
     return {
       searchText: null,
       checkId: '',
-      isDetailClick: false,
+      isOrgDetailClick: true,
       tagValue: this.$store.getters.getSearchTags,
       tagTimer: '',
       dispSelect: [],
@@ -386,8 +404,10 @@ export default {
   methods: {
     async fetchLanguages(query) {
       let searchTagsList = this.$store.getters.getSearchTagsLable
+      console.log('searchTagsList', searchTagsList)
       let result = {}
       if (query == null || query == '') {
+
         for (let i = 0; i < searchTagsList.length; i++) {
           let response = await this.$serve.getSuggestTags(searchTagsList[i])
           result = response.data.map((item) => {
@@ -490,8 +510,8 @@ export default {
     },
     // 詳細条件クリックイベント
     detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit('isDetailClick', this.isDetailClick)
+      this.isOrgDetailClick = !this.isOrgDetailClick
+      this.$emit('isOrgDetailClick', this.isOrgDetailClick)
     },
     // 検索ボタン押下イベント
     searchClick: function (event) {

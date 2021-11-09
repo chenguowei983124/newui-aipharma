@@ -67,7 +67,7 @@
                         .torenndoTab"
                     :key="item"
                 >
-                    #{{ item }}
+                    #{{ item.label }}
                 </div>
             </div>
         </div>
@@ -80,6 +80,7 @@ import ResultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
 export default {
   components: { ResutTag, ResultDetailRow },
   methods: {
+    // クリック タグ
     sendMsgToParent: function (data) {
       this.$emit('listenToChildEvent', data)
     },

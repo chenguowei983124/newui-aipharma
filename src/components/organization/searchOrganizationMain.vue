@@ -105,8 +105,10 @@
                                     {{ item.question }}
                                 </div>
                             </div>
+                            <!-- 編集 フラグ [0,1]{{ item.editFlag }} -->
                             <div class="flex justify-end">
                                 <div
+                                    v-if="item.editFlag == '1'"
                                     class="
                                         bg-gray-300
                                         -mt-5
@@ -117,6 +119,9 @@
                                         justify-center
                                         rounded
                                         flex-none
+                                        cursor-pointer
+                                        active:opacity-50
+                                        hover:opacity-50
                                     "
                                     @click="
                                         editOrganizationSearchInfo(
@@ -292,7 +297,18 @@
                                     <div>最終編集日：{{ item.createdAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
                                 </div>
-
+                                <!-- rounded-full
+                                            border-2 border-gray-300
+                                            bg-gray-100
+                                            h-6
+                                            notoSansJpAndElevenRegular
+                                            pl-1
+                                            pr-1
+                                            text-center
+                                            flex
+                                            items-center
+                                            ml-1
+                                            cursor-pointer -->
                                 <div
                                     class="
                                         flex flex-wrap
@@ -305,18 +321,8 @@
                                         v-for="urls in item.urls"
                                         :key="urls"
                                         class="
-                                            rounded-full
-                                            border-2 border-gray-300
-                                            bg-gray-100
-                                            h-6
-                                            notoSansJpAndElevenRegular
-                                            pl-1
-                                            pr-1
-                                            text-center
-                                            flex
-                                            items-center
-                                            ml-1
-                                            cursor-pointer
+                                            text-light-blue-300
+                                            hover:text-light-blue-500
                                         "
                                     >
                                         <a
@@ -330,7 +336,7 @@
                                     PubMed：
                                     <div
                                         v-if="item.pubmed != ''"
-                                        class="hover:text-blue-400"
+                                        class="hover:text-light-blue-500"
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
@@ -348,7 +354,7 @@
                                     <!-- <div class="flex-none"></div> -->
                                     <div
                                         v-if="item.pubmed != ''"
-                                        class="hover:text-blue-400"
+                                        class="hover:text-light-blue-500"
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
@@ -414,9 +420,9 @@
                                     "
                                     v-for="keywordTags in item.keywordTags"
                                     :key="keywordTags"
-                                    @click="sendMsgToParent(keywordTags.name)"
+                                    @click="sendMsgToParent(keywordTags)"
                                 >
-                                    #{{ keywordTags.name }}
+                                    #{{ keywordTags.label }}
                                 </div>
                             </div>
                             <div
@@ -467,6 +473,7 @@
                                             </div>
                                             <good class="h-4 w-4 mr-1"></good>
                                         </button>
+                                        <!-- pending -->
                                         <!-- <div v-show="activeIndex === index">
                                             <div class="absolute bottom-8">
                                                 <div
@@ -1060,7 +1067,7 @@
         <div
             :class="[
                 $store.getters.getCommentMessageBox
-                    ? 'block fixed top-1/4 z-99 left-0 right-0'
+                    ? 'block fixed top-0 z-99 left-0 right-0 bottom-0 bg-lock'
                     : 'hidden',
             ]"
         >
@@ -1140,8 +1147,6 @@ export default {
       this.resetSearchBar()
       this.execSearch()
     }
-
-
   },
   watch: {
     $route: function () {
@@ -1203,6 +1208,12 @@ export default {
     },
   },
   methods: {
+    // CommentMessageBoxを閉じる
+    closeCommentMessageBox() {
+      this.$store.dispatch(
+        'setCommentMessageBox', false
+      )
+    },
     editOrganizationSearchInfo(index, count) {
       // 1件のみの場合
       if (count == 1) {
@@ -1361,9 +1372,9 @@ export default {
     initStore() {
       this.$store.dispatch('setSearchWord', '')
       this.$store.dispatch('setSearchTags', [])
-      this.$store.dispatch('setMedicineID', -1)
-      this.$store.dispatch('setQuestionID', -1)
-      this.$store.dispatch('setFacilityID', -1)
+      this.$store.dispatch('setMedicineID', '')
+      this.$store.dispatch('setQuestionID', '')
+      this.$store.dispatch('setFacilityID', 0)
       this.$store.dispatch('setPage', 1)
       this.$store.dispatch('setSort', 0)
       this.$store.dispatch('setMaxCount', 0)
@@ -1422,6 +1433,7 @@ export default {
       this.$store.dispatch('setPage', value)
       this.resetRouter()
     },
+    // 詳細情報 クリック タグ
     sendMsgToParent: function (data) {
       this.$emit('listenToChildEvent', data)
     },
@@ -1488,14 +1500,11 @@ export default {
       //     !this.$store.getters.getGoodMessageBox
       //   )
     },
+    // クリック コメント ボタン
     openCommentMessageBox(index) {
       this.qaId = this.$store.getters.organizationSearchInfo.qas[index].id
       this.rowIndex = index
-      //   console.log(this.qaId)
-      this.$store.dispatch(
-        'setCommentMessageBox',
-        !this.$store.getters.getCommentMessageBox
-      )
+      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
     },
     getRoeId(id) {
       //   console.log(id)

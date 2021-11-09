@@ -46,21 +46,26 @@
                 <div class="flex flex-wrap mt-2">
                     <div
                         class="
+                            rounded-full
+                            border-2 border-gray-400
+                            bg-gray-100
                             h-6
                             notoSansJpAndTwelveRegular
                             pl-1
                             pr-1
                             text-center
-                            mr-1
+                            hidden
+                            md:block
+                            mid:block
                             cursor-pointer
-                            underline
+                            mt-1.25
                         "
                         @click="sendMsgToParent(item)"
                         v-for="item in $store.getters
                             .getOrganizationSeartorenndoTab.torenndoTab"
                         :key="item"
                     >
-                        {{ item }}
+                        {{ item.label }}
                     </div>
                 </div>
             </div>
