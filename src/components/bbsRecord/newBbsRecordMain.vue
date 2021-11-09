@@ -1,5 +1,5 @@
 <template>
-    <div class="flex border-b-2 border-blue-200 mt-5 md:h-10">
+    <div class="flex border-b-2 border-blue-200 mt-5 md:h-10 max-h-screen">
         <!-- 左 -->
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"

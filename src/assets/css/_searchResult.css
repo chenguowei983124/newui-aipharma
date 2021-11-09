@@ -1,178 +1,181 @@
 /* フォント相関 */
 /* ラベル　組織内 */
-.searchResult_lable_organization{
+.searchResult_lable_organization {
     @apply notoSansJpAndTwelveMedium text-white bg-organization w-17.5 text-center ring-1 ring-organization;
 }
 /* ラベル　全体 */
-.searchResult_lable_whole{
+.searchResult_lable_whole {
     @apply notoSansJpAndTwelveMedium text-white bg-whole w-17.5 text-center ring-1 ring-whole;
 }
 /* ラベル　グループ */
-.searchResult_lable_group{
+.searchResult_lable_group {
     @apply notoSansJpAndTwelveMedium text-white bg-group w-17.5 text-center  ring-1 ring-group;
 }
 /* ラベル　学会 */
-.searchResult_lable_society{
+.searchResult_lable_society {
     @apply notoSansJpAndTwelveMedium text-white bg-society w-17.5 text-center  ring-1 ring-society;
 }
 /* ラベル　未 */
-.searchResult_lable_notLooked{
+.searchResult_lable_notLooked {
     @apply notoSansJpAndTenMedium ring-1 ring-notlooked text-notlooked bg-notlooked w-4 h-4 flex items-center justify-center;
 }
 /* ラベル　要閲覧 */
-.searchResult_lable_browse{
+.searchResult_lable_browse {
     @apply notoSansJpAndTenBold text-white bg-browse w-8 h-4 ring-1 ring-browse;
-}  
+}
 /* ラベル　安全 */
-.searchResult_lable_safety{
+.searchResult_lable_safety {
     @apply notoSansJpAndTwelveMedium text-black bg-safety w-17.5 text-center ring-1 ring-safety;
 }
 /* ラベル　採用 */
-.searchResult_lable_recruitment{
+.searchResult_lable_recruitment {
     @apply notoSansJpAndTwelveMedium text-black bg-recruitment w-17.5 text-center  ring-1 ring-recruitment;
 }
 /* ラベル　イベント */
-.searchResult_lable_eventType{
+.searchResult_lable_eventType {
     @apply notoSansJpAndTwelveMedium text-black bg-eventType w-17.5 text-center ring-1 ring-eventType;
 }
 /* ラベル　国際 */
-.searchResult_lable_international{
+.searchResult_lable_international {
     @apply notoSansJpAndTwelveMedium text-black bg-international w-17.5 text-center  ring-1 ring-international;
 }
 /* ラベル　救済 */
-.searchResult_lable_rescue{
+.searchResult_lable_rescue {
     @apply notoSansJpAndTwelveMedium text-black bg-rescue w-17.5 text-center ring-1 ring-rescue;
 }
 /* ラベル　審査 */
-.searchResult_lable_examination{
+.searchResult_lable_examination {
     @apply notoSansJpAndTwelveMedium text-black bg-examination w-17.5 text-center ring-1 ring-examination;
 }
 .dorpdownSubMenu {
-    @apply border-t-2 border-white font-bold text-xl  ;
+    @apply border-t-2 border-white font-bold text-xl;
 }
 .dorpdownItem {
     @apply border-t-2 border-white hover:bg-gray-400  cursor-pointer;
 }
 /* ラベル　告知 */
-.searchResult_lable_notice{
+.searchResult_lable_notice {
     @apply notoSansJpAndTenMedium text-notice ring-notice w-16.25 h-4 ring-1;
 }
 /* ラベル　view */
-.searchResult_lable_view{
+.searchResult_lable_view {
     @apply notoSansJpAndTwelveMedium text-view  w-16.25 h-4 text-center block;
 }
 /* ラベル　AI */
-.searchResult_lable_Ai{
+.searchResult_lable_Ai {
     @apply notoSansJpAndTwelveMedium bg-toTop text-white w-17.5 h-4 text-center block;
 }
 /* ラベル　キーワード */
-.searchResult_lable_keyword{
+.searchResult_lable_keyword {
     @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center block;
 }
 /* ラベル　確信度 タイトル */
-.searchResult_lable_certainty_title{
+.searchResult_lable_certainty_title {
     @apply notoSansJpAndTwelveRegular text-black h-4 text-right block;
 }
 /* ラベル　確信度 値 */
-.searchResult_lable_certainty_value{
+.searchResult_lable_certainty_value {
     @apply notoSansJpAndTwelveRegular text-view h-4 text-left block;
 }
 /* ラベル　自施設 値 */
-.searchResult_lable_ownFacility{
+.searchResult_lable_ownFacility {
     @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center block;
 }
 /* ラベル　他施設 値 */
-.searchResult_lable_otherFacility{
+.searchResult_lable_otherFacility {
     @apply notoSansJpAndTwelveMedium bg-whole text-white w-17.5 h-4 text-center block;
 }
 /* ラベル　日付 */
-.searchResult_date_title{
+.searchResult_date_title {
     @apply latoAndFourteenBold w-18.75 block;
 }
-.searchResult_overview{
+.searchResult_overview {
     @apply w-60 h-25 notoSansJpAndFourteenRegular;
 }
 /* ラベル　タイトル */
-.searchResult_title{
-    @apply notoSansJpAndSixteenRegular ;
+.searchResult_title {
+    @apply notoSansJpAndSixteenRegular;
 }
 /* ラベル　new */
-.searchResult_lable_new{
+.searchResult_lable_new {
     @apply notoSansJpAndTwelveBold text-cardPmadNew w-12.5 h-4 text-left block;
 }
 /* ラベル　update */
-.searchResult_lable_update{
+.searchResult_lable_update {
     @apply notoSansJpAndTwelveBold text-cardPmadUpadte w-12.5 h-4 text-left block;
 }
 /* ラベル　new */
-.searchResult_lable_new_right{
+.searchResult_lable_new_right {
     @apply notoSansJpAndTwelveBold text-cardPmadNew md:w-12.5 h-4 text-left md:text-right block;
 }
 /* ラベル　update */
-.searchResult_lable_update_right{
+.searchResult_lable_update_right {
     @apply notoSansJpAndTwelveBold text-cardPmadUpadte md:w-12.5 h-4 text-left md:text-right block;
 }
 .headerDropdownGroup {
     @apply pl-4 notoSansJpAndEighteenBold;
 }
 .headerDropdownSubMenu {
-    @apply pl-4 notoSansJpAndSixteenBold ;
+    @apply pl-4 notoSansJpAndSixteenBold;
 }
-.headerDropdownItem{
+.headerDropdownItem {
     @apply pl-8 notoSansJpAndSixteenBold text-dropdownListItem;
 }
-.searchResult_detail_blue{
+.searchResult_detail_blue {
     @apply bg-white border-2 border-blueline rounded-b-lg w-full;
 }
-.searchResult_detail_gray{
+.searchResult_bbsDetail_blue {
+    @apply bg-white border-2 border-blueline rounded-lg w-full;
+}
+.searchResult_detail_gray {
     @apply bg-white border-b-2 border-l-2 border-r-2 border-grayline rounded-b-lg w-full;
 }
 /* 掲示板タイトル */
-.bulletinBoardInfoTitle{
+.bulletinBoardInfoTitle {
     @apply notoSansJpAndEighteenBold text-center text-white border-b border-white hover:opacity-50 active:opacity-50;
 }
 /* 新着Q＆Aタイトル */
-.newQaInfoTitle{
+.newQaInfoTitle {
     @apply notoSansJpAndEighteenBold text-center text-white  hover:opacity-50 active:opacity-50;
-    }
+}
 /* 学会情報　その他の情報 */
-.searchResult_header_grayline{
+.searchResult_header_grayline {
     @apply flex items-center  rounded-t-lg    
            border-2 border-grayline text-center h-10 py-1 px-2 md:px-4 w-auto    
            bg-white  space-x-2.5;
 }
 /* 学会情報 ヘッダータイトル */
-.scientifiSocietyInfoTitle{
+.scientifiSocietyInfoTitle {
     @apply notoSansJpAndEighteenBold text-black;
 }
 /* PDMA ヘッダータイトル */
-.pdmaInfoTitle{
-    @apply latoAndSixteenBold ;
+.pdmaInfoTitle {
+    @apply latoAndSixteenBold;
 }
 /* 予約はこちら */
-.searchResult_header_reserveLink{
-    @apply  pl-3.5 text-googleTitle notoSansJpAndFourteenRegular underline;
+.searchResult_header_reserveLink {
+    @apply pl-3.5 text-googleTitle notoSansJpAndFourteenRegular underline;
 }
 /* 新着Q＆A Topics */
-.organizationResult_header_bg_gray{
+.organizationResult_header_bg_gray {
     @apply flex justify-between h-10 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
-    text-white ;
+    text-white;
 }
 /* PMDA 医薬品更新情報　Topics */
-.searchResult_header_bg_gray{
+.searchResult_header_bg_gray {
     @apply flex justify-between h-8 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
-    text-white ;
+    text-white;
 }
-#a1:checked ~ .tab-a1{
+#a1:checked ~ .tab-a1 {
     @apply flex;
 }
-#a1:checked ~ .nav label[for="a1"] {
+#a1:checked ~ .nav label[for='a1'] {
     @apply bg-cardTitle text-white notoSansJpAndEighteenBold;
 }
-#a2:checked ~ .tab-a2{
+#a2:checked ~ .tab-a2 {
     @apply flex;
 }
-#a2:checked ~ .nav label[for="a2"] {
+#a2:checked ~ .nav label[for='a2'] {
     @apply bg-cardTitle text-white notoSansJpAndEighteenBold;
 }
 /* Card white head style */
@@ -183,15 +186,15 @@
 .searchResultCardHeaderStyleE {
     @apply latoAndEighteenBold text-white;
 }
-.searchResultActiveTagTitleStyle{
-    @apply flex flex-col justify-center h-10 rounded-t-lg text-center bg-cardViewCount text-blueline ;
+.searchResultActiveTagTitleStyle {
+    @apply flex flex-col justify-center h-10 rounded-t-lg text-center bg-cardViewCount text-blueline;
 }
-.searchResultUnActiveTagTitleStyle{
-    @apply flex flex-col justify-center h-10 rounded-t-lg text-center bg-cardViewCount text-googleTitle ;
+.searchResultUnActiveTagTitleStyle {
+    @apply flex flex-col justify-center h-10 rounded-t-lg text-center bg-cardViewCount text-googleTitle;
 }
-.basePage{
-    @apply w-8 h-8 notoSansJpAndFourteenRegular  text-center  pt-1 rounded border-2 border-grayline text-grayline ;
+.basePage {
+    @apply w-8 h-8 notoSansJpAndFourteenRegular  text-center  pt-1 rounded border-2 border-grayline text-grayline;
 }
-.currentPage{
-    @apply w-8 h-8 notoSansJpAndFourteenRegular  text-center  pt-1 rounded border-2 bg-blueline border-blueline text-white ;
+.currentPage {
+    @apply w-8 h-8 notoSansJpAndFourteenRegular  text-center  pt-1 rounded border-2 bg-blueline border-blueline text-white;
 }

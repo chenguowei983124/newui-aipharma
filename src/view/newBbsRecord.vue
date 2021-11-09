@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="h-screen">
         <!-- トップ情報 -->
-        <my-all-header :form="$constant.formList.NDI"></my-all-header>
+        <my-all-header :form="$constant.formList.BBS"></my-all-header>
         <!-- 中間内容情報 -->
         <new-org-DI-record-layout></new-org-DI-record-layout>
         <!-- ボトム情報 -->

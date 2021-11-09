@@ -11,13 +11,13 @@
             bg-lock
             z-99
             cursor-wait
-            items-end
+            items-center
             flex
             justify-center
         "
         v-show="$store.getters.getIsLoadingShow"
     >
-        <h2>
+        <div class="notoSansJpAndFourteenBold md:notoSansJpAndTwentyTwoBold">
             <span>L</span>
             <span>o</span>
             <span>a</span>
@@ -26,40 +26,40 @@
             <span>n</span>
             <span>g</span>
             <span>...</span>
-        </h2>
+        </div>
     </div>
 </template>
 <style scoped>
-h2 {
+div {
     color: rgba(0, 0, 0, 0.2);
-    font-size: 6em;
+    font-size: 2em;
     display: flex;
 }
-h2 span {
+div span {
     animation: animate 3s linear infinite;
 }
-h2 span:nth-child(1) {
+div span:nth-child(1) {
     animation-delay: 0s;
 }
-h2 span:nth-child(2) {
+div span:nth-child(2) {
     animation-delay: 0.1s;
 }
-h2 span:nth-child(3) {
+div span:nth-child(3) {
     animation-delay: 0.2s;
 }
-h2 span:nth-child(4) {
+div span:nth-child(4) {
     animation-delay: 0.3s;
 }
-h2 span:nth-child(5) {
+div span:nth-child(5) {
     animation-delay: 0.4s;
 }
-h2 span:nth-child(6) {
+div span:nth-child(6) {
     animation-delay: 0.5s;
 }
-h2 span:nth-child(7) {
+div span:nth-child(7) {
     animation-delay: 0.6s;
 }
-h2 span:nth-child(8) {
+div span:nth-child(8) {
     animation-delay: 0.7s;
 }
 

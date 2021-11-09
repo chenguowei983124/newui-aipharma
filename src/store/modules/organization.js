@@ -29,6 +29,7 @@ export default {
         checkFacilityName: true,
         checkNote: true,
         filterBBS: {},
+        searchTagsLable: [], // タブ
     }),
 
     getters: {
@@ -39,6 +40,11 @@ export default {
         // タブ
         getSearchTags(state) {
             return state.searchTags
+        },
+        // タブ
+        getSearchTagsLable(state) {
+            console.log('getSearchTagsLable', state.searchTagsLable)
+            return state.searchTagsLable
         },
         // 薬区分
         getMedicineID(state) {
@@ -128,24 +134,9 @@ export default {
         getOrganizationSeartorenndoTab(state) {
             const organizationSeartorenndoTab = {
                 torenndoTab: [
-                    'ロキソニン',
-                    'ロキソ',
-                    '用途',
-                    '痛み止め',
-                    'ロキソニン',
-                    'ロキソ',
-                    'ロキソニン',
-                    'ロキソ',
-                    '用途',
-                    '痛み止め',
-                    'ロキソニン',
-                    'ロキソ',
-                    'ロキソニン',
-                    'ロキソ',
-                    '用途',
-                    '痛み止め',
-                    'ロキソニン',
-                    'ロキソ',
+                    { value: 1, label: 'ロキソニン' },
+                    { value: 2, label: '用途' },
+                    { value: 3, label: '用途7' },
                 ],
             }
             return organizationSeartorenndoTab
@@ -232,6 +223,11 @@ export default {
         // タブ
         setSearchTags({ commit, state }, value) {
             commit('basic', { key: 'searchTags', value })
+        },
+        // タブ
+        setSearchTagsLable({ commit, state }, value) {
+            console.log('searchTagsLable', value)
+            commit('basic', { key: 'searchTagsLable', value })
         },
         // 薬区分
         setMedicineID({ commit, state }, value) {

@@ -1,8 +1,11 @@
 <template>
-    <div class="container mx-auto pt-12 h-191.25" id="div_postList">
+    <!-- <div class="w-full pt-12 h-191.25 ">aa</div> -->
+    <!-- <div class="mx-auto pt-12 h-312.5" id="div_postList"> -->
+
+    <div class="mx-auto pt-12 h-312.5" id="div_postList">
         <div class="flex justify-end mb-2">
             <vue-single-select
-                class="w-1/4"
+                class="w-42.5"
                 :name="'patientGenderList'"
                 :default-value="'created_at-desc'"
                 :default-input-attribs="{ tabindex: 1 }"
@@ -15,23 +18,13 @@
             ></vue-single-select>
         </div>
         <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp">
-            <!-- @init="mescrollInit" -->
-            <!-- :sub2="['urlTitle']"
-                            :sub3="['content']"
-                            :sub4="['userName', 'view']"
-                            :sub5="['workplace', 'commentCount']" -->
             <div class="relative overflow-hidden mb-8">
                 <div class="overflow-hidden">
-                    <div
-                        class="border-2 bg-green-100"
-                        v-for="(article, index) in postList"
-                        :key="index"
-                        @click="clickItem(article)"
-                    >
+                    <div v-for="(article, index) in postList" :key="index">
                         <result-detail-row
-                            class="searchResult_detail_blue"
+                            class="searchResult_bbsDetail_blue mt-2"
                             :row="article"
-                            :sub1="['group', 'date', 'notificationType']"
+                            :itemClick="clickItem"
                         >
                         </result-detail-row>
                     </div>
@@ -67,7 +60,7 @@ export default {
             ],
 
             mescroll: null,
-            mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
+            //mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
             mescrollUp: {
                 // 上拉加载的配置.
                 callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }
@@ -154,12 +147,13 @@ export default {
             if (pgNo == 1) {
                 this.postList = this.formatPostList(response.data.data)
             } else {
-                this.postList = this.postList.concat(response.data.data)
+                this.postList = this.formatPostList(response.data.data)
             }
             this.pagination = response.data.pagination
         },
         formatPostList(data) {
-            let list = []
+            let list = this.postList
+            console.log('formatPostList', list)
             for (let i = 0; i < data.length; i++) {
                 console.log(data)
                 console.log('item', data[i].post.feedback.viewed)
@@ -194,6 +188,7 @@ export default {
         },
         clickItem(val) {
             // this.dispFlg = !this.dispFlg
+            console.log('aaa', val)
             this.$emit('clickItemEvent', val)
         },
 

@@ -16,7 +16,12 @@
 </template>
 
 <script>
-export default {}
+export default {
+    // props: {
+    //     defaultClass: 'h-6 w-6 mid:h-4 mid:w-4',
+    //     defaultStrokeWidth: '2',
+    // },
+}
 </script>
 
 <style scoped>

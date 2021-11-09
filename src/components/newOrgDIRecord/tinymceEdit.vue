@@ -23,7 +23,7 @@
         }"
     /> -->
     <editor
-        api-key="wymbw7u3lecjz7f30u9h8j0b174d0zrusk9f2j7ey9eu3xlz"
+        api-key="qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp"
         initialValue="<p>Initial editor content</p>"
         v-model="data"
         :init="{

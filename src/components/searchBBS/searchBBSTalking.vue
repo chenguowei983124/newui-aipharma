@@ -1,158 +1,372 @@
 <template>
-    <div class="container mx-auto pt-12 h-191.25">
-        <div class="w-121">
-            <div class="flex justify-between h-10 border-b-2 border-blueline">
-                <div class="">スレッド</div>
-                <div class="h-10 w-10" @click="closeClick">
-                    <svg
-                        width="38"
-                        height="38"
-                        viewBox="0 0 38 38"
-                        xmlns="http://www.w3.org/2000/svg"
+    <div class="">
+        <div class="flex flex-col mx-auto pt-12 justify-between h-312.5">
+            <div :class="[dispEditor ? ' h-245 ' : 'h-292.5 ']">
+                <div
+                    class="flex justify-between h-10 border-b-2 border-blueline"
+                >
+                    <div class="notoSansJpAndTwentyBold">スレッド</div>
+                    <div class="h-10 w-10 mt-2" @click="closeClick">
+                        <x-icon-svg
+                            defaultClass="h-6 w-6"
+                            defaultStrokeWidth="3"
+                            color="#65bbe5"
+                        ></x-icon-svg>
+                    </div>
+                </div>
+
+                <div
+                    class="relative overflow-y-scroll mb-10 mt-5"
+                    :class="[dispEditor ? ' h-245 ' : 'h-270']"
+                >
+                    <div v-if="postList.length > 0">
+                        <div>
+                            <div class="flex">
+                                <div>
+                                    <!-- Group -->
+                                    <div class="flex justify-between">
+                                        <div class="flex">
+                                            <result-detail-row-item
+                                                itemType="1"
+                                                :typeKB="postList[0].group"
+                                                v-if="
+                                                    postList[0].group !=
+                                                    undefined
+                                                "
+                                            ></result-detail-row-item>
+                                            <result-detail-row-item
+                                                itemType="2"
+                                                addStyle="ml-2"
+                                                :itemValue="postList[0].date"
+                                                v-if="
+                                                    postList[0].date !=
+                                                    undefined
+                                                "
+                                            ></result-detail-row-item>
+                                        </div>
+
+                                        <!-- 告知ラベル -->
+                                        <result-detail-row-item
+                                            itemType="1"
+                                            :typeKB="
+                                                postList[0].notificationType
+                                            "
+                                            v-if="
+                                                postList[0].notificationType !=
+                                                undefined
+                                            "
+                                            addStyle="flex justify-center items-center mr-1.25 md:flex-none border-t-2 "
+                                        ></result-detail-row-item>
+                                    </div>
+                                    <div
+                                        class="
+                                            mt-2
+                                            notoSansJpAndFourteenRegular
+                                        "
+                                    >
+                                        {{ postList[0].urlTitle }}
+                                    </div>
+                                    <div class="flex">
+                                        <div
+                                            class="
+                                                rounded-full
+                                                h-12.5
+                                                w-12.5
+                                                bg-backgroundMainSearch
+                                            "
+                                        >
+                                            <img
+                                                class="rounded-full"
+                                                src="../../assets/image/image.png"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div class="ml-3 mt-2">
+                                            <div
+                                                class="
+                                                    notoSansJpAndSixteenRegular
+                                                "
+                                            >
+                                                {{ postList[0].userName }}
+                                            </div>
+                                            <div
+                                                class="
+                                                    notoSansJpAndTwelveRegular
+                                                "
+                                            >
+                                                {{ postList[0].workplace }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="
+                                            h-8
+                                            w-8
+                                            border-2
+                                            rounded
+                                            text-center
+                                            p-0.5
+                                            bg-gray-100
+                                        "
+                                    >
+                                        ・・・
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div
+                        v-for="(article, index) in postList"
+                        :key="index"
+                        @click="clickItem(article)"
                     >
-                        <defs>
-                            <linearGradient
-                                x1="8.042%"
-                                y1="0%"
-                                x2="65.682%"
-                                y2="23.865%"
-                                id="a"
-                            >
-                                <stop
-                                    stop-color="#fff"
-                                    stop-opacity="0"
-                                    offset="0%"
-                                />
-                                <stop
-                                    stop-color="#fff"
-                                    stop-opacity=".631"
-                                    offset="63.146%"
-                                />
-                                <stop stop-color="#fff" offset="100%" />
-                            </linearGradient>
-                        </defs>
-                        <g fill="none" fill-rule="evenodd">
-                            <g transform="translate(1 1)">
-                                <path
-                                    d="M36 18c0-9.94-8.06-18-18-18"
-                                    id="Oval-2"
-                                    stroke="url(#a)"
-                                    stroke-width="2"
+                        <result-detail-row
+                            class="searchResult_bbsDetail_blue"
+                            :row="article"
+                        >
+                        </result-detail-row>
+                    </div> -->
+                        </div>
+                        <div class="mt-2 notoSansJpAndFourteenRegular">
+                            {{ postList[0].title }}
+                        </div>
+                        <div class="mt-2 flex justify-between">
+                            <div>ロキソニンの用途は</div>
+                            <div class="flex items-end">
+                                <!-- view数 -->
+                                <result-detail-row-item
+                                    itemType="4"
+                                    itemTitle=" view"
+                                    :itemValue="
+                                        postList[0].viewCount.toString()
+                                    "
+                                    v-if="postList[0].viewCount != undefined"
+                                ></result-detail-row-item>
+                                <button
+                                    class="
+                                        flex
+                                        items-center
+                                        justify-end
+                                        h-7.5
+                                        w-14
+                                        rounded
+                                        text-white
+                                        bg-whole
+                                    "
                                 >
-                                    <animateTransform
-                                        attributeName="transform"
-                                        type="rotate"
-                                        from="0 18 18"
-                                        to="360 18 18"
-                                        dur="0.9s"
-                                        repeatCount="indefinite"
-                                    />
-                                </path>
-                                <circle fill="#fff" cx="36" cy="18" r="1">
-                                    <animateTransform
-                                        attributeName="transform"
-                                        type="rotate"
-                                        from="0 18 18"
-                                        to="360 18 18"
-                                        dur="0.9s"
-                                        repeatCount="indefinite"
-                                    />
-                                </circle>
-                            </g>
-                        </g>
-                    </svg>
-                    <x-icon-svg class="bg-blue-400"></x-icon-svg>
+                                    <div class="mr-3">
+                                        {{ postList[0].feedback.good }}
+                                    </div>
+                                    <good class="h-4 w-4 mr-1"></good>
+                                </button>
+                                <button
+                                    class="
+                                        flex
+                                        justify-end
+                                        items-center
+                                        h-7.5
+                                        w-14
+                                        rounded
+                                        text-white
+                                        bg-red-400
+                                        ml-1
+                                    "
+                                >
+                                    <div class="mr-3">
+                                        {{ postList[0].feedback.bad }}
+                                    </div>
+                                    <bad class="h-4 w-4 mr-1"></bad>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-3 ml-10 border-t-2 border-blueline"
+                            v-for="(items, index) in postList[0].commnet"
+                            :key="index"
+                        >
+                            <div class="ml-2">
+                                <div class="mt-2 flex justify-between">
+                                    <div class="flex">
+                                        <div
+                                            class="
+                                                rounded-full
+                                                h-12.5
+                                                w-12.5
+                                                bg-backgroundMainSearch
+                                            "
+                                        >
+                                            <img
+                                                class="rounded-full"
+                                                src="../../assets/image/image.png"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div class="ml-3 mt-2">
+                                            <div
+                                                class="
+                                                    notoSansJpAndSixteenRegular
+                                                "
+                                            >
+                                                {{ items.user_data.user_name }}
+                                            </div>
+                                            <div
+                                                class="
+                                                    notoSansJpAndTwelveRegular
+                                                "
+                                            >
+                                                {{ items.user_data.workplace }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="
+                                                h-8
+                                                w-8
+                                                border-2
+                                                rounded
+                                                text-center
+                                                p-0.5
+                                                bg-gray-100
+                                            "
+                                        >
+                                            ・・・
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2 notoSansJpAndFourteenRegular">
+                                    {{ items.content }}
+                                </div>
+                                <div
+                                    class="flex justify-between items-end mt-2"
+                                >
+                                    <div>{{ items.updated_at }}</div>
+                                    <div class="flex items-end">
+                                        <!-- view数 -->
+                                        <result-detail-row-item
+                                            itemType="4"
+                                            itemTitle=" view"
+                                            :itemValue="
+                                                postList[0].viewCount.toString()
+                                            "
+                                            addStyle="md:ml-2.5 md:flex-none"
+                                            v-if="
+                                                postList[0].viewCount !=
+                                                undefined
+                                            "
+                                        ></result-detail-row-item>
+                                        <button
+                                            class="
+                                                flex
+                                                items-center
+                                                justify-end
+                                                h-7.5
+                                                w-14
+                                                rounded
+                                                text-white
+                                                bg-whole
+                                            "
+                                        >
+                                            <div class="mr-3">
+                                                {{ postList[0].feedback.good }}
+                                            </div>
+                                            <good class="h-4 w-4 mr-1"></good>
+                                        </button>
+                                        <div
+                                            class="
+                                                flex
+                                                justify-end
+                                                items-center
+                                                h-7.5
+                                                w-14
+                                                rounded
+                                                text-white
+                                                bg-red-400
+                                                ml-1
+                                            "
+                                        >
+                                            <div class="mr-3">
+                                                {{ postList[0].feedback.bad }}
+                                            </div>
+                                            <bad class="h-4 w-4 mr-1"></bad>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div
+                    class="border-2 h-8 overflow-hidden"
+                    @click="dispEditor = !dispEditor"
+                    v-if="!dispEditor"
+                    v-html="InputComment.toString().split('\n')[0]"
+                ></div>
+                <div v-if="dispEditor">
+                    <editor
+                        api-key="qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp"
+                        initialValue="<p>Initial editor content</p>"
+                        v-model="InputComment"
+                        :init="{
+                            selector: 'textarea#drive-demo',
+                            // plugins: 'image media link tinydrive code imagetools',
+                            height: 130,
+                            menubar: false,
+                            statusbar: false,
+                            //content_style: `p{line-height: 1;} body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;line-height: 1.0; margin: 1rem;}`,
+                            //content_css: '/mycontent.css',
+                            plugins:
+                                'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap  mentions quickbars linkchecker emoticons advtable export',
+                            toolbar:
+                                'myButton | undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image table media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+                            //tinydrive_token_provider: 'http://localhost:8002/jwt',
+                            images_upload_handler: images_upload_handler,
+                        }"
+                    />
+                    <div class="flex justify-end space-x-2">
+                        <input type="button" value="送信" />
+                        <input
+                            type="button"
+                            value="閉じる"
+                            @click="dispEditor = !dispEditor"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
-
-        <mescroll-vue
-            class="mt-2 h-96"
-            ref="mescroll"
-            :down="mescrollDown"
-            :up="mescrollUp"
-            @init="mescrollInit"
-        >
-            <div class="relative overflow-hidden mb-8">
-                <!-- bg-gradient-to-r
-                        from-indigo-50
-                        to-indigo-100 -->
-                <div class="overflow-hidden">
-                    <!-- <div
-                        class="
-                            w-full
-                            bg-local bg-cover bg-center
-                            overflow-y-scroll
-                        "
-                    > -->
-                    <div
-                        class="h-20 border-2 bg-yellow-100"
-                        v-for="(article, index) in articles"
-                        :key="index"
-                        @click="clickItem"
-                    >
-                        <div>{{ article }}</div>
-                    </div>
-                    <!-- </div> -->
-                </div>
-            </div>
-        </mescroll-vue>
-        <tinymce-edit></tinymce-edit>
     </div>
 </template>
 
 <script>
-import MescrollVue from 'mescroll.js/mescroll.vue'
 import XIconSvg from '../common/svgImage/xIconSvg.vue'
-import tinymceEdit from '../newOrgDIRecord/tinymceEdit.vue'
+import resultDetailRow from '../common/searchResult/resultBBS.vue'
+import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
+import Good from '../common/svgImage/good.vue'
+import bad from '../common/svgImage/bad.vue'
+import Editor from '@tinymce/tinymce-vue'
 export default {
-    components: { MescrollVue, XIconSvg, tinymceEdit },
-    props: {},
+    components: {
+        XIconSvg,
+        Editor,
+        resultDetailRow,
+        ResultDetailRowItem,
+        Good,
+        bad,
+    },
+    props: { id: '' },
     data() {
         return {
-            mescroll: null, // mescroll实例对象
-            mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
-            mescrollUp: {
-                // 上拉加载的配置.
-                callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }
-                //以下是一些常用的配置,当然不写也可以的.
-                page: {
-                    num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
-                    size: 10, //每页数据条数,默认10
-                },
-                htmlNodata: '<p class="upwarp-nodata">-- END --</p>',
-                noMoreSize: 5, //如果列表已无数据,可设置列表的总数量要大于5才显示无更多数据;
-                //避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
-                //这就是为什么无更多数据有时候不显示的原因
-                toTop: {
-                    //回到顶部按钮
-                    // src: './static/mescroll/mescroll-totop.png', //图片路径,默认null,支持网络图
-                    offset: 1000, //列表滚动1000px才显示回到顶部按钮
-                },
-                empty: {
-                    //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
-                    warpId: 'xxid', //父布局的id (1.3.5版本支持传入dom元素)
-                    icon: './static/mescroll/mescroll-empty.png', //图标,默认null,支持网络图
-                    tip: '暂无相关数据~', //提示
-                },
-            },
-            articles: [], // 列表数据
+            postList: [], // 列表数据
+            params: {},
             dispFlg: false,
+            dispEditor: false,
+            InputComment: '',
         }
     },
-    beforeRouteEnter(to, from, next) {
-        // 如果没有配置顶部按钮或isBounce,则beforeRouteEnter不用写
-        next((vm) => {
-            // 滚动到原来的列表位置,恢复顶部按钮和isBounce的配置
-            vm.$refs.mescroll && vm.$refs.mescroll.beforeRouteEnter()
-        })
-    },
-    beforeRouteLeave(to, from, next) {
-        // 如果没有配置顶部按钮或isBounce,则beforeRouteLeave不用写
-        // 记录列表滚动的位置,隐藏顶部按钮和isBounce的配置
-        this.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave()
-        next()
-    },
+
     watch: {},
     methods: {
         closeClick() {
@@ -163,56 +377,58 @@ export default {
             this.dispFlg = !this.dispFlg
         },
 
-        mescrollInit(mescroll) {
-            this.mescroll = mescroll // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
+        async doSearch(pgNo = 1) {
+            // console.log('doSearch', this.params, this.$store.getters.getOidcCode)
+            const PAGE_LIMIT = 10
+            Object.assign(this.params, { division: 'BBS' })
+            const queryStringData = {
+                page: 1,
+                id: this.id,
+                limit: PAGE_LIMIT,
+            }
+
+            const response = await this.$serve.getPostList(queryStringData)
+            console.log('getPostList-result', response.data)
+            if (pgNo == 1) {
+                this.postList = this.formatPostList(response.data.data)
+            } else {
+                this.postList = this.postList.concat(response.data.data)
+            }
+            this.pagination = response.data.pagination
         },
-        upCallback(page, mescroll) {
-            console.log('aa')
-            this.$serve.getTest().then((response) => {
-                let aa = response.data.details
-                // this.articles = response.data.details
-                this.articles = this.articles.concat(aa)
-                this.$nextTick(() => {
-                    mescroll.endSuccess(this.articles.length)
-                })
-            })
-            // 联网请求
-            // axios
-            //     .get('xxxxxx', {
-            //         params: {
-            //             num: page.num, // 页码
-            //             size: page.size, // 每页长度
-            //         },
-            //     })
-            //     .then((response) => {
-            //         // 请求的列表数据
-            //         let arr = response.data
-            //         // 如果是第一页需手动置空列表
-            //         if (page.num === 1) this.dataList = []
-            //         // 把请求到的数据添加到列表
-            //         this.dataList = this.dataList.concat(arr)
-            //         // 数据渲染成功后,隐藏下拉刷新的状态
-            //         this.$nextTick(() => {
-            //             mescroll.endSuccess(arr.length)
-            //         })
-            //     })
-            //     .catch((e) => {
-            //         // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
-            //         mescroll.endErr()
-            //     })
+        formatPostList(data) {
+            let list = []
+            for (let i = 0; i < data.length; i++) {
+                console.log(data)
+                console.log('item', data[i].post.feedback.viewed)
+                let listDetail = {
+                    id: data[i].post.id,
+                    urlTitle: data[i].post.title,
+                    title: data[i].post.content,
+                    date: data[i].post.created_at,
+                    group:
+                        data[i].post.scope == 0
+                            ? 'ownFacility'
+                            : data[i].post.scope == 1
+                            ? 'otherFacility'
+                            : 'group',
+                    viewCount: data[i].post.feedback.viewed,
+                    notificationType: data[i].post.genre,
+                    userName: data[i].post.user_data.user_name,
+                    workplace: data[i].post.user_data.workplace,
+                    commnetCount: data[i].post.commnet.length,
+                    feedback: data[i].post.feedback,
+                    tag: data[i].post.tag,
+                    commnet: data[i].post.commnet,
+                }
+                list.push(listDetail)
+            }
+            console.log('list', list)
+            return list
         },
-        getDetail() {
-            this.$serve.getTest().then((response) => {
-                this.articles = response.data.details
-            })
-            console.log(this.articles)
-        },
-        // handleScrolledToBottem() {
-        //     console.log(this.articles)
-        // },
     },
     mounted() {
-        // this.getDetail()
+        this.doSearch()
     },
 }
 </script>

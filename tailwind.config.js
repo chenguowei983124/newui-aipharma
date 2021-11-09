@@ -145,6 +145,8 @@ module.exports = {
                 93.75: '23.4375rem',
                 // 484px
                 121: '30.25rem',
+                // 530px
+                132.5: '33.0625rem',
                 // 720px
                 180: '45rem',
                 // 765px
@@ -153,8 +155,13 @@ module.exports = {
                 192.5: '48.125rem',
                 // 980px
                 245: '61.25rem',
+
                 // 1080px
                 270: '67.5rem',
+                // 1170px
+                292.5: '73.125rem',
+                // 1250px
+                312.5: '78.125rem',
             },
             maxHeight: {
                 'screen-menu': 'calc(100vh - 3.5rem)',
@@ -323,7 +330,7 @@ module.exports = {
                 },
                 checkbox: {
                     iconColor: theme('colors.balck'),
-                    icon: '<svg fill="none" stroke="rgb(0, 0, 0)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>'
+                    icon: '<svg fill="none" stroke="rgb(0, 0, 0)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>',
                 },
                 radio: {
                     iconColor: theme('colors.balck'),

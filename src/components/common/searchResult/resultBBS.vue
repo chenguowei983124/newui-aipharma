@@ -1,10 +1,7 @@
 <template>
     <div class="md:pt-3.5">
-        <!-- sp 最初の行目 -->
-        <div
-            class="md:ml-5 md:mr-5 md:h-4 items-center flex justify-between"
-            v-if="sub1 != undefined"
-        >
+        <!-- 最初の行目 -->
+        <div class="md:ml-5 md:mr-5 md:h-4 items-center flex justify-between">
             <div class="flex">
                 <result-detail-row-item
                     itemType="1"
@@ -28,8 +25,8 @@
             ></result-detail-row-item>
             <!-- </div> -->
         </div>
-        <!-- sp 二行目 -->
-        <div class="md:ml-5 md:mr-5 flex-grow md:truncate md:h-6">
+        <!--  二行目 -->
+        <div class="md:ml-5 md:mr-5 flex-grow truncate md:h-6">
             <span class="items-center" :class="midAreaStyle">
                 <!-- title text -->
                 <div
@@ -41,17 +38,19 @@
                     "
                 >
                     <result-detail-row-item
-                        itemType="3"
+                        itemType="7"
                         :itemValue="row.urlTitle"
                         :itemStyle="resetTitle(midDetailStyle)"
                         addStyle="truncate"
-                        :routerPath="routerPath"
-                        :id="row.id"
-                        v-if="row.title != undefined"
+                        :id="String(row.id)"
+                        v-if="row.urlTitle != undefined"
+                        :itemClick="itemClick"
                     ></result-detail-row-item>
                 </div>
             </span>
         </div>
+
+        <!--  三行目 -->
         <div class="md:ml-5 md:mr-5 flex-grow md:truncate md:h-6">
             <result-detail-row-item
                 itemType="7"
@@ -61,6 +60,8 @@
                 v-if="row.title != undefined"
             ></result-detail-row-item>
         </div>
+
+        <!--  四行目 -->
         <div class="md:ml-5 md:mr-5 flex justify-between md:h-6">
             <result-detail-row-item
                 itemType="7"
@@ -78,6 +79,8 @@
                 v-if="row.viewCount != undefined"
             ></result-detail-row-item>
         </div>
+
+        <!--  五行目 -->
         <div class="md:ml-5 md:mr-5 flex justify-between md:h-6">
             <result-detail-row-item
                 itemType="7"
@@ -96,7 +99,6 @@
             ></result-detail-row-item>
         </div>
 
-        <!-- </div> -->
         <slot></slot>
     </div>
 </template>
@@ -125,20 +127,22 @@ export default {
             type: String,
             default: 'blueline',
         },
-        sub1: Array,
-        sub2: Array,
-        sub3: Array,
-        sub4: Array,
-        sub5: Array,
         routerPath: {
             type: String,
             default: '',
+        },
+        itemClick: {
+            type: Function,
+            default: (index) => {},
         },
     },
     data() {
         return {}
     },
     methods: {
+        testClick(index) {
+            console.log('test', index)
+        },
         getLookedTitle(lookedKB, midStyle) {
             if (lookedKB != undefined) {
                 if (lookedKB == 'looked') {

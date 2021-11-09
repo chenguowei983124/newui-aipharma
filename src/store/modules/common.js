@@ -13,6 +13,7 @@ export default {
         dateValueFrom: '',
         dateValueTo: '',
         styles: '-1',
+        scope: '0',
         qa_classify_facility: [
             { value: '0', title: '全体' },
             { value: '1', title: '自施設のみ' },
@@ -68,6 +69,9 @@ export default {
         getCommentInfo(state) {
             return state.commentInfo
         },
+        getScope(state) {
+            return state.scope
+        },
     },
 
     mutations: {
@@ -76,6 +80,9 @@ export default {
         },
         setCommnet(state, info) {
             state.commentInfo = info
+        },
+        setScope(state, info) {
+            state.scope = info
         },
     },
 
@@ -170,6 +177,9 @@ export default {
         },
         setCommentInfo({ commit }, value) {
             commit('setCommnet', value)
+        },
+        setScopeInfo({ commit }, value) {
+            commit('setScope', value)
         },
     },
 }
