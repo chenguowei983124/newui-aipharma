@@ -85,19 +85,147 @@
                                 pb-5
                             "
                         >
-                            <div
-                                class="
-                                    notoSansJpAndTwentyFourBold
-                                    text-blueline
-                                    w-5
-                                "
-                            >
-                                Q
+                            <div class="flex items-start">
+                                <div
+                                    class="
+                                        notoSansJpAndTwentyFourBold
+                                        text-blueline
+                                        w-5
+                                    "
+                                >
+                                    Q
+                                </div>
+                                <div
+                                    class="
+                                        flex-grow
+                                        notoSansJpAndSixteenBold
+                                        ml-5
+                                    "
+                                >
+                                    {{ item.question }}
+                                </div>
                             </div>
-                            <div
-                                class="flex-grow notoSansJpAndSixteenBold ml-5"
-                            >
-                                {{ item.question }}
+                            <div class="flex justify-end">
+                                <div
+                                    class="
+                                        bg-gray-300
+                                        -mt-5
+                                        h-10
+                                        w-10
+                                        flex
+                                        items-center
+                                        justify-center
+                                        rounded
+                                        flex-none
+                                    "
+                                    @click="
+                                        editOrganizationSearchInfo(
+                                            $store.getters
+                                                .organizationSearchInfo.qas[
+                                                index
+                                            ].id
+                                        )
+                                    "
+                                >
+                                    <dots-horizontal></dots-horizontal>
+                                </div>
+                                <!--  pc -->
+                                <div
+                                    :class="[
+                                        isOrgDotsClick[
+                                            $store.getters
+                                                .organizationSearchInfo.qas[
+                                                index
+                                            ].id
+                                        ] ===
+                                        $store.getters.organizationSearchInfo
+                                            .qas[index].id
+                                            ? 'hidden md:block'
+                                            : 'hidden',
+                                    ]"
+                                    class="
+                                        rounded-md
+                                        border-2 border-gray-400
+                                        bg-white
+                                        h-20
+                                        w-16
+                                        absolute
+                                        mt-6
+                                        flex
+                                        items-center
+                                    "
+                                >
+                                    <div
+                                        class="
+                                            mx-3.5
+                                            space-y-2
+                                            font-NotoSansJp font-bold
+                                            my-2.5
+                                        "
+                                    >
+                                        <div>編集</div>
+                                        <div>削除</div>
+                                    </div>
+                                </div>
+                                <!-- sp -->
+                                <div
+                                    :class="[
+                                        isOrgDotsClick[
+                                            $store.getters
+                                                .organizationSearchInfo.qas[
+                                                index
+                                            ].id
+                                        ] ===
+                                        $store.getters.organizationSearchInfo
+                                            .qas[index].id
+                                            ? 'block md:hidden fixed top-0 left-0 right-0 bottom-0 z-99 bg-lock'
+                                            : 'hidden',
+                                    ]"
+                                    @click="
+                                        editOrganizationSearchInfo(
+                                            $store.getters
+                                                .organizationSearchInfo.qas[
+                                                index
+                                            ].id
+                                        )
+                                    "
+                                >
+                                    <div class="flex justify-center mt-96">
+                                        <div
+                                            class="
+                                                border-2
+                                                bg-white
+                                                border-black
+                                                rounded
+                                                flex-col
+                                            "
+                                        >
+                                            <div
+                                                class="
+                                                    border-b-2 border-black
+                                                    h-9
+                                                    w-88.75
+                                                    flex
+                                                    items-center
+                                                    justify-center
+                                                "
+                                            >
+                                                編集
+                                            </div>
+                                            <div
+                                                class="
+                                                    h-9
+                                                    w-88.75
+                                                    flex
+                                                    items-center
+                                                    justify-center
+                                                "
+                                            >
+                                                削除
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- A -->
@@ -954,6 +1082,7 @@ import Good from '../common/svgImage/good.vue'
 import bad from '../common/svgImage/bad.vue'
 import talk from '../common/svgImage/talk.vue'
 import xIconSvg from '../common/svgImage/xIconSvg.vue'
+import dotsHorizontal from '../common/svgImage/dotsHorizontal.vue'
 import Pagination from '../common/pagination/pagiation.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
@@ -969,6 +1098,7 @@ export default {
     bad,
     talk,
     xIconSvg,
+    dotsHorizontal,
     Pagination,
     vueSingleSelect,
     GoodMessageBox,
@@ -985,6 +1115,8 @@ export default {
       pageCount: 20,
       selectPage: 1,
       goodMessageBox: false,
+      // 組織内 DI 記録（Q&A） ドット-水平
+      isOrgDotsClick: [],
       isDetailDisp: [],
       isDetailsDisp: [],
       activeIndex: -1,
@@ -1008,6 +1140,8 @@ export default {
       this.resetSearchBar()
       this.execSearch()
     }
+
+
   },
   watch: {
     $route: function () {
@@ -1069,6 +1203,15 @@ export default {
     },
   },
   methods: {
+    editOrganizationSearchInfo(index, count) {
+      // 1件のみの場合
+      if (count == 1) {
+        this.isOrgDotsClick[index] = index
+      } else {
+        this.isOrgDotsClick[index] =
+          this.isOrgDotsClick[index] == index ? [] : index
+      }
+    },
     execSearch(kb) {
       // 設定　NULL
       this.openDetailDisp('')
@@ -1131,16 +1274,13 @@ export default {
     // セッションに退避した情報をリーセット
     resetSearchBar: function () {
       this.initStore()
-      console.log('this.$route.query.id', this.$route.query.id)
       if (this.$route.query.id == undefined) {
         this.$store.dispatch('setSearchWord', this.$route.query.search)
-        //   console.log('this.$route.query.search', this.$route.query.search)
         console.log('tags', this.$route.query.tags)
         this.$store.dispatch(
           'setSearchTags',
           this.$route.query.tags.split(',')
         )
-        //   console.log('resetSearchBar', this.$store.getters.getSearchTags)
         this.$store.dispatch(
           'setMedicineID',
           this.$route.query.medicine
@@ -1247,6 +1387,7 @@ export default {
       } else if (this.organizationCountSortValue == 2) {
         dispDetailNumber = 100
       }
+      console.log("this.$store.getters.getSearchTags", this.$store.getters.getSearchTags)
       let params = {
         search: this.$store.getters.getSearchWord,
         tags: this.$store.getters.getSearchTags
@@ -1322,7 +1463,7 @@ export default {
         qaId: this.$store.getters.organizationSearchInfo.qas[index].id,
       }
       this.$serve.sendFeedback(params).then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.data.status == 'create') {
           this.$toast.success(res.data.message, {
             position: 'top-right',
@@ -1350,7 +1491,7 @@ export default {
     openCommentMessageBox(index) {
       this.qaId = this.$store.getters.organizationSearchInfo.qas[index].id
       this.rowIndex = index
-      console.log(this.qaId)
+      //   console.log(this.qaId)
       this.$store.dispatch(
         'setCommentMessageBox',
         !this.$store.getters.getCommentMessageBox

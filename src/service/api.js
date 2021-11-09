@@ -223,6 +223,17 @@ const serve = {
         return data
     },
     //===========================
+    // 各画面の初期表示情報取得
+    //===========================
+    async getOrgCommonInfo() {
+        const data = await axios('/preavoid/get_common_info', {
+            method: 'get',
+        })
+        console.log("/preavoid/get_common_info", data)
+
+        return data
+    },
+    //===========================
     // TOP画面　個人情報取得
     //===========================
     async getManagementInfo() {

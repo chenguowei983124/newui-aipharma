@@ -6,6 +6,10 @@ export default {
         isPortraitClick: false,
         isManagementClick: false,
         isIssueIconClick: false,
+        // 組織内 DI 記録（Q&A） ドット-水平
+        isOrgDotsClick: false,
+        // 組織内 DI 記録（Q&A） 詳細条件
+        isOrgDotsDetailedClick: true,
         qa_classify_class: {},
         qa_classify_subject: {},
         commentInfo: {},
@@ -43,6 +47,14 @@ export default {
         },
         getIssueIconClick(state) {
             return state.isIssueIconClick
+        },
+        // 組織内 DI 記録（Q&A） ドット-水平
+        getIsOrgDotsClick(state) {
+            return state.isOrgDotsClick
+        },
+        // 組織内 DI 記録（Q&A） 詳細条件
+        getIsOrgDotsDetailedClick(state) {
+            return state.isOrgDotsDetailedClick
         },
         getQa_classify_class(state) {
             return state.qa_classify_class
@@ -116,6 +128,14 @@ export default {
         },
         setIssueIconClick({ commit, state }, value) {
             commit('basic', { key: 'isIssueIconClick', value })
+        },
+        // 組織内 DI 記録（Q&A） ドット-水平
+        setIsOrgDotsClick({ commit, state }, value) {
+            commit('basic', { key: 'isOrgDotsClick', value })
+        },
+        // 組織内 DI 記録（Q&A） 
+        setIsOrgDotsDetailedClick({ commit, state }, value) {
+            commit('basic', { key: 'isOrgDotsDetailedClick', value })
         },
         getCommonInfo({ commit, state }) {
             let value = [

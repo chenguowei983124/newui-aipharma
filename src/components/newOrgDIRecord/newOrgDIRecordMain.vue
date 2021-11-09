@@ -58,7 +58,8 @@
                             ring-1
                             border-transparent
                             focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
+                            focus:ring-1
+                            focus:ring-326EB5Lins
                             focus:border-transparent
                         "
                         type="text"
@@ -71,7 +72,7 @@
                         *
                     </label>
                     <div class="rounded-sm ring-1 mt-2">
-                        <tinymce-edit v-model="base.answer.text"></tinymce-edit>
+                        <!-- <tinymce-edit v-model="base.answer.text"></tinymce-edit> -->
                     </div>
                     <div class="flex justify-end mt-1">
                         <input
@@ -113,7 +114,8 @@
                                     ring-1
                                     border-transparent
                                     focus:outline-none
-                                    focus:ring-1 focus:ring-326EB5Lins
+                                    focus:ring-1
+                                    focus:ring-326EB5Lins
                                     focus:border-transparent
                                 "
                                 type="text"
@@ -135,7 +137,8 @@
                                     ring-1
                                     border-transparent
                                     focus:outline-none
-                                    focus:ring-1 focus:ring-326EB5Lins
+                                    focus:ring-1
+                                    focus:ring-326EB5Lins
                                     focus:border-transparent
                                 "
                                 type="text"
@@ -149,8 +152,7 @@
                                     w-11.25
                                     bg-gray-400
                                     hover:opacity-50
-                                    active:bg-bg-gray-200
-                                    active:opacity-100
+                                    active:bg-bg-gray-200 active:opacity-100
                                     h-7.5
                                     md:h-10
                                     rounded-md
@@ -183,8 +185,7 @@
                                     class="
                                         bg-blueline
                                         hover:opacity-50
-                                        active:bg-bg-gray-200
-                                        active:opacity-100
+                                        active:bg-bg-gray-200 active:opacity-100
                                         h-7
                                         md:h-7.5
                                         w-19.5
@@ -204,8 +205,7 @@
                                         w-11.25
                                         bg-gray-400
                                         hover:opacity-50
-                                        active:bg-bg-gray-200
-                                        active:opacity-100
+                                        active:bg-bg-gray-200 active:opacity-100
                                         h-7.5
                                         md:h-10
                                         rounded-md
@@ -229,8 +229,7 @@
                         mt-2
                         bg-blueline
                         hover:opacity-50
-                        active:bg-bg-gray-200
-                        active:opacity-100
+                        active:bg-bg-gray-200 active:opacity-100
                         h-10
                         md:h-7
                         w-15
@@ -290,7 +289,8 @@
                         ring-1
                         border-transparent
                         focus:outline-none
-                        focus:ring-1 focus:ring-326EB5Lins
+                        focus:ring-1
+                        focus:ring-326EB5Lins
                         focus:border-transparent
                     "
                     type="text"
@@ -358,7 +358,8 @@
                         ring-1
                         border-transparent
                         focus:outline-none
-                        focus:ring-1 focus:ring-326EB5Lins
+                        focus:ring-1
+                        focus:ring-326EB5Lins
                         focus:border-transparent
                     "
                     type="text"
@@ -406,8 +407,7 @@
                                     whitespace-nowrap
                                     bg-gray-300
                                     hover:opacity-50
-                                    active:bg-bg-gray-200
-                                    active:opacity-100
+                                    active:bg-bg-gray-200 active:opacity-100
                                     rounded-sm
                                     font-NotoSansJp
                                     px-2
@@ -463,8 +463,7 @@
                         mt-2
                         bg-blueline
                         hover:opacity-50
-                        active:bg-bg-gray-200
-                        active:opacity-100
+                        active:bg-bg-gray-200 active:opacity-100
                         h-10
                         md:h-7
                         w-15
@@ -642,7 +641,8 @@
                                 ring-1
                                 border-transparent
                                 focus:outline-none
-                                focus:ring-1 focus:ring-326EB5Lins
+                                focus:ring-1
+                                focus:ring-326EB5Lins
                                 focus:border-transparent
                             "
                             type="text"
@@ -665,7 +665,8 @@
                             ring-1
                             border-transparent
                             focus:outline-none
-                            focus:ring-1 focus:ring-326EB5Lins
+                            focus:ring-1
+                            focus:ring-326EB5Lins
                             focus:border-transparent
                         "
                         type="text"

@@ -129,96 +129,57 @@ import searchOrganizationMain from '../components/organization/searchOrganizatio
 import OrganizationInit from '../components/organization/organizationInit.vue'
 
 export default {
-    components: {
-        // CommentMessageBox,
-        GoodMessageBox,
-        searchBar,
-        searchOrganizationMain,
-        OrganizationInit,
+  components: {
+    // CommentMessageBox,
+    GoodMessageBox,
+    searchBar,
+    searchOrganizationMain,
+    OrganizationInit,
+  },
+
+  props: {},
+  data() {
+    return {
+      isMenuOpen: true,
+      isDetailButtonClick: false,
+      parentMage: '',
+    }
+  },
+  mounted() { },
+  methods: {
+    getSearchResult: function (value) {
     },
 
-    props: {},
-    data() {
-        return {
-            isMenuOpen: true,
-            isDetailButtonClick: false,
-            parentMage: '',
-        }
+    // ========================================
+    // 詳細条件ボタン押下区分を取得
+    // ========================================
+    getDetailClick: function (data) {
+      this.isDetailButtonClick = data
     },
-    mounted() {},
-    methods: {
-        getSearchResult: function (value) {
-            console.log('')
-        },
-
-        // ========================================
-        // 詳細条件ボタン押下区分を取得
-        // ========================================
-        getDetailClick: function (data) {
-            console.log('getDetailClickdata', data)
-            this.isDetailButtonClick = data
-        },
-        // ========================================
-        // 詳細条件表示・非表示取得
-        // ========================================
-        getDetailDisp: function (value) {
-            //   console.log(value)
-            this.detailDisp = value
-        },
-        refreshOptions(id) {
-            // this.$refs.searchbar.$refs.ownDetail.$refs.mult.select([
-            //     { value: 1, label: 'ファモチジン' },
-            //     { value: 2, label: 'ファモセット注' },
-            //     { value: 4, label: '用途' },
-            // ])
-            // this.$nextTick(() => {
-            //     console.log('★6')
-            //     let vv = []
-            //     vv = this.$store.getters.getSearchTags
-            //     vv.push(id)
-            //     this.$store.dispatch('setSearchTags', vv)
-            // })
-        },
-        searchTag: function (value) {
-            this.value = value
-            this.$store.dispatch('setSearchWord', '')
-            // let vv = []
-            // vv = this.$store.getters.getSearchTags
-            // vv.push(value.value)
-
-            // this.$store.dispatch('setSearchTags', vv)
-            let aa = []
-            aa = this.$store.getters.getSearchTagsLable
-            console.log('ovalue.label', value.label)
-            aa.push(value.label)
-            console.log('list', aa)
-            this.$store.dispatch('setSearchTagsLable', aa)
-
-            // this.$refs.searchbar.$refs.ownDetail.$refs.mult.select([
-            //     { value: 1, label: 'ファモチジン' },
-            //     { value: 2, label: 'ファモセット注' },
-            //     { value: 4, label: '用途' },
-            // ])
-
-            this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
-
-            this.$store.dispatch('setMedicineID', '')
-            this.$store.dispatch('setQuestionID', '')
-            this.$store.dispatch('setFacilityID', '')
-            this.$store.dispatch('setPage', '')
-            this.$store.dispatch('setQAID', '')
-            // this.$refs.searchbar.searchClick()
-        },
-        showMsgToParent: function (data) {
-            return (this.parentMage = data)
-        },
+    // ========================================
+    // 詳細条件表示・非表示取得
+    // ========================================
+    getDetailDisp: function (value) {
+      this.detailDisp = value
     },
-    created() {
-        let param = sessionStorage.getItem('searchParam')
-        this.$store.dispatch(
-            'setSearchWord',
-            sessionStorage.getItem('searchWord')
-        )
+    searchTag: function (value) {
+      this.value = value
+      this.$store.dispatch('setSearchWord', '')
+      let tagsLable = this.$store.getters.getSearchTagsLable
+      tagsLable.push(value.label)
+      this.$store.dispatch('setSearchTagsLable', tagsLable)
+      this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
     },
+    showMsgToParent: function (data) {
+      return (this.parentMage = data)
+    },
+  },
+  created() {
+    let param = sessionStorage.getItem('searchParam')
+    this.$store.dispatch(
+      'setSearchWord',
+      sessionStorage.getItem('searchWord')
+    )
+  },
 }
 </script>

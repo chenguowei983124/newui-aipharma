@@ -48,6 +48,7 @@
             >
                 <div class="flex-auto p-1 notoSansJpAndTwelveRegular">
                     <textarea
+                        style="resize: none"
                         v-model="inputComment"
                         rows="2"
                         class="
@@ -191,11 +192,13 @@
                                         justify-between
                                         border-0 border-black
                                         text-xs
+                                        bg-blue-400
                                     "
                                 >
-                                    <input
+                                    <textarea
+                                        style="resize: none"
                                         class="
-                                            w-60
+                                            w-11/12
                                             h-full
                                             placeholder-gray-500
                                             focus:placeholder-opacity-0
@@ -208,7 +211,7 @@
                                         type="text"
                                         v-show="items.isShow"
                                         v-model="editComment"
-                                    />
+                                    ></textarea>
                                     <div
                                         class="
                                             w-20
@@ -227,7 +230,7 @@
                                                     items
                                                 )
                                             "
-                                            class="bg-green-400 rounded"
+                                            class="bg-green-400 rounded w-6 h-6"
                                         >
                                             <check-icon-svg></check-icon-svg>
                                         </button>
@@ -272,176 +275,176 @@ import CheckIconSvg from '../svgImage/checkIconSvg.vue'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 export default {
-    components: {
-        xIconSvg,
-        SendMessageIconSvg,
-        PencilAltIconSvg,
-        TrashIconSvg,
-        CheckIconSvg,
-    },
-    props: { qaId: '', rowIndex: 0 },
-    computed: {
-        getCommentData() {
-            get: {
-                if (this.$store.getters.getCommentMessageBox) {
-                    this.searchMessage()
-                    // let params = {
-                    //     id: this.qaId,
-                    // }
-                    // await this.$serve.getComment(params).then((res) => {
-                    //     this.$store.dispatch(
-                    //         'setCommentInfo',
-                    //         res.data.resultInfo
-                    //     )
-                    // })
-                }
-            }
-        },
-        getItemList() {
-            console.log(this.$store.getters.getCommentInfo)
-            console.log(this.$store.getters.topManagementInfo)
-            return this.$store.getters.getCommentInfo
-        },
-    },
-
-    data() {
-        return {
-            itemList: [],
-            editComment: '',
-            inputComment: '',
+  components: {
+    xIconSvg,
+    SendMessageIconSvg,
+    PencilAltIconSvg,
+    TrashIconSvg,
+    CheckIconSvg,
+  },
+  props: { qaId: '', rowIndex: 0 },
+  computed: {
+    getCommentData() {
+      get: {
+        if (this.$store.getters.getCommentMessageBox) {
+          this.searchMessage()
+          // let params = {
+          //     id: this.qaId,
+          // }
+          // await this.$serve.getComment(params).then((res) => {
+          //     this.$store.dispatch(
+          //         'setCommentInfo',
+          //         res.data.resultInfo
+          //     )
+          // })
         }
+      }
     },
-    Activated() {
-        console.log('Activated')
+    getItemList() {
+      // console.log(this.$store.getters.getCommentInfo)
+      // console.log(this.$store.getters.topManagementInfo)
+      return this.$store.getters.getCommentInfo
     },
-    methods: {
-        deleteFruit: function (index, items) {
-            Swal.fire({
-                text: '本当に削除してよろしいですか？',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '65bbe5',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '削除',
-                cancelButtonText: 'キャンセル',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log('削除')
-                    let params = {
-                        id: items.id,
-                    }
-                    this.$serve.deleteComment(params).then((res) => {
-                        console.log(res)
-                        if (res.data.status == 'success') {
-                            Swal.fire('', res.data.message, 'success')
+  },
 
-                            // 指定されたindexの要素を1つ削除します。
-                            // this.itemList = this.$store.getters.getCommentInfo
-                            // this.itemList.splice(index, 1)
-                            // this.$store.dispatch(
-                            //     'setCommentInfo',
-                            //     this.itemList
-                            // )
-                            this.searchMessage()
-                            // Good,Bad,comment更新
-                            // GOOd
-                            this.$store.getters.organizationSearchInfo.qas[
-                                this.rowIndex
-                            ].feedbackGood = res.data.goodFeedbackCount
-                            // bad
-                            this.$store.getters.organizationSearchInfo.qas[
-                                this.rowIndex
-                            ].feedbackBad = res.data.badFeedbackCount
+  data() {
+    return {
+      itemList: [],
+      editComment: '',
+      inputComment: '',
+    }
+  },
+  Activated() {
+    console.log('Activated')
+  },
+  methods: {
+    deleteFruit: function (index, items) {
+      Swal.fire({
+        text: '本当に削除してよろしいですか？',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '65bbe5',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '削除',
+        cancelButtonText: 'キャンセル',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log('削除')
+          let params = {
+            id: items.id,
+          }
+          this.$serve.deleteComment(params).then((res) => {
+            console.log(res)
+            if (res.data.status == 'success') {
+              Swal.fire('', res.data.message, 'success')
 
-                            //comment
-                            this.$store.getters.organizationSearchInfo.qas[
-                                this.rowIndex
-                            ].feedbackComment = res.data.commentFeedbackCount
-                        }
-                    })
-                }
-            })
-        },
-        editAddCheckpointsTitle(item) {
-            item.isShow = !item.isShow
-            this.editComment = item.comment
-        },
-        closeCommentMessageBox() {
-            this.inputComment = ''
-            this.$store.dispatch(
-                'setCommentMessageBox',
-                !this.$store.getters.getCommentMessageBox
-            )
-        },
-        sendMessage() {
-            let params = {
-                id: this.qaId,
-                fbComment: this.inputComment,
+              // 指定されたindexの要素を1つ削除します。
+              // this.itemList = this.$store.getters.getCommentInfo
+              // this.itemList.splice(index, 1)
+              // this.$store.dispatch(
+              //     'setCommentInfo',
+              //     this.itemList
+              // )
+              this.searchMessage()
+              // Good,Bad,comment更新
+              // GOOd
+              this.$store.getters.organizationSearchInfo.qas[
+                this.rowIndex
+              ].feedbackGood = res.data.goodFeedbackCount
+              // bad
+              this.$store.getters.organizationSearchInfo.qas[
+                this.rowIndex
+              ].feedbackBad = res.data.badFeedbackCount
+
+              //comment
+              this.$store.getters.organizationSearchInfo.qas[
+                this.rowIndex
+              ].feedbackComment = res.data.commentFeedbackCount
             }
-            this.$serve.sendComment(params).then((res) => {
-                this.$toast.success(res.data.message, {
-                    position: 'top-right',
-                })
-
-                // // 登録したコメントを表示
-                // let row = {
-                //     comment: res.data.qaFeedback.fbComment,
-                //     createdDate: res.data.qaFeedback.createdAt,
-                //     id: res.data.qaFeedback.id,
-                //     updateDate: res.data.qaFeedback.updatedAt,
-                //     userId: res.data.qaFeedback.userId,
-                //     userName: res.data.qaFeedback.fbComment,
-                // }
-                // this.itemList = this.$store.getters.getCommentInfo
-                // this.itemList.push(row)
-                // this.$store.dispatch('setCommentInfo', this.itemList)
-                this.searchMessage()
-
-                // Good,Bad,comment更新
-                // GOOd
-                this.$store.getters.organizationSearchInfo.qas[
-                    this.rowIndex
-                ].feedbackGood = res.data.goodFeedbackCount
-                // bad
-                this.$store.getters.organizationSearchInfo.qas[
-                    this.rowIndex
-                ].feedbackBad = res.data.badFeedbackCount
-
-                //comment
-                this.$store.getters.organizationSearchInfo.qas[
-                    this.rowIndex
-                ].feedbackComment = res.data.commentFeedbackCount
-                console.log(this.itemList)
-
-                this.inputComment = ''
-            })
-        },
-        editMessage(id, index, item) {
-            let params = {
-                feedbackId: id,
-                fbComment: this.editComment,
-            }
-            this.$serve.updateComment(params).then((res) => {
-                this.$toast.success(res.data.message, {
-                    position: 'top-right',
-                })
-            })
-
-            // this.itemList = this.$store.getters.getCommentInfo
-            // this.itemList[index].comment = this.editComment
-            // this.$store.dispatch('setCommentInfo', this.itemList)
-            this.searchMessage()
-            this.editAddCheckpointsTitle(item)
-        },
-        async searchMessage() {
-            let params = {
-                id: this.qaId,
-            }
-            await this.$serve.getComment(params).then((res) => {
-                this.$store.dispatch('setCommentInfo', res.data.resultInfo)
-            })
-        },
+          })
+        }
+      })
     },
+    editAddCheckpointsTitle(item) {
+      item.isShow = !item.isShow
+      this.editComment = item.comment
+    },
+    closeCommentMessageBox() {
+      this.inputComment = ''
+      this.$store.dispatch(
+        'setCommentMessageBox',
+        !this.$store.getters.getCommentMessageBox
+      )
+    },
+    sendMessage() {
+      let params = {
+        id: this.qaId,
+        fbComment: this.inputComment,
+      }
+      this.$serve.sendComment(params).then((res) => {
+        this.$toast.success(res.data.message, {
+          position: 'top-right',
+        })
+
+        // // 登録したコメントを表示
+        // let row = {
+        //     comment: res.data.qaFeedback.fbComment,
+        //     createdDate: res.data.qaFeedback.createdAt,
+        //     id: res.data.qaFeedback.id,
+        //     updateDate: res.data.qaFeedback.updatedAt,
+        //     userId: res.data.qaFeedback.userId,
+        //     userName: res.data.qaFeedback.fbComment,
+        // }
+        // this.itemList = this.$store.getters.getCommentInfo
+        // this.itemList.push(row)
+        // this.$store.dispatch('setCommentInfo', this.itemList)
+        this.searchMessage()
+
+        // Good,Bad,comment更新
+        // GOOd
+        this.$store.getters.organizationSearchInfo.qas[
+          this.rowIndex
+        ].feedbackGood = res.data.goodFeedbackCount
+        // bad
+        this.$store.getters.organizationSearchInfo.qas[
+          this.rowIndex
+        ].feedbackBad = res.data.badFeedbackCount
+
+        //comment
+        this.$store.getters.organizationSearchInfo.qas[
+          this.rowIndex
+        ].feedbackComment = res.data.commentFeedbackCount
+        console.log(this.itemList)
+
+        this.inputComment = ''
+      })
+    },
+    editMessage(id, index, item) {
+      let params = {
+        feedbackId: id,
+        fbComment: this.editComment,
+      }
+      this.$serve.updateComment(params).then((res) => {
+        this.$toast.success(res.data.message, {
+          position: 'top-right',
+        })
+      })
+
+      // this.itemList = this.$store.getters.getCommentInfo
+      // this.itemList[index].comment = this.editComment
+      // this.$store.dispatch('setCommentInfo', this.itemList)
+      this.searchMessage()
+      this.editAddCheckpointsTitle(item)
+    },
+    async searchMessage() {
+      let params = {
+        id: this.qaId,
+      }
+      await this.$serve.getComment(params).then((res) => {
+        this.$store.dispatch('setCommentInfo', res.data.resultInfo)
+      })
+    },
+  },
 }
 </script>
 
