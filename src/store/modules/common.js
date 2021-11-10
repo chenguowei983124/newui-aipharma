@@ -18,6 +18,14 @@ export default {
         dateValueTo: '',
         styles: '-1',
         scope: '0',
+        bbsCheckInfo: {
+            checkTitle: true,
+            checkContent: true,
+            checkComment: true,
+            checkPost: true,
+            checkLastEditor: true,
+            checkFacilityName: true,
+        },
         qa_classify_facility: [
             { value: '0', title: '全体' },
             { value: '1', title: '自施設のみ' },
@@ -84,6 +92,9 @@ export default {
         getScope(state) {
             return state.scope
         },
+        getBbsCheckInfo(state) {
+            return state.bbsCheckInfo
+        },
     },
 
     mutations: {
@@ -95,6 +106,9 @@ export default {
         },
         setScope(state, info) {
             state.scope = info
+        },
+        setBbsCheck(state, info) {
+            state.bbsCheckInfo = info
         },
     },
 
@@ -200,6 +214,9 @@ export default {
         },
         setScopeInfo({ commit }, value) {
             commit('setScope', value)
+        },
+        setBbsCheckInfo({ commit }, value) {
+            commit('setBbsCheck', value)
         },
     },
 }

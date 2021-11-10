@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-screen">
         <my-all-header :form="$constant.formList.BBS"></my-all-header>
         <!-- 内容 -->
         <search-bulletin-board-layout></search-bulletin-board-layout>

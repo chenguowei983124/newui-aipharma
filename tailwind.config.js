@@ -169,7 +169,26 @@ module.exports = {
             },
             maxHeight: {
                 'full-18': 'calc(100% + 18px)',
+                'full-70': 'calc(70% )',
+                'full-80': 'calc(80% )',
                 modal: 'calc(100% + 18px)',
+            },
+            height: {
+                '1/10': '10%',
+                '2/10': '20%',
+                '3/10': '30%',
+                '4/10': '40%',
+                '5/10': '50%',
+                '6/10': '60%',
+                '7/10': '70%',
+                '8/10': '80%',
+                '9/10': '90%',
+                'screen-60': '60vh',
+                'screen-65': '65vh',
+                'screen-70': '70vh',
+                'screen-75': '75vh',
+                'screen-80': '80vh',
+                'screen-90': '90vh',
             },
             backgroundColor: (theme) => ({
                 ...theme('colors'),
@@ -252,6 +271,7 @@ module.exports = {
                 rescue: '#d9edc8',
                 blueline: '#65bbe5',
                 grayline: '#999999',
+                gray_e6e6e6: '#e6e6e6',
                 '326EB5Lins': '#326EB5',
                 garyTitle: '#cccccc',
                 commentBgColor: '#f2f2f2',
@@ -323,6 +343,7 @@ module.exports = {
         placeholderColor: {
             '32a5dcPlaceholderColor': '#32a5dc',
         },
+
         customForms: (theme) => ({
             default: {
                 select: {

@@ -16,8 +16,11 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckQ"
-                                    @change="onCheckQChange"
+                                    :checked="
+                                        $store.getters.getBbsCheckInfo
+                                            .checkTitle
+                                    "
+                                    @change="oncheckTitleChange"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
                                     >タイトル</span
@@ -30,8 +33,11 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckA"
-                                    @change="onChangeCheckA"
+                                    :checked="
+                                        $store.getters.getBbsCheckInfo
+                                            .checkContent
+                                    "
+                                    @change="onCheckContentChange"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
                                     >内容</span
@@ -44,8 +50,11 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckComment"
-                                    @change="onChangeCheckComment"
+                                    :checked="
+                                        $store.getters.getBbsCheckInfo
+                                            .checkComment
+                                    "
+                                    @change="onCheckCommentChange"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
                                     >コメント</span
@@ -61,9 +70,9 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getCheckAddFileName
+                                        $store.getters.getBbsCheckInfo.checkPost
                                     "
-                                    @change="onChangeCheckAddFileName"
+                                    @change="onCheckPostChange"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
                                     >投稿者</span
@@ -77,9 +86,10 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getCheckContributor
+                                        $store.getters.getBbsCheckInfo
+                                            .checkLastEditor
                                     "
-                                    @change="onChangeCheckContributor"
+                                    @change="onCheckLastEditorChange"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
                                     >最終編集者</span
@@ -92,8 +102,11 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckLastEditer"
-                                    @change="onChangeCheckLastEditer"
+                                    :checked="
+                                        $store.getters.getBbsCheckInfo
+                                            .checkFacilityName
+                                    "
+                                    @change="onCheckFacilityNameChange"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
                                     >施設名</span
@@ -129,13 +142,13 @@
         >
             <!-- 公開範囲 -->
             <vue-single-select
-                ref="medicines"
+                ref="scope"
                 :name="'field1'"
                 :default-value="$store.getters.getScope"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="{ tabindex: 1 }"
-                :default-options="scopeList"
-                @selected="setMedicineID"
+                :default-options="$constant.bbsScops"
+                @selected="setScopeInfo"
                 leftLableTitle="公開範囲"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
                 inputStyle="w-full text-left pl-20 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -323,19 +336,34 @@ export default {
         litepieDatepicker,
     },
     computed: {
+        dateValueFrom: {
+            get: function () {
+                return this.$store.getters.getDateValueFrom
+            },
+            set: function (value) {
+                return this.$store.dispatch('setDateValueFrom', value)
+            },
+        },
+        dateValueTo: {
+            get: function () {
+                return this.$store.getters.getDateValueTo
+            },
+            set: function (value) {
+                return this.$store.dispatch('setDateValueTo', value)
+            },
+        },
         tags: {
             get: function () {
                 return this.$store.getters.getSearchTags
             },
             set: function (newValue) {
-                this.$store.getters.dispatch('setSearchTags', newValue)
+                this.$store.dispatch('setSearchTags', newValue)
             },
         },
     },
     data() {
         return {
             tagList: this.$store.getters.bbsDropDownInfo.tags,
-            scopeList: this.$store.getters.bbsDropDownInfo.scops,
             isDetailClick: true,
         }
     },
@@ -345,26 +373,54 @@ export default {
             this.$refs.datepickerTo.clearPicker()
         },
         inputClear() {
-            // this.filterBBS.targets.map(t => {
-            //   t.value = false
-            // })
-            // let tgs = this.filterBBS.targets
-            // Object.keys(tgs).map((key) => {
-            //     tgs[key] = false
-            // })
-
-            // this.filterBBS.tags = []
-            // this.filterBBS.scope = ''
-            // this.filterBBS.create_from = ''
-            // this.filterBBS.create_to = ''
-            // this.$refs.medicines.setValue(null)
-            // this.$refs.datepicker_from.clearPicker()
-            // this.$refs.datepicker_to.clearPicker()
+            this.$refs.datepickerFrom.clearPicker()
+            this.$refs.datepickerTo.clearPicker()
+            this.$refs.scope.setValue('0')
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkTitle = true
+            checkInfo.checkContent = true
+            checkInfo.checkComment = true
+            checkInfo.checkPost = true
+            checkInfo.checkLastEditor = true
+            checkInfo.checkFacilityName = true
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
             this.$emit('clearSearchWordEvent', '')
         },
 
-        setMedicineID(value) {
-            this.filterBBS.scope = value
+        setScopeInfo(value) {
+            this.$store.dispatch('setScopeInfo', value)
+        },
+        oncheckTitleChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkTitle = !checkInfo.checkTitle
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckContentChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkContent = !checkInfo.checkContent
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckCommentChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkComment = !checkInfo.checkComment
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckPostChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkPost = !checkInfo.checkPost
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckLastEditorChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkLastEditor = !checkInfo.checkLastEditor
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckFacilityNameChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkFacilityName = !checkInfo.checkFacilityName
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
         },
         // 詳細条件クリックイベント
         detailBottunClick: function (event) {

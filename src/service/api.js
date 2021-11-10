@@ -195,6 +195,15 @@ const serve = {
                     data.push(map.name)
                 })
             }
+        } else {
+            const response = await axios('/tags', {
+                method: 'get',
+            })
+            const tags = response.data.tags
+            console.log('tags', tags)
+            tags.map((map) => {
+                data.push(map.name)
+            })
         }
 
         return data
@@ -536,6 +545,7 @@ const serve = {
     async getPostList(queryStringData) {
         const data = await axios('/posts/search', {
             method: 'post',
+            params: queryStringData,
         })
         return data
         // const mtd = 'post'

@@ -2,7 +2,7 @@
     <!-- <div class="w-full pt-12 h-191.25 ">aa</div> -->
     <!-- <div class="mx-auto pt-12 h-312.5" id="div_postList"> -->
 
-    <div class="mx-auto pt-12 h-312.5" id="div_postList">
+    <div class="mx-auto h-screen-60 md:h-screen-70" id="div_postList">
         <div class="flex justify-end mb-2">
             <vue-single-select
                 class="w-42.5"
@@ -17,9 +17,9 @@
                   border border-transparent focus:outline-none"
             ></vue-single-select>
         </div>
-        <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp">
-            <div class="relative overflow-hidden mb-8">
-                <div class="overflow-hidden">
+        <mescroll-vue class="overflow-y-scroll" ref="mescroll" :up="mescrollUp">
+            <div class="relative mb-8">
+                <div class="">
                     <div v-for="(article, index) in postList" :key="index">
                         <result-detail-row
                             class="searchResult_bbsDetail_blue mt-2"
@@ -47,7 +47,9 @@ export default {
         resultDetailRow,
         vueSingleSelect,
     },
-    props: {},
+    props: {
+        detailHeightCss: '',
+    },
     data() {
         return {
             firsted: true,
@@ -104,14 +106,22 @@ export default {
     },
     watch: {
         $route(to, from) {
-            // console.log('searchBulletinBoardMain watch',to, from)
+            console.log('searchBulletinBoardMain watch', to.query)
             if (
                 to.path != '/searchBulletinBoard' ||
                 from.path != '/searchBulletinBoard'
             )
                 return
 
-            if (!!to.query.publish) {
+            // if (JSON.stringify(this.$route.query) == '{}') {
+            //     this.initStore()
+            //     this.$store.dispatch('clearPreavoidsInfo', {})
+            // }
+            // if (JSON.stringify(this.$route.query) !== '{}') {
+            //     this.resetSearchBar()
+            //     this.execSearch()
+            // }
+            if (!!to.query) {
                 this.params = to.query
             } else {
                 delete this.params.publish
@@ -119,6 +129,7 @@ export default {
                 Object.assign(this.params, this.$store.getters.getFilterBBS)
                 // console.log('getFilterBBS watch',this.$store.getters.getFilterBBS)
             }
+
             this.mescroll.resetUpScroll()
             this.mescroll.scrollTo(0, 0)
         },
@@ -128,6 +139,7 @@ export default {
             // console.log('doSearch', this.params, this.$store.getters.getOidcCode)
             const PAGE_LIMIT = 10
             Object.assign(this.params, { division: 'BBS' })
+            console.log('watch', this.params)
             const queryStringData = {
                 page: pgNo,
                 limit: PAGE_LIMIT,
@@ -186,6 +198,79 @@ export default {
             this.mescroll.resetUpScroll()
             this.mescroll.scrollTo(0, 0)
         },
+        // 初期化検索条件
+        initStore() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkTitle = true
+            checkInfo.checkContent = true
+            checkInfo.checkComment = true
+            checkInfo.checkPost = true
+            checkInfo.checkLastEditor = true
+            checkInfo.checkFacilityName = true
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+        },
+        // リーセット検索バー
+        resetSearchBar: function () {
+            this.$store.dispatch('setSearchWord', this.$route.query.search)
+            // 対象期間FROM
+            this.$store.dispatch('setDateValueFrom', this.$route.query.dateFrom)
+            // 対象期間TO
+            this.$store.dispatch('setDateValueTo', this.$route.query.dateTo)
+            // 様式
+            this.$store.dispatch('setStyles', this.$route.query.styles)
+            // 施設
+            this.$store.dispatch(
+                'setFacilityID',
+                this.$route.query.facility_flag
+            )
+
+            // 1ページ表示に表示件数設定
+            this.$store.dispatch('setMaxCount', this.$route.query.displayed)
+            this.preavoidsDateSort = this.$route.query.sort
+
+            this.selectDispNumber = this.$route.query.sort
+            if (this.$route.query.displayed == 20) {
+                this.organizationCountSort = 0
+            } else if (this.$route.query.displayed == 50) {
+                this.organizationCountSort = 1
+            }
+            if (this.$route.query.displayed == 100) {
+                this.organizationCountSort = 2
+            }
+            this.$store.dispatch('setSort', this.$route.query.sort)
+            // ページネーション
+            this.$store.dispatch('setPage', this.$route.query.page)
+        },
+        resetRouter() {
+            let getTimestamp = new Date().getTime()
+            let dispDetailNumber = 20
+
+            if (this.organizationCountSort == 0) {
+                dispDetailNumber = 20
+            } else if (this.organizationCountSort == 1) {
+                dispDetailNumber = 50
+            } else if (this.organizationCountSort == 2) {
+                dispDetailNumber = 100
+            }
+            // console.log("dispDetailNumber", dispDetailNumber)
+            let params = {
+                search: this.$store.getters.getSearchWord,
+                dateFrom: this.$store.getters.getDateValueFrom,
+                dateTo: this.$store.getters.getDateValueTo,
+                styles: this.$store.getters.getStyles,
+                facility_flag: this.$store.getters.getFacilityID,
+                // displayed: this.$store.getters.getMaxCount,
+                displayed: dispDetailNumber,
+                sort: this.$store.getters.getSort,
+                timestamp: getTimestamp,
+            }
+            this.$router.push({
+                path: '/searchPreavoids',
+                query: params,
+            })
+        },
         clickItem(val) {
             // this.dispFlg = !this.dispFlg
             console.log('aaa', val)
@@ -236,6 +321,9 @@ export default {
         },
     },
     created() {},
+    mounted() {
+        this.$store.getters.getBBSDropDowninfo
+    },
 }
 </script>
 <style scoped>

@@ -91,28 +91,28 @@ export default {
         async getBBSDropDowninfo({ rootState, commit }, code) {
             commit('setBBSDropDowninfo', {})
             const tags = await serve.getTagsMaster(code)
-            const scops = [
-                { value: '0', title: '全体' },
-                { value: '1', title: '組織' },
-                { value: '2', title: 'グループ' },
-            ]
-            const genre_Info = [
-                { value: 'notice', title: '告知' },
-                { value: 'event', title: 'イベント' },
-                { value: 'other', title: 'その他' },
-            ]
-            const genre_BBS = [
-                { value: 'notice', title: '告知' },
-                { value: 'event', title: 'イベント' },
-                { value: 'query', title: '質問' },
-                { value: 'questionnaire', title: 'アンケート' },
-                { value: 'other', title: 'その他' },
-            ]
+            // const scops = [
+            //     { value: '0', title: '全体' },
+            //     { value: '1', title: '組織' },
+            //     { value: '2', title: 'グループ' },
+            // ]
+            // const genre_Info = [
+            //     { value: 'notice', title: '告知' },
+            //     { value: 'event', title: 'イベント' },
+            //     { value: 'other', title: 'その他' },
+            // ]
+            // const genre_BBS = [
+            //     { value: 'notice', title: '告知' },
+            //     { value: 'event', title: 'イベント' },
+            //     { value: 'query', title: '質問' },
+            //     { value: 'questionnaire', title: 'アンケート' },
+            //     { value: 'other', title: 'その他' },
+            // ]
             const bbsDropDowninfo = {
                 tags: tags,
-                scops: scops,
-                genre_Info: genre_Info,
-                genre_BBS: genre_BBS,
+                // scops: scops,
+                // genre_Info: genre_Info,
+                // genre_BBS: genre_BBS,
             }
             // console.log('setBBSDropDowninfo', bbsDropDowninfo)
             commit('setBBSDropDowninfo', bbsDropDowninfo)
