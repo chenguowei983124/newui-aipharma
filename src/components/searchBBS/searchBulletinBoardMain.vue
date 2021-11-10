@@ -2,7 +2,7 @@
     <!-- <div class="w-full pt-12 h-191.25 ">aa</div> -->
     <!-- <div class="mx-auto pt-12 h-312.5" id="div_postList"> -->
 
-    <div class="mx-auto h-screen-60 md:h-screen-70" id="div_postList">
+    <div class="h-screen-60 md:h-screen-65" id="div_postList">
         <div class="flex justify-end mb-2">
             <vue-single-select
                 class="w-42.5"
@@ -18,7 +18,7 @@
             ></vue-single-select>
         </div>
         <mescroll-vue class="overflow-y-scroll" ref="mescroll" :up="mescrollUp">
-            <div class="relative mb-8">
+            <div class="relative">
                 <div class="">
                     <div v-for="(article, index) in postList" :key="index">
                         <result-detail-row

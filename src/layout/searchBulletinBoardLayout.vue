@@ -34,7 +34,7 @@
                     </div>
                     <div
                         class="
-                            md:ml-2 md:mt-12 md:border-l-2 md:border-blueline
+                            md:ml-2 md:mt-22 md:border-l-2 md:border-blueline
                         "
                         v-if="dispFlg"
                     ></div>
@@ -48,15 +48,6 @@
                         "
                         v-if="dispFlg"
                     >
-                        <!-- <bbs-list
-                            class="
-                                flex-grow
-                                w-full
-                                md:ml-2 md:w-132.5 md:flex-none
-                            "
-                            :detailHeightCss="detailHeightCss"
-                            @clickItemEvent="openDetail"
-                        ></bbs-list> -->
                         <bbs-talking
                             class="
                                 flex-grow

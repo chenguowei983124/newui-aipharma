@@ -1,7 +1,7 @@
 <template>
-    <div class="md:pt-3.5">
+    <div class="md:p-5 p-2">
         <!-- 最初の行目 -->
-        <div class="md:ml-5 md:mr-5 md:h-4 items-center flex justify-between">
+        <div class="md:h-4 items-center flex justify-between">
             <div class="flex">
                 <result-detail-row-item
                     itemType="1"
@@ -26,8 +26,8 @@
             <!-- </div> -->
         </div>
         <!--  二行目 -->
-        <div class="md:ml-5 md:mr-5 flex-grow truncate md:h-6">
-            <span class="items-center" :class="midAreaStyle">
+        <div class="flex-grow truncate md:h-6">
+            <span class="items-center">
                 <!-- title text -->
                 <div
                     class="
@@ -40,7 +40,6 @@
                     <result-detail-row-item
                         itemType="7"
                         :itemValue="row.urlTitle"
-                        :itemStyle="resetTitle(midDetailStyle)"
                         addStyle="truncate"
                         :id="String(row.id)"
                         v-if="row.urlTitle != undefined"
@@ -51,25 +50,26 @@
         </div>
 
         <!--  三行目 -->
-        <div class="md:ml-5 md:mr-5 flex-grow md:truncate md:h-6">
+        <div class="flex-grow md:truncate md:h-6">
             <result-detail-row-item
                 itemType="7"
                 :itemValue="row.title"
-                :itemStyle="resetTitle(midDetailStyle)"
                 addStyle="truncate"
                 v-if="row.title != undefined"
             ></result-detail-row-item>
         </div>
 
         <!--  四行目 -->
-        <div class="md:ml-5 md:mr-5 flex justify-between md:h-6">
-            <result-detail-row-item
-                itemType="7"
-                :itemValue="row.userName"
-                :itemStyle="resetTitle(midDetailStyle)"
-                addStyle="truncate"
-                v-if="row.userName != undefined"
-            ></result-detail-row-item>
+        <div class="mt-3.75 flex justify-between md:h-6">
+            <div class="flex items-end">
+                <result-detail-row-item
+                    itemType="7"
+                    :itemValue="row.userName"
+                    itemStyle="notoSansJpAndSixteenBold"
+                    v-if="row.userName != undefined"
+                ></result-detail-row-item>
+                <div class="ml-2 notoSansJpAndTwelveRegular">先生</div>
+            </div>
             <!-- view数 -->
             <result-detail-row-item
                 itemType="4"
@@ -81,12 +81,11 @@
         </div>
 
         <!--  五行目 -->
-        <div class="md:ml-5 md:mr-5 flex justify-between md:h-6">
+        <div class="flex justify-between md:h-6">
             <result-detail-row-item
                 itemType="7"
                 :itemValue="row.workplace"
-                :itemStyle="resetTitle(midDetailStyle)"
-                addStyle="truncate"
+                itemStyle="notoSansJpAndTwelveBold"
                 v-if="row.workplace != undefined"
             ></result-detail-row-item>
             <!-- view数 -->
@@ -94,7 +93,7 @@
                 itemType="9"
                 itemTitle="返信 XX 件"
                 :itemValue="row.commnetCount.toString()"
-                addStyle="md:ml-2.5 md:flex-none"
+                addStyle=" md:flex-none"
                 v-if="row.commnetCount != undefined"
             ></result-detail-row-item>
         </div>
@@ -211,42 +210,30 @@ export default {
             })
         },
     },
-    setup(props) {
-        const proAreaStyle = computed(() => {
-            const style = []
-            if (props.proDetailStyle == 'style1') {
-                style.push('flex space-x-1.5 md:space-x-3 pl-2 md:pl-0')
-            }
-            if (props.proDetailStyle == 'style2') {
-                style.push('flex flex-row md:flex-col md:space-x-0 space-x-2 ')
-            }
-            return style
-        })
+    // setup(props) {
+    //     const proAreaStyle = computed(() => {
+    //         const style = []
+    //         if (props.proDetailStyle == 'style1') {
+    //             style.push('flex space-x-1.5 md:space-x-3 pl-2 md:pl-0')
+    //         }
+    //         if (props.proDetailStyle == 'style2') {
+    //             style.push('flex flex-row md:flex-col md:space-x-0 space-x-2 ')
+    //         }
+    //         return style
+    //     })
 
-        const midAreaStyle = computed(() => {
-            const style = []
-            if (props.midDetailStyle == 'style1') {
-                style.push('flex pl-2 md:pl-0')
-            }
-            if (props.proDetailStyle == 'style2') {
-                style.push('flex flex-col')
-            }
-            return style
-        })
+    //     const bakAreaStyle = computed(() => {
+    //         const style = []
+    //         if (props.bakDetailStyle == 'style1') {
+    //             style.push('flex')
+    //         }
+    //         return style
+    //     })
 
-        const bakAreaStyle = computed(() => {
-            const style = []
-            if (props.bakDetailStyle == 'style1') {
-                style.push('flex')
-            }
-            return style
-        })
-
-        return {
-            proAreaStyle,
-            midAreaStyle,
-            bakAreaStyle,
-        }
-    },
+    //     return {
+    //         proAreaStyle,
+    //         bakAreaStyle,
+    //     }
+    // },
 }
 </script>

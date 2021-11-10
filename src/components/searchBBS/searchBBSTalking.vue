@@ -2,12 +2,8 @@
     <div class="mx-auto h-screen-60 md:h-screen-70" id="div_postList">
         <div class="flex justify-between h-10 border-b-2 border-blueline">
             <div class="notoSansJpAndTwentyBold">スレッド</div>
-            <div class="h-10 w-10 mt-2" @click="closeClick">
-                <x-icon-svg
-                    defaultClass="h-6 w-6"
-                    defaultStrokeWidth="3"
-                    color="#65bbe5"
-                ></x-icon-svg>
+            <div class="h-10 w-10 mt-1" @click="closeClick">
+                <x-icon-svg color="#65bbe5"></x-icon-svg>
             </div>
         </div>
         <!-- " -->
@@ -15,12 +11,12 @@
             class="overflow-y-scroll"
             :class="[dispEditor ? 'h-7/10' : 'h-9/10']"
         >
-            <div class="mt-4">
+            <div class="mt-4 pl-2 pr-2">
                 <div v-if="postList.length > 0">
                     <div>
-                        <div class="flex">
+                        <div class="flex flex-grow">
                             <div>
-                                <div class="flex justify-between">
+                                <div class="flex justify-between pl-2 pr-8">
                                     <div class="flex">
                                         <result-detail-row-item
                                             itemType="1"
@@ -44,13 +40,21 @@
                                             postList[0].notificationType !=
                                             undefined
                                         "
-                                        addStyle="flex justify-center items-center mr-1.25 md:flex-none border-t-2 "
+                                        addStyle="flex justify-center items-center mr-1.25 md:flex-none  "
                                     ></result-detail-row-item>
                                 </div>
-                                <div class="mt-2 notoSansJpAndFourteenRegular">
+                                <div
+                                    class="
+                                        mt-8
+                                        notoSansJpAndEighteenMedium
+                                        break-all
+                                        pl-2
+                                        pr-8
+                                    "
+                                >
                                     {{ postList[0].urlTitle }}
                                 </div>
-                                <div class="flex">
+                                <div class="flex mt-5">
                                     <div
                                         class="
                                             rounded-full
@@ -66,12 +70,23 @@
                                         />
                                     </div>
                                     <div class="ml-3 mt-2">
-                                        <div
-                                            class="notoSansJpAndSixteenRegular"
-                                        >
-                                            {{ postList[0].userName }}
+                                        <div class="flex items-end">
+                                            <div
+                                                class="notoSansJpAndSixteenBold"
+                                            >
+                                                {{ postList[0].userName }}
+                                            </div>
+                                            <div
+                                                class="
+                                                    ml-1
+                                                    notoSansJpAndTwelveRegular
+                                                "
+                                            >
+                                                先生
+                                            </div>
                                         </div>
-                                        <div class="notoSansJpAndTwelveRegular">
+
+                                        <div class="notoSansJpAndTwelveBold">
                                             {{ postList[0].workplace }}
                                         </div>
                                     </div>
@@ -80,13 +95,14 @@
                             <div>
                                 <div
                                     class="
-                                        h-8
-                                        w-8
+                                        h-10
+                                        w-10
                                         border-2
                                         rounded
                                         text-center
-                                        p-0.5
-                                        bg-gray-100
+                                        p-1.5
+                                        bg-gray_ececec
+                                        text-grayline
                                     "
                                 >
                                     ・・・
@@ -94,11 +110,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-2 notoSansJpAndFourteenRegular">
+                    <div class="mt-5 notoSansJpAndFourteenRegular break-all">
                         {{ postList[0].title }}
                     </div>
-                    <div class="mt-2 flex justify-between">
-                        <div>ロキソニンの用途は</div>
+                    <div class="mt-5 flex">
+                        <div class="flex flex-wrap mt-2">
+                            <div
+                                class="
+                                    rounded-full
+                                    border-2 border-gray-300
+                                    bg-gray-100
+                                    h-6
+                                    notoSansJpAndTwelveRegular
+                                    pl-1
+                                    pr-1
+                                    text-center
+                                    mr-1
+                                    cursor-pointer
+                                "
+                            >
+                                # ロキソニンの用途は
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 flex justify-end">
                         <div class="flex items-end">
                             <result-detail-row-item
                                 itemType="4"
@@ -143,7 +178,6 @@
                             </button>
                         </div>
                     </div>
-
                     <div
                         class="mt-3 ml-10 border-t-2 border-blueline"
                         v-for="(items, index) in postList[0].commnet"
@@ -167,12 +201,23 @@
                                         />
                                     </div>
                                     <div class="ml-3 mt-2">
-                                        <div
-                                            class="notoSansJpAndSixteenRegular"
-                                        >
-                                            {{ items.user_data.user_name }}
+                                        <div class="flex items-end">
+                                            <div
+                                                class="notoSansJpAndSixteenBold"
+                                            >
+                                                {{ items.user_data.user_name }}
+                                            </div>
+                                            <div
+                                                class="
+                                                    ml-1
+                                                    notoSansJpAndTwelveRegular
+                                                "
+                                            >
+                                                先生
+                                            </div>
                                         </div>
-                                        <div class="notoSansJpAndTwelveRegular">
+
+                                        <div class="notoSansJpAndTwelveBold">
                                             {{ items.user_data.workplace }}
                                         </div>
                                     </div>
@@ -180,24 +225,27 @@
                                 <div>
                                     <div
                                         class="
-                                            h-8
-                                            w-8
+                                            h-10
+                                            w-10
                                             border-2
                                             rounded
                                             text-center
-                                            p-0.5
-                                            bg-gray-100
+                                            p-1.5
+                                            bg-gray_ececec
+                                            text-grayline
                                         "
                                     >
                                         ・・・
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-2 notoSansJpAndFourteenRegular">
+                            <div class="mt-5 notoSansJpAndFourteenRegular">
                                 {{ items.content }}
                             </div>
-                            <div class="flex justify-between items-end mt-2">
-                                <div>{{ items.updated_at }}</div>
+                            <div class="flex justify-between items-end mt-5">
+                                <div class="latoAndFourteenBold">
+                                    {{ items.updated_at }}
+                                </div>
                                 <div class="flex items-end">
                                     <result-detail-row-item
                                         itemType="4"
@@ -254,7 +302,7 @@
         </div>
         <div class="mt-4">
             <div
-                class="border-2 h-8"
+                class="rounded border-2 h-8"
                 @click="dispEditor = !dispEditor"
                 v-if="!dispEditor"
                 v-html="InputComment.toString().split('\n')[0]"
@@ -270,14 +318,8 @@
                         height: 130,
                         menubar: false,
                         statusbar: false,
-                        //content_style: `p{line-height: 1;} body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;line-height: 1.0; margin: 1rem;}`,
-                        //content_css: '/mycontent.css',
-                        plugins:
-                            'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap  mentions quickbars linkchecker emoticons advtable export',
-                        toolbar:
-                            'myButton | undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image table media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
-                        //tinydrive_token_provider: 'http://localhost:8002/jwt',
-                        images_upload_handler: images_upload_handler,
+
+                        toolbar: ' bold italic underline strikethrough | ',
                     }"
                 />
                 <div
@@ -286,7 +328,7 @@
                         justify-end
                         space-x-2
                         h-10
-                        border-2
+                        border-l-2 border-b-2 border-r-2
                         items-center
                         pr-2
                     "
@@ -318,9 +360,10 @@
                             bg-whole
                         "
                     >
-                        <div class="mr-3 notoSansJpAndFourteenBold">送信</div>
-                        <send-message-icon-svg></send-message-icon-svg>
-                        <!-- <good class="h-4 w-4 mr-1"></good> -->
+                        <div class="mr-1.5 notoSansJpAndFourteenBold">送信</div>
+                        <send-message-icon-svg
+                            class="mr-1"
+                        ></send-message-icon-svg>
                     </button>
                 </div>
             </div>
@@ -330,7 +373,7 @@
 </template>
 
 <script>
-import XIconSvg from '../common/svgImage/xIconSvg.vue'
+import XIconSvg from '../common/svgImage/bbsXIconSvg.vue'
 import sendMessageIconSvg from '../common/svgImage/sendMessageIconSvg.vue'
 import resultDetailRow from '../common/searchResult/resultBBS.vue'
 import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'

@@ -98,14 +98,14 @@
             </div>
             <div :class="searchBarStyleClessMid">
                 <!-- 左青背景 -->
-                <div :class="searchBarProStyleClass"></div>
+                <!-- <div :class="searchBarProStyleClass"></div> -->
                 <search-preavoid-title
                     v-if="form == this.$constant.formList.PVD"
                 ></search-preavoid-title>
                 <search-bbs-title-bar
                     v-if="form == this.$constant.formList.BBS"
                 ></search-bbs-title-bar>
-                <div :class="searchBarProStyleClass"></div>
+                <!-- <div :class="searchBarProStyleClass"></div> -->
             </div>
         </div>
     </div>
@@ -263,7 +263,7 @@ export default {
             } else if (this.$props.form == this.$constant.formList.PVD) {
                 return 'hidden'
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return 'flex-grow'
+                return 'flex-grow '
             }
         },
         searchBarMidStyleClass: function () {
