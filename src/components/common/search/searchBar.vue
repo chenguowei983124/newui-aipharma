@@ -81,9 +81,7 @@
                     </div>
                     <!-- 掲示板 -->
                     <div
-                        :class="
-                            detailDisp ? 'block' : 'hidden group-hover:block'
-                        "
+                        :class="'hidden group-hover:block'"
                         v-if="checkId == 6 && form != $constant.formList.TOP"
                     >
                         <search-bbs-detail
@@ -155,6 +153,7 @@ export default {
     },
     watch: {
         checkId: function () {
+            console.log(this.form)
             this.$emit('searchID', this.checkId)
         },
     },
@@ -172,7 +171,7 @@ export default {
             this.checkId = 3
         } else if (this.$props.form == this.$constant.formList.BBS) {
             this.checkId = 6
-            this.detailDisp = false
+            // this.detailDisp = false
         }
     },
     destroyed() {
@@ -187,6 +186,7 @@ export default {
                 this.$store.dispatch('setSearchWord', value)
             },
         },
+        // 検索ボタンを固定前端に表示
         searchBarFixedClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
                 return ''
@@ -202,6 +202,7 @@ export default {
                 return 'fixed w-full lm:w-270'
             }
         },
+        // 検索バーの前中後を一行にする
         searchBarClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
                 return 'flex '
@@ -217,6 +218,7 @@ export default {
                 return 'flex'
             }
         },
+        // 検索バーの全体様式
         searchBarStyleCless: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
                 return 'bg-backgroundMainSearch flex rounded-none mid:rounded-md items-center h-full pt-2.5 pb-2.5 md:pt-5 md:pb-5'
@@ -241,6 +243,7 @@ export default {
                 return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 rounded-b-lg md:rounded-b-none'
             }
         },
+        // 症例、掲示板のタイトル欄の様式
         searchBarStyleClessMid: function () {
             if (
                 this.$props.form == this.$constant.formList.PVD ||
@@ -251,6 +254,7 @@ export default {
                 return 'hidden'
             }
         },
+        // 検索バーの前後部様式
         searchBarProStyleClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
                 return 'bg-red-400 flex-grow'
@@ -266,6 +270,7 @@ export default {
                 return 'flex-grow '
             }
         },
+        // 検索バーの中部様式
         searchBarMidStyleClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
                 return 'bg-backgroundMainSearch h-full w-full md:w-191.25 rounded-b-lg md:rounded-none'
@@ -293,7 +298,7 @@ export default {
                 return 'キーワードを入力'
             }
         },
-
+        // PC版のキーワード入力の様式
         sreachBarPCInputClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
                 return (
@@ -367,14 +372,24 @@ export default {
                     )
                 }
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return (
-                    'hidden md:block  h-10 w-10/12  rounded-r ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent '
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'hidden md:block md:rounded-none h-10 w-10/12  ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0  border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                } else {
+                    return (
+                        'hidden md:block  h-10 w-10/12  md:rounded-none md:rounded-r ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                }
             }
         },
+        // SP版のキーワード入力の様式
         sreachBarSPInputClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
                 return (
@@ -420,6 +435,7 @@ export default {
                 )
             }
         },
+        // 検索ボタン様式
         sreachBarButtonClass: function () {
             if (
                 this.$props.form != this.$constant.formList.TOP &&
@@ -450,6 +466,9 @@ export default {
         showMsg: function (data) {},
 
         menu: function () {
+            // if (this.$props.form == this.$constant.formList.BBS) {
+            //     this.detailDisp = true
+            // } else {
             this.srcoll =
                 window.pageYOffset ||
                 document.documentElement.scrollTop ||
@@ -459,9 +478,8 @@ export default {
             } else {
                 this.detailDisp = true
             }
-            if (this.$props.form == this.$constant.formList.BBS) {
-                this.detailDisp = true
-            }
+            // }
+            console.log('detailDisp', this.detailDisp)
             console.log('scorll', this.detailDisp)
             this.$emit('detailDisp', this.detailDisp)
         },
@@ -761,6 +779,7 @@ export default {
             this.$store.dispatch('setDateValueFrom', '')
             this.$store.dispatch('setDateValueTo', '')
         },
+        // 詳細条件押下フラグ
         getIsDetailClick(value) {
             this.$emit('isDetailClick', value)
         },
