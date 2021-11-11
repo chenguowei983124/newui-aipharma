@@ -1,6 +1,6 @@
 <template>
     <!-- 検索枠 -->
-    <div class="flex">
+    <div class="group">
         <!-- pcの場合 -->
         <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
             <!-- @detailDisp="getDetailDisp" -->
@@ -79,23 +79,23 @@ import searchBar from '../components/common/search/searchBar.vue'
 import searchPreavoidsMain from '../components/searchPreavoids/searchPreavoidsMain.vue'
 
 export default {
-  components: {
-    searchBar,
-    searchPreavoidsMain,
-  },
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true,
-      isDetailButtonClick: false,
-    }
-  },
-  methods: {
-    // 詳細条件ボタン押下区分を取得
-    getDetailClick: function (data) {
-      this.isDetailButtonClick = data
+    components: {
+        searchBar,
+        searchPreavoidsMain,
     },
-  },
-  created() { },
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+            isDetailButtonClick: false,
+        }
+    },
+    methods: {
+        // 詳細条件ボタン押下区分を取得
+        getDetailClick: function (data) {
+            this.isDetailButtonClick = data
+        },
+    },
+    created() {},
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <!-- 検索枠 -->
-    <div class="flex">
+    <div class="group">
         <!-- pcの場合 -->
         <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
             <search-bar
@@ -133,62 +133,62 @@ import DiKnowledgeInit from '../components/diKnowledge/diKnowledgeInit.vue'
 import SearchDiKnowledgeAi from '../components/diKnowledge/searchDiKnowledgeAi.vue'
 
 export default {
-  components: {
-    CommentMessageBox,
-    GoodMessageBox,
-    searchBar,
-    SearchDiKnowledgeMain,
-    DiKnowledgeInit,
-    SearchDiKnowledgeAi,
-  },
+    components: {
+        CommentMessageBox,
+        GoodMessageBox,
+        searchBar,
+        SearchDiKnowledgeMain,
+        DiKnowledgeInit,
+        SearchDiKnowledgeAi,
+    },
 
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true,
-      isDetailButtonClick: false,
-      parentMage: '',
-    }
-  },
-  methods: {
-    getSearchResult: function (value) {
-      //   console.log('')
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+            isDetailButtonClick: false,
+            parentMage: '',
+        }
     },
-    // ========================================
-    // 詳細条件ボタン押下区分を取得
-    // ========================================
-    getDetailClick: function (data) {
-      this.isDetailButtonClick = data
+    methods: {
+        getSearchResult: function (value) {
+            //   console.log('')
+        },
+        // ========================================
+        // 詳細条件ボタン押下区分を取得
+        // ========================================
+        getDetailClick: function (data) {
+            this.isDetailButtonClick = data
+        },
+        // ========================================
+        // 詳細条件表示・非表示取得
+        // ========================================
+        getDetailDisp: function (value) {
+            //   console.log(value)
+            this.detailDisp = value
+        },
+        searchTag: function (value) {
+            this.value = value
+            this.$store.dispatch('setSearchWord', value)
+            this.$store.dispatch('setSearchTags', '')
+            this.$store.dispatch('setMedicineID', '')
+            this.$store.dispatch('setQuestionID', '')
+            this.$store.dispatch('setFacilityID', '')
+            this.$store.dispatch('setPage', '')
+            this.$store.dispatch('setQAID', '')
+            this.$refs.searchbar.searchClick()
+        },
+        showMsgToParent: function (data) {
+            //   console.log("showMsgToParent", data)
+            return (this.parentMage = data)
+        },
     },
-    // ========================================
-    // 詳細条件表示・非表示取得
-    // ========================================
-    getDetailDisp: function (value) {
-      //   console.log(value)
-      this.detailDisp = value
+    created() {
+        let param = sessionStorage.getItem('searchParam')
+        this.$store.dispatch(
+            'setSearchWord',
+            sessionStorage.getItem('searchWord')
+        )
     },
-    searchTag: function (value) {
-      this.value = value
-      this.$store.dispatch('setSearchWord', value)
-      this.$store.dispatch('setSearchTags', '')
-      this.$store.dispatch('setMedicineID', '')
-      this.$store.dispatch('setQuestionID', '')
-      this.$store.dispatch('setFacilityID', '')
-      this.$store.dispatch('setPage', '')
-      this.$store.dispatch('setQAID', '')
-      this.$refs.searchbar.searchClick()
-    },
-    showMsgToParent: function (data) {
-      //   console.log("showMsgToParent", data)
-      return (this.parentMage = data)
-    },
-  },
-  created() {
-    let param = sessionStorage.getItem('searchParam')
-    this.$store.dispatch(
-      'setSearchWord',
-      sessionStorage.getItem('searchWord')
-    )
-  },
 }
 </script>

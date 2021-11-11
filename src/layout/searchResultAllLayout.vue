@@ -1,6 +1,6 @@
 <template>
     <!-- 検索枠 -->
-    <div class="flex">
+    <div class="group">
         <!-- pcの場合 -->
         <div class="fixed flex-auto w-full pt-12.5 md:pt-15 md:top-0 z-30">
             <search-bar :form="$constant.formList.ALL"></search-bar>
@@ -30,17 +30,17 @@ import searchBar from '../components/common/search/searchBar.vue'
 import searchResultMain from '../components/searchResultAll/searchResultMain.vue'
 
 export default {
-  components: {
-    searchBar,
-    searchResultMain,
-  },
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true,
-    }
-  },
-  methods: {},
-  created() { },
+    components: {
+        searchBar,
+        searchResultMain,
+    },
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+        }
+    },
+    methods: {},
+    created() {},
 }
 </script>
