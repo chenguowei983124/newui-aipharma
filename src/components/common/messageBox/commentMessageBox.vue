@@ -334,6 +334,7 @@ export default {
           console.log('削除')
           let params = {
             id: items.id,
+            qasid: this.qaId
           }
           if (params != '') {
             this.$serve.deleteComment(params).then((res) => {
@@ -428,6 +429,7 @@ export default {
       let params = {
         feedbackId: id,
         fbComment: this.editComment,
+        qaId: this.qaId,
       }
       this.$serve.updateComment(params).then((res) => {
         this.$toast.success(res.data.message, {

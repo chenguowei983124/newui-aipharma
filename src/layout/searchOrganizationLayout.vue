@@ -16,8 +16,8 @@
             <div
                 :class="[
                     isOrgDetailButtonClick
-                        ? 'hidden group-hover:block h-50 '
-                        : 'hidden group-hover:block h-30',
+                        ? 'hidden group-hover:block h-56'
+                        : 'hidden group-hover:block h-36',
                 ]"
                 v-if="!isScroll"
             ></div>
@@ -27,20 +27,20 @@
             :class="[
                 isScroll
                     ? isOrgDetailButtonClick
-                        ? 'h-88.75 '
-                        : 'h-66'
+                        ? 'h-65 md:h-88.75 '
+                        : 'h-36 md:h-60 '
                     : isOrgDetailButtonClick
-                    ? 'h-88.75'
-                    : 'h-72',
+                    ? 'h-20 md:h-40 '
+                    : 'h-20 md:h-40 ',
             ]"
         ></div>
         <!-- 内容 -->
-        <div class="flex border-b-2 border-blue-200 mt-33.5 md:mt-5 md:h-20">
+        <div class="flex border-b-2 border-blue-200 mt-50 md:mt-10 md:h-18">
             <!-- 左 -->
             <div
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
             ></div>
-            <div class="flex flex-col w-full md:w-191.25 justify-center">
+            <div class="flex flex-col w-full md:w-191.25 justify-start">
                 <div class="flex flex-row space-x-2 items-center">
                     <div
                         class="
@@ -84,7 +84,7 @@
                                 cursor-pointer
                                 mt-1.25
                             "
-                            @click="searchTag(value)"
+                            @click="searchTag(value.label)"
                             v-for="(value, key, index) in $store.getters
                                 .getOrganizationSeartorenndoTab.torenndoTab"
                             :key="index"
@@ -182,13 +182,13 @@ export default {
       this.value = value
       this.$store.dispatch('setSearchWord', '')
       let tagsLable = this.$store.getters.getSearchTagsLable
-      tagsLable.push(value.label)
+      tagsLable.push(value)
       this.$store.dispatch('setSearchTagsLable', tagsLable)
       this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
     },
     // init中 クリック タグ
     showMsgToParent: function (data) {
-      //   console.log('showMsgToParentshowMsgToParent', data)
+      console.log('showMsgToParentshowMsgToParent', data)
       this.searchTag(data)
     },
   },

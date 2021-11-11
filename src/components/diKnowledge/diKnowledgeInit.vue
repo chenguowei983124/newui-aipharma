@@ -66,7 +66,7 @@
                         .torenndoTab"
                     :key="item"
                 >
-                    #{{ item }}
+                    #{{ item.label }}
                 </div>
             </div>
         </div>

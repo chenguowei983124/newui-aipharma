@@ -397,29 +397,48 @@ export default {
   },
   computed: {
     dispTagValue() {
+
       this.tagValue = this.$store.getters.getSearchTags
+      console.log('tagValuetagValuevvvv', this.tagValue)
       return this.tagValue
     },
   },
   methods: {
     async fetchLanguages(query) {
       let searchTagsList = this.$store.getters.getSearchTagsLable
-      console.log('searchTagsList', searchTagsList)
       let result = {}
-      if (query == null || query == '') {
-
-        for (let i = 0; i < searchTagsList.length; i++) {
-          let response = await this.$serve.getSuggestTags(searchTagsList[i])
-          result = response.data.map((item) => {
-            return {
-              value: item.tagId,
-              label: item.name,
+      if ((query == null || query == '')) {
+        if (Object.keys(searchTagsList).length !== 0) {
+          let resultList = {}
+          for (let i = 0; i < searchTagsList.length; i++) {
+            let response = await this.$serve.getSuggestTags(searchTagsList[i])
+            resultList = response.data.map((item) => {
+              return {
+                value: item.tagId,
+                label: item.name,
+              }
+            })
+          }
+          Object.keys(resultList).forEach(function (key) {
+            if (resultList[key].label == searchTagsList[0]) {
+              result = {
+                value: resultList[key].value,
+                label: resultList[key].label,
+              }
             }
-          })
-        }
-        if (searchTagsList.length > 0) {
+          });
+          let flg = false
+          // 存在チェック
+          for (let index = 0; index < this.tagValue.length; index++) {
+            if (this.tagValue[index] == result.value) {
+              flg = true
+            }
+          }
+          // 存在しない場合、入力に設定
           this.$store.dispatch('setSearchTagsLable', [])
-          this.$refs.mult.select(result)
+          if (!flg) {
+            this.$refs.mult.select(result)
+          }
         }
       } else {
         await this.$serve.getSuggestTags(query).then((response) => {

@@ -2,7 +2,15 @@
     <label class="flex flex-row flex-auto justify-between" :class="headerStyle">
         <div class="justify-center flex flex-row items-center h-full">
             <!-- 検索結果ヘッダータイトル -->
-            <a :class="titleStyle" v-if="title != ''" :href="'#' + titleURL">{{
+
+            <a
+                :class="titleStyle"
+                v-if="title != '' && titleURL != ''"
+                :href="'#' + titleURL"
+                >{{ title }}</a
+            >
+            <!-- タイトル　クリックできません -->
+            <a :class="titleStyle" v-if="title != '' && titleURL == ''">{{
                 title
             }}</a>
 

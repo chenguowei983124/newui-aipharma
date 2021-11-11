@@ -36,7 +36,7 @@
             <div class="tab-a2 hidden">
                 <result-detail-row
                     class="searchResult_detail_blue"
-                    routerPath="bulletinBoard"
+                    routerPath="searchBulletinBoard"
                     :sites="$store.getters.topBulletinBoardInfo.details"
                     :sub2="['title']"
                 >
@@ -50,11 +50,11 @@
             headerStyle="titleOnlyUnderlineBgColorBlue"
             title="掲示板"
             titleStyle="bulletinBoardInfoTitle"
-            titleURL="bulletinBoard"
+            titleURL="searchBulletinBoard"
         >
             <result-detail-row
                 class="searchResult_detail_blue"
-                routerPath="bulletinBoard"
+                routerPath="searchBulletinBoard"
                 :sub2="['title']"
                 :sites="$store.getters.topBulletinBoardInfo.details"
             >
@@ -176,9 +176,9 @@ export default {
   },
   mounted() {
     //   console.log('getOidcCode', this.$store.getters.getOidcCode)
-    this.$store.dispatch('getTopNotice',this.$store.getters.getOidcCode)
-    this.$store.dispatch('getTopBulletinBoardInfo',this.$store.getters.getOidcCode)
-    this.$store.dispatch('getBBSDropDowninfo',this.$store.getters.getOidcCode)
+    this.$store.dispatch('getTopNotice', this.$store.getters.getOidcCode)
+    this.$store.dispatch('getTopBulletinBoardInfo', this.$store.getters.getOidcCode)
+    this.$store.dispatch('getBBSDropDowninfo', this.$store.getters.getOidcCode)
     this.$store.dispatch('getScientifiSocietyInfo')
     this.$store.dispatch('getTopPMDA')
     this.$store.dispatch('getCommonInfo')

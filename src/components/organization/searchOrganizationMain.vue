@@ -248,6 +248,7 @@
                             </div>
 
                             <div
+                                id="answerTab"
                                 class="
                                     flex-grow
                                     break-all
@@ -336,7 +337,10 @@
                                     PubMed：
                                     <div
                                         v-if="item.pubmed != ''"
-                                        class="hover:text-light-blue-500"
+                                        class="
+                                            hover:text-light-blue-500
+                                            underline
+                                        "
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
@@ -354,7 +358,10 @@
                                     <!-- <div class="flex-none"></div> -->
                                     <div
                                         v-if="item.pubmed != ''"
-                                        class="hover:text-light-blue-500"
+                                        class="
+                                            hover:text-light-blue-500
+                                            underline
+                                        "
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
@@ -379,18 +386,9 @@
                                         v-for="documents in item.documents"
                                         :key="documents"
                                         class="
-                                            rounded-full
-                                            border-2 border-gray-300
-                                            bg-gray-100
-                                            h-6
-                                            notoSansJpAndElevenRegular
-                                            pl-1
-                                            pr-1
-                                            text-center
-                                            flex
-                                            items-center
                                             ml-1
                                             cursor-pointer
+                                            hover:text-light-blue-500
                                         "
                                     >
                                         <a
@@ -420,9 +418,9 @@
                                     "
                                     v-for="keywordTags in item.keywordTags"
                                     :key="keywordTags"
-                                    @click="sendMsgToParent(keywordTags)"
+                                    @click="sendMsgToParent(keywordTags.name)"
                                 >
-                                    #{{ keywordTags.label }}
+                                    #{{ keywordTags.name }}
                                 </div>
                             </div>
                             <div
@@ -1255,11 +1253,7 @@ export default {
           this.$store.dispatch('setOrganizationSearchInfo', response)
           // 1件のみの場合、全回答情報を表示
           if (response.data.allCount == 1) {
-            this.openDetailDisp(
-              response.data.qas.id,
-              response.data.allCount
-            )
-
+            this.openDetailDisp(response.data.qas[0].id, response.data.allCount)
             let qaid = ''
             if (this.$route.query.id) {
               qaid = this.$route.query.id
@@ -1368,24 +1362,32 @@ export default {
         )
       }
     },
-
+    // 初回設定
     initStore() {
       this.$store.dispatch('setSearchWord', '')
+      // タブ
       this.$store.dispatch('setSearchTags', [])
+      // 薬区分
       this.$store.dispatch('setMedicineID', '')
+      // 質問区分
       this.$store.dispatch('setQuestionID', '')
+      // 施設
       this.$store.dispatch('setFacilityID', 0)
+      // ページ
       this.$store.dispatch('setPage', 1)
+      // ソート順
       this.$store.dispatch('setSort', 0)
-      this.$store.dispatch('setMaxCount', 0)
-      this.$store.dispatch('setCheckQ', true)
-      this.$store.dispatch('setCheckA', true)
-      this.$store.dispatch('setCheckComment', true)
-      this.$store.dispatch('setCheckAddFileName', true)
-      this.$store.dispatch('setCheckContributor', true)
-      this.$store.dispatch('setCheckLastEditer', true)
-      this.$store.dispatch('setCheckFacilityName', true)
-      this.$store.dispatch('setCheckNote', true)
+      // 表示件数
+      this.$store.dispatch('setMaxCount', 10)
+      // 検索対象
+      this.$store.dispatch('setCheckQ', true) // Q
+      this.$store.dispatch('setCheckA', true) // A
+      this.$store.dispatch('setCheckComment', true) // コメント
+      this.$store.dispatch('setCheckAddFileName', true) // 添付ファイル名
+      this.$store.dispatch('setCheckContributor', true) // 投稿者
+      this.$store.dispatch('setCheckLastEditer', true) // 最終編集者
+      this.$store.dispatch('setCheckFacilityName', true) // 施設名
+      this.$store.dispatch('setCheckNote', true) // 備考
     },
     resetRouter() {
       let getTimestamp = new Date().getTime()
@@ -1435,13 +1437,16 @@ export default {
     },
     // 詳細情報 クリック タグ
     sendMsgToParent: function (data) {
+      console.log('datasendMsgToParent', data)
       this.$emit('listenToChildEvent', data)
     },
     // 開くボタン押下
     openDetailDisp(index, count) {
       // 1件のみの場合
       if (count == 1) {
+        console.log('index', index)
         this.isDetailDisp[index] = index
+        console.log('this.isDetailDisp[index]', this.isDetailDisp[index])
       } else {
         this.isDetailDisp[index] =
           this.isDetailDisp[index] == index ? [] : index
@@ -1518,7 +1523,7 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style >
 .box {
     height: 40px;
     width: 100%;
@@ -1549,21 +1554,22 @@ export default {
 .text {
     margin: 0 5px;
 }
-.table {
+/* html　様式設定 */
+#answerTab .table {
     border-top: 1px solid #999;
 
     border-left: 1px solid #999;
 
     border-spacing: 0;
 }
-table th {
+#answerTab table th {
     padding: 10px 30px;
 
     border-bottom: 1px solid #999;
 
     border-right: 1px solid #999;
 }
-table td {
+#answerTab table td {
     padding: 10px 30px;
     border-left: 1px solid #999;
     border-top: 1px solid #999;

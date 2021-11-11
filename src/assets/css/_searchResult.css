@@ -136,7 +136,7 @@
 }
 /* 新着Q＆Aタイトル */
 .newQaInfoTitle {
-    @apply notoSansJpAndEighteenBold text-center text-white  hover:opacity-50 active:opacity-50;
+    @apply notoSansJpAndEighteenBold text-center text-white  ;
 }
 /* 学会情報　その他の情報 */
 .searchResult_header_grayline {

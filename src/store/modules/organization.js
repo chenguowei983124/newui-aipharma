@@ -15,19 +15,20 @@ export default {
         searchTags: [], // タブ
         medicineID: '', // 薬区分
         questionID: '', // 質問区分
-        facilityID: '0', // 施設
+        facilityID: '2', // 施設
         page: '1', // ページ
-        QAID: '', // QAID
+        QAID: '', // QAID　？？？？
         sort: '0', // ソート順
-        maxCount: '20', // 表示件数
-        checkQ: true,
-        checkA: true,
-        checkComment: true,
-        checkAddFileName: true,
-        checkContributor: true,
-        checkLastEditer: true,
-        checkFacilityName: true,
-        checkNote: true,
+        maxCount: '10', // 表示件数
+        // 検索対象
+        checkQ: true, // Q
+        checkA: true, // A
+        checkComment: true, // コメント
+        checkAddFileName: true, // 添付ファイル名
+        checkContributor: true, // 投稿者
+        checkLastEditer: true, // 最終編集者
+        checkFacilityName: true, // 施設名
+        checkNote: true, // 備考
         filterBBS: {},
         searchTagsLable: [], // タブname
     }),
@@ -43,7 +44,6 @@ export default {
         },
         // タブ
         getSearchTagsLable(state) {
-            console.log('getSearchTagsLable', state.searchTagsLable)
             return state.searchTagsLable
         },
         // 薬区分
@@ -72,6 +72,7 @@ export default {
         },
         // 表示件数
         getMaxCount(state) {
+            console.log('getMaxCount(state)', state.maxCount)
             return state.maxCount
         },
         // 検索対象　Q
@@ -152,6 +153,9 @@ export default {
         setOrganizationSearchInfo(state, info) {
             state.organizationSearchInfo = info.data
         },
+        setOrganizationTab(state, info) {
+            state.organizationSeartorenndoTab = info.data
+        },
         setOrganizationNewQAInfo(state, info) {
             state.organizationNewQAInfo = info.data
         },
@@ -182,6 +186,13 @@ export default {
             commit('setOrganizationSearchInfo', info)
         },
         //===========================
+        // 組織内DI記録検索結果取得（init タグ取得）
+        //===========================
+        // async getOrganizationSeartorenndoTab({ rootState, commit }) {
+        //     const info = await serve.getOwnTab()
+        //     commit('setOrganizationTab', info)
+        // },
+        //===========================
         // 組織内DI記録検索結果取得（新着QA）
         //===========================
         async getOrganizationNewQAInfo({ rootState, commit }) {
@@ -192,7 +203,7 @@ export default {
         // 組織内DI記録検索結果取得（よく見られているQA）
         //===========================
         async getOrganizationLookcarefullyQAInfo({ rootState, commit }) {
-            const info = await serve.getOwnNewQA()
+            const info = await serve.getOwnLookcarefullyQA()
             commit('setOrganizationLookcarefullyQAInfo', info)
         },
         setOrganizationSeartorenndoTab({ commit, state }, value) {

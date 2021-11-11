@@ -399,7 +399,8 @@ export default {
       menuItemList: [
         { id: '1', title: 'TOP', itemStyle: 'item', path: '/myhome' },
         { id: '2', title: 'お知らせ', itemStyle: 'item', path: '/notification' },
-        { id: '3', title: '掲示板', itemStyle: 'item', path: '/bulletinBoard' },
+        // { id: '3', title: '掲示板', itemStyle: 'item', path: '/bulletinBoard' },
+        { id: '3', title: '掲示板', itemStyle: 'item', path: '/searchBulletinBoard' },
       ],
       menuItemList2: [
         {

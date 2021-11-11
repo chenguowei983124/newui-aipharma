@@ -6,12 +6,10 @@ import sendResetPassword from '/src/view/sendResetPassword.vue'
 import setPassword from '/src/view/setPassword.vue'
 import myHome from '/src/view/myHome.vue'
 import notification from '/src/view/notification.vue'
-import bulletinBoard from '/src/view/bulletinBoard.vue'
 import searchResultAll from '/src/view/searchResultAll.vue'
 import searchOrganization from '/src/view/searchOrganization.vue'
 import searchDiKnowledge from '/src/view/searchDiKnowledge.vue'
 import searchPreavoids from '/src/view/searchPreavoids.vue'
-import searchNotice from '/src/view/searchNotice.vue'
 import searchBulletinBoard from '/src/view/searchBulletinBoard.vue'
 import newOrgDIRecord from '/src/view/newOrgDIRecord.vue'
 import newBbsRecord from '/src/view/newBbsRecord.vue'
@@ -20,35 +18,42 @@ import error from '/src/view/error.vue'
 import Redirect from '/src/view/Redirect.vue'
 
 const routes = [
+    // ログイン　画面
     {
         path: '/',
         redirect: '/login',
     },
+    // OIDC 認証
     {
         path: '/redirect',
         name: 'redirect',
         component: Redirect,
     },
+    // ログイン
     {
         path: '/login',
         name: 'login',
         component: login,
     },
+    // メール　送信
     {
         path: '/sendResetPasswordMail',
         name: 'sendResetPasswordMail',
         component: sendResetPasswordMail,
     },
+    // パスワード　再設定
     {
         path: '/sendResetPassword',
         name: 'sendResetPassword',
         component: sendResetPassword,
     },
+    //　パスワード　初回設定
     {
         path: '/setPassword',
         name: 'setPassword',
         component: setPassword,
     },
+    // トップ　画面
     {
         path: '/myHome',
         name: 'myHome',
@@ -66,15 +71,7 @@ const routes = [
             requireAuth: true,
         },
     },
-    // 掲示板画面
-    {
-        path: '/bulletinBoard',
-        name: 'bulletinBoard',
-        component: bulletinBoard,
-        meta: {
-            requireAuth: true,
-        },
-    },
+    // 一括検索
     {
         path: '/searchResultAll',
         name: 'searchResultAll',
@@ -83,14 +80,7 @@ const routes = [
             requireAuth: true,
         },
     },
-    {
-        path: '/searchOrganization/:id',
-        name: 'searchOrganization',
-        component: searchOrganization,
-        meta: {
-            requireAuth: true,
-        },
-    },
+    // 組織内DI 記録（Q&A）
     {
         path: '/searchOrganization',
         name: 'searchOrganization',
@@ -99,6 +89,7 @@ const routes = [
             requireAuth: true,
         },
     },
+    // DI ナレッジシェア
     {
         path: '/searchDiKnowledge',
         name: 'searchDiKnowledge',
@@ -107,6 +98,7 @@ const routes = [
             requireAuth: true,
         },
     },
+    // 症例（プレアボイド）
     {
         path: '/searchPreavoids',
         name: 'searchPreavoids',
@@ -115,14 +107,7 @@ const routes = [
             requireAuth: true,
         },
     },
-    {
-        path: '/searchNotice',
-        name: 'searchNotice',
-        component: searchNotice,
-        meta: {
-            requireAuth: true,
-        },
-    },
+    // 掲示板画面
     {
         path: '/searchBulletinBoard',
         name: 'searchBulletinBoard',
@@ -131,6 +116,7 @@ const routes = [
             requireAuth: true,
         },
     },
+    // 組織内DI 記録（Q&A）登録
     {
         path: '/newOrgDIRecord',
         name: 'newOrgDIRecord',
@@ -139,6 +125,7 @@ const routes = [
             requireAuth: true,
         },
     },
+    // 掲示板 登録
     {
         path: '/newBbsRecord',
         name: 'newBbsRecord',
@@ -147,11 +134,13 @@ const routes = [
             requireAuth: true,
         },
     },
+    // エラー 画面
     {
         path: '/error',
         name: 'error',
         component: error,
     },
+    // 404 画面
     {
         path: '/404',
         name: '404',

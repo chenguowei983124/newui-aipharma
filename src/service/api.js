@@ -249,7 +249,7 @@ const serve = {
         const data = await axios('/account/api/general/send_user_info', {
             method: 'post',
         })
-
+        console.log("/account/api/general/send_user_info", data)
         return data
     },
     //===========================
@@ -329,6 +329,16 @@ const serve = {
             method: 'get',
         })
 
+        return data
+    },
+    //===========================
+    // 組織内DI記録検索結果取得（init タグ取得）
+    //===========================
+    async getOwnTab() {
+        const data = await axios('/api/qa/get_organization_Tab', {
+            method: 'get',
+        })
+        console.log('getOwnTabData', data)
         return data
     },
     //===========================
@@ -481,7 +491,7 @@ const serve = {
     async getComment(params) {
         const data = await axios('/api/qa/get_comments', {
             method: 'get',
-            data: params,
+            params: params,
         })
         return data
     },
