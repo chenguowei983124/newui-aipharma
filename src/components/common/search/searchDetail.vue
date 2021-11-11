@@ -165,8 +165,7 @@
                     </div>
                 </div>
             </div>
-            {{ 'hello' }}
-            {{ $store.getters.getorgTagsList }}
+
             <!-- 二行目 -->
             <div>
                 <div class="px-2 md:px-0">
@@ -364,235 +363,240 @@ import Multiselect from '@vueform/multiselect'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { },
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
+        message: {
+            type: String,
+            default: '',
+        },
     },
-    message: {
-      type: String,
-      default: '',
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
     },
-  },
-  components: {
-    searchDropdown,
-    searchSvg,
-    TriangleDownSvg,
-    Multiselect,
-    vueSingleSelect,
-  },
-  data() {
-    return {
-      searchText: null,
-      checkId: '',
-      isOrgDetailClick: true,
-      tagValue: this.$store.getters.getSearchTags,
-      tagTimer: '',
-      dispSelect: [],
-      // 
-      orgOrgTagslist: []
-    }
-  },
-  watch: {
-    tagValue() {
-      this.$store.dispatch('setSearchTags', this.tagValue)
-      this.$emit('tagValue', this.tagValue)
-    },
-  },
-  computed: {
-    dispTagValue() {
-      this.tagValue = this.$store.getters.getSearchTags
-      console.log('this.tagValue', this.tagValue)
-      console.log('orgOrgTagslist', this.orgOrgTagslist)
-      let flag = false
-      let result = []
-      for (let index = 0; index < this.orgOrgTagslist.length; index++) {
-        console.log('okok', this.orgOrgTagslist[index])
-        console.log('okok', this.tagValue[this.tagValue.length - 1])
-        const element = this.orgOrgTagslist[index];
-        if (this.orgOrgTagslist[index].value == this.tagValue[this.tagValue.length - 1]) {
-          result.push(this.orgOrgTagslist[index])
-          this.$store.dispatch('setOrgTagsList', result)
-          flag = true
-          console.log('this.orgOrgTagslist[index]', this.orgOrgTagslist[index])
-          console.log('this.orgOrgTagslist', result)
+    data() {
+        return {
+            searchText: null,
+            checkId: '',
+            isOrgDetailClick: true,
+            tagValue: this.$store.getters.getSearchTags,
+            tagTimer: '',
+            dispSelect: [],
+            //
+            orgOrgTagslist: [],
+            inputFlg: false,
         }
-
-      }
-
-      return this.tagValue
     },
-  },
-  methods: {
-    async fetchLanguages(query) {
-      let searchTagsList = this.$store.getters.getSearchTagsLable
-      let result = {}
-      if (query == null || query == '') {
-        if (Object.keys(searchTagsList).length !== 0) {
-          for (let i = 0; i < searchTagsList.length; i++) {
-            let response = await this.$serve.getSuggestTags(
-              searchTagsList[i]
+    watch: {
+        tagValue() {
+            this.$store.dispatch('setSearchTags', this.tagValue)
+            this.$emit('tagValue', this.tagValue)
+        },
+    },
+    computed: {
+        dispTagValue() {
+            this.tagValue = this.$store.getters.getSearchTags
+            if (this.inputFlg) {
+                let selectedItem = this.$store.getters.getorgTagsList
+                for (
+                    let index = 0;
+                    index < this.orgOrgTagslist.length;
+                    index++
+                ) {
+                    const element = this.orgOrgTagslist[index]
+                    if (
+                        this.orgOrgTagslist[index].value ==
+                        this.tagValue[this.tagValue.length - 1]
+                    ) {
+                        selectedItem.push(this.orgOrgTagslist[index])
+                        this.$store.dispatch('setOrgTagsList', selectedItem)
+                    }
+                }
+            }
+
+            return this.tagValue
+        },
+    },
+    methods: {
+        async fetchLanguages(query) {
+            let searchTagsList = this.$store.getters.getSearchTagsLable
+            let result = {}
+            if (query == null || query == '') {
+                if (Object.keys(searchTagsList).length !== 0) {
+                    for (let i = 0; i < searchTagsList.length; i++) {
+                        let response = await this.$serve.getSuggestTags(
+                            searchTagsList[i]
+                        )
+                        result = response.data.map((item) => {
+                            return {
+                                value: item.tagId,
+                                label: item.name,
+                            }
+                        })
+                    }
+                    let setList = {}
+                    Object.keys(result).forEach(function (key) {
+                        if (result[key].label == searchTagsList[0]) {
+                            setList = {
+                                value: result[key].value,
+                                label: result[key].label,
+                            }
+                        }
+                    })
+                    let flg = false
+                    // 存在チェック
+                    for (let index = 0; index < this.tagValue.length; index++) {
+                        if (this.tagValue[index] == setList.value) {
+                            flg = true
+                        }
+                    }
+                    // 存在しない場合、入力に設定
+                    this.$store.dispatch('setSearchTagsLable', [])
+                    if (!flg) {
+                        this.$refs.mult.select(setList)
+                    }
+                    this.inputFlg = true
+                } else {
+                    result = this.$store.getters.getorgTagsList
+                }
+            } else {
+                this.inputFlg = true
+                await this.$serve.getSuggestTags(query).then((response) => {
+                    result = response.data.map((item) => {
+                        return {
+                            value: item.tagId,
+                            label: item.name,
+                        }
+                    })
+                })
+            }
+            console.log('resultresult', result)
+
+            this.orgOrgTagslist = result
+            console.log('this.orgOrgTagslist', this.orgOrgTagslist)
+            return result
+        },
+
+        inputClear(data) {
+            this.tagValue = []
+            this.$refs.medicines.setValue(null)
+            this.$refs.qDistinction.setValue(null)
+            this.$refs.facility.setValue(null)
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.dispatch('setMedicineID', '')
+            this.$store.dispatch('setQuestionID', '')
+            this.$store.dispatch('setFacilityID', '')
+            this.$store.dispatch('setCheckQ', true)
+            this.$store.dispatch('setCheckA', true)
+            this.$store.dispatch('setCheckComment', true)
+            this.$store.dispatch('setCheckAddFileName', true)
+            this.$store.dispatch('setCheckContributor', true)
+            this.$store.dispatch('setCheckLastEditer', true)
+            this.$store.dispatch('setCheckFacilityName', true)
+            this.$store.dispatch('setCheckNote', true)
+        },
+        multiselectValue(value) {},
+        onCheckQChange() {
+            this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
+        },
+        onChangeCheckA() {
+            this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
+        },
+        onChangeCheckComment() {
+            this.$store.dispatch(
+                'setCheckComment',
+                !this.$store.getters.getCheckComment
             )
-            result = response.data.map((item) => {
-              return {
-                value: item.tagId,
-                label: item.name,
-              }
-            })
-          }
-          let setList = {}
-          Object.keys(result).forEach(function (key) {
-            if (result[key].label == searchTagsList[0]) {
-              setList = {
-                value: result[key].value,
-                label: result[key].label,
-              }
+        },
+        onChangeCheckAddFileName() {
+            this.$store.dispatch(
+                'setCheckAddFileName',
+                !this.$store.getters.getCheckAddFileName
+            )
+        },
+        onChangeCheckContributor() {
+            this.$store.dispatch(
+                'setCheckContributor',
+                !this.$store.getters.getCheckContributor
+            )
+        },
+        onChangeCheckLastEditer() {
+            this.$store.dispatch(
+                'setCheckLastEditer',
+                !this.$store.getters.getCheckLastEditer
+            )
+        },
+        onChangeCheckFacilityName() {
+            this.$store.dispatch(
+                'setCheckFacilityName',
+                !this.$store.getters.getCheckFacilityName
+            )
+        },
+        onChangeCheckNote() {
+            this.$store.dispatch(
+                'setCheckNote',
+                !this.$store.getters.getCheckNote
+            )
+        },
+
+        sendInputInfo() {},
+        setMedicineID(value) {
+            this.$store.dispatch('setMedicineID', value)
+        },
+        setQuestionID(value) {
+            this.$store.dispatch('setQuestionID', value)
+        },
+        setFacilityID(value) {
+            this.$store.dispatch('setFacilityID', value)
+        },
+        // 詳細条件クリックイベント
+        detailBottunClick: function (event) {
+            this.isOrgDetailClick = !this.isOrgDetailClick
+            this.$emit('isOrgDetailClick', this.isOrgDetailClick)
+        },
+        // 検索ボタン押下イベント
+        searchClick: function (event) {
+            // すべて
+            if (this.checkId == 1) {
+                // 検索APIを呼び出し(画面入力値)
+                this.$store.dispatch('searchAll', this.searchValue)
+
+                // 一括検索結果画面へ遷移
+                this.$router.push('/searchResultAll')
             }
-          })
-          let flg = false
-          // 存在チェック
-          for (let index = 0; index < this.tagValue.length; index++) {
-            if (this.tagValue[index] == setList.value) {
-              flg = true
+            // DI ナレッジシェア
+            else if (this.checkId == 2) {
+                this.$router.push('/searchResultAll')
             }
-          }
-          // 存在しない場合、入力に設定
-          this.$store.dispatch('setSearchTagsLable', [])
-          if (!flg) {
-            this.$refs.mult.select(setList)
-          }
-        }
-      } else {
-        await this.$serve.getSuggestTags(query).then((response) => {
-          result = response.data.map((item) => {
-            return {
-              value: item.tagId,
-              label: item.name,
+            // 組織内 DI 記録（Q&A）
+            else if (this.checkId == 3) {
+                this.$router.push('/searchOrganization')
             }
-          })
-        })
-      }
-      console.log('resultresult', result)
-
-      this.orgOrgTagslist = result
-      console.log('this.orgOrgTagslist', this.orgOrgTagslist)
-      return result
+            // 症例（プレアボイド）
+            else if (this.checkId == 4) {
+                this.$router.push('/searchOrganization')
+            }
+            // DI 辞書
+            else if (this.checkId == 5) {
+                this.$router.push('/searchOrganization')
+            }
+            // 製薬企業情報
+            else if (this.checkId == 6) {
+                this.$router.push('/searchOrganization')
+            }
+        },
+        // DropDown 選択したアイテムＩＤ取得
+        getCheckId(data) {
+            this.checkId = data
+        },
     },
-
-    inputClear(data) {
-      this.tagValue = []
-      this.$refs.medicines.setValue(null)
-      this.$refs.qDistinction.setValue(null)
-      this.$refs.facility.setValue(null)
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setSearchTags', [])
-      this.$store.dispatch('setMedicineID', '')
-      this.$store.dispatch('setQuestionID', '')
-      this.$store.dispatch('setFacilityID', '')
-      this.$store.dispatch('setCheckQ', true)
-      this.$store.dispatch('setCheckA', true)
-      this.$store.dispatch('setCheckComment', true)
-      this.$store.dispatch('setCheckAddFileName', true)
-      this.$store.dispatch('setCheckContributor', true)
-      this.$store.dispatch('setCheckLastEditer', true)
-      this.$store.dispatch('setCheckFacilityName', true)
-      this.$store.dispatch('setCheckNote', true)
-    },
-    multiselectValue(value) { },
-    onCheckQChange() {
-      this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
-    },
-    onChangeCheckA() {
-      this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
-    },
-    onChangeCheckComment() {
-      this.$store.dispatch(
-        'setCheckComment',
-        !this.$store.getters.getCheckComment
-      )
-    },
-    onChangeCheckAddFileName() {
-      this.$store.dispatch(
-        'setCheckAddFileName',
-        !this.$store.getters.getCheckAddFileName
-      )
-    },
-    onChangeCheckContributor() {
-      this.$store.dispatch(
-        'setCheckContributor',
-        !this.$store.getters.getCheckContributor
-      )
-    },
-    onChangeCheckLastEditer() {
-      this.$store.dispatch(
-        'setCheckLastEditer',
-        !this.$store.getters.getCheckLastEditer
-      )
-    },
-    onChangeCheckFacilityName() {
-      this.$store.dispatch(
-        'setCheckFacilityName',
-        !this.$store.getters.getCheckFacilityName
-      )
-    },
-    onChangeCheckNote() {
-      this.$store.dispatch(
-        'setCheckNote',
-        !this.$store.getters.getCheckNote
-      )
-    },
-
-    sendInputInfo() { },
-    setMedicineID(value) {
-      this.$store.dispatch('setMedicineID', value)
-    },
-    setQuestionID(value) {
-      this.$store.dispatch('setQuestionID', value)
-    },
-    setFacilityID(value) {
-      this.$store.dispatch('setFacilityID', value)
-    },
-    // 詳細条件クリックイベント
-    detailBottunClick: function (event) {
-      this.isOrgDetailClick = !this.isOrgDetailClick
-      this.$emit('isOrgDetailClick', this.isOrgDetailClick)
-    },
-    // 検索ボタン押下イベント
-    searchClick: function (event) {
-      // すべて
-      if (this.checkId == 1) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('searchAll', this.searchValue)
-
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 2) {
-        this.$router.push('/searchResultAll')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // DI 辞書
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 6) {
-        this.$router.push('/searchOrganization')
-      }
-    },
-    // DropDown 選択したアイテムＩＤ取得
-    getCheckId(data) {
-      this.checkId = data
-    },
-  },
 }
 </script>
 
