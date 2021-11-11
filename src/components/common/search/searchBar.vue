@@ -230,7 +230,6 @@ export default {
           return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-lg md:rounded-b-none'
         }
       } else if (this.$props.form == this.$constant.formList.PVD) {
-        // console.log("this.detailDis", this.detailDisp)
         if (this.detailDisp == false) {
           return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 rounded-b-lg md:rounded-b-none'
         } else {
@@ -278,6 +277,17 @@ export default {
         return ' flex-grow md:flex-none  h-full w-191.25'
       } else if (this.$props.form == this.$constant.formList.BBS) {
         return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch    '
+      }
+    },
+    pcPlaceholder: function () {
+      if (this.$props.form == this.$constant.formList.TOP) {
+        return 'Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます'
+      } else if (this.$props.form == this.$constant.formList.ALL) {
+        return 'Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます'
+      } else if (this.$props.form == this.$constant.formList.OWN) {
+        return 'キーワードを入力'
+      } else if (this.$props.form == this.$constant.formList.BBS) {
+        return 'キーワードを入力'
       }
     },
     sreachBarPCInputClass: function () {
@@ -623,7 +633,6 @@ export default {
               : this.$store.getters.getCheckNote,
           timestamp: getTimestamp,
         }
-        console.log('this.$store.getters.getMaxCount', this.$store.getters.getMaxCount)
         this.$router.push({
           path: '/searchOrganization',
           query: params,
@@ -631,7 +640,6 @@ export default {
       }
       // 症例（プレアボイド）
       else if (this.checkId == 3) {
-        // console.log("this.$constant.formList.TOP", this.$constant.formList.TOP)
         if (
           this.$store.getters.getDateValueFrom != '' &&
           this.$store.getters.getDateValueTo != ''
@@ -692,10 +700,6 @@ export default {
       }
       // 掲示板
       else if (this.checkId == 6) {
-        console.log(
-          'searchBulletinBoard',
-          'this.$store.getters.getFilterBBS,this.$route'
-        )
         let params = {}
         let getTimestamp = new Date().getTime()
         params = {
@@ -763,7 +767,6 @@ export default {
     },
     //  組織内 DI 記録（Q&A）詳細条件 フラグ
     getIsOrgDetailClick(value) {
-      console.log('getIsOrgDetailClick', value)
       this.$emit('isOrgDetailClick', value)
     },
   },

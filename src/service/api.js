@@ -59,9 +59,6 @@ const transDataformat = (resData) => {
     result.data = {
         details: dt,
     }
-
-    // console.log('transDataformat-after', result)
-
     return result
 }
 const serve = {
@@ -132,11 +129,9 @@ const serve = {
             let acURL = '/posts/topmenu_info'
             const queryString = new URLSearchParams(queryStringData).toString()
             const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            // console.log('getTopNoticel_url', url)
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
                 data = response
-                // console.log('getTopNoticel', data)
             }
         }
 
@@ -151,7 +146,6 @@ const serve = {
             data = await axios('/preavoid/get_topmenu_BulletinBoard_info', {
                 method: 'get',
             })
-            // console.log('getTopBulletinBoard', data)
         } else {
             const queryStringData = {
                 code: code,
@@ -164,11 +158,9 @@ const serve = {
             let acURL = '/posts/topmenu_info'
             const queryString = new URLSearchParams(queryStringData).toString()
             const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            // console.log('getTopBulletinBoard_url', url)
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
                 data = response
-                console.log('getTopBulletinBoard', data)
             }
         }
         return data
@@ -187,7 +179,6 @@ const serve = {
             let acURL = '/tags'
             const queryString = new URLSearchParams(queryStringData).toString()
             const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            console.log('getTagsMaster_url', url)
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
                 const tags = response.data.tags
@@ -200,7 +191,6 @@ const serve = {
                 method: 'get',
             })
             const tags = response.data.tags
-            console.log('tags', tags)
             tags.map((map) => {
                 data.push(map.name)
             })
@@ -238,7 +228,6 @@ const serve = {
         const data = await axios('/preavoid/get_common_info', {
             method: 'get',
         })
-        console.log("/preavoid/get_common_info", data)
 
         return data
     },
@@ -249,7 +238,6 @@ const serve = {
         const data = await axios('/account/api/general/send_user_info', {
             method: 'post',
         })
-        console.log("/account/api/general/send_user_info", data)
         return data
     },
     //===========================
@@ -261,7 +249,6 @@ const serve = {
             method: 'post',
             data: params,
         })
-        // console.log("getALLDiKnowledgeInfo", data)
         return data
     },
     //===========================
@@ -273,7 +260,6 @@ const serve = {
             method: 'post',
             data: params,
         })
-        console.log('getAIDiKnowledgeInfo', data)
         return data
     },
     //===========================
@@ -305,20 +291,6 @@ const serve = {
         data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
             method: 'get',
         })
-        // } else {
-        //     let mtd = 'get'
-        //     let acURL = '/posts/bunch_bulletin_board_info'
-        //     const queryString = new URLSearchParams(params).toString()
-        //     const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-        //     console.log('getALLBulletinBoard_Info', url)
-        //     const response = await exeAxios(mtd, url, null)
-        //     if (response.status == 200) {
-        //         data = response
-        //         console.log('bunch_bulletin_board_info', response)
-        //     }
-        // }
-
-        // console.log('getALLBulletinBoard_Info', data)
         return data
     },
     //===========================
@@ -338,7 +310,6 @@ const serve = {
         const data = await axios('/api/qa/get_organization_Tab', {
             method: 'get',
         })
-        console.log('getOwnTabData', data)
         return data
     },
     //===========================
@@ -540,34 +511,12 @@ const serve = {
 
         return data
     },
-    // async getPostList(queryStringData) {
-    //     const mtd = 'post'
-    //     const acURL = '/posts/search'
-    //     const flt = {
-    //         filter: queryStringData.filter,
-    //     }
-    //     delete queryStringData.filter
-    //     const queryString = new URLSearchParams(queryStringData).toString()
-    //     const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-    //     console.log('getPostList-filter', flt)
-    //     return exeAxios(mtd, url, flt)
-    // },
     async getPostList(queryStringData) {
         const data = await axios('/posts/search', {
             method: 'post',
             params: queryStringData,
         })
         return data
-        // const mtd = 'post'
-        // const acURL = '/posts/search'
-        // const flt = {
-        //     filter: queryStringData.filter,
-        // }
-        // delete queryStringData.filter
-        // const queryString = new URLSearchParams(queryStringData).toString()
-        // const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-        // console.log('getPostList-filter', flt)
-        // return exeAxios(mtd, url, flt)
     },
 }
 export default serve

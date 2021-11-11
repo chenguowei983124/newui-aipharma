@@ -31,9 +31,14 @@ export default {
         checkNote: true, // 備考
         filterBBS: {},
         searchTagsLable: [], // タブname
+        orgTagsList: []
     }),
 
     getters: {
+        // 
+        getorgTagsList(state) {
+            return state.orgTagsList
+        },
         // キーワード
         getSearchWord(state) {
             return state.searchWord
@@ -72,7 +77,6 @@ export default {
         },
         // 表示件数
         getMaxCount(state) {
-            console.log('getMaxCount(state)', state.maxCount)
             return state.maxCount
         },
         // 検索対象　Q
@@ -225,6 +229,11 @@ export default {
         },
         setIsOrganizationSearch({ commit, state }, value) {
             commit('basic', { key: 'isOrganizationSearch', value })
+        },
+        // 
+        setOrgTagsList({ commit, state }, value) {
+            console.log('setOrgTagsList', value)
+            commit('basic', { key: 'orgTagsList', value })
         },
         // キーワード
         setSearchWord({ commit, state }, value) {

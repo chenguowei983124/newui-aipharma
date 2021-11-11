@@ -1141,7 +1141,6 @@ export default {
     }
 
     if (JSON.stringify(this.$route.query) !== '{}') {
-      //   console.log("start this.resetSearchBar()")
       this.resetSearchBar()
       this.execSearch()
     }
@@ -1281,7 +1280,6 @@ export default {
       this.initStore()
       if (this.$route.query.id == undefined) {
         this.$store.dispatch('setSearchWord', this.$route.query.search)
-        console.log('tags', this.$route.query.tags)
         this.$store.dispatch(
           'setSearchTags',
           this.$route.query.tags.split(',')
@@ -1400,7 +1398,6 @@ export default {
       } else if (this.organizationCountSortValue == 2) {
         dispDetailNumber = 100
       }
-      console.log("this.$store.getters.getSearchTags", this.$store.getters.getSearchTags)
       let params = {
         search: this.$store.getters.getSearchWord,
         tags: this.$store.getters.getSearchTags
@@ -1429,24 +1426,19 @@ export default {
     },
     // 改ページのデータ検索
     getSelectPage(value) {
-      //   console.log('page', value)
       this.selectPage = value
-      //   console.log(value)
       this.$store.dispatch('setPage', value)
       this.resetRouter()
     },
     // 詳細情報 クリック タグ
     sendMsgToParent: function (data) {
-      console.log('datasendMsgToParent', data)
       this.$emit('listenToChildEvent', data)
     },
     // 開くボタン押下
     openDetailDisp(index, count) {
       // 1件のみの場合
       if (count == 1) {
-        console.log('index', index)
         this.isDetailDisp[index] = index
-        console.log('this.isDetailDisp[index]', this.isDetailDisp[index])
       } else {
         this.isDetailDisp[index] =
           this.isDetailDisp[index] == index ? [] : index
@@ -1462,11 +1454,9 @@ export default {
         this.isDetailsDisp[index] == index ? [] : index
     },
     clickCallback() {
-      //   console.log()
     },
     setOrganizationDateSortValue(value) {
       this.organizationDateSortValue = value
-      //   console.log(value)
       this.$store.dispatch('setSort', value)
       this.resetRouter()
     },
@@ -1480,7 +1470,6 @@ export default {
         qaId: this.$store.getters.organizationSearchInfo.qas[index].id,
       }
       this.$serve.sendFeedback(params).then((res) => {
-        // console.log(res)
         if (res.data.status == 'create') {
           this.$toast.success(res.data.message, {
             position: 'top-right',
@@ -1512,7 +1501,6 @@ export default {
       this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
     },
     getRoeId(id) {
-      //   console.log(id)
     },
     ActicleDetail(index) {
       this.activeIndex = this.activeIndex == index ? -1 : index
