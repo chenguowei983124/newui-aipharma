@@ -277,6 +277,7 @@
                                     "
                                 ></div>
                                 <div
+                                    class="overflow-x-auto"
                                     v-show="
                                         isDetailDisp[
                                             $store.getters
@@ -1200,7 +1201,11 @@ export default {
       if (this.$store.getters.organizationSearchInfo.allCount == 1) {
         return start.toString()
       } else {
-        return start.toString() + '-' + end.toString()
+        if (this.$store.getters.organizationSearchInfo.allCount == 0) {
+          return '0'
+        } else {
+          return start.toString() + '-' + end.toString()
+        }
       }
     },
   },
@@ -1376,7 +1381,7 @@ export default {
       // ソート順
       this.$store.dispatch('setSort', 0)
       // 表示件数
-      this.$store.dispatch('setMaxCount', 10)
+      this.$store.dispatch('setMaxCount', 20)
       // 検索対象
       this.$store.dispatch('setCheckQ', true) // Q
       this.$store.dispatch('setCheckA', true) // A
@@ -1545,16 +1550,12 @@ export default {
 /* html　様式設定 */
 #answerTab .table {
     border-top: 1px solid #999;
-
     border-left: 1px solid #999;
-
     border-spacing: 0;
 }
 #answerTab table th {
     padding: 10px 30px;
-
     border-bottom: 1px solid #999;
-
     border-right: 1px solid #999;
 }
 #answerTab table td {
@@ -1562,7 +1563,6 @@ export default {
     border-left: 1px solid #999;
     border-top: 1px solid #999;
     border-bottom: 1px solid #999;
-
     border-right: 1px solid #999;
 }
 </style>

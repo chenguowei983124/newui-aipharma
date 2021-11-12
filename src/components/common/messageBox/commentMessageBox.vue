@@ -317,7 +317,6 @@ export default {
     }
   },
   Activated() {
-    console.log('Activated')
   },
   methods: {
     deleteFruit: function (index, items) {

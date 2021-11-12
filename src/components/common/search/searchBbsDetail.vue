@@ -317,137 +317,136 @@ import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
 
 export default {
-    props: {
-        searchButtonClick: {
-            type: Function,
-            default: () => {},
-        },
-        message: {
-            type: String,
-            default: '',
-        },
+  props: {
+    searchButtonClick: {
+      type: Function,
+      default: () => { },
     },
-    components: {
-        searchDropdown,
-        searchSvg,
-        TriangleDownSvg,
-        Multiselect,
-        vueSingleSelect,
-        litepieDatepicker,
+    message: {
+      type: String,
+      default: '',
     },
-    computed: {
-        dateValueFrom: {
-            get: function () {
-                return this.$store.getters.getDateValueFrom
-            },
-            set: function (value) {
-                return this.$store.dispatch('setDateValueFrom', value)
-            },
-        },
-        dateValueTo: {
-            get: function () {
-                return this.$store.getters.getDateValueTo
-            },
-            set: function (value) {
-                return this.$store.dispatch('setDateValueTo', value)
-            },
-        },
-        tags: {
-            get: function () {
-                return this.$store.getters.getSearchTags
-            },
-            set: function (newValue) {
-                this.$store.dispatch('setSearchTags', newValue)
-            },
-        },
+  },
+  components: {
+    searchDropdown,
+    searchSvg,
+    TriangleDownSvg,
+    Multiselect,
+    vueSingleSelect,
+    litepieDatepicker,
+  },
+  computed: {
+    dateValueFrom: {
+      get: function () {
+        return this.$store.getters.getDateValueFrom
+      },
+      set: function (value) {
+        return this.$store.dispatch('setDateValueFrom', value)
+      },
     },
-    data() {
-        return {
-            tagList: this.$store.getters.bbsDropDownInfo.tags,
-            isDetailClick: true,
-        }
+    dateValueTo: {
+      get: function () {
+        return this.$store.getters.getDateValueTo
+      },
+      set: function (value) {
+        return this.$store.dispatch('setDateValueTo', value)
+      },
     },
-    methods: {
-        dateClear: function () {
-            this.$refs.datepickerFrom.clearPicker()
-            this.$refs.datepickerTo.clearPicker()
-        },
-        inputClear() {
-            this.$refs.datepickerFrom.clearPicker()
-            this.$refs.datepickerTo.clearPicker()
-            this.$refs.scope.setValue('0')
-            let checkInfo = this.$store.getters.getBbsCheckInfo
-            checkInfo.checkTitle = true
-            checkInfo.checkContent = true
-            checkInfo.checkComment = true
-            checkInfo.checkPost = true
-            checkInfo.checkLastEditor = true
-            checkInfo.checkFacilityName = true
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
-            this.$store.dispatch('setSearchWord', '')
-            this.$store.dispatch('setSearchTags', [])
-            this.$emit('clearSearchWordEvent', '')
-        },
-
-        setScopeInfo(value) {
-            this.$store.dispatch('setScopeInfo', value)
-        },
-        oncheckTitleChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
-            checkInfo.checkTitle = !checkInfo.checkTitle
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
-        },
-        onCheckContentChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
-            checkInfo.checkContent = !checkInfo.checkContent
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
-        },
-        onCheckCommentChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
-            checkInfo.checkComment = !checkInfo.checkComment
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
-        },
-        onCheckPostChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
-            checkInfo.checkPost = !checkInfo.checkPost
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
-        },
-        onCheckLastEditorChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
-            checkInfo.checkLastEditor = !checkInfo.checkLastEditor
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
-        },
-        onCheckFacilityNameChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
-            checkInfo.checkFacilityName = !checkInfo.checkFacilityName
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
-        },
-        // 詳細条件クリックイベント
-        detailBottunClick: function (event) {
-            this.isDetailClick = !this.isDetailClick
-            console.log(this.isDetailClick)
-            this.$emit('isDetailClick', this.isDetailClick)
-        },
+    tags: {
+      get: function () {
+        return this.$store.getters.getSearchTags
+      },
+      set: function (newValue) {
+        this.$store.dispatch('setSearchTags', newValue)
+      },
+    },
+  },
+  data() {
+    return {
+      tagList: this.$store.getters.bbsDropDownInfo.tags,
+      isDetailClick: true,
+    }
+  },
+  methods: {
+    dateClear: function () {
+      this.$refs.datepickerFrom.clearPicker()
+      this.$refs.datepickerTo.clearPicker()
+    },
+    inputClear() {
+      this.$refs.datepickerFrom.clearPicker()
+      this.$refs.datepickerTo.clearPicker()
+      this.$refs.scope.setValue('0')
+      let checkInfo = this.$store.getters.getBbsCheckInfo
+      checkInfo.checkTitle = true
+      checkInfo.checkContent = true
+      checkInfo.checkComment = true
+      checkInfo.checkPost = true
+      checkInfo.checkLastEditor = true
+      checkInfo.checkFacilityName = true
+      this.$store.dispatch('setBbsCheckInfo', checkInfo)
+      this.$store.dispatch('setSearchWord', '')
+      this.$store.dispatch('setSearchTags', [])
+      this.$emit('clearSearchWordEvent', '')
     },
 
-    updated() {
-        this.$nextTick(function () {
-            // ビュー全体がレンダリングされた後にのみ実行されるコード
-            this.$store.dispatch('setFilterBBS', this.$data.filterBBS)
-        })
+    setScopeInfo(value) {
+      this.$store.dispatch('setScopeInfo', value)
     },
-    watch: {
-        $route(to, from) {
-            if (
-                to.path == '/searchBulletinBoard' ||
-                from.path != '/searchBulletinBoard'
-            )
-                return
+    oncheckTitleChange() {
+      let checkInfo = this.$store.getters.getBbsCheckInfo
+      checkInfo.checkTitle = !checkInfo.checkTitle
+      this.$store.dispatch('setBbsCheckInfo', checkInfo)
+    },
+    onCheckContentChange() {
+      let checkInfo = this.$store.getters.getBbsCheckInfo
+      checkInfo.checkContent = !checkInfo.checkContent
+      this.$store.dispatch('setBbsCheckInfo', checkInfo)
+    },
+    onCheckCommentChange() {
+      let checkInfo = this.$store.getters.getBbsCheckInfo
+      checkInfo.checkComment = !checkInfo.checkComment
+      this.$store.dispatch('setBbsCheckInfo', checkInfo)
+    },
+    onCheckPostChange() {
+      let checkInfo = this.$store.getters.getBbsCheckInfo
+      checkInfo.checkPost = !checkInfo.checkPost
+      this.$store.dispatch('setBbsCheckInfo', checkInfo)
+    },
+    onCheckLastEditorChange() {
+      let checkInfo = this.$store.getters.getBbsCheckInfo
+      checkInfo.checkLastEditor = !checkInfo.checkLastEditor
+      this.$store.dispatch('setBbsCheckInfo', checkInfo)
+    },
+    onCheckFacilityNameChange() {
+      let checkInfo = this.$store.getters.getBbsCheckInfo
+      checkInfo.checkFacilityName = !checkInfo.checkFacilityName
+      this.$store.dispatch('setBbsCheckInfo', checkInfo)
+    },
+    // 詳細条件クリックイベント
+    detailBottunClick: function (event) {
+      this.isDetailClick = !this.isDetailClick
+      this.$emit('isDetailClick', this.isDetailClick)
+    },
+  },
 
-            //   console.log('searchBBSTitle watch',to, from)
-            this.inputClear()
-        },
+  updated() {
+    this.$nextTick(function () {
+      // ビュー全体がレンダリングされた後にのみ実行されるコード
+      this.$store.dispatch('setFilterBBS', this.$data.filterBBS)
+    })
+  },
+  watch: {
+    $route(to, from) {
+      if (
+        to.path == '/searchBulletinBoard' ||
+        from.path != '/searchBulletinBoard'
+      )
+        return
+
+      //   console.log('searchBBSTitle watch',to, from)
+      this.inputClear()
     },
+  },
 }
 </script>
 

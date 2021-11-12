@@ -239,7 +239,6 @@ export default {
 
   watch: {
     defaultValue() {
-      // console.log('this.defaultValuethis.defaultValue ', this.defaultValue)
       if (this.defaultValue !== null) {
         let length = this.defaultOptions.length
         for (let index = 0; index < length; index++) {
@@ -507,7 +506,6 @@ export default {
         }
       }
       this.hasVisibleOptions = hasVisibleOptions
-      // console.log(this.hasVisibleOptions)
       this.showAllOptions = false
       this.updateDisplaySelectedIndex()
     },

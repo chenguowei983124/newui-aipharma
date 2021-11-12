@@ -759,6 +759,7 @@ export default {
     // DropDown 選択したアイテムＩＤ取得
     getCheckId(value) {
       this.checkId = value
+      this.$emit('orgcheckId', value)
       this.$store.dispatch('setDateValueFrom', '')
       this.$store.dispatch('setDateValueTo', '')
     },

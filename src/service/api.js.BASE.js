@@ -4,33 +4,33 @@ const API_TIMEOUT = 5000
 const API_BASE = 'http://localhost:3000/'
 
 const exeAxios = (method, acURL, data) => {
-    return axios({ 
-        method: method, 
+    return axios({
+        method: method,
         url: acURL,
         data: data,
-        timeout : API_TIMEOUT,
+        timeout: API_TIMEOUT,
         validateStatus: function (status) {
-        return status < 500; // Resolve only if the status code is less than 500
+            return status < 500; // Resolve only if the status code is less than 500
         },
         withCredentials: true
     })
 }
 const pathJoin = (pathArr) => {
-    return pathArr.map(function (path){
-      if (path[0] === "/"){
-        path = path.slice(1)
-      }
-      if (path[path.length - 1] === "/"){
-        path = path.slice(0, path.length - 1)
-      }
-      return path;
+    return pathArr.map(function (path) {
+        if (path[0] === "/") {
+            path = path.slice(1)
+        }
+        if (path[path.length - 1] === "/") {
+            path = path.slice(0, path.length - 1)
+        }
+        return path;
     }).join("/")
 }
 const transDataformat = (resData) => {
     let result = resData
     const list = resData.data
     let dt = []
-    
+
     list.map((item) => {
         const year = item.post.created_at.slice(0, 4) + "."
         const month = item.post.created_at.slice(5, 7) + "."
@@ -48,11 +48,10 @@ const transDataformat = (resData) => {
         }
         dt.push(obj)
     })
-    Object.assign(result, {data_bk: result.data})
+    Object.assign(result, { data_bk: result.data })
     result.data = {
         details: dt
     }
-    console.log('transDataformat-after',result)
     return result
 }
 const serve = {
@@ -79,7 +78,7 @@ const serve = {
     //===========================
     async getTopNoticel(code) {
         let data
-        if (!code){
+        if (!code) {
             data = await axios('/preavoid/get_topmenu_Noticel_info', {
                 method: 'get'
             })
@@ -93,13 +92,12 @@ const serve = {
             let mtd = 'get'
             let acURL = '/posts'
             const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}` 
-            console.log('getTopNoticel_url',url)
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
                 const res = response.data;
                 data = transDataformat(res)
-            }            
+            }
         }
 
         return data
@@ -109,7 +107,7 @@ const serve = {
     //===========================
     async getTopBulletinBoard(code) {
         let data
-        if (!code){
+        if (!code) {
             data = await axios('/preavoid/get_topmenu_BulletinBoard_info', {
                 method: 'get'
             })
@@ -124,13 +122,12 @@ const serve = {
             let mtd = 'get'
             let acURL = '/posts'
             const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}` 
-            console.log('getTopNoticel_url',url)
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
             const response = await exeAxios(mtd, url, null)
             if (response.status == 200) {
                 const res = response.data;
                 data = transDataformat(res)
-            }            
+            }
         }
 
         return data

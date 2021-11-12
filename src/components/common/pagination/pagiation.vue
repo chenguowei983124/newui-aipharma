@@ -370,12 +370,10 @@ export default {
     },
     prevPage() {
       if (this.selected <= 1) return
-      console.log('prevPage', this.selected)
       this.handlePageSelected(this.selected - 1)
     },
     nextPage() {
       if (this.selected >= this.pageCount) return
-      console.log('nextPage', this.selected)
       this.handlePageSelected(this.selected + 1)
     },
 

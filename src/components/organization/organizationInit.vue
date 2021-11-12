@@ -62,7 +62,7 @@
                         mr-1
                         cursor-pointer
                     "
-                    @click="sendMsgToParent(item)"
+                    @click="sendMsgToParent(item.label)"
                     v-for="item in $store.getters.getOrganizationSeartorenndoTab
                         .torenndoTab"
                     :key="item"

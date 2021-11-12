@@ -9,6 +9,7 @@
                     :form="$constant.formList.OWN"
                     @isOrgDetailClick="getOrgDetailClick"
                     @detailDisp="getScroll"
+                    v-on:orgcheckId="orgcheckIdMsg"
                 ></search-bar>
             </div>
 
@@ -153,6 +154,8 @@ export default {
       // 詳細条件ボタン押下区分
       isOrgDetailButtonClick: true,
       isScroll: true,
+      // すべて 選択
+      isorgcheckIdMsg: ''
       //   isOrgDetailButtonClick: false,
     }
   },
@@ -162,9 +165,7 @@ export default {
     // 詳細条件ボタン押下区分を取得
     // ========================================
     getOrgDetailClick: function (data) {
-      console.log('getOrgDetailClickgetOrgDetailClick', data)
       this.isOrgDetailButtonClick = data
-      console.log('this.isOrgDetailButtonClick', this.isOrgDetailButtonClick)
     },
     // スクロール
     getScroll: function (value) {
@@ -188,9 +189,12 @@ export default {
     },
     // init中 クリック タグ
     showMsgToParent: function (data) {
-      console.log('showMsgToParentshowMsgToParent', data)
       this.searchTag(data)
     },
+    // DropDown 選択したアイテムＩＤ取得
+    orgcheckIdMsg: function (data) {
+      this.isorgcheckIdMsg = data
+    }
   },
   created() {
     let param = sessionStorage.getItem('searchParam')

@@ -397,89 +397,79 @@ import MescrollVue from 'mescroll.js/mescroll.vue'
 import EditAndDelete from '../common/searchResult/editAndDelete.vue'
 
 export default {
-    components: {
-        XIconSvg,
-        Editor,
-        sendMessageIconSvg,
-        resultDetailRow,
-        ResultDetailRowItem,
-        Good,
-        bad,
-        MescrollVue,
-        EditAndDelete,
+  components: {
+    XIconSvg,
+    Editor,
+    sendMessageIconSvg,
+    resultDetailRow,
+    ResultDetailRowItem,
+    Good,
+    bad,
+    MescrollVue,
+    EditAndDelete,
+  },
+  props: {
+    id: '',
+  },
+  data() {
+    return {
+      postList: [], // 列表数据
+      params: {},
+      dispFlg: false,
+      dispEditor: false,
+      InputComment: '',
+    }
+  },
+
+  watch: {},
+  methods: {
+    closeClick() {
+      this.$emit('close', false)
     },
-    props: {
-        id: '',
+    editComment(id) {
     },
-    data() {
-        return {
-            postList: [], // 列表数据
-            params: {},
-            dispFlg: false,
-            dispEditor: false,
-            InputComment: '',
+    deleteComment(id) {
+    },
+    async doSearch() {
+
+      Object.assign(this.params, { division: 'BBS' })
+      const response = await this.$serve.getPostsrforId('', this.id)
+
+      this.postList = this.formatPostList(response.data.data)
+    },
+    formatPostList(data) {
+      let list = []
+      for (let i = 0; i < data.length; i++) {
+        let listDetail = {
+          id: data[i].post.id,
+          urlTitle: data[i].post.title,
+          title: data[i].post.content,
+          date: data[i].post.created_at,
+          group:
+            data[i].post.scope == 0
+              ? 'ownFacility'
+              : data[i].post.scope == 1
+                ? 'otherFacility'
+                : 'group',
+          viewCount: data[i].post.feedback.viewed,
+          notificationType: data[i].post.genre,
+          userName: data[i].post.user_data.user_name,
+          workplace: data[i].post.user_data.workplace,
+          commnetCount: data[i].post.commnet.length,
+          feedback: data[i].post.feedback,
+          tag: data[i].post.tag,
+          commnet: data[i].post.commnet,
+          user_id: data[i].post.user_id,
         }
+        list.push(listDetail)
+      }
+      return list
     },
-
-    watch: {},
-    methods: {
-        closeClick() {
-            console.log('100')
-            this.$emit('close', false)
-        },
-        editComment(id) {
-            console.log('editComment', id)
-        },
-        deleteComment(id) {
-            console.log('deleteComment', id)
-        },
-        async doSearch() {
-            console.log('userid', this.$store.getters.topManagementInfo.user_id)
-
-            Object.assign(this.params, { division: 'BBS' })
-            console.log('id', this.id)
-            const response = await this.$serve.getPostsrforId('', this.id)
-            console.log('getPostList-result', response.data)
-
-            this.postList = this.formatPostList(response.data.data)
-        },
-        formatPostList(data) {
-            let list = []
-            for (let i = 0; i < data.length; i++) {
-                console.log(data)
-                console.log('item', data[i].post.feedback.viewed)
-                let listDetail = {
-                    id: data[i].post.id,
-                    urlTitle: data[i].post.title,
-                    title: data[i].post.content,
-                    date: data[i].post.created_at,
-                    group:
-                        data[i].post.scope == 0
-                            ? 'ownFacility'
-                            : data[i].post.scope == 1
-                            ? 'otherFacility'
-                            : 'group',
-                    viewCount: data[i].post.feedback.viewed,
-                    notificationType: data[i].post.genre,
-                    userName: data[i].post.user_data.user_name,
-                    workplace: data[i].post.user_data.workplace,
-                    commnetCount: data[i].post.commnet.length,
-                    feedback: data[i].post.feedback,
-                    tag: data[i].post.tag,
-                    commnet: data[i].post.commnet,
-                    user_id: data[i].post.user_id,
-                }
-                console.log('aa', data[i].post.commnet)
-                list.push(listDetail)
-            }
-            console.log('list', list)
-            return list
-        },
-    },
-    created() {},
-    mounted() {
-        this.doSearch()
-    },
+  },
+  created() { },
+  mounted() {
+    this.doSearch()
+  },
 }
 </script>
 <style scoped>
