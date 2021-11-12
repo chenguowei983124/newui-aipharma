@@ -199,6 +199,35 @@ const serve = {
         return data
     },
     //===========================
+    // IDによって投稿情報の取得
+    //===========================
+    async getPostsrforId(code, id) {
+        let data = []
+        if (!!code) {
+            const queryStringData = {
+                code: code,
+            }
+            // API-index
+            let mtd = 'get'
+            let acURL = `/posts/${id}`
+            const queryString = new URLSearchParams(queryStringData).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const tags = response.data
+                tags.map((map) => {
+                    data.push(map.name)
+                })
+            }
+        } else {
+            data = await axios(`/posts/${id}`, {
+                method: 'get',
+            })
+        }
+
+        return data
+    },
+    //===========================
     // TOP画面　学会情報取得
     //===========================
     async getTopScientifiSociety() {

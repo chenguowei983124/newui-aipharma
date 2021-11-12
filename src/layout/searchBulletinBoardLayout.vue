@@ -11,12 +11,11 @@
                 ></search-bar>
             </div>
 
-            <!-- spの場合、ヘッダー、検索枠の位置を替える -->
             <div :class="fixedHoverHight" v-if="!isScroll"></div>
         </div>
 
         <div :class="fixedHight"></div>
-        <div class="flex">
+        <div class="flex h-screen-72">
             <div class="flex-grow min-w-min block"></div>
 
             <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-245">
@@ -28,6 +27,7 @@
                                     ? 'hidden md:w-full md:flex-grow md:block'
                                     : 'flex-grow w-full',
                             ]"
+                            ref="bbsList"
                             :detailHeightCss="detailHeightCss"
                             @clickItemEvent="openDetail"
                         ></bbs-list>
@@ -79,9 +79,9 @@ export default {
             let css = ''
             if (this.isScroll) {
                 if (this.isDetailButtonClick) {
-                    css = 'h-36 md:h-60'
+                    css = 'h-36 md:h-36'
                 } else {
-                    css = 'h-36 md:h-60'
+                    css = 'h-36 md:h-48'
                 }
             } else {
                 if (this.isDetailButtonClick) {
@@ -136,11 +136,13 @@ export default {
             // this.isScroll = value
         },
         openDetail(val) {
+            console.log('openDetail', val)
             this.id = val
             this.dispFlg = true
         },
         getClose(value) {
             this.dispFlg = value
+            this.$refs.bbsList.talkingClosed()
         },
         getUnpublish() {
             const params = {

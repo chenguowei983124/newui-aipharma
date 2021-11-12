@@ -26,13 +26,6 @@ export default {
             checkLastEditor: true,
             checkFacilityName: true,
         },
-        qa_classify_facility: [
-            { value: '0', title: '全体' },
-            { value: '1', title: '自施設のみ' },
-            { value: '2', title: '他施設のみ' },
-            { value: '3', title: 'グループ施設のみ' },
-            { value: '4', title: 'グループ施設+自施設' },
-        ],
         oidcCode: '',
         download: false,
     }),
@@ -147,7 +140,7 @@ export default {
         setIsOrgDotsClick({ commit, state }, value) {
             commit('basic', { key: 'isOrgDotsClick', value })
         },
-        // 組織内 DI 記録（Q&A） 
+        // 組織内 DI 記録（Q&A）
         setIsOrgDotsDetailedClick({ commit, state }, value) {
             commit('basic', { key: 'isOrgDotsDetailedClick', value })
         },

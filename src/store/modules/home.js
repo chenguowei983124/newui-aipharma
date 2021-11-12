@@ -30,14 +30,6 @@ export default {
         },
         // management
         topManagementInfo(state) {
-            // const managementInfo = {
-            //     lastName: '木村',
-            //     name: '木村 太郎',
-            //     title: 'doctor',
-            //     hospital: '◯◯◯◯◯◯大学病院',
-            //     authority: '管 理 者',
-            // }
-
             return state.managementInfo
         },
         // managementGroup
@@ -91,30 +83,10 @@ export default {
         async getBBSDropDowninfo({ rootState, commit }, code) {
             commit('setBBSDropDowninfo', {})
             const tags = await serve.getTagsMaster(code)
-            // const scops = [
-            //     { value: '0', title: '全体' },
-            //     { value: '1', title: '組織' },
-            //     { value: '2', title: 'グループ' },
-            // ]
-            // const genre_Info = [
-            //     { value: 'notice', title: '告知' },
-            //     { value: 'event', title: 'イベント' },
-            //     { value: 'other', title: 'その他' },
-            // ]
-            // const genre_BBS = [
-            //     { value: 'notice', title: '告知' },
-            //     { value: 'event', title: 'イベント' },
-            //     { value: 'query', title: '質問' },
-            //     { value: 'questionnaire', title: 'アンケート' },
-            //     { value: 'other', title: 'その他' },
-            // ]
+
             const bbsDropDowninfo = {
                 tags: tags,
-                // scops: scops,
-                // genre_Info: genre_Info,
-                // genre_BBS: genre_BBS,
             }
-            // console.log('setBBSDropDowninfo', bbsDropDowninfo)
             commit('setBBSDropDowninfo', bbsDropDowninfo)
         },
         async getTopManagementInfo({ rootState, commit }, code) {

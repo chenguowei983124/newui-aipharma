@@ -100,6 +100,8 @@ module.exports = {
                 // 134px
                 33.5: '8.375rem',
                 // 150px
+                35: '8.75rem',
+                // 150px
                 37.5: '9.375rem',
                 // 170px
                 42.5: '10.625rem',
@@ -184,7 +186,15 @@ module.exports = {
                 '8/10': '80%',
                 '9/10': '90%',
                 'screen-60': '60vh',
+                'screen-61': '61vh',
+                'screen-62': '62vh',
+                'screen-63': '63vh',
+                'screen-64': '64vh',
                 'screen-65': '65vh',
+                'screen-66': '66vh',
+                'screen-67': '67vh',
+                'screen-68': '68vh',
+                'screen-69': '69vh',
                 'screen-70': '70vh',
                 'screen-71': '71vh',
                 'screen-72': '72vh',
@@ -193,6 +203,15 @@ module.exports = {
                 'screen-75': '75vh',
                 'screen-80': '80vh',
                 'screen-90': '90vh',
+                'screen-91': '91vh',
+                'screen-92': '92vh',
+                'screen-93': '93vh',
+                'screen-94': '94vh',
+                'screen-95': '95vh',
+                'screen-96': '96vh',
+                'screen-97': '97vh',
+                'screen-98': '98vh',
+                'screen-99': '99vh',
             },
             backgroundColor: (theme) => ({
                 ...theme('colors'),

@@ -1,104 +1,113 @@
 <template>
-    <div class="md:p-5 p-2">
-        <!-- 最初の行目 -->
-        <div class="md:h-4 items-center flex justify-between">
-            <div class="flex">
-                <result-detail-row-item
-                    itemType="1"
-                    :typeKB="row.group"
-                    v-if="row.group != undefined"
-                ></result-detail-row-item>
-                <!-- date -->
-                <result-detail-row-item
-                    itemType="2"
-                    addStyle="ml-2"
-                    :itemValue="row.date"
-                    v-if="row.date != undefined"
-                ></result-detail-row-item>
-            </div>
-            <!-- 告知ラベル -->
-            <result-detail-row-item
-                itemType="1"
-                :typeKB="row.notificationType"
-                v-if="row.notificationType != undefined"
-                addStyle="flex justify-center items-center mr-1.25 md:flex-none "
-            ></result-detail-row-item>
-            <!-- </div> -->
+    <div class="">
+        <div class="absolute w-full rounded-sm -ml-0.5">
+            <div
+                class="bg-lock h-35 rounded-lg md:h-40"
+                v-if="row.clicked"
+            ></div>
         </div>
-        <!--  二行目 -->
-        <div class="flex-grow truncate md:h-6">
-            <span class="items-center">
-                <!-- title text -->
-                <div
-                    class="
-                        underline
-                        truncate
-                        hover:opacity-50
-                        active:opacity-50
-                    "
-                >
+        <div class="md:p-4 p-2">
+            <!-- 最初の行目 -->
+            <div class="md:h-4 items-center flex justify-between">
+                <div class="flex">
                     <result-detail-row-item
-                        itemType="7"
-                        :itemValue="row.urlTitle"
-                        addStyle="truncate"
-                        :id="String(row.id)"
-                        v-if="row.urlTitle != undefined"
-                        :itemClick="itemClick"
+                        itemType="1"
+                        :typeKB="row.group"
+                        v-if="row.group != undefined"
+                    ></result-detail-row-item>
+                    <!-- date -->
+                    <result-detail-row-item
+                        itemType="2"
+                        addStyle="ml-2"
+                        :itemValue="row.date"
+                        v-if="row.date != undefined"
                     ></result-detail-row-item>
                 </div>
-            </span>
-        </div>
+                <!-- 告知ラベル -->
+                <result-detail-row-item
+                    itemType="1"
+                    :typeKB="row.notificationType"
+                    v-if="row.notificationType != undefined"
+                    addStyle="flex justify-center items-center mr-1.25 md:flex-none "
+                ></result-detail-row-item>
+                <!-- </div> -->
+            </div>
+            <!--  二行目 -->
+            <div class="flex-grow truncate md:h-6">
+                <span class="items-center">
+                    <!-- title text -->
+                    <div
+                        class="
+                            underline
+                            truncate
+                            hover:opacity-50
+                            active:opacity-50
+                        "
+                    >
+                        <result-detail-row-item
+                            itemType="7"
+                            :itemValue="row.urlTitle"
+                            addStyle="truncate"
+                            :id="String(row.id)"
+                            v-if="row.urlTitle != undefined"
+                            :index="index"
+                            :itemClick="itemClick"
+                        ></result-detail-row-item>
+                    </div>
+                </span>
+            </div>
 
-        <!--  三行目 -->
-        <div class="flex-grow md:truncate md:h-6">
-            <result-detail-row-item
-                itemType="7"
-                :itemValue="row.title"
-                addStyle="truncate"
-                v-if="row.title != undefined"
-            ></result-detail-row-item>
-        </div>
-
-        <!--  四行目 -->
-        <div class="mt-3.75 flex justify-between md:h-6">
-            <div class="flex items-end">
+            <!--  三行目 -->
+            <div class="flex-grow md:truncate md:h-6">
                 <result-detail-row-item
                     itemType="7"
-                    :itemValue="row.userName"
-                    itemStyle="notoSansJpAndSixteenBold"
-                    v-if="row.userName != undefined"
+                    :itemValue="row.title"
+                    addStyle="truncate"
+                    v-if="row.title != undefined"
                 ></result-detail-row-item>
-                <div class="ml-2 notoSansJpAndTwelveRegular">先生</div>
             </div>
-            <!-- view数 -->
-            <result-detail-row-item
-                itemType="4"
-                itemTitle=" view"
-                :itemValue="row.viewCount.toString()"
-                addStyle="md:ml-2.5 md:flex-none"
-                v-if="row.viewCount != undefined"
-            ></result-detail-row-item>
-        </div>
 
-        <!--  五行目 -->
-        <div class="flex justify-between md:h-6">
-            <result-detail-row-item
-                itemType="7"
-                :itemValue="row.workplace"
-                itemStyle="notoSansJpAndTwelveBold"
-                v-if="row.workplace != undefined"
-            ></result-detail-row-item>
-            <!-- view数 -->
-            <result-detail-row-item
-                itemType="9"
-                itemTitle="返信 XX 件"
-                :itemValue="row.commnetCount.toString()"
-                addStyle=" md:flex-none"
-                v-if="row.commnetCount != undefined"
-            ></result-detail-row-item>
-        </div>
+            <!--  四行目 -->
+            <div class="mt-3.75 flex justify-between md:h-6">
+                <div class="flex items-end">
+                    <result-detail-row-item
+                        itemType="7"
+                        :itemValue="row.userName"
+                        itemStyle="notoSansJpAndSixteenBold"
+                        v-if="row.userName != undefined"
+                    ></result-detail-row-item>
+                    <div class="ml-2 notoSansJpAndTwelveRegular">先生</div>
+                </div>
+                <!-- view数 -->
+                <result-detail-row-item
+                    itemType="4"
+                    itemTitle=" view"
+                    :itemValue="row.viewCount.toString()"
+                    addStyle="md:ml-2.5 md:flex-none"
+                    v-if="row.viewCount != undefined"
+                ></result-detail-row-item>
+            </div>
 
-        <slot></slot>
+            <!--  五行目 -->
+            <div class="flex justify-between md:h-6">
+                <result-detail-row-item
+                    itemType="7"
+                    :itemValue="row.workplace"
+                    itemStyle="notoSansJpAndTwelveBold"
+                    v-if="row.workplace != undefined"
+                ></result-detail-row-item>
+                <!-- view数 -->
+                <result-detail-row-item
+                    itemType="9"
+                    itemTitle="返信 XX 件"
+                    :itemValue="row.commnetCount.toString()"
+                    addStyle=" md:flex-none"
+                    v-if="row.commnetCount != undefined"
+                ></result-detail-row-item>
+            </div>
+
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -129,6 +138,10 @@ export default {
         routerPath: {
             type: String,
             default: '',
+        },
+        index: {
+            type: Number,
+            default: 0,
         },
         itemClick: {
             type: Function,
@@ -210,30 +223,5 @@ export default {
             })
         },
     },
-    // setup(props) {
-    //     const proAreaStyle = computed(() => {
-    //         const style = []
-    //         if (props.proDetailStyle == 'style1') {
-    //             style.push('flex space-x-1.5 md:space-x-3 pl-2 md:pl-0')
-    //         }
-    //         if (props.proDetailStyle == 'style2') {
-    //             style.push('flex flex-row md:flex-col md:space-x-0 space-x-2 ')
-    //         }
-    //         return style
-    //     })
-
-    //     const bakAreaStyle = computed(() => {
-    //         const style = []
-    //         if (props.bakDetailStyle == 'style1') {
-    //             style.push('flex')
-    //         }
-    //         return style
-    //     })
-
-    //     return {
-    //         proAreaStyle,
-    //         bakAreaStyle,
-    //     }
-    // },
 }
 </script>

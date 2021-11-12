@@ -1,8 +1,5 @@
 <template>
-    <!-- <div class="w-full pt-12 h-191.25 ">aa</div> -->
-    <!-- <div class="mx-auto pt-12 h-312.5" id="div_postList"> -->
-
-    <div class="h-screen-60 md:h-screen-65" id="div_postList">
+    <div class="" id="div_postList">
         <div class="flex justify-end mb-2">
             <vue-single-select
                 class="w-42.5"
@@ -17,13 +14,18 @@
                   border border-transparent focus:outline-none"
             ></vue-single-select>
         </div>
-        <mescroll-vue class="overflow-y-scroll" ref="mescroll" :up="mescrollUp">
+        <mescroll-vue
+            class="h-screen-67 overflow-y-scroll"
+            ref="mescroll"
+            :up="mescrollUp"
+        >
             <div class="relative">
                 <div class="">
                     <div v-for="(article, index) in postList" :key="index">
                         <result-detail-row
                             class="searchResult_bbsDetail_blue mt-2"
                             :row="article"
+                            :index="index"
                             :itemClick="clickItem"
                         >
                         </result-detail-row>
@@ -56,6 +58,7 @@ export default {
             params: {},
             pagination: {},
             postList: [],
+            openIndex: -1,
             singleSelectItem: [
                 { value: 'created_at-desc', title: '投稿日が新しい順' },
                 { value: 'created_at-asc', title: '投稿日が古い順' },
@@ -185,6 +188,7 @@ export default {
                     userName: data[i].post.user_data.user_name,
                     workplace: data[i].post.user_data.workplace,
                     commnetCount: data[i].post.commnet.length,
+                    clicked: false,
                 }
                 list.push(listDetail)
             }
@@ -271,12 +275,17 @@ export default {
                 query: params,
             })
         },
-        clickItem(val) {
-            // this.dispFlg = !this.dispFlg
-            console.log('aaa', val)
+        clickItem(val, index) {
+            this.openIndex = index
+            this.postList[index].clicked = true
             this.$emit('clickItemEvent', val)
         },
-
+        talkingClosed() {
+            if (this.openIndex != -1) {
+                this.postList[this.openIndex].clicked = false
+                this.openIndex = -1
+            }
+        },
         // mescrollInit(mescroll) {
         //   console.log('mescrollInit', mescroll)
         //   this.mescroll = mescroll // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置

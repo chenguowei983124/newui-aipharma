@@ -23,7 +23,11 @@
     >
         <span :class="itemClass">{{ itemValue }}</span>
     </a>
-    <div v-if="itemType == '7'" :class="itemClass" @click="itemClick(id)">
+    <div
+        v-if="itemType == '7'"
+        :class="itemClass"
+        @click="itemClick(id, index)"
+    >
         {{ itemValue }}
     </div>
     <router-link
@@ -57,9 +61,10 @@ export default {
         routerPath: String,
         id: String,
         linkUrl: String,
+        index: Number,
         itemClick: {
             type: Function,
-            default: (index) => {},
+            default: (id, index) => {},
         },
     },
     data() {
@@ -68,11 +73,7 @@ export default {
         }
     },
     computed: {},
-    methods: {
-        testClick() {
-            console.log('itemClick')
-        },
-    },
+    methods: {},
     setup(props) {
         const itemClass = computed(() => {
             const style = []

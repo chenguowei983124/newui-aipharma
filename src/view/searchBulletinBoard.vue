@@ -1,9 +1,11 @@
 <template>
-    <div class="h-screen">
+    <div class="relative h-screen">
         <my-all-header :form="$constant.formList.BBS"></my-all-header>
         <!-- 内容 -->
         <search-bulletin-board-layout></search-bulletin-board-layout>
-        <home-bottom-template class="mt-20"></home-bottom-template>
+        <home-bottom-template
+            class="absolute bottom-0 w-full"
+        ></home-bottom-template>
     </div>
 </template>
 
