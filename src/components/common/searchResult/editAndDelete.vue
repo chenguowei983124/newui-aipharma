@@ -39,8 +39,8 @@
             v-if="boxDispFlg"
         >
             <div class="mx-3.5 space-y-2 font-NotoSansJp font-bold my-2.5">
-                <div @click="editClick(id)">編集</div>
-                <div @click="deleteClick(id)">削除</div>
+                <div @click="editClick">編集</div>
+                <div @click="deleteClick">削除</div>
             </div>
         </div>
     </div>
@@ -75,11 +75,10 @@ export default {
             this.boxDispFlg = !this.boxDispFlg
         },
         editClick() {
-            this.editEvent('editClick', this.id)
+            this.editEvent(this.id)
             this.boxClose()
         },
         deleteClick() {
-            console.log('deleteClick', this.id)
             this.deleteEvent(this.id)
             this.boxClose()
         },
