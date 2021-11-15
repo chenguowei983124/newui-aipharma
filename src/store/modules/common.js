@@ -28,9 +28,14 @@ export default {
         },
         oidcCode: '',
         download: false,
+        bbsTagsList: [],
+        loadingShowFlg: true,
     }),
 
     getters: {
+        getBbsTagsList(state) {
+            return state.bbsTagsList
+        },
         getDownload(state) {
             return state.download
         },
@@ -86,7 +91,11 @@ export default {
             return state.scope
         },
         getBbsCheckInfo(state) {
+            console.log(state.bbsCheckInfo)
             return state.bbsCheckInfo
+        },
+        getLoadingShowFlg(state) {
+            return state.loadingShowFlg
         },
     },
 
@@ -210,6 +219,13 @@ export default {
         },
         setBbsCheckInfo({ commit }, value) {
             commit('setBbsCheck', value)
+        },
+        setBbsTagsList({ commit, state }, value) {
+            console.log('bbsTagsList', value)
+            commit('basic', { key: 'bbsTagsList', value })
+        },
+        setLoadingShowFlg({ commit, state }, value) {
+            commit('basic', { key: 'loadingShowFlg', value })
         },
     },
 }

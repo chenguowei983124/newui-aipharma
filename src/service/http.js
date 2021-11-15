@@ -29,8 +29,10 @@ service.interceptors.request.use(
         // config.transformRequest = [function (data) {
         //     return qs.stringify(data)
         // }]
+        if (store.getters.getLoadingShowFlg) {
+            store.dispatch('setIsLoadingShow', true)
+        }
 
-        store.dispatch('setIsLoadingShow', true)
         return config
     },
     (error) => {
@@ -41,12 +43,14 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     (response) => {
         store.dispatch('setIsLoadingShow', false)
+        store.dispatch('setLoadingShowFlg', true)
         console.log('OK')
         return Promise.resolve(response)
     },
     (error) => {
         console.log('NG')
         store.dispatch('setIsLoadingShow', false)
+        store.dispatch('setLoadingShowFlg', true)
         const { response } = error
         if (response) {
             console.log(response)

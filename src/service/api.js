@@ -1,4 +1,5 @@
 import axios from './http'
+import store from '../store'
 // import axios from "axios";
 const API_TIMEOUT = 5000
 // const API_BASE = 'http://localhost:3000/'
@@ -168,7 +169,8 @@ const serve = {
     //===========================
     // お知らせ,掲示板のtagsマスタデータ
     //===========================
-    async getTagsMaster(code) {
+    async getTagsMaster(code, value) {
+        store.dispatch('setLoadingShowFlg', false)
         let data = []
         if (!!code) {
             const queryStringData = {
@@ -187,13 +189,10 @@ const serve = {
                 })
             }
         } else {
-            const response = await axios('/tags', {
+            const response = await axios(`/tags?${value}`, {
                 method: 'get',
             })
-            const tags = response.data.tags
-            tags.map((map) => {
-                data.push(map.name)
-            })
+            data = response.data.tags
         }
 
         return data
@@ -222,6 +221,163 @@ const serve = {
         } else {
             data = await axios(`/posts/${id}`, {
                 method: 'get',
+            })
+        }
+
+        return data
+    },
+    //===========================
+    // 投稿情報の削除
+    //===========================
+    async deletePost(code, id) {
+        let data = []
+        if (!!code) {
+            const queryStringData = {
+                code: code,
+            }
+            // API-index
+            let mtd = 'DELETE'
+            let acURL = `/posts/${id}`
+            const queryString = new URLSearchParams(queryStringData).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const tags = response.data
+                tags.map((map) => {
+                    data.push(map.name)
+                })
+            }
+        } else {
+            data = await axios(`/posts/${id}`, {
+                method: 'DELETE',
+            })
+        }
+
+        return data
+    },
+    //===========================
+    // 投稿情報の削除
+    //===========================
+    async deletePost(code, id, post_id) {
+        let data = []
+        if (!!code) {
+            const queryStringData = {
+                code: code,
+            }
+            // API-index
+            let mtd = 'DELETE'
+            let acURL = `/feedbacks/${id}`
+            const queryString = new URLSearchParams(queryStringData).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const tags = response.data
+                tags.map((map) => {
+                    data.push(map.name)
+                })
+            }
+        } else {
+            const queryStringData = {
+                code: code,
+                feedbackId: id,
+                post_id: post_id,
+            }
+            const queryString = new URLSearchParams(queryStringData).toString()
+            data = await axios(`/feedbacks/${id}?${queryString}`, {
+                method: 'DELETE',
+            })
+        }
+
+        return data
+    },
+    //===========================
+    // 投稿情報の削除
+    //===========================
+    async postReadfeedbacks(post_id, code) {
+        let data = []
+        if (!!code) {
+            const queryStringData = {
+                code: code,
+                postId: post_id,
+            }
+            // API-index
+            let mtd = 'post'
+            let acURL = `/posts/${post_id}/feedbacks`
+            const queryString = new URLSearchParams(queryStringData).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const tags = response.data
+                tags.map((map) => {
+                    data.push(map.name)
+                })
+            }
+        } else {
+            const queryStringData = {
+                postId: post_id,
+            }
+            const queryString = new URLSearchParams(queryStringData).toString()
+            data = await axios(`/posts/${post_id}/feedbacks?${queryString}`, {
+                method: 'post',
+            })
+        }
+
+        return data
+    },
+    //===========================
+    // フィードバックの切り替え
+    //===========================
+    async putfeedbacks(params, code) {
+        let data = []
+        if (!!code) {
+            // API-index
+            let mtd = 'put'
+            let acURL = `/feedbacks/${params.feedbackId}`
+            const queryString = new URLSearchParams(params).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const tags = response.data
+                tags.map((map) => {
+                    data.push(map.name)
+                })
+            }
+        } else {
+            const queryString = new URLSearchParams(params).toString()
+            data = await axios(
+                `/feedbacks/${params.feedbackId}?${queryString}`,
+                {
+                    method: 'put',
+                }
+            )
+            console.log('data', data)
+        }
+
+        return data
+    },
+    async postPosts(param, code) {
+        let data = []
+        if (!!code) {
+            const queryStringData = {
+                code: code,
+                postId: post_id,
+            }
+            // API-index
+            let mtd = 'post'
+            let acURL = `/posts`
+            const queryString = new URLSearchParams(queryStringData).toString()
+            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            const response = await exeAxios(mtd, url, null)
+            if (response.status == 200) {
+                const tags = response.data
+                tags.map((map) => {
+                    data.push(map.name)
+                })
+            }
+        } else {
+            data = await axios(`/posts`, {
+                method: 'post',
+                data: param,
             })
         }
 
