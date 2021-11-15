@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div class="cs:relative">
         <div
             class="
                 bg-gray-300
@@ -19,28 +19,48 @@
             <dots-horizontal></dots-horizontal>
         </div>
         <div
-            class="fixed top-0 left-0 right-0 bottom-0 z-75"
+            class="fixed top-0 left-0 right-0 bottom-0 z-75 bg-lock"
             v-if="boxDispFlg"
             @click.self="boxClose"
         ></div>
+
         <div
             class="
                 rounded-md
-                border-2 border-gray-400
+                mid:border-gray-400
                 bg-white
                 h-20
-                w-16
+                cs:w-16
                 absolute
-                -m-5
-                mt-2
-                items-center
+                w-11/12
                 z-75
+                left-4
+                cs:-left-6 cs:top-12
+                top-1/2
+                border-2 border-black
             "
             v-if="boxDispFlg"
         >
-            <div class="mx-3.5 space-y-2 font-NotoSansJp font-bold my-2.5">
-                <div @click="editClick">編集</div>
-                <div @click="deleteClick">削除</div>
+            <div class="mid:mx-3.5 font-NotoSansJp font-bold items-center">
+                <div
+                    class="
+                        text-center
+                        h-10
+                        border-b-2 border-black
+                        mid:border-0
+                        pt-1.5
+                        mid:pt-2
+                    "
+                    @click="editClick"
+                >
+                    編集
+                </div>
+                <div
+                    class="text-center h-10 pt-1.5 mid:pt-0"
+                    @click="deleteClick"
+                >
+                    削除
+                </div>
             </div>
         </div>
     </div>
@@ -53,6 +73,7 @@ export default {
     props: {
         index: Number,
         id: String,
+        postId: String,
         editEvent: {
             type: Function,
             default: () => {},
@@ -79,7 +100,7 @@ export default {
             this.boxClose()
         },
         deleteClick() {
-            this.deleteEvent(this.id)
+            this.deleteEvent(this.id, this.postId)
             this.boxClose()
         },
     },
