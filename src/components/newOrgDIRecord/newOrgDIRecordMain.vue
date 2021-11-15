@@ -55,11 +55,10 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent
+                            border border-transparent
                             focus:outline-none
-                            focus:ring-1
-                            focus:ring-326EB5Lins
+                            focus:border
+                            focus:border-326EB5Lins
                             focus:border-transparent
                         "
                         type="text"
@@ -71,14 +70,14 @@
                     <label v-show="!validation.answer" style="color: red">
                         *
                     </label>
-                    <div class="rounded-sm ring-1 mt-2">
+                    <div class="rounded-sm border mt-2">
                         <!-- <tinymce-edit v-model="base.answer.text"></tinymce-edit> -->
                     </div>
                     <div class="flex justify-end mt-1">
                         <input
                             v-model="base.answer.isKeep"
                             type="checkbox"
-                            class="form-checkbox w-2.5 h-2.5 mt-1 ring-1"
+                            class="form-checkbox w-2.5 h-2.5 mt-1 border"
                             checked
                         />
                         <label class="ml-1 notoSansJpAndTwelveRegular">
@@ -111,11 +110,10 @@
                                     pl-4
                                     placeholder-gray-500
                                     focus:placeholder-opacity-0
-                                    ring-1
-                                    border-transparent
+                                    border border-transparent
                                     focus:outline-none
-                                    focus:ring-1
-                                    focus:ring-326EB5Lins
+                                    focus:border
+                                    focus:border-326EB5Lins
                                     focus:border-transparent
                                 "
                                 type="text"
@@ -134,11 +132,10 @@
                                     pl-4
                                     placeholder-gray-500
                                     focus:placeholder-opacity-0
-                                    ring-1
-                                    border-transparent
+                                    border border-transparent
                                     focus:outline-none
-                                    focus:ring-1
-                                    focus:ring-326EB5Lins
+                                    focus:border
+                                    focus:border-326EB5Lins
                                     focus:border-transparent
                                 "
                                 type="text"
@@ -286,11 +283,10 @@
                         pl-4
                         placeholder-gray-500
                         focus:placeholder-opacity-0
-                        ring-1
-                        border-transparent
+                        border border-transparent
                         focus:outline-none
-                        focus:ring-1
-                        focus:ring-326EB5Lins
+                        focus:border
+                        focus:border-326EB5Lins
                         focus:border-transparent
                     "
                     type="text"
@@ -355,11 +351,10 @@
                         pl-4
                         placeholder-gray-500
                         focus:placeholder-opacity-0
-                        ring-1
-                        border-transparent
+                        border border-transparent
                         focus:outline-none
-                        focus:ring-1
-                        focus:ring-326EB5Lins
+                        focus:border
+                        focus:border-326EB5Lins
                         focus:border-transparent
                     "
                     type="text"
@@ -638,11 +633,10 @@
                                 pl-4
                                 placeholder-gray-500
                                 focus:placeholder-opacity-0
-                                ring-1
-                                border-transparent
+                                border border-transparent
                                 focus:outline-none
-                                focus:ring-1
-                                focus:ring-326EB5Lins
+                                focus:border
+                                focus:border-326EB5Lins
                                 focus:border-transparent
                             "
                             type="text"
@@ -662,11 +656,10 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent
+                            border border-transparent
                             focus:outline-none
-                            focus:ring-1
-                            focus:ring-326EB5Lins
+                            focus:border
+                            focus:border-326EB5Lins
                             focus:border-transparent
                         "
                         type="text"
@@ -695,7 +688,7 @@
                         <input
                             v-model="detail.publicRange"
                             type="checkbox"
-                            class="form-checkbox w-3 h-3 text-white ring-1"
+                            class="form-checkbox w-3 h-3 text-white border"
                             checked
                         />
                         <label class="ml-0.5 font-NotoSansJp text-sm">

@@ -19,11 +19,10 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1 ring-grayline
-                            border-transparent
+                            border border-grayline border-transparent
                             focus:outline-none
-                            focus:ring-1
-                            focus:ring-grayline
+                            focus:border
+                            focus:border-grayline
                             focus:border-transparent
                         "
                         type="password"
@@ -43,11 +42,10 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1 ring-grayline
-                            border-transparent
+                            border border-grayline border-transparent
                             focus:outline-none
-                            focus:ring-1
-                            focus:ring-grayline
+                            focus:border
+                            focus:border-grayline
                             focus:border-transparent
                         "
                         type="password"
