@@ -25,11 +25,10 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1 ring-grayline
-                            border-transparent
+                            border border-grayline border-transparent
                             focus:outline-none
-                            focus:ring-1
-                            focus:ring-grayline
+                            focus:border
+                            focus:border-grayline
                             focus:border-transparent
                         "
                         type="text"
@@ -73,28 +72,28 @@
 <script>
 import logo from './logo.vue'
 export default {
-    data() {
-        return {
-            mailAddress: '',
-        }
+  data() {
+    return {
+      mailAddress: '',
+    }
+  },
+  components: {
+    logo,
+  },
+  methods: {
+    sendMailClick: function () {
+      let params = {
+        email: this.mailAddress,
+      }
+      this.$serve.postResetPasswordMail(params).then((res) => {
+        this.$toast.success(res.data.message, {
+          position: 'top-right',
+        })
+        this.$router.push('/')
+      })
     },
-    components: {
-        logo,
-    },
-    methods: {
-        sendMailClick: function () {
-            let params = {
-                email: this.mailAddress,
-            }
-            this.$serve.postResetPasswordMail(params).then((res) => {
-                this.$toast.success(res.data.message, {
-                    position: 'top-right',
-                })
-                this.$router.push('/')
-            })
-        },
-    },
-    props: {},
+  },
+  props: {},
 }
 </script>
 <style></style>
