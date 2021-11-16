@@ -52,6 +52,11 @@ const organizationCountSort = [
     { value: '1', title: '50件 表示' },
     { value: '2', title: '100件 表示' },
 ]
+// 掲示板検索　順 区分リスト
+const singleSelectItem = [
+    { value: '0', title: '投稿日が新しい順' },
+    { value: '1', title: '投稿日が古い順' },
+]
 
 const managementitemList = [
     { title: 'データ登録', itemStyle: 'title' },
@@ -225,4 +230,5 @@ export default {
     bbsScops,
     bbsGenre,
     preavoidsDateSort,
+    singleSelectItem,
 }

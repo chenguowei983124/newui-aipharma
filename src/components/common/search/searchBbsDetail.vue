@@ -121,15 +121,20 @@
         <div>
             <div class="px-2 md:px-0">
                 <Multiselect
+                    ref="mult"
                     v-model="tags"
                     mode="tags"
                     placeholder="#タグ"
-                    :filterResults="false"
+                    :filterResults="true"
                     :minChars="1"
-                    :resolveOnLoad="false"
-                    :delay="0"
+                    :resolveOnLoad="true"
+                    :delay="1000"
                     :searchable="true"
-                    :options="tagList"
+                    :options="
+                        async function (query) {
+                            return await fetchLanguages(query) // check JS block for implementation
+                        }
+                    "
                     :classes="$constant.multiselectCss"
                 />
             </div>
@@ -317,136 +322,227 @@ import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
 
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { },
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
+        message: {
+            type: String,
+            default: '',
+        },
     },
-    message: {
-      type: String,
-      default: '',
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
+        litepieDatepicker,
     },
-  },
-  components: {
-    searchDropdown,
-    searchSvg,
-    TriangleDownSvg,
-    Multiselect,
-    vueSingleSelect,
-    litepieDatepicker,
-  },
-  computed: {
-    dateValueFrom: {
-      get: function () {
-        return this.$store.getters.getDateValueFrom
-      },
-      set: function (value) {
-        return this.$store.dispatch('setDateValueFrom', value)
-      },
+    computed: {
+        dateValueFrom: {
+            get: function () {
+                return this.$store.getters.getDateValueFrom
+            },
+            set: function (value) {
+                return this.$store.dispatch('setDateValueFrom', value)
+            },
+        },
+        dateValueTo: {
+            get: function () {
+                return this.$store.getters.getDateValueTo
+            },
+            set: function (value) {
+                return this.$store.dispatch('setDateValueTo', value)
+            },
+        },
+        tags: {
+            get: function () {
+                return this.$store.getters.getSearchTags
+            },
+            set: function (newValue) {
+                this.$store.dispatch('setSearchTags', newValue)
+                this.setInputedTagList()
+            },
+        },
     },
-    dateValueTo: {
-      get: function () {
-        return this.$store.getters.getDateValueTo
-      },
-      set: function (value) {
-        return this.$store.dispatch('setDateValueTo', value)
-      },
+    data() {
+        return {
+            tagList: this.$store.getters.bbsDropDownInfo.tags,
+            isDetailClick: true,
+            bbsTagslist: [],
+            selectedDBTagList: [],
+        }
     },
-    tags: {
-      get: function () {
-        return this.$store.getters.getSearchTags
-      },
-      set: function (newValue) {
-        this.$store.dispatch('setSearchTags', newValue)
-      },
-    },
-  },
-  data() {
-    return {
-      tagList: this.$store.getters.bbsDropDownInfo.tags,
-      isDetailClick: true,
-    }
-  },
-  methods: {
-    dateClear: function () {
-      this.$refs.datepickerFrom.clearPicker()
-      this.$refs.datepickerTo.clearPicker()
-    },
-    inputClear() {
-      this.$refs.datepickerFrom.clearPicker()
-      this.$refs.datepickerTo.clearPicker()
-      this.$refs.scope.setValue('0')
-      let checkInfo = this.$store.getters.getBbsCheckInfo
-      checkInfo.checkTitle = true
-      checkInfo.checkContent = true
-      checkInfo.checkComment = true
-      checkInfo.checkPost = true
-      checkInfo.checkLastEditor = true
-      checkInfo.checkFacilityName = true
-      this.$store.dispatch('setBbsCheckInfo', checkInfo)
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setSearchTags', [])
-      this.$emit('clearSearchWordEvent', '')
+    methods: {
+        async fetchLanguages(query) {
+            let searchTagsList = this.$store.getters.getSearchTagsLable
+            let result = {}
+            if (query == null || query == '') {
+                if (Object.keys(searchTagsList).length !== 0) {
+                    for (
+                        let i = 0;
+                        i < Object.keys(searchTagsList).length;
+                        i++
+                    ) {
+                        let response = await this.$serve.getTagsMaster(
+                            '',
+                            searchTagsList[i]
+                        )
+                        result = response.map((item) => {
+                            return {
+                                value: item.name,
+                                label: item.name,
+                            }
+                        })
+                    }
+                    let setList = {}
+                    Object.keys(result).forEach(function (key) {
+                        if (result[key].label == searchTagsList[0]) {
+                            setList = {
+                                value: result[key].value,
+                                label: result[key].label,
+                            }
+                        }
+                    })
+                    console.log('setList', setList)
+                    let flg = false
+                    // 存在チェック
+                    for (
+                        let index = 0;
+                        index < this.$store.getters.getSearchTags.length;
+                        index++
+                    ) {
+                        if (
+                            this.$store.getters.getSearchTags[index] ==
+                            setList.value
+                        ) {
+                            flg = true
+                        }
+                    }
+                    // 存在しない場合、入力に設定
+                    this.$store.dispatch('setSearchTagsLable', [])
+                    if (!flg) {
+                        this.$refs.mult.select(setList)
+                    }
+                    this.bbsTagslist = result
+                } else {
+                    console.log(
+                        'setInputList',
+                        this.$store.getters.getBbsTagsList
+                    )
+                    result = this.$store.getters.getBbsTagsList
+                }
+            } else {
+                await this.$serve.getTagsMaster('', query).then((response) => {
+                    console.log(response)
+                    result = response.map((item) => {
+                        return {
+                            value: item.name,
+                            label: item.name,
+                        }
+                    })
+                })
+                this.bbsTagslist = result
+            }
+            console.log('result', result)
+            return result
+        },
+        setInputedTagList() {
+            let selectedItem = this.$store.getters.getBbsTagsList
+            for (let index = 0; index < this.bbsTagslist.length; index++) {
+                const element = this.bbsTagslist[index]
+                if (
+                    this.bbsTagslist[index].value ==
+                    this.$store.getters.getSearchTags[
+                        this.$store.getters.getSearchTags.length - 1
+                    ]
+                ) {
+                    let storeExistFlg = false
+                    for (let i = 0; i < selectedItem.length; i++) {
+                        if (
+                            selectedItem[i].value ==
+                            this.bbsTagslist[index].value
+                        ) {
+                            storeExistFlg = true
+                        }
+                    }
+                    if (!storeExistFlg) {
+                        selectedItem.push(this.bbsTagslist[index])
+                        this.$store.dispatch('setBbsTagsList', selectedItem)
+                    }
+                }
+            }
+        },
+        dateClear: function () {
+            this.$refs.datepickerFrom.clearPicker()
+            this.$refs.datepickerTo.clearPicker()
+            this.$refs.mult.refreshOptions
+        },
+        inputClear() {
+            this.$refs.datepickerFrom.clearPicker()
+            this.$refs.datepickerTo.clearPicker()
+            this.$refs.scope.setValue('0')
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkTitle = true
+            checkInfo.checkContent = true
+            checkInfo.checkComment = true
+            checkInfo.checkPost = true
+            checkInfo.checkLastEditor = true
+            checkInfo.checkFacilityName = true
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$emit('clearSearchWordEvent', '')
+        },
+
+        setScopeInfo(value) {
+            this.$store.dispatch('setScopeInfo', value)
+        },
+        oncheckTitleChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkTitle = !checkInfo.checkTitle
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckContentChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkContent = !checkInfo.checkContent
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckCommentChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkComment = !checkInfo.checkComment
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckPostChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkPost = !checkInfo.checkPost
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckLastEditorChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkLastEditor = !checkInfo.checkLastEditor
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        onCheckFacilityNameChange() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkFacilityName = !checkInfo.checkFacilityName
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+        },
+        // 詳細条件クリックイベント
+        detailBottunClick: function (event) {
+            this.isDetailClick = !this.isDetailClick
+            this.$emit('isDetailClick', this.isDetailClick)
+        },
     },
 
-    setScopeInfo(value) {
-      this.$store.dispatch('setScopeInfo', value)
+    updated() {
+        this.$nextTick(function () {
+            // ビュー全体がレンダリングされた後にのみ実行されるコード
+            this.$store.dispatch('setFilterBBS', this.$data.filterBBS)
+        })
     },
-    oncheckTitleChange() {
-      let checkInfo = this.$store.getters.getBbsCheckInfo
-      checkInfo.checkTitle = !checkInfo.checkTitle
-      this.$store.dispatch('setBbsCheckInfo', checkInfo)
-    },
-    onCheckContentChange() {
-      let checkInfo = this.$store.getters.getBbsCheckInfo
-      checkInfo.checkContent = !checkInfo.checkContent
-      this.$store.dispatch('setBbsCheckInfo', checkInfo)
-    },
-    onCheckCommentChange() {
-      let checkInfo = this.$store.getters.getBbsCheckInfo
-      checkInfo.checkComment = !checkInfo.checkComment
-      this.$store.dispatch('setBbsCheckInfo', checkInfo)
-    },
-    onCheckPostChange() {
-      let checkInfo = this.$store.getters.getBbsCheckInfo
-      checkInfo.checkPost = !checkInfo.checkPost
-      this.$store.dispatch('setBbsCheckInfo', checkInfo)
-    },
-    onCheckLastEditorChange() {
-      let checkInfo = this.$store.getters.getBbsCheckInfo
-      checkInfo.checkLastEditor = !checkInfo.checkLastEditor
-      this.$store.dispatch('setBbsCheckInfo', checkInfo)
-    },
-    onCheckFacilityNameChange() {
-      let checkInfo = this.$store.getters.getBbsCheckInfo
-      checkInfo.checkFacilityName = !checkInfo.checkFacilityName
-      this.$store.dispatch('setBbsCheckInfo', checkInfo)
-    },
-    // 詳細条件クリックイベント
-    detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit('isDetailClick', this.isDetailClick)
-    },
-  },
-
-  updated() {
-    this.$nextTick(function () {
-      // ビュー全体がレンダリングされた後にのみ実行されるコード
-      this.$store.dispatch('setFilterBBS', this.$data.filterBBS)
-    })
-  },
-  watch: {
-    $route(to, from) {
-      if (
-        to.path == '/searchBulletinBoard' ||
-        from.path != '/searchBulletinBoard'
-      )
-        return
-
-      //   console.log('searchBBSTitle watch',to, from)
-      this.inputClear()
-    },
-  },
 }
 </script>
 

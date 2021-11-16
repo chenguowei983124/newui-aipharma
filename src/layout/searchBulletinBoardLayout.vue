@@ -4,6 +4,7 @@
         <div class="group">
             <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
                 <search-bar
+                    ref="searchBar"
                     class=""
                     :form="$constant.formList.BBS"
                     @isDetailClick="getDetailDisp"
@@ -54,9 +55,11 @@
                                 w-full
                                 md:ml-2 md:w-132.5 md:flex-none
                             "
+                            ref="talking"
                             @close="getClose"
                             :id="id"
                             :detailHeightCss="detailHeightCss"
+                            :exeSearchRefishOpts="exeSearchMultiSelectRefishOpt"
                             v-if="dispFlg"
                         >
                         </bbs-talking>
@@ -138,7 +141,14 @@ export default {
         openDetail(val) {
             console.log('openDetail', val)
             this.id = val
+            if (this.dispFlg === true) {
+                this.$refs.talking.doSearch()
+            }
+
             this.dispFlg = true
+        },
+        exeSearchMultiSelectRefishOpt() {
+            this.$refs.searchBar.$refs.inptBbsDetail.$refs.mult.refreshOptions()
         },
         getClose(value) {
             this.dispFlg = value

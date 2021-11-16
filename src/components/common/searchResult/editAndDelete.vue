@@ -19,11 +19,10 @@
             <dots-horizontal></dots-horizontal>
         </div>
         <div
-            class="fixed top-0 left-0 right-0 bottom-0 z-75 bg-lock"
+            class="fixed cs:hidden top-0 left-0 right-0 bottom-0 z-75 bg-lock"
             v-if="boxDispFlg"
             @click.self="boxClose"
         ></div>
-
         <div
             class="
                 rounded-md
@@ -47,16 +46,17 @@
                         text-center
                         h-10
                         border-b-2 border-black
-                        mid:border-0
+                        cs:border-0
                         pt-1.5
-                        mid:pt-2
+                        cs:pt-2
+                        cursor-pointer
                     "
                     @click="editClick"
                 >
                     編集
                 </div>
                 <div
-                    class="text-center h-10 pt-1.5 mid:pt-0"
+                    class="text-center h-10 pt-1.5 mid:pt-0 cursor-pointer"
                     @click="deleteClick"
                 >
                     削除
@@ -71,6 +71,7 @@ import dotsHorizontal from '../svgImage/dotsHorizontal.vue'
 export default {
     components: { dotsHorizontal },
     props: {
+        dataInfo: {},
         index: Number,
         id: String,
         postId: String,
@@ -83,24 +84,36 @@ export default {
             default: () => {},
         },
     },
+    mounted() {
+        document.addEventListener('click', this.handleClickOutside)
+        document.addEventListener('keyup', this.handleClickOutside)
+    },
+    unmounted() {
+        document.removeEventListener('keyup', this.handleClickOutside)
+        document.removeEventListener('click', this.handleClickOutside)
+    },
     data() {
         return {
             dispFlg: false,
             boxDispFlg: false,
         }
     },
-    couputed: {},
-    watch: {},
     methods: {
+        handleClickOutside(e) {
+            if (this.$el.contains(e.target)) {
+                return
+            }
+            this.boxDispFlg = false
+        },
         boxClose() {
             this.boxDispFlg = !this.boxDispFlg
         },
         editClick() {
-            this.editEvent(this.id)
+            this.editEvent(this.dataInfo)
             this.boxClose()
         },
         deleteClick() {
-            this.deleteEvent(this.id, this.postId)
+            this.deleteEvent(this.dataInfo)
             this.boxClose()
         },
     },

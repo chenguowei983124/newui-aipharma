@@ -91,7 +91,6 @@ export default {
             return state.scope
         },
         getBbsCheckInfo(state) {
-            console.log(state.bbsCheckInfo)
             return state.bbsCheckInfo
         },
         getLoadingShowFlg(state) {
@@ -221,7 +220,6 @@ export default {
             commit('setBbsCheck', value)
         },
         setBbsTagsList({ commit, state }, value) {
-            console.log('bbsTagsList', value)
             commit('basic', { key: 'bbsTagsList', value })
         },
         setLoadingShowFlg({ commit, state }, value) {
