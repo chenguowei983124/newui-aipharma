@@ -59,12 +59,17 @@
 
             <!--  三行目 -->
             <div class="flex-grow md:truncate md:h-6">
-                <result-detail-row-item
+                <div
+                    class="truncate"
+                    v-html="row.title"
+                    v-if="row.title != undefined"
+                ></div>
+                <!-- <result-detail-row-item
                     itemType="7"
                     :itemValue="row.title"
                     addStyle="truncate"
                     v-if="row.title != undefined"
-                ></result-detail-row-item>
+                ></result-detail-row-item> -->
             </div>
 
             <!--  四行目 -->

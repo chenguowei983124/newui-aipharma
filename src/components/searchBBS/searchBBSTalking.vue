@@ -102,9 +102,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5 notoSansJpAndFourteenRegular break-all">
-                        {{ postList[0].title }}
-                    </div>
+                    <div class="mt-5" v-html="postList[0].title"></div>
                     <div class="mt-5 flex">
                         <div
                             class="flex flex-wrap mt-2"
@@ -194,115 +192,11 @@
                         v-for="(items, index) in postList[0].commnet"
                         :key="index"
                     >
-                        <div class="ml-2">
-                            <div class="mt-2 flex justify-between">
-                                <div class="flex">
-                                    <div
-                                        class="
-                                            rounded-full
-                                            h-12.5
-                                            w-12.5
-                                            bg-backgroundMainSearch
-                                        "
-                                    >
-                                        <img
-                                            class="rounded-full"
-                                            src="../../assets/image/image.png"
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div class="ml-3 mt-2">
-                                        <div class="flex items-end">
-                                            <div
-                                                class="notoSansJpAndSixteenBold"
-                                            >
-                                                {{ items.user_data.user_name }}
-                                            </div>
-                                            <div
-                                                class="
-                                                    ml-1
-                                                    notoSansJpAndTwelveRegular
-                                                "
-                                            >
-                                                先生
-                                            </div>
-                                        </div>
-
-                                        <div class="notoSansJpAndTwelveBold">
-                                            {{ items.user_data.workplace }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <edit-and-delete
-                                        :editEvent="editComment"
-                                        :deleteEvent="deleteComment"
-                                        :dataInfo="items"
-                                    ></edit-and-delete>
-                                </div>
-                            </div>
-                            <div class="mt-5 notoSansJpAndFourteenRegular">
-                                {{ items.content }}
-                            </div>
-                            <div class="flex justify-between items-end mt-5">
-                                <div class="latoAndFourteenBold">
-                                    {{ items.updated_at }}
-                                </div>
-                                <div class="flex items-end">
-                                    <button
-                                        class="
-                                            flex
-                                            items-center
-                                            justify-end
-                                            h-7.5
-                                            w-14
-                                            rounded
-                                            text-white
-                                            bg-whole
-                                        "
-                                        @click="
-                                            putFeedbacks(
-                                                '1',
-                                                postList[0].post_id,
-                                                items.feedback.mine.id,
-                                                index
-                                            )
-                                        "
-                                    >
-                                        <div class="mr-3">
-                                            {{ items.feedback.good }}
-                                        </div>
-                                        <good class="h-4 w-4 mr-1"></good>
-                                    </button>
-                                    <button
-                                        class="
-                                            flex
-                                            justify-end
-                                            items-center
-                                            h-7.5
-                                            w-14
-                                            rounded
-                                            text-white
-                                            bg-red-400
-                                            ml-1
-                                        "
-                                        @click="
-                                            putFeedbacks(
-                                                '2',
-                                                postList[0].post_id,
-                                                items.feedback.mine.id,
-                                                index
-                                            )
-                                        "
-                                    >
-                                        <div class="mr-3">
-                                            {{ items.feedback.bad }}
-                                        </div>
-                                        <bad class="h-4 w-4 mr-1"></bad>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <make-detail-row
+                            :postList="postList"
+                            :items="items"
+                            :index="index"
+                        ></make-detail-row>
                     </div>
                 </div>
             </div>
@@ -398,8 +292,8 @@ import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 import Good from '../common/svgImage/good.vue'
 import bad from '../common/svgImage/bad.vue'
 import Editor from '@tinymce/tinymce-vue'
-import MescrollVue from 'mescroll.js/mescroll.vue'
 import EditAndDelete from '../common/searchResult/editAndDelete.vue'
+import MakeDetailRow from './makeDetailRow.vue'
 
 export default {
     components: {
@@ -410,8 +304,8 @@ export default {
         ResultDetailRowItem,
         Good,
         bad,
-        MescrollVue,
         EditAndDelete,
+        MakeDetailRow,
     },
     props: {
         id: '',
@@ -442,34 +336,7 @@ export default {
         closeClick() {
             this.$emit('close', false)
         },
-        // コメント編集押下
-        editComment(dataInfo) {
-            console.log('コメント編集押下', id)
-        },
-        // コメント削除押下
-        deleteComment(dataInfo) {
-            this.$swal
-                .fire({
-                    text: '本当に削除してよろしいですか？',
-                    icon: '',
-                    showCancelButton: true,
-                    cancelButtonText: 'キャンセル',
-                    confirmButtonText: '削除',
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        this.$serve.deletePost('', dataInfo.postid, dataInfo.id)
-                        this.$swal.fire({
-                            text: '削除されました。',
-                            icon: '',
-                            showCancelButton: false,
-                            confirmButtonText: 'OK',
-                        })
-                        this.doSearch()
-                    }
-                })
-            console.log('コメント削除押下', dataInfo.id)
-        },
+
         // 該当明細編集押下
         editDetail(dataInfo) {
             let params = {
@@ -546,8 +413,6 @@ export default {
             return list
         },
         putFeedbacks(kind, post_id, feedbackId, index) {
-            console.log('text', this.postList[0].feedback)
-            // console.log('text', this.postList[0].commnet[index].feedback)
             let tempKind = kind
             if (index === undefined) {
                 if (this.postList[0].feedback.mine.kind == kind) {
@@ -588,17 +453,9 @@ export default {
             this.doSearch()
         },
     },
-    created() {},
     mounted() {
         this.doSearch()
     },
 }
 </script>
-<style scoped>
-/* .mescroll {
-    position: fixed;
-    top: 44px;
-    bottom: 0;
-    height: auto;
-} */
-</style>
+<style scoped></style>

@@ -38,7 +38,7 @@
                     <vue-single-select
                         class="w-full md:w-1/2"
                         :name="'patientGenderList'"
-                        :default-value="-1"
+                        :default-value="this.base.scope"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="$constant.bbsScops"
                         @selected="setScopeValue"
@@ -58,7 +58,7 @@
                     <vue-single-select
                         class="w-full md:w-1/2"
                         :name="'patientGenderList'"
-                        :default-value="-1"
+                        :default-value="this.base.genre"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="$constant.bbsGenre"
                         @selected="setPatientGenderValue"
@@ -104,19 +104,15 @@
                     <editor
                         api-key="wymbw7u3lecjz7f30u9h8j0b174d0zrusk9f2j7ey9eu3xlz"
                         initialValue="<p>Initial editor content</p>"
-                        v-model="this.base.answer"
+                        v-model="base.answer"
                         :init="{
                             selector: 'textarea#drive-demo',
                             height: 200,
                             menubar: false,
                             statusbar: false,
-                            content_style: `p{line-height: 1;} body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;line-height: 1.0; margin: 1rem;}`,
-
-                            plugins:
-                                'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap  mentions quickbars linkchecker emoticons advtable export',
+                            plugins: 'advlist lists',
                             toolbar:
-                                'myButton | undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image table media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
-                            images_upload_handler: images_upload_handler,
+                                'undo redo | bold italic underline strikethrough | numlist bullist | ',
                         }"
                     />
                 </div>
@@ -155,59 +151,81 @@
 import newOrgDIRecordButtons from './newBbsRecordButtons.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../common/dateRange/litepie-datepicker.vue'
-import tinymceEdit from './bbsTinymceEdit.vue'
 import Multiselect from '@vueform/multiselect'
 import Editor from '@tinymce/tinymce-vue'
 
 export default {
-  components: {
-    newOrgDIRecordButtons,
-    vueSingleSelect,
-    litepieDatepicker,
-    tinymceEdit,
-    Multiselect,
-    Editor,
-  },
-  data() {
-    return {
-      qa_informations: {},
-
-      base: {
-        scope: '',
-        genre: '',
-        title: '',
-        answer: {
-          text: '',
-          isKeep: false,
+    components: {
+        newOrgDIRecordButtons,
+        vueSingleSelect,
+        litepieDatepicker,
+        Multiselect,
+        Editor,
+    },
+    data() {
+        return {
+            qa_informations: {},
+            params: {},
+            base: {
+                scope: '',
+                genre: '',
+                title: '',
+                answer: '',
+                tags: [],
+            },
+        }
+    },
+    methods: {
+        setPatientGenderValue(value) {
+            this.base.genre = value
         },
-        tags: [],
-      },
-    }
-  },
-  methods: {
-    setPatientGenderValue(value) {
-      this.base.genre = value
-    },
-    setScopeValue(value) {
-      this.base.scope = value
-    },
-  },
+        setScopeValue(value) {
+            this.base.scope = value
+        },
+        tmpSaveEvent() {},
+        saveEvent() {},
+        async doSearch() {
+            this.dispEditor = false
+            this.InputComment = ''
+            await this.$serve.postReadfeedbacks(this.id, '')
 
-  computed: {
-    validation() {
-      const base = this.base
-      return {
-        question: !!base.scope,
-        answer: !!base.answer.text,
-      }
+            Object.assign(this.params, { division: 'BBS' })
+            const response = await this.$serve.getPostsrforId(
+                '',
+                this.$route.query.id
+            )
+            console.log(response.data.data[0].post.genre)
+            this.base.genre = response.data.data[0].post.genre
+            this.base.scope = response.data.data[0].post.scope
+            this.base.title = response.data.data[0].post.title
+            this.base.answer = response.data.data[0].post.content
+        },
     },
-    isValid() {
-      var validation = this.validation
-      return Object.keys(validation).every(function (key) {
-        return validation[key]
-      })
+
+    computed: {
+        validation() {
+            const base = this.base
+            console.log(base.answer)
+            return {
+                question: !!base.scope,
+                genre: !!base.genre,
+                title: !!base.title,
+                answer: !!base.answer,
+            }
+        },
+        isValid() {
+            var validation = this.validation
+            return Object.keys(validation).every(function (key) {
+                console.log(validation[key])
+                return validation[key]
+            })
+        },
     },
-  },
+    mounted() {
+        if (JSON.stringify(this.$route.query) !== '{}') {
+            this.doSearch()
+        }
+    },
 }
 </script>
 <style></style>
