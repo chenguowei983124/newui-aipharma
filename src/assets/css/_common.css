@@ -119,3 +119,7 @@
 .latoAndEighteenBold {
     @apply font-Lato text-lg font-bold;
 }
+/* input line css */
+.inputLineCss {
+    @apply border border-grayline border-transparent ;
+}

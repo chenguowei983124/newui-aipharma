@@ -180,8 +180,6 @@ export default {
 
     // クリック タグ
     searchTag: function (value) {
-      this.value = value
-      this.$store.dispatch('setSearchWord', '')
       let tagsLable = this.$store.getters.getSearchTagsLable
       tagsLable.push(value)
       this.$store.dispatch('setSearchTagsLable', tagsLable)

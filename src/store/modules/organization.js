@@ -13,13 +13,13 @@ export default {
         // 検索条件
         searchWord: '', // キーワード
         searchTags: [], // タブ
-        medicineID: '', // 薬区分
-        questionID: '', // 質問区分
-        facilityID: '2', // 施設
+        medicineID: '0', // 薬区分
+        questionID: '0', // 質問区分
+        facilityID: '0', // 施設
         page: '1', // ページ
-        QAID: '', // QAID　？？？？
+        QAID: '', // QAID　
         sort: '0', // ソート順
-        maxCount: '10', // 表示件数
+        maxCount: '20', // 表示件数
         // 検索対象
         checkQ: true, // Q
         checkA: true, // A

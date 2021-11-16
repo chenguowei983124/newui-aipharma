@@ -89,7 +89,13 @@
                         <input
                             v-model="isAgree"
                             type="checkbox"
-                            class="form-checkbox w-3 h-3 text-white ring-1"
+                            class="
+                                form-checkbox
+                                w-3
+                                h-3
+                                text-white
+                                border border-grayline
+                            "
                             checked
                         />
                         <span class="ml-1 notoSansJpAndTwelveRegular pb-0.5"

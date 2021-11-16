@@ -112,7 +112,7 @@ const issueIconitemList = [
     {
         title: '掲示板 登録',
         itemStyle: 'item',
-        routerPath: '/newOrgDIRecord',
+        routerPath: '/newBbsRecord',
     },
 ]
 

@@ -392,7 +392,11 @@ export default {
       orgOrgTagslist: [],
       inputFlg: false,
       // 
-      facilityID: 0
+      facilityID: 0,
+      // 薬の分類
+      qa_classify_class: 0,
+      // 質問区分
+      qa_classify_subject: 0
     }
   },
   watch: {
@@ -502,8 +506,10 @@ export default {
       this.$refs.facility.setValue(null)
       this.$store.dispatch('setSearchWord', '')
       this.$store.dispatch('setSearchTags', [])
-      this.$store.dispatch('setMedicineID', '')
-      this.$store.dispatch('setQuestionID', '')
+      this.$refs.medicines.setValue('0')
+      this.$refs.qDistinction.setValue('0')
+      // this.$store.dispatch('setMedicineID', '')
+      // this.$store.dispatch('setQuestionID', '')
       // 施設 初回設置[index]
       this.$refs.facility.setValue('0')
       this.$store.dispatch('setCheckQ', true)
@@ -561,7 +567,9 @@ export default {
 
     sendInputInfo() { },
     setMedicineID(value) {
+      // if (value != this.$store.getters.getMedicineID) {
       this.$store.dispatch('setMedicineID', value)
+      // }
     },
     setQuestionID(value) {
       this.$store.dispatch('setQuestionID', value)

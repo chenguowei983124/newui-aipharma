@@ -1285,22 +1285,10 @@ export default {
       this.initStore()
       if (this.$route.query.id == undefined) {
         this.$store.dispatch('setSearchWord', this.$route.query.search)
-        this.$store.dispatch(
-          'setSearchTags',
-          this.$route.query.tags.split(',')
-        )
-        this.$store.dispatch(
-          'setMedicineID',
-          this.$route.query.medicine
-        )
-        this.$store.dispatch(
-          'setQuestionID',
-          this.$route.query.qacategory
-        )
-        this.$store.dispatch(
-          'setFacilityID',
-          this.$route.query.facility_flag
-        )
+        this.$store.dispatch('setSearchTags', this.$route.query.tags.split(','))
+        this.$store.dispatch('setMedicineID', this.$route.query.medicine)
+        this.$store.dispatch('setQuestionID', this.$route.query.qacategory)
+        this.$store.dispatch('setFacilityID', this.$route.query.facility_flag)
         this.$store.dispatch('setMaxCount', this.$route.query.displayed)
         this.organizationDateSortValue = this.$route.query.sort
         if (this.$route.query.displayed == 20) {
@@ -1371,9 +1359,9 @@ export default {
       // タブ
       this.$store.dispatch('setSearchTags', [])
       // 薬区分
-      this.$store.dispatch('setMedicineID', '')
+      this.$store.dispatch('setMedicineID', 0)
       // 質問区分
-      this.$store.dispatch('setQuestionID', '')
+      this.$store.dispatch('setQuestionID', 0)
       // 施設
       this.$store.dispatch('setFacilityID', 0)
       // ページ
@@ -1460,14 +1448,20 @@ export default {
     },
     clickCallback() {
     },
+    // 順 区分
     setOrganizationDateSortValue(value) {
-      this.organizationDateSortValue = value
-      this.$store.dispatch('setSort', value)
-      this.resetRouter()
+      if (this.organizationDateSortValue != value) {
+        this.organizationDateSortValue = value
+        this.$store.dispatch('setSort', value)
+        this.resetRouter()
+      }
     },
+    // 件 表示 区分 
     setOrganizationCountSortValue(value) {
-      this.organizationCountSortValue = value
-      this.resetRouter()
+      if (this.organizationCountSortValue != value) {
+        this.organizationCountSortValue = value
+        this.resetRouter()
+      }
     },
     openGoodMessageBox(type, index) {
       let params = {

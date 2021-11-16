@@ -19,8 +19,8 @@
                             rounded-sm
                             pl-4
                             placeholder-gray-500
+                            inputLineCss
                             focus:placeholder-opacity-0
-                            border border-grayline border-transparent
                             focus:outline-none
                             focus:border
                             focus:border-grayline
@@ -43,11 +43,11 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            border border-grayline border-transparent
                             focus:outline-none
                             focus:border
                             focus:border-grayline
                             focus:border-transparent
+                            inputLineCss
                         "
                         type="password"
                         placeholder="パスワード"

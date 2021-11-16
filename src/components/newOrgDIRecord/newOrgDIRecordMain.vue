@@ -55,7 +55,7 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            border border-transparent
+                            inputLineCss
                             focus:outline-none
                             focus:border
                             focus:border-326EB5Lins
@@ -71,7 +71,7 @@
                         *
                     </label>
                     <div class="rounded-sm border mt-2">
-                        <!-- <tinymce-edit v-model="base.answer.text"></tinymce-edit> -->
+                        <tinymce-edit v-model="base.answer.text"></tinymce-edit>
                     </div>
                     <div class="flex justify-end mt-1">
                         <input
@@ -109,8 +109,8 @@
                                     rounded-sm
                                     pl-4
                                     placeholder-gray-500
+                                    inputLineCss
                                     focus:placeholder-opacity-0
-                                    border border-transparent
                                     focus:outline-none
                                     focus:border
                                     focus:border-326EB5Lins
@@ -132,7 +132,7 @@
                                     pl-4
                                     placeholder-gray-500
                                     focus:placeholder-opacity-0
-                                    border border-transparent
+                                    inputLineCss
                                     focus:outline-none
                                     focus:border
                                     focus:border-326EB5Lins
@@ -283,7 +283,7 @@
                         pl-4
                         placeholder-gray-500
                         focus:placeholder-opacity-0
-                        border border-transparent
+                        inputLineCss
                         focus:outline-none
                         focus:border
                         focus:border-326EB5Lins
@@ -351,7 +351,7 @@
                         pl-4
                         placeholder-gray-500
                         focus:placeholder-opacity-0
-                        border border-transparent
+                        inputLineCss
                         focus:outline-none
                         focus:border
                         focus:border-326EB5Lins
@@ -633,7 +633,7 @@
                                 pl-4
                                 placeholder-gray-500
                                 focus:placeholder-opacity-0
-                                border border-transparent
+                                inputLineCss
                                 focus:outline-none
                                 focus:border
                                 focus:border-326EB5Lins
@@ -656,7 +656,7 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            border border-transparent
+                            inputLineCss
                             focus:outline-none
                             focus:border
                             focus:border-326EB5Lins

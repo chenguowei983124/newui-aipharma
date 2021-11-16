@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen">
+    <div class="">
         <!-- トップ情報 -->
         <my-all-header :form="$constant.formList.BBS"></my-all-header>
         <!-- 中間内容情報 -->
@@ -14,10 +14,10 @@ import myAllHeader from '../components/common/header/myAllHeader.vue'
 import newOrgDIRecordLayout from '../layout/newBbsRecordLayout.vue'
 import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
-    components: {
-        myAllHeader,
-        newOrgDIRecordLayout,
-        homeBottomTemplate,
-    },
+  components: {
+    myAllHeader,
+    newOrgDIRecordLayout,
+    homeBottomTemplate,
+  },
 }
 </script>

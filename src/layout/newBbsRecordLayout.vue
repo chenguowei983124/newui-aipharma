@@ -6,18 +6,18 @@
 import newOrgDIRecordMain from '../components/bbsRecord/newBbsRecordMain.vue'
 
 export default {
-    components: {
-        newOrgDIRecordMain,
-    },
-    props: {},
-    data() {
-        return {
-            // isMenuOpen: true
-        }
-    },
-    watch: {},
-    methods: {},
-    created() {},
+  components: {
+    newOrgDIRecordMain,
+  },
+  props: {},
+  data() {
+    return {
+      // isMenuOpen: true
+    }
+  },
+  watch: {},
+  methods: {},
+  created() { },
 }
 </script>
 <style scoped></style>

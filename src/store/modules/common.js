@@ -1,3 +1,4 @@
+import serve from '../../service/api'
 export default {
     state: () => ({
         isFormScreen: false,
@@ -111,6 +112,16 @@ export default {
         setBbsCheck(state, info) {
             state.bbsCheckInfo = info
         },
+        // 薬の分類
+        setQaClassifyClass(state, info) {
+            console.log('setQaClassifyClass02', info.data.qa_classify_class)
+            state.qa_classify_class = info.data.qa_classify_class
+        },
+        // 質問区分
+        setQaClassifySubject(state, info) {
+            console.log('setQaClassifyClass03', info.data.qa_category_lists)
+            state.qa_classify_subject = info.data.qa_category_lists
+        },
     },
 
     actions: {
@@ -152,60 +163,12 @@ export default {
         setIsOrgDotsDetailedClick({ commit, state }, value) {
             commit('basic', { key: 'isOrgDotsDetailedClick', value })
         },
-        getCommonInfo({ commit, state }) {
-            let value = [
-                { value: '0', title: '医療用医薬品（内服薬）' },
-                { value: '1', title: '医療用医薬品（注射薬）' },
-                { value: '2', title: '医療用医薬品（外用薬-塗布）' },
-                { value: '3', title: '医療用医薬品（外用薬-貼付）' },
-                { value: '4', title: '医療用医薬品（外用薬-吸入）' },
-                { value: '5', title: '医療用医薬品（外用薬-点眼）' },
-                { value: '6', title: '医療用医薬品（外用薬-その他）' },
-                { value: '7', title: '一般医薬品・要指導医薬品' },
-                { value: '8', title: '体外診断用医薬品' },
-                { value: '9', title: '治験薬' },
-                { value: '10', title: '医療機器・医療資材・衛生材料' },
-                { value: '11', title: '院内製剤・薬品' },
-                { value: '12', title: '不明' },
-                { value: '13', title: 'その他' },
-            ]
-
-            commit('basic', { key: 'qa_classify_class', value })
-
-            value = [
-                { value: '0', title: '小児' },
-                { value: '1', title: '高齢者' },
-                { value: '2', title: '妊娠・授乳婦' },
-                { value: '3', title: '過敏症' },
-                { value: '4', title: '腎障害・透析' },
-                { value: '5', title: '肝障害' },
-                { value: '6', title: '配合変化・フィルター' },
-                { value: '7', title: '相互作用' },
-                { value: '8', title: '安定性・使用期限' },
-                { value: '9', title: '医薬品鑑別' },
-                { value: '10', title: '価格・処方制限' },
-                { value: '11', title: '警告・禁忌' },
-                { value: '12', title: '効能・効果' },
-                { value: '13', title: '採用の有無・請求方法' },
-                { value: '13', title: '手続き・制度' },
-                { value: '13', title: '製品不具合の調査' },
-                { value: '13', title: '資材関連' },
-                { value: '13', title: '処方の仕方' },
-                { value: '13', title: '製薬会社連絡' },
-                { value: '13', title: '組成・剤形・規格' },
-                { value: '13', title: '中毒' },
-                { value: '13', title: '調製方法' },
-                { value: '13', title: 'TDM・体内動態' },
-                { value: '13', title: '副作用' },
-                { value: '13', title: '粉砕・簡易懸濁' },
-                { value: '13', title: '薬物治療・ガイドライン' },
-                { value: '13', title: '用法・用量' },
-                { value: '13', title: '漢方・生薬' },
-                { value: '13', title: '不明' },
-                { value: '13', title: 'その他' },
-            ]
-
-            commit('basic', { key: 'qa_classify_subject', value })
+        // 薬の分類 質問区分
+        async getCommonInfo({ rootState, commit }) {
+            const info = await serve.getOrgCommonInfo()
+            console.log('getOrgCommonInfogetOrgCommonInfo01', info)
+            commit('setQaClassifyClass', info)
+            commit('setQaClassifySubject', info)
         },
         setOidcCode({ commit, state }, value) {
             commit('basic', { key: 'oidcCode', value })

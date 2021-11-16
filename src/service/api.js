@@ -413,7 +413,6 @@ const serve = {
         const data = await axios('/preavoid/get_common_info', {
             method: 'get',
         })
-
         return data
     },
     //===========================
@@ -580,6 +579,7 @@ const serve = {
     // 組織内DI記録検索結果取得（QA用のタグをサジェスト）
     //===========================
     async getSuggestTags(param) {
+        // store.dispatch('setLoadingShowFlg', false)
         const data = await axios('/api/qa/suggest_tags', {
             method: 'post',
             params: param,

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex border-b-2 border-blue-200 mt-5 md:h-10 max-h-screen">
+    <div class="flex border-b-2 border-blue-200 mt-5 md:h-10">
         <!-- 左 -->
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
@@ -12,7 +12,7 @@
                 justify-center
                 mx-2
                 md:mx-0
-                mb-5
+                pt-0
             "
         >
             <div class="text-googleTitle notoSansJpAndTwentyFourBold">
@@ -160,54 +160,54 @@ import Multiselect from '@vueform/multiselect'
 import Editor from '@tinymce/tinymce-vue'
 
 export default {
-    components: {
-        newOrgDIRecordButtons,
-        vueSingleSelect,
-        litepieDatepicker,
-        tinymceEdit,
-        Multiselect,
-        Editor,
-    },
-    data() {
-        return {
-            qa_informations: {},
+  components: {
+    newOrgDIRecordButtons,
+    vueSingleSelect,
+    litepieDatepicker,
+    tinymceEdit,
+    Multiselect,
+    Editor,
+  },
+  data() {
+    return {
+      qa_informations: {},
 
-            base: {
-                scope: '',
-                genre: '',
-                title: '',
-                answer: {
-                    text: '',
-                    isKeep: false,
-                },
-                tags: [],
-            },
-        }
-    },
-    methods: {
-        setPatientGenderValue(value) {
-            this.base.genre = value
+      base: {
+        scope: '',
+        genre: '',
+        title: '',
+        answer: {
+          text: '',
+          isKeep: false,
         },
-        setScopeValue(value) {
-            this.base.scope = value
-        },
+        tags: [],
+      },
+    }
+  },
+  methods: {
+    setPatientGenderValue(value) {
+      this.base.genre = value
     },
+    setScopeValue(value) {
+      this.base.scope = value
+    },
+  },
 
-    computed: {
-        validation() {
-            const base = this.base
-            return {
-                question: !!base.scope,
-                answer: !!base.answer.text,
-            }
-        },
-        isValid() {
-            var validation = this.validation
-            return Object.keys(validation).every(function (key) {
-                return validation[key]
-            })
-        },
+  computed: {
+    validation() {
+      const base = this.base
+      return {
+        question: !!base.scope,
+        answer: !!base.answer.text,
+      }
     },
+    isValid() {
+      var validation = this.validation
+      return Object.keys(validation).every(function (key) {
+        return validation[key]
+      })
+    },
+  },
 }
 </script>
 <style></style>
