@@ -18,7 +18,7 @@ export default {
         facilityID: '0', // 施設
         page: '1', // ページ
         QAID: '', // QAID　
-        sort: 'monthly_view_count_desc', // ソート順
+        sort: '0', // ソート順
         maxCount: '20', // 表示件数
         // 検索対象
         checkQ: true, // Q
@@ -81,7 +81,6 @@ export default {
         },
         // 検索対象　Q
         getCheckQ(state) {
-            // console.log('getCheckQ', state.checkQ)
             return state.checkQ
         },
         // 検索対象　A
@@ -232,7 +231,6 @@ export default {
         },
         // 
         setOrgTagsList({ commit, state }, value) {
-            console.log('setOrgTagsList', value)
             commit('basic', { key: 'orgTagsList', value })
         },
         // キーワード
@@ -245,7 +243,6 @@ export default {
         },
         // タブ
         setSearchTagsLable({ commit, state }, value) {
-            console.log('searchTagsLable', value)
             commit('basic', { key: 'searchTagsLable', value })
         },
         // 薬区分

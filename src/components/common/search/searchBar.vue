@@ -505,7 +505,7 @@ export default {
               : this.$store.getters.getMaxCount,
           sort:
             this.$props.form == this.$constant.formList.TOP
-              ? 'monthly_view_count_desc'
+              ? '0'
               : this.$store.getters.getSort,
           page:
             this.$props.form == this.$constant.formList.TOP
@@ -552,7 +552,7 @@ export default {
       }
       // 組織内 DI 記録（Q&A）
       else if (this.checkId == 2) {
-        if (this.$props.form === this.$constant.formList.own) {
+        if (this.$props.form === this.$constant.formList.OWN) {
           if (Object.keys(this.$store.getters.getorgTagsList).length > 0) {
             this.$refs.ownDetail.$refs.mult.refreshOptions()
           }
@@ -590,7 +590,7 @@ export default {
           // ソート順
           sort:
             this.$props.form == this.$constant.formList.TOP
-              ? 'monthly_view_count_desc'
+              ? '0'
               : this.$store.getters.getSort,
           // ページ
           page:

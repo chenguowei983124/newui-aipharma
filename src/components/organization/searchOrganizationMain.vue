@@ -1003,7 +1003,7 @@ export default {
   data() {
     return {
       // 順 区分 id
-      organizationDateSortValue: 'monthly_view_count_desc',
+      organizationDateSortValue: 0,
       // 件 表示 区分 id
       organizationCountSortValue: 0,
       pageCount: 20,
@@ -1255,7 +1255,7 @@ export default {
       // ページ
       this.$store.dispatch('setPage', 1)
       // ソート順
-      this.$store.dispatch('setSort', 'monthly_view_count_desc')
+      this.$store.dispatch('setSort', 0)
       // 表示件数
       this.$store.dispatch('setMaxCount', 20)
       // 検索対象

@@ -926,7 +926,7 @@ export default {
   data() {
     return {
       // 順 区分 id
-      organizationDateSortValue: 'monthly_view_count_desc',
+      organizationDateSortValue: 0,
       // 件 表示 区分 id
       organizationCountSortValue: 0,
       pageCount: 1,
