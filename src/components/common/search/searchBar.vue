@@ -119,7 +119,7 @@ import searchDiKnowledge from './searchDiKnowledge.vue'
 import searchPreavoids from './searchPreavoids.vue'
 import searchBbsTitleBar from './searchBbsTitleBar.vue'
 import searchBbsDetail from './searchBbsDetail.vue'
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import Swal from 'sweetalert2/dist/sweetalert2.js'
 import searchPreavoidTitle from './searchPreavoidTitle.vue'
 
 export default {
@@ -132,7 +132,7 @@ export default {
     searchPreavoidTitle,
     searchBbsTitleBar,
     searchBbsDetail,
-    Swal,
+    // Swal,
   },
   props: {
     form: {
@@ -505,7 +505,7 @@ export default {
               : this.$store.getters.getMaxCount,
           sort:
             this.$props.form == this.$constant.formList.TOP
-              ? '1'
+              ? 'monthly_view_count_desc'
               : this.$store.getters.getSort,
           page:
             this.$props.form == this.$constant.formList.TOP
@@ -552,6 +552,11 @@ export default {
       }
       // 組織内 DI 記録（Q&A）
       else if (this.checkId == 2) {
+        if (this.$props.form === this.$constant.formList.own) {
+          if (Object.keys(this.$store.getters.getorgTagsList).length > 0) {
+            this.$refs.ownDetail.$refs.mult.refreshOptions()
+          }
+        }
         let getTimestamp = new Date().getTime()
         let params = {
           search: this.$store.getters.getSearchWord,
@@ -585,7 +590,7 @@ export default {
           // ソート順
           sort:
             this.$props.form == this.$constant.formList.TOP
-              ? '0'
+              ? 'monthly_view_count_desc'
               : this.$store.getters.getSort,
           // ページ
           page:

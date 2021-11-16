@@ -106,132 +106,12 @@
                                 </div>
                             </div>
                             <!-- 編集 フラグ [0,1]{{ item.editFlag }} -->
-                            <div class="flex justify-end">
-                                <div
-                                    v-if="item.editFlag == '1'"
-                                    class="
-                                        bg-gray-300
-                                        -mt-5
-                                        h-10
-                                        w-10
-                                        flex
-                                        items-center
-                                        justify-center
-                                        rounded
-                                        flex-none
-                                        cursor-pointer
-                                        active:opacity-50
-                                        hover:opacity-50
-                                    "
-                                    @click="
-                                        editOrganizationSearchInfo(
-                                            $store.getters
-                                                .organizationSearchInfo.qas[
-                                                index
-                                            ].id
-                                        )
-                                    "
-                                >
-                                    <dots-horizontal></dots-horizontal>
-                                </div>
-                                <!--  pc -->
-                                <div
-                                    :class="[
-                                        isOrgDotsClick[
-                                            $store.getters
-                                                .organizationSearchInfo.qas[
-                                                index
-                                            ].id
-                                        ] ===
-                                        $store.getters.organizationSearchInfo
-                                            .qas[index].id
-                                            ? 'hidden md:block'
-                                            : 'hidden',
-                                    ]"
-                                    class="
-                                        rounded-md
-                                        border-2 border-gray-400
-                                        bg-white
-                                        h-20
-                                        w-16
-                                        absolute
-                                        mt-6
-                                        flex
-                                        items-center
-                                    "
-                                >
-                                    <div
-                                        class="
-                                            mx-3.5
-                                            space-y-2
-                                            font-NotoSansJp font-bold
-                                            my-2.5
-                                        "
-                                    >
-                                        <div>編集</div>
-                                        <div>削除</div>
-                                    </div>
-                                </div>
-                                <!-- sp -->
-                                <div
-                                    :class="[
-                                        isOrgDotsClick[
-                                            $store.getters
-                                                .organizationSearchInfo.qas[
-                                                index
-                                            ].id
-                                        ] ===
-                                        $store.getters.organizationSearchInfo
-                                            .qas[index].id
-                                            ? 'block md:hidden fixed top-0 left-0 right-0 bottom-0 z-99 bg-lock'
-                                            : 'hidden',
-                                    ]"
-                                    @click="
-                                        editOrganizationSearchInfo(
-                                            $store.getters
-                                                .organizationSearchInfo.qas[
-                                                index
-                                            ].id
-                                        )
-                                    "
-                                >
-                                    <div class="flex justify-center mt-96">
-                                        <div
-                                            class="
-                                                border-2
-                                                bg-white
-                                                border-black
-                                                rounded
-                                                flex-col
-                                            "
-                                        >
-                                            <div
-                                                class="
-                                                    border-b-2 border-black
-                                                    h-9
-                                                    w-88.75
-                                                    flex
-                                                    items-center
-                                                    justify-center
-                                                "
-                                            >
-                                                編集
-                                            </div>
-                                            <div
-                                                class="
-                                                    h-9
-                                                    w-88.75
-                                                    flex
-                                                    items-center
-                                                    justify-center
-                                                "
-                                            >
-                                                削除
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <edit-and-delete
+                                :editEvent="editDetail"
+                                :deleteEvent="deleteDetail"
+                                :id="String(item.id)"
+                                :dataInfo="item"
+                            ></edit-and-delete>
                         </div>
                         <!-- A -->
                         <div class="flex justify-between mt-5 items-start">
@@ -1094,6 +974,8 @@ import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 import CommentMessageBox from '../common/messageBox/commentMessageBox.vue'
+import EditAndDelete from '../common/searchResult/editAndDelete.vue'
+
 export default {
   components: {
     TriangleDownSvg,
@@ -1110,12 +992,18 @@ export default {
     GoodMessageBox,
     ResultDetailRowItem,
     CommentMessageBox,
+    EditAndDelete
   },
-  props: {},
+  props: {
+    exeSearchRefishOpts: {
+      type: Function,
+      default: () => { },
+    },
+  },
   data() {
     return {
       // 順 区分 id
-      organizationDateSortValue: 0,
+      organizationDateSortValue: 'monthly_view_count_desc',
       // 件 表示 区分 id
       organizationCountSortValue: 0,
       pageCount: 20,
@@ -1367,7 +1255,7 @@ export default {
       // ページ
       this.$store.dispatch('setPage', 1)
       // ソート順
-      this.$store.dispatch('setSort', 0)
+      this.$store.dispatch('setSort', 'monthly_view_count_desc')
       // 表示件数
       this.$store.dispatch('setMaxCount', 20)
       // 検索対象
@@ -1381,6 +1269,7 @@ export default {
       this.$store.dispatch('setCheckNote', true) // 備考
     },
     resetRouter() {
+      this.exeSearchRefishOpts()
       let getTimestamp = new Date().getTime()
       let dispDetailNumber = 20
 
@@ -1506,6 +1395,43 @@ export default {
     },
     sendGoodMessage(index) {
       var v = this.qaInfo[index].value
+    },
+    // 該当明細編集押下
+    editDetail(dataInfo) {
+      let params = {
+        id: dataInfo.id,
+      }
+      this.$router.push({
+        path: '/newOrgDIRecord',
+        query: params,
+      })
+      console.log('該当明細編集押下', dataInfo.id)
+    },
+    // 該当明細削除押下
+    deleteDetail(dataInfo) {
+      this.$swal
+        .fire({
+          text: '本当に削除してよろしいですか？',
+          icon: '',
+          showCancelButton: true,
+          cancelButtonText: 'キャンセル',
+          confirmButtonText: '削除',
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            // this.$serve.deletePost('', '', dataInfo.id)
+            this.$serve.deleteQa(dataInfo.id)
+            this.$serve.getOwnData(this.$route.query)
+            this.$swal.fire({
+              text: '削除されました。',
+              icon: '',
+              showCancelButton: false,
+              confirmButtonText: 'OK',
+            })
+            this.$emit('close', false)
+          }
+        })
+      console.log('該当明細削除押下', dataInfo.id)
     },
   },
 }

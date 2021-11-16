@@ -440,7 +440,7 @@ export default {
   methods: {
     async fetchLanguages(query) {
       let searchTagsList = this.$store.getters.getSearchTagsLable
-      let result = {}
+      let result = this.$store.getters.getorgTagsList
       if (query == null || query == '') {
         if (Object.keys(searchTagsList).length !== 0) {
           for (let i = 0; i < searchTagsList.length; i++) {
@@ -501,9 +501,6 @@ export default {
     inputClear(data) {
       console.log('heloooodfhggghoooo')
       this.tagValue = []
-      this.$refs.medicines.setValue(null)
-      this.$refs.qDistinction.setValue(null)
-      this.$refs.facility.setValue(null)
       this.$store.dispatch('setSearchWord', '')
       this.$store.dispatch('setSearchTags', [])
       this.$refs.medicines.setValue('0')

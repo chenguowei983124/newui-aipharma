@@ -114,12 +114,10 @@ export default {
         },
         // 薬の分類
         setQaClassifyClass(state, info) {
-            console.log('setQaClassifyClass02', info.data.qa_classify_class)
             state.qa_classify_class = info.data.qa_classify_class
         },
         // 質問区分
         setQaClassifySubject(state, info) {
-            console.log('setQaClassifyClass03', info.data.qa_category_lists)
             state.qa_classify_subject = info.data.qa_category_lists
         },
     },
@@ -166,7 +164,6 @@ export default {
         // 薬の分類 質問区分
         async getCommonInfo({ rootState, commit }) {
             const info = await serve.getOrgCommonInfo()
-            console.log('getOrgCommonInfogetOrgCommonInfo01', info)
             commit('setQaClassifyClass', info)
             commit('setQaClassifySubject', info)
         },

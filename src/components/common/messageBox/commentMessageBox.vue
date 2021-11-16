@@ -167,7 +167,7 @@
                                     "
                                 >
                                     <button
-                                        @click="deleteFruit(index, items)"
+                                        @click="deleteFruit(items)"
                                         class="
                                             bg-personInformationButton
                                             rounded
@@ -319,55 +319,55 @@ export default {
   Activated() {
   },
   methods: {
-    deleteFruit: function (index, items) {
-      Swal.fire({
-        text: '本当に削除してよろしいですか？',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '65bbe5',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '削除',
-        cancelButtonText: 'キャンセル',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log('削除')
-          let params = {
-            id: items.id,
-            qasid: this.qaId
-          }
-          if (params != '') {
-            this.$serve.deleteComment(params).then((res) => {
-              console.log(res)
-              if (res.data.status == 'success') {
-                Swal.fire('', res.data.message, 'success')
-
-                // 指定されたindexの要素を1つ削除します。
-                // this.itemList = this.$store.getters.getCommentInfo
-                // this.itemList.splice(index, 1)
-                // this.$store.dispatch(
-                //     'setCommentInfo',
-                //     this.itemList
-                // )
-                this.searchMessage()
-                // Good,Bad,comment更新
-                // GOOd
-                this.$store.getters.organizationSearchInfo.qas[
-                  this.rowIndex
-                ].feedbackGood = res.data.goodFeedbackCount
-                // bad
-                this.$store.getters.organizationSearchInfo.qas[
-                  this.rowIndex
-                ].feedbackBad = res.data.badFeedbackCount
-
-                //comment
-                this.$store.getters.organizationSearchInfo.qas[
-                  this.rowIndex
-                ].feedbackComment = res.data.commentFeedbackCount
-              }
+    deleteFruit(items) {
+      this.$swal
+        .fire({
+          text: '本当に削除してよろしいですか？',
+          icon: '',
+          showCancelButton: true,
+          cancelButtonText: 'キャンセル',
+          confirmButtonText: '削除',
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            console.log('削除')
+            let params = {
+              id: items.id,
+            }
+            // this.$serve.deletePreavoidData(params)
+            this.$swal.fire({
+              text: '削除されました。',
+              icon: '',
+              showCancelButton: false,
+              cancelButtonText: 'キャンセル',
+              confirmButtonText: 'OK',
             })
+            if (params != '') {
+              this.$serve.deleteComment(params).then((res) => {
+                console.log(res)
+                if (res.data.status == 'success') {
+                  // this.swal.fire('', res.data.message, 'success')
+
+                  // 指定されたindexの要素を1つ削除します。
+                  // this.itemList = this.$store.getters.getCommentInfo
+                  // this.itemList.splice(index, 1)
+                  // this.$store.dispatch(
+                  //     'setCommentInfo',
+                  //     this.itemList
+                  // )
+                  this.searchMessage()
+                  // Good,Bad,comment更新
+                  // Good
+                  this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackGood = res.data.goodFeedbackCount
+                  // bad
+                  this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackBad = res.data.badFeedbackCount
+                  //comment
+                  this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackComment = res.data.commentFeedbackCount
+                }
+              })
+            }
           }
-        }
-      })
+        })
     },
     editAddCheckpointsTitle(item) {
       item.isShow = !item.isShow

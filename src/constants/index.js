@@ -30,14 +30,22 @@ const searchParam = {
 }
 // 順 区分リスト
 const organizationDateSort = [
-    { value: '0', title: '最終編集日が新しい順' },
-    { value: '1', title: '最終編集日が古い順' },
-    { value: '2', title: 'Goodが多い順' },
-    { value: '3', title: 'Badが多い順' },
-    { value: '4', title: 'コメント数が多い順' },
-    { value: '5', title: 'コメント数が少ない順' },
-    { value: '6', title: 'Q&A-ID昇順' },
-    { value: '7', title: 'Q&A-ID降順' },
+    { value: 'monthly_view_count_desc', title: '月間閲覧件数（多→少）' },
+    { value: 'last_updated_at_desc', title: '編集日（新→旧）' },
+    { value: 'last_updated_at_asc', title: '編集日（旧→新）' },
+    { value: 'asked_at_desc', title: '質問日（新→旧）' },
+    { value: 'asked_at_asc', title: '質問日（旧→新）' },
+    { value: 'good_feedback_count_desc', title: 'Good数（多→少）' },
+    { value: 'bad_feedback_count_desc', title: 'Bad数（多→少）' },
+    { value: 'comment_feedback_count_desc', title: 'コメント数（多→少）' },
+    // { value: '0', title: '最終編集日が新しい順' },
+    // { value: '1', title: '最終編集日が古い順' },
+    // { value: '2', title: 'Goodが多い順' },
+    // { value: '3', title: 'Badが多い順' },
+    // { value: '4', title: 'コメント数が多い順' },
+    // { value: '5', title: 'コメント数が少ない順' },
+    // { value: '6', title: 'Q&A-ID昇順' },
+    // { value: '7', title: 'Q&A-ID降順' },
 ]
 // 順 区分リスト
 const preavoidsDateSort = [

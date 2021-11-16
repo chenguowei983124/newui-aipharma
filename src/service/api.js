@@ -507,6 +507,19 @@ const serve = {
         return data
     },
     //===========================
+    // 組織内DI記録検索 QAの削除
+    //===========================
+    async deleteQa(params) {
+        const data = await axios('/api/qa/delete_qa', {
+            method: 'post',
+            params: {
+                qaid: params,
+            },
+        })
+
+        return data
+    },
+    //===========================
     // 組織内DI記録検索結果取得（よく見られているQA）
     //===========================
     async getOwnLookcarefullyQA() {
@@ -555,8 +568,8 @@ const serve = {
     // 組織内DI記録検索結果取得（ID）
     //===========================
     async getOwn({ id }) {
-        const data = await axios('/preavoid/get_organization_search_info', {
-            method: 'get',
+        const data = await axios('/api/qa/get_organization_search_info', {
+            method: 'post',
             params: {
                 id: id,
             },
@@ -568,9 +581,31 @@ const serve = {
     // 組織内DI記録検索結果取得（検索条件）
     //===========================
     async getOwnData(param) {
-        const data = await axios('/preavoid/get_organization_search_info', {
-            method: 'get',
-            params: param,
+        console.log('paramparam', param)
+        var params = {
+            class: param.medicine,
+            displayed: param.displayed,
+            facilityFlag: param.facility_flag,
+            freeword: param.search,
+            page: param.page,
+            qacategory: param.qacategory,
+            sort: param.sort,
+            tags: param.tags.split(',') == '' ? [] : param.tags.split(',').map(Number),
+            searchSelect: {
+                checkQ: param.checkQ == 'true' ? 1 : 0,
+                checkA: param.checkA == 'true' ? 1 : 0,
+                checkComment: param.checkComment == 'true' ? 1 : 0,
+                checkNote: param.checkNote == 'true' ? 1 : 0,
+                checkAddFileName: param.checkAddFileName == 'true' ? 1 : 0,
+                checkContributor: param.checkContributor == 'true' ? 1 : 0,
+                checkLastEditer: param.checkLastEditer == 'true' ? 1 : 0,
+                checkFacilityName: param.checkFacilityName == 'true' ? 1 : 0
+            }
+        }
+
+        const data = await axios('/api/qa/get_organization_search_info', {
+            method: 'post',
+            data: params,
         })
 
         return data

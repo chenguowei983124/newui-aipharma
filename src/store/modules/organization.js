@@ -18,7 +18,7 @@ export default {
         facilityID: '0', // 施設
         page: '1', // ページ
         QAID: '', // QAID　
-        sort: '0', // ソート順
+        sort: 'monthly_view_count_desc', // ソート順
         maxCount: '20', // 表示件数
         // 検索対象
         checkQ: true, // Q

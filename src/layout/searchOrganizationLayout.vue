@@ -108,6 +108,7 @@
                         <search-organization-main
                             ref="main"
                             v-on:listenToChildEvent="showMsgToParent"
+                            :exeSearchRefishOpts="refishTagList"
                         ></search-organization-main>
                     </div>
                     <div>
@@ -161,6 +162,11 @@ export default {
   },
   mounted() { },
   methods: {
+    refishTagList() {
+      if (Object.keys(this.$store.getters.getorgTagsList).length > 0) {
+        this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
+      }
+    },
     // ========================================
     // 詳細条件ボタン押下区分を取得
     // ========================================
