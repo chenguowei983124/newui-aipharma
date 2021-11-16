@@ -581,7 +581,6 @@ const serve = {
     // 組織内DI記録検索結果取得（検索条件）
     //===========================
     async getOwnData(param) {
-        console.log('paramparam', param)
         var params = {
             class: param.medicine,
             displayed: param.displayed,
