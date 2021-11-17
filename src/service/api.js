@@ -679,7 +679,7 @@ const serve = {
     // コメント取得
     //===========================
     async getComment(params) {
-        const data = await axios('/api/qa/get_comments', {
+        const data = await axios('/api/qa/get_comments_userview', {
             method: 'get',
             params: params,
         })
@@ -715,14 +715,59 @@ const serve = {
         })
         return data
     },
-    async getOwndIKnowledgeShare(param) {
-        const data = await axios('/preavoid/get_DIKnowledgeShare_search_info', {
-            method: 'get',
-            params: param,
+    //===========================
+    // DIナレッジシェア画面の通常検索（キーワード検索、タグ検索など）
+    // {
+    //     "displayed": 1,
+    //     "freeword": "ファモチジンの用途",
+    //     "page": 1,
+    //     "sort": "monthly_view_count_desc",
+    //     "tags": [
+    //       1,
+    //       2
+    //     ],
+    //     "searchSelect": {
+    //       "checkQ": 1,
+    //       "checkA": 1,
+    //       "checkComment": 1,
+    //       "checkNote": 1,
+    //       "checkAddFileName": 1,
+    //       "checkContributor": 1,
+    //       "checkLastEditer": 1,
+    //       "checkFacilityName": 1
+    //     }
+    //   }
+    //===========================
+    async getDIKnowledgeShare(param) {
+        const data = await axios('/api/qa/get_DIKnowledgeShare_keyword_search_info', {
+            method: 'post',
+            data: param,
         })
 
         return data
     },
+    //===========================
+    // DIナレッジシェア画面のAI検索
+    // {
+    //     "freeword": "ファモチジンの用途"
+    //   }
+    //===========================
+    async getDIKnowledgeShareAI(param) {
+        const data = await axios('/api/qa/get_DIKnowledgeShare_similar_search_info', {
+            method: 'post',
+            data: param,
+        })
+
+        return data
+    },
+    // async getOwndIKnowledgeShare(param) {
+    //     const data = await axios('/preavoid/get_DIKnowledgeShare_search_info', {
+    //         method: 'get',
+    //         params: param,
+    //     })
+
+    //     return data
+    // },
     async getTest() {
         const data = await axios('/preavoid/get_topmenu_Noticel_info_test', {
             method: 'get',
