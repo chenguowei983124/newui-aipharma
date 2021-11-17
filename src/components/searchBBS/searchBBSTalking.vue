@@ -269,13 +269,15 @@
                             class="
                                 mr-1.5
                                 notoSansJpAndFourteenBold
-                                pointer-events-none
+                                cursor-pointer
                             "
+                            @click="sendPosts(postList[0].post_id)"
                         >
                             送信
                         </div>
                         <send-message-icon-svg
-                            class="mr-1 pointer-events-none"
+                            class="mr-1 cursor-pointer"
+                            @click="sendPosts(postList[0].post_id)"
                         ></send-message-icon-svg>
                     </button>
                 </div>

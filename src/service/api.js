@@ -1,22 +1,23 @@
 import axios from './http'
+import exeAxios from './bbsHttp'
 import store from '../store'
 // import axios from "axios";
 const API_TIMEOUT = 5000
 // const API_BASE = 'http://localhost:3000/'
 const API_BASE = 'https://ai-pharma-bbs-be-stg.kit-ai.jp/'
 
-const exeAxios = (method, acURL, data) => {
-    return axios({
-        method: method,
-        url: acURL,
-        data: data,
-        timeout: API_TIMEOUT,
-        validateStatus: function (status) {
-            return status < 500 // Resolve only if the status code is less than 500
-        },
-        withCredentials: true,
-    })
-}
+// const exeAxios = (method, acURL, data) => {
+//     return axios({
+//         method: method,
+//         url: acURL,
+//         data: data,
+//         timeout: API_TIMEOUT,
+//         validateStatus: function (status) {
+//             return status < 500 // Resolve only if the status code is less than 500
+//         },
+//         withCredentials: true,
+//     })
+// }
 const pathJoin = (pathArr) => {
     return pathArr
         .map(function (path) {
@@ -29,38 +30,6 @@ const pathJoin = (pathArr) => {
             return path
         })
         .join('/')
-}
-const transDataformat = (resData) => {
-    let result = resData
-    const list = resData.data
-    let dt = []
-
-    list.map((item) => {
-        const year = item.post.created_at.slice(0, 4) + '.'
-        const month = item.post.created_at.slice(5, 7) + '.'
-        const day = item.post.created_at.slice(8, 10)
-
-        const obj = {
-            browseRequired:
-                item.post.browseRequired || false ? 'browse' : 'notbrowsed',
-            date: year + month + day,
-            group: item.post.scope,
-            id: item.post.id,
-            looked:
-                Object.keys(item.post.feedback.mine).length > 0
-                    ? 'looked'
-                    : 'notLooked',
-            notificationType: item.post.genre,
-            title: item.post.title,
-            viewCount: item.post.feedback.viewed,
-        }
-        dt.push(obj)
-    })
-    Object.assign(result, { data_bk: result.data })
-    result.data = {
-        details: dt,
-    }
-    return result
 }
 const serve = {
     //===========================
@@ -357,29 +326,25 @@ const serve = {
     },
     async postPosts(param, code) {
         let data = []
-        if (!!code) {
-            const queryStringData = {
-                code: code,
-                postId: post_id,
-            }
-            // API-index
-            let mtd = 'post'
-            let acURL = `/posts`
-            const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
-            if (response.status == 200) {
-                const tags = response.data
-                tags.map((map) => {
-                    data.push(map.name)
-                })
-            }
-        } else {
-            data = await axios(`/posts`, {
-                method: 'post',
-                data: param,
-            })
-        }
+        // if (!!code) {
+
+        //     let mtd = 'post'
+        //     let acURL = `/posts`
+        //     const queryString = new URLSearchParams(queryStringData).toString()
+        //     const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+        //     const response = await exeAxios(mtd, url, null)
+        //     if (response.status == 200) {
+        //         const tags = response.data
+        //         tags.map((map) => {
+        //             data.push(map.name)
+        //         })
+        //     }
+        // } else {
+        data = await exeAxios(`/posts`, {
+            method: 'post',
+            data: param,
+        })
+        // }
 
         return data
     },
@@ -589,7 +554,10 @@ const serve = {
             page: param.page,
             qacategory: param.qacategory,
             sort: param.sort,
-            tags: param.tags.split(',') == '' ? [] : param.tags.split(',').map(Number),
+            tags:
+                param.tags.split(',') == ''
+                    ? []
+                    : param.tags.split(',').map(Number),
             searchSelect: {
                 checkQ: param.checkQ == 'true' ? 1 : 0,
                 checkA: param.checkA == 'true' ? 1 : 0,
@@ -598,8 +566,8 @@ const serve = {
                 checkAddFileName: param.checkAddFileName == 'true' ? 1 : 0,
                 checkContributor: param.checkContributor == 'true' ? 1 : 0,
                 checkLastEditer: param.checkLastEditer == 'true' ? 1 : 0,
-                checkFacilityName: param.checkFacilityName == 'true' ? 1 : 0
-            }
+                checkFacilityName: param.checkFacilityName == 'true' ? 1 : 0,
+            },
         }
 
         const data = await axios('/api/qa/get_organization_search_info', {

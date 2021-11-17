@@ -8,6 +8,7 @@ const formList = {
     OWN: 'searchOrganizantion',
     PVD: 'searchPreavoids',
     BBS: 'searchBulletinBoard',
+    BBSR: 'BBSRecord',
 }
 // 様式リスト
 const style = [

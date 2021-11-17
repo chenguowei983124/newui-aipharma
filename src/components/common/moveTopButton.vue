@@ -54,6 +54,7 @@ export default {
                 this.$router.currentRoute.value.name != 'sendResetPassword' &&
                 this.$router.currentRoute.value.name != 'setPassword' &&
                 this.$router.currentRoute.value.name != 'searchBulletinBoard' &&
+                this.$router.currentRoute.value.name != 'newBbsRecord' &&
                 this.$router.currentRoute.value.name
             ) {
                 return true

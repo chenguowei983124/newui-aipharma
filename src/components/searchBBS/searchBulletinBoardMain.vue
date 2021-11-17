@@ -125,17 +125,30 @@ export default {
     methods: {
         async doSearch(pgNo = 1) {
             this.initStore()
-            this.resetSearchBar()
-            const PAGE_LIMIT = 10
-            Object.assign(this.params, { division: 'BBS' })
-            console.log('watch', this.params)
-            const queryStringData = {
-                page: pgNo,
-                limit: PAGE_LIMIT,
-                filter: this.params,
+            let response
+            if (
+                JSON.stringify(this.$route.query) !== '{}' &&
+                this.$route.query.id !== undefined
+            ) {
+                Object.assign(this.params, { id: this.$route.query.id })
+                response = await this.$serve.getPostsrforId(
+                    '',
+                    this.$route.query.id
+                )
+            } else {
+                this.resetSearchBar()
+                const PAGE_LIMIT = 10
+                Object.assign(this.params, { division: 'BBS' })
+                console.log('watch', this.params)
+                const queryStringData = {
+                    page: pgNo,
+                    limit: PAGE_LIMIT,
+                    filter: this.params,
+                }
+
+                response = await this.$serve.getPostList(queryStringData)
             }
-            const response = await this.$serve.getPostList(queryStringData)
-            console.log('getPostList-result', response.data)
+            console.log('res', response.data)
             if (pgNo == 1) {
                 this.postList = this.formatPostList(response.data.data)
                 if (this.postList.length == 1) {
@@ -302,14 +315,11 @@ export default {
 
             mescroll.endSuccess(
                 this.postList.length,
-                page.num < this.pagination.pages
+                this.$route.query.id !== undefined
+                    ? true
+                    : page.num < this.pagination.pages
             )
-            console.log(
-                'mescroll.endSuccess--------------end------',
-                this.postList.length,
-                page.num
-            )
-            // })
+
             this.mescroll = mescroll
         },
     },

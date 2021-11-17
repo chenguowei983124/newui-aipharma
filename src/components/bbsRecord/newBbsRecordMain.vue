@@ -1,22 +1,32 @@
 <template>
-    <div class="flex border-b-2 border-blue-200 mt-5 md:h-10">
+    <div class="flex border-b-2 border-blue-200">
         <!-- 左 -->
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
-        <div
-            class="
-                flex flex-col
-                w-full
-                md:w-191.25
-                justify-center
-                mx-2
-                md:mx-0
-                pt-0
-            "
-        >
-            <div class="text-googleTitle notoSansJpAndTwentyFourBold">
-                掲示板 登録
+        <div class="flex w-full md:w-191.25 mx-2 md:mx-0">
+            <div
+                class="
+                    text-googleTitle
+                    notoSansJpAndTwentyBold
+                    pt-2.5
+                    pb-2.5
+                    pr-5
+                    md:pt-5 md:pb-5
+                "
+            >
+                掲示板
+            </div>
+            <div
+                class="
+                    text-googleTitle
+                    notoSansJpAndTwentyBold
+                    pt-2.5
+                    pb-2.5
+                    md:pt-5 md:pb-5
+                "
+            >
+                {{ title }}
             </div>
         </div>
         <!-- 右 -->
@@ -24,11 +34,11 @@
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
     </div>
-    <div class="flex pt-4">
+    <div class="flex">
         <div class="flex-grow max-h-full min-w-min block"></div>
         <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">
             <div class="grid grid-cols-1 gap-1 md:space-y-2">
-                <div id="patientGender" class="mt-3">
+                <div id="patientGender" class="mt-3 md:mt-5">
                     <div class="flex">
                         <label class="notoSansJpAndSixteenBold">
                             公開範囲
@@ -36,19 +46,20 @@
                         <label class="text-red-500 ml-1"> * </label>
                     </div>
                     <vue-single-select
-                        class="w-full md:w-1/2"
+                        ref="scope"
+                        class="w-full md:w-1/2 mt-1"
                         :name="'patientGenderList'"
-                        :default-value="this.base.scope"
+                        :default-value="defaultScope"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="$constant.bbsScops"
                         @selected="setScopeValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                          border border-transparent focus:outline-none"
+                                      border border-transparent focus:outline-none"
                     ></vue-single-select>
                 </div>
-                <div id="patientGender" class="mt-3">
+                <div id="patientGender" class="mt-3 md:mt-5">
                     <div class="flex">
                         <label class="notoSansJpAndSixteenBold">
                             ジャンル
@@ -56,19 +67,20 @@
                         <label class="text-red-500 ml-1"> * </label>
                     </div>
                     <vue-single-select
-                        class="w-full md:w-1/2"
+                        ref="genre"
+                        class="w-full md:w-1/2 mt-1"
                         :name="'patientGenderList'"
-                        :default-value="this.base.genre"
+                        :default-value="defaultGenre"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="$constant.bbsGenre"
                         @selected="setPatientGenderValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                          border border-transparent focus:outline-none"
+                                      border border-transparent focus:outline-none"
                     ></vue-single-select>
                 </div>
-                <div id="memo" class="mt-3">
+                <div id="memo" class="mt-3 md:mt-5">
                     <div class="flex">
                         <label class="notoSansJpAndSixteenBold">
                             タイトル
@@ -85,20 +97,23 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1
-                            border-transparent border-grayline
+                            inputLineCss
                             focus:outline-none
-                            focus:ring-1
-                            focus:ring-326EB5Lins
+                            focus:border
+                            focus:border-326EB5Lins
                             focus:border-transparent
+                            h-20
+                            mt-1
                         "
                         type="text"
                         placeholder=""
                     ></textarea>
                 </div>
-                <div id="patientGender" class="mt-3">
+                <div id="patientGender" class="mt-3 md:mt-5">
                     <div class="flex">
-                        <label class="notoSansJpAndSixteenBold"> 本文 </label>
+                        <label class="notoSansJpAndSixteenBold mb-1">
+                            本文
+                        </label>
                         <label class="text-red-500 ml-1"> * </label>
                     </div>
                     <editor
@@ -107,7 +122,7 @@
                         v-model="base.answer"
                         :init="{
                             selector: 'textarea#drive-demo',
-                            height: 200,
+                            height: 150,
                             menubar: false,
                             statusbar: false,
                             plugins: 'advlist lists',
@@ -116,25 +131,29 @@
                         }"
                     />
                 </div>
-                <div id="mediTypes" class="mt-3">
+                <div id="mediTypes" class="mt-3 pb-8 md:pb-16 md:mt-5">
                     <label class="notoSansJpAndSixteenBold"> タグ </label>
                     <Multiselect
-                        class="h-7.5"
+                        class="h-7.5 mt-1"
                         mode="tags"
                         v-model="base.tags"
-                        :closeOnSelect="false"
+                        placeholder="#タグ"
+                        :filterResults="true"
+                        :minChars="1"
+                        :resolveOnLoad="true"
+                        :delay="1000"
                         :searchable="true"
                         :createTag="true"
-                        :options="[
-                            { value: 'batman', label: 'Batman' },
-                            { value: 'robin', label: 'Robin' },
-                            { value: 'joker', label: 'Joker' },
-                        ]"
+                        :loading="false"
+                        :options="
+                            async function (query) {
+                                return await fetchLanguages(query) // check JS block for implementation
+                            }
+                        "
                         :classes="$constant.multiselectCss"
                     ></Multiselect>
                 </div>
                 <new-org-DI-record-buttons
-                    id="bButtons"
                     parent="base"
                     :disableSave="!isValid"
                     @onTmpSaveEvent="tmpSaveEvent"
@@ -166,6 +185,8 @@ export default {
         return {
             qa_informations: {},
             params: {},
+            defaultScope: '0',
+            defaultGenre: 'notice',
             base: {
                 scope: '',
                 genre: '',
@@ -173,17 +194,70 @@ export default {
                 answer: '',
                 tags: [],
             },
+            title:
+                JSON.stringify(this.$route.query) === '{}'
+                    ? '  投稿'
+                    : '  編集',
         }
     },
+
     methods: {
+        // ジャンル選択した値取得
         setPatientGenderValue(value) {
+            console.log('valueG', value)
             this.base.genre = value
         },
+        // 公開範囲選択した値取得
         setScopeValue(value) {
             this.base.scope = value
         },
-        tmpSaveEvent() {},
-        saveEvent() {},
+        //　一時保存
+        tmpSaveEvent() {
+            let params = {
+                post: {
+                    division: 'BBS',
+                    title: this.base.title,
+                    content: this.base.answer,
+                    genre: this.base.genre,
+                    publish: true,
+                    scope: this.base.scope,
+                },
+                tag: this.base.tags,
+            }
+            this.$serve.postPosts(params, '')
+            this.clearInput()
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                this.$router.go(-1)
+            }
+        },
+        // 登録
+        saveEvent() {
+            let params = {
+                post: {
+                    division: 'Info',
+                    title: this.base.title,
+                    content: this.base.answer,
+                    genre: this.base.genre,
+                    publish: true,
+                    scope: this.base.scope,
+                },
+                tag: this.base.tags,
+            }
+            this.$serve.postPosts(params, '')
+            this.clearInput()
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                this.$router.go(-1)
+            }
+        },
+        // 入力した内容をクリア
+        clearInput() {
+            this.base.title = ''
+            this.base.answer = ''
+            this.$refs.scope.setValue('0')
+            this.$refs.genre.setValue('notice')
+            this.base.tags = []
+        },
+        // 検索結果画面で編集押下時、IDよりデータ取得
         async doSearch() {
             this.dispEditor = false
             this.InputComment = ''
@@ -194,11 +268,92 @@ export default {
                 '',
                 this.$route.query.id
             )
-            console.log(response.data.data[0].post.genre)
-            this.base.genre = response.data.data[0].post.genre
+            //
             this.base.scope = response.data.data[0].post.scope
+            this.$refs.scope.setValue(String(this.base.scope))
+
+            this.base.genre = response.data.data[0].post.genre
+            this.$refs.genre.setValue(this.base.genre)
+
             this.base.title = response.data.data[0].post.title
             this.base.answer = response.data.data[0].post.content
+            for (let i = 0; i < response.data.data[0].post.tag.length; i++) {
+                this.base.tags.push(response.data.data[0].post.tag[i].name)
+            }
+        },
+        async fetchLanguages(query) {
+            let result = {}
+            // let searchTagsList = this.$store.getters.getSearchTagsLable
+            // let result = {}
+            // if (query == null || query == '') {
+            //     if (Object.keys(searchTagsList).length !== 0) {
+            //         for (
+            //             let i = 0;
+            //             i < Object.keys(searchTagsList).length;
+            //             i++
+            //         ) {
+            //             let response = await this.$serve.getTagsMaster(
+            //                 '',
+            //                 searchTagsList[i]
+            //             )
+            //             result = response.map((item) => {
+            //                 return {
+            //                     value: item.name,
+            //                     label: item.name,
+            //                 }
+            //             })
+            //         }
+            //         let setList = {}
+            //         Object.keys(result).forEach(function (key) {
+            //             if (result[key].label == searchTagsList[0]) {
+            //                 setList = {
+            //                     value: result[key].value,
+            //                     label: result[key].label,
+            //                 }
+            //             }
+            //         })
+            //         console.log('setList', setList)
+            //         let flg = false
+            //         // 存在チェック
+            //         for (
+            //             let index = 0;
+            //             index < this.$store.getters.getSearchTags.length;
+            //             index++
+            //         ) {
+            //             if (
+            //                 this.$store.getters.getSearchTags[index] ==
+            //                 setList.value
+            //             ) {
+            //                 flg = true
+            //             }
+            //         }
+            //         // 存在しない場合、入力に設定
+            //         this.$store.dispatch('setSearchTagsLable', [])
+            //         if (!flg) {
+            //             this.$refs.mult.select(setList)
+            //         }
+            //         this.bbsTagslist = result
+            //     } else {
+            //         console.log(
+            //             'setInputList',
+            //             this.$store.getters.getBbsTagsList
+            //         )
+            //         result = this.$store.getters.getBbsTagsList
+            //     }
+            // } else {
+            await this.$serve.getTagsMaster('', query).then((response) => {
+                console.log(response)
+                result = response.map((item) => {
+                    return {
+                        value: item.name,
+                        label: item.name,
+                    }
+                })
+            })
+            //     this.bbsTagslist = result
+            // }
+            // console.log('result', result)
+            return result
         },
     },
 
@@ -214,11 +369,14 @@ export default {
             }
         },
         isValid() {
-            var validation = this.validation
-            return Object.keys(validation).every(function (key) {
-                console.log(validation[key])
-                return validation[key]
-            })
+            const base = this.base
+            return {
+                question: !!base.scope,
+                genre: !!base.genre,
+                title: !!base.title,
+                answer: !!base.answer,
+            }
+            // })
         },
     },
     mounted() {
@@ -228,4 +386,5 @@ export default {
     },
 }
 </script>
+
 <style></style>
