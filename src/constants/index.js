@@ -9,6 +9,7 @@ const formList = {
     PVD: 'searchPreavoids',
     BBS: 'searchBulletinBoard',
     BBSR: 'BBSRecord',
+    EDI: 'BBSRecord',
 }
 // 様式リスト
 const style = [
