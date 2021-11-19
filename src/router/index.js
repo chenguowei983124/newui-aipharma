@@ -11,6 +11,7 @@ import searchOrganization from '/src/view/searchOrganization.vue'
 import searchDiKnowledge from '/src/view/searchDiKnowledge.vue'
 import searchPreavoids from '/src/view/searchPreavoids.vue'
 import searchBulletinBoard from '/src/view/searchBulletinBoard.vue'
+import searchNotification from '/src/view/searchNotification.vue'
 import newOrgDIRecord from '/src/view/newOrgDIRecord.vue'
 import newBbsRecord from '/src/view/newBbsRecord.vue'
 import notFound from '/src/view/notFound.vue'
@@ -112,6 +113,15 @@ const routes = [
         path: '/searchBulletinBoard',
         name: 'searchBulletinBoard',
         component: searchBulletinBoard,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // お知らせ画面
+    {
+        path: '/searchNotification',
+        name: 'searchNotification',
+        component: searchNotification,
         meta: {
             requireAuth: true,
         },

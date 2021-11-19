@@ -172,8 +172,14 @@ import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../common/dateRange/litepie-datepicker.vue'
 import Multiselect from '@vueform/multiselect'
 import Editor from '@tinymce/tinymce-vue'
-
+import { onBeforeRouteUpdate } from 'vue-router'
 export default {
+    setup() {
+        onBeforeRouteUpdate((to, from, next) => {
+            console.log('asdfasdfasdfasdfasdfasfasdf')
+            next()
+        })
+    },
     components: {
         newOrgDIRecordButtons,
         vueSingleSelect,

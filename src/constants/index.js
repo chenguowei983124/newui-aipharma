@@ -9,7 +9,7 @@ const formList = {
     PVD: 'searchPreavoids',
     BBS: 'searchBulletinBoard',
     BBSR: 'BBSRecord',
-    EDI: 'BBSRecord',
+    EDI: 'searchNotification',
 }
 // 様式リスト
 const style = [
@@ -117,7 +117,7 @@ const issueIconitemList = [
     {
         title: 'お知らせ 登録',
         itemStyle: 'item',
-        routerPath: '/newOrgDIRecord',
+        routerPath: '/searchNotification',
     },
     {
         title: '掲示板 登録',

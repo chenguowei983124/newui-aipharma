@@ -129,59 +129,61 @@ import checkSvg from '../svgImage/checkSvg.vue'
 import triangleDownSvg from '../svgImage/triangleDownSvg.vue'
 
 export default {
-  components: { checkSvg, triangleDownSvg },
-  props: {
-    checkedID: {
-      type: Number,
-      default: 1,
+    components: { checkSvg, triangleDownSvg },
+    props: {
+        checkedID: {
+            type: Number,
+            default: 1,
+        },
     },
-  },
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside)
-    document.addEventListener('keyup', this.handleClickOutside)
-    this.searchText = this.initial
-  },
-  destroyed() {
-    document.removeEventListener('keyup', this.handleClickOutside)
-    document.removeEventListener('click', this.handleClickOutside)
-  },
-  data() {
-    return {
-      isDown: false,
-      isSelect: true,
-      itemList: [
-        [{ id: '0', title: 'すべて', itemStyle: 'All' }],
-        [{ id: '1', title: 'DI ナレッジシェア', itemStyle: 'item' }],
-        [
-          {
-            id: '2',
-            title: '組織内 DI 記録（Q&A）',
-            itemStyle: 'item',
-          },
-        ],
-        [{ id: '3', title: '症例（プレアボイド）', itemStyle: 'item' }],
-        [{ id: '4', title: 'DI 辞書', itemStyle: 'item' }],
-        [{ id: '5', title: '製薬企業情報', itemStyle: 'item' }],
-        [{ id: '6', title: '掲示板', itemStyle: 'item' }],
-      ],
-    }
-  },
-  watch: {},
-  methods: {
-    itemClick(value) {
-      if (value.itemStyle != 'title') {
-        this.isDown = !this.isDown
-        this.$emit('getCheckedId', value.id)
-      }
+    mounted() {
+        document.addEventListener('click', this.handleClickOutside)
+        document.addEventListener('keyup', this.handleClickOutside)
+        this.searchText = this.initial
     },
-    handleClickOutside(e) {
-      if (this.$el.contains(e.target)) {
-        return
-      }
-      this.isDown = false
+    destroyed() {
+        document.removeEventListener('keyup', this.handleClickOutside)
+        document.removeEventListener('click', this.handleClickOutside)
     },
-  },
-  created() { },
+    data() {
+        console.log('checkedID', this.checkedID)
+        return {
+            isDown: false,
+            isSelect: true,
+            itemList: [
+                [{ id: '0', title: 'すべて', itemStyle: 'All' }],
+                [{ id: '1', title: 'DI ナレッジシェア', itemStyle: 'item' }],
+                [
+                    {
+                        id: '2',
+                        title: '組織内 DI 記録（Q&A）',
+                        itemStyle: 'item',
+                    },
+                ],
+                [{ id: '3', title: '症例（プレアボイド）', itemStyle: 'item' }],
+                [{ id: '4', title: 'DI 辞書', itemStyle: 'item' }],
+                [{ id: '5', title: '製薬企業情報', itemStyle: 'item' }],
+                [{ id: '6', title: '掲示板', itemStyle: 'item' }],
+                [{ id: '7', title: 'お知らせ', itemStyle: 'item' }],
+            ],
+        }
+    },
+    watch: {},
+    methods: {
+        itemClick(value) {
+            if (value.itemStyle != 'title') {
+                this.isDown = !this.isDown
+                this.$emit('getCheckedId', value.id)
+            }
+        },
+        handleClickOutside(e) {
+            if (this.$el.contains(e.target)) {
+                return
+            }
+            this.isDown = false
+        },
+    },
+    created() {},
 }
 </script>
 <style scoped></style>

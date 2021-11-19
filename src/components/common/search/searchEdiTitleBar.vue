@@ -10,10 +10,10 @@
                 flex-none
                 pl-2
                 md:pl-0
-                w-20
+                w-30
             "
         >
-            掲示板
+            お知らせ
         </div>
         <div class="flex flex-row space-x-2">
             <button
@@ -27,7 +27,6 @@
                     h-7.5
                     px-1
                 "
-                @click="bbsRecordClick"
             >
                 投　稿
             </button>
@@ -58,13 +57,7 @@ export default {
     },
     couputed: {},
     watch: {},
-    methods: {
-        bbsRecordClick() {
-            this.$router.push({
-                path: '/newBbsRecord',
-            })
-        },
-    },
+    methods: {},
     created() {},
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
-    <div class="h-screen flex flex-row">
+    <div class="flex flex-row">
+        <div class="h-screen"></div>
         <div class="flex flex-col w-screen justify-between">
             <div>
                 <!-- トップ情報 -->
@@ -8,7 +9,7 @@
                 <new-org-DI-record-layout></new-org-DI-record-layout>
             </div>
             <!-- ボトム情報 -->
-            <home-bottom-template></home-bottom-template>
+            <home-bottom-template class="mt-10"></home-bottom-template>
         </div>
     </div>
 </template>

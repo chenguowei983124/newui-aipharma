@@ -38,14 +38,12 @@
 
 <script>
 import MescrollVue from 'mescroll.js/mescroll.vue'
-import bbsTalking from './searchBBSTalking.vue'
 import resultDetailRow from '../common/searchResult/resultBBS.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 
 export default {
     components: {
         MescrollVue,
-        bbsTalking,
         resultDetailRow,
         vueSingleSelect,
     },
@@ -82,7 +80,6 @@ export default {
             },
         }
     },
-
     beforeRouteEnter(to, from, next) {
         console.log('beforeRouteEnter', to, from, next)
         next((vm) => {
@@ -199,14 +196,14 @@ export default {
         },
         // 初期化検索条件
         initStore() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
+            let checkInfo = this.$store.getters.getEdiCheckInfo
             checkInfo.checkTitle = true
             checkInfo.checkContent = true
             checkInfo.checkComment = true
             checkInfo.checkPost = true
             checkInfo.checkLastEditor = true
             checkInfo.checkFacilityName = true
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
             this.$store.dispatch('setSearchWord', '')
             this.$store.dispatch('setSort', 0)
             this.$store.dispatch('setSearchTags', [])
@@ -252,7 +249,7 @@ export default {
                     ? true
                     : false
             console.log('checkInfo', checkInfo)
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
 
             this.selectDispNumber = this.$route.query.sort
             this.$store.dispatch('setSort', this.$route.query.sort)
@@ -281,13 +278,11 @@ export default {
                 timestamp: getTimestamp,
             }
             this.$router.push({
-                path: '/searchBulletinBoard',
+                path: '/searchNotification',
                 query: params,
             })
         },
         clickItem(val, index) {
-            console.log('index', this.openIndex)
-            console.log('index', this.postList)
             if (this.openIndex >= 0) {
                 this.postList[this.openIndex].clicked = false
             }
@@ -333,11 +328,4 @@ export default {
     },
 }
 </script>
-<style scoped>
-/* .mescroll {
-    position: fixed;
-    top: 44px;
-    bottom: 0;
-    height: auto;
-} */
-</style>
+<style scoped></style>

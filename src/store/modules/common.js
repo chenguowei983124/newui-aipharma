@@ -27,6 +27,14 @@ export default {
             checkLastEditor: true,
             checkFacilityName: true,
         },
+        ediCheckInfo: {
+            checkTitle: true,
+            checkContent: true,
+            checkComment: true,
+            checkPost: true,
+            checkLastEditor: true,
+            checkFacilityName: true,
+        },
         oidcCode: '',
         download: false,
         bbsTagsList: [],
@@ -93,6 +101,9 @@ export default {
         },
         getBbsCheckInfo(state) {
             return state.bbsCheckInfo
+        },
+        getEdiCheckInfo(state) {
+            return state.ediCheckInfo
         },
         getLoadingShowFlg(state) {
             return state.loadingShowFlg
@@ -178,6 +189,9 @@ export default {
         },
         setBbsCheckInfo({ commit }, value) {
             commit('setBbsCheck', value)
+        },
+        setEdiCheckInfo({ commit }, value) {
+            commit('setEidCheck', value)
         },
         setBbsTagsList({ commit, state }, value) {
             commit('basic', { key: 'bbsTagsList', value })
