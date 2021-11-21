@@ -19,9 +19,9 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            border border-grayline border-transparent
+                            inputLineCss
                             focus:outline-none
-                            focus:border
+                            focus:ring-1
                             focus:border-grayline
                             focus:border-transparent
                         "
@@ -42,9 +42,9 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            border border-grayline border-transparent
+                            inputLineCss
                             focus:outline-none
-                            focus:border
+                            focus:ring-1
                             focus:border-grayline
                             focus:border-transparent
                         "
@@ -94,7 +94,7 @@
                                 w-3
                                 h-3
                                 text-white
-                                border border-grayline
+                                ring-1 ring-grayline
                             "
                             checked
                         />

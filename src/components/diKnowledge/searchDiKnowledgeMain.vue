@@ -1,7 +1,20 @@
 <template>
-    <!-- get_DIKnowledgeShare_search_info -->
-    <div v-if="$store.getters.dIKnowledgeShareSearchInfo != undefined">
-        <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium pb-1">
+    <div
+        v-if="
+            $store.getters.dIKnowledgeShareSearchInfo != undefined &&
+            Object.keys($store.getters.dIKnowledgeShareSearchInfo).length != 0
+        "
+    >
+        <div
+            class="
+                flex flex-row
+                space-x-2
+                notoSansJpAndFourteenMedium
+                pb-1
+                mt-4
+                md:mt-0
+            "
+        >
             検索条件：
             <div
                 class=""
@@ -12,24 +25,23 @@
                 {{ searchWords }}
             </div>
         </div>
-        <!-- <div class="">検索条件：{{ $store.getters.getSearchValue }}</div> -->
+        <div class="notoSansJpAndFourteenMedium">
+            該当：
+            {{ $store.getters.dIKnowledgeShareSearchInfo.allCount }}件
+        </div>
         <!-- pc/sp -->
-        <div class="flex justify-between flex-wrap space-y-1">
-            <div class="notoSansJpAndFourteenMedium">
-                該当：
-                {{ $store.getters.dIKnowledgeShareSearchInfo.allCount }}件
-            </div>
-            <div class="flex space-x-2">
+        <div class="flex justify-start md:justify-end flex-wrap space-y-1">
+            <div class="flex space-x-2 mt-3 md:-mt-3">
                 <div class="flex space-x-2">
                     <!-- 順 区分 -->
                     <vue-single-select
-                        class="w-56"
+                        class="w-56 cursor-pointer"
                         :name="'field1'"
-                        :default-value="0"
+                        :default-value="diSortValue"
                         :placeholder="'-- Choose an option --'"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="$constant.organizationDateSort"
-                        @selected="setOrganizationDateSortValue"
+                        @selected="setDiSortValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 "
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -37,13 +49,13 @@
                     ></vue-single-select>
                     <!-- 件 表示 区分 -->
                     <vue-single-select
-                        class="w-32"
+                        class="w-32 cursor-pointer"
                         :name="'field2'"
-                        :default-value="0"
+                        :default-value="diCountSortValue"
                         :placeholder="'-- Choose an option --'"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="$constant.organizationCountSort"
-                        @selected="setOrganizationCountSortValue"
+                        @selected="setDiCountSortValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
@@ -52,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <div class="space-y-2 mt-8">
+        <div class="space-y-2 mt-2">
             <div
                 v-for="(item, index) in $store.getters
                     .dIKnowledgeShareSearchInfo.qas"
@@ -117,6 +129,7 @@
                             </div>
 
                             <div
+                                id="answerTab"
                                 class="
                                     flex-grow
                                     break-all
@@ -162,7 +175,13 @@
                         </div>
                         <!-- 更新情報 pc/sp-->
                         <div class="flex flex-col pt-5 pl-0 md:pl-10">
-                            <div class="space-y-2 notoSansJpAndElevenRegular">
+                            <div
+                                class="
+                                    space-y-2
+                                    notoSansJpAndElevenRegular
+                                    text-dropdownListItem
+                                "
+                            >
                                 <div class="flex space-x-4">
                                     <div>最終編集日：{{ item.createdAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
@@ -179,18 +198,8 @@
                                         v-for="urls in item.urls"
                                         :key="urls"
                                         class="
-                                            rounded-full
-                                            border-2 border-gray-300
-                                            bg-gray-100
-                                            h-6
-                                            notoSansJpAndElevenRegular
-                                            pl-1
-                                            pr-1
-                                            text-center
-                                            flex
-                                            items-center
-                                            ml-1
-                                            cursor-pointer
+                                            text-light-blue-300
+                                            hover:text-light-blue-500
                                         "
                                     >
                                         <a
@@ -204,7 +213,10 @@
                                     PubMed：
                                     <div
                                         v-if="item.pubmed != ''"
-                                        class="hover:text-blue-400"
+                                        class="
+                                            hover:text-light-blue-500
+                                            underline
+                                        "
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
@@ -222,7 +234,10 @@
                                     <!-- <div class="flex-none"></div> -->
                                     <div
                                         v-if="item.pubmed != ''"
-                                        class="hover:text-blue-400"
+                                        class="
+                                            hover:text-light-blue-500
+                                            underline
+                                        "
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
@@ -247,18 +262,9 @@
                                         v-for="documents in item.documents"
                                         :key="documents"
                                         class="
-                                            rounded-full
-                                            border-2 border-gray-300
-                                            bg-gray-100
-                                            h-6
-                                            notoSansJpAndElevenRegular
-                                            pl-1
-                                            pr-1
-                                            text-center
-                                            flex
-                                            items-center
                                             ml-1
                                             cursor-pointer
+                                            hover:text-light-blue-500
                                         "
                                     >
                                         <a
@@ -270,57 +276,60 @@
                                 </div>
                                 <div>施設規模：{{ item.facilityScale }}</div>
                             </div>
-                            <div class="flex flex-wrap space-x-2 mt-2">
-                                <div
-                                    class="
-                                        rounded-full
-                                        border-2 border-gray-300
-                                        bg-gray-100
-                                        h-6
-                                        notoSansJpAndElevenRegular
-                                        pl-1
-                                        pr-1
-                                        text-center
-                                        flex
-                                        items-center
-                                        mr-1
-                                        cursor-pointer
-                                    "
-                                    v-for="keywordTags in item.keywordTags"
-                                    :key="keywordTags"
-                                    @click="sendMsgToParent(keywordTags.name)"
-                                >
-                                    #{{ keywordTags.name }}
+                            <div>
+                                <div class="flex flex-wrap space-x-2 mt-2">
+                                    <div
+                                        class="
+                                            rounded-full
+                                            border-2 border-gray-300
+                                            bg-gray-100
+                                            h-6
+                                            notoSansJpAndElevenRegular
+                                            pl-1
+                                            pr-1
+                                            text-center
+                                            flex
+                                            items-center
+                                            mr-1
+                                            cursor-pointer
+                                        "
+                                        v-for="keywordTags in item.keywordTags"
+                                        :key="keywordTags"
+                                        @click="
+                                            sendMsgToParent(keywordTags.name)
+                                        "
+                                    >
+                                        #{{ keywordTags.name }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div
-                                class="
-                                    flex flex-col
-                                    justify-end
-                                    items-end
-                                    mt-4
-                                    md:mt-0
-                                "
-                            >
+
                                 <div
                                     class="
                                         flex flex-row
-                                        space-x-2
-                                        items-baseline
+                                        justify-end
+                                        mt-4
+                                        md:-mt-7
                                     "
                                 >
-                                    <div class="text-searchDropdown text-xs">
-                                        {{ item.viewCount }} view
-                                    </div>
-                                    <!-- good pc -->
                                     <div
                                         class="
-                                            relative
-                                            hidden
-                                            md:block
-                                            mid:block
+                                            text-searchDropdown text-xs
+                                            mt-3.75
+                                            mr-2
                                         "
                                     >
+                                        <div class="font-NotoSansJp">
+                                            {{ item.viewCount }} view
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="
+                                            flex flex-row
+                                            space-x-2
+                                            items-baseline
+                                        "
+                                    >
+                                        <!-- good -->
                                         <button
                                             class="
                                                 flex
@@ -332,109 +341,16 @@
                                                 text-white
                                                 bg-whole
                                             "
-                                            @click="ActicleDetail(index)"
+                                            @click="
+                                                openGoodMessageBox(1, index)
+                                            "
                                         >
                                             <div class="mr-3">
                                                 {{ item.feedbackGood }}
                                             </div>
                                             <good class="h-4 w-4 mr-1"></good>
                                         </button>
-                                        <div v-show="activeIndex === index">
-                                            <div class="absolute bottom-8">
-                                                <div
-                                                    class="
-                                                        w-44
-                                                        h-24
-                                                        bg-white
-                                                        border border-black
-                                                        rounded
-                                                    "
-                                                >
-                                                    <div
-                                                        class="
-                                                            bg-gray-300
-                                                            h-1/4
-                                                            flex
-                                                            justify-between
-                                                            items-center
-                                                            px-2
-                                                        "
-                                                    >
-                                                        <div class="text-xs">
-                                                            理由をお聞かせください。
-                                                        </div>
-                                                        <div
-                                                            class="
-                                                                cursor-pointer
-                                                            "
-                                                            @click="
-                                                                ActicleDetail(
-                                                                    index
-                                                                )
-                                                            "
-                                                        >
-                                                            <x-icon-svg></x-icon-svg>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="
-                                                            h-3/4
-                                                            flex flex-col
-                                                        "
-                                                    >
-                                                        <div class="h-3/4">
-                                                            <textarea
-                                                                v-model="
-                                                                    item.value
-                                                                "
-                                                                type="text"
-                                                                class="
-                                                                    text-xs
-                                                                    w-full
-                                                                    focus:outline-none
-                                                                "
-                                                                placeholder="（任意）"
-                                                            />
-                                                        </div>
-                                                        <div
-                                                            class="
-                                                                h-1/4
-                                                                flex
-                                                                justify-between
-                                                                items-center
-                                                                px-1
-                                                            "
-                                                        >
-                                                            <div
-                                                                class="
-                                                                    text-xxss
-                                                                    text-red-600
-                                                                "
-                                                            >
-                                                                ※コメントは管理者に送信されます
-                                                            </div>
-                                                            <button
-                                                                class="
-                                                                    bg-gray-600
-                                                                    text-white
-                                                                    text-xxss
-                                                                "
-                                                                @click="
-                                                                    sendGoodMessage(
-                                                                        index
-                                                                    )
-                                                                "
-                                                            >
-                                                                送信
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- good sp-->
-                                    <div class="block md:hidden mid:hidden">
+                                        <!-- bad -->
                                         <button
                                             class="
                                                 flex
@@ -444,54 +360,40 @@
                                                 w-14
                                                 rounded
                                                 text-white
-                                                bg-whole
+                                                bg-red-400
                                             "
-                                            @click="openGoodMessageBox"
+                                            @click="
+                                                openGoodMessageBox(2, index)
+                                            "
                                         >
                                             <div class="mr-3">
-                                                {{ item.feedbackGood }}
+                                                {{ item.feedbackBad }}
                                             </div>
-                                            <good class="h-4 w-4 mr-1"></good>
+                                            <bad class="h-4 w-4 mr-1"></bad>
                                         </button>
-                                    </div>
-                                    <!-- bad -->
-                                    <div
-                                        class="
-                                            flex
-                                            justify-end
-                                            items-center
-                                            h-7.5
-                                            w-14
-                                            rounded
-                                            text-white
-                                            bg-red-400
-                                        "
-                                    >
-                                        <div class="mr-3">
-                                            {{ item.feedbackBad }}
-                                        </div>
-                                        <bad class="h-4 w-4 mr-1"></bad>
-                                    </div>
-                                    <!-- comment -->
-                                    <button
-                                        class="
-                                            flex
-                                            justify-end
-                                            items-center
-                                            h-7.5
-                                            w-14
-                                            rounded
-                                            text-white
-                                            bg-yellow-300
-                                        "
-                                        @click="openCommentMessageBox"
-                                    >
-                                        <div class="mr-2">
-                                            {{ item.feedbackComment }}
-                                        </div>
+                                        <!-- comment -->
+                                        <button
+                                            class="
+                                                flex
+                                                justify-end
+                                                items-center
+                                                h-7.5
+                                                w-14
+                                                rounded
+                                                text-white
+                                                bg-yellow-300
+                                            "
+                                            @click="
+                                                openCommentMessageBox(index)
+                                            "
+                                        >
+                                            <div class="mr-2">
+                                                {{ item.feedbackComment }}
+                                            </div>
 
-                                        <talk class="h-5 w-5 mr-1"></talk>
-                                    </button>
+                                            <talk class="h-5 w-5 mr-1"></talk>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -912,7 +814,7 @@
                 </div>
             </div>
         </div>
-        <pagination
+         <pagination
             :page-count="getPageCount"
             :page-range="4"
             :margin-pages="1"
@@ -924,9 +826,23 @@
             activeClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular bg-blueline text-white"
             prevClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
             nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            class="flex justify-center space-x-1 mt-2"
+            class="flex justify-center space-x-1"
         ></pagination>
         <div class="flex justify-center mt-2">{{ dispDetailRange }}件 表示</div>
+        <div class="border-b border-gray-400 mt-6 mb-4 md:mb-0"></div>
+        <div
+            :class="[
+                $store.getters.getCommentMessageBox
+                    ? 'block fixed top-0 z-99 left-0 right-0 bottom-0 bg-lock'
+                    : 'hidden',
+            ]"
+        >
+            <comment-message-box
+                class=""
+                :qaId="qaId"
+                :rowIndex="rowIndex"
+            ></comment-message-box>
+        </div>
     </div>
 </template>
 
@@ -942,6 +858,7 @@ import xIconSvg from '../common/svgImage/xIconSvg.vue'
 import Pagination from '../common/pagination/pagiation.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
+import CommentMessageBox from '../common/messageBox/commentMessageBox.vue'
 import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 import { ref, onBeforeUpdate, onUpdated, onUnmounted, nextTick } from 'vue'
 import { reactive, onMounted } from 'vue'
@@ -963,33 +880,39 @@ export default {
     vueSingleSelect,
     GoodMessageBox,
     ResultDetailRowItem,
+    CommentMessageBox
   },
-  props: {},
+  props: {
+    exeSearchRefishOpts: {
+      type: Function,
+      default: () => { },
+    },
+  },
   data() {
     return {
       // 順 区分 id
-      organizationDateSortValue: 0,
+      diSortValue: 'last_updated_at_desc',
       // 件 表示 区分 id
-      organizationCountSortValue: 0,
-      pageCount: 1,
-      selectPage: 0,
-      goodMessageBox: false,
+      diCountSortValue: 0,
+      pageCount: 20,
+      selectPage: 1,
       isDetailDisp: [],
       isDetailsDisp: [],
-      activeIndex: -1,
-      resultData: Object,
-      result: Object,
+      qaId: '',
+      rowIndex: 0,
     }
   },
+  unmounted() {
+    this.initStore()
+  },
   mounted() {
-    // console.log('this.$route.query', this.$route.query)
     if (JSON.stringify(this.$route.query) == '{}') {
       this.initStore()
-      this.$store.dispatch('setdIKnowledgeShareSearchAIInfo', {})
-      this.$store.dispatch('setdIKnowledgeShareSearchInfo', {})
+      this.$store.commit('setdIKnowledgeInfo', {})
+      this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
     }
-
     if (JSON.stringify(this.$route.query) !== '{}') {
+      this.resetSearchBar()
       this.execSearch()
     }
   },
@@ -998,13 +921,14 @@ export default {
       if (this.$route.path != '/searchDiKnowledge') {
         return
       }
+
       if (JSON.stringify(this.$route.query) == '{}') {
         this.initStore()
-        this.$store.dispatch('setdIKnowledgeShareSearchAIInfo', {})
-        this.$store.dispatch('setdIKnowledgeShareSearchInfo', {})
+        this.$store.commit('setdIKnowledgeInfo', {})
+        this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
       }
+
       if (JSON.stringify(this.$route.query) !== '{}') {
-        // console.log('router1')
         this.resetSearchBar()
         this.execSearch()
       }
@@ -1013,19 +937,20 @@ export default {
   computed: {
     getPageCount() {
       //   let page = 1;
-      if (this.organizationCountSortValue == '0') {
+      if (this.diCountSortValue == '0') {
         this.pageCount = 20
-      } else if (this.organizationCountSortValue == '1') {
+      } else if (this.diCountSortValue == '1') {
         this.pageCount = 50
-      } else if (this.organizationCountSortValue == '2') {
+      } else if (this.diCountSortValue == '2') {
         this.pageCount = 100
       }
-      this.$store.dispatch('setMaxCount', this.pageCount)
+      this.$store.commit('setMaxCountDI', this.pageCount)
       return Math.ceil(
-        this.$store.getters.dIKnowledgeShareSearchInfo.allCount,
+        this.$store.getters.dIKnowledgeShareSearchInfo.allCount /
         this.pageCount
       )
     },
+    // 明細部に表示明細のFROM-TO
     dispDetailRange: function () {
       let start = 1
       let end = ''
@@ -1033,21 +958,20 @@ export default {
         start = (this.selectPage - 1) * this.pageCount + 1
       }
 
-      if (
-        this.$store.getters.dIKnowledgeShareSearchInfo.qas != undefined
-      ) {
-        end =
-          start +
-          Object.keys(
-            this.$store.getters.dIKnowledgeShareSearchInfo.qas
-          ).length -
-          1
+      if (this.$store.getters.dIKnowledgeShareSearchInfo.qas != undefined) {
+        end = start +
+          Object.keys(this.$store.getters.dIKnowledgeShareSearchInfo.qas)
+            .length - 1
       }
 
       if (this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 1) {
         return start.toString()
       } else {
-        return start.toString() + '-' + end.toString()
+        if (this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 0) {
+          return '0'
+        } else {
+          return start.toString() + '-' + end.toString()
+        }
       }
     },
   },
@@ -1059,203 +983,157 @@ export default {
       let qaid = ''
       let params
 
-      if (this.$route.query.id != undefined) {
+      if (typeof (this.$route.query.id) != "undefined") {
         qaid = this.$route.query.id
         this.$store.dispatch('setQAID', qaid)
         sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
-      } else if (this.$route.query.page != undefined) {
-        // console.log('設定　NULL')
-        params = {
-          search: this.$store.getters.getSearchWord,
-          tags:
-            this.$props.form == this.$constant.formList.TOP
-              ? ''
-              : this.$store.getters.getSearchTags
-                ? this.$store.getters.getSearchTags.join(',')
-                : '',
-          medicine:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getMedicineID,
-          qacategory:
-            this.$props.form == this.$constant.formList.TOP
-              ? '-1'
-              : this.$store.getters.getQuestionID,
-          facility_flag:
-            this.$props.form == this.$constant.formList.TOP
-              ? '-1'
-              : this.$store.getters.getFacilityID,
-          displayed:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getMaxCount,
-          sort:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getSort,
-          page:
-            this.$props.form == this.$constant.formList.TOP
-              ? '1'
-              : this.$store.getters.getPage,
-        }
       } else if (this.$store.getters.getQAID != '') {
         qaid = this.$store.getters.getQAID
       }
 
       let result
+      let resultAi
       // QAID存在チェック
       if (qaid != '') {
-        result = this.$serve.getOwn({ id: qaid })
-      } else if (params != null) {
-        result = this.$serve.getOwnData(this.$route.query)
+        this.$store.commit('setdIKnowledgeInfo', {})
+        this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
+        params = {
+          id: qaid,
+          confidence: this.$route.query.confidence
+        }
+        if (typeof (this.$route.query.confidence) == "undefined") {
+          result = this.$serve.getDIKnowledgeSharedId(params)
+          this.setSearchResult(result)
+        } else {
+          resultAi = this.$serve.getDIKnowledgeSharedId(params)
+          this.setSearchResultAi(resultAi)
+
+        }
+      } else if (typeof (this.$route.query.page) != "undefined") {
+        result = this.$serve.getDIKnowledgeShare(this.$route.query)
+        resultAi = this.$serve.getDIKnowledgeShareAI(this.$route.query)
+        this.setSearchResult(result)
+        this.setSearchResultAi(resultAi)
       }
 
-      this.setSearchResult(result)
-      // this.dispDetailRange()
+
     },
+    setSearchResultAi: function (value) {
+      if (value != '' && typeof (value) != "undefined") {
+        value.then((response) => {
+          this.$store.commit('setdIKnowledgeShareSearchAIInfo', response)
+          // 1件のみの場合、全回答情報を表示
+          if (response.data.allCount == 1) {
+            let qaid = ''
+            if (this.$route.query.id) {
+              qaid = this.$route.query.id
+              this.$store.dispatch('setQAID', qaid)
+              sessionStorage.setItem(
+                this.$constant.searchParam.PAID,
+                qaid
+              )
+            } else if (this.$store.getters.getQAID != '') {
+              qaid = this.$store.getters.getQAID
+            }
+            // ビュー件数更新
+            let params = {
+              id: qaid,
+            }
+            this.$serve.sendViewCount(params)
+          } else {
+            this.isDetailDisp = []
+          }
+        })
 
+      }
+    },
     setSearchResult: function (value) {
-      value.then((response) => {
-        //   console.log("setSearchResult", response)
-        this.$store.dispatch('getdIKnowledgeShareSearchInfo', response)
-        // 1件のみの場合、全回答情報を表示
-        if (response.data.allCount == 1) {
-          //   for (const key in response.data.qas) {
-          //     if (
-          //       Object.hasOwnProperty.call(response.data.qas, key)
-          //     ) {
-          //       this.openDetailDisp(key, response.data.allCount)
-          //     }
-          //   }
-          this.openDetailDisp(
-            response.data.qas.id,
-            response.data.allCount
-          )
+      if (value != '' && typeof (value) != "undefined") {
+        value.then((response) => {
+          this.$store.commit('setdIKnowledgeInfo', response)
+          // 1件のみの場合、全回答情報を表示
+          if (response.data.allCount == 1) {
+            this.openDetailDisp(response.data.qas[0].id, response.data.allCount)
+            let qaid = ''
+            if (this.$route.query.id) {
+              qaid = this.$route.query.id
+              this.$store.dispatch('setQAID', qaid)
+              sessionStorage.setItem(
+                this.$constant.searchParam.PAID,
+                qaid
+              )
+            } else if (this.$store.getters.getQAID != '') {
+              qaid = this.$store.getters.getQAID
+            }
+            // ビュー件数更新
+            let params = {
+              id: qaid,
+            }
+            this.$serve.sendViewCount(params)
+          } else {
+            this.isDetailDisp = []
+          }
+        })
 
-          let qaid = ''
-          if (this.$route.query.id) {
-            qaid = this.$route.query.id
-            this.$store.dispatch('setQAID', qaid)
-            sessionStorage.setItem(
-              this.$constant.searchParam.PAID,
-              qaid
-            )
-          } else if (this.$store.getters.getQAID != '') {
-            qaid = this.$store.getters.getQAID
-          }
-          // ビュー件数更新
-          let params = {
-            id: qaid,
-          }
-          this.$serve.sendViewCount(params)
-        } else {
-          this.isDetailDisp = []
-        }
-      })
+      }
     },
     // =====================================================
     // セッションに退避した情報をリーセット
     // =====================================================
     resetSearchBar: function () {
       this.initStore()
-      this.$store.dispatch('setSearchWord', this.$route.query.search)
-      this.$store.dispatch('setMedicineID', this.$route.query.medicine)
-      this.$store.dispatch('setQuestionID', this.$route.query.qacategory)
-      this.$store.dispatch(
-        'setFacilityID',
-        this.$route.query.facility_flag
-      )
-      this.$store.dispatch('setMaxCount', this.$route.query.displayed)
-      this.organizationDateSortValue = this.$route.query.sort
-      if (this.$route.query.displayed == 20) {
-        this.organizationCountSortValue = 0
-      } else if (this.$route.query.displayed == 50) {
-        this.organizationCountSortValue = 1
-      }
-      if (this.$route.query.displayed == 100) {
-        this.organizationCountSortValue = 2
-      }
-      this.$store.dispatch('setSort', this.$route.query.sort)
-      this.$store.dispatch('setPage', this.$route.query.page)
 
-      this.$store.dispatch(
-        'setCheckQ',
-        this.$route.query.checkQ.toString() === 'true',
-        true,
-        false
-      )
-
-      this.$store.dispatch(
-        'setCheckA',
-        this.$route.query.checkA.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckComment',
-        this.$route.query.checkComment.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckAddFileName',
-        this.$route.query.checkAddFileName.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckContributor',
-        this.$route.query.checkContributor.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckLastEditer',
-        this.$route.query.checkLastEditer.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckFacilityName',
-        this.$route.query.checkFacilityName.toString() === 'true',
-        true,
-        false
-      )
-      this.$store.dispatch(
-        'setCheckNote',
-        this.$route.query.checkNote.toString() === 'true',
-        true,
-        false
-      )
+      if (typeof (this.$route.query.id) == "undefined") {
+        this.$store.dispatch('setQAID', '')
+        this.$store.commit('setSearchWordDI', this.$route.query.search)
+        this.$store.dispatch('setSearchTags', this.$route.query.tags.split(','))
+        this.$store.commit('setMaxCountDI', this.$route.query.displayed)
+        this.diSortValue = this.$route.query.sort
+        this.$store.commit('setSortDI', this.$route.query.sort)
+        if (this.$route.query.displayed == 20) {
+          this.diCountSortValue = 0
+        } else if (this.$route.query.displayed == 50) {
+          this.diCountSortValue = 1
+        } else if (this.$route.query.displayed == 100) {
+          this.diCountSortValue = 2
+        }
+        this.$store.commit('setPageDI', this.$route.query.page)
+        this.$store.commit('setCheckQDI', this.$route.query.checkQ.toString() === 'true', true, false)
+        this.$store.commit('setCheckADI', this.$route.query.checkA.toString() === 'true', true, false)
+        this.$store.commit('setCheckCommentDI', this.$route.query.checkComment.toString() === 'true', true, false)
+        this.$store.commit('setCheckAddFileNameDI', this.$route.query.checkAddFileName.toString() === 'true', true, false)
+        this.$store.commit('setCheckContributorDI', this.$route.query.checkContributor.toString() === 'true', true, false)
+        this.$store.commit('setCheckLastEditerDI', this.$route.query.checkLastEditer.toString() === 'true', true, false)
+        this.$store.commit('setCheckFacilityNameDI', this.$route.query.checkFacilityName.toString() === 'true', true, false)
+        this.$store.commit('setCheckNoteDI', this.$route.query.checkNote.toString() === 'true', true, false)
+      }
     },
-
+    // 初期化
     initStore() {
-      this.$store.dispatch('setSearchWord', '')
+      this.$store.commit('setSearchWordDI', '')
       this.$store.dispatch('setSearchTags', [])
-      this.$store.dispatch('setMedicineID', -1)
-      this.$store.dispatch('setQuestionID', -1)
-      this.$store.dispatch('setFacilityID', -1)
-      this.$store.dispatch('setPage', 1)
-      this.$store.dispatch('setSort', 0)
-      this.$store.dispatch('setMaxCount', 0)
-      this.$store.dispatch('setCheckQ', true)
-      this.$store.dispatch('setCheckA', true)
-      this.$store.dispatch('setCheckComment', true)
-      this.$store.dispatch('setCheckAddFileName', true)
-      this.$store.dispatch('setCheckContributor', true)
-      this.$store.dispatch('setCheckLastEditer', true)
-      this.$store.dispatch('setCheckFacilityName', true)
-      this.$store.dispatch('setCheckNote', true)
+      this.$store.commit('setPageDI', 1)
+      this.$store.commit('setSortDI', 'last_updated_at_desc')
+      this.$store.commit('setMaxCountDI', 20)
+      this.$store.commit('setCheckQDI', true)
+      this.$store.commit('setCheckADI', true)
+      this.$store.commit('setCheckCommentDI', true)
+      this.$store.commit('setCheckAddFileNameDI', true)
+      this.$store.commit('setCheckContributorDI', true)
+      this.$store.commit('setCheckLastEditerDI', true)
+      this.$store.commit('setCheckFacilityNameDI', true)
+      this.$store.commit('setCheckNoteDI', true)
     },
     resetRouter() {
+      this.exeSearchRefishOpts()
       let getTimestamp = new Date().getTime()
       let dispDetailNumber = 20
 
-      if (this.organizationCountSortValue == 0) {
+      if (this.diCountSortValue == 0) {
         dispDetailNumber = 20
-      } else if (this.organizationCountSortValue == 1) {
+      } else if (this.diCountSortValue == 1) {
         dispDetailNumber = 50
-      } else if (this.organizationCountSortValue == 2) {
+      } else if (this.diCountSortValue == 2) {
         dispDetailNumber = 100
       }
       let params = {
@@ -1263,20 +1141,17 @@ export default {
         tags: this.$store.getters.getSearchTags
           ? this.$store.getters.getSearchTags.join(',')
           : '',
-        medicine: this.$store.getters.getMedicineID,
-        qacategory: this.$store.getters.getQuestionID,
-        facility_flag: this.$store.getters.getFacilityID,
         displayed: dispDetailNumber,
-        sort: this.$store.getters.getSort,
-        page: this.$store.getters.getPage,
-        checkQ: this.$store.getters.getCheckQ,
-        checkA: this.$store.getters.getCheckA,
-        checkComment: this.$store.getters.getCheckComment,
-        checkAddFileName: this.$store.getters.getCheckAddFileName,
-        checkContributor: this.$store.getters.getCheckContributor,
-        checkLastEditer: this.$store.getters.getCheckLastEditer,
-        checkFacilityName: this.$store.getters.getCheckFacilityName,
-        checkNote: this.$store.getters.getCheckNote,
+        sort: this.$store.getters.getSortDI,
+        page: this.$store.getters.getPageDI,
+        checkQ: this.$store.getters.getCheckQDI,
+        checkA: this.$store.getters.getCheckADI,
+        checkComment: this.$store.getters.getCheckCommentDI,
+        checkAddFileName: this.$store.getters.getCheckAddFileNameDI,
+        checkContributor: this.$store.getters.getCheckContributorDI,
+        checkLastEditer: this.$store.getters.getCheckLastEditerDI,
+        checkFacilityName: this.$store.getters.getCheckFacilityNameDI,
+        checkNote: this.$store.getters.getCheckNoteDI,
         timestamp: getTimestamp,
       }
       this.$router.push({
@@ -1284,12 +1159,14 @@ export default {
         query: params,
       })
     },
+    // 改ページのデータ検索
     getSelectPage(value) {
-      //   console.log('getSelectPage', value)
       this.selectPage = value
+      this.$store.commit('setPageDI', value)
+      this.resetRouter()
     },
     sendMsgToParent: function (data) {
-      this.$emit('listenToChildEvent', data)
+      this.$emit('listenToChildEventDi', data)
     },
     // 開くボタン押下
     openDetailDisp(index, count) {
@@ -1311,29 +1188,48 @@ export default {
         this.isDetailsDisp[index] == index ? [] : index
     },
     clickCallback() { },
-    setOrganizationDateSortValue(value) {
-      this.organizationDateSortValue = value
+    // 順 区分 選ぶ
+    setDiSortValue(value) {
+      if (this.diSortValue != value) {
+        this.diSortValue = value
+        this.$store.commit('setSortDI', value)
+        this.resetRouter()
+      }
     },
-    setOrganizationCountSortValue(value) {
-      this.organizationCountSortValue = value
+    // 件 表示 区分 選ぶ
+    setDiCountSortValue(value) {
+      if (this.diCountSortValue != value) {
+        this.diCountSortValue = value
+        this.resetRouter()
+      }
     },
-    openGoodMessageBox(index) {
-      this.$store.dispatch(
-        'setGoodMessageBox',
-        !this.$store.getters.getGoodMessageBox
-      )
+    openGoodMessageBox(type, index) {
+      let params = {
+        fbType: type,
+        qaId: this.$store.getters.dIKnowledgeShareSearchInfo.qas[index].id,
+      }
+      this.$serve.sendFeedback(params).then((res) => {
+        if (res.data.status == 'create') {
+          this.$toast.success(res.data.message, {
+            position: 'top-right',
+          })
+          this.$store.getters.dIKnowledgeShareSearchInfo.qas[
+            index
+          ].feedbackGood = res.data.goodFeedbackCount
+          this.$store.getters.dIKnowledgeShareSearchInfo.qas[
+            index
+          ].feedbackBad = res.data.badFeedbackCount
+          this.$store.getters.dIKnowledgeShareSearchInfo.qas[
+            index
+          ].feedbackComment = res.data.commentFeedbackCount
+        }
+      })
     },
-    openCommentMessageBox() {
-      this.$store.dispatch(
-        'setCommentMessageBox',
-        !this.$store.getters.getCommentMessageBox
-      )
-    },
-    getRoeId(id) {
-      console.log(id)
-    },
-    ActicleDetail(index) {
-      this.activeIndex = this.activeIndex == index ? -1 : index
+    openCommentMessageBox(index) {
+      this.qaId = this.$store.getters.dIKnowledgeShareSearchInfo.qas[index].id
+      this.rowIndex = index
+      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
+
     },
     sendGoodMessage(index) {
       var v = this.qaInfo[index].value

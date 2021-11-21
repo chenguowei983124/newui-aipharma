@@ -57,7 +57,7 @@
                             focus:placeholder-opacity-0
                             inputLineCss
                             focus:outline-none
-                            focus:border
+                            focus:ring-1
                             focus:border-326EB5Lins
                             focus:border-transparent
                         "
@@ -77,7 +77,14 @@
                         <input
                             v-model="base.answer.isKeep"
                             type="checkbox"
-                            class="form-checkbox w-2.5 h-2.5 mt-1 border"
+                            class="
+                                form-checkbox
+                                w-2.5
+                                h-2.5
+                                text-white
+                                mt-1
+                                ring-1 ring-grayline
+                            "
                             checked
                         />
                         <label class="ml-1 notoSansJpAndTwelveRegular">
@@ -112,7 +119,7 @@
                                     inputLineCss
                                     focus:placeholder-opacity-0
                                     focus:outline-none
-                                    focus:border
+                                    focus:ring-1
                                     focus:border-326EB5Lins
                                     focus:border-transparent
                                 "
@@ -134,7 +141,7 @@
                                     focus:placeholder-opacity-0
                                     inputLineCss
                                     focus:outline-none
-                                    focus:border
+                                    focus:ring-1
                                     focus:border-326EB5Lins
                                     focus:border-transparent
                                 "
@@ -285,7 +292,7 @@
                         focus:placeholder-opacity-0
                         inputLineCss
                         focus:outline-none
-                        focus:border
+                        focus:ring-1
                         focus:border-326EB5Lins
                         focus:border-transparent
                     "
@@ -353,7 +360,7 @@
                         focus:placeholder-opacity-0
                         inputLineCss
                         focus:outline-none
-                        focus:border
+                        focus:ring-1
                         focus:border-326EB5Lins
                         focus:border-transparent
                     "
@@ -635,7 +642,7 @@
                                 focus:placeholder-opacity-0
                                 inputLineCss
                                 focus:outline-none
-                                focus:border
+                                focus:ring-1
                                 focus:border-326EB5Lins
                                 focus:border-transparent
                             "
@@ -658,7 +665,7 @@
                             focus:placeholder-opacity-0
                             inputLineCss
                             focus:outline-none
-                            focus:border
+                            focus:ring-1
                             focus:border-326EB5Lins
                             focus:border-transparent
                         "

@@ -99,7 +99,7 @@
                             focus:placeholder-opacity-0
                             inputLineCss
                             focus:outline-none
-                            focus:border
+                            focus:ring-1
                             focus:border-326EB5Lins
                             focus:border-transparent
                             h-20
@@ -112,7 +112,7 @@
                 <div id="patientGender" class="mt-3 md:mt-5">
                     <div class="flex">
                         <label class="notoSansJpAndSixteenBold mb-1">
-                            本文
+                            本文{{ base.answer }}
                         </label>
                         <label class="text-red-500 ml-1"> * </label>
                     </div>
@@ -174,222 +174,223 @@ import Multiselect from '@vueform/multiselect'
 import Editor from '@tinymce/tinymce-vue'
 import { onBeforeRouteUpdate } from 'vue-router'
 export default {
-    setup() {
-        onBeforeRouteUpdate((to, from, next) => {
-            console.log('asdfasdfasdfasdfasdfasfasdf')
-            next()
+  setup() {
+    onBeforeRouteUpdate((to, from, next) => {
+      console.log('asdfasdfasdfasdfasdfasfasdf')
+      next()
+    })
+  },
+
+  components: {
+    newOrgDIRecordButtons,
+    vueSingleSelect,
+    litepieDatepicker,
+    Multiselect,
+    Editor,
+  },
+  data() {
+    return {
+      qa_informations: {},
+      params: {},
+      defaultScope: '0',
+      defaultGenre: 'notice',
+      base: {
+        scope: '',
+        genre: '',
+        title: '',
+        answer: '',
+        tags: [],
+      },
+      title:
+        JSON.stringify(this.$route.query) === '{}'
+          ? '  投稿'
+          : '  編集',
+    }
+  },
+
+  methods: {
+    // ジャンル選択した値取得
+    setPatientGenderValue(value) {
+      console.log('valueG', value)
+      this.base.genre = value
+    },
+    // 公開範囲選択した値取得
+    setScopeValue(value) {
+      this.base.scope = value
+    },
+    //　一時保存
+    tmpSaveEvent() {
+      let params = {
+        post: {
+          division: 'BBS',
+          title: this.base.title,
+          content: this.base.answer,
+          genre: this.base.genre,
+          publish: true,
+          scope: this.base.scope,
+        },
+        tag: this.base.tags,
+      }
+      this.$serve.postPosts(params, '')
+      this.clearInput()
+      if (JSON.stringify(this.$route.query) !== '{}') {
+        this.$router.go(-1)
+      }
+    },
+    // 登録
+    saveEvent() {
+      let params = {
+        post: {
+          division: 'Info',
+          title: this.base.title,
+          content: this.base.answer,
+          genre: this.base.genre,
+          publish: true,
+          scope: this.base.scope,
+        },
+        tag: this.base.tags,
+      }
+      this.$serve.postPosts(params, '')
+      this.clearInput()
+      if (JSON.stringify(this.$route.query) !== '{}') {
+        this.$router.go(-1)
+      }
+    },
+    // 入力した内容をクリア
+    clearInput() {
+      this.base.title = ''
+      this.base.answer = ''
+      this.$refs.scope.setValue('0')
+      this.$refs.genre.setValue('notice')
+      this.base.tags = []
+    },
+    // 検索結果画面で編集押下時、IDよりデータ取得
+    async doSearch() {
+      this.dispEditor = false
+      this.InputComment = ''
+      await this.$serve.postReadfeedbacks(this.id, '')
+
+      Object.assign(this.params, { division: 'BBS' })
+      const response = await this.$serve.getPostsrforId(
+        '',
+        this.$route.query.id
+      )
+      //
+      this.base.scope = response.data.data[0].post.scope
+      this.$refs.scope.setValue(String(this.base.scope))
+
+      this.base.genre = response.data.data[0].post.genre
+      this.$refs.genre.setValue(this.base.genre)
+
+      this.base.title = response.data.data[0].post.title
+      this.base.answer = response.data.data[0].post.content
+      for (let i = 0; i < response.data.data[0].post.tag.length; i++) {
+        this.base.tags.push(response.data.data[0].post.tag[i].name)
+      }
+    },
+    async fetchLanguages(query) {
+      let result = {}
+      // let searchTagsList = this.$store.getters.getSearchTagsLable
+      // let result = {}
+      // if (query == null || query == '') {
+      //     if (Object.keys(searchTagsList).length !== 0) {
+      //         for (
+      //             let i = 0;
+      //             i < Object.keys(searchTagsList).length;
+      //             i++
+      //         ) {
+      //             let response = await this.$serve.getTagsMaster(
+      //                 '',
+      //                 searchTagsList[i]
+      //             )
+      //             result = response.map((item) => {
+      //                 return {
+      //                     value: item.name,
+      //                     label: item.name,
+      //                 }
+      //             })
+      //         }
+      //         let setList = {}
+      //         Object.keys(result).forEach(function (key) {
+      //             if (result[key].label == searchTagsList[0]) {
+      //                 setList = {
+      //                     value: result[key].value,
+      //                     label: result[key].label,
+      //                 }
+      //             }
+      //         })
+      //         console.log('setList', setList)
+      //         let flg = false
+      //         // 存在チェック
+      //         for (
+      //             let index = 0;
+      //             index < this.$store.getters.getSearchTags.length;
+      //             index++
+      //         ) {
+      //             if (
+      //                 this.$store.getters.getSearchTags[index] ==
+      //                 setList.value
+      //             ) {
+      //                 flg = true
+      //             }
+      //         }
+      //         // 存在しない場合、入力に設定
+      //         this.$store.dispatch('setSearchTagsLable', [])
+      //         if (!flg) {
+      //             this.$refs.mult.select(setList)
+      //         }
+      //         this.bbsTagslist = result
+      //     } else {
+      //         console.log(
+      //             'setInputList',
+      //             this.$store.getters.getBbsTagsList
+      //         )
+      //         result = this.$store.getters.getBbsTagsList
+      //     }
+      // } else {
+      await this.$serve.getTagsMaster('', query).then((response) => {
+        console.log(response)
+        result = response.map((item) => {
+          return {
+            value: item.name,
+            label: item.name,
+          }
         })
+      })
+      //     this.bbsTagslist = result
+      // }
+      // console.log('result', result)
+      return result
     },
-    components: {
-        newOrgDIRecordButtons,
-        vueSingleSelect,
-        litepieDatepicker,
-        Multiselect,
-        Editor,
-    },
-    data() {
-        return {
-            qa_informations: {},
-            params: {},
-            defaultScope: '0',
-            defaultGenre: 'notice',
-            base: {
-                scope: '',
-                genre: '',
-                title: '',
-                answer: '',
-                tags: [],
-            },
-            title:
-                JSON.stringify(this.$route.query) === '{}'
-                    ? '  投稿'
-                    : '  編集',
-        }
-    },
+  },
 
-    methods: {
-        // ジャンル選択した値取得
-        setPatientGenderValue(value) {
-            console.log('valueG', value)
-            this.base.genre = value
-        },
-        // 公開範囲選択した値取得
-        setScopeValue(value) {
-            this.base.scope = value
-        },
-        //　一時保存
-        tmpSaveEvent() {
-            let params = {
-                post: {
-                    division: 'BBS',
-                    title: this.base.title,
-                    content: this.base.answer,
-                    genre: this.base.genre,
-                    publish: true,
-                    scope: this.base.scope,
-                },
-                tag: this.base.tags,
-            }
-            this.$serve.postPosts(params, '')
-            this.clearInput()
-            if (JSON.stringify(this.$route.query) !== '{}') {
-                this.$router.go(-1)
-            }
-        },
-        // 登録
-        saveEvent() {
-            let params = {
-                post: {
-                    division: 'Info',
-                    title: this.base.title,
-                    content: this.base.answer,
-                    genre: this.base.genre,
-                    publish: true,
-                    scope: this.base.scope,
-                },
-                tag: this.base.tags,
-            }
-            this.$serve.postPosts(params, '')
-            this.clearInput()
-            if (JSON.stringify(this.$route.query) !== '{}') {
-                this.$router.go(-1)
-            }
-        },
-        // 入力した内容をクリア
-        clearInput() {
-            this.base.title = ''
-            this.base.answer = ''
-            this.$refs.scope.setValue('0')
-            this.$refs.genre.setValue('notice')
-            this.base.tags = []
-        },
-        // 検索結果画面で編集押下時、IDよりデータ取得
-        async doSearch() {
-            this.dispEditor = false
-            this.InputComment = ''
-            await this.$serve.postReadfeedbacks(this.id, '')
-
-            Object.assign(this.params, { division: 'BBS' })
-            const response = await this.$serve.getPostsrforId(
-                '',
-                this.$route.query.id
-            )
-            //
-            this.base.scope = response.data.data[0].post.scope
-            this.$refs.scope.setValue(String(this.base.scope))
-
-            this.base.genre = response.data.data[0].post.genre
-            this.$refs.genre.setValue(this.base.genre)
-
-            this.base.title = response.data.data[0].post.title
-            this.base.answer = response.data.data[0].post.content
-            for (let i = 0; i < response.data.data[0].post.tag.length; i++) {
-                this.base.tags.push(response.data.data[0].post.tag[i].name)
-            }
-        },
-        async fetchLanguages(query) {
-            let result = {}
-            // let searchTagsList = this.$store.getters.getSearchTagsLable
-            // let result = {}
-            // if (query == null || query == '') {
-            //     if (Object.keys(searchTagsList).length !== 0) {
-            //         for (
-            //             let i = 0;
-            //             i < Object.keys(searchTagsList).length;
-            //             i++
-            //         ) {
-            //             let response = await this.$serve.getTagsMaster(
-            //                 '',
-            //                 searchTagsList[i]
-            //             )
-            //             result = response.map((item) => {
-            //                 return {
-            //                     value: item.name,
-            //                     label: item.name,
-            //                 }
-            //             })
-            //         }
-            //         let setList = {}
-            //         Object.keys(result).forEach(function (key) {
-            //             if (result[key].label == searchTagsList[0]) {
-            //                 setList = {
-            //                     value: result[key].value,
-            //                     label: result[key].label,
-            //                 }
-            //             }
-            //         })
-            //         console.log('setList', setList)
-            //         let flg = false
-            //         // 存在チェック
-            //         for (
-            //             let index = 0;
-            //             index < this.$store.getters.getSearchTags.length;
-            //             index++
-            //         ) {
-            //             if (
-            //                 this.$store.getters.getSearchTags[index] ==
-            //                 setList.value
-            //             ) {
-            //                 flg = true
-            //             }
-            //         }
-            //         // 存在しない場合、入力に設定
-            //         this.$store.dispatch('setSearchTagsLable', [])
-            //         if (!flg) {
-            //             this.$refs.mult.select(setList)
-            //         }
-            //         this.bbsTagslist = result
-            //     } else {
-            //         console.log(
-            //             'setInputList',
-            //             this.$store.getters.getBbsTagsList
-            //         )
-            //         result = this.$store.getters.getBbsTagsList
-            //     }
-            // } else {
-            await this.$serve.getTagsMaster('', query).then((response) => {
-                console.log(response)
-                result = response.map((item) => {
-                    return {
-                        value: item.name,
-                        label: item.name,
-                    }
-                })
-            })
-            //     this.bbsTagslist = result
-            // }
-            // console.log('result', result)
-            return result
-        },
+  computed: {
+    validation() {
+      const base = this.base
+      console.log(base.answer)
+      return {
+        question: !!base.scope,
+        genre: !!base.genre,
+        title: !!base.title,
+        answer: !!base.answer,
+      }
     },
-
-    computed: {
-        validation() {
-            const base = this.base
-            console.log(base.answer)
-            return {
-                question: !!base.scope,
-                genre: !!base.genre,
-                title: !!base.title,
-                answer: !!base.answer,
-            }
-        },
-        isValid() {
-            const base = this.base
-            return {
-                question: !!base.scope,
-                genre: !!base.genre,
-                title: !!base.title,
-                answer: !!base.answer,
-            }
-            // })
-        },
+    isValid() {
+      const base = this.base
+      return {
+        question: !!base.scope,
+        genre: !!base.genre,
+        title: !!base.title,
+        answer: !!base.answer,
+      }
+      // })
     },
-    mounted() {
-        if (JSON.stringify(this.$route.query) !== '{}') {
-            this.doSearch()
-        }
-    },
+  },
+  mounted() {
+    if (JSON.stringify(this.$route.query) !== '{}') {
+      this.doSearch()
+    }
+  },
 }
 </script>
 

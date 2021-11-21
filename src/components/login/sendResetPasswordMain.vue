@@ -21,7 +21,7 @@
                             focus:placeholder-opacity-0
                             inputLineCss
                             focus:outline-none
-                            focus:border
+                            focus:ring-1
                             focus:border-grayline
                             focus:border-transparent
                         "
@@ -44,7 +44,7 @@
                             focus:placeholder-opacity-0
                             inputLineCss
                             focus:outline-none
-                            focus:border
+                            focus:ring-1
                             focus:border-grayline
                             focus:border-transparent
                         "

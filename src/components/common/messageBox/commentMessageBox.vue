@@ -332,7 +332,7 @@ export default {
           if (result.isConfirmed) {
             console.log('削除')
             let params = {
-              id: items.id,
+              feedbackId: items.id,
             }
             // this.$serve.deletePreavoidData(params)
             this.$swal.fire({
@@ -382,7 +382,7 @@ export default {
     },
     sendMessage() {
       let params = {
-        id: this.qaId,
+        qaId: this.qaId,
         fbComment: this.inputComment,
         checkboxFlag: this.flag
       }
@@ -444,7 +444,7 @@ export default {
     },
     async searchMessage() {
       let params = {
-        id: this.qaId,
+        qaId: this.qaId,
       }
       await this.$serve.getComment(params).then((res) => {
         this.$store.dispatch('setCommentInfo', res.data.resultInfo)

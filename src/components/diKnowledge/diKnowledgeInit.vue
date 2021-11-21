@@ -6,7 +6,7 @@
                 headerStyle="titleBgColorGray"
                 title="新着Q＆A"
                 titleStyle="newQaInfoTitle"
-                titleURL="/"
+                titleURL=""
             >
                 <result-detail-row
                     class="searchResult_detail_gray"
@@ -20,7 +20,7 @@
                 headerStyle="titleBgColorGray"
                 title="よく見られているQ＆A  &nbsp; &nbsp;- 最近 1 ヶ月-"
                 titleStyle="newQaInfoTitle"
-                titleURL="/"
+                titleURL=""
             >
                 <result-detail-row
                     class="searchResult_detail_gray"
@@ -44,9 +44,12 @@
                 p-2
                 text-sm
                 font-NotoSansJp
+                text-tags
             "
         >
-            <div>{{ 'トレンドタグ' }}</div>
+            <div class="font-bold">
+                {{ 'トレンドタグ' }}
+            </div>
             <div class="flex flex-wrap mt-2">
                 <div
                     class="
@@ -61,12 +64,12 @@
                         mr-1
                         cursor-pointer
                     "
-                    @click="sendMsgToParent(item)"
+                    @click="sendMsgToParent(item.label)"
                     v-for="item in $store.getters.getOrganizationSeartorenndoTab
                         .torenndoTab"
                     :key="item"
                 >
-                    #{{ item.label }}
+                    #&nbsp;{{ item.label }}
                 </div>
             </div>
         </div>
@@ -80,7 +83,7 @@ export default {
   components: { ResutTag, ResultDetailRow },
   methods: {
     sendMsgToParent: function (data) {
-      this.$emit('listenToChildEvent', data)
+      this.$emit('listenToChildEventDiInit', data)
     },
   },
   mounted() {

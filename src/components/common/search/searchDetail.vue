@@ -499,7 +499,6 @@ export default {
     },
 
     inputClear(data) {
-      console.log('heloooodfhggghoooo')
       this.tagValue = []
       this.$store.dispatch('setSearchWord', '')
       this.$store.dispatch('setSearchTags', [])

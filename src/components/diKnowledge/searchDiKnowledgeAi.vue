@@ -1,21 +1,20 @@
 <template>
-    <!-- get_DIKnowledgeShare_search_info -->
     <div v-if="$store.getters.dIKnowledgeShareSearchAIInfo != undefined">
         <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium">
             検索条件：
             <div
                 class=""
                 v-for="(searchAiWords, index) in $store.getters
-                    .dIKnowledgeShareSearchAIInfo.searchAiWords"
+                    .dIKnowledgeShareSearchAIInfo.searchWords"
                 :key="index"
             >
                 {{ searchAiWords }}
             </div>
         </div>
-        <div class="space-y-2 mt-8">
+        <div class="space-y-2 mt-2">
             <div
                 v-for="(item, index) in $store.getters
-                    .dIKnowledgeShareSearchAIInfo.qasAi"
+                    .dIKnowledgeShareSearchAIInfo.qas"
                 :key="index"
             >
                 <div class="border-2 rounded-lg border-yellow-500">
@@ -35,9 +34,10 @@
                             items-center
                         "
                     >
-                        {{ '☆AIのおすすめ' }}
+                        <iconmonstr-star></iconmonstr-star>
+                        <div class="ml-1">{{ 'AIのおすすめ' }}</div>
                     </div>
-                    <div class="p-4">
+                    <div class="p-2.5 md:p-4">
                         <!-- Q -->
                         <div
                             class="
@@ -58,7 +58,12 @@
                                 Q
                             </div>
                             <div
-                                class="flex-grow notoSansJpAndSixteenBold ml-5"
+                                class="
+                                    flex-grow
+                                    notoSansJpAndSixteenBold
+                                    ml-5
+                                    mt-2
+                                "
                             >
                                 {{ item.question }}
                             </div>
@@ -76,7 +81,6 @@
                                     A
                                 </div>
                             </div>
-
                             <div
                                 class="
                                     flex-grow
@@ -85,18 +89,17 @@
                                     pl-5
                                 "
                             >
-                                <!-- {{ item.answer }} -->
                                 <div
                                     v-show="
                                         !(
                                             isDetailDisp[
                                                 $store.getters
                                                     .dIKnowledgeShareSearchAIInfo
-                                                    .qasAi[index].id
+                                                    .qas[index].id
                                             ] ===
                                             $store.getters
                                                 .dIKnowledgeShareSearchAIInfo
-                                                .qasAi[index].id
+                                                .qas[index].id
                                         )
                                     "
                                     v-html="
@@ -108,10 +111,10 @@
                                         isDetailDisp[
                                             $store.getters
                                                 .dIKnowledgeShareSearchAIInfo
-                                                .qasAi[index].id
+                                                .qas[index].id
                                         ] ===
                                         $store.getters
-                                            .dIKnowledgeShareSearchAIInfo.qasAi[
+                                            .dIKnowledgeShareSearchAIInfo.qas[
                                             index
                                         ].id
                                     "
@@ -121,7 +124,13 @@
                         </div>
                         <!-- 更新情報 pc/sp-->
                         <div class="flex flex-col pt-5 pl-0 md:pl-10">
-                            <div class="space-y-2 notoSansJpAndElevenRegular">
+                            <div
+                                class="
+                                    space-y-2
+                                    notoSansJpAndElevenRegular
+                                    text-dropdownListItem
+                                "
+                            >
                                 <div class="flex space-x-4">
                                     <div>最終編集日：{{ item.createdAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
@@ -138,18 +147,8 @@
                                         v-for="urls in item.urls"
                                         :key="urls"
                                         class="
-                                            rounded-full
-                                            border-2 border-gray-300
-                                            bg-gray-100
-                                            h-6
-                                            notoSansJpAndElevenRegular
-                                            pl-1
-                                            pr-1
-                                            text-center
-                                            flex
-                                            items-center
-                                            ml-1
-                                            cursor-pointer
+                                            text-light-blue-300
+                                            hover:text-light-blue-500
                                         "
                                     >
                                         <a
@@ -163,7 +162,10 @@
                                     PubMed：
                                     <div
                                         v-if="item.pubmed != ''"
-                                        class="hover:text-blue-400"
+                                        class="
+                                            hover:text-light-blue-500
+                                            underline
+                                        "
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
@@ -180,7 +182,10 @@
                                     J-STAGE：
                                     <div
                                         v-if="item.pubmed != ''"
-                                        class="hover:text-blue-400"
+                                        class="
+                                            hover:text-light-blue-500
+                                            underline
+                                        "
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
@@ -205,18 +210,9 @@
                                         v-for="documents in item.documents"
                                         :key="documents"
                                         class="
-                                            rounded-full
-                                            border-2 border-gray-300
-                                            bg-gray-100
-                                            h-6
-                                            notoSansJpAndElevenRegular
-                                            pl-1
-                                            pr-1
-                                            text-center
-                                            flex
-                                            items-center
                                             ml-1
                                             cursor-pointer
+                                            hover:text-light-blue-500
                                         "
                                     >
                                         <a
@@ -228,79 +224,97 @@
                                 </div>
                                 <div>施設規模：{{ item.facilityScale }}</div>
                             </div>
-                            <div class="flex flex-wrap space-x-2 mt-2">
-                                <div
-                                    class="
-                                        rounded-full
-                                        border-2 border-gray-300
-                                        bg-gray-100
-                                        h-6
-                                        notoSansJpAndElevenRegular
-                                        pl-1
-                                        pr-1
-                                        text-center
-                                        flex
-                                        items-center
-                                        mr-1
-                                        cursor-pointer
-                                    "
-                                    v-for="keywordTags in item.keywordTags"
-                                    :key="keywordTags"
-                                    @click="sendMsgToParent(keywordTags.name)"
-                                >
-                                    #{{ keywordTags.name }}
-                                </div>
-                            </div>
-                            <div
-                                class="
-                                    flex flex-col
-                                    justify-end
-                                    items-end
-                                    mt-4
-                                    md:mt-0
-                                "
-                            >
-                                <div
-                                    class="flex flex-row space-x-2 items-center"
-                                >
-                                    <div class="">
-                                        <!-- certainty -->
-                                        <div
-                                            class="
-                                                text-black text-xs
-                                                font-NotoSansJp
-                                                flex
-                                                justify-end
-                                            "
-                                        >
-                                            確信度　
-                                            <div
-                                                class="
-                                                    text-searchDropdown text-xs
-                                                "
-                                            >
-                                                {{ item.certainty }}％
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="
-                                                text-searchDropdown text-xs
-                                                flex
-                                                justify-end
-                                            "
-                                        >
-                                            {{ item.viewCount }} view
-                                        </div>
-                                    </div>
-                                    <!-- good pc -->
+                            <div>
+                                <div class="flex flex-wrap space-x-2 mt-2">
                                     <div
                                         class="
-                                            relative
-                                            hidden
-                                            md:block
-                                            mid:block
+                                            rounded-full
+                                            border-2 border-gray-300
+                                            bg-gray-100
+                                            h-6
+                                            notoSansJpAndElevenRegular
+                                            pl-1
+                                            pr-1
+                                            text-center
+                                            flex
+                                            items-center
+                                            mr-1
+                                            cursor-pointer
+                                        "
+                                        v-for="keywordTags in item.keywordTags"
+                                        :key="keywordTags"
+                                        @click="
+                                            sendMsgToParent(keywordTags.name)
                                         "
                                     >
+                                        #{{ keywordTags.name }}
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="
+                                        flex flex-col
+                                        justify-end
+                                        items-end
+                                        mt-4
+                                        md:-mt-7
+                                    "
+                                >
+                                    <div
+                                        class="
+                                            flex flex-row
+                                            space-x-2
+                                            items-center
+                                        "
+                                    >
+                                        <div
+                                            class="
+                                                flex flex-row
+                                                md:flex-col
+                                                pt-3.5
+                                                md:pt-0
+                                            "
+                                        >
+                                            <div
+                                                class="
+                                                    text-black text-xxss
+                                                    md:text-xs
+                                                    font-NotoSansJp
+                                                    flex
+                                                    justify-end
+                                                "
+                                            >
+                                                確信度　
+                                                <div
+                                                    class="
+                                                        text-searchDropdown
+                                                        text-xxss
+                                                        md:text-xs
+                                                    "
+                                                >
+                                                    {{
+                                                        $store.getters
+                                                            .dIKnowledgeShareSearchAIInfo
+                                                            .confidence
+                                                    }}％
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                class="
+                                                    text-searchDropdown
+                                                    text-xxss
+                                                    md:text-xs
+                                                    flex
+                                                    justify-end
+                                                    ml-1
+                                                    font-NotoSansJp
+                                                "
+                                            >
+                                                {{ item.viewCount }} view
+                                            </div>
+                                        </div>
+                                        <!-- good -->
                                         <button
                                             class="
                                                 flex
@@ -312,109 +326,164 @@
                                                 text-white
                                                 bg-whole
                                             "
-                                            @click="ActicleDetail(index)"
+                                            @click="
+                                                openGoodMessageBox(1, index)
+                                            "
                                         >
                                             <div class="mr-3">
                                                 {{ item.feedbackGood }}
                                             </div>
                                             <good class="h-4 w-4 mr-1"></good>
                                         </button>
-                                        <div v-show="activeIndex === index">
-                                            <div class="absolute bottom-8">
-                                                <div
-                                                    class="
-                                                        w-44
-                                                        h-24
-                                                        bg-white
-                                                        border border-black
-                                                        rounded
-                                                    "
-                                                >
+                                        <!-- good pc old-->
+                                        <!-- <div
+                                            class="
+                                                relative
+                                                hidden
+                                                md:block
+                                                mid:block
+                                            "
+                                        >
+                                            <button
+                                                class="
+                                                    flex
+                                                    items-center
+                                                    justify-end
+                                                    h-7.5
+                                                    w-14
+                                                    rounded
+                                                    text-white
+                                                    bg-whole
+                                                "
+                                                @click="ActicleDetail(index)"
+                                            >
+                                                <div class="mr-3">
+                                                    {{ item.feedbackGood }}
+                                                </div>
+                                                <good
+                                                    class="h-4 w-4 mr-1"
+                                                ></good>
+                                            </button>
+                                            <div v-show="activeIndex === index">
+                                                <div class="absolute bottom-8">
                                                     <div
                                                         class="
-                                                            bg-gray-300
-                                                            h-1/4
-                                                            flex
-                                                            justify-between
-                                                            items-center
-                                                            px-2
+                                                            w-44
+                                                            h-24
+                                                            bg-white
+                                                            border border-black
+                                                            rounded
                                                         "
                                                     >
-                                                        <div class="text-xs">
-                                                            理由をお聞かせください。
-                                                        </div>
                                                         <div
                                                             class="
-                                                                cursor-pointer
-                                                            "
-                                                            @click="
-                                                                ActicleDetail(
-                                                                    index
-                                                                )
-                                                            "
-                                                        >
-                                                            <x-icon-svg></x-icon-svg>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="
-                                                            h-3/4
-                                                            flex flex-col
-                                                        "
-                                                    >
-                                                        <div class="h-3/4">
-                                                            <textarea
-                                                                v-model="
-                                                                    item.value
-                                                                "
-                                                                type="text"
-                                                                class="
-                                                                    text-xs
-                                                                    w-full
-                                                                    focus:outline-none
-                                                                "
-                                                                placeholder="（任意）"
-                                                            />
-                                                        </div>
-                                                        <div
-                                                            class="
+                                                                bg-gray-300
                                                                 h-1/4
                                                                 flex
                                                                 justify-between
                                                                 items-center
-                                                                px-1
+                                                                px-2
                                                             "
                                                         >
                                                             <div
-                                                                class="
-                                                                    text-xxss
-                                                                    text-red-600
-                                                                "
+                                                                class="text-xs"
                                                             >
-                                                                ※コメントは管理者に送信されます
+                                                                理由をお聞かせください。
                                                             </div>
-                                                            <button
+                                                            <div
                                                                 class="
-                                                                    bg-gray-600
-                                                                    text-white
-                                                                    text-xxss
+                                                                    cursor-pointer
                                                                 "
                                                                 @click="
-                                                                    sendGoodMessage(
+                                                                    ActicleDetail(
                                                                         index
                                                                     )
                                                                 "
                                                             >
-                                                                送信
-                                                            </button>
+                                                                <x-icon-svg></x-icon-svg>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="
+                                                                h-3/4
+                                                                flex flex-col
+                                                            "
+                                                        >
+                                                            <div class="h-3/4">
+                                                                <textarea
+                                                                    v-model="
+                                                                        item.value
+                                                                    "
+                                                                    type="text"
+                                                                    class="
+                                                                        text-xs
+                                                                        w-full
+                                                                        focus:outline-none
+                                                                    "
+                                                                    placeholder="（任意）"
+                                                                />
+                                                            </div>
+                                                            <div
+                                                                class="
+                                                                    h-1/4
+                                                                    flex
+                                                                    justify-between
+                                                                    items-center
+                                                                    px-1
+                                                                "
+                                                            >
+                                                                <div
+                                                                    class="
+                                                                        text-xxss
+                                                                        text-red-600
+                                                                    "
+                                                                >
+                                                                    ※コメントは管理者に送信されます
+                                                                </div>
+                                                                <button
+                                                                    class="
+                                                                        bg-gray-600
+                                                                        text-white
+                                                                        text-xxss
+                                                                    "
+                                                                    @click="
+                                                                        sendGoodMessage(
+                                                                            index
+                                                                        )
+                                                                    "
+                                                                >
+                                                                    送信
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <!-- good sp-->
-                                    <div class="block md:hidden mid:hidden">
+                                        </div> -->
+                                        <!-- good sp old-->
+                                        <!-- <div class="block md:hidden mid:hidden">
+                                            <button
+                                                class="
+                                                    flex
+                                                    justify-end
+                                                    items-center
+                                                    h-7.5
+                                                    w-14
+                                                    rounded
+                                                    text-white
+                                                    bg-whole
+                                                "
+                                                @click="openGoodMessageBox"
+                                            >
+                                                <div class="mr-3">
+                                                    {{ item.feedbackGood }}
+                                                </div>
+                                                <good
+                                                    class="h-4 w-4 mr-1"
+                                                ></good>
+                                            </button>
+                                        </div> -->
+                                        <!-- bad -->
                                         <button
                                             class="
                                                 flex
@@ -424,70 +493,82 @@
                                                 w-14
                                                 rounded
                                                 text-white
-                                                bg-whole
+                                                bg-red-400
                                             "
-                                            @click="openGoodMessageBox"
+                                            @click="
+                                                openGoodMessageBox(2, index)
+                                            "
                                         >
                                             <div class="mr-3">
-                                                {{ item.feedbackGood }}
+                                                {{ item.feedbackBad }}
                                             </div>
-                                            <good class="h-4 w-4 mr-1"></good>
+                                            <bad class="h-4 w-4 mr-1"></bad>
+                                        </button>
+                                        <!-- bad old-->
+                                        <!-- <div
+                                            class="
+                                                flex
+                                                justify-end
+                                                items-center
+                                                h-7.5
+                                                w-14
+                                                rounded
+                                                text-white
+                                                bg-red-400
+                                            "
+                                        >
+                                            <div class="mr-3">
+                                                {{ item.feedbackBad }}
+                                            </div>
+                                            <bad class="h-4 w-4 mr-1"></bad>
+                                        </div> -->
+                                        <!-- comment old @click="openCommentMessageBox"-->
+                                        <!-- <button
+                                            class="
+                                                flex
+                                                justify-end
+                                                items-center
+                                                h-7.5
+                                                w-14
+                                                rounded
+                                                text-white
+                                                bg-yellow-300
+                                            "
+                                        >
+                                            <div class="mr-2">
+                                                {{ item.feedbackComment }}
+                                            </div>
+
+                                            <talk class="h-5 w-5 mr-1"></talk>
+                                        </button> -->
+                                        <!-- comment -->
+                                        <button
+                                            class="
+                                                flex
+                                                justify-end
+                                                items-center
+                                                h-7.5
+                                                w-14
+                                                rounded
+                                                text-white
+                                                bg-yellow-300
+                                            "
+                                            @click="
+                                                openCommentMessageBox(index)
+                                            "
+                                        >
+                                            <div class="mr-2">
+                                                {{ item.feedbackComment }}
+                                            </div>
+
+                                            <talk class="h-5 w-5 mr-1"></talk>
                                         </button>
                                     </div>
-                                    <!-- bad -->
-                                    <div
-                                        class="
-                                            flex
-                                            justify-end
-                                            items-center
-                                            h-7.5
-                                            w-14
-                                            rounded
-                                            text-white
-                                            bg-red-400
-                                        "
-                                    >
-                                        <div class="mr-3">
-                                            {{ item.feedbackBad }}
-                                        </div>
-                                        <bad class="h-4 w-4 mr-1"></bad>
-                                    </div>
-                                    <!-- comment -->
-                                    <button
-                                        class="
-                                            flex
-                                            justify-end
-                                            items-center
-                                            h-7.5
-                                            w-14
-                                            rounded
-                                            text-white
-                                            bg-yellow-300
-                                        "
-                                        @click="openCommentMessageBox"
-                                    >
-                                        <div class="mr-2">
-                                            {{ item.feedbackComment }}
-                                        </div>
-
-                                        <talk class="h-5 w-5 mr-1"></talk>
-                                    </button>
                                 </div>
                             </div>
                         </div>
                         <!-- 詳細情報 pc/sp -->
-                        <div
-                            :class="[
-                                isDetailDisp[
-                                    $store.getters.dIKnowledgeShareSearchAIInfo
-                                        .qasAi[index].id
-                                ] ==
-                                $store.getters.dIKnowledgeShareSearchAIInfo
-                                    .qasAi[index].id
-                                    ? 'block'
-                                    : 'hidden',
-                            ]"
-                        >
+                        <div :class="[detailDispFlag ? 'block' : 'hidden']">
                             <div class="flex flex-row justify-center text-sm">
                                 <div class="box">
                                     <span class="line"></span>
@@ -506,7 +587,7 @@
                                                 openDetailsDisp(
                                                     $store.getters
                                                         .dIKnowledgeShareSearchAIInfo
-                                                        .qasAi[index].id
+                                                        .qas[index].id
                                                 )
                                             "
                                         >
@@ -517,11 +598,11 @@
                                                     isDetailsDisp[
                                                         $store.getters
                                                             .dIKnowledgeShareSearchAIInfo
-                                                            .qasAi[index].id
+                                                            .qas[index].id
                                                     ] ===
                                                     $store.getters
                                                         .dIKnowledgeShareSearchAIInfo
-                                                        .qasAi[index].id
+                                                        .qas[index].id
                                                         ? 'transform rotate-180'
                                                         : '',
                                                 ]"
@@ -536,12 +617,12 @@
                                 :class="[
                                     isDetailsDisp[
                                         $store.getters
-                                            .dIKnowledgeShareSearchAIInfo.qasAi[
+                                            .dIKnowledgeShareSearchAIInfo.qas[
                                             index
                                         ].id
                                     ] ===
                                     $store.getters.dIKnowledgeShareSearchAIInfo
-                                        .qasAi[index].id
+                                        .qas[index].id
                                         ? 'block'
                                         : 'hidden',
                                 ]"
@@ -823,37 +904,18 @@
                     </div>
                     <div
                         class="
-                            bg-yellow-200
+                            bg-aiSwitchBg
                             rounded-b-lg
-                            text-center text-yellow-600
+                            text-center text-aiSwitch
                             h-7.5
                             flex
                             justify-center
                             items-center
                             cursor-pointer
                         "
-                        @click="
-                            openDetailDisp(
-                                $store.getters.dIKnowledgeShareSearchAIInfo
-                                    .qasAi[index].id
-                            )
-                        "
+                        @click="openDetailDisp(index)"
                     >
-                        <div
-                            v-show="
-                                !(
-                                    isDetailDisp[
-                                        $store.getters
-                                            .dIKnowledgeShareSearchAIInfo.qasAi[
-                                            index
-                                        ].id
-                                    ] ===
-                                    $store.getters.dIKnowledgeShareSearchAIInfo
-                                        .qasAi[index].id
-                                )
-                            "
-                            class="flex items-center"
-                        >
+                        <div v-show="!detailDispFlag" class="flex items-center">
                             <triangle-down-svg
                                 class="w-3 h-3"
                                 fill="#F79800"
@@ -865,17 +927,7 @@
                                 開く
                             </div>
                         </div>
-                        <div
-                            v-show="
-                                isDetailDisp[
-                                    $store.getters.dIKnowledgeShareSearchAIInfo
-                                        .qasAi[index].id
-                                ] ===
-                                $store.getters.dIKnowledgeShareSearchAIInfo
-                                    .qasAi[index].id
-                            "
-                            class="flex items-center"
-                        >
+                        <div v-show="detailDispFlag" class="flex items-center">
                             <triangle-down-svg
                                 class="w-3 h-3 transform rotate-180"
                                 fill="#F79800"
@@ -891,10 +943,12 @@
                 </div>
             </div>
         </div>
+        <div class="border-b border-gray-400 mt-6"></div>
     </div>
 </template>
 
 <script>
+import iconmonstrStar from '../common/svgImage/iconmonstrStar.vue'
 import TriangleDownSvg from '../common/svgImage/triangleDownSvg.vue'
 import resutTag from '../common/searchResult/resultTag.vue'
 import resultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
@@ -909,6 +963,7 @@ import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 export default {
   components: {
+    iconmonstrStar,
     TriangleDownSvg,
     resutTag,
     resultDetailRow,
@@ -925,113 +980,78 @@ export default {
   props: {},
   data() {
     return {
-      // 順 区分 id
-      organizationDateSortValue: 0,
-      // 件 表示 区分 id
-      organizationCountSortValue: 0,
-      pageCount: 1,
-      selectPage: 0,
-      goodMessageBox: false,
-      //   isDetailDisp: false,
       isDetailDisp: [],
-      //   isDetailsDisp: false,
       isDetailsDisp: [],
-      activeIndex: -1,
-      resultData: Object,
-      result: Object,
+      detailDispFlag: true,
+      qaId: '',
+      rowIndex: 0,
     }
+  },
+  unmounted() {
+    this.$store.commit('setdIKnowledgeInfo', {})
+    this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
   },
   mounted() {
-    this.$store.dispatch('clearOrganizationSearchInfo')
-    if (this.$route.params.id) {
-      let result = this.$serve.getOwn({ id: this.$route.params.id })
-      result.then((response) => {
-        this.$store.dispatch('setOrganizationSearchInfo', response)
-        this.resultData = response.data.allCount
-        if (response.data.allCount == 1) {
-          for (const key in response.data.qas) {
-            if (
-              Object.hasOwnProperty.call(response.data.qas, key)
-            ) {
-              //   console.log('element', key)
-              this.openDetailDisp(key)
-            }
-          }
-        }
-      })
+    if (JSON.stringify(this.$route.query) == '{}') {
+      this.$store.commit('setdIKnowledgeInfo', {})
+      this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
     }
   },
-  watch: {},
-  computed: {
-    getPageCount() {
-      //   let page = 1;
-      if (this.organizationCountSortValue == '0') {
-        this.pageCount = 20
-      } else if (this.organizationCountSortValue == '1') {
-        this.pageCount = 50
-      } else if (this.organizationCountSortValue == '2') {
-        this.pageCount = 100
+  watch: {
+    $route: function () {
+      if (this.$route.path != '/searchDiKnowledge') {
+        return
       }
-      return Math.ceil(
-        this.$store.getters.organizationSearchInfo.allCount /
-        this.pageCount
-      )
-    },
+
+      if (JSON.stringify(this.$route.query) == '{}') {
+        this.$store.commit('setdIKnowledgeInfo', {})
+        this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
+      }
+    }
+  },
+  computed: {
   },
   methods: {
-    async getInitData() {
-      let result = this.$serve.getOwn({ id: this.$route.params.id })
-    },
-    getSelectPage(value) {
-      this.selectPage = value
-    },
     sendMsgToParent: function (data) {
-      this.$emit('listenToChildEvent', data)
+      this.$emit('listenToChildEventAi', data)
     },
+    // 開く クリック
     openDetailDisp(index, count) {
+      this.detailDispFlag = !this.detailDispFlag
       // 1件のみの場合
-      if (count == 1) {
-        this.isDetailDisp[index] = index
-      } else {
-        this.isDetailDisp[index] =
-          this.isDetailDisp[index] == index ? [] : index
-        if (this.isDetailsDisp[index] == index) {
-          this.isDetailsDisp[index] =
-            this.isDetailsDisp[index] == index ? [] : index
-        }
-      }
+      //   if (count == 1) {
+      //     this.isDetailDisp[index] = index
+      //   } else {
+      //     this.isDetailDisp[index] = this.isDetailDisp[index] == index ? [] : index
+      //     if (this.isDetailsDisp[index] == index) {
+      //       this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index
+      //     }
+      //   }
     },
+    // 詳細情報 クリック
     openDetailsDisp(index) {
-      this.isDetailsDisp[index] =
-        this.isDetailsDisp[index] == index ? [] : index
+      this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index
     },
-    clickCallback() {
+    // フィードバック機能
+    openGoodMessageBox(type, index) {
+      let params = {
+        fbType: type,
+        qaId: this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].id,
+      }
+      this.$serve.sendFeedback(params).then((res) => {
+        if (res.data.status == 'create') {
+          this.$toast.success(res.data.message, { position: 'top-right', })
+          this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].feedbackGood = res.data.goodFeedbackCount
+          this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].feedbackBad = res.data.badFeedbackCount
+          this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].feedbackComment = res.data.commentFeedbackCount
+        }
+      })
     },
-    setOrganizationDateSortValue(value) {
-      this.organizationDateSortValue = value
-    },
-    setOrganizationCountSortValue(value) {
-      this.organizationCountSortValue = value
-    },
-    openGoodMessageBox(index) {
-      this.$store.dispatch(
-        'setGoodMessageBox',
-        !this.$store.getters.getGoodMessageBox
-      )
-    },
-    openCommentMessageBox() {
-      this.$store.dispatch(
-        'setCommentMessageBox',
-        !this.$store.getters.getCommentMessageBox
-      )
-    },
-    getRoeId(id) {
-    },
-    ActicleDetail(index) {
-      this.activeIndex = this.activeIndex == index ? -1 : index
-    },
-    sendGoodMessage(index) {
-      var v = this.qaInfo[index].value
+    // 対象QAの全フィードバックコメントのうち閲覧可能なものを取得する
+    openCommentMessageBox(index) {
+      this.qaId = this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].id
+      this.rowIndex = index
+      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
     },
   },
 }

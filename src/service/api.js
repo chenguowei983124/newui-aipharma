@@ -533,10 +533,11 @@ const serve = {
     // 組織内DI記録検索結果取得（ID）
     //===========================
     async getOwn({ id }) {
-        const data = await axios('/api/qa/get_organization_search_info', {
-            method: 'post',
+        const data = await axios('/api/qa/send_detail_qa_info', {
+            method: 'get',
             params: {
                 id: id,
+                confidence: 'nil'
             },
         })
 
@@ -584,7 +585,7 @@ const serve = {
         store.dispatch('setLoadingShowFlg', false)
         const data = await axios('/api/qa/suggest_tags', {
             method: 'post',
-            params: param,
+            params: { tag_name_cont: param },
         })
 
         return data
@@ -685,47 +686,59 @@ const serve = {
     },
     //===========================
     // DIナレッジシェア画面の通常検索（キーワード検索、タグ検索など）
-    // {
-    //     "displayed": 1,
-    //     "freeword": "ファモチジンの用途",
-    //     "page": 1,
-    //     "sort": "monthly_view_count_desc",
-    //     "tags": [
-    //       1,
-    //       2
-    //     ],
-    //     "searchSelect": {
-    //       "checkQ": 1,
-    //       "checkA": 1,
-    //       "checkComment": 1,
-    //       "checkNote": 1,
-    //       "checkAddFileName": 1,
-    //       "checkContributor": 1,
-    //       "checkLastEditer": 1,
-    //       "checkFacilityName": 1
-    //     }
-    //   }
+
     //===========================
     async getDIKnowledgeShare(param) {
+        var params = {
+            displayed: param.displayed,
+            freeword: param.search,
+            page: param.page,
+            sort: param.sort,
+            tags:
+                param.tags.split(',') == ''
+                    ? []
+                    : param.tags.split(',').map(Number),
+            searchSelect: {
+                checkQ: param.checkQ == 'true' ? 1 : 0,
+                checkA: param.checkA == 'true' ? 1 : 0,
+                checkComment: param.checkComment == 'true' ? 1 : 0,
+                checkNote: param.checkNote == 'true' ? 1 : 0,
+                checkAddFileName: param.checkAddFileName == 'true' ? 1 : 0,
+                checkContributor: param.checkContributor == 'true' ? 1 : 0,
+                checkLastEditer: param.checkLastEditer == 'true' ? 1 : 0,
+                checkFacilityName: param.checkFacilityName == 'true' ? 1 : 0,
+            },
+        }
         const data = await axios('/api/qa/get_DIKnowledgeShare_keyword_search_info', {
             method: 'post',
-            data: param,
+            data: params,
         })
 
         return data
     },
     //===========================
     // DIナレッジシェア画面のAI検索
-    // {
-    //     "freeword": "ファモチジンの用途"
-    //   }
     //===========================
     async getDIKnowledgeShareAI(param) {
         const data = await axios('/api/qa/get_DIKnowledgeShare_similar_search_info', {
             method: 'post',
-            data: param,
+            data: { freeword: param.search },
         })
 
+        return data
+    },
+    //===========================
+    // リクエストされたQAの詳細情報を返す DIナレッジシェア（id,confidence）
+    //===========================
+    async getDIKnowledgeSharedId(params) {
+        var confidenceTemp = typeof (params.confidence) == "undefined" ? 'nil' : params.confidence
+        const data = await axios('/api/qa/send_detail_qa_info', {
+            method: 'get',
+            params: {
+                id: params.id,
+                confidence: confidenceTemp
+            },
+        })
         return data
     },
     // async getOwndIKnowledgeShare(param) {

@@ -14,7 +14,7 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckQ"
+                                    :checked="$store.getters.getCheckQDI"
                                     @change="onCheckQChange"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss">Q</span>
@@ -26,7 +26,7 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckA"
+                                    :checked="$store.getters.getCheckADI"
                                     @change="onChangeCheckA"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss">A</span>
@@ -38,7 +38,7 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckComment"
+                                    :checked="$store.getters.getCheckCommentDI"
                                     @change="onChangeCheckComment"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
@@ -55,7 +55,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getCheckAddFileName
+                                        $store.getters.getCheckAddFileNameDI
                                     "
                                     @change="onChangeCheckAddFileName"
                                 />
@@ -71,7 +71,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getCheckContributor
+                                        $store.getters.getCheckContributorDI
                                     "
                                     @change="onChangeCheckContributor"
                                 />
@@ -86,7 +86,9 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckLastEditer"
+                                    :checked="
+                                        $store.getters.getCheckLastEditerDI
+                                    "
                                     @change="onChangeCheckLastEditer"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
@@ -103,7 +105,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getCheckFacilityName
+                                        $store.getters.getCheckFacilityNameDI
                                     "
                                     @change="onChangeCheckFacilityName"
                                 />
@@ -118,7 +120,7 @@
                                 <input
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
-                                    :checked="$store.getters.getCheckNote"
+                                    :checked="$store.getters.getCheckNoteDI"
                                     @change="onChangeCheckNote"
                                 />
                                 <span class="ml-1 text-xs md:text-mxss"
@@ -133,14 +135,16 @@
         <!-- 二行目 -->
         <div>
             <div class="px-2 md:px-0">
+                <div class="hidden">{{ dispTagValue }}</div>
                 <Multiselect
+                    ref="multDi"
                     class="h-7.5"
                     v-model="tagValue"
                     mode="tags"
                     placeholder="#タグ"
-                    :filterResults="false"
+                    :filterResults="true"
                     :minChars="1"
-                    :resolveOnLoad="false"
+                    :resolveOnLoad="true"
                     :delay="0"
                     :searchable="true"
                     :options="
@@ -160,7 +164,7 @@
                         rounded
                         border-b-2 border-gray-500
                         bg-personDataInfo
-                        text-gray-700
+                        text-tags
                         notoSansJpAndSixteenBold
                         w-43.75
                         md:w-28
@@ -238,72 +242,120 @@ export default {
       searchValue: '',
       checkId: '',
       isDetailClick: false,
-      selectValue: '',
-      selectValue2: '',
-      selectValue3: '',
-      tagValue: [],
+      tagValue: this.$store.getters.getSearchTags,
+      orgDiTagslist: [],
     }
   },
   watch: {
     tagValue() {
-      // console.log(this.tagValue)
+      this.$store.dispatch('setSearchTags', this.tagValue)
       this.$emit('tagValue', this.tagValue)
+    },
+  },
+  computed: {
+    dispTagValue() {
+      this.tagValue = this.$store.getters.getSearchTags
+      // if (this.inputFlg) {
+      //     this.inputFlg = false
+      let selectedItem = this.$store.getters.getorgTagsList
+      for (let index = 0; index < this.orgDiTagslist.length; index++) {
+        const element = this.orgDiTagslist[index]
+        if (
+          this.orgDiTagslist[index].value ==
+          this.tagValue[this.tagValue.length - 1]
+        ) {
+          let storeExistFlg = false
+          for (let i = 0; i < selectedItem.length; i++) {
+            if (
+              selectedItem[i].value ==
+              this.orgDiTagslist[index].value
+            ) {
+              storeExistFlg = true
+            }
+          }
+          if (!storeExistFlg) {
+            selectedItem.push(this.orgDiTagslist[index])
+            this.$store.dispatch('setOrgTagsList', selectedItem)
+          }
+        }
+      }
+      // }
+
+      return this.tagValue
     },
   },
   methods: {
     async fetchLanguages(query) {
-      let where = ''
-      if (query) {
-        where =
-          '&where=' +
-          encodeURIComponent(
-            JSON.stringify({
-              ProgrammingLanguage: {
-                $regex: `${query}|${query.toUpperCase()}|${query[0].toUpperCase() + query.slice(1)
-                  }`,
-              },
+
+      let searchTagsList = this.$store.getters.getSearchTagsLable
+      let result = this.$store.getters.getorgTagsList
+      if (query == null || query == '') {
+        if (Object.keys(searchTagsList).length !== 0) {
+          for (let i = 0; i < searchTagsList.length; i++) {
+            let response = await this.$serve.getSuggestTags(
+              searchTagsList[i]
+            )
+            result = response.data.map((item) => {
+              return {
+                value: item.tagId,
+                label: item.name,
+              }
             })
-          )
+          }
+          let setList = {}
+          Object.keys(result).forEach(function (key) {
+            if (result[key].label == searchTagsList[0]) {
+              setList = {
+                value: result[key].value,
+                label: result[key].label,
+              }
+            }
+          })
+          let flg = false
+          // 存在チェック
+          for (let index = 0; index < this.tagValue.length; index++) {
+            if (this.tagValue[index] == setList.value) {
+              flg = true
+            }
+          }
+          // 存在しない場合、入力に設定
+          this.$store.dispatch('setSearchTagsLable', [])
+          if (!flg) {
+            this.$refs.multDi.select(setList)
+          }
+          this.orgDiTagslist = result
+          this.inputFlg = true
+        } else {
+          result = this.$store.getters.getorgTagsList
+        }
+      } else {
+        this.inputFlg = true
+        await this.$serve.getSuggestTags(query).then((response) => {
+          result = response.data.map((item) => {
+            return {
+              value: item.tagId,
+              label: item.name,
+            }
+          })
+        })
+        this.orgDiTagslist = result
       }
-
-      const response = await fetch(
-        'https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage' +
-        where,
-        {
-          headers: {
-            'X-Parse-Application-Id':
-              'XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL', // This is the fake app's application id
-            'X-Parse-Master-Key':
-              'Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv', // This is the fake app's readonly master key
-          },
-        }
-      )
-
-      const data = await response.json() // Here you have the data that you need
-      return data.results.map((item) => {
-        return {
-          value: item.ProgrammingLanguage,
-          label: item.ProgrammingLanguage,
-        }
-      })
+      return result
     },
     inputClear() {
-      this.searchValue = ''
-      this.value = []
-      this.$refs.medicines.setValue(null)
-      this.$refs.qDistinction.setValue(null)
-      this.$refs.facility.setValue(null)
-    },
-    sendInputInfo() {
-    },
-    setSelectValue(value) {
-      this.selectValue = value
-    },
-    setSelectValue2(value) {
-      this.selectValue2 = value
-    },
-    setSelectValue3(value) {
-      this.selectValue3 = value
+      this.tagValue = []
+      this.$store.commit('setSearchWordDI', '')
+      this.$store.dispatch('setSearchTags', [])
+      // 施設 初回設置[index]
+      this.$store.commit('setCheckQDI', true)
+      this.$store.commit('setCheckADI', true)
+      this.$store.commit('setCheckCommentDI', true)
+      this.$store.commit('setCheckAddFileNameDI', true)
+      this.$store.commit('setCheckContributorDI', true)
+      this.$store.commit('setCheckLastEditerDI', true)
+      this.$store.commit('setCheckFacilityNameDI', true)
+      this.$store.commit('setCheckNoteDI', true)
+
     },
     // 詳細条件クリックイベント
     detailBottunClick: function (event) {
@@ -344,6 +396,30 @@ export default {
     // DropDown 選択したアイテムＩＤ取得
     getCheckId(data) {
       this.checkId = data
+    },
+    onCheckQChange() {
+      this.$store.commit('setCheckQDI', !this.$store.getters.getCheckQDI)
+    },
+    onChangeCheckA() {
+      this.$store.commit('setCheckADI', !this.$store.getters.getCheckADI)
+    },
+    onChangeCheckComment() {
+      this.$store.commit('setCheckCommentDI', !this.$store.getters.getCheckCommentDI)
+    },
+    onChangeCheckAddFileName() {
+      this.$store.commit('setCheckAddFileNameDI', !this.$store.getters.getCheckAddFileNameDI)
+    },
+    onChangeCheckContributor() {
+      this.$store.commit('setCheckContributorDI', !this.$store.getters.getCheckContributorDI)
+    },
+    onChangeCheckLastEditer() {
+      this.$store.commit('setCheckLastEditerDI', !this.$store.getters.getCheckLastEditerDI)
+    },
+    onChangeCheckFacilityName() {
+      this.$store.commit('setCheckFacilityNameDI', !this.$store.getters.getCheckFacilityNameDI)
+    },
+    onChangeCheckNote() {
+      this.$store.commit('setCheckNoteDI', !this.$store.getters.getCheckNoteDI)
     },
   },
 }

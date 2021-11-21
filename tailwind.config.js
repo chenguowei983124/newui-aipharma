@@ -215,6 +215,7 @@ module.exports = {
             },
             backgroundColor: (theme) => ({
                 ...theme('colors'),
+                aiSwitchBg: '#fceacc',
                 blueline: '#65bbe5',
                 downloadIcon: '#8CC85A',
                 organization: '#326EB5',
@@ -249,7 +250,6 @@ module.exports = {
                 personDataInfo: 'rgb(230, 230, 230)',
                 personGroupInformation: 'rgb(253, 244, 229)',
                 personInformationButton: 'rgb(241, 90, 36)',
-                personOrganizationButton: 'rgb(240, 150, 0)',
                 searchBunnon: 'rgb(240, 150, 0)',
                 cardTitle: 'rgb(101, 187, 229)',
                 cardTitlePmad: 'rgb(153, 153, 153)',
@@ -279,6 +279,8 @@ module.exports = {
                 googleTitle: 'rgb(50, 165,220)',
             },
             colors: {
+                tags: 'rgb(51,51,51)',
+                aiSwitch: '#f09600',
                 notice: '#666666',
                 notlooked: '#f09600',
                 browse: '#d4145a',

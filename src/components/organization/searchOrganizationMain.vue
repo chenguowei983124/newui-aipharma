@@ -288,7 +288,7 @@
                                         border-2 border-gray-300
                                         bg-gray-100
                                         h-6
-                                        notoSansJpAndElevenRegular
+                                        notoSansJpAndTwelveRegular
                                         pl-1
                                         pr-1
                                         text-center
@@ -1003,7 +1003,7 @@ export default {
   data() {
     return {
       // 順 区分 id
-      organizationDateSortValue: 0,
+      organizationDateSortValue: 'last_updated_at_desc',
       // 件 表示 区分 id
       organizationCountSortValue: 0,
       pageCount: 20,
@@ -1255,7 +1255,7 @@ export default {
       // ページ
       this.$store.dispatch('setPage', 1)
       // ソート順
-      this.$store.dispatch('setSort', 0)
+      this.$store.dispatch('setSort', 'last_updated_at_desc')
       // 表示件数
       this.$store.dispatch('setMaxCount', 20)
       // 検索対象
@@ -1364,14 +1364,10 @@ export default {
           })
           this.$store.getters.organizationSearchInfo.qas[
             index
-          ].feedbackGood =
-            this.$store.getters.organizationSearchInfo.qas[index]
-              .feedbackGood + res.data.goodFeedbackCount
+          ].feedbackGood = res.data.goodFeedbackCount
           this.$store.getters.organizationSearchInfo.qas[
             index
-          ].feedbackBad =
-            this.$store.getters.organizationSearchInfo.qas[index]
-              .feedbackBad + res.data.badFeedbackCount
+          ].feedbackBad = res.data.badFeedbackCount
           this.$store.getters.organizationSearchInfo.qas[
             index
           ].feedbackComment = res.data.commentFeedbackCount
