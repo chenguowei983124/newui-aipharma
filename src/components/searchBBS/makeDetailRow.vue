@@ -41,10 +41,23 @@
                 </div>
             </div>
             <div class="mt-5">
-                <div v-if="!isShow" v-html="items.content"></div>
+                <div
+                    v-if="!isShow"
+                    v-html="
+                        items.content
+                            .replace(
+                                '<ol>',
+                                `<ol style='list-style-type: decimal;'>`
+                            )
+                            .replace(
+                                '<ul>',
+                                `<ul style='list-style-type: disc;'>`
+                            )
+                    "
+                ></div>
                 <div v-if="isShow">
                     <editor
-                        api-key="qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp"
+                        :api-key="this.$constant.APIKEY"
                         initialValue="<p>Initial editor content</p>"
                         v-model="inputComment"
                         :init="{
@@ -99,6 +112,7 @@
                                 bg-whole
                                 cursor-pointer
                             "
+                            @click="sendBbsComment()"
                         >
                             <div
                                 class="
@@ -197,6 +211,10 @@ export default {
             type: Function,
             default: () => {},
         },
+        exeSearchData: {
+            type: Function,
+            default: () => {},
+        },
         items: {},
         postList: Array,
         index: 0,
@@ -218,6 +236,7 @@ export default {
 
         // コメント削除押下
         deleteComment(dataInfo) {
+            console.log(dataInfo)
             this.$swal
                 .fire({
                     text: '本当に削除してよろしいですか？',
@@ -228,19 +247,37 @@ export default {
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        this.$serve.deletePost('', dataInfo.postid, dataInfo.id)
+                        this.$serve.deleteBbsComment(
+                            this.$store.getters.getOidcCode,
+                            dataInfo.post_id,
+                            dataInfo.id
+                        )
                         this.$swal.fire({
                             text: '削除されました。',
                             icon: '',
                             showCancelButton: false,
                             confirmButtonText: 'OK',
                         })
-                        this.doSearch()
+                        this.isShow = false
+                        this.exeSearchData()
                     }
                 })
             console.log('コメント削除押下', dataInfo.id)
         },
-
+        sendBbsComment() {
+            let param = {
+                code: this.$store.getters.getOidcCode,
+                post: {
+                    post_id: this.items.post_id,
+                    id: this.items.id,
+                    content: this.inputComment,
+                },
+                postId: this.items.post_id,
+            }
+            let res = this.$serve.postPosts(param)
+            this.isShow = false
+            this.exeSearchData()
+        },
         tagClick(name) {
             let tagsLable = this.$store.getters.getSearchTagsLable
             tagsLable.push(name)
@@ -267,8 +304,9 @@ export default {
                 feedbackId: feedbackId,
                 post_id: post_id,
                 kind: tempKind,
+                code: this.$store.getters.getOidcCode,
             }
-            this.$serve.putfeedbacks(params, '').then((res) => {
+            this.$serve.putfeedbacks(params).then((res) => {
                 if (index === undefined) {
                     Object.assign(this.postList[0].feedback, res.data.feedback)
                 } else {

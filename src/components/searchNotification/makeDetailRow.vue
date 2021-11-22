@@ -228,7 +228,11 @@ export default {
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        this.$serve.deletePost('', dataInfo.postid, dataInfo.id)
+                        this.$serve.deleteBbsComment(
+                            this.$store.getters.getOidcCode,
+                            dataInfo.postid,
+                            dataInfo.id
+                        )
                         this.$swal.fire({
                             text: '削除されました。',
                             icon: '',

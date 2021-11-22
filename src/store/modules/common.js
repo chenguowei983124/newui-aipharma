@@ -14,11 +14,11 @@ export default {
         qa_classify_class: {},
         qa_classify_subject: {},
         commentInfo: {},
-        oidcCode: '',
+        oidcCode: 'test',
         dateValueFrom: '',
         dateValueTo: '',
         styles: '-1',
-        scope: '0',
+        scope: 'created_at-desc',
         bbsCheckInfo: {
             checkTitle: true,
             checkContent: true,

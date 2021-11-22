@@ -451,7 +451,7 @@ export default {
                     content: this.InputComment,
                 },
             }
-            let res = this.$serve.postPosts(param, '')
+            let res = this.$serve.postPosts(param)
             this.doSearch()
         },
     },

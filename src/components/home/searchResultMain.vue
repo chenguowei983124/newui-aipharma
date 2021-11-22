@@ -165,24 +165,26 @@ import resultDetailRow from '../common/searchResult/resultDetailRow.vue'
 import carousel from '../common/searchResult/carousel.vue'
 
 export default {
-  components: {
-    resutTag,
-    resultDetailRow,
-    carousel,
-  },
-  props: {},
-  watch: {},
-  setup() {
-  },
-  mounted() {
-    //   console.log('getOidcCode', this.$store.getters.getOidcCode)
-    this.$store.dispatch('getTopNotice', this.$store.getters.getOidcCode)
-    this.$store.dispatch('getTopBulletinBoardInfo', this.$store.getters.getOidcCode)
-    this.$store.dispatch('getBBSDropDowninfo', this.$store.getters.getOidcCode)
-    this.$store.dispatch('getScientifiSocietyInfo')
-    this.$store.dispatch('getTopPMDA')
-    this.$store.dispatch('getCommonInfo')
-  },
+    components: {
+        resutTag,
+        resultDetailRow,
+        carousel,
+    },
+    props: {},
+    watch: {},
+    setup() {},
+    mounted() {
+        //   console.log('getOidcCode', this.$store.getters.getOidcCode)
+        this.$store.dispatch('getTopNotice', this.$store.getters.getOidcCode)
+        this.$store.dispatch(
+            'getTopBulletinBoardInfo',
+            this.$store.getters.getOidcCode
+        )
+        // this.$store.dispatch('getBBSDropDowninfo', this.$store.getters.getOidcCode)
+        this.$store.dispatch('getScientifiSocietyInfo')
+        this.$store.dispatch('getTopPMDA')
+        this.$store.dispatch('getCommonInfo')
+    },
 }
 </script>
 <style scoped></style>

@@ -23,7 +23,7 @@
         }"
     /> -->
     <editor
-        api-key="qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp"
+        :api-key="$constant.APIKEY"
         initialValue="<p>Initial editor content</p>"
         v-model="data"
         :init="{
@@ -62,6 +62,7 @@ export default {
     },
     data() {
         return {
+            apikey: 'qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp',
             tinymce_init: {
                 selector: 'textarea#custom-toolbar-button',
                 toolbar: 'customInsertButton customDateButton',

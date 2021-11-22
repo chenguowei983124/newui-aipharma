@@ -138,13 +138,44 @@ export default {
                 )
             } else {
                 this.resetSearchBar()
-                const PAGE_LIMIT = 10
+                const PAGE_LIMIT = 20
                 Object.assign(this.params, { division: 'BBS' })
                 console.log('watch', this.params)
+                console.log(
+                    'this.$store.getters.getOidcCode',
+                    this.$store.getters.getOidcCode
+                )
                 const queryStringData = {
                     page: pgNo,
                     limit: PAGE_LIMIT,
-                    filter: this.params,
+                    code: this.$store.getters.getOidcCode,
+                    filter: {
+                        division: 'BBS',
+                        free_text: this.params.free_text,
+                        targets: {
+                            title: this.params.checkTitle,
+                            content: this.params.checkContent,
+                            coment: this.params.checkComment,
+                            creator: this.params.checkLastEditor,
+                            updater: this.params.checkLastEditor,
+                            facility: this.params.checkFacilityName,
+                        },
+                        tags:
+                            this.params.tags === undefined ||
+                            this.params.tags === ''
+                                ? []
+                                : this.params.tags.split(','),
+                        scope: this.params.scope,
+                        create_from: this.params.dateFrom,
+                        create_to: this.params.dateTo,
+                        publish: false,
+                        order: this.params.sort,
+                    },
+                    // this.params,
+                    // filter: {
+                    //     free_text: '',
+                    //     division: '',
+                    // },
                 }
 
                 response = await this.$serve.getPostList(queryStringData)
@@ -208,7 +239,7 @@ export default {
             checkInfo.checkFacilityName = true
             this.$store.dispatch('setBbsCheckInfo', checkInfo)
             this.$store.dispatch('setSearchWord', '')
-            this.$store.dispatch('setSort', 0)
+            this.$store.dispatch('setSort', 'created_at-desc')
             this.$store.dispatch('setSearchTags', [])
             this.$store.dispatch('setSearchTagsLable', [])
         },
@@ -217,7 +248,8 @@ export default {
             this.$store.dispatch('setSearchWord', this.$route.query.free_text)
             this.$store.dispatch(
                 'setSearchTags',
-                this.$route.query.tags === ''
+                this.$route.query.tags === '' ||
+                    this.$route.query.tags === undefined
                     ? []
                     : this.$route.query.tags.split(',')
             )
@@ -230,31 +262,42 @@ export default {
             // 検索対象
             let checkInfo = this.$store.getters.getBbsCheckInfo
             checkInfo.checkTitle =
+                this.$route.query.checkTitle === undefined ||
                 this.$route.query.checkTitle.toString() === 'true'
                     ? true
                     : false
             checkInfo.checkContent =
+                this.$route.query.checkContent === undefined ||
                 this.$route.query.checkContent.toString() === 'true'
                     ? true
                     : false
             checkInfo.checkComment =
+                this.$route.query.checkComment === undefined ||
                 this.$route.query.checkComment.toString() === 'true'
                     ? true
                     : false
             checkInfo.checkPost =
-                this.$route.query.checkPost.toString() === 'true' ? true : false
+                this.$route.query.checkPost === undefined ||
+                this.$route.query.checkPost.toString() === 'true'
+                    ? true
+                    : false
             checkInfo.checkLastEditor =
+                this.$route.query.checkLastEditor === undefined ||
                 this.$route.query.checkLastEditor.toString() === 'true'
                     ? true
                     : false
             checkInfo.checkFacilityName =
+                this.$route.query.checkFacilityName === undefined ||
                 this.$route.query.checkFacilityName.toString() === 'true'
                     ? true
                     : false
             console.log('checkInfo', checkInfo)
             this.$store.dispatch('setBbsCheckInfo', checkInfo)
 
-            this.selectDispNumber = this.$route.query.sort
+            this.selectDispNumber =
+                this.$route.query.checkFacilityName === undefined
+                    ? '0'
+                    : this.$route.query.sort
             this.$store.dispatch('setSort', this.$route.query.sort)
         },
         resetRouter() {
@@ -326,7 +369,7 @@ export default {
     },
     created() {},
     mounted() {
-        this.$store.getters.getBBSDropDowninfo
+        // this.$store.getters.getBBSDropDowninfo
     },
     unmounted() {
         this.initStore()

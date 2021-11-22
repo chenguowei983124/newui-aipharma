@@ -84,6 +84,7 @@ const serve = {
     //===========================
     async getTopNoticel(code) {
         let data
+        console.log(code)
         if (!code) {
             data = await axios('/preavoid/get_topmenu_Noticel_info', {
                 method: 'get',
@@ -95,11 +96,12 @@ const serve = {
                 limit: 5,
             }
             // API-index
-            let mtd = 'get'
             let acURL = '/posts/topmenu_info'
             const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
+            const response = await exeAxios(acURL, {
+                method: 'get',
+                params: queryStringData,
+            })
             if (response.status == 200) {
                 data = response
             }
@@ -123,46 +125,152 @@ const serve = {
                 limit: 5,
                 division: 'BBS',
             }
-            // API-index
-            let mtd = 'get'
             let acURL = '/posts/topmenu_info'
-            const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
+            // const queryString = new URLSearchParams(queryStringData).toString()
+            const response = await exeAxios(acURL, {
+                method: 'get',
+                params: queryStringData,
+            })
             if (response.status == 200) {
                 data = response
             }
+            // API-index
+            // let mtd = 'get'
+            // let acURL = '/posts/topmenu_info'
+            // const queryString = new URLSearchParams(queryStringData).toString()
+            // const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+            // const response = await exeAxios(mtd, url, null)
+            // if (response.status == 200) {
+            //     data = response
+            // }
         }
         return data
     },
+    // //===========================
+    // // TOP画面　お知らせ情報
+    // //===========================
+    // async getTopNoticel(code) {
+    //     let data
+    //     // if (!code) {
+    //     //     data = await axios('/preavoid/get_topmenu_Noticel_info', {
+    //     //         method: 'get',
+    //     //     })
+    //     // } else {
+    //     // const queryStringData = {
+    //     //     code: code,
+    //     //     page: 1,
+    //     //     limit: 5,
+    //     // }
+    //     // API-index
+    //     // let mtd = 'get'
+    //     // let acURL = '/posts/topmenu_info'
+    //     // const queryString = new URLSearchParams(queryStringData).toString()
+    //     // const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+    //     // const response = await exeAxios(mtd, url, null)
+    //     // if (response.status == 200) {
+    //     //     data = response
+    //     // }
+
+    //     const queryStringData = {
+    //         code: code,
+    //         page: 1,
+    //         limit: 5,
+    //     }
+    //     // API-index
+    //     let acURL = '/posts/topmenu_info'
+    //     const queryString = queryStringData
+    //     // const queryString = new URLSearchParams(queryStringData).toString()
+    //     const response = await exeAxios(acURL, {
+    //         method: 'get',
+    //         params: queryString,
+    //     })
+    //     if (response.status == 200) {
+    //         data = response
+    //     }
+    //     // }
+
+    //     return data
+    // },
+    // //===========================
+    // // TOP画面　掲示板情報取得
+    // //===========================
+    // async getTopBulletinBoard(code) {
+    //     let data
+    //     // if (!code) {
+    //     //     data = await axios('/preavoid/get_topmenu_BulletinBoard_info', {
+    //     //         method: 'get',
+    //     //     })
+    //     // } else {
+    //     const queryStringData = {
+    //         code: code,
+    //         page: 1,
+    //         limit: 5,
+    //         division: 'BBS',
+    //     }
+    //     let acURL = '/posts/topmenu_info'
+    //     const queryString = queryStringData
+    //     // const queryString = new URLSearchParams(queryStringData).toString()
+    //     const response = await exeAxios(acURL, {
+    //         method: 'get',
+    //         params: queryString,
+    //     })
+    //     if (response.status == 200) {
+    //         data = response
+    //     }
+
+    //     // const queryStringData = {
+    //     //     code: code,
+    //     //     page: 1,
+    //     //     limit: 5,
+    //     //     division: 'BBS',
+    //     // }
+    //     // API-index
+    //     // let mtd = 'get'
+    //     // let acURL = '/posts/topmenu_info'
+    //     // const queryString = new URLSearchParams(queryStringData).toString()
+    //     // const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+    //     // const response = await exeAxios(mtd, url, null)
+    //     // if (response.status == 200) {
+    //     //     data = response
+    //     // }
+    //     // }
+    //     return data
+    // },
     //===========================
     // お知らせ,掲示板のtagsマスタデータ
     //===========================
     async getTagsMaster(code, value) {
         store.dispatch('setLoadingShowFlg', false)
         let data = []
-        if (!!code) {
-            const queryStringData = {
-                code: code,
-            }
-            // API-index
-            let mtd = 'get'
-            let acURL = '/tags'
-            const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
-            if (response.status == 200) {
-                const tags = response.data.tags
-                tags.map((map) => {
-                    data.push(map.name)
-                })
-            }
-        } else {
-            const response = await axios(`/tags?${value}`, {
-                method: 'get',
-            })
-            data = response.data.tags
+        // if (!!code) {
+        const queryStringData = {
+            code: code,
+            search: value,
         }
+        // API-index
+        let mtd = 'get'
+        let acURL = '/tags'
+        const queryString = queryStringData
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        const response = await exeAxios(acURL, {
+            method: 'get',
+            params: queryString,
+        })
+
+        // const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+        // const response = await exeAxios(mtd, url, null)
+        if (response.status == 200) {
+            data = response.data.tags
+            // tags.map((map) => {
+            //     data.push(map.name)
+            // })
+        }
+        // } else {
+        //     const response = await axios(`/tags?${value}`, {
+        //         method: 'get',
+        //     })
+        //     data = response.data.tags
+        // }
 
         return data
     },
@@ -171,27 +279,38 @@ const serve = {
     //===========================
     async getPostsrforId(code, id) {
         let data = []
-        if (!!code) {
-            const queryStringData = {
-                code: code,
-            }
-            // API-index
-            let mtd = 'get'
-            let acURL = `/posts/${id}`
-            const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
-            if (response.status == 200) {
-                const tags = response.data
-                tags.map((map) => {
-                    data.push(map.name)
-                })
-            }
-        } else {
-            data = await axios(`/posts/${id}`, {
-                method: 'get',
-            })
+        code = 'asdf'
+        // if (!!code) {
+        console.log('asdfa')
+        const queryStringData = {
+            code: code,
+            postId: id,
         }
+        const queryString = queryStringData
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        let acURL = `/posts/${id}`
+        data = await exeAxios(acURL, {
+            method: 'get',
+            params: queryString,
+        })
+        // API-index
+        // let mtd = 'get'
+        // let acURL = `/posts/${id}`
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        // const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+        // const response = await exeAxios(mtd, url, null)
+        // if (response.status == 200) {
+        //     const tags = response.data
+        //     tags.map((map) => {
+        //         data.push(map.name)
+        //     })
+        // }
+        // } else {
+        //     console.log('234567')
+        //     data = await axios(`/posts/${id}`, {
+        //         method: 'get',
+        //     })
+        // }
 
         return data
     },
@@ -200,152 +319,174 @@ const serve = {
     //===========================
     async deletePost(code, id) {
         let data = []
-        if (!!code) {
-            const queryStringData = {
-                code: code,
-            }
-            // API-index
-            let mtd = 'DELETE'
-            let acURL = `/posts/${id}`
-            const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
-            if (response.status == 200) {
-                const tags = response.data
-                tags.map((map) => {
-                    data.push(map.name)
-                })
-            }
-        } else {
-            data = await axios(`/posts/${id}`, {
-                method: 'DELETE',
-            })
+        // if (!!code) {
+        const queryStringData = {
+            code: code,
+            postId: id,
         }
+        // API-index
+        // let mtd = 'DELETE'
+        let acURL = `/posts/${id}`
+        const queryString = queryStringData
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        data = await exeAxios(acURL, {
+            method: 'DELETE',
+            params: queryString,
+        })
+        // const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+        // const response = await exeAxios(mtd, url, null)
+        // if (response.status == 200) {
+        //     const tags = response.data
+        //     tags.map((map) => {
+        //         data.push(map.name)
+        //     })
+        // }
+        // } else {
+        //     data = await axios(`/posts/${id}`, {
+        //         method: 'DELETE',
+        //     })
+        // }
 
         return data
     },
     //===========================
-    // 投稿情報の削除
+    // コメント情報の削除
     //===========================
-    async deletePost(code, id, post_id) {
+    async deleteBbsComment(code, post_id, commentId) {
         let data = []
-        if (!!code) {
-            const queryStringData = {
-                code: code,
-            }
-            // API-index
-            let mtd = 'DELETE'
-            let acURL = `/feedbacks/${id}`
-            const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
-            if (response.status == 200) {
-                const tags = response.data
-                tags.map((map) => {
-                    data.push(map.name)
-                })
-            }
-        } else {
-            const queryStringData = {
-                code: code,
-                feedbackId: id,
-                post_id: post_id,
-            }
-            const queryString = new URLSearchParams(queryStringData).toString()
-            data = await axios(`/feedbacks/${id}?${queryString}`, {
-                method: 'DELETE',
-            })
+        // if (!!code) {
+        const queryStringData = {
+            code: code,
+            postId: post_id,
+            id: commentId,
         }
+        console.log('deleteBbsComment', post_id)
+        // API-index
+        // let mtd = 'DELETE'
+        let acURL = `/posts/${post_id}`
+        const queryString = queryStringData
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        data = await exeAxios(acURL, {
+            method: 'DELETE',
+            params: queryString,
+        })
+
+        return data
+    },
+    //===========================
+    // コメント情報の編集
+    //===========================
+    async editBbsComment(code, params) {
+        let data = []
+        // if (!!code) {
+        const queryStringData = {
+            code: code,
+        }
+        console.log('editBbsComment', post_id)
+        // API-index
+        // let mtd = 'DELETE'
+        let acURL = `/posts/${post_id}`
+        const queryString = queryStringData
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        data = await exeAxios(acURL, {
+            method: 'put',
+            data: params,
+        })
 
         return data
     },
     //===========================
     // 投稿情報の削除
+    //===========================
+    // async deletefeedbacks(code, id, post_id) {
+    //     let data = []
+    //     if (!!code) {
+    //         const queryStringData = {
+    //             code: code,
+    //         }
+    //         // API-index
+    //         let mtd = 'DELETE'
+    //         let acURL = `/feedbacks/${id}`
+    //         const queryString = new URLSearchParams(queryStringData).toString()
+    //         const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
+    //         const response = await exeAxios(mtd, url, null)
+    //         if (response.status == 200) {
+    //             const tags = response.data
+    //             tags.map((map) => {
+    //                 data.push(map.name)
+    //             })
+    //         }
+    //     } else {
+    //         const queryStringData = {
+    //             code: code,
+    //             feedbackId: id,
+    //             post_id: post_id,
+    //         }
+    //         const queryString = new URLSearchParams(queryStringData).toString()
+    //         data = await axios(`/feedbacks/${id}?${queryString}`, {
+    //             method: 'DELETE',
+    //         })
+    //     }
+
+    //     return data
+    // },
+    //===========================
+    // 既読としてフィードバックする
     //===========================
     async postReadfeedbacks(post_id, code) {
         let data = []
-        if (!!code) {
-            const queryStringData = {
-                code: code,
-                postId: post_id,
-            }
-            // API-index
-            let mtd = 'post'
-            let acURL = `/posts/${post_id}/feedbacks`
-            const queryString = new URLSearchParams(queryStringData).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
-            if (response.status == 200) {
-                const tags = response.data
-                tags.map((map) => {
-                    data.push(map.name)
-                })
-            }
-        } else {
-            const queryStringData = {
-                postId: post_id,
-            }
-            const queryString = new URLSearchParams(queryStringData).toString()
-            data = await axios(`/posts/${post_id}/feedbacks?${queryString}`, {
-                method: 'post',
-            })
+
+        const queryStringData = {
+            code: code,
+            postId: post_id,
         }
+        const queryString = queryStringData
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        data = await exeAxios(`/posts/${post_id}/feedbacks`, {
+            method: 'post',
+            params: queryString,
+        })
 
         return data
     },
     //===========================
     // フィードバックの切り替え
     //===========================
-    async putfeedbacks(params, code) {
+    async putfeedbacks(params) {
         let data = []
-        if (!!code) {
-            // API-index
-            let mtd = 'put'
-            let acURL = `/feedbacks/${params.feedbackId}`
-            const queryString = new URLSearchParams(params).toString()
-            const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-            const response = await exeAxios(mtd, url, null)
-            if (response.status == 200) {
-                const tags = response.data
-                tags.map((map) => {
-                    data.push(map.name)
-                })
-            }
-        } else {
-            const queryString = new URLSearchParams(params).toString()
-            data = await axios(
-                `/feedbacks/${params.feedbackId}?${queryString}`,
-                {
-                    method: 'put',
-                }
-            )
-            console.log('data', data)
-        }
+
+        const queryString = params
+        // const queryString = new URLSearchParams(params).toString()
+        data = await exeAxios(`/feedbacks/${params.feedbackId}`, {
+            method: 'put',
+            params: queryString,
+        })
 
         return data
     },
-    async postPosts(param, code) {
+    async postPosts(param) {
         let data = []
-        // if (!!code) {
-
-        //     let mtd = 'post'
-        //     let acURL = `/posts`
-        //     const queryString = new URLSearchParams(queryStringData).toString()
-        //     const url = `${pathJoin([API_BASE, acURL])}?${queryString}`
-        //     const response = await exeAxios(mtd, url, null)
-        //     if (response.status == 200) {
-        //         const tags = response.data
-        //         tags.map((map) => {
-        //             data.push(map.name)
-        //         })
-        //     }
-        // } else {
+        const queryString = param
+        // const queryString = new URLSearchParams(params).toString()
         data = await exeAxios(`/posts`, {
             method: 'post',
-            data: param,
+            data: queryString,
         })
-        // }
 
+        return data
+    },
+    // 掲示板検索
+    async getPostList(queryStringData) {
+        let filter = queryStringData.filter
+        delete queryStringData.filter
+        const queryString = queryStringData
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        console.log('queryString', queryString)
+        const data = await exeAxios('/posts/search', {
+            method: 'post',
+            params: queryString,
+            data: filter,
+        })
         return data
     },
     //===========================
@@ -537,7 +678,7 @@ const serve = {
             method: 'get',
             params: {
                 id: id,
-                confidence: 'nil'
+                confidence: 'nil',
             },
         })
 
@@ -709,10 +850,13 @@ const serve = {
                 checkFacilityName: param.checkFacilityName == 'true' ? 1 : 0,
             },
         }
-        const data = await axios('/api/qa/get_DIKnowledgeShare_keyword_search_info', {
-            method: 'post',
-            data: params,
-        })
+        const data = await axios(
+            '/api/qa/get_DIKnowledgeShare_keyword_search_info',
+            {
+                method: 'post',
+                data: params,
+            }
+        )
 
         return data
     },
@@ -720,10 +864,13 @@ const serve = {
     // DIナレッジシェア画面のAI検索
     //===========================
     async getDIKnowledgeShareAI(param) {
-        const data = await axios('/api/qa/get_DIKnowledgeShare_similar_search_info', {
-            method: 'post',
-            data: { freeword: param.search },
-        })
+        const data = await axios(
+            '/api/qa/get_DIKnowledgeShare_similar_search_info',
+            {
+                method: 'post',
+                data: { freeword: param.search },
+            }
+        )
 
         return data
     },
@@ -731,12 +878,13 @@ const serve = {
     // リクエストされたQAの詳細情報を返す DIナレッジシェア（id,confidence）
     //===========================
     async getDIKnowledgeSharedId(params) {
-        var confidenceTemp = typeof (params.confidence) == "undefined" ? 'nil' : params.confidence
+        var confidenceTemp =
+            typeof params.confidence == 'undefined' ? 'nil' : params.confidence
         const data = await axios('/api/qa/send_detail_qa_info', {
             method: 'get',
             params: {
                 id: params.id,
-                confidence: confidenceTemp
+                confidence: confidenceTemp,
             },
         })
         return data
@@ -754,13 +902,6 @@ const serve = {
             method: 'get',
         })
 
-        return data
-    },
-    async getPostList(queryStringData) {
-        const data = await axios('/posts/search', {
-            method: 'post',
-            params: queryStringData,
-        })
         return data
     },
 }

@@ -321,7 +321,7 @@ export default {
     },
     created() {},
     mounted() {
-        this.$store.getters.getBBSDropDowninfo
+        // this.$store.getters.getBBSDropDowninfo
     },
     unmounted() {
         this.initStore()

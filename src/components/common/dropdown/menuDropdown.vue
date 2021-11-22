@@ -380,121 +380,131 @@ import groundMenuXSvg from '../svgImage/groundMenuXSvg.vue'
 import groundMenuSvg from '../svgImage/groundMenuSvg.vue'
 import HomeIconSvg from '../svgImage/homeIconSvg.vue'
 export default {
-  name: 'dropdown',
-  components: {
-    menuLogoSvg,
-    iconDown,
-    groundMenuXSvg,
-    groundMenuSvg,
-    HomeIconSvg,
-  },
-  props: { isDispaly: false },
-  data() {
-    return {
-      isOpen: false,
-      itemType1: false,
-      itemType2: false,
-      itemType3: false,
-      itemType4: false,
-      menuItemList: [
-        { id: '1', title: 'TOP', itemStyle: 'item', path: '/myhome' },
-        { id: '2', title: 'お知らせ', itemStyle: 'item', path: '/notification' },
-        // { id: '3', title: '掲示板', itemStyle: 'item', path: '/bulletinBoard' },
-        { id: '3', title: '掲示板', itemStyle: 'item', path: '/searchBulletinBoard' },
-      ],
-      menuItemList2: [
-        {
-          id: '1',
-          title: 'データベース',
-          itemStyle: 'title',
-          path: '',
-        },
-        {
-          id: '2',
-          title: 'DI ナレッジシェア',
-          itemStyle: 'item',
-          path: '/searchDiKnowledge',
-        },
-        {
-          id: '3',
-          title: '組織内DI 記録（Q&A）',
-          itemStyle: 'item',
-          path: '/searchOrganization',
-        },
-        {
-          id: '4',
-          title: '症例（プレアボイド）',
-          itemStyle: 'item',
-          path: '/searchPreavoids',
-        },
-        { id: '5', title: 'DI 辞書', itemStyle: 'item', path: '' },
-        { id: '6', title: '製薬企業情報', itemStyle: 'item', path: '' },
-      ],
-      menuItemList3: [
-        { id: '1', title: 'マイデータ', itemStyle: 'title', path: '' },
-        {
-          id: '2',
-          title: '組織内DI 記録（Q&A）',
-          itemStyle: 'item',
-          path: '',
-        },
-        {
-          id: '3',
-          title: '登録',
-          itemStyle: 'subproject',
-          path: '/newOrgDIRecord',
-        },
-        {
-          id: '4',
-          title: '症例（プレアボイド）',
-          itemStyle: 'item',
-          path: '',
-        },
-        { id: '5', title: '登録', itemStyle: 'subproject', path: '' },
-        {
-          id: '6',
-          title: 'データ入出力',
-          itemStyle: 'item',
-          path: 'searchOrganization',
-        },
-      ],
-      menuItemList4: [
-        { id: '1', title: 'その他', itemStyle: 'title', path: '' },
-        { id: '2', title: '外部リンク', itemStyle: 'item', path: '' },
-        { id: '3', title: '動画', itemStyle: 'item', path: '' },
-        { id: '4', title: '学会', itemStyle: 'item', path: '' },
-        {
-          id: '5',
-          title: '製薬企業DIチャットボット',
-          itemStyle: 'item',
-          path: '',
-        },
-        { id: '6', title: 'ヘルプ', itemStyle: 'item', path: '' },
-      ],
-    }
-  },
-  watch: {},
-  methods: {
-    linkClick() {
-      this.$store.dispatch(
-        'setMenuClick',
-        !this.$store.getters.getIsMenuClick
-      )
+    name: 'dropdown',
+    components: {
+        menuLogoSvg,
+        iconDown,
+        groundMenuXSvg,
+        groundMenuSvg,
+        HomeIconSvg,
     },
-    scrollToTop() {
-      let currentScroll = document.documentElement.scrollTop,
-        int = setInterval(frame, 6)
-
-      function frame() {
-        if (0 > currentScroll) {
-          clearInterval(int)
-        } else {
-          currentScroll = currentScroll - 12
-          document.documentElement.scrollTop = currentScroll
+    props: { isDispaly: false },
+    data() {
+        return {
+            isOpen: false,
+            itemType1: false,
+            itemType2: false,
+            itemType3: false,
+            itemType4: false,
+            menuItemList: [
+                { id: '1', title: 'TOP', itemStyle: 'item', path: '/myhome' },
+                {
+                    id: '2',
+                    title: 'お知らせ',
+                    itemStyle: 'item',
+                    path: '/searchNotification',
+                },
+                // { id: '3', title: '掲示板', itemStyle: 'item', path: '/bulletinBoard' },
+                {
+                    id: '3',
+                    title: '掲示板',
+                    itemStyle: 'item',
+                    path: '/searchBulletinBoard',
+                },
+            ],
+            menuItemList2: [
+                {
+                    id: '1',
+                    title: 'データベース',
+                    itemStyle: 'title',
+                    path: '',
+                },
+                {
+                    id: '2',
+                    title: 'DI ナレッジシェア',
+                    itemStyle: 'item',
+                    path: '/searchDiKnowledge',
+                },
+                {
+                    id: '3',
+                    title: '組織内DI 記録（Q&A）',
+                    itemStyle: 'item',
+                    path: '/searchOrganization',
+                },
+                {
+                    id: '4',
+                    title: '症例（プレアボイド）',
+                    itemStyle: 'item',
+                    path: '/searchPreavoids',
+                },
+                { id: '5', title: 'DI 辞書', itemStyle: 'item', path: '' },
+                { id: '6', title: '製薬企業情報', itemStyle: 'item', path: '' },
+            ],
+            menuItemList3: [
+                { id: '1', title: 'マイデータ', itemStyle: 'title', path: '' },
+                {
+                    id: '2',
+                    title: '組織内DI 記録（Q&A）',
+                    itemStyle: 'item',
+                    path: '',
+                },
+                {
+                    id: '3',
+                    title: '登録',
+                    itemStyle: 'subproject',
+                    path: '/newOrgDIRecord',
+                },
+                {
+                    id: '4',
+                    title: '症例（プレアボイド）',
+                    itemStyle: 'item',
+                    path: '',
+                },
+                { id: '5', title: '登録', itemStyle: 'subproject', path: '' },
+                {
+                    id: '6',
+                    title: 'データ入出力',
+                    itemStyle: 'item',
+                    path: 'searchOrganization',
+                },
+            ],
+            menuItemList4: [
+                { id: '1', title: 'その他', itemStyle: 'title', path: '' },
+                { id: '2', title: '外部リンク', itemStyle: 'item', path: '' },
+                { id: '3', title: '動画', itemStyle: 'item', path: '' },
+                { id: '4', title: '学会', itemStyle: 'item', path: '' },
+                {
+                    id: '5',
+                    title: '製薬企業DIチャットボット',
+                    itemStyle: 'item',
+                    path: '',
+                },
+                { id: '6', title: 'ヘルプ', itemStyle: 'item', path: '' },
+            ],
         }
-      }
     },
-  },
+    watch: {},
+    methods: {
+        linkClick() {
+            this.$store.dispatch(
+                'setMenuClick',
+                !this.$store.getters.getIsMenuClick
+            )
+        },
+        scrollToTop() {
+            let currentScroll = document.documentElement.scrollTop,
+                int = setInterval(frame, 6)
+
+            function frame() {
+                if (0 > currentScroll) {
+                    clearInterval(int)
+                } else {
+                    currentScroll = currentScroll - 12
+                    document.documentElement.scrollTop = currentScroll
+                }
+            }
+        },
+    },
 }
 </script>
 <style></style>

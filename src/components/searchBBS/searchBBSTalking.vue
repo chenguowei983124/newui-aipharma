@@ -6,6 +6,7 @@
                 <x-icon-svg color="#65bbe5"></x-icon-svg>
             </div>
         </div>
+
         <!-- "" -->
         <div
             class="overflow-y-scroll"
@@ -102,7 +103,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5" v-html="postList[0].title"></div>
+                    <div
+                        class="mt-5 ml-2"
+                        v-html="
+                            postList[0].title
+                                .replace(
+                                    '<ol>',
+                                    `<ol style='list-style-type: decimal;'>`
+                                )
+                                .replace(
+                                    '<ul>',
+                                    `<ul style='list-style-type: disc;'>`
+                                )
+                        "
+                    ></div>
                     <div class="mt-5 flex">
                         <div
                             class="flex flex-wrap mt-2"
@@ -196,6 +210,7 @@
                             :postList="postList"
                             :items="items"
                             :index="index"
+                            :exeSearchData="doSearch"
                         ></make-detail-row>
                     </div>
                 </div>
@@ -203,11 +218,20 @@
         </div>
         <div class="mt-2">
             <div
-                class="rounded border-2 h-8"
+                class="rounded border-2 h-8 pl-5"
                 @click="dispEditor = !dispEditor"
                 v-if="!dispEditor"
-                v-html="InputComment.toString().split('\n')[0]"
+                v-html="
+                    InputComment.toString()
+                        .split(`<p>&nbsp;</p>`)[0]
+                        .replace(
+                            '<ol>',
+                            `<ol style='list-style-type: decimal;'>`
+                        )
+                        .replace('<ul>', `<ul style='list-style-type: disc;'>`)
+                "
             ></div>
+
             <div v-if="dispEditor">
                 <editor
                     api-key="qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp"
@@ -271,13 +295,11 @@
                                 notoSansJpAndFourteenBold
                                 cursor-pointer
                             "
-                            @click="sendPosts(postList[0].post_id)"
                         >
                             送信
                         </div>
                         <send-message-icon-svg
                             class="mr-1 cursor-pointer"
-                            @click="sendPosts(postList[0].post_id)"
                         ></send-message-icon-svg>
                     </button>
                 </div>
@@ -377,7 +399,6 @@ export default {
         async doSearch() {
             this.dispEditor = false
             this.InputComment = ''
-            await this.$serve.postReadfeedbacks(this.id, '')
 
             Object.assign(this.params, { division: 'BBS' })
             const response = await this.$serve.getPostsrforId('', this.id)
@@ -432,6 +453,7 @@ export default {
                 feedbackId: feedbackId,
                 post_id: post_id,
                 kind: tempKind,
+                code: this.$store.getters.getOidcCode,
             }
             this.$serve.putfeedbacks(params, '').then((res) => {
                 if (index === undefined) {
@@ -446,18 +468,27 @@ export default {
         },
         sendPosts(post_id) {
             let param = {
+                code: this.$store.getters.getOidcCode,
                 post: {
                     post_id: post_id,
                     content: this.InputComment,
                 },
+                postId: post_id,
             }
-            let res = this.$serve.postPosts(param, '')
+            let res = this.$serve.postPosts(param)
+            console.log('two')
             this.doSearch()
         },
     },
     mounted() {
+        console.log('one')
+        this.$serve.postReadfeedbacks(this.id, '')
         this.doSearch()
     },
 }
 </script>
-<style scoped></style>
+<style type="text/css">
+ol {
+    list-style-type: decimal;
+}
+</style>

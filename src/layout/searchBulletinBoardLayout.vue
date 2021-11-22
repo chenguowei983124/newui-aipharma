@@ -21,7 +21,14 @@
 
             <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-245">
                 <div class="flex">
-                    <div class="grid grid-cols-1 gap-1 md:space-y-3.75">
+                    <div
+                        class="
+                            grid grid-cols-1
+                            md:flex-auto
+                            gap-1
+                            md:space-y-3.75
+                        "
+                    >
                         <bbs-list
                             :class="[
                                 dispFlg
@@ -43,9 +50,7 @@
                         class="
                             grid grid-cols-1
                             gap-1
-                            md:space-y-3.75
-                            w-full
-                            md:ml-2 md:w-132.5 md:flex-none
+                            md:space-y-3.75 md:ml-2 md:w-132.5 md:flex-none
                         "
                         v-if="dispFlg"
                     >

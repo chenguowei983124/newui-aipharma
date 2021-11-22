@@ -65,9 +65,10 @@ const organizationCountSort = [
 ]
 // 掲示板検索　順 区分リスト
 const singleSelectItem = [
-    { value: '0', title: '投稿日が新しい順' },
-    { value: '1', title: '投稿日が古い順' },
+    { value: 'created_at-desc', title: '投稿日が新しい順' },
+    { value: 'created_at-asc', title: '投稿日が古い順' },
 ]
+const APIKEY = 'qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp'
 
 const managementitemList = [
     { title: 'データ登録', itemStyle: 'title' },
@@ -143,6 +144,7 @@ const qaClassifyFacility = [
 ]
 
 const bbsScops = [
+    { value: 'select', title: '選択してください' },
     { value: '0', title: '全体' },
     { value: '1', title: '組織' },
     { value: '2', title: 'グループ' },
@@ -153,6 +155,7 @@ const bbsGenreInfo = [
     { value: 'other', title: 'その他' },
 ]
 const bbsGenre = [
+    { value: 'select', title: '選択してください' },
     { value: 'notice', title: '告知' },
     { value: 'event', title: 'イベント' },
     { value: 'query', title: '質問' },
@@ -242,4 +245,5 @@ export default {
     bbsGenre,
     preavoidsDateSort,
     singleSelectItem,
+    APIKEY,
 }

@@ -103,6 +103,12 @@ module.exports = {
                 35: '8.75rem',
                 // 150px
                 37.5: '9.375rem',
+                // 164px
+                40.5: '10.125rem',
+                // 164px
+                41: '10.25rem',
+                // 168px
+                42: '10.5rem',
                 // 170px
                 42.5: '10.625rem',
                 // 175px
@@ -395,6 +401,8 @@ module.exports = {
             textOpacity: ['disabled'],
             textColor: ['disabled'],
             display: ['group-hover', 'group-focus'],
+            borderRadius: ['group-hover', 'group-focus'],
+            padding: ['group-hover', 'group-focus'],
         },
     },
     plugins: [require('@tailwindcss/custom-forms')],
