@@ -320,6 +320,7 @@
                                                 flex
                                                 items-center
                                                 justify-end
+                                                font-NotoSansJp
                                                 h-7.5
                                                 w-14
                                                 rounded
@@ -488,6 +489,7 @@
                                             class="
                                                 flex
                                                 justify-end
+                                                font-NotoSansJp
                                                 items-center
                                                 h-7.5
                                                 w-14
@@ -546,6 +548,7 @@
                                             class="
                                                 flex
                                                 justify-end
+                                                font-NotoSansJp
                                                 items-center
                                                 h-7.5
                                                 w-14
@@ -1050,6 +1053,9 @@ export default {
     // 対象QAの全フィードバックコメントのうち閲覧可能なものを取得する
     openCommentMessageBox(index) {
       this.qaId = this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].id
+      console.log('openCommentMessageBox', this.qaid)
+      this.$store.dispatch('setQAID', this.qaId)
+      sessionStorage.setItem(this.$constant.searchParam.PAID, this.qaId)
       this.rowIndex = index
       this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
     },

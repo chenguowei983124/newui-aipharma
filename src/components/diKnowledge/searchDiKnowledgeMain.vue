@@ -327,6 +327,7 @@
                                             flex flex-row
                                             space-x-2
                                             items-baseline
+                                            font-NotoSansJp
                                         "
                                     >
                                         <!-- good -->
@@ -1001,7 +1002,8 @@ export default {
           id: qaid,
           confidence: this.$route.query.confidence
         }
-        if (typeof (this.$route.query.confidence) == "undefined") {
+        if (typeof (this.$route.query.confidence) == "undefined"
+          || this.$route.query.confidence == "undefined") {
           result = this.$serve.getDIKnowledgeSharedId(params)
           this.setSearchResult(result)
         } else {
@@ -1230,9 +1232,6 @@ export default {
       this.rowIndex = index
       this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
 
-    },
-    sendGoodMessage(index) {
-      var v = this.qaInfo[index].value
     },
   },
 }
