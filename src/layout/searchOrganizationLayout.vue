@@ -36,7 +36,7 @@
             ]"
         ></div>
         <!-- 内容 -->
-        <div class="flex border-b-2 border-blue-200 mt-50 md:mt-10 md:h-18">
+        <div class="flex border-b-2 border-blue-200 mt-50 md:mt-8 h-10 md:h-13">
             <!-- 左 -->
             <div
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
@@ -100,7 +100,7 @@
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
             ></div>
         </div>
-        <div class="flex pt-8">
+        <div class="flex pt-6 md:pt-4">
             <div class="flex-grow max-h-full min-w-min block"></div>
             <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">
                 <div class="grid grid-cols-1 gap-1 md:space-y-3.75">

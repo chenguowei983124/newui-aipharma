@@ -86,8 +86,7 @@ export default {
         },
     },
     mounted() {
-        // this.$store.dispatch('getOrganizationNewQAInfo')
-        // this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
+        ///api/qa/get_trendy_tags
         // this.$store.dispatch('getOrganizationSeartorenndoTab')
     },
 }

@@ -647,10 +647,11 @@ export default {
                             ? 'last_updated_at_desc'
                             : this.$store.getters.getSort,
                     // ページ
-                    page:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? '1'
-                            : '1',
+                    page: '1',
+                    // page:
+                    //     this.$props.form == this.$constant.formList.TOP
+                    //         ? '1'
+                    //         : '1',
                     // 検索対象 Q
                     checkQ:
                         this.$props.form == this.$constant.formList.TOP
@@ -709,7 +710,7 @@ export default {
                         this.$store.getters.getDateValueFrom >=
                         this.$store.getters.getDateValueTo
                     ) {
-                        Swal.fire('', '期間（報告日）入力不正', 'info')
+                        this.$swal.fire('', '期間（報告日）入力不正', '')
                         return
                     }
                 }

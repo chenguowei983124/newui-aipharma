@@ -619,7 +619,7 @@ const serve = {
         const data = await axios('/api/qa/delete_qa', {
             method: 'post',
             params: {
-                qaid: params,
+                qaId: params,
             },
         })
 
@@ -885,6 +885,7 @@ const serve = {
             params: {
                 id: params.id,
                 confidence: confidenceTemp,
+                timestamp: new Date().getTime()
             },
         })
         return data

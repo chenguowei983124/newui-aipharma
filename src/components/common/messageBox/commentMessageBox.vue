@@ -343,7 +343,6 @@ export default {
                         })
                         if (params != '') {
                             this.$serve.deleteComment(params).then((res) => {
-                                console.log(res)
                                 if (res.data.status == 'success') {
                                     // this.swal.fire('', res.data.message, 'success')
 

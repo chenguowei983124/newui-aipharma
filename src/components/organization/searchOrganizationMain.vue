@@ -65,7 +65,7 @@
                             h-4
                             flex-grow
                             -ml-0.5
-                            -mt-0.5
+                            -mt-0.45
                         "
                     >
                         <result-detail-row-item
@@ -173,24 +173,12 @@
                             </div>
                         </div>
                         <!-- 更新情報 pc/sp-->
-                        <div class="flex flex-col pt-5 pl-0 md:pl-10">
-                            <div class="space-y-2 notoSansJpAndElevenRegular">
+                        <div class="flex flex-col pt-5 pl-0 md:pl-10 ">
+                            <div class="space-y-2 notoSansJpAndElevenRegular text-dropdownListItem">
                                 <div class="flex space-x-4">
-                                    <div>最終編集日：{{ item.createdAt }}</div>
+                                    <div>最終編集日：{{ item.updatedAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
                                 </div>
-                                <!-- rounded-full
-                                            border-2 border-gray-300
-                                            bg-gray-100
-                                            h-6
-                                            notoSansJpAndElevenRegular
-                                            pl-1
-                                            pr-1
-                                            text-center
-                                            flex
-                                            items-center
-                                            ml-1
-                                            cursor-pointer -->
                                 <div
                                     class="
                                         flex flex-wrap
@@ -221,6 +209,7 @@
                                         class="
                                             hover:text-light-blue-500
                                             underline
+                                            break-all
                                         "
                                     >
                                         <a
@@ -301,12 +290,14 @@
                                     :key="keywordTags"
                                     @click="sendMsgToParent(keywordTags.name)"
                                 >
-                                    #{{ keywordTags.name }}
+                                    #&nbsp;{{ keywordTags.name }}
                                 </div>
                             </div>
                             <div
                                 class="
                                     flex flex-col
+                                    font-NotoSansJp
+                                    text-xs
                                     justify-end
                                     items-end
                                     mt-4
@@ -314,29 +305,10 @@
                                 "
                             >
                                 <div class="flex flex-row space-x-2 items-end">
-                                    <div class="text-searchDropdown text-xs">
+                                    <div class="text-searchDropdown">
                                         {{ item.viewCount }} view
                                     </div>
-                                    <!-- <div
-                                        class="
-                                            flex
-                                            justify-end
-                                            items-center
-                                            h-7.5
-                                            w-14
-                                            rounded
-                                            text-white
-                                            bg-whole
-                                        "
-                                        @click="openGoodMessageBox(1, index)"
-                                    >
-                                        <div class="mr-3">
-                                            {{ item.feedbackGood }}
-                                        </div>
-                                        <good class="h-4 w-4 mr-1"></good>
-                                    </div> -->
-                                    <!-- good pc -->
-                                    <!-- <div class="items-baseline"> -->
+                                    <!-- good -->
                                     <button
                                         class="
                                             flex
@@ -346,6 +318,7 @@
                                             w-14
                                             rounded
                                             text-white
+                                            font-medium
                                             bg-whole
                                         "
                                         @click="openGoodMessageBox(1, index)"
@@ -355,33 +328,8 @@
                                         </div>
                                         <good class="h-4 w-4 mr-1"></good>
                                     </button>
-                                    <!-- </div> -->
-                                    <!-- good sp-->
-                                    <!-- <div class="block md:hidden mid:hidden">
-                                        <button
-                                            class="
-                                                flex
-                                                justify-end
-                                                items-center
-                                                h-7.5
-                                                w-14
-                                                rounded
-                                                text-white
-                                                bg-whole
-                                            "
-                                            @click="
-                                                openGoodMessageBox(1, index)
-                                            "
-                                        >
-                                            <div class="mr-3">
-                                                {{ item.feedbackGood }}
-                                            </div>
-                                            <good class="h-4 w-4 mr-1"></good>
-                                        </button>
-                                    </div> -->
                                     <!-- bad -->
-
-                                    <div
+                                    <button
                                         class="
                                             flex
                                             justify-end
@@ -398,7 +346,7 @@
                                             {{ item.feedbackBad }}
                                         </div>
                                         <bad class="h-4 w-4 mr-1"></bad>
-                                    </div>
+                                    </button>
                                     <!-- comment -->
                                     <button
                                         class="
@@ -443,8 +391,8 @@
                                         ><div
                                             class="
                                                 border-b border-gray-500
-                                                notoSansJpAndTwelveRegular
-                                                text-grayline
+                                                notoSansJpAndTwelveMedium
+                                                text-dropdownListItem
                                                 flex
                                                 justify-center
                                                 items-center
@@ -497,7 +445,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -513,7 +461,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -538,7 +486,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -562,7 +510,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -586,7 +534,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -611,7 +559,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -629,7 +577,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -657,7 +605,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -681,7 +629,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -705,7 +653,7 @@
                                         md:flex md:flex-row
                                         border-b-2
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                     "
                                     v-for="customDetails in item.customDetails"
                                     :key="customDetails"
@@ -754,7 +702,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -847,13 +795,14 @@
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            page-class="text-center pt-2 align-middle notoSansJpAndFourteenRegular h-10 w-10 text-center border-2 bg-white"
-            activeClass="text-center pt-2 notoSansJpAndFourteenRegular bg-blueline text-white"
-            prevClass="text-center pt-2 notoSansJpAndFourteenRegular h-10 w-10 text-center border-2 bg-white"
-            nextClass="text-center pt-2 notoSansJpAndFourteenRegular h-10 w-10 text-center border-2 bg-white"
+            page-class="text-center pt-2 align-middle notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
+            activeClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem bg-blueline text-white"
+            prevClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
+            nextClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
-        <div class="flex justify-center mt-2">{{ dispDetailRange }}件 表示</div>
+        <div class="flex justify-center mt-2 text-dropdownListItem text-xs">{{ dispDetailRange }}件 表示</div>
+        <div class="border-b border-gray-400 mt-6 mb-4 md:mb-0"></div>
         <div
             :class="[
                 $store.getters.getCommentMessageBox
@@ -937,6 +886,7 @@ export default {
     mounted() {
         if (JSON.stringify(this.$route.query) == '{}') {
             this.initStore()
+            this.orgInit()
             this.$store.dispatch('setOrganizationSearchInfo', {})
         }
 
@@ -1052,12 +1002,15 @@ export default {
             }
 
             this.setSearchResult(result)
-            this.$store.dispatch('getOrganizationNewQAInfo')
-            this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
+            this.orgInit()
             this.$store.dispatch('setLoadingShowFlg', true)
             this.$store.dispatch('setIsLoadingShow', false)
         },
-
+        orgInit:function(){
+            console.log('hello')
+            this.$store.dispatch('getOrganizationNewQAInfo')
+            this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
+        },
         setSearchResult: function (value) {
             if (value != '') {
                 value.then((response) => {
@@ -1350,16 +1303,16 @@ export default {
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        // this.$serve.deletePost('', '', dataInfo.id)
-                        this.$serve.deleteQa(dataInfo.id)
-                        this.$serve.getOwnData(this.$route.query)
-                        this.$swal.fire({
-                            text: '削除されました。',
-                            icon: '',
-                            showCancelButton: false,
-                            confirmButtonText: 'OK',
-                        })
+                        this.$serve.deleteQa(dataInfo.id).then((res) => {
+                            this.$swal.fire({
+                                text: '削除されました。',
+                                icon: '',
+                                showCancelButton: false,
+                                confirmButtonText: 'OK',
+                            })
                         this.$emit('close', false)
+                        this.execSearch()
+                        })
                     }
                 })
             console.log('該当明細削除押下', dataInfo.id)
