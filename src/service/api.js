@@ -879,7 +879,7 @@ const serve = {
     //===========================
     async getDIKnowledgeSharedId(params) {
         var confidenceTemp =
-            typeof params.confidence == 'undefined' ? 'nil' : params.confidence
+            typeof (params.confidence) == "undefined" || params.confidence == "undefined" ? 'nil' : params.confidence
         const data = await axios('/api/qa/send_detail_qa_info', {
             method: 'get',
             params: {
