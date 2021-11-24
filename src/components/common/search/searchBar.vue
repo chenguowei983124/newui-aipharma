@@ -240,7 +240,7 @@ export default {
             } else if (this.$props.form == this.$constant.formList.PVD) {
                 return 'flex'
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return 'flex'
+                return 'flex  '
             } else if (this.$props.form == this.$constant.formList.EDI) {
                 return 'flex'
             }
@@ -265,7 +265,7 @@ export default {
                     return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-lg md:rounded-b-none'
                 }
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 rounded-b-lg md:rounded-b-none'
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 md:group-hover:pb-2.5 group-hover:pb-0 md:rounded-b-none '
             } else if (this.$props.form == this.$constant.formList.EDI) {
                 return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 rounded-b-lg md:rounded-b-none'
             }
@@ -276,7 +276,7 @@ export default {
                 this.$props.form == this.$constant.formList.BBS ||
                 this.$props.form == this.$constant.formList.EDI
             ) {
-                return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2'
+                return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2 '
             } else {
                 return 'hidden'
             }
@@ -310,7 +310,7 @@ export default {
             } else if (this.$props.form == this.$constant.formList.PVD) {
                 return ' flex-grow md:flex-none  h-full w-191.25'
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch    '
+                return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch   '
             } else if (this.$props.form == this.$constant.formList.EDI) {
                 return ' flex-grow md:flex-none  h-full w-180 bg-backgroundMainSearch    '
             }
@@ -602,6 +602,7 @@ export default {
             }
             // 組織内 DI 記録（Q&A）
             else if (this.checkId == 2) {
+                console.log('組織内DI記録')
                 if (this.$props.form === this.$constant.formList.OWN) {
                     if (
                         Object.keys(this.$store.getters.getorgTagsList).length >
@@ -649,7 +650,7 @@ export default {
                     page:
                         this.$props.form == this.$constant.formList.TOP
                             ? '1'
-                            : this.$store.getters.getPage,
+                            : '1',
                     // 検索対象 Q
                     checkQ:
                         this.$props.form == this.$constant.formList.TOP
@@ -692,6 +693,11 @@ export default {
                             : this.$store.getters.getCheckNote,
                     timestamp: getTimestamp,
                 }
+
+                this.$router.push({
+                    path: '/searchOrganization',
+                    query: params,
+                })
             }
             // 症例（プレアボイド）
             else if (this.checkId == 3) {
@@ -755,6 +761,18 @@ export default {
             }
             // 掲示板
             else if (this.checkId == 6) {
+                if (
+                    this.$store.getters.getDateValueFrom != '' &&
+                    this.$store.getters.getDateValueTo != ''
+                ) {
+                    if (
+                        this.$store.getters.getDateValueFrom >=
+                        this.$store.getters.getDateValueTo
+                    ) {
+                        this.$swal.fire('', '期間（報告日）入力不正', '')
+                        return
+                    }
+                }
                 let params = {}
                 let getTimestamp = new Date().getTime()
                 params = {
@@ -805,7 +823,7 @@ export default {
                             : this.$store.getters.getScope,
                     sort:
                         this.$props.form == this.$constant.formList.TOP
-                            ? '0'
+                            ? 'created_at-desc'
                             : this.$store.getters.getSort,
                     timestamp: getTimestamp,
                 }

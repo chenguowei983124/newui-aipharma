@@ -78,18 +78,18 @@
 import ResutTag from '../common/searchResult/resultTag.vue'
 import ResultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
 export default {
-  components: { ResutTag, ResultDetailRow },
-  methods: {
-    // クリック タグ
-    sendMsgToParent: function (data) {
-      this.$emit('listenToChildEvent', data)
+    components: { ResutTag, ResultDetailRow },
+    methods: {
+        // クリック タグ
+        sendMsgToParent: function (data) {
+            this.$emit('listenToChildEvent', data)
+        },
     },
-  },
-  mounted() {
-    this.$store.dispatch('getOrganizationNewQAInfo')
-    this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
-    // this.$store.dispatch('getOrganizationSeartorenndoTab')
-  },
+    mounted() {
+        // this.$store.dispatch('getOrganizationNewQAInfo')
+        // this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
+        // this.$store.dispatch('getOrganizationSeartorenndoTab')
+    },
 }
 </script>
 

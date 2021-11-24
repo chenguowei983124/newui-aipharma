@@ -12,7 +12,7 @@
             @click="isDown = !isDown"
             :class="[isDown ? 'rounded-tl' : 'rounded-l']"
         >
-            <a class="text-searchDropdown font-bold pl-2 text-xs NotoSansJp">
+            <a class="text-searchDropdown pl-2 notoSansJpAndTwelveBold">
                  {{ itemList[checkedID][0].title }}
             </a>
             <div class="ml-1 mr-2">

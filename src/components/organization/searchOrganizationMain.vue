@@ -313,142 +313,51 @@
                                     md:mt-0
                                 "
                             >
-                                <div
-                                    class="
-                                        flex flex-row
-                                        space-x-2
-                                        items-baseline
-                                    "
-                                >
+                                <div class="flex flex-row space-x-2 items-end">
                                     <div class="text-searchDropdown text-xs">
                                         {{ item.viewCount }} view
                                     </div>
-                                    <!-- good pc -->
-                                    <div
+                                    <!-- <div
                                         class="
-                                            relative
-                                            hidden
-                                            md:block
-                                            mid:block
+                                            flex
+                                            justify-end
+                                            items-center
+                                            h-7.5
+                                            w-14
+                                            rounded
+                                            text-white
+                                            bg-whole
                                         "
+                                        @click="openGoodMessageBox(1, index)"
                                     >
-                                        <button
-                                            class="
-                                                flex
-                                                items-center
-                                                justify-end
-                                                h-7.5
-                                                w-14
-                                                rounded
-                                                text-white
-                                                bg-whole
-                                            "
-                                            @click="
-                                                openGoodMessageBox(1, index)
-                                            "
-                                        >
-                                            <div class="mr-3">
-                                                {{ item.feedbackGood }}
-                                            </div>
-                                            <good class="h-4 w-4 mr-1"></good>
-                                        </button>
-                                        <!-- pending -->
-                                        <!-- <div v-show="activeIndex === index">
-                                            <div class="absolute bottom-8">
-                                                <div
-                                                    class="
-                                                        w-44
-                                                        h-24
-                                                        bg-white
-                                                        border border-black
-                                                        rounded
-                                                    "
-                                                >
-                                                    <div
-                                                        class="
-                                                            bg-gray-300
-                                                            h-1/4
-                                                            flex
-                                                            justify-between
-                                                            items-center
-                                                            px-2
-                                                        "
-                                                    >
-                                                        <div class="text-xs">
-                                                            理由をお聞かせください。
-                                                        </div>
-                                                        <div
-                                                            class="
-                                                                cursor-pointer
-                                                            "
-                                                            @click="
-                                                                ActicleDetail(
-                                                                    index
-                                                                )
-                                                            "
-                                                        >
-                                                            <x-icon-svg></x-icon-svg>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="
-                                                            h-3/4
-                                                            flex flex-col
-                                                        "
-                                                    >
-                                                        <div class="h-3/4">
-                                                            <textarea
-                                                                v-model="
-                                                                    item.value
-                                                                "
-                                                                type="text"
-                                                                class="
-                                                                    text-xs
-                                                                    w-full
-                                                                    focus:outline-none
-                                                                "
-                                                                placeholder="（任意）"
-                                                            />
-                                                        </div>
-                                                        <div
-                                                            class="
-                                                                h-1/4
-                                                                flex
-                                                                justify-between
-                                                                items-center
-                                                                px-1
-                                                            "
-                                                        >
-                                                            <div
-                                                                class="
-                                                                    text-xxss
-                                                                    text-red-600
-                                                                "
-                                                            >
-                                                                ※コメントは管理者に送信されます
-                                                            </div>
-                                                            <button
-                                                                class="
-                                                                    bg-gray-600
-                                                                    text-white
-                                                                    text-xxss
-                                                                "
-                                                                @click="
-                                                                    sendGoodMessage(
-                                                                        index
-                                                                    )
-                                                                "
-                                                            >
-                                                                送信
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                    </div>
+                                        <div class="mr-3">
+                                            {{ item.feedbackGood }}
+                                        </div>
+                                        <good class="h-4 w-4 mr-1"></good>
+                                    </div> -->
+                                    <!-- good pc -->
+                                    <!-- <div class="items-baseline"> -->
+                                    <button
+                                        class="
+                                            flex
+                                            items-center
+                                            justify-end
+                                            h-7.5
+                                            w-14
+                                            rounded
+                                            text-white
+                                            bg-whole
+                                        "
+                                        @click="openGoodMessageBox(1, index)"
+                                    >
+                                        <div class="mr-3">
+                                            {{ item.feedbackGood }}
+                                        </div>
+                                        <good class="h-4 w-4 mr-1"></good>
+                                    </button>
+                                    <!-- </div> -->
                                     <!-- good sp-->
-                                    <div class="block md:hidden mid:hidden">
+                                    <!-- <div class="block md:hidden mid:hidden">
                                         <button
                                             class="
                                                 flex
@@ -469,8 +378,9 @@
                                             </div>
                                             <good class="h-4 w-4 mr-1"></good>
                                         </button>
-                                    </div>
+                                    </div> -->
                                     <!-- bad -->
+
                                     <div
                                         class="
                                             flex
@@ -930,16 +840,17 @@
         </div>
          <pagination
             :page-count="getPageCount"
-            :page-range="4"
+            :page-range="3"
             :margin-pages="1"
             @input="getSelectPage"
+            :value="Number($store.getters.getPage)"
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            page-class="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            activeClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular bg-blueline text-white"
-            prevClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
+            page-class="text-center pt-2 align-middle notoSansJpAndFourteenRegular h-10 w-10 text-center border-2 bg-white"
+            activeClass="text-center pt-2 notoSansJpAndFourteenRegular bg-blueline text-white"
+            prevClass="text-center pt-2 notoSansJpAndFourteenRegular h-10 w-10 text-center border-2 bg-white"
+            nextClass="text-center pt-2 notoSansJpAndFourteenRegular h-10 w-10 text-center border-2 bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
         <div class="flex justify-center mt-2">{{ dispDetailRange }}件 表示</div>
@@ -977,462 +888,486 @@ import CommentMessageBox from '../common/messageBox/commentMessageBox.vue'
 import EditAndDelete from '../common/searchResult/editAndDelete.vue'
 
 export default {
-  components: {
-    TriangleDownSvg,
-    resutTag,
-    resultDetailRow,
-    carousel,
-    Good,
-    bad,
-    talk,
-    xIconSvg,
-    dotsHorizontal,
-    Pagination,
-    vueSingleSelect,
-    GoodMessageBox,
-    ResultDetailRowItem,
-    CommentMessageBox,
-    EditAndDelete
-  },
-  props: {
-    exeSearchRefishOpts: {
-      type: Function,
-      default: () => { },
+    components: {
+        TriangleDownSvg,
+        resutTag,
+        resultDetailRow,
+        carousel,
+        Good,
+        bad,
+        talk,
+        xIconSvg,
+        dotsHorizontal,
+        Pagination,
+        vueSingleSelect,
+        GoodMessageBox,
+        ResultDetailRowItem,
+        CommentMessageBox,
+        EditAndDelete,
     },
-  },
-  data() {
-    return {
-      // 順 区分 id
-      organizationDateSortValue: 'last_updated_at_desc',
-      // 件 表示 区分 id
-      organizationCountSortValue: 0,
-      pageCount: 20,
-      selectPage: 1,
-      goodMessageBox: false,
-      // 組織内 DI 記録（Q&A） ドット-水平
-      isOrgDotsClick: [],
-      isDetailDisp: [],
-      isDetailsDisp: [],
-      activeIndex: -1,
-      resultData: Object,
-      result: Object,
-      qaId: '',
-      rowIndex: 0,
-    }
-  },
-  unmounted() {
-    this.initStore()
-  },
-  mounted() {
-    if (JSON.stringify(this.$route.query) == '{}') {
-      this.initStore()
-      this.$store.dispatch('setOrganizationSearchInfo', {})
-    }
-
-    if (JSON.stringify(this.$route.query) !== '{}') {
-      this.resetSearchBar()
-      this.execSearch()
-    }
-  },
-  watch: {
-    $route: function () {
-      if (this.$route.path != '/searchOrganization') {
-        return
-      }
-      if (JSON.stringify(this.$route.query) == '{}') {
+    props: {
+        exeSearchRefishOpts: {
+            type: Function,
+            default: () => {},
+        },
+    },
+    data() {
+        return {
+            // 順 区分 id
+            organizationDateSortValue: 'last_updated_at_desc',
+            // 件 表示 区分 id
+            organizationCountSortValue: 0,
+            pageCount: 20,
+            selectPage: 1,
+            goodMessageBox: false,
+            // 組織内 DI 記録（Q&A） ドット-水平
+            isOrgDotsClick: [],
+            isDetailDisp: [],
+            isDetailsDisp: [],
+            activeIndex: -1,
+            resultData: Object,
+            result: Object,
+            qaId: '',
+            rowIndex: 0,
+        }
+    },
+    unmounted() {
         this.initStore()
-        this.$store.dispatch('setOrganizationSearchInfo', {})
-      }
-      if (JSON.stringify(this.$route.query) !== '{}') {
-        this.resetSearchBar()
-        this.execSearch()
-      }
     },
-  },
-  computed: {
-    // 最大取得件数取得
-    getPageCount() {
-      // 選択したアイテムの数字を取得
-      if (this.organizationCountSortValue == '0') {
-        this.pageCount = 20
-      } else if (this.organizationCountSortValue == '1') {
-        this.pageCount = 50
-      } else if (this.organizationCountSortValue == '2') {
-        this.pageCount = 100
-      }
-
-      //
-      this.$store.dispatch('setMaxCount', this.pageCount)
-
-      // ページ数を取得
-      return Math.ceil(
-        this.$store.getters.organizationSearchInfo.allCount /
-        this.pageCount
-      )
-    },
-    // 明細部に表示明細のFROM-TO
-    dispDetailRange: function () {
-      let start = 1
-      let end = ''
-      if (this.selectPage > 1) {
-        start = (this.selectPage - 1) * this.pageCount + 1
-      }
-
-      if (this.$store.getters.organizationSearchInfo.qas != undefined) {
-        end =
-          start +
-          Object.keys(this.$store.getters.organizationSearchInfo.qas)
-            .length -
-          1
-      }
-
-      if (this.$store.getters.organizationSearchInfo.allCount == 1) {
-        return start.toString()
-      } else {
-        if (this.$store.getters.organizationSearchInfo.allCount == 0) {
-          return '0'
-        } else {
-          return start.toString() + '-' + end.toString()
+    mounted() {
+        if (JSON.stringify(this.$route.query) == '{}') {
+            this.initStore()
+            this.$store.dispatch('setOrganizationSearchInfo', {})
         }
-      }
-    },
-  },
-  methods: {
-    // CommentMessageBoxを閉じる
-    closeCommentMessageBox() {
-      this.$store.dispatch(
-        'setCommentMessageBox', false
-      )
-    },
-    editOrganizationSearchInfo(index, count) {
-      // 1件のみの場合
-      if (count == 1) {
-        this.isOrgDotsClick[index] = index
-      } else {
-        this.isOrgDotsClick[index] =
-          this.isOrgDotsClick[index] == index ? [] : index
-      }
-    },
-    execSearch(kb) {
-      // 設定　NULL
-      this.openDetailDisp('')
-      // QAID取得
-      let qaid = ''
-      let params
 
-      if (this.$route.query.id != undefined) {
-        qaid = this.$route.query.id
-        this.$store.dispatch('setQAID', qaid)
-        sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
-      } else if (this.$store.getters.getQAID != '') {
-        qaid = this.$store.getters.getQAID
-      }
-
-      let result
-      // QAID存在チェック
-      if (qaid != '') {
-        result = this.$serve.getOwn({ id: qaid })
-      } else if (this.$route.query.page != undefined) {
-        result = this.$serve.getOwnData(this.$route.query)
-      }
-
-      this.setSearchResult(result)
+        if (JSON.stringify(this.$route.query) !== '{}') {
+            this.resetSearchBar()
+            this.execSearch()
+        }
     },
+    watch: {
+        $route: function () {
+            if (this.$route.path != '/searchOrganization') {
+                return
+            }
+            console.log('params', this.$route)
+            if (JSON.stringify(this.$route.query) == '{}') {
+                this.initStore()
+                this.$store.dispatch('setOrganizationSearchInfo', {})
+            }
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                this.resetSearchBar()
+                this.execSearch()
+            }
+        },
+    },
+    computed: {
+        // 最大取得件数取得
+        getPageCount() {
+            // 選択したアイテムの数字を取得
+            if (this.organizationCountSortValue == '0') {
+                this.pageCount = 20
+            } else if (this.organizationCountSortValue == '1') {
+                this.pageCount = 50
+            } else if (this.organizationCountSortValue == '2') {
+                this.pageCount = 100
+            }
 
-    setSearchResult: function (value) {
-      if (value != "") {
-        value.then((response) => {
-          this.$store.dispatch('setOrganizationSearchInfo', response)
-          // 1件のみの場合、全回答情報を表示
-          if (response.data.allCount == 1) {
-            this.openDetailDisp(response.data.qas[0].id, response.data.allCount)
+            //
+            this.$store.dispatch('setMaxCount', this.pageCount)
+
+            // ページ数を取得
+            return Math.ceil(
+                this.$store.getters.organizationSearchInfo.allCount /
+                    this.pageCount
+            )
+        },
+        // 明細部に表示明細のFROM-TO
+        dispDetailRange: function () {
+            let start = 1
+            let end = ''
+            if (this.selectPage > 1) {
+                start = (this.selectPage - 1) * this.pageCount + 1
+            }
+
+            if (this.$store.getters.organizationSearchInfo.qas != undefined) {
+                end =
+                    start +
+                    Object.keys(this.$store.getters.organizationSearchInfo.qas)
+                        .length -
+                    1
+            }
+
+            if (this.$store.getters.organizationSearchInfo.allCount == 1) {
+                return start.toString()
+            } else {
+                if (this.$store.getters.organizationSearchInfo.allCount == 0) {
+                    return '0'
+                } else {
+                    return start.toString() + '-' + end.toString()
+                }
+            }
+        },
+    },
+    methods: {
+        // CommentMessageBoxを閉じる
+        closeCommentMessageBox() {
+            this.$store.dispatch('setCommentMessageBox', false)
+        },
+        editOrganizationSearchInfo(index, count) {
+            // 1件のみの場合
+            if (count == 1) {
+                this.isOrgDotsClick[index] = index
+            } else {
+                this.isOrgDotsClick[index] =
+                    this.isOrgDotsClick[index] == index ? [] : index
+            }
+        },
+        execSearch(kb) {
+            // 設定　NULL
+            this.openDetailDisp('')
+            // QAID取得
             let qaid = ''
-            if (this.$route.query.id) {
-              qaid = this.$route.query.id
-              this.$store.dispatch('setQAID', qaid)
-              sessionStorage.setItem(
-                this.$constant.searchParam.PAID,
-                qaid
-              )
-            } else if (this.$store.getters.getQAID != '') {
-              qaid = this.$store.getters.getQAID
+            let params
+
+            if (this.$route.query.id != undefined) {
+                qaid = this.$route.query.id
+                this.$store.dispatch('setQAID', qaid)
+                // sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
             }
-            // ビュー件数更新
+            // else if (this.$store.getters.getQAID != '') {
+            //     qaid = this.$store.getters.getQAID
+            // }
+            this.$store.dispatch('setLoadingShowFlg', false)
+            this.$store.dispatch('setIsLoadingShow', true)
+
+            let result
+            // QAID存在チェック
+            if (qaid != '') {
+                console.log('this.$route.query', this.$route.query.id)
+                result = this.$serve.getOwn({ id: qaid })
+            } else if (this.$route.query.page != undefined) {
+                console.log('this.$route.query', this.$route.query)
+                result = this.$serve.getOwnData(this.$route.query)
+            }
+
+            this.setSearchResult(result)
+            this.$store.dispatch('getOrganizationNewQAInfo')
+            this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
+            this.$store.dispatch('setLoadingShowFlg', true)
+            this.$store.dispatch('setIsLoadingShow', false)
+        },
+
+        setSearchResult: function (value) {
+            if (value != '') {
+                value.then((response) => {
+                    this.$store.dispatch('setOrganizationSearchInfo', response)
+                    // 1件のみの場合、全回答情報を表示
+                    if (response.data.allCount == 1) {
+                        this.openDetailDisp(
+                            response.data.qas[0].id,
+                            response.data.allCount
+                        )
+                        let qaid = ''
+                        if (this.$route.query.id) {
+                            qaid = this.$route.query.id
+                            this.$store.dispatch('setQAID', qaid)
+                            // sessionStorage.setItem(
+                            //     this.$constant.searchParam.PAID,
+                            //     qaid
+                            // )
+                        } else if (this.$store.getters.getQAID != '') {
+                            qaid = this.$store.getters.getQAID
+                        }
+                        // ビュー件数更新
+                        let params = {
+                            id: qaid,
+                        }
+                        this.$serve.sendViewCount(params)
+                    } else {
+                        this.isDetailDisp = []
+                    }
+                })
+            }
+        },
+        // セッションに退避した情報をリーセット
+        resetSearchBar: function () {
+            this.initStore()
+            if (this.$route.query.id == undefined) {
+                this.$store.dispatch('setSearchWord', this.$route.query.search)
+                this.$store.dispatch(
+                    'setSearchTags',
+                    this.$route.query.tags.split(',')
+                )
+                this.$store.dispatch(
+                    'setMedicineID',
+                    this.$route.query.medicine
+                )
+                this.$store.dispatch(
+                    'setQuestionID',
+                    this.$route.query.qacategory
+                )
+                this.$store.dispatch(
+                    'setFacilityID',
+                    this.$route.query.facility_flag
+                )
+                this.$store.dispatch('setMaxCount', this.$route.query.displayed)
+                this.organizationDateSortValue = this.$route.query.sort
+                if (this.$route.query.displayed == 20) {
+                    this.organizationCountSortValue = 0
+                } else if (this.$route.query.displayed == 50) {
+                    this.organizationCountSortValue = 1
+                }
+                if (this.$route.query.displayed == 100) {
+                    this.organizationCountSortValue = 2
+                }
+                this.$store.dispatch('setSort', this.$route.query.sort)
+                this.$store.dispatch('setPage', this.$route.query.page)
+
+                this.$store.dispatch(
+                    'setCheckQ',
+                    this.$route.query.checkQ.toString() === 'true',
+                    true,
+                    false
+                )
+
+                this.$store.dispatch(
+                    'setCheckA',
+                    this.$route.query.checkA.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.dispatch(
+                    'setCheckComment',
+                    this.$route.query.checkComment.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.dispatch(
+                    'setCheckAddFileName',
+                    this.$route.query.checkAddFileName.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.dispatch(
+                    'setCheckContributor',
+                    this.$route.query.checkContributor.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.dispatch(
+                    'setCheckLastEditer',
+                    this.$route.query.checkLastEditer.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.dispatch(
+                    'setCheckFacilityName',
+                    this.$route.query.checkFacilityName.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.dispatch(
+                    'setCheckNote',
+                    this.$route.query.checkNote.toString() === 'true',
+                    true,
+                    false
+                )
+            }
+        },
+        // 初回設定
+        initStore() {
+            this.$store.dispatch('setSearchWord', '')
+            // タブ
+            this.$store.dispatch('setSearchTags', [])
+            // 薬区分
+            this.$store.dispatch('setMedicineID', 0)
+            // 質問区分
+            this.$store.dispatch('setQuestionID', 0)
+            // 施設
+            this.$store.dispatch('setFacilityID', 0)
+            // ページ
+            this.$store.dispatch('setPage', 1)
+            // ソート順
+            this.$store.dispatch('setSort', 'last_updated_at_desc')
+            // 表示件数
+            this.$store.dispatch('setMaxCount', 20)
+            // 検索対象
+            this.$store.dispatch('setCheckQ', true) // Q
+            this.$store.dispatch('setCheckA', true) // A
+            this.$store.dispatch('setCheckComment', true) // コメント
+            this.$store.dispatch('setCheckAddFileName', true) // 添付ファイル名
+            this.$store.dispatch('setCheckContributor', true) // 投稿者
+            this.$store.dispatch('setCheckLastEditer', true) // 最終編集者
+            this.$store.dispatch('setCheckFacilityName', true) // 施設名
+            this.$store.dispatch('setCheckNote', true) // 備考
+        },
+        resetRouter() {
+            this.exeSearchRefishOpts()
+            let getTimestamp = new Date().getTime()
+            let dispDetailNumber = 20
+
+            if (this.organizationCountSortValue == 0) {
+                dispDetailNumber = 20
+            } else if (this.organizationCountSortValue == 1) {
+                dispDetailNumber = 50
+            } else if (this.organizationCountSortValue == 2) {
+                dispDetailNumber = 100
+            }
             let params = {
-              id: qaid,
+                search: this.$store.getters.getSearchWord,
+                tags: this.$store.getters.getSearchTags
+                    ? this.$store.getters.getSearchTags.join(',')
+                    : '',
+                medicine: this.$store.getters.getMedicineID,
+                qacategory: this.$store.getters.getQuestionID,
+                facility_flag: this.$store.getters.getFacilityID,
+                displayed: dispDetailNumber,
+                sort: this.$store.getters.getSort,
+                page: this.$store.getters.getPage,
+                checkQ: this.$store.getters.getCheckQ,
+                checkA: this.$store.getters.getCheckA,
+                checkComment: this.$store.getters.getCheckComment,
+                checkAddFileName: this.$store.getters.getCheckAddFileName,
+                checkContributor: this.$store.getters.getCheckContributor,
+                checkLastEditer: this.$store.getters.getCheckLastEditer,
+                checkFacilityName: this.$store.getters.getCheckFacilityName,
+                checkNote: this.$store.getters.getCheckNote,
+                timestamp: getTimestamp,
             }
-            this.$serve.sendViewCount(params)
-          } else {
-            this.isDetailDisp = []
-          }
-        })
-      }
-    },
-    // セッションに退避した情報をリーセット
-    resetSearchBar: function () {
-      this.initStore()
-      if (this.$route.query.id == undefined) {
-        this.$store.dispatch('setSearchWord', this.$route.query.search)
-        this.$store.dispatch('setSearchTags', this.$route.query.tags.split(','))
-        this.$store.dispatch('setMedicineID', this.$route.query.medicine)
-        this.$store.dispatch('setQuestionID', this.$route.query.qacategory)
-        this.$store.dispatch('setFacilityID', this.$route.query.facility_flag)
-        this.$store.dispatch('setMaxCount', this.$route.query.displayed)
-        this.organizationDateSortValue = this.$route.query.sort
-        if (this.$route.query.displayed == 20) {
-          this.organizationCountSortValue = 0
-        } else if (this.$route.query.displayed == 50) {
-          this.organizationCountSortValue = 1
-        }
-        if (this.$route.query.displayed == 100) {
-          this.organizationCountSortValue = 2
-        }
-        this.$store.dispatch('setSort', this.$route.query.sort)
-        this.$store.dispatch('setPage', this.$route.query.page)
-
-        this.$store.dispatch(
-          'setCheckQ',
-          this.$route.query.checkQ.toString() === 'true',
-          true,
-          false
-        )
-
-        this.$store.dispatch(
-          'setCheckA',
-          this.$route.query.checkA.toString() === 'true',
-          true,
-          false
-        )
-        this.$store.dispatch(
-          'setCheckComment',
-          this.$route.query.checkComment.toString() === 'true',
-          true,
-          false
-        )
-        this.$store.dispatch(
-          'setCheckAddFileName',
-          this.$route.query.checkAddFileName.toString() === 'true',
-          true,
-          false
-        )
-        this.$store.dispatch(
-          'setCheckContributor',
-          this.$route.query.checkContributor.toString() === 'true',
-          true,
-          false
-        )
-        this.$store.dispatch(
-          'setCheckLastEditer',
-          this.$route.query.checkLastEditer.toString() === 'true',
-          true,
-          false
-        )
-        this.$store.dispatch(
-          'setCheckFacilityName',
-          this.$route.query.checkFacilityName.toString() === 'true',
-          true,
-          false
-        )
-        this.$store.dispatch(
-          'setCheckNote',
-          this.$route.query.checkNote.toString() === 'true',
-          true,
-          false
-        )
-      }
-    },
-    // 初回設定
-    initStore() {
-      this.$store.dispatch('setSearchWord', '')
-      // タブ
-      this.$store.dispatch('setSearchTags', [])
-      // 薬区分
-      this.$store.dispatch('setMedicineID', 0)
-      // 質問区分
-      this.$store.dispatch('setQuestionID', 0)
-      // 施設
-      this.$store.dispatch('setFacilityID', 0)
-      // ページ
-      this.$store.dispatch('setPage', 1)
-      // ソート順
-      this.$store.dispatch('setSort', 'last_updated_at_desc')
-      // 表示件数
-      this.$store.dispatch('setMaxCount', 20)
-      // 検索対象
-      this.$store.dispatch('setCheckQ', true) // Q
-      this.$store.dispatch('setCheckA', true) // A
-      this.$store.dispatch('setCheckComment', true) // コメント
-      this.$store.dispatch('setCheckAddFileName', true) // 添付ファイル名
-      this.$store.dispatch('setCheckContributor', true) // 投稿者
-      this.$store.dispatch('setCheckLastEditer', true) // 最終編集者
-      this.$store.dispatch('setCheckFacilityName', true) // 施設名
-      this.$store.dispatch('setCheckNote', true) // 備考
-    },
-    resetRouter() {
-      this.exeSearchRefishOpts()
-      let getTimestamp = new Date().getTime()
-      let dispDetailNumber = 20
-
-      if (this.organizationCountSortValue == 0) {
-        dispDetailNumber = 20
-      } else if (this.organizationCountSortValue == 1) {
-        dispDetailNumber = 50
-      } else if (this.organizationCountSortValue == 2) {
-        dispDetailNumber = 100
-      }
-      let params = {
-        search: this.$store.getters.getSearchWord,
-        tags: this.$store.getters.getSearchTags
-          ? this.$store.getters.getSearchTags.join(',')
-          : '',
-        medicine: this.$store.getters.getMedicineID,
-        qacategory: this.$store.getters.getQuestionID,
-        facility_flag: this.$store.getters.getFacilityID,
-        displayed: dispDetailNumber,
-        sort: this.$store.getters.getSort,
-        page: this.$store.getters.getPage,
-        checkQ: this.$store.getters.getCheckQ,
-        checkA: this.$store.getters.getCheckA,
-        checkComment: this.$store.getters.getCheckComment,
-        checkAddFileName: this.$store.getters.getCheckAddFileName,
-        checkContributor: this.$store.getters.getCheckContributor,
-        checkLastEditer: this.$store.getters.getCheckLastEditer,
-        checkFacilityName: this.$store.getters.getCheckFacilityName,
-        checkNote: this.$store.getters.getCheckNote,
-        timestamp: getTimestamp,
-      }
-      this.$router.push({
-        path: '/searchOrganization',
-        query: params,
-      })
-    },
-    // 改ページのデータ検索
-    getSelectPage(value) {
-      this.selectPage = value
-      this.$store.dispatch('setPage', value)
-      this.resetRouter()
-    },
-    // 詳細情報 クリック タグ
-    sendMsgToParent: function (data) {
-      this.$emit('listenToChildEvent', data)
-    },
-    // 開くボタン押下
-    openDetailDisp(index, count) {
-      // 1件のみの場合
-      if (count == 1) {
-        this.isDetailDisp[index] = index
-      } else {
-        this.isDetailDisp[index] =
-          this.isDetailDisp[index] == index ? [] : index
-        if (this.isDetailsDisp[index] == index) {
-          this.isDetailsDisp[index] =
-            this.isDetailsDisp[index] == index ? [] : index
-        }
-      }
-    },
-    // 明細の詳細情報リンク押下
-    openDetailsDisp(index) {
-      this.isDetailsDisp[index] =
-        this.isDetailsDisp[index] == index ? [] : index
-    },
-    clickCallback() {
-    },
-    // 順 区分
-    setOrganizationDateSortValue(value) {
-      if (this.organizationDateSortValue != value) {
-        this.organizationDateSortValue = value
-        this.$store.dispatch('setSort', value)
-        this.resetRouter()
-      }
-    },
-    // 件 表示 区分 
-    setOrganizationCountSortValue(value) {
-      if (this.organizationCountSortValue != value) {
-        this.organizationCountSortValue = value
-        this.resetRouter()
-      }
-    },
-    openGoodMessageBox(type, index) {
-      let params = {
-        fbType: type,
-        qaId: this.$store.getters.organizationSearchInfo.qas[index].id,
-      }
-      this.$serve.sendFeedback(params).then((res) => {
-        if (res.data.status == 'create') {
-          this.$toast.success(res.data.message, {
-            position: 'top-right',
-          })
-          this.$store.getters.organizationSearchInfo.qas[
-            index
-          ].feedbackGood = res.data.goodFeedbackCount
-          this.$store.getters.organizationSearchInfo.qas[
-            index
-          ].feedbackBad = res.data.badFeedbackCount
-          this.$store.getters.organizationSearchInfo.qas[
-            index
-          ].feedbackComment = res.data.commentFeedbackCount
-        }
-      })
-      //   this.$store.dispatch(
-      //     'setGoodMessageBox',
-      //     !this.$store.getters.getGoodMessageBox
-      //   )
-    },
-    // クリック コメント ボタン
-    openCommentMessageBox(index) {
-      this.qaId = this.$store.getters.organizationSearchInfo.qas[index].id
-      this.rowIndex = index
-      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
-    },
-    getRoeId(id) {
-    },
-    ActicleDetail(index) {
-      this.activeIndex = this.activeIndex == index ? -1 : index
-    },
-    sendGoodMessage(index) {
-      var v = this.qaInfo[index].value
-    },
-    // 該当明細編集押下
-    editDetail(dataInfo) {
-      let params = {
-        id: dataInfo.id,
-      }
-      this.$router.push({
-        path: '/newOrgDIRecord',
-        query: params,
-      })
-      console.log('該当明細編集押下', dataInfo.id)
-    },
-    // 該当明細削除押下
-    deleteDetail(dataInfo) {
-      this.$swal
-        .fire({
-          text: '本当に削除してよろしいですか？',
-          icon: '',
-          showCancelButton: true,
-          cancelButtonText: 'キャンセル',
-          confirmButtonText: '削除',
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            // this.$serve.deletePost('', '', dataInfo.id)
-            this.$serve.deleteQa(dataInfo.id)
-            this.$serve.getOwnData(this.$route.query)
-            this.$swal.fire({
-              text: '削除されました。',
-              icon: '',
-              showCancelButton: false,
-              confirmButtonText: 'OK',
+            this.$router.push({
+                path: '/searchOrganization',
+                query: params,
             })
-            this.$emit('close', false)
-          }
-        })
-      console.log('該当明細削除押下', dataInfo.id)
+        },
+        // 改ページのデータ検索
+        getSelectPage(value) {
+            this.selectPage = value
+            this.$store.dispatch('setPage', value)
+            this.resetRouter()
+        },
+        // 詳細情報 クリック タグ
+        sendMsgToParent: function (data) {
+            this.$emit('listenToChildEvent', data)
+        },
+        // 開くボタン押下
+        openDetailDisp(index, count) {
+            // 1件のみの場合
+            if (count == 1) {
+                this.isDetailDisp[index] = index
+            } else {
+                this.isDetailDisp[index] =
+                    this.isDetailDisp[index] == index ? [] : index
+                if (this.isDetailsDisp[index] == index) {
+                    this.isDetailsDisp[index] =
+                        this.isDetailsDisp[index] == index ? [] : index
+                }
+            }
+        },
+        // 明細の詳細情報リンク押下
+        openDetailsDisp(index) {
+            this.isDetailsDisp[index] =
+                this.isDetailsDisp[index] == index ? [] : index
+        },
+        clickCallback() {},
+        // 順 区分
+        setOrganizationDateSortValue(value) {
+            if (this.organizationDateSortValue != value) {
+                this.organizationDateSortValue = value
+                this.$store.dispatch('setSort', value)
+                this.resetRouter()
+            }
+        },
+        // 件 表示 区分
+        setOrganizationCountSortValue(value) {
+            if (this.organizationCountSortValue != value) {
+                this.organizationCountSortValue = value
+                this.resetRouter()
+            }
+        },
+        openGoodMessageBox(type, index) {
+            let params = {
+                fbType: type,
+                qaId: this.$store.getters.organizationSearchInfo.qas[index].id,
+            }
+            this.$serve.sendFeedback(params).then((res) => {
+                if (res.data.status == 'create') {
+                    this.$toast.success(res.data.message, {
+                        position: 'top-right',
+                    })
+                    this.$store.getters.organizationSearchInfo.qas[
+                        index
+                    ].feedbackGood = res.data.goodFeedbackCount
+                    this.$store.getters.organizationSearchInfo.qas[
+                        index
+                    ].feedbackBad = res.data.badFeedbackCount
+                    this.$store.getters.organizationSearchInfo.qas[
+                        index
+                    ].feedbackComment = res.data.commentFeedbackCount
+                }
+            })
+            //   this.$store.dispatch(
+            //     'setGoodMessageBox',
+            //     !this.$store.getters.getGoodMessageBox
+            //   )
+        },
+        // クリック コメント ボタン
+        openCommentMessageBox(index) {
+            this.qaId = this.$store.getters.organizationSearchInfo.qas[index].id
+            this.rowIndex = index
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
+        getRoeId(id) {},
+        ActicleDetail(index) {
+            this.activeIndex = this.activeIndex == index ? -1 : index
+        },
+        sendGoodMessage(index) {
+            var v = this.qaInfo[index].value
+        },
+        // 該当明細編集押下
+        editDetail(dataInfo) {
+            let params = {
+                id: dataInfo.id,
+            }
+            this.$router.push({
+                path: '/newOrgDIRecord',
+                query: params,
+            })
+            console.log('該当明細編集押下', dataInfo.id)
+        },
+        // 該当明細削除押下
+        deleteDetail(dataInfo) {
+            this.$swal
+                .fire({
+                    text: '本当に削除してよろしいですか？',
+                    icon: '',
+                    showCancelButton: true,
+                    cancelButtonText: 'キャンセル',
+                    confirmButtonText: '削除',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        // this.$serve.deletePost('', '', dataInfo.id)
+                        this.$serve.deleteQa(dataInfo.id)
+                        this.$serve.getOwnData(this.$route.query)
+                        this.$swal.fire({
+                            text: '削除されました。',
+                            icon: '',
+                            showCancelButton: false,
+                            confirmButtonText: 'OK',
+                        })
+                        this.$emit('close', false)
+                    }
+                })
+            console.log('該当明細削除押下', dataInfo.id)
+        },
     },
-  },
 }
 </script>
-<style >
+<style>
 .box {
     height: 40px;
     width: 100%;
