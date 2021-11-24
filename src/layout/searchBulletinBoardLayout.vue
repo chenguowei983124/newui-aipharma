@@ -155,9 +155,9 @@ export default {
         exeSearchMultiSelectRefishOpt() {
             this.$refs.searchBar.$refs.inptBbsDetail.$refs.mult.refreshOptions()
         },
-        getClose(value) {
+        getClose(value, deleteFlg) {
             this.dispFlg = value
-            this.$refs.bbsList.talkingClosed()
+            this.$refs.bbsList.talkingClosed(deleteFlg)
         },
         getUnpublish() {
             const params = {

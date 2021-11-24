@@ -834,6 +834,18 @@ export default {
                 })
                 // 掲示板
             } else if (this.checkId == 7) {
+                if (
+                    this.$store.getters.getDateValueFrom != '' &&
+                    this.$store.getters.getDateValueTo != ''
+                ) {
+                    if (
+                        this.$store.getters.getDateValueFrom >=
+                        this.$store.getters.getDateValueTo
+                    ) {
+                        this.$swal.fire('', '期間（報告日）入力不正', '')
+                        return
+                    }
+                }
                 let params = {}
                 let getTimestamp = new Date().getTime()
                 params = {
@@ -884,7 +896,7 @@ export default {
                             : this.$store.getters.getScope,
                     sort:
                         this.$props.form == this.$constant.formList.TOP
-                            ? '0'
+                            ? 'created_at-desc'
                             : this.$store.getters.getSort,
                     timestamp: getTimestamp,
                 }

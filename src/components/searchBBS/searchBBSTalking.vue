@@ -211,6 +211,7 @@
                             :items="items"
                             :index="index"
                             :exeSearchData="doSearch"
+                            :putFeedbacks="putFeedbacks"
                         ></make-detail-row>
                     </div>
                 </div>
@@ -384,17 +385,22 @@ export default {
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        this.$serve.deletePost('', dataInfo.post_id)
-                        this.$swal.fire({
-                            text: '削除されました。',
-                            icon: '',
-                            showCancelButton: false,
-                            confirmButtonText: 'OK',
-                        })
-                        this.$emit('close', false)
+                        this.$serve
+                            .deletePost('', dataInfo.post_id)
+                            .then(() => {
+                                this.$swal
+                                    .fire({
+                                        text: '削除されました。',
+                                        icon: '',
+                                        showCancelButton: false,
+                                        confirmButtonText: 'OK',
+                                    })
+                                    .then(() => {
+                                        this.$emit('close', false, 'delete')
+                                    })
+                            })
                     }
                 })
-            console.log('該当明細削除押下', dataInfo.post_id)
         },
         async doSearch() {
             this.dispEditor = false
@@ -437,32 +443,69 @@ export default {
         },
         putFeedbacks(kind, post_id, feedbackId, index) {
             let tempKind = kind
+            console.log('user', this.$store.getters.topManagementInfo.user_id)
+
             if (index === undefined) {
-                if (this.postList[0].feedback.mine.kind == kind) {
-                    tempKind = 2
+                console.log('feedback', this.postList[0].feedback.mine.user_id)
+                if (
+                    this.postList[0].feedback.mine.kind == kind &&
+                    this.postList[0].feedback.mine.user_id ==
+                        this.$store.getters.topManagementInfo.user_id
+                ) {
+                    tempKind = 0
                 }
             } else {
+                console.log(
+                    'feedback user_id',
+                    this.postList[0].commnet[index].feedback.mine.user_id
+                )
+                console.log(
+                    'feedback kind',
+                    this.postList[0].commnet[index].feedback.mine.kind
+                )
                 if (
-                    this.postList[0].commnet[index].feedback.mine.kind == kind
+                    this.postList[0].commnet[index].feedback.mine.kind ==
+                        kind &&
+                    this.postList[0].commnet[index].feedback.mine.user_id ==
+                        this.$store.getters.topManagementInfo.user_id
                 ) {
-                    tempKind = 2
+                    tempKind = 0
                 }
             }
 
             let params = {
                 feedbackId: feedbackId,
-                post_id: post_id,
-                kind: tempKind,
                 code: this.$store.getters.getOidcCode,
+                feedback: {
+                    post_id: post_id,
+                    kind: tempKind,
+                },
             }
             this.$serve.putfeedbacks(params, '').then((res) => {
-                if (index === undefined) {
-                    Object.assign(this.postList[0].feedback, res.data.feedback)
-                } else {
-                    Object.assign(
-                        this.postList[0].commnet[index].feedback,
-                        res.data.feedback
-                    )
+                console.log(res)
+                if (res.data.status === 'SUCCESS') {
+                    if (index === undefined) {
+                        Object.assign(
+                            this.postList[0].feedback,
+                            res.data.feedback
+                        )
+                    } else {
+                        Object.assign(
+                            this.postList[0].commnet[index].feedback,
+                            res.data.feedback
+                        )
+                    }
+                    console.log('tempKind', tempKind)
+                    let message = '評価がキャンセルしました。'
+                    if (tempKind === 1) {
+                        message = 'Good評価ありがとうございました。'
+                    }
+                    if (tempKind === 2) {
+                        message = 'Bad評価ありがとうございました。'
+                    }
+                    this.$toast.success(message, {
+                        position: 'top-right',
+                    })
                 }
             })
         },
@@ -473,10 +516,12 @@ export default {
                     post_id: post_id,
                     content: this.InputComment,
                 },
-                postId: post_id,
             }
             let res = this.$serve.postPosts(param)
-            console.log('two')
+            this.$toast.success('送信成功しました。', {
+                position: 'top-right',
+            })
+
             this.doSearch()
         },
     },

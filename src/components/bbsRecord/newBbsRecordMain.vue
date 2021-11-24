@@ -112,7 +112,7 @@
                 <div id="patientGender" class="mt-3 md:mt-5">
                     <div class="flex">
                         <label class="notoSansJpAndSixteenBold mb-1">
-                            本文{{ base.answer }}
+                            本文
                         </label>
                         <label class="text-red-500 ml-1"> * </label>
                     </div>
@@ -127,7 +127,7 @@
                             statusbar: false,
                             plugins: 'advlist lists',
                             toolbar:
-                                'undo redo | bold italic underline strikethrough | numlist bullist | ',
+                                'undo redo | bold italic underline strikethrough | fontsizeselect forecolor removeformat | numlist bullist | ',
                         }"
                     />
                 </div>
@@ -222,85 +222,132 @@ export default {
             this.base.genre = value
         },
 
+        // 公開範囲選択した値取得
+        setScopeValue(value) {
+            this.base.scope = value
+        },
         //　一時保存
         tmpSaveEvent() {
-            let params = {
-                post: {
-                    division: 'BBS',
-                    title: this.base.title,
-                    content: this.base.answer,
-                    genre: this.base.genre,
-                    publish: true,
-                    scope: this.base.scope,
-                },
-
-                // 公開範囲選択した値取得
-                setScopeValue(value) {
-                    this.base.scope = value
-                },
-                //　一時保存
-                tmpSaveEvent() {
-                    let params = {
-                        post: {
-                            division: 'BBS',
-                            title: this.base.title,
-                            content: this.base.answer,
-                            genre: this.base.genre,
-                            publish: true,
-                            scope: this.base.scope,
-                        },
-                        tag: this.base.tags,
+            this.$swal
+                .fire({
+                    text: '下書き保存してよろしいですか？',
+                    icon: '',
+                    showCancelButton: true,
+                    cancelButtonText: 'キャンセル',
+                    confirmButtonText: '確認',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('削除')
+                        let params = {
+                            code: this.$store.getters.getOidcCode,
+                            post: {
+                                division: 'BBS',
+                                title: this.base.title,
+                                content: this.base.answer,
+                                genre: this.base.genre,
+                                publish: false,
+                                scope: this.base.scope,
+                            },
+                            tag: this.base.tags,
+                        }
+                        this.$serve.postPosts(params).then((res) => {
+                            this.$swal
+                                .fire({
+                                    text: '保存されました。',
+                                    icon: '',
+                                    showCancelButton: false,
+                                    cancelButtonText: 'キャンセル',
+                                    confirmButtonText: 'OK',
+                                })
+                                .then(() => {
+                                    // this.clearInput()
+                                    this.$router.go(-1)
+                                })
+                        })
                     }
-                    this.$serve.postPosts(params)
-                    this.clearInput()
-                    if (JSON.stringify(this.$route.query) !== '{}') {
-                        this.$router.go(-1)
+                })
+        },
+        // 登録
+        saveEvent() {
+            let flg = false
+            flg = this.$swal
+                .fire({
+                    text: '投稿してよろしいですか？',
+                    icon: '',
+                    showCancelButton: true,
+                    cancelButtonText: 'キャンセル',
+                    confirmButtonText: '確認',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('this.base', this.base)
+                        let params = {
+                            code: this.$store.getters.getOidcCode,
+                            post: {
+                                division: 'BBS',
+                                title: this.base.title,
+                                content: this.base.answer,
+                                genre: this.base.genre,
+                                publish: true,
+                                scope: this.base.scope,
+                            },
+                            tag: this.base.tags,
+                        }
+                        if (JSON.stringify(this.$route.query) === '{}') {
+                            this.$serve.postPosts(params).then((res) => {
+                                this.$swal
+                                    .fire({
+                                        text: '投稿されました。',
+                                        icon: '',
+                                        showCancelButton: false,
+                                        cancelButtonText: 'キャンセル',
+                                        confirmButtonText: 'OK',
+                                    })
+                                    .then(() => {
+                                        // this.clearInput()
+                                        this.$router.go(-1)
+                                    })
+                            })
+                        } else {
+                            console.log(this.$route.query.id)
+                            Object.assign(params.post, {
+                                post_id: this.$route.query.id,
+                            })
+                            this.$serve
+                                .putBbsPosts(params, this.$route.query.id)
+                                .then((res) => {
+                                    this.$swal
+                                        .fire({
+                                            text: '投稿されました。',
+                                            icon: '',
+                                            showCancelButton: false,
+                                            cancelButtonText: 'キャンセル',
+                                            confirmButtonText: 'OK',
+                                        })
+                                        .then(() => {
+                                            // this.clearInput()
+                                            this.$router.go(-1)
+                                        })
+                                })
+                        }
                     }
-                },
-                // 登録
-                saveEvent() {
-                    let params = {
-                        post: {
-                            division: 'Info',
-                            title: this.base.title,
-                            content: this.base.answer,
-                            genre: this.base.genre,
-                            publish: true,
-                            scope: this.base.scope,
-                        },
-                        tag: this.base.tags,
-                    }
-                    this.$serve.postPosts(params)
-                    this.clearInput()
-                    this.$router.go(-1)
-                },
-                cancelEvent() {
-                    this.$router.go(-1)
-                },
-                // 入力した内容をクリア
-                clearInput() {
-                    this.base.title = ''
-                    this.base.answer = ''
-                    this.$refs.scope.setValue('select')
-                    this.$refs.genre.setValue('select')
-                    this.base.tags = []
-                },
-                tag: this.base.tags,
+                })
+            if (flg) {
             }
-            this.$serve.postPosts(params, '')
-            this.clearInput()
-            if (JSON.stringify(this.$route.query) !== '{}') {
-                this.$router.go(-1)
-            }
+        },
+        cancelEvent() {
+            this.$router.go(-1)
         },
         // 入力した内容をクリア
-        clearInput() {
-            this.base.title = ''
-            this.base.answer = ''
-            this.$refs.scope.setValue('0')
-            this.$refs.genre.setValue('notice')
-            this.base.tags = []
-        },
+        // clearInput() {
+        //     this.base.title = ''
+        //     this.base.answer = ''
+        //     this.$refs.scope.setValue('select')
+        //     this.$refs.genre.setValue('select')
+        //     this.base.tags = []
+        // },
+
         // 検索結果画面で編集押下時、IDよりデータ取得
         async doSearch() {
             this.dispEditor = false
@@ -397,25 +444,6 @@ export default {
             } else {
                 return false
             }
-            // const base = this.base
-            // console.log(!!base.title)
-            // return {
-            //     scope: !!base.scope,
-            //     genre: !!base.genre,
-            //     title: !!base.title,
-            //     answer: !!base.answer,
-            // }
-            // })
-        },
-        isValid() {
-            const base = this.base
-            return {
-                question: !!base.scope,
-                genre: !!base.genre,
-                title: !!base.title,
-                answer: !!base.answer,
-            }
-            // })
         },
     },
     mounted() {

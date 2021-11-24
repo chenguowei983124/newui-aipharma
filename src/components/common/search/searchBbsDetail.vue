@@ -152,7 +152,7 @@
                 :default-value="$store.getters.getScope"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="{ tabindex: 1 }"
-                :default-options="$constant.bbsScops"
+                :default-options="$constant.searchBbsScops"
                 @selected="setScopeInfo"
                 leftLableTitle="公開範囲"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"

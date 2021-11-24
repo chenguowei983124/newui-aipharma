@@ -23,7 +23,7 @@
                 <div class="">
                     <div v-for="(article, index) in postList" :key="index">
                         <result-detail-row
-                            class="searchResult_bbsDetail_blue mt-2"
+                            class="searchResult_EdiDetail_gray mt-2"
                             :row="article"
                             :index="index"
                             :itemClick="clickItem"
@@ -38,7 +38,7 @@
 
 <script>
 import MescrollVue from 'mescroll.js/mescroll.vue'
-import resultDetailRow from '../common/searchResult/resultBBS.vue'
+import resultDetailRow from '../common/searchResult/resultEdi.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 
 export default {
@@ -80,17 +80,6 @@ export default {
             },
         }
     },
-    beforeRouteEnter(to, from, next) {
-        console.log('beforeRouteEnter', to, from, next)
-        next((vm) => {
-            vm.$refs.mescroll && vm.$refs.mescroll.beforeRouteEnter()
-        })
-    },
-    beforeRouteLeave(to, from, next) {
-        console.log('beforeRouteLeave', to, from, next)
-        this.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave()
-        next()
-    },
     watch: {
         $route(to, from) {
             console.log('searchBulletinBoardMain watch', to.query)
@@ -100,14 +89,6 @@ export default {
             )
                 return
 
-            // if (JSON.stringify(this.$route.query) == '{}') {
-            //     this.initStore()
-            //     this.$store.dispatch('clearPreavoidsInfo', {})
-            // }
-            // if (JSON.stringify(this.$route.query) !== '{}') {
-            //     this.resetSearchBar()
-            //     this.execSearch()
-            // }
             if (!!to.query) {
                 this.params = to.query
             } else {
@@ -122,6 +103,7 @@ export default {
     },
     methods: {
         async doSearch(pgNo = 1) {
+            console.log('delete search')
             this.initStore()
             let response
             if (
@@ -133,15 +115,69 @@ export default {
                     '',
                     this.$route.query.id
                 )
-            } else {
+            }
+            if (JSON.stringify(this.$route.query) === '{}') {
                 this.resetSearchBar()
-                const PAGE_LIMIT = 10
+                const PAGE_LIMIT = 20
                 Object.assign(this.params, { division: 'BBS' })
-                console.log('watch', this.params)
                 const queryStringData = {
                     page: pgNo,
                     limit: PAGE_LIMIT,
-                    filter: this.params,
+                    code: this.$store.getters.getOidcCode,
+
+                    filter: {
+                        division: 'BBS',
+                        free_text: '',
+                        targets: {
+                            title: true,
+                            content: true,
+                            coment: true,
+                            creator: true,
+                            updater: true,
+                            facility: true,
+                        },
+                        tags: [],
+                        scope: '0',
+                        create_from: '',
+                        create_to: '',
+                        publish: false,
+                        order: 'created_at-desc',
+                    },
+                }
+
+                response = await this.$serve.getPostList(queryStringData)
+            } else {
+                this.resetSearchBar()
+                const PAGE_LIMIT = 20
+                Object.assign(this.params, { division: 'BBS' })
+
+                const queryStringData = {
+                    code: this.$store.getters.getOidcCode,
+                    page: pgNo,
+                    limit: PAGE_LIMIT,
+
+                    filter: {
+                        division: 'BBS',
+                        free_text: this.params.free_text,
+                        targets: {
+                            title: this.params.checkTitle,
+                            content: this.params.checkContent,
+                            coment: this.params.checkComment,
+                            creator: this.params.checkLastEditor,
+                            updater: this.params.checkLastEditor,
+                            facility: this.params.checkFacilityName,
+                        },
+                        tags:
+                            this.params.tags === undefined ||
+                            this.params.tags === ''
+                                ? []
+                                : this.params.tags.split(','),
+                        scope: this.params.scope,
+                        create_from: this.params.dateFrom,
+                        create_to: this.params.dateTo,
+                        publish: false,
+                        order: this.params.sort,
+                    },
                 }
 
                 response = await this.$serve.getPostList(queryStringData)
@@ -196,16 +232,16 @@ export default {
         },
         // 初期化検索条件
         initStore() {
-            let checkInfo = this.$store.getters.getEdiCheckInfo
+            let checkInfo = this.$store.getters.getBbsCheckInfo
             checkInfo.checkTitle = true
             checkInfo.checkContent = true
             checkInfo.checkComment = true
             checkInfo.checkPost = true
             checkInfo.checkLastEditor = true
             checkInfo.checkFacilityName = true
-            this.$store.dispatch('setEdiCheckInfo', checkInfo)
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
             this.$store.dispatch('setSearchWord', '')
-            this.$store.dispatch('setSort', 0)
+            this.$store.dispatch('setSort', 'created_at-desc')
             this.$store.dispatch('setSearchTags', [])
             this.$store.dispatch('setSearchTagsLable', [])
         },
@@ -214,45 +250,72 @@ export default {
             this.$store.dispatch('setSearchWord', this.$route.query.free_text)
             this.$store.dispatch(
                 'setSearchTags',
-                this.$route.query.tags === ''
+                this.$route.query.tags === '' ||
+                    this.$route.query.tags === undefined
                     ? []
                     : this.$route.query.tags.split(',')
             )
             // 対象期間FROM
-            this.$store.dispatch('setDateValueFrom', this.$route.query.dateFrom)
+            this.$store.dispatch(
+                'setDateValueFrom',
+                this.$route.query.dateFrom === undefined
+                    ? ''
+                    : this.$route.query.dateFrom
+            )
             // 対象期間TO
-            this.$store.dispatch('setDateValueTo', this.$route.query.dateTo)
+            this.$store.dispatch(
+                'setDateValueTo',
+                this.$route.query.dateTo === undefined
+                    ? ''
+                    : this.$route.query.dateTo
+            )
             // 様式
-            this.$store.dispatch('setScopeInfo', this.$route.query.scope)
+            this.$store.dispatch(
+                'setScopeInfo',
+                this.$route.query.scope === undefined
+                    ? '0'
+                    : this.$route.query.scope
+            )
             // 検索対象
             let checkInfo = this.$store.getters.getBbsCheckInfo
             checkInfo.checkTitle =
+                this.$route.query.checkTitle === undefined ||
                 this.$route.query.checkTitle.toString() === 'true'
                     ? true
                     : false
             checkInfo.checkContent =
+                this.$route.query.checkContent === undefined ||
                 this.$route.query.checkContent.toString() === 'true'
                     ? true
                     : false
             checkInfo.checkComment =
+                this.$route.query.checkComment === undefined ||
                 this.$route.query.checkComment.toString() === 'true'
                     ? true
                     : false
             checkInfo.checkPost =
-                this.$route.query.checkPost.toString() === 'true' ? true : false
+                this.$route.query.checkPost === undefined ||
+                this.$route.query.checkPost.toString() === 'true'
+                    ? true
+                    : false
             checkInfo.checkLastEditor =
+                this.$route.query.checkLastEditor === undefined ||
                 this.$route.query.checkLastEditor.toString() === 'true'
                     ? true
                     : false
             checkInfo.checkFacilityName =
+                this.$route.query.checkFacilityName === undefined ||
                 this.$route.query.checkFacilityName.toString() === 'true'
                     ? true
                     : false
             console.log('checkInfo', checkInfo)
-            this.$store.dispatch('setEdiCheckInfo', checkInfo)
-
-            this.selectDispNumber = this.$route.query.sort
-            this.$store.dispatch('setSort', this.$route.query.sort)
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch(
+                'setSort',
+                this.$route.query.checkFacilityName === undefined
+                    ? 'created_at-desc'
+                    : this.$route.query.sort
+            )
         },
         resetRouter() {
             let getTimestamp = new Date().getTime()
@@ -278,11 +341,13 @@ export default {
                 timestamp: getTimestamp,
             }
             this.$router.push({
-                path: '/searchNotification',
+                path: '/searchBulletinBoard',
                 query: params,
             })
         },
         clickItem(val, index) {
+            console.log('index', this.openIndex)
+            console.log('index', this.postList)
             if (this.openIndex >= 0) {
                 this.postList[this.openIndex].clicked = false
             }
@@ -291,10 +356,16 @@ export default {
             this.postList[index].clicked = true
             this.$emit('clickItemEvent', val)
         },
-        talkingClosed() {
+        talkingClosed(deleteFlg) {
             if (this.openIndex != -1) {
                 this.postList[this.openIndex].clicked = false
                 this.openIndex = -1
+            }
+
+            if (deleteFlg !== undefined) {
+                this.mescroll.resetUpScroll()
+                this.mescroll.scrollTo(0, 0)
+                console.log('deleted')
             }
         },
         async upCallback(page, mescroll) {
@@ -328,4 +399,11 @@ export default {
     },
 }
 </script>
-<style scoped></style>
+<style scoped>
+/* .mescroll {
+    position: fixed;
+    top: 44px;
+    bottom: 0;
+    height: auto;
+} */
+</style>

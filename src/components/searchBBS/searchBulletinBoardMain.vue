@@ -82,18 +82,6 @@ export default {
             },
         }
     },
-
-    beforeRouteEnter(to, from, next) {
-        console.log('beforeRouteEnter', to, from, next)
-        next((vm) => {
-            vm.$refs.mescroll && vm.$refs.mescroll.beforeRouteEnter()
-        })
-    },
-    beforeRouteLeave(to, from, next) {
-        console.log('beforeRouteLeave', to, from, next)
-        this.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave()
-        next()
-    },
     watch: {
         $route(to, from) {
             console.log('searchBulletinBoardMain watch', to.query)
@@ -103,14 +91,6 @@ export default {
             )
                 return
 
-            // if (JSON.stringify(this.$route.query) == '{}') {
-            //     this.initStore()
-            //     this.$store.dispatch('clearPreavoidsInfo', {})
-            // }
-            // if (JSON.stringify(this.$route.query) !== '{}') {
-            //     this.resetSearchBar()
-            //     this.execSearch()
-            // }
             if (!!to.query) {
                 this.params = to.query
             } else {
@@ -125,6 +105,7 @@ export default {
     },
     methods: {
         async doSearch(pgNo = 1) {
+            console.log('delete search')
             this.initStore()
             let response
             if (
@@ -132,23 +113,56 @@ export default {
                 this.$route.query.id !== undefined
             ) {
                 Object.assign(this.params, { id: this.$route.query.id })
-                response = await this.$serve.getPostsrforId(
-                    '',
-                    this.$route.query.id
-                )
-            } else {
+                await this.$serve
+                    .getPostsrforId('', this.$route.query.id)
+                    .then((response) => {
+                        this.setSearchResult(response, pgNo)
+                    })
+            }
+            if (JSON.stringify(this.$route.query) === '{}') {
                 this.resetSearchBar()
                 const PAGE_LIMIT = 20
                 Object.assign(this.params, { division: 'BBS' })
-                console.log('watch', this.params)
-                console.log(
-                    'this.$store.getters.getOidcCode',
-                    this.$store.getters.getOidcCode
-                )
                 const queryStringData = {
                     page: pgNo,
                     limit: PAGE_LIMIT,
                     code: this.$store.getters.getOidcCode,
+
+                    filter: {
+                        division: 'BBS',
+                        free_text: '',
+                        targets: {
+                            title: true,
+                            content: true,
+                            coment: true,
+                            creator: true,
+                            updater: true,
+                            facility: true,
+                        },
+                        tags: [],
+                        scope: '0',
+                        create_from: '',
+                        create_to: '',
+                        publish: false,
+                        order: 'created_at-desc',
+                    },
+                }
+
+                await this.$serve
+                    .getPostList(queryStringData)
+                    .then((response) => {
+                        this.setSearchResult(response, pgNo)
+                    })
+            } else {
+                this.resetSearchBar()
+                const PAGE_LIMIT = 20
+                Object.assign(this.params, { division: 'BBS' })
+
+                const queryStringData = {
+                    code: this.$store.getters.getOidcCode,
+                    page: pgNo,
+                    limit: PAGE_LIMIT,
+
                     filter: {
                         division: 'BBS',
                         free_text: this.params.free_text,
@@ -171,16 +185,16 @@ export default {
                         publish: false,
                         order: this.params.sort,
                     },
-                    // this.params,
-                    // filter: {
-                    //     free_text: '',
-                    //     division: '',
-                    // },
                 }
 
-                response = await this.$serve.getPostList(queryStringData)
+                await this.$serve
+                    .getPostList(queryStringData)
+                    .then((response) => {
+                        this.setSearchResult(response, pgNo)
+                    })
             }
-            console.log('res', response.data)
+        },
+        setSearchResult(response, pgNo) {
             if (pgNo == 1) {
                 this.postList = this.formatPostList(response.data.data)
                 if (this.postList.length == 1) {
@@ -190,6 +204,7 @@ export default {
                 this.postList = this.formatPostList(response.data.data)
             }
             this.pagination = response.data.pagination
+            console.log(this.postList)
         },
         formatPostList(data) {
             let list = this.postList
@@ -254,11 +269,26 @@ export default {
                     : this.$route.query.tags.split(',')
             )
             // 対象期間FROM
-            this.$store.dispatch('setDateValueFrom', this.$route.query.dateFrom)
+            this.$store.dispatch(
+                'setDateValueFrom',
+                this.$route.query.dateFrom === undefined
+                    ? ''
+                    : this.$route.query.dateFrom
+            )
             // 対象期間TO
-            this.$store.dispatch('setDateValueTo', this.$route.query.dateTo)
+            this.$store.dispatch(
+                'setDateValueTo',
+                this.$route.query.dateTo === undefined
+                    ? ''
+                    : this.$route.query.dateTo
+            )
             // 様式
-            this.$store.dispatch('setScopeInfo', this.$route.query.scope)
+            this.$store.dispatch(
+                'setScopeInfo',
+                this.$route.query.scope === undefined
+                    ? '0'
+                    : this.$route.query.scope
+            )
             // 検索対象
             let checkInfo = this.$store.getters.getBbsCheckInfo
             checkInfo.checkTitle =
@@ -293,12 +323,12 @@ export default {
                     : false
             console.log('checkInfo', checkInfo)
             this.$store.dispatch('setBbsCheckInfo', checkInfo)
-
-            this.selectDispNumber =
+            this.$store.dispatch(
+                'setSort',
                 this.$route.query.checkFacilityName === undefined
-                    ? '0'
+                    ? 'created_at-desc'
                     : this.$route.query.sort
-            this.$store.dispatch('setSort', this.$route.query.sort)
+            )
         },
         resetRouter() {
             let getTimestamp = new Date().getTime()
@@ -339,10 +369,18 @@ export default {
             this.postList[index].clicked = true
             this.$emit('clickItemEvent', val)
         },
-        talkingClosed() {
+        talkingClosed(deleteFlg) {
             if (this.openIndex != -1) {
                 this.postList[this.openIndex].clicked = false
                 this.openIndex = -1
+            }
+
+            if (deleteFlg !== undefined) {
+                this.firsted = true
+                this.postList = []
+                this.mescroll.resetUpScroll()
+                this.mescroll.scrollTo(0, 0)
+                console.log('deleted')
             }
         },
         async upCallback(page, mescroll) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div class="relative h-screen">
         <my-all-header :form="$constant.formList.EDI"></my-all-header>
         <!-- 内容 -->
         <search-notification-layout></search-notification-layout>

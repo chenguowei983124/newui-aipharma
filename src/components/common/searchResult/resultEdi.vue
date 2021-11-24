@@ -130,7 +130,6 @@
 
 <script>
 import resultDetailRowItem from './resultDetailRowItem.vue'
-import { computed } from '@vue/runtime-core'
 
 export default {
     components: { resultDetailRowItem },

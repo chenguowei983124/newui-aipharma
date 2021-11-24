@@ -11,5 +11,5 @@ export default defineConfig({
         port: 443,
         https: true,
     },
-    base: '/user/'
+    base: '/user/',
 })

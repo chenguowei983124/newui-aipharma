@@ -322,7 +322,6 @@ const serve = {
         // if (!!code) {
         const queryStringData = {
             code: code,
-            postId: id,
         }
         // API-index
         // let mtd = 'DELETE'
@@ -369,6 +368,29 @@ const serve = {
         data = await exeAxios(acURL, {
             method: 'DELETE',
             params: queryString,
+        })
+
+        return data
+    },
+    //===========================
+    // 投稿メッセージ情報の編集
+    //===========================
+    async putBbsPosts(params, post_id) {
+        let data = []
+        // if (!!code) {
+        const queryStringData = {
+            code: params.code,
+        }
+        delete params.code
+        // API-index
+        // let mtd = 'DELETE'
+        let acURL = `/posts/${post_id}`
+        const queryString = queryStringData
+        // const queryString = new URLSearchParams(queryStringData).toString()
+        data = await exeAxios(acURL, {
+            method: 'put',
+            params: queryStringData,
+            data: params,
         })
 
         return data
@@ -438,7 +460,6 @@ const serve = {
 
         const queryStringData = {
             code: code,
-            postId: post_id,
         }
         const queryString = queryStringData
         // const queryString = new URLSearchParams(queryStringData).toString()
@@ -454,22 +475,26 @@ const serve = {
     //===========================
     async putfeedbacks(params) {
         let data = []
-
+        let feedback = params.feedback
         const queryString = params
         // const queryString = new URLSearchParams(params).toString()
         data = await exeAxios(`/feedbacks/${params.feedbackId}`, {
             method: 'put',
-            params: queryString,
+            params: { code: params.code },
+            data: { feedback: feedback },
         })
 
         return data
     },
     async postPosts(param) {
         let data = []
+        let code = { code: param.code }
+        delete param.code
         const queryString = param
         // const queryString = new URLSearchParams(params).toString()
         data = await exeAxios(`/posts`, {
             method: 'post',
+            params: code,
             data: queryString,
         })
 
@@ -485,7 +510,7 @@ const serve = {
         const data = await exeAxios('/posts/search', {
             method: 'post',
             params: queryString,
-            data: filter,
+            data: { filter: filter },
         })
         return data
     },
@@ -879,7 +904,10 @@ const serve = {
     //===========================
     async getDIKnowledgeSharedId(params) {
         var confidenceTemp =
-            typeof (params.confidence) == "undefined" || params.confidence == "undefined" ? 'nil' : params.confidence
+            typeof params.confidence == 'undefined' ||
+            params.confidence == 'undefined'
+                ? 'nil'
+                : params.confidence
         const data = await axios('/api/qa/send_detail_qa_info', {
             method: 'get',
             params: {

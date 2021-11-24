@@ -127,6 +127,9 @@
 .searchResult_bbsDetail_blue {
     @apply bg-white border-2 border-blueline rounded-lg w-full;
 }
+.searchResult_EdiDetail_gray {
+    @apply bg-white border-2 border-grayline rounded-lg w-full;
+}
 .searchResult_detail_gray {
     @apply bg-white border-b-2 border-l-2 border-r-2 border-grayline rounded-b-lg w-full;
 }
@@ -136,7 +139,7 @@
 }
 /* 新着Q＆Aタイトル */
 .newQaInfoTitle {
-    @apply notoSansJpAndEighteenBold text-center text-white  ;
+    @apply notoSansJpAndEighteenBold text-center text-white;
 }
 /* 学会情報　その他の情報 */
 .searchResult_header_grayline {

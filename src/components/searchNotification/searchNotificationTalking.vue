@@ -1,11 +1,12 @@
 <template>
     <div class="mx-auto h-screen-60 md:h-screen-69" id="div_postList">
-        <div class="flex justify-between h-10 border-b-2 border-blueline">
+        <div class="flex justify-between h-10 border-b-2 border-notice,">
             <div class="notoSansJpAndTwentyBold">スレッド</div>
             <div class="h-10 w-10 mt-1" @click="closeClick">
-                <x-icon-svg color="#65bbe5"></x-icon-svg>
+                <x-icon-svg color="#666666"></x-icon-svg>
             </div>
         </div>
+
         <!-- "" -->
         <div
             class="overflow-y-scroll"
@@ -102,7 +103,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5" v-html="postList[0].title"></div>
+                    <div
+                        class="mt-5 ml-2"
+                        v-html="
+                            postList[0].title
+                                .replace(
+                                    '<ol>',
+                                    `<ol style='list-style-type: decimal;'>`
+                                )
+                                .replace(
+                                    '<ul>',
+                                    `<ul style='list-style-type: disc;'>`
+                                )
+                        "
+                    ></div>
                     <div class="mt-5 flex">
                         <div
                             class="flex flex-wrap mt-2"
@@ -196,6 +210,8 @@
                             :postList="postList"
                             :items="items"
                             :index="index"
+                            :exeSearchData="doSearch"
+                            :putFeedbacks="putFeedbacks"
                         ></make-detail-row>
                     </div>
                 </div>
@@ -203,11 +219,20 @@
         </div>
         <div class="mt-2">
             <div
-                class="rounded border-2 h-8"
+                class="rounded border-2 h-8 pl-5"
                 @click="dispEditor = !dispEditor"
                 v-if="!dispEditor"
-                v-html="InputComment.toString().split('\n')[0]"
+                v-html="
+                    InputComment.toString()
+                        .split(`<p>&nbsp;</p>`)[0]
+                        .replace(
+                            '<ol>',
+                            `<ol style='list-style-type: decimal;'>`
+                        )
+                        .replace('<ul>', `<ul style='list-style-type: disc;'>`)
+                "
             ></div>
+
             <div v-if="dispEditor">
                 <editor
                     api-key="qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp"
@@ -271,13 +296,11 @@
                                 notoSansJpAndFourteenBold
                                 cursor-pointer
                             "
-                            @click="sendPosts(postList[0].post_id)"
                         >
                             送信
                         </div>
                         <send-message-icon-svg
                             class="mr-1 cursor-pointer"
-                            @click="sendPosts(postList[0].post_id)"
                         ></send-message-icon-svg>
                     </button>
                 </div>
@@ -289,8 +312,6 @@
 <script>
 import XIconSvg from '../common/svgImage/bbsXIconSvg.vue'
 import sendMessageIconSvg from '../common/svgImage/sendMessageIconSvg.vue'
-import resultDetailRow from '../common/searchResult/resultBBS.vue'
-import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 import Good from '../common/svgImage/good.vue'
 import bad from '../common/svgImage/bad.vue'
 import Editor from '@tinymce/tinymce-vue'
@@ -302,8 +323,6 @@ export default {
         XIconSvg,
         Editor,
         sendMessageIconSvg,
-        resultDetailRow,
-        ResultDetailRowItem,
         Good,
         bad,
         EditAndDelete,
@@ -345,7 +364,7 @@ export default {
                 id: dataInfo.post_id,
             }
             this.$router.push({
-                path: '/newBbsRecord',
+                path: '/newEdiRecord',
                 query: params,
             })
             console.log('該当明細編集押下', dataInfo.post_id)
@@ -362,24 +381,28 @@ export default {
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        this.$serve.deletePost('', dataInfo.post_id)
-                        this.$swal.fire({
-                            text: '削除されました。',
-                            icon: '',
-                            showCancelButton: false,
-                            confirmButtonText: 'OK',
-                        })
-                        this.$emit('close', false)
+                        this.$serve
+                            .deletePost('', dataInfo.post_id)
+                            .then(() => {
+                                this.$swal
+                                    .fire({
+                                        text: '削除されました。',
+                                        icon: '',
+                                        showCancelButton: false,
+                                        confirmButtonText: 'OK',
+                                    })
+                                    .then(() => {
+                                        this.$emit('close', false, 'delete')
+                                    })
+                            })
                     }
                 })
-            console.log('該当明細削除押下', dataInfo.post_id)
         },
         async doSearch() {
             this.dispEditor = false
             this.InputComment = ''
-            await this.$serve.postReadfeedbacks(this.id, '')
 
-            Object.assign(this.params, { division: 'BBS' })
+            Object.assign(this.params, { division: 'Info' })
             const response = await this.$serve.getPostsrforId('', this.id)
 
             this.postList = this.formatPostList(response.data.data)
@@ -416,48 +439,97 @@ export default {
         },
         putFeedbacks(kind, post_id, feedbackId, index) {
             let tempKind = kind
+            console.log('user', this.$store.getters.topManagementInfo.user_id)
+
             if (index === undefined) {
-                if (this.postList[0].feedback.mine.kind == kind) {
-                    tempKind = 2
+                console.log('feedback', this.postList[0].feedback.mine.user_id)
+                if (
+                    this.postList[0].feedback.mine.kind == kind &&
+                    this.postList[0].feedback.mine.user_id ==
+                        this.$store.getters.topManagementInfo.user_id
+                ) {
+                    tempKind = 0
                 }
             } else {
+                console.log(
+                    'feedback user_id',
+                    this.postList[0].commnet[index].feedback.mine.user_id
+                )
+                console.log(
+                    'feedback kind',
+                    this.postList[0].commnet[index].feedback.mine.kind
+                )
                 if (
-                    this.postList[0].commnet[index].feedback.mine.kind == kind
+                    this.postList[0].commnet[index].feedback.mine.kind ==
+                        kind &&
+                    this.postList[0].commnet[index].feedback.mine.user_id ==
+                        this.$store.getters.topManagementInfo.user_id
                 ) {
-                    tempKind = 2
+                    tempKind = 0
                 }
             }
 
             let params = {
                 feedbackId: feedbackId,
-                post_id: post_id,
-                kind: tempKind,
+                code: this.$store.getters.getOidcCode,
+                feedback: {
+                    post_id: post_id,
+                    kind: tempKind,
+                },
             }
             this.$serve.putfeedbacks(params, '').then((res) => {
-                if (index === undefined) {
-                    Object.assign(this.postList[0].feedback, res.data.feedback)
-                } else {
-                    Object.assign(
-                        this.postList[0].commnet[index].feedback,
-                        res.data.feedback
-                    )
+                console.log(res)
+                if (res.data.status === 'SUCCESS') {
+                    if (index === undefined) {
+                        Object.assign(
+                            this.postList[0].feedback,
+                            res.data.feedback
+                        )
+                    } else {
+                        Object.assign(
+                            this.postList[0].commnet[index].feedback,
+                            res.data.feedback
+                        )
+                    }
+                    console.log('tempKind', tempKind)
+                    let message = '評価がキャンセルしました。'
+                    if (tempKind === 1) {
+                        message = 'Good評価ありがとうございました。'
+                    }
+                    if (tempKind === 2) {
+                        message = 'Bad評価ありがとうございました。'
+                    }
+                    this.$toast.success(message, {
+                        position: 'top-right',
+                    })
                 }
             })
         },
         sendPosts(post_id) {
             let param = {
+                code: this.$store.getters.getOidcCode,
                 post: {
                     post_id: post_id,
                     content: this.InputComment,
                 },
             }
             let res = this.$serve.postPosts(param)
+            this.$toast.success('送信成功しました。', {
+                position: 'top-right',
+            })
+
             this.doSearch()
         },
     },
     mounted() {
+        console.log('one')
+        this.$serve.postReadfeedbacks(this.id, '')
         this.doSearch()
     },
 }
 </script>
-<style scoped></style>
+<style type="text/css">
+ol {
+    list-style-type: decimal;
+}
+</style>

@@ -45,7 +45,7 @@ service.interceptors.response.use(
     (response) => {
         store.dispatch('setIsLoadingShow', false)
         store.dispatch('setLoadingShowFlg', true)
-        console.log('OK', response.data.status)
+        // console.log('OK', response.data.status)
         // if (response.data.status !== 'SUCCESS') {
         //     router.push({
         //         name: 'error',

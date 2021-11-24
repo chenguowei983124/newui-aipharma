@@ -149,6 +149,12 @@ const bbsScops = [
     { value: '1', title: '組織' },
     { value: '2', title: 'グループ' },
 ]
+
+const searchBbsScops = [
+    { value: '0', title: '全体' },
+    { value: '1', title: '組織' },
+    { value: '2', title: 'グループ' },
+]
 const bbsGenreInfo = [
     { value: 'notice', title: '告知' },
     { value: 'event', title: 'イベント' },
@@ -246,4 +252,5 @@ export default {
     preavoidsDateSort,
     singleSelectItem,
     APIKEY,
+    searchBbsScops,
 }

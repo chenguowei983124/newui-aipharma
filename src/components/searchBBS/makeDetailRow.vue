@@ -215,6 +215,10 @@ export default {
             type: Function,
             default: () => {},
         },
+        putFeedbacks: {
+            type: Function,
+            default: () => {},
+        },
         items: {},
         postList: Array,
         index: 0,
@@ -284,39 +288,39 @@ export default {
             this.$store.dispatch('setSearchTagsLable', tagsLable)
             this.exeSearchRefishOpts()
         },
-        putFeedbacks(kind, post_id, feedbackId, index) {
-            console.log('text', this.postList[0].feedback)
-            // console.log('text', this.postList[0].commnet[index].feedback)
-            let tempKind = kind
-            if (index === undefined) {
-                if (this.postList[0].feedback.mine.kind == kind) {
-                    tempKind = 2
-                }
-            } else {
-                if (
-                    this.postList[0].commnet[index].feedback.mine.kind == kind
-                ) {
-                    tempKind = 2
-                }
-            }
+        // putFeedbacks(kind, post_id, feedbackId, index) {
+        //     console.log('text', this.postList[0].feedback)
+        //     // console.log('text', this.postList[0].commnet[index].feedback)
+        //     let tempKind = kind
+        //     if (index === undefined) {
+        //         if (this.postList[0].feedback.mine.kind == kind) {
+        //             tempKind = 2
+        //         }
+        //     } else {
+        //         if (
+        //             this.postList[0].commnet[index].feedback.mine.kind == kind
+        //         ) {
+        //             tempKind = 2
+        //         }
+        //     }
 
-            let params = {
-                feedbackId: feedbackId,
-                post_id: post_id,
-                kind: tempKind,
-                code: this.$store.getters.getOidcCode,
-            }
-            this.$serve.putfeedbacks(params).then((res) => {
-                if (index === undefined) {
-                    Object.assign(this.postList[0].feedback, res.data.feedback)
-                } else {
-                    Object.assign(
-                        this.postList[0].commnet[index].feedback,
-                        res.data.feedback
-                    )
-                }
-            })
-        },
+        //     let params = {
+        //         feedbackId: feedbackId,
+        //         post_id: post_id,
+        //         kind: tempKind,
+        //         code: this.$store.getters.getOidcCode,
+        //     }
+        //     this.$serve.putfeedbacks(params).then((res) => {
+        //         if (index === undefined) {
+        //             Object.assign(this.postList[0].feedback, res.data.feedback)
+        //         } else {
+        //             Object.assign(
+        //                 this.postList[0].commnet[index].feedback,
+        //                 res.data.feedback
+        //             )
+        //         }
+        //     })
+        // },
     },
     created() {},
 }
