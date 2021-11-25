@@ -112,86 +112,88 @@ export default {
                 JSON.stringify(this.$route.query) !== '{}' &&
                 this.$route.query.id !== undefined
             ) {
+                console.log('delete search 1')
                 Object.assign(this.params, { id: this.$route.query.id })
                 await this.$serve
                     .getPostsrforId('', this.$route.query.id)
                     .then((response) => {
                         this.setSearchResult(response, pgNo)
                     })
-            }
-            if (JSON.stringify(this.$route.query) === '{}') {
-                this.resetSearchBar()
-                const PAGE_LIMIT = 20
-                Object.assign(this.params, { division: 'BBS' })
-                const queryStringData = {
-                    page: pgNo,
-                    limit: PAGE_LIMIT,
-                    code: this.$store.getters.getOidcCode,
-
-                    filter: {
-                        division: 'BBS',
-                        free_text: '',
-                        targets: {
-                            title: true,
-                            content: true,
-                            coment: true,
-                            creator: true,
-                            updater: true,
-                            facility: true,
-                        },
-                        tags: [],
-                        scope: '0',
-                        create_from: '',
-                        create_to: '',
-                        publish: false,
-                        order: 'created_at-desc',
-                    },
-                }
-
-                await this.$serve
-                    .getPostList(queryStringData)
-                    .then((response) => {
-                        this.setSearchResult(response, pgNo)
-                    })
             } else {
-                this.resetSearchBar()
-                const PAGE_LIMIT = 20
-                Object.assign(this.params, { division: 'BBS' })
+                if (JSON.stringify(this.$route.query) === '{}') {
+                    this.resetSearchBar()
+                    const PAGE_LIMIT = 20
+                    Object.assign(this.params, { division: 'BBS' })
+                    const queryStringData = {
+                        page: pgNo,
+                        limit: PAGE_LIMIT,
+                        code: this.$store.getters.getOidcCode,
 
-                const queryStringData = {
-                    code: this.$store.getters.getOidcCode,
-                    page: pgNo,
-                    limit: PAGE_LIMIT,
-
-                    filter: {
-                        division: 'BBS',
-                        free_text: this.params.free_text,
-                        targets: {
-                            title: this.params.checkTitle,
-                            content: this.params.checkContent,
-                            coment: this.params.checkComment,
-                            creator: this.params.checkLastEditor,
-                            updater: this.params.checkLastEditor,
-                            facility: this.params.checkFacilityName,
+                        filter: {
+                            division: 'BBS',
+                            free_text: '',
+                            targets: {
+                                title: true,
+                                content: true,
+                                coment: true,
+                                creator: true,
+                                updater: true,
+                                facility: true,
+                            },
+                            tags: [],
+                            scope: '0',
+                            create_from: '',
+                            create_to: '',
+                            publish: false,
+                            order: 'created_at-desc',
                         },
-                        tags:
-                            this.params.tags === undefined ||
-                            this.params.tags === ''
-                                ? []
-                                : this.params.tags.split(','),
-                        scope: this.params.scope,
-                        create_from: this.params.dateFrom,
-                        create_to: this.params.dateTo,
-                        publish: false,
-                        order: this.params.sort,
-                    },
-                }
+                    }
+                    console.log('delete search 2')
+                    await this.$serve
+                        .getPostList(queryStringData)
+                        .then((response) => {
+                            this.setSearchResult(response, pgNo)
+                        })
+                } else {
+                    this.resetSearchBar()
+                    const PAGE_LIMIT = 20
+                    Object.assign(this.params, { division: 'BBS' })
 
-                await this.$serve
-                    .getPostList(queryStringData)
-                    .then((response) => {
-                        this.setSearchResult(response, pgNo)
-                    })
+                    const queryStringData = {
+                        code: this.$store.getters.getOidcCode,
+                        page: pgNo,
+                        limit: PAGE_LIMIT,
+
+                        filter: {
+                            division: 'BBS',
+                            free_text: this.params.free_text,
+                            targets: {
+                                title: this.params.checkTitle,
+                                content: this.params.checkContent,
+                                coment: this.params.checkComment,
+                                creator: this.params.checkLastEditor,
+                                updater: this.params.checkLastEditor,
+                                facility: this.params.checkFacilityName,
+                            },
+                            tags:
+                                this.params.tags === undefined ||
+                                this.params.tags === ''
+                                    ? []
+                                    : this.params.tags.split(','),
+                            scope: this.params.scope,
+                            create_from: this.params.dateFrom,
+                            create_to: this.params.dateTo,
+                            publish: false,
+                            order: this.params.sort,
+                        },
+                    }
+                    console.log('delete search 3')
+                    await this.$serve
+                        .getPostList(queryStringData)
+                        .then((response) => {
+                            this.setSearchResult(response, pgNo)
+                        })
+                }
             }
         },
         setSearchResult(response, pgNo) {

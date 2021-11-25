@@ -10,6 +10,14 @@ export default {
         searchAllPreAvoid: { allCount: '' },
         searchAllbulletinBoardInfo: { allCount: '' },
         searchAllGoogleInfo: {},
+        searchAllStatus: {
+            DiKnowledge: false,
+            AIDiKnowledge: false,
+            Organization: false,
+            PreAvoid: false,
+            BBS: false,
+            Google: false,
+        },
     }),
 
     getters: {
@@ -40,6 +48,17 @@ export default {
         getSearchValue(state) {
             return state.searchKey
         },
+        getSearchStatus(state) {
+            // return state.searchAllStatus
+            return (
+                state.searchAllStatus.AIDiKnowledge &&
+                state.searchAllStatus.DiKnowledge &&
+                state.searchAllStatus.Organization &&
+                state.searchAllStatus.PreAvoid &&
+                state.searchAllStatus.BBS &&
+                state.searchAllStatus.Google
+            )
+        },
     },
 
     mutations: {
@@ -67,6 +86,9 @@ export default {
         setSearchKey(state, info) {
             state.searchKey = info
         },
+        setSearchAllStatus(state, info) {
+            state.searchAllStatus = info
+        },
     },
 
     actions: {
@@ -76,7 +98,7 @@ export default {
         // ========================================
         // DI ナレッジシェアAPI実行
         // ========================================
-        async searchALLLDiKnowledgeInfo({ rootState, state, commit }) {
+        async searchALLLDiKnowledgeInfo({ rootState, state, commit, getters }) {
             let params = {
                 question: state.searchKey,
             }
@@ -85,12 +107,23 @@ export default {
                 .then((response) => {
                     // 検索結果格納
                     commit('searchAllDiKnowledgeInfo', response.data)
+                    // 検索状態設定
+                    let status = state.searchAllStatus
+                    status.DiKnowledge = true
+                    commit('setSearchAllStatus', status)
+
+                    if (getters.getSearchStatus) {
+                        let falseFlg = false
+                        let trueFlg = true
+                        commit('basic', { key: 'loadingShowFlg', trueFlg })
+                        commit('basic', { key: 'isLoadingShow', falseFlg })
+                    }
                 })
         },
         // ========================================
         // DI ナレッジシェア AI API実行
         // ========================================
-        async searchAIDiKnowledgeInfo({ rootState, state, commit }) {
+        async searchAIDiKnowledgeInfo({ rootState, state, commit, getters }) {
             let params = {
                 question: state.searchKey,
             }
@@ -99,12 +132,28 @@ export default {
                 .then((response) => {
                     // 検索結果格納
                     commit('searchAIDiInfo', response.data)
+
+                    // 検索状態設定
+                    let status = state.searchAllStatus
+                    status.AIDiKnowledge = true
+                    commit('setSearchAllStatus', status)
+                    if (getters.getSearchStatus) {
+                        let falseFlg = false
+                        let trueFlg = true
+                        commit('basic', { key: 'loadingShowFlg', trueFlg })
+                        commit('basic', { key: 'isLoadingShow', falseFlg })
+                    }
                 })
         },
         // ========================================
         // 組織内 DI 記録（Q&A）API実行
         // ========================================
-        async searchALLLOrganizationInfo({ rootState, state, commit }) {
+        async searchALLLOrganizationInfo({
+            rootState,
+            state,
+            commit,
+            getters,
+        }) {
             let params = {
                 question: state.searchKey,
             }
@@ -113,12 +162,23 @@ export default {
                 .then((response) => {
                     // 検索結果格納
                     commit('searchAllOrganizationInfo', response.data)
+
+                    // 検索状態設定
+                    let status = state.searchAllStatus
+                    status.Organization = true
+                    commit('setSearchAllStatus', status)
+                    if (getters.getSearchStatus) {
+                        let falseFlg = false
+                        let trueFlg = true
+                        commit('basic', { key: 'loadingShowFlg', trueFlg })
+                        commit('basic', { key: 'isLoadingShow', falseFlg })
+                    }
                 })
         },
         // ========================================
         // 症例API実行
         // ========================================
-        async searchALLLPreAvoidInfo({ rootState, state, commit }) {
+        async searchALLLPreAvoidInfo({ rootState, state, commit, getters }) {
             let params = {
                 searchKey: state.searchKey,
             }
@@ -127,12 +187,28 @@ export default {
                 .then((response) => {
                     // 検索結果格納
                     commit('searchAllPreAvoidInfo', response.data)
+
+                    // 検索状態設定
+                    let status = state.searchAllStatus
+                    status.PreAvoid = true
+                    commit('setSearchAllStatus', status)
+                    if (getters.getSearchStatus) {
+                        let falseFlg = false
+                        let trueFlg = true
+                        commit('basic', { key: 'loadingShowFlg', trueFlg })
+                        commit('basic', { key: 'isLoadingShow', falseFlg })
+                    }
                 })
         },
         // ========================================
         // 掲示板情報取得API実行
         // ========================================
-        async searchALLBulletinBoardInfo({ rootState, state, commit }) {
+        async searchALLBulletinBoardInfo({
+            rootState,
+            state,
+            commit,
+            getters,
+        }) {
             let params = {
                 searchKey: state.searchKey,
             }
@@ -141,22 +217,56 @@ export default {
                 .then((response) => {
                     // 検索結果格納
                     commit('searchALLBulletinBoardInfo', response.data)
+
+                    // 検索状態設定
+                    let status = state.searchAllStatus
+                    status.BBS = true
+                    commit('setSearchAllStatus', status)
+                    if (getters.getSearchStatus) {
+                        let falseFlg = false
+                        let trueFlg = true
+                        commit('basic', { key: 'loadingShowFlg', trueFlg })
+                        commit('basic', { key: 'isLoadingShow', falseFlg })
+                    }
                 })
         },
         // ========================================
         // Google情報取得API実行
         // ========================================
-        async searchGoogleInfo({ rootState, state, commit }) {
+        async searchGoogleInfo({ rootState, state, commit, getters }) {
             let params = {
                 searchKey: state.searchKey,
             }
             const info = await serve
                 .getALLGoogle_Info(params)
                 .then((response) => {
-                    // console.log('getALLGoogle_Info', response.data)
                     // 検索結果格納
                     commit('setALLGoogleInfo', response.data)
+
+                    // 検索状態設定
+                    let status = state.searchAllStatus
+                    status.Google = true
+                    commit('setSearchAllStatus', status)
+                    if (getters.getSearchStatus) {
+                        let falseFlg = false
+                        let trueFlg = true
+                        commit('basic', { key: 'loadingShowFlg', trueFlg })
+                        commit('basic', { key: 'isLoadingShow', falseFlg })
+                    }
                 })
+        },
+        initSearchAllStatus({ rootState, state, commit }) {
+            // 検索状態設定
+            let status = state.searchAllStatus
+            console.log('searchAllStatus', state)
+            console.log('rootState', rootState)
+            status.DiKnowledge = false
+            status.AIDiKnowledge = false
+            status.Organization = false
+            status.PreAvoid = false
+            status.BBS = false
+            status.Google = false
+            commit('setSearchAllStatus', status)
         },
     },
 }
