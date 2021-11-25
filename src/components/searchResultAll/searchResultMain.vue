@@ -152,122 +152,161 @@ import googleItem from '../common/searchResult/googleItem.vue'
 import pharmaceuticalsItem from '../common/searchResult/pharmaceuticalsItem.vue'
 import jstageItem from '../common/searchResult/jstageItem.vue'
 export default {
-  components: {
-    resutTag,
-    resultDetailRow,
-    resultExternalLinkdetailRow,
-    carousel,
-    googleItem,
-    pharmaceuticalsItem,
-    jstageItem,
-  },
-  props: {},
-  data() {
-    return {}
-  },
-  computed: {
-    diKnowledge: {
-      get: function () {
-        var diKnowledgeitems = []
-        if (this.$store.getters.getSearchAIDiKnowledge != undefined) {
-          if (Object.keys(this.$store.getters.getSearchAIDiKnowledge).length !== 0) {
-            diKnowledgeitems.push(this.$store.getters.getSearchAIDiKnowledge)
-          }
-        }
-        if (this.$store.getters.getSearchAllDiKnowledge.details != undefined) {
-          if (Object.keys(this.$store.getters.getSearchAllDiKnowledge.details).length !== 0) {
-            for (var i in this.$store.getters.getSearchAllDiKnowledge.details) {
-              diKnowledgeitems.push(this.$store.getters.getSearchAllDiKnowledge.details[i])
+    components: {
+        resutTag,
+        resultDetailRow,
+        resultExternalLinkdetailRow,
+        carousel,
+        googleItem,
+        pharmaceuticalsItem,
+        jstageItem,
+    },
+    props: {},
+    data() {
+        return {}
+    },
+    computed: {
+        diKnowledge: {
+            get: function () {
+                var diKnowledgeitems = []
+                if (this.$store.getters.getSearchAIDiKnowledge != undefined) {
+                    if (
+                        Object.keys(this.$store.getters.getSearchAIDiKnowledge)
+                            .length !== 0
+                    ) {
+                        diKnowledgeitems.push(
+                            this.$store.getters.getSearchAIDiKnowledge
+                        )
+                    }
+                }
+                if (
+                    this.$store.getters.getSearchAllDiKnowledge.details !=
+                    undefined
+                ) {
+                    if (
+                        Object.keys(
+                            this.$store.getters.getSearchAllDiKnowledge.details
+                        ).length !== 0
+                    ) {
+                        for (var i in this.$store.getters
+                            .getSearchAllDiKnowledge.details) {
+                            diKnowledgeitems.push(
+                                this.$store.getters.getSearchAllDiKnowledge
+                                    .details[i]
+                            )
+                        }
+                    }
+                }
+
+                return diKnowledgeitems
+            },
+        },
+        searchResults: {
+            get: function () {
+                if (
+                    this.$store.getters.getSearchAllOrganizationDidDocument
+                        .details != undefined
+                ) {
+                    if (
+                        Object.keys(
+                            this.$store.getters
+                                .getSearchAllOrganizationDidDocument.searchWords
+                        ).length !== 0
+                    ) {
+                        return this.$store.getters
+                            .getSearchAllOrganizationDidDocument.searchWords
+                    }
+                } else {
+                    return this.$store.getters.getSearchAllDiKnowledge
+                        .searchWords
+                }
+            },
+        },
+        searchOrganizationCount: {
+            get: function () {
+                if (
+                    this.$store.getters.getSearchAllOrganizationDidDocument
+                        .allCount != undefined
+                ) {
+                    return this.$store.getters
+                        .getSearchAllOrganizationDidDocument.allCount
+                } else {
+                    return 0
+                }
+            },
+        },
+        preAvoidCount: {
+            get: function () {
+                if (
+                    this.$store.getters.getSearchAllPreAvoid.allCount !=
+                    undefined
+                ) {
+                    return this.$store.getters.getSearchAllPreAvoid.allCount
+                } else {
+                    return 0
+                }
+            },
+        },
+        bulletinBoardInfoCount: {
+            get: function () {
+                if (
+                    this.$store.getters.getSearchAllBulletinBoardInfo
+                        .allCount != undefined
+                ) {
+                    return this.$store.getters.getSearchAllBulletinBoardInfo
+                        .allCount
+                } else {
+                    return 0
+                }
+            },
+        },
+    },
+    methods: {
+        async getDispData() {
+            if (this.$route.query.searchKey != undefined) {
+                this.$store.dispatch(
+                    'saveSearchValue',
+                    this.$route.query.searchKey
+                )
+            } else {
+                this.$store.dispatch('saveSearchValue', '')
             }
-          }
-        }
+            this.execSearch()
+        },
+        execSearch() {
+            this.$store.dispatch('initSearchAllStatus')
+            this.$store.dispatch('setLoadingShowFlg', false)
+            this.$store.dispatch('setIsLoadingShow', true)
 
-        return diKnowledgeitems
-      },
+            this.$store.dispatch('searchALLLDiKnowledgeInfo')
+            this.$store.dispatch('searchAIDiKnowledgeInfo')
+            this.$store.dispatch('searchALLLOrganizationInfo')
+            this.$store.dispatch('searchALLLPreAvoidInfo')
+            this.$store.dispatch('searchALLBulletinBoardInfo')
+            this.$store.dispatch('searchGoogleInfo')
+        },
     },
-    searchResults: {
-      get: function () {
-        if (this.$store.getters.getSearchAllOrganizationDidDocument.details != undefined) {
-          if (Object.keys(this.$store.getters.getSearchAllOrganizationDidDocument.searchWords).length !== 0) {
-            return this.$store.getters.getSearchAllOrganizationDidDocument.searchWords
-          }
-        } else {
-          return this.$store.getters.getSearchAllDiKnowledge.searchWords
-        }
-      }
-    },
-    searchOrganizationCount: {
-      get: function () {
-        if (this.$store.getters.getSearchAllOrganizationDidDocument.allCount != undefined) {
-          return this.$store.getters.getSearchAllOrganizationDidDocument.allCount
-        } else {
-          return 0
-        }
-      }
-    },
-    preAvoidCount: {
-      get: function () {
-        if (this.$store.getters.getSearchAllPreAvoid.allCount != undefined) {
-          return this.$store.getters.getSearchAllPreAvoid.allCount
-        } else {
-          return 0
-        }
-      }
-    },
-    bulletinBoardInfoCount: {
-      get: function () {
-        if (this.$store.getters.getSearchAllBulletinBoardInfo.allCount != undefined) {
-          return this.$store.getters.getSearchAllBulletinBoardInfo.allCount
-        } else {
-          return 0
-        }
-      }
-    }
-  },
-  methods: {
-    async getDispData() {
-      if (this.$route.query.searchKey != undefined) {
-        this.$store.dispatch(
-          'saveSearchValue',
-          this.$route.query.searchKey
-        )
-      } else {
-        this.$store.dispatch('saveSearchValue', '')
-      }
+    watch: {
+        $route: function () {
+            if (this.$route.path != '/searchResultAll') {
+                return
+            }
+            if (JSON.stringify(this.$route.query.searchKey) == '{}') {
+                this.$store.dispatch('saveSearchValue', '')
+            }
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                this.$store.dispatch(
+                    'saveSearchValue',
+                    this.$route.query.searchKey
+                )
+            }
 
-      this.$store.dispatch('searchALLLDiKnowledgeInfo')
-      this.$store.dispatch('searchAIDiKnowledgeInfo')
-      this.$store.dispatch('searchALLLOrganizationInfo')
-      this.$store.dispatch('searchALLLPreAvoidInfo')
-      this.$store.dispatch('searchALLBulletinBoardInfo')
-      this.$store.dispatch('searchGoogleInfo')
+            this.execSearch()
+        },
     },
-  },
-  watch: {
-    $route: function () {
-      if (this.$route.path != '/searchResultAll') {
-        return
-      }
-      if (JSON.stringify(this.$route.query.searchKey) == '{}') {
-        this.$store.dispatch('saveSearchValue', '')
-      }
-      if (JSON.stringify(this.$route.query) !== '{}') {
-        this.$store.dispatch(
-          'saveSearchValue',
-          this.$route.query.searchKey
-        )
-      }
-      this.$store.dispatch('searchALLLDiKnowledgeInfo')
-      this.$store.dispatch('searchAIDiKnowledgeInfo')
-      this.$store.dispatch('searchALLLOrganizationInfo')
-      this.$store.dispatch('searchALLLPreAvoidInfo')
-      this.$store.dispatch('searchALLBulletinBoardInfo')
-      this.$store.dispatch('searchGoogleInfo')
+    mounted() {
+        this.getDispData()
     },
-  },
-  mounted() {
-    this.getDispData()
-  },
 }
 </script>
 <style scoped></style>
