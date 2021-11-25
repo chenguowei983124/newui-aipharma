@@ -195,7 +195,7 @@ export default {
         },
         formatPostList(data) {
             let list = this.postList
-            console.log('formatPostList', list)
+            console.log('data', data)
             for (let i = 0; i < data.length; i++) {
                 let listDetail = {
                     id: data[i].post.id,
@@ -210,14 +210,16 @@ export default {
                             : 'group',
                     viewCount: data[i].post.feedback.viewed,
                     notificationType: data[i].post.genre,
+                    browseRequired: data[i].post.browseRequired,
                     userName: data[i].post.user_data.user_name,
                     workplace: data[i].post.user_data.workplace,
                     commnetCount: data[i].post.commnet.length,
                     clicked: false,
                 }
+
                 list.push(listDetail)
             }
-
+            console.log(list)
             return list
         },
         doSort(val) {

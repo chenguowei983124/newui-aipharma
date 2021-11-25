@@ -22,6 +22,11 @@
                         :itemValue="row.date"
                         v-if="row.date != undefined"
                     ></result-detail-row-item>
+                    <!-- 要閲覧ラベル -->
+                    <result-detail-row-item
+                        itemType="1"
+                        typeKB="browse"
+                    ></result-detail-row-item>
                 </div>
                 <!-- 告知ラベル -->
                 <result-detail-row-item

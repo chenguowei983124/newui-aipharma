@@ -1,6 +1,6 @@
 <template>
     <div class="mx-auto h-screen-60 md:h-screen-69" id="div_postList">
-        <div class="flex justify-between h-10 border-b-2 border-notice,">
+        <div class="flex justify-between h-10 border-b-2 border-grayline">
             <div class="notoSansJpAndTwentyBold">スレッド</div>
             <div class="h-10 w-10 mt-1" @click="closeClick">
                 <x-icon-svg color="#666666"></x-icon-svg>
@@ -32,8 +32,13 @@
                                             :itemValue="postList[0].date"
                                             v-if="postList[0].date != undefined"
                                         ></result-detail-row-item>
+                                        <!-- 要閲覧ラベル -->
+                                        <result-detail-row-item
+                                            itemType="1"
+                                            addStyle="ml-1"
+                                            typeKB="browse"
+                                        ></result-detail-row-item>
                                     </div>
-
                                     <result-detail-row-item
                                         itemType="1"
                                         :typeKB="postList[0].notificationType"
@@ -312,6 +317,7 @@
 <script>
 import XIconSvg from '../common/svgImage/bbsXIconSvg.vue'
 import sendMessageIconSvg from '../common/svgImage/sendMessageIconSvg.vue'
+import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 import Good from '../common/svgImage/good.vue'
 import bad from '../common/svgImage/bad.vue'
 import Editor from '@tinymce/tinymce-vue'
@@ -327,6 +333,7 @@ export default {
         bad,
         EditAndDelete,
         MakeDetailRow,
+        ResultDetailRowItem,
     },
     props: {
         id: '',

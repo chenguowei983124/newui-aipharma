@@ -35,7 +35,7 @@
                     </div>
                     <div
                         class="
-                            md:ml-2 md:mt-22 md:border-l-2 md:border-blueline
+                            md:ml-2 md:mt-22 md:border-l-2 md:border-grayline
                         "
                         v-if="dispFlg"
                     ></div>
