@@ -279,12 +279,8 @@ const serve = {
     //===========================
     async getPostsrforId(code, id) {
         let data = []
-        code = 'asdf'
-        // if (!!code) {
-        console.log('asdfa')
         const queryStringData = {
             code: code,
-            postId: id,
         }
         const queryString = queryStringData
         // const queryString = new URLSearchParams(queryStringData).toString()
@@ -913,7 +909,7 @@ const serve = {
             params: {
                 id: params.id,
                 confidence: confidenceTemp,
-                timestamp: new Date().getTime()
+                timestamp: new Date().getTime(),
             },
         })
         return data
