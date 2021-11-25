@@ -6,11 +6,11 @@
             headerStyle="titleOnlyUnderlineBgColorBlue"
             title="お知らせ"
             titleStyle="bulletinBoardInfoTitle"
-            titleURL="notification"
+            titleURL="searchNotification"
         >
             <result-detail-row
                 class="searchResult_detail_blue"
-                routerPath="notification"
+                routerPath="searchNotification"
                 :sites="$store.getters.topNoticeInfo.details"
                 :sub2="['title']"
             >
@@ -26,7 +26,7 @@
         >
             <div class="tab-a1 hidden">
                 <result-detail-row
-                    routerPath="notification"
+                    routerPath="searchNotification"
                     class="searchResult_detail_blue"
                     :sites="$store.getters.topNoticeInfo.details"
                     :sub2="['title']"
