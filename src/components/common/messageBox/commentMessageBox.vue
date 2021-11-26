@@ -283,7 +283,7 @@ export default {
         TrashIconSvg,
         CheckIconSvg,
     },
-    props: { qaId: '', rowIndex: 0 },
+    props: { qaId: '', rowIndex: 0 , commentsFlag: '' },
     computed: {
         getCommentData() {
             get: {
@@ -355,19 +355,37 @@ export default {
                                     // )
                                     this.searchMessage()
                                     // Good,Bad,comment更新
-                                    // Good
-                                    this.$store.getters.organizationSearchInfo.qas[
-                                        this.rowIndex
-                                    ].feedbackGood = res.data.goodFeedbackCount
-                                    // bad
-                                    this.$store.getters.organizationSearchInfo.qas[
-                                        this.rowIndex
-                                    ].feedbackBad = res.data.badFeedbackCount
-                                    //comment
-                                    this.$store.getters.organizationSearchInfo.qas[
-                                        this.rowIndex
-                                    ].feedbackComment =
-                                        res.data.commentFeedbackCount
+                                    if (this.commentsFlag == 'aiComments') {
+                                        // Good
+                                        this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[this.rowIndex].feedbackGood 
+                                            = res.data.goodFeedbackCount
+                                        // bad
+                                        this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[this.rowIndex].feedbackBad 
+                                            = res.data.badFeedbackCount
+                                        //comment
+                                        this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[this.rowIndex].feedbackComment 
+                                            = res.data.commentFeedbackCount
+                                    } else if (this.commentsFlag == 'diComments') {
+                                        // Good
+                                        this.$store.getters.dIKnowledgeShareSearchInfo.qas[this.rowIndex].feedbackGood 
+                                            = res.data.goodFeedbackCount
+                                        // bad
+                                        this.$store.getters.dIKnowledgeShareSearchInfo.qas[this.rowIndex].feedbackBad 
+                                            = res.data.badFeedbackCount
+                                        //comment
+                                        this.$store.getters.dIKnowledgeShareSearchInfo.qas[this.rowIndex].feedbackComment 
+                                            = res.data.commentFeedbackCount
+                                    } else if (this.commentsFlag == 'orgComments') {
+                                        // Good
+                                        this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackGood 
+                                            = res.data.goodFeedbackCount
+                                        // bad
+                                        this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackBad 
+                                            = res.data.badFeedbackCount
+                                        //comment
+                                        this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackComment 
+                                            = res.data.commentFeedbackCount
+                                    }
                                 }
                             })
                         }
@@ -411,20 +429,40 @@ export default {
                 this.searchMessage()
 
                 // Good,Bad,comment更新
-                // GOOd
-                this.$store.getters.organizationSearchInfo.qas[
-                    this.rowIndex
-                ].feedbackGood = res.data.goodFeedbackCount
-                // bad
-                this.$store.getters.organizationSearchInfo.qas[
-                    this.rowIndex
-                ].feedbackBad = res.data.badFeedbackCount
-
-                //comment
-                this.$store.getters.organizationSearchInfo.qas[
-                    this.rowIndex
-                ].feedbackComment = res.data.commentFeedbackCount
-                console.log(this.itemList)
+                if (this.commentsFlag == 'aiComments') {
+                    // GOOd
+                    this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[this.rowIndex].feedbackGood 
+                        = res.data.goodFeedbackCount
+                    // bad
+                    this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[this.rowIndex].feedbackBad 
+                        = res.data.badFeedbackCount
+                    //comment
+                    this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[this.rowIndex].feedbackComment 
+                        = res.data.commentFeedbackCount
+                    console.log(this.itemList)
+                } else if (this.commentsFlag == 'diComments') {
+                     // GOOd
+                    this.$store.getters.dIKnowledgeShareSearchInfo.qas[this.rowIndex].feedbackGood 
+                        = res.data.goodFeedbackCount
+                    // bad
+                    this.$store.getters.dIKnowledgeShareSearchInfo.qas[this.rowIndex].feedbackBad 
+                        = res.data.badFeedbackCount
+                    //comment
+                    this.$store.getters.dIKnowledgeShareSearchInfo.qas[this.rowIndex].feedbackComment 
+                        = res.data.commentFeedbackCount
+                    console.log(this.itemList)
+                } else if (this.commentsFlag == 'orgComments') {
+                    // GOOd
+                    this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackGood 
+                        = res.data.goodFeedbackCount
+                    // bad
+                    this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackBad 
+                        = res.data.badFeedbackCount
+                    //comment
+                    this.$store.getters.organizationSearchInfo.qas[this.rowIndex].feedbackComment
+                        = res.data.commentFeedbackCount
+                    console.log(this.itemList)
+                }
 
                 this.inputComment = ''
             })

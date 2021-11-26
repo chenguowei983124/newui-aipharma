@@ -579,7 +579,7 @@ const serve = {
     async getALLOrganizationInfo(params) {
         const data = await axios('/api/qa/search_di_record', {
             method: 'post',
-            params: params,
+            data: params,
         })
         return data
     },
@@ -878,7 +878,6 @@ const serve = {
                 data: params,
             }
         )
-
         return data
     },
     //===========================
@@ -909,19 +908,11 @@ const serve = {
             params: {
                 id: params.id,
                 confidence: confidenceTemp,
-                timestamp: new Date().getTime(),
             },
         })
         return data
     },
-    // async getOwndIKnowledgeShare(param) {
-    //     const data = await axios('/preavoid/get_DIKnowledgeShare_search_info', {
-    //         method: 'get',
-    //         params: param,
-    //     })
-
-    //     return data
-    // },
+    
     async getTest() {
         const data = await axios('/preavoid/get_topmenu_Noticel_info_test', {
             method: 'get',

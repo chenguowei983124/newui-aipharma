@@ -86,10 +86,12 @@
         <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">
             <div class="grid grid-cols-1 gap-1 md:space-y-3.75">
                 <search-di-knowledge-ai
+                    ref="mainAi"
                     v-on:listenToChildEventAi="showMsgToParent"
                 ></search-di-knowledge-ai>
                 <search-di-knowledge-main
                     ref="mainDi"
+                    @clickAi="clickAi"
                     v-on:listenToChildEventDi="showMsgToParent"
                     :exeSearchRefishOpts="refishTagList"
                 ></search-di-knowledge-main>
@@ -153,6 +155,9 @@ export default {
     }
   },
   methods: {
+    clickAi:function(index, count){
+        this.$refs.mainAi.openDetailDisp(index, count);
+      },
     // スクロール
     getScroll: function (value) {
       this.isScroll = value

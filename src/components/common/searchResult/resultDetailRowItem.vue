@@ -5,7 +5,7 @@
         v-if="itemType == '3'"
         :to="{
             name: routerPath,
-            query: { id: id },
+            query: { id: id, timestamp: new Date().getTime() },
         }"
     >
         <span :class="itemClass">{{ itemValue }}</span></router-link
@@ -34,11 +34,18 @@
         v-if="itemType == '8'"
         :to="{
             name: routerPath,
-            query: { id: id, confidence: confidence },
+            query: {
+                id: id,
+                confidence:
+                    typeof confidence == 'undefined' ||
+                    confidence == 'undefined'
+                        ? 'nil'
+                        : confidence,
+            },
         }"
     >
         <span :class="itemClass" class="font-NotoSansJp"
-            >Q:{{ itemValue }}</span
+            >Q&nbsp;:&nbsp;{{ itemValue }}</span
         ></router-link
     >
     <span v-if="itemType == '9'" :class="itemClass"

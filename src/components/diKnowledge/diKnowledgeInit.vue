@@ -87,8 +87,8 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('getDiKnowledgeShareNewQAInfo')
-    this.$store.dispatch('getDiKnowledgeShareLookcarefullyQAInfo')
+    ///api/qa/get_trendy_tags
+    // this.$store.dispatch('getOrganizationSeartorenndoTab')
   },
 }
 </script>

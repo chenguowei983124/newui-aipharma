@@ -557,10 +557,7 @@ export default {
                         this.$props.form == this.$constant.formList.TOP
                             ? 'last_updated_at_desc'
                             : this.$store.getters.getSortDI,
-                    page:
-                        this.$props.form == this.$constant.formList.TOP
-                            ? '1'
-                            : this.$store.getters.getPageDI,
+                    page: '1',
                     checkQ:
                         this.$props.form == this.$constant.formList.TOP
                             ? true

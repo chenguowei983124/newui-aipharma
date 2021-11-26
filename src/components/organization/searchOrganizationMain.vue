@@ -1,6 +1,6 @@
 <template>
     <div v-if="$store.getters.organizationSearchInfo != undefined">
-        <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium pb-1">
+        <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium pb-1 mt-2">
             検索条件：
             <div
                 class=""
@@ -12,16 +12,16 @@
             </div>
         </div>
         <!-- pc/sp -->
-        <div class="flex justify-between flex-wrap space-y-1">
+        <div class="flex justify-between flex-wrap space-y-3 mt-2">
             <div class="notoSansJpAndFourteenMedium">
                 該当：
                 {{ $store.getters.organizationSearchInfo.allCount }}件
             </div>
             <div class="flex space-x-2">
-                <div class="flex space-x-2">
+                <div class="flex space-x-3">
                     <!-- 順 区分 -->
                     <vue-single-select
-                        class="w-56 cursor-pointer"
+                        class="w-54 cursor-pointer"
                         :name="'field1'"
                         :default-value="organizationDateSortValue"
                         :placeholder="'-- Choose an option --'"
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="space-y-2 mt-8">
+        <div class="space-y-2 mt-2">
             <div
                 v-for="(item, index) in $store.getters.organizationSearchInfo
                     .qas"
@@ -811,9 +811,9 @@
             ]"
         >
             <comment-message-box
-                class=""
                 :qaId="qaId"
                 :rowIndex="rowIndex"
+                :commentsFlag="commentsFlag"
             ></comment-message-box>
         </div>
     </div>
@@ -878,6 +878,7 @@ export default {
             result: Object,
             qaId: '',
             rowIndex: 0,
+            commentsFlag:''
         }
     },
     unmounted() {
@@ -900,7 +901,7 @@ export default {
             if (this.$route.path != '/searchOrganization') {
                 return
             }
-            console.log('params', this.$route)
+            this.selectPage = this.$route.query.page
             if (JSON.stringify(this.$route.query) == '{}') {
                 this.initStore()
                 this.$store.dispatch('setOrganizationSearchInfo', {})
@@ -939,7 +940,6 @@ export default {
             if (this.selectPage > 1) {
                 start = (this.selectPage - 1) * this.pageCount + 1
             }
-
             if (this.$store.getters.organizationSearchInfo.qas != undefined) {
                 end =
                     start +
@@ -994,10 +994,8 @@ export default {
             let result
             // QAID存在チェック
             if (qaid != '') {
-                console.log('this.$route.query', this.$route.query.id)
                 result = this.$serve.getOwn({ id: qaid })
             } else if (this.$route.query.page != undefined) {
-                console.log('this.$route.query', this.$route.query)
                 result = this.$serve.getOwnData(this.$route.query)
             }
 
@@ -1007,7 +1005,6 @@ export default {
             this.$store.dispatch('setIsLoadingShow', false)
         },
         orgInit:function(){
-            console.log('hello')
             this.$store.dispatch('getOrganizationNewQAInfo')
             this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
         },
@@ -1268,10 +1265,8 @@ export default {
         openCommentMessageBox(index) {
             this.qaId = this.$store.getters.organizationSearchInfo.qas[index].id
             this.rowIndex = index
-            this.$store.dispatch(
-                'setCommentMessageBox',
-                !this.$store.getters.getCommentMessageBox
-            )
+            this.commentsFlag = 'orgComments'
+            this.$store.dispatch('setCommentMessageBox',!this.$store.getters.getCommentMessageBox)
         },
         getRoeId(id) {},
         ActicleDetail(index) {

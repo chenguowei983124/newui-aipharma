@@ -183,7 +183,7 @@
                                 "
                             >
                                 <div class="flex space-x-4">
-                                    <div>最終編集日：{{ item.createdAt }}</div>
+                                    <div>最終編集日：{{ item.updatedAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
                                 </div>
                                 <div
@@ -574,10 +574,10 @@
                                         <div class="flex flex-wrap">
                                             <div
                                                 class="mr-2"
-                                                v-for="medicineName in item.medicines"
-                                                :key="medicineName"
+                                                v-for="sideEffectsName in item.sideEffectsName"
+                                                :key="sideEffectsName"
                                             >
-                                                {{ medicineName.name }}
+                                                {{ sideEffectsName.name }}
                                             </div>
                                         </div>
                                     </div>
@@ -667,10 +667,10 @@
                                         <div class="flex flex-wrap">
                                             <div
                                                 class="mr-2"
-                                                v-for="referenceMaterials in item.referenceMaterials"
-                                                :key="referenceMaterials"
+                                                v-for="diseaseName in item.diseaseName"
+                                                :key="diseaseName"
                                             >
-                                                {{ referenceMaterials.name }}
+                                                {{ diseaseName.name }}
                                             </div>
                                         </div>
                                     </div>
@@ -817,16 +817,17 @@
         </div>
          <pagination
             :page-count="getPageCount"
-            :page-range="4"
+            :page-range="3"
             :margin-pages="1"
             @input="getSelectPage"
+            :value="Number($store.getters.getPageDI)"
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            page-class="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            activeClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular bg-blueline text-white"
-            prevClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
+            page-class="text-center pt-2 align-middle notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
+            activeClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem bg-blueline text-white"
+            prevClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
+            nextClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
         <div class="flex justify-center mt-2">{{ dispDetailRange }}件 表示</div>
@@ -839,9 +840,9 @@
             ]"
         >
             <comment-message-box
-                class=""
                 :qaId="qaId"
                 :rowIndex="rowIndex"
+                :commentsFlag="commentsFlag"
             ></comment-message-box>
         </div>
     </div>
@@ -901,14 +902,20 @@ export default {
       isDetailsDisp: [],
       qaId: '',
       rowIndex: 0,
+      // 検索AI　フラグ
+      aiFlag:false,
+      // コメント フラグ
+      commentsFlag: ''
     }
   },
   unmounted() {
     this.initStore()
   },
   mounted() {
+      console.log('hellom',this.$route.query)
     if (JSON.stringify(this.$route.query) == '{}') {
       this.initStore()
+      this.diInit()
       this.$store.commit('setdIKnowledgeInfo', {})
       this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
     }
@@ -919,10 +926,11 @@ export default {
   },
   watch: {
     $route: function () {
+        console.log('hello',this.$route.query)
       if (this.$route.path != '/searchDiKnowledge') {
         return
       }
-
+      this.selectPage = this.$route.query.page
       if (JSON.stringify(this.$route.query) == '{}') {
         this.initStore()
         this.$store.commit('setdIKnowledgeInfo', {})
@@ -987,11 +995,14 @@ export default {
       if (typeof (this.$route.query.id) != "undefined") {
         qaid = this.$route.query.id
         this.$store.dispatch('setQAID', qaid)
-        sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
-      } else if (this.$store.getters.getQAID != '') {
-        qaid = this.$store.getters.getQAID
-      }
-
+        // sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
+      } 
+    //   else if (this.$store.getters.getQAID != '') {
+    //     qaid = this.$store.getters.getQAID
+    //   }
+    this.$store.dispatch('setLoadingShowFlg', false)
+            this.$store.dispatch('setIsLoadingShow', true)
+console.log('123456789')
       let result
       let resultAi
       // QAID存在チェック
@@ -1003,7 +1014,7 @@ export default {
           confidence: this.$route.query.confidence
         }
         if (typeof (this.$route.query.confidence) == "undefined"
-          || this.$route.query.confidence == "undefined") {
+          || this.$route.query.confidence == "nil") {
           result = this.$serve.getDIKnowledgeSharedId(params)
           this.setSearchResult(result)
         } else {
@@ -1012,39 +1023,49 @@ export default {
 
         }
       } else if (typeof (this.$route.query.page) != "undefined") {
+        console.log('top=>init=>検索',this.$route.query.page)
         result = this.$serve.getDIKnowledgeShare(this.$route.query)
         resultAi = this.$serve.getDIKnowledgeShareAI(this.$route.query)
+        this.aiFlag = true
+
         this.setSearchResult(result)
         this.setSearchResultAi(resultAi)
       }
-
-
+        this.diInit()
+        console.log('987654321')
+        this.$store.dispatch('setLoadingShowFlg', true)
+            this.$store.dispatch('setIsLoadingShow', false)
+    },
+    diInit:function(){
+    this.$store.dispatch('getDiKnowledgeShareNewQAInfo')
+    this.$store.dispatch('getDiKnowledgeShareLookcarefullyQAInfo')
     },
     setSearchResultAi: function (value) {
       if (value != '' && typeof (value) != "undefined") {
         value.then((response) => {
           this.$store.commit('setdIKnowledgeShareSearchAIInfo', response)
-          // 1件のみの場合、全回答情報を表示
-          if (response.data.allCount == 1) {
-            let qaid = ''
-            if (this.$route.query.id) {
-              qaid = this.$route.query.id
-              this.$store.dispatch('setQAID', qaid)
-              sessionStorage.setItem(
-                this.$constant.searchParam.PAID,
-                qaid
-              )
-            } else if (this.$store.getters.getQAID != '') {
-              qaid = this.$store.getters.getQAID
+          console.log('this.aiFlag',this.aiFlag)
+          if(this.aiFlag == false){
+              // 1件のみの場合、全回答情報を表示
+              if (response.data.allCount == 1) {
+                this.$emit('clickAi',response.data.qas[0].id, response.data.allCount)
+                let qaid = ''
+                if (this.$route.query.id) {
+                  qaid = this.$route.query.id
+                  this.$store.commit('setQaAiId', qaid)
+                } else if (this.$store.getters.getQaAiId != '') {
+                  qaid = this.$store.getters.getQaAiId
+                }
+                console.log('qaid',qaid)
+                // ビュー件数更新
+                let params = {
+                //   id: response.data.qas[0].id,
+                id: qaid
+                }
+                this.$serve.sendViewCount(params)
+              }
+              this.aiFlag = false
             }
-            // ビュー件数更新
-            let params = {
-              id: qaid,
-            }
-            this.$serve.sendViewCount(params)
-          } else {
-            this.isDetailDisp = []
-          }
         })
 
       }
@@ -1055,15 +1076,12 @@ export default {
           this.$store.commit('setdIKnowledgeInfo', response)
           // 1件のみの場合、全回答情報を表示
           if (response.data.allCount == 1) {
+              console.log('setSearchResult进来了')
             this.openDetailDisp(response.data.qas[0].id, response.data.allCount)
             let qaid = ''
             if (this.$route.query.id) {
               qaid = this.$route.query.id
               this.$store.dispatch('setQAID', qaid)
-              sessionStorage.setItem(
-                this.$constant.searchParam.PAID,
-                qaid
-              )
             } else if (this.$store.getters.getQAID != '') {
               qaid = this.$store.getters.getQAID
             }
@@ -1087,7 +1105,7 @@ export default {
 
       if (typeof (this.$route.query.id) == "undefined") {
         this.$store.dispatch('setQAID', '')
-        this.$store.commit('setSearchWordDI', this.$route.query.search)
+        this.$store.dispatch('setSearchWord', this.$route.query.search)
         this.$store.dispatch('setSearchTags', this.$route.query.tags.split(','))
         this.$store.commit('setMaxCountDI', this.$route.query.displayed)
         this.diSortValue = this.$route.query.sort
@@ -1112,7 +1130,7 @@ export default {
     },
     // 初期化
     initStore() {
-      this.$store.commit('setSearchWordDI', '')
+      this.$store.dispatch('setSearchWord', '')
       this.$store.dispatch('setSearchTags', [])
       this.$store.commit('setPageDI', 1)
       this.$store.commit('setSortDI', 'last_updated_at_desc')
@@ -1230,6 +1248,7 @@ export default {
     openCommentMessageBox(index) {
       this.qaId = this.$store.getters.dIKnowledgeShareSearchInfo.qas[index].id
       this.rowIndex = index
+      this.commentsFlag = 'diComments'
       this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
 
     },

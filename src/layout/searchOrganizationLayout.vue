@@ -36,7 +36,7 @@
             ]"
         ></div>
         <!-- 内容 -->
-        <div class="flex border-b-2 border-blue-200 mt-50 md:mt-8 h-10 md:h-13">
+        <div class="flex border-b-2 border-blue-200 mt-50 md:mt-12 h-10 md:h-16 ">
             <!-- 左 -->
             <div
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"

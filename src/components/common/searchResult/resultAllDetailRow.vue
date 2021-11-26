@@ -8,7 +8,7 @@
                 mid:pt-0
                 space-y-1.5
                 md:space-y-0 md:flex
-                items-baseline
+                
                 md:border-white md:space-x-3
                 mx-0.5
             "
@@ -18,24 +18,23 @@
         >
             <!-- sp 最初の行目 -->
             <div
-                class="md:ml-5 md:h-4 items-center"
+                class="md:ml-2 md:h-4 items-center md:mt-1"
                 v-if="sub1 != undefined"
                 :class="[row.confidence != undefined ? 'mb-0 md:mb-4' : '']"
             >
                 <div
-                    class="md:flex"
+                    class="md:flex ml-2 md:pl-0"
                     v-for="dispItem in sub1"
                     :key="dispItem"
                     :class="proAreaStyle"
                 >
-                    <div class="">
                         <div
                             v-if="
                                 row.id != undefined &&
                                 dispItem == 'keyword' &&
                                 row.confidence == undefined
                             "
-                            class="searchResult_lable_ownFacility"
+                            class="searchResult_lable_ownFacility "
                         >
                             キーワード
                         </div>
@@ -45,7 +44,6 @@
                         >
                             AI
                         </div>
-                    </div>
 
                     <!-- {{ row.confidence }} -->
                     <!-- 属性ラベル -->
@@ -94,7 +92,7 @@
                 </div>
             </div>
             <!-- sp 二行目 -->
-            <div class="md:ml-0 flex-grow md:truncate md:h-6">
+            <div class="md:ml-0 flex-grow md:truncate md:h-6 ml-2">
                 <span
                     class="items-center"
                     :class="midAreaStyle"
@@ -170,7 +168,7 @@
             </div>
             <!-- sp 三行目 -->
             <div
-                class="md:ml-0 md:pr-5 pb-2 md:pb-0 flex-none"
+                class="md:ml-0 md:pr-5 pb-2 md:pb-0 flex-none ml-1"
                 :class="bakAreaStyle"
             >
                 <div
@@ -225,7 +223,7 @@
                         itemType="4"
                         itemTitle=" view"
                         :itemValue="row.viewCount.toString()"
-                        addStyle="md:flex-none "
+                        addStyle="md:flex-none"
                         v-if="row.viewCount != undefined && dispItem == 'view'"
                     ></result-detail-row-item>
                 </div>

@@ -10,7 +10,7 @@ export default {
         searchWordDI: '', // キーワード
         // searchTags: [], // タブ
         pageDI: '1', // ページ
-        // QAID: '', // QAID　
+        QaAiId: '', // QAAIID　
         sortDI: '0', // ソート順
         maxCountDI: '20', // 表示件数
         // 検索対象
@@ -35,6 +35,10 @@ export default {
         },
         diKnowledgeShareLookcarefullyQAInfo(state) {
             return state.diKnowledgeShareLookcarefullyQAInfo
+        },
+        // QaAiId
+        getQaAiId(state) {
+            return state.QaAiId
         },
         // キーワード
         getSearchWordDI(state) {
@@ -97,6 +101,10 @@ export default {
         },
         setDiKnowledgeShareLookcarefullyQAInfo(state, info) {
             state.diKnowledgeShareLookcarefullyQAInfo = info.data
+        },
+        // QaAiId
+        setQaAiId(state, info) {
+            return state.QaAiId = info
         },
         // キーワード
         setSearchWordDI(state, info) {

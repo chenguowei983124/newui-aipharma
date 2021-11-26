@@ -28,7 +28,7 @@
                     </div>
                     <div>
                         <a class="font-NotoSansJp text-base">
-                            {{ item.article }}
+                            {{ item.overview }}
                         </a>
                     </div>
                 </div>

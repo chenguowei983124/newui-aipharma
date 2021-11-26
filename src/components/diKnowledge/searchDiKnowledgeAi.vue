@@ -132,7 +132,7 @@
                                 "
                             >
                                 <div class="flex space-x-4">
-                                    <div>最終編集日：{{ item.createdAt }}</div>
+                                    <div>最終編集日：{{ item.updatedAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
                                 </div>
                                 <div
@@ -336,154 +336,6 @@
                                             </div>
                                             <good class="h-4 w-4 mr-1"></good>
                                         </button>
-                                        <!-- good pc old-->
-                                        <!-- <div
-                                            class="
-                                                relative
-                                                hidden
-                                                md:block
-                                                mid:block
-                                            "
-                                        >
-                                            <button
-                                                class="
-                                                    flex
-                                                    items-center
-                                                    justify-end
-                                                    h-7.5
-                                                    w-14
-                                                    rounded
-                                                    text-white
-                                                    bg-whole
-                                                "
-                                                @click="ActicleDetail(index)"
-                                            >
-                                                <div class="mr-3">
-                                                    {{ item.feedbackGood }}
-                                                </div>
-                                                <good
-                                                    class="h-4 w-4 mr-1"
-                                                ></good>
-                                            </button>
-                                            <div v-show="activeIndex === index">
-                                                <div class="absolute bottom-8">
-                                                    <div
-                                                        class="
-                                                            w-44
-                                                            h-24
-                                                            bg-white
-                                                            border border-black
-                                                            rounded
-                                                        "
-                                                    >
-                                                        <div
-                                                            class="
-                                                                bg-gray-300
-                                                                h-1/4
-                                                                flex
-                                                                justify-between
-                                                                items-center
-                                                                px-2
-                                                            "
-                                                        >
-                                                            <div
-                                                                class="text-xs"
-                                                            >
-                                                                理由をお聞かせください。
-                                                            </div>
-                                                            <div
-                                                                class="
-                                                                    cursor-pointer
-                                                                "
-                                                                @click="
-                                                                    ActicleDetail(
-                                                                        index
-                                                                    )
-                                                                "
-                                                            >
-                                                                <x-icon-svg></x-icon-svg>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="
-                                                                h-3/4
-                                                                flex flex-col
-                                                            "
-                                                        >
-                                                            <div class="h-3/4">
-                                                                <textarea
-                                                                    v-model="
-                                                                        item.value
-                                                                    "
-                                                                    type="text"
-                                                                    class="
-                                                                        text-xs
-                                                                        w-full
-                                                                        focus:outline-none
-                                                                    "
-                                                                    placeholder="（任意）"
-                                                                />
-                                                            </div>
-                                                            <div
-                                                                class="
-                                                                    h-1/4
-                                                                    flex
-                                                                    justify-between
-                                                                    items-center
-                                                                    px-1
-                                                                "
-                                                            >
-                                                                <div
-                                                                    class="
-                                                                        text-xxss
-                                                                        text-red-600
-                                                                    "
-                                                                >
-                                                                    ※コメントは管理者に送信されます
-                                                                </div>
-                                                                <button
-                                                                    class="
-                                                                        bg-gray-600
-                                                                        text-white
-                                                                        text-xxss
-                                                                    "
-                                                                    @click="
-                                                                        sendGoodMessage(
-                                                                            index
-                                                                        )
-                                                                    "
-                                                                >
-                                                                    送信
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <!-- good sp old-->
-                                        <!-- <div class="block md:hidden mid:hidden">
-                                            <button
-                                                class="
-                                                    flex
-                                                    justify-end
-                                                    items-center
-                                                    h-7.5
-                                                    w-14
-                                                    rounded
-                                                    text-white
-                                                    bg-whole
-                                                "
-                                                @click="openGoodMessageBox"
-                                            >
-                                                <div class="mr-3">
-                                                    {{ item.feedbackGood }}
-                                                </div>
-                                                <good
-                                                    class="h-4 w-4 mr-1"
-                                                ></good>
-                                            </button>
-                                        </div> -->
                                         <!-- bad -->
                                         <button
                                             class="
@@ -506,43 +358,6 @@
                                             </div>
                                             <bad class="h-4 w-4 mr-1"></bad>
                                         </button>
-                                        <!-- bad old-->
-                                        <!-- <div
-                                            class="
-                                                flex
-                                                justify-end
-                                                items-center
-                                                h-7.5
-                                                w-14
-                                                rounded
-                                                text-white
-                                                bg-red-400
-                                            "
-                                        >
-                                            <div class="mr-3">
-                                                {{ item.feedbackBad }}
-                                            </div>
-                                            <bad class="h-4 w-4 mr-1"></bad>
-                                        </div> -->
-                                        <!-- comment old @click="openCommentMessageBox"-->
-                                        <!-- <button
-                                            class="
-                                                flex
-                                                justify-end
-                                                items-center
-                                                h-7.5
-                                                w-14
-                                                rounded
-                                                text-white
-                                                bg-yellow-300
-                                            "
-                                        >
-                                            <div class="mr-2">
-                                                {{ item.feedbackComment }}
-                                            </div>
-
-                                            <talk class="h-5 w-5 mr-1"></talk>
-                                        </button> -->
                                         <!-- comment -->
                                         <button
                                             class="
@@ -571,7 +386,17 @@
                             </div>
                         </div>
                         <!-- 詳細情報 pc/sp -->
-                        <div :class="[detailDispFlag ? 'block' : 'hidden']">
+                        <div :class="[
+                                isDetailDisp[
+                                    $store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                                        index
+                                    ].id
+                                ] ==
+                                $store.getters.dIKnowledgeShareSearchAIInfo.qas[index]
+                                    .id
+                                    ? 'block'
+                                    : 'hidden',
+                            ]">
                             <div class="flex flex-row justify-center text-sm">
                                 <div class="box">
                                     <span class="line"></span>
@@ -735,10 +560,10 @@
                                         <div class="flex flex-wrap">
                                             <div
                                                 class="mr-2"
-                                                v-for="medicineName in item.medicines"
-                                                :key="medicineName"
+                                                v-for="sideEffectsName in item.sideEffectsName"
+                                                :key="sideEffectsName"
                                             >
-                                                {{ medicineName.name }}
+                                                {{ sideEffectsName.name }}
                                             </div>
                                         </div>
                                     </div>
@@ -828,10 +653,10 @@
                                         <div class="flex flex-wrap">
                                             <div
                                                 class="mr-2"
-                                                v-for="referenceMaterials in item.referenceMaterials"
-                                                :key="referenceMaterials"
+                                                v-for="diseaseName in item.diseaseName"
+                                                :key="diseaseName"
                                             >
-                                                {{ referenceMaterials.name }}
+                                                {{ diseaseName.name }}
                                             </div>
                                         </div>
                                     </div>
@@ -916,9 +741,22 @@
                             items-center
                             cursor-pointer
                         "
-                        @click="openDetailDisp(index)"
+                        @click="openDetailDisp($store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                                    index
+                                ].id)"
                     >
-                        <div v-show="!detailDispFlag" class="flex items-center">
+                        <div v-show="
+                                !(
+                                    isDetailDisp[
+                                        $store.getters.dIKnowledgeShareSearchAIInfo
+                                            .qas[index].id
+                                    ] ===
+                                    $store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                                        index
+                                    ].id
+                                )
+                            "
+                             class="flex items-center">
                             <triangle-down-svg
                                 class="w-3 h-3"
                                 fill="#F79800"
@@ -930,7 +768,15 @@
                                 開く
                             </div>
                         </div>
-                        <div v-show="detailDispFlag" class="flex items-center">
+                        <div v-show="
+                                isDetailDisp[
+                                    $store.getters.dIKnowledgeShareSearchAIInfo
+                                        .qas[index].id
+                                ] ===
+                                $store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                                    index
+                                ].id
+                            " class="flex items-center">
                             <triangle-down-svg
                                 class="w-3 h-3 transform rotate-180"
                                 fill="#F79800"
@@ -947,6 +793,19 @@
             </div>
         </div>
         <div class="border-b border-gray-400 mt-6"></div>
+        <div
+            :class="[
+                $store.getters.getCommentMessageBox
+                    ? 'block fixed top-0 z-99 left-0 right-0 bottom-0 bg-lock'
+                    : 'hidden',
+            ]"
+        >
+            <comment-message-box
+                :qaId="qaId"
+                :rowIndex="rowIndex"
+                :commentsFlag="commentsFlag"
+            ></comment-message-box>
+        </div>
     </div>
 </template>
 
@@ -963,6 +822,7 @@ import xIconSvg from '../common/svgImage/xIconSvg.vue'
 import Pagination from '../common/pagination/pagiation.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
+import CommentMessageBox from '../common/messageBox/commentMessageBox.vue'
 import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 export default {
   components: {
@@ -978,6 +838,7 @@ export default {
     Pagination,
     vueSingleSelect,
     GoodMessageBox,
+    CommentMessageBox,
     ResultDetailRowItem,
   },
   props: {},
@@ -985,9 +846,10 @@ export default {
     return {
       isDetailDisp: [],
       isDetailsDisp: [],
-      detailDispFlag: true,
       qaId: '',
       rowIndex: 0,
+      // コメント フラグ
+      commentsFlag: ''
     }
   },
   unmounted() {
@@ -1020,16 +882,15 @@ export default {
     },
     // 開く クリック
     openDetailDisp(index, count) {
-      this.detailDispFlag = !this.detailDispFlag
-      // 1件のみの場合
-      //   if (count == 1) {
-      //     this.isDetailDisp[index] = index
-      //   } else {
-      //     this.isDetailDisp[index] = this.isDetailDisp[index] == index ? [] : index
-      //     if (this.isDetailsDisp[index] == index) {
-      //       this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index
-      //     }
-      //   }
+    // 1件のみの場合
+        if (count == 1) {
+          this.isDetailDisp[index] = index
+        } else {
+          this.isDetailDisp[index] = this.isDetailDisp[index] == index ? [] : index
+          if (this.isDetailsDisp[index] == index) {
+            this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index
+          }
+        }
     },
     // 詳細情報 クリック
     openDetailsDisp(index) {
@@ -1052,11 +913,9 @@ export default {
     },
     // 対象QAの全フィードバックコメントのうち閲覧可能なものを取得する
     openCommentMessageBox(index) {
-      this.qaId = this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].id
-      console.log('openCommentMessageBox', this.qaid)
-      this.$store.dispatch('setQAID', this.qaId)
-      sessionStorage.setItem(this.$constant.searchParam.PAID, this.qaId)
+      this.qaId = this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[0].id
       this.rowIndex = index
+      this.commentsFlag = 'aiComments'
       this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
     },
   },

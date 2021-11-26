@@ -92,7 +92,7 @@
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="DI 辞書"
                 titleStyle="bulletinBoardInfoTitle"
-                titleURL="\"
+                titleURL=""
                 rightStyle="count"
                 countTitle="該当：9999件"
                 countStyle="searchResultAllCountLable"
@@ -127,6 +127,7 @@
             <resut-tag
                 headerStyle="titleOnlyUnderlineBgColorGray"
                 title="Google"
+                titleURL=""
                 titleStyle="pdmaInfoTitle"
                 rightStyle="icon"
                 iconUrl="https://www.google.co.jp/"

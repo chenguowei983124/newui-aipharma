@@ -9,7 +9,7 @@
 }
 /* ラベル　グループ */
 .searchResult_lable_group {
-    @apply notoSansJpAndTwelveMedium text-white bg-group w-17.5 text-center  ring-1 ring-group;
+    @apply notoSansJpAndTwelveMedium text-white bg-group w-17.5 h-4 text-center block;
 }
 /* ラベル　学会 */
 .searchResult_lable_society {
@@ -59,7 +59,7 @@
 }
 /* ラベル　view */
 .searchResult_lable_view {
-    @apply notoSansJpAndTwelveMedium text-view  w-16.25 h-4 text-center block;
+    @apply notoSansJpAndTwelveMedium text-view  w-16.25 h-4 text-right block;
 }
 /* ラベル　AI */
 .searchResult_lable_Ai {
@@ -87,7 +87,7 @@
 }
 /* ラベル　日付 */
 .searchResult_date_title {
-    @apply latoAndFourteenBold w-18.75 block;
+    @apply notoSansJpAndTwelveRegular w-18.75 block;
 }
 .searchResult_overview {
     @apply w-60 h-25 notoSansJpAndFourteenRegular;
