@@ -276,7 +276,7 @@ export default {
                 this.$props.form == this.$constant.formList.BBS ||
                 this.$props.form == this.$constant.formList.EDI
             ) {
-                return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2 '
+                return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2 border-blueline '
             } else {
                 return 'hidden'
             }

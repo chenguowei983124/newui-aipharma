@@ -224,6 +224,8 @@ module.exports = {
             },
             backgroundColor: (theme) => ({
                 ...theme('colors'),
+                redFF145A:'#FF145A',
+                blue326EB3:'#326EB3',
                 aiSwitchBg: '#fceacc',
                 blueline: '#65bbe5',
                 downloadIcon: '#8CC85A',

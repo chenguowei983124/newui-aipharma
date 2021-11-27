@@ -1,8 +1,8 @@
 <template>
     <div class="" id="div_postList">
-        <div class="flex justify-end mb-2">
+        <div class="flex justify-end mb-2r">
             <vue-single-select
-                class="w-42.5"
+                class="w-42.5 cursor-pointer"
                 :name="'patientGenderList'"
                 :default-value="$store.getters.getSort"
                 :default-input-attribs="{ tabindex: 1 }"
@@ -14,6 +14,7 @@
                   border border-transparent focus:outline-none"
             ></vue-single-select>
         </div>
+        <!-- <div v-if="postList.length != 0"> -->
         <mescroll-vue
             class="h-screen-67 overflow-y-scroll"
             ref="mescroll"
@@ -33,6 +34,7 @@
                 </div>
             </div>
         </mescroll-vue>
+        <!-- </div> -->
     </div>
 </template>
 
@@ -108,14 +110,11 @@ export default {
             console.log('delete search')
             this.initStore()
             let response
-            if (
-                JSON.stringify(this.$route.query) !== '{}' &&
-                this.$route.query.id !== undefined
-            ) {
+            if (JSON.stringify(this.$route.query) !== '{}' 
+                && this.$route.query.id !== undefined) {
                 console.log('delete search 1')
                 Object.assign(this.params, { id: this.$route.query.id })
-                await this.$serve
-                    .getPostsrforId('', this.$route.query.id)
+                await this.$serve.getPostsrforId('', this.$route.query.id)
                     .then((response) => {
                         this.setSearchResult(response, pgNo)
                     })
@@ -197,16 +196,27 @@ export default {
             }
         },
         setSearchResult(response, pgNo) {
-            if (pgNo == 1) {
-                this.postList = this.formatPostList(response.data.data)
-                if (this.postList.length == 1) {
-                    this.clickItem(this.postList[0].id, 0)
+            // if (response.data.data.length != 0 ) {
+                if (pgNo == 1) {
+                    this.postList = this.formatPostList(response.data.data)
+                    if (this.postList.length == 1) {
+                        this.clickItem(this.postList[0].id, 0)
+                    }
+                } else {
+                    this.postList = this.formatPostList(response.data.data)
                 }
-            } else {
-                this.postList = this.formatPostList(response.data.data)
-            }
-            this.pagination = response.data.pagination
-            console.log(this.postList)
+                this.pagination = response.data.pagination
+                console.log(this.postList)
+            // } else {
+            //     console.log('zaizheli ')
+            //     this.$swal.fire({
+            //         text: 'nothing...',
+            //         icon: '',
+            //         showCancelButton: false,
+            //         // cancelButtonText: 'キャンセル',
+            //         confirmButtonText: 'OK',
+            //     })
+            // }
         },
         formatPostList(data) {
             let list = this.postList
@@ -217,11 +227,18 @@ export default {
                     urlTitle: data[i].post.title,
                     title: data[i].post.content,
                     date: data[i].post.created_at,
+                    // group:
+                    //     data[i].post.scope == 0
+                    //         ? 'ownFacility'
+                    //         : data[i].post.scope == 1
+                    //         ? 'otherFacility'
+                    //         : 'group',
+                    // 公開範囲（organization：組織内、whole：全体、 group：グループ　society：学会）
                     group:
                         data[i].post.scope == 0
-                            ? 'ownFacility'
+                            ? 'whole'
                             : data[i].post.scope == 1
-                            ? 'otherFacility'
+                            ? 'organization'
                             : 'group',
                     viewCount: data[i].post.feedback.viewed,
                     notificationType: data[i].post.genre,
@@ -241,8 +258,8 @@ export default {
                 this.resetRouter()
                 delete this.params.publish
                 Object.assign(this.params, { order: val })
-
                 this.postList = []
+                this.$emit('closeBbsTalking')
             }
         },
         // 初期化検索条件
@@ -387,7 +404,7 @@ export default {
         },
         async upCallback(page, mescroll) {
             if (this.firsted) {
-                console.log('upCallbackfirsted------------start------')
+                console.log('upCallbackfirsted------------start------',this.$route.query)
                 this.params = this.$route.query
                 await this.doSearch()
                 this.firsted = false

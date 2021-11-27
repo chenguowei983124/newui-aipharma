@@ -42,6 +42,7 @@
                             truncate
                             hover:opacity-50
                             active:opacity-50
+                            cursor-pointer
                         "
                     >
                         <result-detail-row-item

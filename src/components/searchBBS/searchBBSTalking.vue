@@ -157,6 +157,7 @@
                                     justify-end
                                     h-7.5
                                     w-14
+                                    ml-2
                                     rounded
                                     text-white
                                     bg-whole
@@ -408,7 +409,6 @@ export default {
 
             Object.assign(this.params, { division: 'BBS' })
             const response = await this.$serve.getPostsrforId('', this.id)
-
             this.postList = this.formatPostList(response.data.data)
         },
         formatPostList(data) {

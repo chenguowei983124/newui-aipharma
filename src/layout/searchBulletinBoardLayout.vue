@@ -38,6 +38,7 @@
                             ref="bbsList"
                             :detailHeightCss="detailHeightCss"
                             @clickItemEvent="openDetail"
+                            @closeBbsTalking="closeDispFlg"
                         ></bbs-list>
                     </div>
                     <div
@@ -158,6 +159,9 @@ export default {
         getClose(value, deleteFlg) {
             this.dispFlg = value
             this.$refs.bbsList.talkingClosed(deleteFlg)
+        },
+        closeDispFlg(){
+            this.dispFlg = false
         },
         getUnpublish() {
             const params = {
