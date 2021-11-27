@@ -406,10 +406,21 @@ export default {
         async doSearch() {
             this.dispEditor = false
             this.InputComment = ''
-
             Object.assign(this.params, { division: 'BBS' })
             const response = await this.$serve.getPostsrforId('', this.id)
-            this.postList = this.formatPostList(response.data.data)
+            if (response.data.data.length != 0) {
+                this.postList = this.formatPostList(response.data.data)
+            } else {
+                this.$swal.fire({
+                    text: 'データがありません。',
+                    icon: '',
+                    showCancelButton: false,
+                    // cancelButtonText: 'キャンセル',
+                    confirmButtonText: 'OK',
+                })
+                this.closeClick()
+                this.$emit('resetBbsRouter')
+            }
         },
         formatPostList(data) {
             let list = []

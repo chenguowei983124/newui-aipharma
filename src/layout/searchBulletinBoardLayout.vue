@@ -63,6 +63,7 @@
                             "
                             ref="talking"
                             @close="getClose"
+                            @resetBbsRouter="resetBbsRouter"
                             :id="id"
                             :detailHeightCss="detailHeightCss"
                             :exeSearchRefishOpts="exeSearchMultiSelectRefishOpt"
@@ -162,6 +163,9 @@ export default {
         },
         closeDispFlg(){
             this.dispFlg = false
+        },
+        resetBbsRouter(){
+            this.$refs.bbsList.resetRouter()
         },
         getUnpublish() {
             const params = {

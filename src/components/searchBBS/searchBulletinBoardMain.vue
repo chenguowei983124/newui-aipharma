@@ -78,7 +78,7 @@ export default {
                 },
                 empty: {
                     warpId: 'div_postList',
-                    icon: './static/mescroll/mescroll-empty.png',
+                    // icon: './static/mescroll/mescroll-empty.png',
                     tip: 'データがありません。',
                 },
             },
@@ -192,10 +192,12 @@ export default {
                         .then((response) => {
                             this.setSearchResult(response, pgNo)
                         })
+                    // this.$emit('closeBbsTalking')
                 }
             }
         },
         setSearchResult(response, pgNo) {
+            console.log('pgNo',pgNo)
             // if (response.data.data.length != 0 ) {
                 if (pgNo == 1) {
                     this.postList = this.formatPostList(response.data.data)

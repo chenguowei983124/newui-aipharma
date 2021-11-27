@@ -912,7 +912,6 @@ export default {
     this.initStore()
   },
   mounted() {
-      console.log('hellom',this.$route.query)
     if (JSON.stringify(this.$route.query) == '{}') {
       this.initStore()
       this.diInit()
@@ -926,7 +925,6 @@ export default {
   },
   watch: {
     $route: function () {
-        console.log('hello',this.$route.query)
       if (this.$route.path != '/searchDiKnowledge') {
         return
       }
@@ -1002,7 +1000,6 @@ export default {
     //   }
     this.$store.dispatch('setLoadingShowFlg', false)
             this.$store.dispatch('setIsLoadingShow', true)
-console.log('123456789')
       let result
       let resultAi
       // QAID存在チェック
@@ -1023,7 +1020,6 @@ console.log('123456789')
 
         }
       } else if (typeof (this.$route.query.page) != "undefined") {
-        console.log('top=>init=>検索',this.$route.query.page)
         result = this.$serve.getDIKnowledgeShare(this.$route.query)
         resultAi = this.$serve.getDIKnowledgeShareAI(this.$route.query)
         this.aiFlag = true
@@ -1032,7 +1028,6 @@ console.log('123456789')
         this.setSearchResultAi(resultAi)
       }
         this.diInit()
-        console.log('987654321')
         this.$store.dispatch('setLoadingShowFlg', true)
             this.$store.dispatch('setIsLoadingShow', false)
     },
@@ -1044,7 +1039,6 @@ console.log('123456789')
       if (value != '' && typeof (value) != "undefined") {
         value.then((response) => {
           this.$store.commit('setdIKnowledgeShareSearchAIInfo', response)
-          console.log('this.aiFlag',this.aiFlag)
           if(this.aiFlag == false){
               // 1件のみの場合、全回答情報を表示
               if (response.data.allCount == 1) {
@@ -1056,7 +1050,6 @@ console.log('123456789')
                 } else if (this.$store.getters.getQaAiId != '') {
                   qaid = this.$store.getters.getQaAiId
                 }
-                console.log('qaid',qaid)
                 // ビュー件数更新
                 let params = {
                 //   id: response.data.qas[0].id,
@@ -1076,7 +1069,6 @@ console.log('123456789')
           this.$store.commit('setdIKnowledgeInfo', response)
           // 1件のみの場合、全回答情報を表示
           if (response.data.allCount == 1) {
-              console.log('setSearchResult进来了')
             this.openDetailDisp(response.data.qas[0].id, response.data.allCount)
             let qaid = ''
             if (this.$route.query.id) {
