@@ -1072,6 +1072,7 @@ export default {
                         file: this.base.files,
                     },
                     qaMedicines: this.detail.mediName,
+                    categories: this.detail.quesClass,
                     keywordTags: this.detail.keyWord,
                     qaAskedPersonMedicalDepartments:
                         this.detail.questioner.department,
@@ -1248,16 +1249,6 @@ export default {
                     this.base.pmid = res.data.qa.pubmed
                     this.url.pmid.text = URL_BASE_PMID + res.data.qa.pubmed
 
-                    // this.base.doi = res.data.qas[0].doi
-                    // this.base.doi = res.data.qas[0].urls.doi
-                    // for (
-                    //     let i = 0;
-                    //     i <= res.data.qas[0].documents.length;
-                    //     i++
-                    // ) {
-                    //     this.base.file.filename =
-                    //         res.data.qas[0].documents[i].name
-                    // }
                     // 薬の分類
                     for (
                         let i = 0;
