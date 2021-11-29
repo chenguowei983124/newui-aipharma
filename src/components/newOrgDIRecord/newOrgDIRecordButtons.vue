@@ -5,8 +5,7 @@
             class="
                 bg-gray-200
                 hover:opacity-50
-                active:bg-personInformationButton
-                active:opacity-100
+                active:bg-personInformationButton active:opacity-100
                 border-b-2 border-gray-500
                 h-10
                 rounded-full
@@ -16,6 +15,28 @@
                 md:w-5/12
                 disabled:cursor-not-allowed
             "
+            @click="onCancel"
+            v-if="
+                JSON.stringify($route.query) !== '{}' && $route.query.id !== ''
+            "
+            value="キャンセル"
+        />
+        <input
+            type="button"
+            class="
+                bg-gray-200
+                hover:opacity-50
+                active:bg-personInformationButton active:opacity-100
+                border-b-2 border-gray-500
+                h-10
+                rounded-full
+                notoSansJpAndEighteenBold
+                text-black
+                w-full
+                md:w-5/12
+                disabled:cursor-not-allowed
+            "
+            v-if="JSON.stringify($route.query) === '{}'"
             @click="onTmpSave"
             value="下書き保存"
         />
@@ -38,34 +59,34 @@
             "
             :disabled="disableSave"
             @click="onSave"
-            value="登録する"
+            value="投稿する"
         />
     </div>
 </template>
 
 <script>
-
 export default {
-  props: {
-    parent: {},
-    disableSave: Boolean,
-  },
-  data() {
-    return {
-    }
-  },
-  components: {
-    // logo
-  },
-  methods: {
-    onTmpSave: function () {
-      this.$emit('onTmpSaveEvent', this.parent);
+    props: {
+        parent: {},
+        disableSave: Boolean,
     },
-    onSave: function () {
-      this.$emit('onSaveEvent', this.parent);
+    data() {
+        return {}
     },
-  },
+    components: {
+        // logo
+    },
+    methods: {
+        onTmpSave: function () {
+            this.$emit('onTmpSaveEvent', this.parent)
+        },
+        onSave: function () {
+            this.$emit('onSaveEvent', this.parent)
+        },
+        onCancel: function () {
+            this.$emit('onCancelEvent', this.parent)
+        },
+    },
 }
 </script>
-<style>
-</style>
+<style></style>

@@ -13,6 +13,7 @@ export default {
         isOrgDotsDetailedClick: true,
         qa_classify_class: {},
         qa_classify_subject: {},
+        commonInfo: {},
         commentInfo: {},
         oidcCode: 'test',
         dateValueFrom: '',
@@ -74,6 +75,66 @@ export default {
         getQa_classify_class(state) {
             return state.qa_classify_class
         },
+        // 各画面のプルダウン情報取得
+        getCommonInfo(state) {
+            return state.commonInfo
+        },
+        getCommonInfo_AskedPerson(state) {
+            let arr = Array.from(
+                state.commonInfo.asked_persons_class.map((item) => {
+                    return {
+                        value: item.name,
+                        title: item.name,
+                    }
+                })
+            )
+
+            return arr
+        },
+        getCommonInfo_PatientGgender(state) {
+            let arr = Array.from(
+                state.commonInfo.patient_gender.map((item) => {
+                    return {
+                        value: item.id,
+                        title: item.name,
+                    }
+                })
+            )
+
+            return arr
+        },
+        getCommonInfo_qa_classify_class(state) {
+            let arr = Array.from(
+                state.commonInfo.qa_classify_class.map((item) => {
+                    return {
+                        value: item.title,
+                        label: item.title,
+                    }
+                })
+            )
+            for (let i = 0; i < arr.length - 1; i++) {
+                if (arr[i].value === '0') {
+                    delete arr[i]
+                }
+            }
+            return arr
+        },
+        getCommonInfo_qa_category_lists(state) {
+            let arr = Array.from(
+                state.commonInfo.qa_category_lists.map((item) => {
+                    return {
+                        value: item.value,
+                        label: item.title,
+                    }
+                })
+            )
+            for (let i = 0; i < arr.length - 1; i++) {
+                if (arr[i].value === '0') {
+                    delete arr[i]
+                }
+            }
+            return arr
+        },
         qa_classify_subject(state) {
             return state.qa_classify_subject
         },
@@ -131,6 +192,10 @@ export default {
         setQaClassifySubject(state, info) {
             state.qa_classify_subject = info.data.qa_category_lists
         },
+        setCommon(state, info) {
+            state.commonInfo = info.data
+            console.log('common', state.commonInfo)
+        },
     },
 
     actions: {
@@ -177,10 +242,13 @@ export default {
             const info = await serve.getOrgCommonInfo()
             commit('setQaClassifyClass', info)
             commit('setQaClassifySubject', info)
+
+            commit('setCommon', info)
         },
         setOidcCode({ commit, state }, value) {
             commit('basic', { key: 'oidcCode', value })
         },
+        // コメント取得
         setCommentInfo({ commit }, value) {
             commit('setCommnet', value)
         },

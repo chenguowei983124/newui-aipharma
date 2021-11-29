@@ -912,7 +912,35 @@ const serve = {
         })
         return data
     },
-    
+    //===========================
+    // 組織DI記録登録画面(投稿)
+    //===========================
+    async postOwnQA(param) {
+        const data = await axios('/api/qa/create_qa', {
+            method: 'post',
+            data: { qa: param },
+        })
+
+        return data
+    },
+    //===========================
+    // 組織DI記録登録画面（編集）
+    //===========================
+    async postUpdateOwnQA(param) {
+        const data = await axios('/api/qa/update_qa', {
+            method: 'post',
+            data: { qa: param },
+        })
+
+        return data
+    },
+    async getOwnEditInfo(param) {
+        const data = await axios(`/api/qa/watch_qa/${param}`, {
+            method: 'get',
+        })
+
+        return data
+    },
     async getTest() {
         const data = await axios('/preavoid/get_topmenu_Noticel_info_test', {
             method: 'get',
