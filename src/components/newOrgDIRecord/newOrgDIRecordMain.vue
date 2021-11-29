@@ -74,6 +74,7 @@
                     </label>
                     <div class="rounded-sm border mt-2" aria-readonly="true">
                         <editor
+                            id="editor"
                             :api-key="$constant.APIKEY"
                             initialValue="<p>Initial editor content</p>"
                             v-model="base.answer.text"
@@ -103,7 +104,7 @@
                                 mt-1
                                 ring-1 ring-grayline
                             "
-                            checked
+                            @change="onChangeAnswer"
                         />
                         <label class="ml-1 notoSansJpAndTwelveRegular">
                             回答保留
@@ -833,7 +834,7 @@ export default {
                 question: '',
                 answer: {
                     text: '',
-                    isKeep: true,
+                    isKeep: false,
                 },
                 source: [
                     {
@@ -1235,6 +1236,27 @@ export default {
             }
             return result
         },
+        onChangeAnswer(value) {
+            console.log('onChangeAnswer', value)
+            this.enableDisable('editor')
+        },
+
+        getEditorStatus: function (editorId) {
+            return tinymce.get(editorId).mode.get()
+        },
+        toggleEditorStatus: function (editorId, currentStatus) {
+            if (answer.isKeep) {
+            }
+            if (currentStatus === 'design') {
+                tinymce.get(editorId).mode.set('readonly')
+            } else {
+                tinymce.get(editorId).mode.set('design')
+            }
+        },
+        enableDisable: function (targetEditor) {
+            var status = this.getEditorStatus(targetEditor)
+            this.toggleEditorStatus(targetEditor, status)
+        },
         // 検索結果画面で編集押下時、IDよりデータ取得
         async doSearch() {
             this.dispEditor = false
@@ -1387,6 +1409,7 @@ export default {
         ) {
             this.doSearch()
         }
+        // this.onChangeAnswer(true)
     },
 }
 </script>
