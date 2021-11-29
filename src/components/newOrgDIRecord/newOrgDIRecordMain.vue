@@ -750,17 +750,6 @@
                                 month: 'MMM',
                             }"
                         ></litepie-datepicker>
-                        <!-- <litepie-datepicker
-                            ref="datepicker"
-                            :asSingle="true"
-                            i18n="ja"
-                            v-model="detail.questionDate"
-                            :autoApply="false"
-                            :formatter="{
-                                date: 'YYYY.MM.DD',
-                                month: 'MMM',
-                            }"
-                        ></litepie-datepicker> -->
                     </div>
                 </div>
                 <div id="publicRange" class="mt-3">
@@ -1259,6 +1248,16 @@ export default {
                     this.base.source = res.data.qa.qaSource
                     this.base.pmid = res.data.qa.pubmed
                     this.url.pmid.text = URL_BASE_PMID + res.data.qa.pubmed
+                    // 薬の分類
+                    this.base.file = []
+                    for (let i = 0; i < res.data.qa.documents.length; i++) {
+                        this.base.file.push({
+                            filetype: '',
+                            filesize: '',
+                            filename: res.data.qa.documents[i].name,
+                            base64: '',
+                        })
+                    }
 
                     // 薬の分類
                     for (
@@ -1299,7 +1298,7 @@ export default {
 
                     // 質問者
                     this.detail.questioner.prefession =
-                        res.data.qa.askedPersonClassName
+                        res.data.qa.askedPersonClassId
                     for (
                         let i = 0;
                         i < res.data.qa.askedPersonMedicalDepartments.length;

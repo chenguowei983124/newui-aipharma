@@ -83,7 +83,7 @@ export default {
             let arr = Array.from(
                 state.commonInfo.asked_persons_class.map((item) => {
                     return {
-                        value: item.name,
+                        value: item.id,
                         title: item.name,
                     }
                 })
