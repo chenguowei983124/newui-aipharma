@@ -125,7 +125,7 @@
                     >
                         <div class="">
                             <input
-                                v-model="item.name"
+                                v-model="item.title"
                                 class="
                                     h-10
                                     w-88.75
@@ -568,8 +568,9 @@
                     <!-- <div class="flex space-x-2"> -->
                     <vue-single-select
                         class="w-42.5"
+                        ref="AskedPerson"
                         :name="'patientGenderList'"
-                        :default-value="-1"
+                        :default-value="detail.questioner.prefession"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="
                             $store.getters.getCommonInfo_AskedPerson
@@ -600,7 +601,7 @@
                     <vue-single-select
                         class="w-42.5"
                         :name="'patientGenderList'"
-                        :default-value="-1"
+                        :default-value="detail.patientGender"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="
                             $store.getters.getCommonInfo_PatientGgender
@@ -658,7 +659,9 @@
                             v-if="item.data_type == 'single'"
                             class="w-full"
                             :name="'singleSelect_' + item.id"
-                            :default-value="0"
+                            :default-value="
+                                $data['detail']['custom_details'][index].value
+                            "
                             :default-input-attribs="{ tabindex: 1 }"
                             :default-options="
                                 getItemsFromList(item.data, false)
@@ -834,7 +837,7 @@ export default {
                 },
                 source: [
                     {
-                        name: '',
+                        title: '',
                         url: '',
                     },
                 ],
@@ -904,7 +907,7 @@ export default {
             })
         },
         onAddSource: function () {
-            this.base.source.push({ name: '', url: '' })
+            this.base.source.push({ title: '', url: '' })
         },
         onFileChange(e) {
             // console.log('onFileChange-1', e)
@@ -934,6 +937,7 @@ export default {
             }
         },
         setPrefessionValue(value) {
+            console.log(value)
             this.detail.questioner.prefession = value
         },
         setPatientGenderValue(value) {
@@ -1118,6 +1122,7 @@ export default {
         },
         getItemsFromList(list, multiple = true) {
             if (multiple) {
+                console.log('result1', typeof list[0])
                 if (typeof list[0] == 'string') return list
                 else {
                     // list of object
@@ -1126,6 +1131,7 @@ export default {
                         if (!node.id) return
                         result.push(node.name)
                     })
+                    console.log('result2', result)
                     return result
                 }
             } else {
@@ -1138,10 +1144,11 @@ export default {
                     } else {
                         if (!node.id) return
 
-                        item = { value: node.id, title: node.name }
+                        item = { value: node.name, title: node.name }
                     }
                     result.push(item)
                 })
+                console.log('result3', result)
                 return result
             }
         },
@@ -1237,13 +1244,10 @@ export default {
                     console.log(res.data.qa)
                     this.base.question = res.data.qa.question
                     this.base.answer.text = res.data.qa.answer
+                    this.base.source = res.data.qa.qaSource
+                    this.base.pmid = res.data.qa.pubmed
+                    this.url.pmid.text = URL_BASE_PMID + res.data.qa.pubmed
 
-                    for (let i = 0; i <= res.data.qa.qaSource.length; i++) {
-                        this.base.source.name = res.data.qa.qaSource[i].title
-                        this.base.source.url = res.data.qa.qaSource[i].url
-                    }
-                    console.log('test', res.data.qas[0].qaQaClassifyClasses)
-                    this.base.pmid = res.data.qas[0].pubmed
                     // this.base.doi = res.data.qas[0].doi
                     // this.base.doi = res.data.qas[0].urls.doi
                     // for (
@@ -1257,52 +1261,102 @@ export default {
                     // 薬の分類
                     for (
                         let i = 0;
-                        i <
-                        Object.values(res.data.qas[0].qaQaClassifyClasses)
-                            .length;
+                        i < res.data.qa.qaClassifyClasses.length;
                         i++
                     ) {
                         this.detail.mediTypes.push(
-                            Object.values(res.data.qas[0].qaQaClassifyClasses)[
-                                i
-                            ].name
+                            res.data.qa.qaClassifyClasses[i].name
+                        )
+                    }
+                    // 質問区分
+
+                    for (let i = 0; i < res.data.qa.categories.length; i++) {
+                        this.detail.quesClass.push(
+                            res.data.qa.categories[i].name
                         )
                     }
 
-                    // 質問区分
-                    // console.log(
-                    //     this.detail.custom_details,
-                    //     res.data.qas[0].customDetails
-                    // )
-                    // this.detail.custom_details = Array.from(
-                    //     res.data.qas[0].customDetails
-                    // )
-                    // this.detail.quesClass = res.data.qas[0].categories
-                    // this.detail.mediName = res.data.qas[0].medicines
-                    // this.detail.sideEffects = res.data.qas[0].sideEffectsName
-                    // this.detail.keyWord = res.data.qas[0].keywordTags
-                    // this.detail.questioner.prefession = 1
-                    // this.detail.questioner.department =
-                    //     res.data.qas[0].askedPersonMedicalDepartments
-                    // // this.detail.patientGender =res.data.qas[0].keywordTags
-                    // this.detail.references = res.data.qas[0].referenceMaterials
-                    // this.detail.memo = res.data.qas[0].note
-                    // this.detail.questionDate = res.data.qas[0].createdAt
-                    // this.detail.publicRange = true
+                    // 医薬品名
+                    for (let i = 0; i < res.data.qa.medicines.length; i++) {
+                        this.detail.mediName.push(res.data.qa.medicines[i].name)
+                    }
+
+                    // 副作用
+                    for (let i = 0; i < res.data.qa.sideEffects.length; i++) {
+                        this.detail.sideEffects.push(
+                            res.data.qa.sideEffects[i].name
+                        )
+                    }
+
+                    // キーワード
+                    for (let i = 0; i < res.data.qa.keywordTags.length; i++) {
+                        this.detail.keyWord.push(
+                            res.data.qa.keywordTags[i].name
+                        )
+                    }
+
+                    // 質問者
+                    this.detail.questioner.prefession =
+                        res.data.qa.askedPersonClassName
+                    for (
+                        let i = 0;
+                        i < res.data.qa.askedPersonMedicalDepartments.length;
+                        i++
+                    ) {
+                        this.detail.questioner.department.push(
+                            res.data.qa.askedPersonMedicalDepartments[i].name
+                        )
+                    }
+
+                    // 患者性別
+                    this.detail.patientGender = res.data.qa.patientGender
+
+                    // 参照資料
+                    for (
+                        let i = 0;
+                        i < res.data.qa.referenceMaterials.length;
+                        i++
+                    ) {
+                        this.detail.references.push(
+                            res.data.qa.referenceMaterials[i].name
+                        )
+                    }
+
+                    // 疾患名
+                    for (let i = 0; i < res.data.qa.diseases.length; i++) {
+                        this.detail.diseaseName.push(
+                            res.data.qa.diseases[i].name
+                        )
+                    }
+                    // カスタム項目
+                    for (let i = 0; i < res.data.qa.customDetails.length; i++) {
+                        for (
+                            let j = 0;
+                            j < this.detail.custom_details.length;
+                            j++
+                        ) {
+                            if (
+                                this.detail.custom_details[j].id ===
+                                res.data.qa.customDetails[i].id
+                            ) {
+                                this.detail.custom_details[j].value =
+                                    res.data.qa.customDetails[i].data
+                            }
+                        }
+                    }
+
+                    // 備考
+                    this.detail.memo = res.data.qa.note
+                    // 公開範囲
+                    if (res.data.qa.shareScope === '全体公開') {
+                        this.detail.publicRange = true
+                    } else {
+                        this.detail.publicRange = false
+                    }
+
+                    // 質問日
+                    this.detail.questionDate = res.data.qa.createdAt
                 })
-
-            //
-            // this.base.scope = response.data.data[0].post.scope
-            // this.$refs.scope.setValue(String(this.base.scope))
-
-            // this.base.genre = response.data.data[0].post.genre
-            // this.$refs.genre.setValue(this.base.genre)
-
-            // this.base.title = response.data.data[0].post.title
-            // this.base.answer = response.data.data[0].post.content
-            // for (let i = 0; i < response.data.data[0].post.tag.length; i++) {
-            //     this.base.tags.push(response.data.data[0].post.tag[i].name)
-            // }
         },
     },
     created() {

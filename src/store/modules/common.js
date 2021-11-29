@@ -95,7 +95,7 @@ export default {
             let arr = Array.from(
                 state.commonInfo.patient_gender.map((item) => {
                     return {
-                        value: item.id,
+                        value: item.name,
                         title: item.name,
                     }
                 })
@@ -123,7 +123,7 @@ export default {
             let arr = Array.from(
                 state.commonInfo.qa_category_lists.map((item) => {
                     return {
-                        value: item.value,
+                        value: item.title,
                         label: item.title,
                     }
                 })
