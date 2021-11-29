@@ -740,16 +740,27 @@
                     <label class="notoSansJpAndSixteenBold"> 質問日 </label>
                     <div class="w-full md:w-1/3">
                         <litepie-datepicker
-                            ref="datepicker"
+                            ref="datepickerFrom"
                             :asSingle="true"
                             i18n="ja"
                             v-model="detail.questionDate"
-                            :autoApply="true"
+                            :autoApply="false"
                             :formatter="{
                                 date: 'YYYY.MM.DD',
                                 month: 'MMM',
                             }"
                         ></litepie-datepicker>
+                        <!-- <litepie-datepicker
+                            ref="datepicker"
+                            :asSingle="true"
+                            i18n="ja"
+                            v-model="detail.questionDate"
+                            :autoApply="false"
+                            :formatter="{
+                                date: 'YYYY.MM.DD',
+                                month: 'MMM',
+                            }"
+                        ></litepie-datepicker> -->
                     </div>
                 </div>
                 <div id="publicRange" class="mt-3">
@@ -1346,6 +1357,7 @@ export default {
                     }
 
                     // 質問日
+                    // this.dateValueFrom(res.data.qa.createdAt)
                     this.detail.questionDate = res.data.qa.createdAt
                 })
         },
