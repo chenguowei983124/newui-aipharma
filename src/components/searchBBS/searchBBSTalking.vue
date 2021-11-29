@@ -419,7 +419,7 @@ export default {
                     confirmButtonText: 'OK',
                 })
                 this.closeClick()
-                this.$emit('resetBbsRouter')
+                // this.$emit('resetBbsRouter')
             }
         },
         formatPostList(data) {

@@ -165,7 +165,7 @@ export default {
             this.dispFlg = false
         },
         resetBbsRouter(){
-            this.$refs.bbsList.resetRouter()
+            this.$refs.bbsList.doSearch()
         },
         getUnpublish() {
             const params = {
