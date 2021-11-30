@@ -213,6 +213,8 @@
                             :index="index"
                             :exeSearchData="doSearch"
                             :putFeedbacks="putFeedbacks"
+                            @onCloseEditEvent="closeEditEvent"
+                            :isShow="items.isShow"
                         ></make-detail-row>
                     </div>
                 </div>
@@ -447,11 +449,18 @@ export default {
                     commnet: data[i].post.commnet,
                     user_id: data[i].post.user_id,
                 }
+
+                for (let i = 0; i < listDetail.commnet.length; i++) {
+                    listDetail.commnet[i].isShow = false
+                }
                 list.push(listDetail)
-                console.log(list)
             }
             return list
         },
+        closeEditEvent(index, value) {
+            this.postList[0].commnet[index].isShow = value
+        },
+
         putFeedbacks(kind, post_id, feedbackId, index) {
             let tempKind = kind
             console.log('user', this.$store.getters.topManagementInfo.user_id)
