@@ -4,25 +4,57 @@
             class="h-15 w-15 flex justify-center items-center cursor-pointer"
             @click="toTop"
         >
-            <svg
-                id="_211012_ai_pharma_parts"
-                data-name="211012_ai_pharma_parts"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 120 120"
-                class="hover:opacity-50 active:opacity-50"
+            <button
+                class="h-15 w-15 bg-toTop text-white rounded-full z-99"
+                @click="toTop"
             >
-                <circle class="cls-1" cx="60" cy="60" r="60" />
-                <polygon
-                    class="cls-2"
-                    points="60 41.47 36 71.47 84 71.47 60 41.47"
-                />
-            </svg>
+                ▲
+            </button>
+
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="60" />
+                <polygon points="60 41.47 36 71.47 84 71.47 60 41.47" />
+            </svg> -->
+            <!-- class="hover:opacity-50 active:opacity-50" -->
+            <!-- id="_211012_ai_pharma_parts"
+                data-name="211012_ai_pharma_parts" -->
+            <!-- class="cls-2" -->
         </div>
+        <!-- <div class="fixed hidden lg:block bottom-5 z-0">
+            <div class="flex flex-grow justify-end">
+                <button
+                    class="h-15 w-15 bg-toTop text-white rounded-full z-99"
+                    @click="toTop"
+                >
+                    ▲
+                </button>
+            </div>
+        </div> -->
+        <!-- <button
+            class="
+                fixed
+                bottom-5
+                right-5
+                h-15
+                w-15
+                block
+                lg:hidden
+                bg-toTop
+                text-white
+                rounded-full
+                z-99
+            "
+            @click="toTop"
+        >
+            ▲
+        </button> -->
     </div>
 </template>
 
 <script>
+import checkIconSvg from './svgImage/checkIconSvg.vue'
 export default {
+    components: { checkIconSvg },
     emits: ['toTop'],
     data() {
         return {}
