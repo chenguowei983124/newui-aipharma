@@ -94,8 +94,9 @@
                             notoSansJpAndSixteenblack
                             text-white
                         "
+                        @click="ediRecordClick"
                     >
-                        お知らせ 登録
+                        お知らせ 投稿
                     </button>
 
                     <button
@@ -110,7 +111,7 @@
                         "
                         @click="bbsRecordClick"
                     >
-                        掲示板 登録
+                        掲示板 投稿
                     </button>
                 </div>
                 <!-- 五行目 -->
@@ -127,7 +128,7 @@
                         "
                         @click="orgDiRecordClick"
                     >
-                        組織内DI 記録 登録
+                        組織内DI 記録 投稿
                     </button>
 
                     <button
@@ -141,7 +142,7 @@
                             text-white
                         "
                     >
-                        症例 登録
+                        症例 投稿
                     </button>
                 </div>
                 <div
@@ -198,33 +199,38 @@
 import TopPortraitIcon from '../home/topPortraitIcon.vue'
 
 export default {
-  components: { TopPortraitIcon },
-  props: {},
-  data() {
-    return {
-      isDown: false,
-    }
-  },
-  watch: {},
-  methods: {
-    itemClick() {
-      this.isDown = !this.isDown
+    components: { TopPortraitIcon },
+    props: {},
+    data() {
+        return {
+            isDown: false,
+        }
     },
-    orgDiRecordClick() {
-      this.$router.push({
-        path: '/newOrgDIRecord',
-      })
+    watch: {},
+    methods: {
+        itemClick() {
+            this.isDown = !this.isDown
+        },
+        orgDiRecordClick() {
+            this.$router.push({
+                path: '/newOrgDIRecord',
+            })
+        },
+        bbsRecordClick() {
+            this.$router.push({
+                path: '/newBbsRecord',
+            })
+        },
+        ediRecordClick() {
+            this.$router.push({
+                path: '/newEdiRecord',
+            })
+        },
     },
-    bbsRecordClick() {
-      this.$router.push({
-        path: '/newBbsRecord',
-      })
+    created() {},
+    mounted() {
+        this.$store.dispatch('getTopManagementInfo')
     },
-  },
-  created() { },
-  mounted() {
-    this.$store.dispatch('getTopManagementInfo')
-  },
 }
 </script>
 <style scoped></style>

@@ -5,7 +5,7 @@ import sendResetPasswordMail from '/src/view/sendResetPasswordMail.vue'
 import sendResetPassword from '/src/view/sendResetPassword.vue'
 import setPassword from '/src/view/setPassword.vue'
 import myHome from '/src/view/myHome.vue'
-import notification from '/src/view/notification.vue'
+import newEdiRecord from '/src/view/newEdiRecord.vue'
 import searchResultAll from '/src/view/searchResultAll.vue'
 import searchOrganization from '/src/view/searchOrganization.vue'
 import searchDiKnowledge from '/src/view/searchDiKnowledge.vue'
@@ -65,9 +65,9 @@ const routes = [
     },
     // お知らせ画面
     {
-        path: '/notification',
-        name: 'notification',
-        component: notification,
+        path: '/newEdiRecord',
+        name: 'newEdiRecord',
+        component: newEdiRecord,
         meta: {
             requireAuth: true,
         },

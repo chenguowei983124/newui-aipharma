@@ -71,14 +71,14 @@ const singleSelectItem = [
 const APIKEY = 'qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp'
 
 const managementitemList = [
-    { title: 'データ登録', itemStyle: 'title' },
+    { title: 'データ投稿', itemStyle: 'title' },
     {
-        title: '組織内DI 記録（Q&A）登録',
+        title: '組織内DI 記録（Q&A）投稿',
         itemStyle: 'item',
         routerPath: '/newOrgDIRecord',
     },
     {
-        title: '症例（プレアボイド）登録',
+        title: '症例（プレアボイド）投稿',
         itemStyle: 'item',
         routerPath: '/newOrgDIRecord',
     },
@@ -97,13 +97,13 @@ const managementitemList = [
 ]
 
 const managementPcitemList = [
-    { title: 'データ登録', itemStyle: 'title' },
+    { title: 'データ投稿', itemStyle: 'title' },
     {
-        title: '組織内DI 記録 登録',
+        title: '組織内DI 記録 投稿',
         itemStyle: 'item',
         routerPath: '/newOrgDIRecord',
     },
-    { title: '症例 登録', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
+    { title: '症例 投稿', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
     { title: 'マイデータ', itemStyle: 'title' },
     {
         title: '組織内DI 記録 ',
@@ -117,12 +117,12 @@ const managementPcitemList = [
 const issueIconitemList = [
     { title: '投稿', itemStyle: 'title' },
     {
-        title: 'お知らせ 登録',
+        title: 'お知らせ 投稿',
         itemStyle: 'item',
         routerPath: '/searchNotification',
     },
     {
-        title: '掲示板 登録',
+        title: '掲示板 投稿',
         itemStyle: 'item',
         routerPath: '/newBbsRecord',
     },
