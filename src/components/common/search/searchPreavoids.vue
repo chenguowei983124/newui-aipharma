@@ -34,7 +34,6 @@
                     }"
                     :leftLableDisp="false"
                 ></litepie-datepicker>
-                <button></button>
                 <input
                     class="
                         w-9.5
@@ -202,80 +201,80 @@ import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../dateRange/litepie-datepicker.vue'
 import { ref } from 'vue'
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { },
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
     },
-  },
-  components: {
-    searchDropdown,
-    searchSvg,
-    TriangleDownSvg,
-    Multiselect,
-    vueSingleSelect,
-    litepieDatepicker,
-  },
-  data() {
-    return {
-      searchValue: '',
-      isDetailClick: true,
-      value: [],
-      defaultValue: 0,
-      defaultInputAttribs: {
-        tabindex: 1,
-      },
-      dispText: '',
-    }
-  },
-  computed: {
-    dateValueFrom: {
-      get: function () {
-        return this.$store.getters.getDateValueFrom
-      },
-      set: function (value) {
-        return this.$store.dispatch('setDateValueFrom', value)
-      },
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
+        litepieDatepicker,
     },
-    dateValueTo: {
-      get: function () {
-        return this.$store.getters.getDateValueTo
-      },
-      set: function (value) {
-        return this.$store.dispatch('setDateValueTo', value)
-      },
+    data() {
+        return {
+            searchValue: '',
+            isDetailClick: true,
+            value: [],
+            defaultValue: 0,
+            defaultInputAttribs: {
+                tabindex: 1,
+            },
+            dispText: '',
+        }
     },
-  },
+    computed: {
+        dateValueFrom: {
+            get: function () {
+                return this.$store.getters.getDateValueFrom
+            },
+            set: function (value) {
+                return this.$store.dispatch('setDateValueFrom', value)
+            },
+        },
+        dateValueTo: {
+            get: function () {
+                return this.$store.getters.getDateValueTo
+            },
+            set: function (value) {
+                return this.$store.dispatch('setDateValueTo', value)
+            },
+        },
+    },
 
-  methods: {
-    dateClear: function () {
-      this.$refs.datepickerFrom.clearPicker()
-      this.$refs.datepickerTo.clearPicker()
+    methods: {
+        dateClear: function () {
+            this.$refs.datepickerFrom.clearPicker()
+            this.$refs.datepickerTo.clearPicker()
+        },
+        clearClick: function () {
+            this.$refs.datepickerFrom.clearPicker()
+            this.$refs.datepickerTo.clearPicker()
+            this.$refs.facility.setValue('0')
+            this.$refs.styles.setValue('0')
+            this.$store.dispatch('setSearchWord', '')
+        },
+        getDispText: function (value) {
+            this.dispText = value
+        },
+        // 施設
+        setFacilityID(value) {
+            this.$store.dispatch('setFacilityID', value)
+        },
+        // 様式
+        setStyles(value) {
+            this.$store.dispatch('setStyles', value)
+        },
+        // 詳細条件クリックイベント
+        detailBottunClick: function (event) {
+            this.isDetailClick = !this.isDetailClick
+            this.$emit('isDetailClick', this.isDetailClick)
+        },
     },
-    clearClick: function () {
-      this.$refs.datepickerFrom.clearPicker()
-      this.$refs.datepickerTo.clearPicker()
-      this.$refs.facility.setValue('0')
-      this.$refs.styles.setValue('0')
-      this.$store.dispatch('setSearchWord', '')
-    },
-    getDispText: function (value) {
-      this.dispText = value
-    },
-    // 施設
-    setFacilityID(value) {
-      this.$store.dispatch('setFacilityID', value)
-    },
-    // 様式
-    setStyles(value) {
-      this.$store.dispatch('setStyles', value)
-    },
-    // 詳細条件クリックイベント
-    detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit('isDetailClick', this.isDetailClick)
-    },
-  },
 }
 </script>
 

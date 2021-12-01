@@ -10,7 +10,7 @@ module.exports = {
         extend: {
             margin: {
                 '-0.45': '-0.1125rem',
-               },
+            },
             backgroundImage: (theme) => ({
                 'multiselect-caret': `url("${svgToDataUri(
                     `<svg viewBox="0 0 320 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg>`
@@ -106,6 +106,8 @@ module.exports = {
                 35: '8.75rem',
                 // 150px
                 37.5: '9.375rem',
+                38: '9.5rem',
+                39: '9.75rem',
                 // 164px
                 40.5: '10.125rem',
                 // 164px
@@ -224,8 +226,8 @@ module.exports = {
             },
             backgroundColor: (theme) => ({
                 ...theme('colors'),
-                redFF145A:'#FF145A',
-                blue326EB3:'#326EB3',
+                redFF145A: '#FF145A',
+                blue326EB3: '#326EB3',
                 aiSwitchBg: '#fceacc',
                 blueline: '#65bbe5',
                 downloadIcon: '#8CC85A',
@@ -391,8 +393,10 @@ module.exports = {
                     iconColor: theme('colors.balck'),
                     icon: '<svg fill="none" stroke="rgb(0, 0, 0)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>',
                 },
+
                 radio: {
                     iconColor: theme('colors.balck'),
+                    icon: '<svg fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="4"/></svg>',
                 },
             },
         }),

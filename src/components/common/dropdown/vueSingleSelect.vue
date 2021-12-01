@@ -113,7 +113,7 @@ export default {
         leftLableStyle: {
             tpye: String,
             default:
-                'absolute mt-1.25 pl-2 left-1 text-lg text-blueline notoSansJpAndFourteenBold',
+                'absolute mt-1.25 pl-2 left-1 text-lg text-blueline notoSansJpAndFourteenBold pointer-events-none',
         },
         leftLableDisp: {
             type: Boolean,

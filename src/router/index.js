@@ -13,6 +13,7 @@ import searchPreavoids from '/src/view/searchPreavoids.vue'
 import searchBulletinBoard from '/src/view/searchBulletinBoard.vue'
 import searchNotification from '/src/view/searchNotification.vue'
 import newOrgDIRecord from '/src/view/newOrgDIRecord.vue'
+import preavoidsInputOut from '/src/view/preavoidsInputOut.vue'
 import newBbsRecord from '/src/view/newBbsRecord.vue'
 import notFound from '/src/view/notFound.vue'
 import error from '/src/view/error.vue'
@@ -140,6 +141,15 @@ const routes = [
         path: '/newBbsRecord',
         name: 'newBbsRecord',
         component: newBbsRecord,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // 症例 入出力画面
+    {
+        path: '/preavoidsInputOut',
+        name: 'preavoidsInputOut',
+        component: preavoidsInputOut,
         meta: {
             requireAuth: true,
         },

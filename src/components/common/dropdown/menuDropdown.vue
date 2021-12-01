@@ -465,7 +465,7 @@ export default {
                     id: '6',
                     title: 'データ入出力',
                     itemStyle: 'item',
-                    path: 'searchOrganization',
+                    path: 'preavoidsInputOut',
                 },
             ],
             menuItemList4: [

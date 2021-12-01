@@ -163,7 +163,7 @@
 }
 /* 新着Q＆A Topics */
 .organizationResult_header_bg_gray {
-    @apply flex justify-between h-10 rounded-t-lg bg-grayline text-center py-1 px-5 w-auto
+    @apply flex justify-between h-10 rounded-t-lg bg-grayline text-center py-1 px-5 pt-2 w-auto
     text-white;
 }
 /* PMDA 医薬品更新情報　Topics */

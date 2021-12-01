@@ -10,6 +10,7 @@ const formList = {
     BBS: 'searchBulletinBoard',
     BBSR: 'BBSRecord',
     EDI: 'searchNotification',
+    PIO: 'preavoidsInOut',
 }
 // 様式リスト
 const style = [
@@ -17,6 +18,11 @@ const style = [
     { value: '1', title: '様式1' },
     { value: '2', title: '様式2' },
     { value: '3', title: '様式3' },
+]
+const inputOutStyle = [
+    { value: '0', title: '様式1' },
+    { value: '1', title: '様式2' },
+    { value: '2', title: '様式3' },
 ]
 // パラメータリスト
 const searchParam = {
@@ -253,4 +259,5 @@ export default {
     singleSelectItem,
     APIKEY,
     searchBbsScops,
+    inputOutStyle,
 }

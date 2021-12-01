@@ -13,7 +13,7 @@
         </div>
         <div class="flex flex-row">
             <!-- third -->
-            <div class="flex items-center border-b-2 md:border-b-0">
+            <div class="flex items-center">
                 <div
                     class="
                         w-37.5
@@ -79,23 +79,25 @@ export default {
     computed: {
         searchBarFixedClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
-                return 'fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-white'
+                return 'fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-whiteborder-b-2 grayline '
             } else if (this.$props.form == this.$constant.formList.ALL) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2 grayline'
             } else if (this.$props.form == this.$constant.formList.DI) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2 grayline'
             } else if (this.$props.form == this.$constant.formList.OWN) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2 grayline'
             } else if (this.$props.form == this.$constant.formList.PVD) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2 grayline'
             } else if (this.$props.form == this.$constant.formList.NDI) {
-                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
+                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2 grayline'
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2 grayline'
             } else if (this.$props.form == this.$constant.formList.BBSR) {
-                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2'
+                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2 grayline'
             } else if (this.$props.form == this.$constant.formList.EDI) {
-                return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white'
+                return 'fixed flex justify-between h-12.5 md:h-15 w-full border-b-2 grayline lm:w-270 z-99 bg-white'
+            } else if (this.$props.form == this.$constant.formList.PIO) {
+                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 border-b-2 grayline z-99 bg-white'
             }
         },
     },

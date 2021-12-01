@@ -35,9 +35,9 @@
                         bg-white
                         border border-litepie-secondary-300
                         focus:border-test-Range-From-300
-                        focus:ring
+                        focus:ring-1
                         focus:ring-test-Range-From-500
-                        focus:ring-opacity-10
+                        focus:ring-grayline
                         focus:outline-none
                         dark:bg-litepie-secondary-800
                         dark:border-litepie-secondary-700
@@ -448,7 +448,7 @@ export default /*#__PURE__*/ defineComponent({
         leftLableStyle: {
             tpye: String,
             default:
-                'absolute mt-1 pl-2 left-1  text-lg text-blueline notoSansJpAndFourteenBold z-99',
+                'absolute mt-1 pl-2 left-1  text-lg text-blueline notoSansJpAndFourteenBold z-99 pointer-events-none',
         },
         leftLableDisp: {
             type: Boolean,
