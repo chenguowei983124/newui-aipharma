@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="bg-lock h-full">
         <div class="absolute w-full rounded-sm -ml-0.5 -mt-0.5">
             <div
                 class="bg-lock h-36 rounded-lg md:h-40.5"
@@ -47,6 +47,7 @@
                             truncate
                             hover:opacity-50
                             active:opacity-50
+                            cursor-pointer
                         "
                     >
                         <result-detail-row-item

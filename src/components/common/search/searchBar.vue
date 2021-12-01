@@ -829,7 +829,7 @@ export default {
                     path: '/searchBulletinBoard',
                     query: params,
                 })
-                // 掲示板
+            // お知らせ
             } else if (this.checkId == 7) {
                 if (
                     this.$store.getters.getDateValueFrom != '' &&
@@ -850,28 +850,28 @@ export default {
                     checkTitle:
                         this.$props.form == this.$constant.formList.TOP
                             ? true
-                            : this.$store.getters.getBbsCheckInfo.checkTitle,
+                            : this.$store.getters.getEdiCheckInfo.checkTitle,
                     checkContent:
                         this.$props.form == this.$constant.formList.TOP
                             ? true
-                            : this.$store.getters.getBbsCheckInfo.checkContent,
+                            : this.$store.getters.getEdiCheckInfo.checkContent,
                     checkComment:
                         this.$props.form == this.$constant.formList.TOP
                             ? true
-                            : this.$store.getters.getBbsCheckInfo.checkComment,
+                            : this.$store.getters.getEdiCheckInfo.checkComment,
                     checkPost:
                         this.$props.form == this.$constant.formList.TOP
                             ? true
-                            : this.$store.getters.getBbsCheckInfo.checkPost,
+                            : this.$store.getters.getEdiCheckInfo.checkPost,
                     checkLastEditor:
                         this.$props.form == this.$constant.formList.TOP
                             ? true
-                            : this.$store.getters.getBbsCheckInfo
+                            : this.$store.getters.getEdiCheckInfo
                                   .checkLastEditor,
                     checkFacilityName:
                         this.$props.form == this.$constant.formList.TOP
                             ? true
-                            : this.$store.getters.getBbsCheckInfo
+                            : this.$store.getters.getEdiCheckInfo
                                   .checkFacilityName,
                     dateFrom:
                         this.$props.form == this.$constant.formList.TOP

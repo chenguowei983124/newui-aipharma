@@ -20,7 +20,7 @@
                 class="
                     rounded
                     border-b-2 border-pink-800
-                    bg-pink-600
+                    bg-redFF145A
                     text-white
                     notoSansJpAndFourteenMedium
                     w-17
@@ -34,7 +34,7 @@
                 class="
                     rounded
                     border-b-2 border-blue-900
-                    bg-blue-700
+                    bg-blue326EB3
                     text-white
                     notoSansJpAndFourteenMedium
                     w-20

@@ -17,7 +17,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getBbsCheckInfo
+                                        $store.getters.getEdiCheckInfo
                                             .checkTitle
                                     "
                                     @change="oncheckTitleChange"
@@ -34,7 +34,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getBbsCheckInfo
+                                        $store.getters.getEdiCheckInfo
                                             .checkContent
                                     "
                                     @change="onCheckContentChange"
@@ -51,7 +51,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getBbsCheckInfo
+                                        $store.getters.getEdiCheckInfo
                                             .checkComment
                                     "
                                     @change="onCheckCommentChange"
@@ -70,7 +70,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getBbsCheckInfo.checkPost
+                                        $store.getters.getEdiCheckInfo.checkPost
                                     "
                                     @change="onCheckPostChange"
                                 />
@@ -86,7 +86,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getBbsCheckInfo
+                                        $store.getters.getEdiCheckInfo
                                             .checkLastEditor
                                     "
                                     @change="onCheckLastEditorChange"
@@ -103,7 +103,7 @@
                                     type="checkbox"
                                     class="form-checkbox ring-1 text-white"
                                     :checked="
-                                        $store.getters.getBbsCheckInfo
+                                        $store.getters.getEdiCheckInfo
                                             .checkFacilityName
                                     "
                                     @change="onCheckFacilityNameChange"
@@ -152,7 +152,8 @@
                 :default-value="$store.getters.getScope"
                 :placeholder="'-- Choose an option --'"
                 :default-input-attribs="{ tabindex: 1 }"
-                :default-options="$constant.bbsScops"
+                :default-options="$constant.searchBbsScops
+                "
                 @selected="setScopeInfo"
                 leftLableTitle="公開範囲"
                 buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
@@ -484,51 +485,50 @@ export default {
             this.$refs.datepickerFrom.clearPicker()
             this.$refs.datepickerTo.clearPicker()
             this.$refs.scope.setValue('0')
-            let checkInfo = this.$store.getters.getBbsCheckInfo
+            let checkInfo = this.$store.getters.getEdiCheckInfo
             checkInfo.checkTitle = true
             checkInfo.checkContent = true
             checkInfo.checkComment = true
             checkInfo.checkPost = true
             checkInfo.checkLastEditor = true
             checkInfo.checkFacilityName = true
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
             this.$store.dispatch('setSearchWord', '')
             this.$store.dispatch('setSearchTags', [])
             this.$emit('clearSearchWordEvent', '')
         },
-
         setScopeInfo(value) {
             this.$store.dispatch('setScopeInfo', value)
         },
         oncheckTitleChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
+            let checkInfo = this.$store.getters.getEdiCheckInfo
             checkInfo.checkTitle = !checkInfo.checkTitle
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
         },
         onCheckContentChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
+            let checkInfo = this.$store.getters.getEdiCheckInfo
             checkInfo.checkContent = !checkInfo.checkContent
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
         },
         onCheckCommentChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
+            let checkInfo = this.$store.getters.getEdiCheckInfo
             checkInfo.checkComment = !checkInfo.checkComment
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
         },
         onCheckPostChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
+            let checkInfo = this.$store.getters.getEdiCheckInfo
             checkInfo.checkPost = !checkInfo.checkPost
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
         },
         onCheckLastEditorChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
+            let checkInfo = this.$store.getters.getEdiCheckInfo
             checkInfo.checkLastEditor = !checkInfo.checkLastEditor
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
         },
         onCheckFacilityNameChange() {
-            let checkInfo = this.$store.getters.getBbsCheckInfo
+            let checkInfo = this.$store.getters.getEdiCheckInfo
             checkInfo.checkFacilityName = !checkInfo.checkFacilityName
-            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
         },
         // 詳細条件クリックイベント
         detailBottunClick: function (event) {

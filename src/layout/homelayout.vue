@@ -89,12 +89,10 @@ export default {
   created() {
     if (!!import.meta.env.VITE_APP_IS_OIDC_AUTH && import.meta.env.VITE_APP_IS_OIDC_AUTH == 'true') {
       if (!!this.$route.params.code) {
-        // console.log('setOidcCode', this.$route.params.code)
         this.$store.dispatch('setOidcCode', this.$route.params.code)
       }
     } else {
       this.$store.dispatch('setOidcCode', '')
-      // console.log('no code')
     }
   },
 }

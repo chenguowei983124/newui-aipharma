@@ -162,6 +162,7 @@
                                     justify-end
                                     h-7.5
                                     w-14
+                                    ml-2
                                     rounded
                                     text-white
                                     bg-whole
@@ -217,6 +218,8 @@
                             :index="index"
                             :exeSearchData="doSearch"
                             :putFeedbacks="putFeedbacks"
+                            @onCloseEditEvent="closeEditEvent"
+                            :isShow="items.isShow"
                         ></make-detail-row>
                     </div>
                 </div>
@@ -408,11 +411,20 @@ export default {
         async doSearch() {
             this.dispEditor = false
             this.InputComment = ''
-
             Object.assign(this.params, { division: 'Info' })
             const response = await this.$serve.getPostsrforId('', this.id)
-
-            this.postList = this.formatPostList(response.data.data)
+            if (response.data.data.length != 0) {
+                this.postList = this.formatPostList(response.data.data)
+            } else {
+                this.$swal.fire({
+                    text: 'データがありません。',
+                    icon: '',
+                    showCancelButton: false,
+                    // cancelButtonText: 'キャンセル',
+                    confirmButtonText: 'OK',
+                })
+                this.closeClick()
+            }
         },
         formatPostList(data) {
             let list = []
@@ -439,10 +451,16 @@ export default {
                     commnet: data[i].post.commnet,
                     user_id: data[i].post.user_id,
                 }
+                for (let i = 0; i < listDetail.commnet.length; i++) {
+                    listDetail.commnet[i].isShow = false
+                }
                 list.push(listDetail)
                 console.log(list)
             }
             return list
+        },
+        closeEditEvent(index, value) {
+            this.postList[0].commnet[index].isShow = value
         },
         putFeedbacks(kind, post_id, feedbackId, index) {
             let tempKind = kind

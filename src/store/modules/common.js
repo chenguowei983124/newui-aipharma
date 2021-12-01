@@ -184,6 +184,9 @@ export default {
         setBbsCheck(state, info) {
             state.bbsCheckInfo = info
         },
+        setEidCheck(state, info) {
+            state.ediCheckInfo = info
+        },
         // 薬の分類
         setQaClassifyClass(state, info) {
             state.qa_classify_class = info.data.qa_classify_class

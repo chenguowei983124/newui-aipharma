@@ -174,13 +174,11 @@ export default {
     watch: {},
     setup() {},
     mounted() {
-        //   console.log('getOidcCode', this.$store.getters.getOidcCode)
         this.$store.dispatch('getTopNotice', this.$store.getters.getOidcCode)
         this.$store.dispatch(
             'getTopBulletinBoardInfo',
             this.$store.getters.getOidcCode
         )
-        // this.$store.dispatch('getBBSDropDowninfo', this.$store.getters.getOidcCode)
         this.$store.dispatch('getScientifiSocietyInfo')
         this.$store.dispatch('getTopPMDA')
         this.$store.dispatch('getCommonInfo')

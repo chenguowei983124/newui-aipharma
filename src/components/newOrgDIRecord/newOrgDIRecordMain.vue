@@ -32,7 +32,7 @@
                     class="
                         text-googleTitle
                         notoSansJpAndTwentyEightBold
-                        md:notoSansJpAndThirtyBold
+                        md:text-3xl
                         text-center
                     "
                 >
@@ -69,9 +69,9 @@
                 </div>
                 <div id="answer" class="mt-3">
                     <label class="notoSansJpAndSixteenBold"> 回答 </label>
-                    <label v-show="!validation.answer" style="color: red">
+                    <!-- <label v-show="!validation.answer" style="color: red">
                         *
-                    </label>
+                    </label> -->
                     <div class="rounded-sm border mt-2" aria-readonly="true">
                         <editor
                             id="editor"
@@ -90,7 +90,6 @@
                                     ' undo redo | bold italic underline strikethrough | fontsizeselect forecolor removeformat | alignleft aligncenter alignright alignjustify |  numlist bullist | image table link | fullscreen  preview pagebreak ',
                             }"
                         />
-                        <!-- <tinymce-edit v-model="base.answer.text"></tinymce-edit> -->
                     </div>
                     <div class="flex justify-end mt-1">
                         <input
@@ -221,7 +220,7 @@
                                     value="+追加"
                                 />
                             </div>
-                            <div class="bg-blue-500 block md:hidden">
+                            <div class="block md:hidden">
                                 <input
                                     type="button"
                                     class="
@@ -332,7 +331,7 @@
                     </label>
                 </a>
                 <!-- </div> -->
-                <div class="w-24 inline-block mt-2">
+                <!-- <div class="w-24 inline-block mt-2">
                     <a
                         :href="url.doi.lable"
                         target="_blank"
@@ -362,9 +361,9 @@
                             </svg>
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <!-- <div class="flex-wrap md:flex"> -->
-                <input
+                <!-- <input
                     v-model="base.doi"
                     class="
                         mt-2
@@ -398,14 +397,14 @@
                     >
                         {{ url.doi.text }}
                     </label>
-                </a>
+                </a> -->
                 <!-- </div> -->
 
                 <label class="notoSansJpAndSixteenBold"> ファイル </label>
 
                 <div v-for="(item, index) in base.file" :key="index">
                     <div class="flex flex-row items-center">
-                        <p class="ml-1 font-NotoSansJp text-mxs truncate">
+                        <p class="ml-1 font-NotoSansJp text-mxss truncate">
                             {{ !!item.filename ? item.filename : '' }}
                         </p>
                         <div
@@ -497,7 +496,7 @@
                     id="dTitle"
                     class="
                         notoSansJpAndTwentyEightBold
-                        md:notoSansJpAndThirtyBold
+                        md:text-3xl
                         text-gray-500 text-center
                     "
                 >
@@ -506,15 +505,16 @@
                 <div id="mediTypes" class="mt-3">
                     <label class="notoSansJpAndSixteenBold"> 薬の分類 </label>
                     <Multiselect
-                        mode="tags"
-                        v-model="detail.mediTypes"
-                        :closeOnSelect="false"
-                        :searchable="true"
-                        :createTag="false"
-                        :options="
-                            $store.getters.getCommonInfo_qa_classify_class
-                        "
-                        :classes="$constant.multiselectCss"
+                    class="cursor-default"
+                      mode="tags"
+                      v-model="detail.mediTypes"
+                      :closeOnSelect="false"
+                      :searchable="true"
+                      :createTag="false"
+                      :options="
+                          $store.getters.getCommonInfo_qa_classify_class
+                      "
+                      :classes="$constant.multiselectCss"
                     ></Multiselect>
                 </div>
                 <div id="quesClass" class="mt-3">
@@ -557,20 +557,24 @@
                 </div>
                 <div id="keyWord" class="mt-3">
                     <label class="notoSansJpAndSixteenBold"> キーワード </label>
-                    <multiselectEdit
+                    <Multiselect
+                        mode="tags"
                         v-model="detail.keyWord"
-                        :multiSelectItemList="
-                            $store.getters.getCommonInfo.keyword_tags
-                        "
-                    ></multiselectEdit>
+                        :closeOnSelect="false"
+                        :searchable="true"
+                        :createTag="false"
+                        :options="$store.getters.getCommonInfo.keyword_tags"
+                        :classes="$constant.multiselectCss">
+                    </Multiselect>
                 </div>
                 <div id="questioner" class="mt-3">
                     <label class="notoSansJpAndSixteenBold"> 質問者 </label>
-                    <!-- <div class="flex space-x-2"> -->
+                    <!-- <div class="flex space-x-2"> 
+                        placeholder="職種" leftLableTitle="職種"-->
                     <vue-single-select
                         class="w-42.5"
                         ref="AskedPerson"
-                        :name="'patientGenderList'"
+                        :name="'prefession'"
                         :default-value="detail.questioner.prefession"
                         :default-input-attribs="{ tabindex: 1 }"
                         :default-options="
@@ -584,6 +588,8 @@
                     ></vue-single-select>
 
                     <Multiselect
+                    class="mt-3"
+                        placeholder="診療科"
                         mode="tags"
                         v-model="detail.questioner.department"
                         :closeOnSelect="false"
@@ -652,68 +658,70 @@
                         .custom_details"
                     :key="index"
                 >
-                    <div :id="'custom_details_' + item.id" class="mt-3">
-                        <label class="notoSansJpAndSixteenBold">
-                            {{ item.title }}
-                        </label>
-                        <vue-single-select
-                            v-if="item.data_type == 'single'"
-                            class="w-full"
-                            :name="'singleSelect_' + item.id"
-                            :default-value="
-                                $data['detail']['custom_details'][index].value
-                            "
-                            :default-input-attribs="{ tabindex: 1 }"
-                            :default-options="
-                                getItemsFromList(item.data, false)
-                            "
-                            v-model="
-                                $data['detail']['custom_details'][index].value
-                            "
-                            @selectItemByMouse="setSingleSelectValue"
-                            @selectItemByEnter="setSingleSelectValue"
-                            :leftLableDisp="false"
-                            buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                            inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                  border border-transparent focus:outline-none"
-                        ></vue-single-select>
+                  <div :id="'custom_details_' + item.id" class="mt-3">
+                      <label class="notoSansJpAndSixteenBold">
+                          {{ item.title }}
+                      </label>
+                      <vue-single-select
+                          :placeholder="'-- Choose an option --'"
+                          leftLableTitle="様式"
+                          v-if="item.data_type == 'single'"
+                          class="w-full"
+                          :name="'singleSelect_' + item.id"
+                          :default-value="
+                              $data['detail']['custom_details'][index].value
+                          "
+                          :default-input-attribs="{ tabindex: 1 }"
+                          :default-options="
+                              getItemsFromList(item.data, false)
+                          "
+                          v-model="
+                              $data['detail']['custom_details'][index].value
+                          "
+                          @selectItemByMouse="setSingleSelectValue"
+                          @selectItemByEnter="setSingleSelectValue"
+                          :leftLableDisp="false"
+                          buttonStyle="w-9.5 h-10 pt-4 bg-grayline rounded-r right-0"
+                          inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-10 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                              border border-transparent focus:outline-none"
+                      ></vue-single-select>
 
-                        <Multiselect
-                            mode="tags"
-                            v-model="
-                                $data['detail']['custom_details'][index].value
-                            "
-                            :closeOnSelect="false"
-                            :searchable="true"
-                            :createTag="false"
-                            :options="item.data"
-                            :classes="$constant.multiselectCss"
-                            v-if="item.data_type == 'multiple'"
-                        ></Multiselect>
+                      <Multiselect
+                          mode="tags"
+                          v-model="
+                              $data['detail']['custom_details'][index].value
+                          "
+                          :closeOnSelect="false"
+                          :searchable="true"
+                          :createTag="false"
+                          :options="item.data"
+                          :classes="$constant.multiselectCss"
+                          v-if="item.data_type == 'multiple'"
+                      ></Multiselect>
 
-                        <textarea
-                            v-else-if="item.data_type == 'text'"
-                            v-model="
-                                $data['detail']['custom_details'][index].value
-                            "
-                            class="
-                                block
-                                w-full
-                                NotoSansJp-normal
-                                rounded-sm
-                                pl-4
-                                placeholder-gray-500
-                                focus:placeholder-opacity-0
-                                inputLineCss
-                                focus:outline-none
-                                focus:ring-1
-                                focus:border-326EB5Lins
-                                focus:border-transparent
-                            "
-                            type="text"
-                            placeholder=""
-                        ></textarea>
-                    </div>
+                      <textarea
+                          v-else-if="item.data_type == 'text'"
+                          v-model="
+                              $data['detail']['custom_details'][index].value
+                          "
+                          class="
+                              block
+                              w-full
+                              NotoSansJp-normal
+                              rounded-sm
+                              pl-4
+                              placeholder-gray-500
+                              focus:placeholder-opacity-0
+                              inputLineCss
+                              focus:outline-none
+                              focus:ring-1
+                              focus:border-326EB5Lins
+                              focus:border-transparent
+                          "
+                          type="text"
+                          placeholder=""
+                      ></textarea>
+                  </div>
                 </div>
                 <div id="memo" class="mt-3">
                     <label class="notoSansJpAndSixteenBold"> 備考 </label>
@@ -759,7 +767,13 @@
                         <input
                             v-model="detail.publicRange"
                             type="checkbox"
-                            class="form-checkbox w-3 h-3 text-white border"
+                            class="
+                                form-checkbox
+                                w-2.5
+                                h-2.5
+                                text-white
+                                ring-1 ring-grayline
+                            "
                             checked
                         />
                         <label class="ml-0.5 font-NotoSansJp text-sm">
@@ -776,6 +790,7 @@
                 <new-org-DI-record-buttons
                     id="dButtons"
                     parent="detail"
+                    :disableSave="!isValid"
                     @onTmpSaveEvent="tmpSaveEvent"
                     @onSaveEvent="saveEvent"
                     @onCancelEvent="cancelEvent"
@@ -791,8 +806,8 @@
 import newOrgDIRecordButtons from './newOrgDIRecordButtons.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../common/dateRange/litepie-datepicker.vue'
-import tinymceEdit from './tinymceEdit.vue'
-import multiselectEdit from './multiSelectEdit.vue'
+// import tinymceEdit from './tinymceEdit.vue'
+// import multiselectEdit from './multiSelectEdit.vue'
 import xIconSvg from '../common/svgImage/xIconSvg.vue'
 const URL_BASE_PMID = 'https://www.ncbi.nlm.nih.gov/pubmed/'
 const URL_BASE_DOI = 'http://www.google.com/'
@@ -805,9 +820,7 @@ export default {
         newOrgDIRecordButtons,
         vueSingleSelect,
         litepieDatepicker,
-        tinymceEdit,
         Multiselect,
-        multiselectEdit,
         xIconSvg,
         Editor,
     },
@@ -860,7 +873,7 @@ export default {
                 sideEffects: [],
                 keyWord: [],
                 questioner: {
-                    prefession: '',
+                    prefession: '-1',
                     department: [],
                 },
                 patientGender: '',
@@ -938,7 +951,7 @@ export default {
             }
         },
         setPrefessionValue(value) {
-            console.log(value)
+            // console.log(value)
             this.detail.questioner.prefession = value
         },
         setPatientGenderValue(value) {
@@ -980,7 +993,7 @@ export default {
         tmpSaveEvent(kind) {
             let param = this.setParam()
 
-            console.log(param)
+            // console.log(param)
             this.$serve.postOwnQA(param).then((res) => {
                 if (res.data.status === 'success') {
                     this.$swal
@@ -1006,42 +1019,72 @@ export default {
             })
         },
         saveEvent(kind) {
-            let param = this.setParam()
-            Object.assign(param.qa, { id: this.$route.query.id })
-
-            console.log(param)
-            this.$serve.postUpdateOwnQA(param).then((res) => {
-                if (res.data.status === 'success') {
-                    this.$swal
-                        .fire({
-                            text: '投稿に成功しました。',
-                            icon: '',
-                            showCancelButton: false,
-                            cancelButtonText: 'キャンセル',
-                            confirmButtonText: 'OK',
-                        })
-                        .then(() => {
-                            // this.clearInput()
-                            this.$router.go(-1)
-                        })
-                } else {
-                    this.$swal
-                        .fire({
-                            text: '投稿に失敗しました。',
-                            icon: '',
-                            showCancelButton: false,
-                            confirmButtonText: 'OK',
-                        })
-                        .then(() => {})
-                }
-            })
+            // console.log('this.$route.query.id',this.$route.query.id)
+            if (typeof(this.$route.query.id) == 'undefined') {
+                let create = 'create'
+                let param = this.setParam(create)
+                this.$serve.postOwnQA(param).then((res) => {
+                    if (res.data.status === 'success') {
+                        this.$swal
+                            .fire({
+                                text: '投稿に成功しました。',
+                                icon: '',
+                                showCancelButton: false,
+                                cancelButtonText: 'キャンセル',
+                                confirmButtonText: 'OK',
+                            })
+                            .then(() => {
+                                // this.clearInput()
+                                this.$router.go(-1)
+                            })
+                    } else {
+                        this.$swal
+                            .fire({
+                                text: '投稿に失敗しました。',
+                                icon: '',
+                                showCancelButton: false,
+                                confirmButtonText: 'OK',
+                            })
+                            .then(() => {})
+                    }
+                })
+            } else {
+                let update = "update"
+                let param = this.setParam(update)
+                Object.assign(param.qa, { id: this.$route.query.id })
+                this.$serve.postUpdateOwnQA(param).then((res) => {
+                    if (res.data.status === 'success') {
+                        this.$swal
+                            .fire({
+                                text: '投稿に成功しました。',
+                                icon: '',
+                                showCancelButton: false,
+                                cancelButtonText: 'キャンセル',
+                                confirmButtonText: 'OK',
+                            })
+                            .then(() => {
+                                // this.clearInput()
+                                this.$router.go(-1)
+                            })
+                    } else {
+                        this.$swal
+                            .fire({
+                                text: '投稿に失敗しました。',
+                                icon: '',
+                                showCancelButton: false,
+                                confirmButtonText: 'OK',
+                            })
+                            .then(() => {})
+                    }
+                })
+            }
         },
         cancelEvent() {
             this.$router.go(-1)
         },
-        setParam() {
+        setParam(data) {
             let qaCustomDetails = []
-            console.log(this.detail.custom_details[0].id)
+            // console.log(this.detail.custom_details[0].id)
             for (let i = 0; i < this.detail.custom_details.length; i++) {
                 let item = {
                     customDetailId: this.detail.custom_details[i].id,
@@ -1087,8 +1130,8 @@ export default {
                     categories: '',
                     referenceMaterials: this.detail.references,
                     note: this.detail.memo,
-                    askedPersonClassId: this.detail.questioner.prefession,
-                    publishFlag: 0,
+                    askedPersonClassId: this.detail.questioner.prefession == '-1' ? '' : this.detail.questioner.prefession,
+                    publishFlag: data == 'create' || data == 'update' ? 1 : 0,
                 },
             }
             return param
@@ -1124,7 +1167,7 @@ export default {
         },
         getItemsFromList(list, multiple = true) {
             if (multiple) {
-                console.log('result1', typeof list[0])
+                // console.log('result1', typeof list[0])
                 if (typeof list[0] == 'string') return list
                 else {
                     // list of object
@@ -1133,7 +1176,7 @@ export default {
                         if (!node.id) return
                         result.push(node.name)
                     })
-                    console.log('result2', result)
+                    // console.log('result2', result)
                     return result
                 }
             } else {
@@ -1150,7 +1193,7 @@ export default {
                     }
                     result.push(item)
                 })
-                console.log('result3', result)
+                // console.log('result3', result)
                 return result
             }
         },
@@ -1237,7 +1280,7 @@ export default {
             return result
         },
         onChangeAnswer(value) {
-            console.log('onChangeAnswer', value)
+            // console.log('onChangeAnswer', value)
             this.enableDisable('editor')
         },
 
@@ -1264,7 +1307,7 @@ export default {
             let result = this.$serve
                 .getOwnEditInfo(this.$route.query.id)
                 .then((res) => {
-                    console.log(res.data.qa)
+                    // console.log(res.data.qa)
                     this.base.question = res.data.qa.question
                     this.base.answer.text = res.data.qa.answer
                     this.base.source = res.data.qa.qaSource
@@ -1392,7 +1435,7 @@ export default {
             const base = this.base
             return {
                 question: !!base.question,
-                answer: !!base.answer.text,
+                // answer: !!base.answer.text,
             }
         },
         isValid() {
