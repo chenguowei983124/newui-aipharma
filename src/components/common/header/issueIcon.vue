@@ -51,8 +51,8 @@
                         v-if="$store.getters.getIssueIconClick"
                     >
                         <div
-                            v-for="item in $constant.issueIconitemList"
-                            :key="item"
+                            v-for="(item, index) in $constant.issueIconitemList"
+                            :key="index"
                             class="h-9 font-NotoSansJp cursor-pointer"
                         >
                             <div class="">
@@ -79,9 +79,9 @@
                                 >
                                     <div
                                         :class="[
-                                            item.title == '掲示板 登録'
-                                                ? 'rounded-b'
-                                                : '',
+                                            index + 1 == $constant.issueIconitemList.length
+                                            ? 'rounded-b'
+                                            : '',
                                         ]"
                                         class="
                                             border-b-2
@@ -121,8 +121,8 @@
                             v-if="$store.getters.getIssueIconClick"
                         >
                             <div
-                                v-for="item in $constant.issueIconitemList"
-                                :key="item"
+                                v-for="(item, index) in $constant.issueIconitemList"
+                                :key="index"
                                 class="h-9 font-NotoSansJp cursor-pointer"
                             >
                                 <div class="">
@@ -160,9 +160,9 @@
                                                 font-light
                                             "
                                             :class="[
-                                                item.title == '掲示板 登録'
-                                                    ? 'rounded-b border-b-2'
-                                                    : '',
+                                                index + 1 == $constant.issueIconitemList.length
+                                                ? 'rounded-b border-b-2'
+                                                : '',
                                             ]"
                                         >
                                             <div

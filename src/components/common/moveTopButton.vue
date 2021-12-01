@@ -20,41 +20,12 @@
                 data-name="211012_ai_pharma_parts" -->
             <!-- class="cls-2" -->
         </div>
-        <!-- <div class="fixed hidden lg:block bottom-5 z-0">
-            <div class="flex flex-grow justify-end">
-                <button
-                    class="h-15 w-15 bg-toTop text-white rounded-full z-99"
-                    @click="toTop"
-                >
-                    ▲
-                </button>
-            </div>
-        </div> -->
-        <!-- <button
-            class="
-                fixed
-                bottom-5
-                right-5
-                h-15
-                w-15
-                block
-                lg:hidden
-                bg-toTop
-                text-white
-                rounded-full
-                z-99
-            "
-            @click="toTop"
-        >
-            ▲
-        </button> -->
     </div>
 </template>
 
 <script>
-import checkIconSvg from './svgImage/checkIconSvg.vue'
 export default {
-    components: { checkIconSvg },
+    components: { },
     emits: ['toTop'],
     data() {
         return {}

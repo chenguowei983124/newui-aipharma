@@ -131,7 +131,7 @@
                         }"
                     />
                 </div>
-                <div id="mediTypes" class="mt-3 pb-8 md:mt-5">
+                <div id="mediTypes" class="mt-3 md:mt-5">
                     <label class="notoSansJpAndSixteenBold"> タグ </label>
                     <Multiselect
                         ref="tag"
@@ -155,12 +155,21 @@
                     ></Multiselect>
                 </div>
 
-                <div class="md:pb-16 mt-4">
+                <div id="check" class="md:pb-16 mt-3">
+                    <label class="notoSansJpAndSixteenBold"> 要閲覧 </label>
                     <div class="block">
                         <input
-                            v-model="base.base"
+                            v-model="base.check"
                             type="checkbox"
-                            class="form-checkbox w-3 h-3 text-white border"
+                            class="
+                                form-checkbox
+                                ml-0.5
+                                w-2.5
+                                h-2.5
+                                text-white
+                                ring-1 ring-grayline
+                            "
+                            checked
                         />
                         <label class="notoSansJpAndFourteenRegular">
                             要閲覧ラベルを付ける場合にチェック
@@ -196,7 +205,6 @@ import { onBeforeRouteUpdate } from 'vue-router'
 export default {
     setup() {
         onBeforeRouteUpdate((to, from, next) => {
-            console.log('asdfasdfasdfasdfasdfasfasdf')
             next()
         })
     },
@@ -232,7 +240,6 @@ export default {
     methods: {
         // ジャンル選択した値取得
         setPatientGenderValue(value) {
-            console.log('valueG', value)
             this.base.genre = value
         },
 
@@ -252,11 +259,11 @@ export default {
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        console.log('削除')
                         let params = {
                             code: this.$store.getters.getOidcCode,
                             post: {
-                                division: 'BBS',
+                                division: 'Info',
+                                CfRequired: this.base.check,
                                 title: this.base.title,
                                 content: this.base.answer,
                                 genre: this.base.genre,
@@ -295,11 +302,12 @@ export default {
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        console.log('this.base', this.base)
+                        // console.log('this.base', this.base)
                         let params = {
                             code: this.$store.getters.getOidcCode,
                             post: {
-                                division: 'BBS',
+                                division: 'Info',
+                                CfRequired: this.base.check,
                                 title: this.base.title,
                                 content: this.base.answer,
                                 genre: this.base.genre,
@@ -324,7 +332,7 @@ export default {
                                     })
                             })
                         } else {
-                            console.log(this.$route.query.id)
+                            // console.log(this.$route.query.id)
                             Object.assign(params.post, {
                                 post_id: this.$route.query.id,
                             })
@@ -353,14 +361,13 @@ export default {
         cancelEvent() {
             this.$router.go(-1)
         },
-
         // 検索結果画面で編集押下時、IDよりデータ取得
         async doSearch() {
             this.dispEditor = false
             this.InputComment = ''
             await this.$serve.postReadfeedbacks(this.id, '')
 
-            Object.assign(this.params, { division: 'BBS' })
+            Object.assign(this.params, { division: 'Info' })
             const response = await this.$serve.getPostsrforId(
                 '',
                 this.$route.query.id
@@ -374,6 +381,12 @@ export default {
 
             this.base.title = response.data.data[0].post.title
             this.base.answer = response.data.data[0].post.content
+            // 要閲覧区分(notbrowsed：要閲覧ではない　browse:要閲覧）
+            if (response.data.data[0].post.browseRequired === 'browse') {
+                this.base.check = true
+            } else if (response.data.data[0].post.browseRequired === 'notbrowsed') {
+                this.base.check = false
+            }
             for (let i = 0; i < response.data.data[0].post.tag.length; i++) {
                 this.base.tags.push(response.data.data[0].post.tag[i].name)
             }
@@ -410,11 +423,10 @@ export default {
                     }
                 }
             } else {
-                console.log('query', query)
+                // console.log('query', query)
                 await this.$serve
                     .getTagsMaster(this.$store.getters.getOidcCode, query)
                     .then((response) => {
-                        console.log(response)
                         result = response.map((item) => {
                             return {
                                 value: item.name,
@@ -430,7 +442,6 @@ export default {
     computed: {
         validation() {
             const base = this.base
-            console.log(base.answer)
             return {
                 question: !!base.scope,
                 genre: !!base.genre,

@@ -1,6 +1,6 @@
 <template>
     <!-- 検索枠 -->
-    <div id="">
+    <div id="searchNotificationLayout">
         <div class="group">
             <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
                 <search-bar
@@ -21,17 +21,21 @@
 
             <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-245">
                 <div class="flex">
-                    <div class="grid grid-cols-1 gap-1 md:space-y-3.75">
-                        <bbs-list
+                    <div class="grid grid-cols-1
+                            md:flex-auto
+                            gap-1
+                            md:space-y-3.75">
+                        <notification-list
                             :class="[
                                 dispFlg
                                     ? 'hidden md:w-full md:flex-grow md:block'
                                     : 'flex-grow w-full',
                             ]"
-                            ref="bbsList"
+                            ref="notificationList"
                             :detailHeightCss="detailHeightCss"
                             @clickItemEvent="openDetail"
-                        ></bbs-list>
+                            @closeNotificationTalking="closeDispFlg"
+                        ></notification-list>
                     </div>
                     <div
                         class="
@@ -43,26 +47,26 @@
                         class="
                             grid grid-cols-1
                             gap-1
-                            md:space-y-3.75
-                            w-full
-                            md:ml-2 md:w-132.5 md:flex-none
+                            md:space-y-3.75 md:ml-2 md:w-132.5 md:flex-none
+                            
                         "
                         v-if="dispFlg"
                     >
-                        <bbs-talking
+                        <notification-talking
                             class="
                                 flex-grow
                                 w-full
                                 md:ml-2 md:w-132.5 md:flex-none
                             "
-                            ref="talking"
+                            ref="notificationTalking"
                             @close="getClose"
+                            @resetBbsRouter="resetBbsRouter"
                             :id="id"
                             :detailHeightCss="detailHeightCss"
                             :exeSearchRefishOpts="exeSearchMultiSelectRefishOpt"
                             v-if="dispFlg"
                         >
-                        </bbs-talking>
+                        </notification-talking>
                     </div>
                 </div>
             </div>
@@ -72,11 +76,11 @@
 </template>
 
 <script>
-import bbsList from '../components/searchNotification/searchNotificationMain.vue'
-import bbsTalking from '../components/searchNotification/searchNotificationTalking.vue'
+import notificationList from '../components/searchNotification/searchNotificationMain.vue'
+import notificationTalking from '../components/searchNotification/searchNotificationTalking.vue'
 import searchBar from '../components/common/search/searchBar.vue'
 export default {
-    components: { bbsList, bbsTalking, searchBar },
+    components: { notificationList, notificationTalking, searchBar },
     computed: {
         fixedHight() {
             let css = ''
@@ -132,17 +136,15 @@ export default {
     methods: {
         // 詳細条件ボタン押下区分を取得
         getDetailDisp: function (data) {
-            console.log('asdf')
             this.isDetailButtonClick = data
         },
         getScroll: function (value) {
             // this.isScroll = value
         },
         openDetail(val) {
-            console.log('openDetail', val)
             this.id = val
             if (this.dispFlg === true) {
-                this.$refs.talking.doSearch()
+                this.$refs.notificationTalking.doSearch()
             }
 
             this.dispFlg = true
@@ -150,20 +152,16 @@ export default {
         exeSearchMultiSelectRefishOpt() {
             this.$refs.searchBar.$refs.inptBbsDetail.$refs.mult.refreshOptions()
         },
-        getClose(value) {
+        getClose(value,deleteFlg) {
             this.dispFlg = value
-            this.$refs.bbsList.talkingClosed()
+            this.$refs.notificationList.talkingClosed(deleteFlg)
         },
-        // getUnpublish() {
-        //     const params = {
-        //         publish: false,
-        //         timestamp: new Date().getTime(),
-        //     }
-        //     this.$router.push({
-        //         path: '/searchNotification',
-        //         query: params,
-        //     })
-        // },
+        closeDispFlg(){
+            this.dispFlg = false
+        },
+        resetBbsRouter(){
+            this.$refs.notificationList.doSearch()
+        },
     },
     created() {},
 }

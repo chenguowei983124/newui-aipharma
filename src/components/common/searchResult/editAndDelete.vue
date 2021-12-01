@@ -69,55 +69,55 @@
 <script>
 import dotsHorizontal from '../svgImage/dotsHorizontal.vue'
 export default {
-    components: { dotsHorizontal },
-    props: {
-        dataInfo: {},
-        index: Number,
-        id: String,
-        postId: String,
-        editEvent: {
-            type: Function,
-            default: () => {},
-        },
-        deleteEvent: {
-            type: Function,
-            default: () => {},
-        },
+  components: { dotsHorizontal },
+  props: {
+    dataInfo: {},
+    index: Number,
+    id: String,
+    postId: String,
+    editEvent: {
+      type: Function,
+      default: () => { },
     },
-    mounted() {
-        document.addEventListener('click', this.handleClickOutside)
-        document.addEventListener('keyup', this.handleClickOutside)
+    deleteEvent: {
+      type: Function,
+      default: () => { },
     },
-    unmounted() {
-        document.removeEventListener('keyup', this.handleClickOutside)
-        document.removeEventListener('click', this.handleClickOutside)
+  },
+  mounted() {
+    document.addEventListener('click', this.handleClickOutside)
+    document.addEventListener('keyup', this.handleClickOutside)
+  },
+  unmounted() {
+    document.removeEventListener('keyup', this.handleClickOutside)
+    document.removeEventListener('click', this.handleClickOutside)
+  },
+  data() {
+    return {
+      dispFlg: false,
+      boxDispFlg: false,
+    }
+  },
+  methods: {
+    handleClickOutside(e) {
+      if (this.$el.contains(e.target)) {
+        return
+      }
+      this.boxDispFlg = false
     },
-    data() {
-        return {
-            dispFlg: false,
-            boxDispFlg: false,
-        }
+    boxClose() {
+      this.boxDispFlg = !this.boxDispFlg
     },
-    methods: {
-        handleClickOutside(e) {
-            if (this.$el.contains(e.target)) {
-                return
-            }
-            this.boxDispFlg = false
-        },
-        boxClose() {
-            this.boxDispFlg = !this.boxDispFlg
-        },
-        editClick() {
-            this.editEvent(this.dataInfo)
-            this.boxClose()
-        },
-        deleteClick() {
-            this.deleteEvent(this.dataInfo)
-            this.boxClose()
-        },
+    editClick() {
+      this.editEvent(this.dataInfo)
+      this.boxClose()
     },
-    created() {},
+    deleteClick() {
+      this.deleteEvent(this.dataInfo)
+      this.boxClose()
+    },
+  },
+  created() { },
 }
 </script>
 <style scoped></style>

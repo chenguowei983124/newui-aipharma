@@ -94,7 +94,7 @@
                                 bg-gray_e6e6e6
                                 cursor-pointer
                             "
-                            @click="isShow = !isShow"
+                            @click="closeEdit"
                         >
                             <div class="mr-3 notoSansJpAndFourteenBold">
                                 閉じる
@@ -222,11 +222,11 @@ export default {
         items: {},
         postList: Array,
         index: 0,
+        isShow: false,
     },
     data() {
         return {
             commentEditFlg: false,
-            isShow: false,
             inputComment: this.items.content,
         }
     },
@@ -235,7 +235,7 @@ export default {
     methods: {
         // コメント編集押下
         editComment(dataInfo) {
-            this.isShow = true
+            this.$emit('onCloseEditEvent', this.index, true)
         },
 
         // コメント削除押下
@@ -262,7 +262,7 @@ export default {
                             showCancelButton: false,
                             confirmButtonText: 'OK',
                         })
-                        this.isShow = false
+                        this.$emit('onCloseEditEvent', this.index, true)
                         this.exeSearchData()
                     }
                 })
@@ -279,7 +279,7 @@ export default {
                 postId: this.items.post_id,
             }
             let res = this.$serve.postPosts(param)
-            this.isShow = false
+            this.$emit('onCloseEditEvent', this.index, true)
             this.exeSearchData()
         },
         tagClick(name) {
@@ -288,39 +288,9 @@ export default {
             this.$store.dispatch('setSearchTagsLable', tagsLable)
             this.exeSearchRefishOpts()
         },
-        // putFeedbacks(kind, post_id, feedbackId, index) {
-        //     console.log('text', this.postList[0].feedback)
-        //     // console.log('text', this.postList[0].commnet[index].feedback)
-        //     let tempKind = kind
-        //     if (index === undefined) {
-        //         if (this.postList[0].feedback.mine.kind == kind) {
-        //             tempKind = 2
-        //         }
-        //     } else {
-        //         if (
-        //             this.postList[0].commnet[index].feedback.mine.kind == kind
-        //         ) {
-        //             tempKind = 2
-        //         }
-        //     }
-
-        //     let params = {
-        //         feedbackId: feedbackId,
-        //         post_id: post_id,
-        //         kind: tempKind,
-        //         code: this.$store.getters.getOidcCode,
-        //     }
-        //     this.$serve.putfeedbacks(params).then((res) => {
-        //         if (index === undefined) {
-        //             Object.assign(this.postList[0].feedback, res.data.feedback)
-        //         } else {
-        //             Object.assign(
-        //                 this.postList[0].commnet[index].feedback,
-        //                 res.data.feedback
-        //             )
-        //         }
-        //     })
-        // },
+        closeEdit() {
+            this.$emit('onCloseEditEvent', this.index, false)
+        },
     },
     created() {},
 }

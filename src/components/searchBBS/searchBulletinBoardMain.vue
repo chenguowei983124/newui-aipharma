@@ -1,6 +1,6 @@
 <template>
     <div class="" id="div_postList">
-        <div class="flex justify-end mb-2r">
+        <div class="flex justify-end mb-2">
             <vue-single-select
                 class="w-42.5 cursor-pointer"
                 :name="'patientGenderList'"
@@ -14,7 +14,6 @@
                   border border-transparent focus:outline-none"
             ></vue-single-select>
         </div>
-        <!-- <div v-if="postList.length != 0"> -->
         <mescroll-vue
             class="h-screen-67 overflow-y-scroll"
             ref="mescroll"
@@ -34,7 +33,6 @@
                 </div>
             </div>
         </mescroll-vue>
-        <!-- </div> -->
     </div>
 </template>
 
@@ -107,12 +105,9 @@ export default {
     },
     methods: {
         async doSearch(pgNo = 1) {
-            console.log('delete search')
             this.initStore()
-            let response
             if (JSON.stringify(this.$route.query) !== '{}' 
                 && this.$route.query.id !== undefined) {
-                console.log('delete search 1')
                 Object.assign(this.params, { id: this.$route.query.id })
                 await this.$serve.getPostsrforId('', this.$route.query.id)
                     .then((response) => {
@@ -147,7 +142,6 @@ export default {
                             order: 'created_at-desc',
                         },
                     }
-                    console.log('delete search 2')
                     await this.$serve
                         .getPostList(queryStringData)
                         .then((response) => {
@@ -186,19 +180,16 @@ export default {
                             order: this.params.sort,
                         },
                     }
-                    console.log('delete search 3')
                     await this.$serve
                         .getPostList(queryStringData)
                         .then((response) => {
                             this.setSearchResult(response, pgNo)
                         })
-                    // this.$emit('closeBbsTalking')
                 }
             }
         },
         setSearchResult(response, pgNo) {
-            console.log('pgNo',pgNo)
-            // if (response.data.data.length != 0 ) {
+            if (response.data.data.length != 0 ) {
                 if (pgNo == 1) {
                     this.postList = this.formatPostList(response.data.data)
                     if (this.postList.length == 1) {
@@ -208,21 +199,10 @@ export default {
                     this.postList = this.formatPostList(response.data.data)
                 }
                 this.pagination = response.data.pagination
-                console.log(this.postList)
-            // } else {
-            //     console.log('zaizheli ')
-            //     this.$swal.fire({
-            //         text: 'nothing...',
-            //         icon: '',
-            //         showCancelButton: false,
-            //         // cancelButtonText: 'キャンセル',
-            //         confirmButtonText: 'OK',
-            //     })
-            // }
+            } 
         },
         formatPostList(data) {
             let list = this.postList
-            console.log('formatPostList', list)
             for (let i = 0; i < data.length; i++) {
                 let listDetail = {
                     id: data[i].post.id,
@@ -342,7 +322,6 @@ export default {
                 this.$route.query.checkFacilityName.toString() === 'true'
                     ? true
                     : false
-            console.log('checkInfo', checkInfo)
             this.$store.dispatch('setBbsCheckInfo', checkInfo)
             this.$store.dispatch(
                 'setSort',
@@ -380,8 +359,6 @@ export default {
             })
         },
         clickItem(val, index) {
-            console.log('index', this.openIndex)
-            console.log('index', this.postList)
             if (this.openIndex >= 0) {
                 this.postList[this.openIndex].clicked = false
             }
@@ -401,7 +378,6 @@ export default {
                 this.postList = []
                 this.mescroll.resetUpScroll()
                 this.mescroll.scrollTo(0, 0)
-                console.log('deleted')
             }
         },
         async upCallback(page, mescroll) {
@@ -412,7 +388,6 @@ export default {
                 this.firsted = false
             } else {
                 console.log('upCallbackSecond--------------start------')
-
                 await this.doSearch(page.num)
             }
 

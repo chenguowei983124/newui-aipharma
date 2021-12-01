@@ -125,7 +125,7 @@ const issueIconitemList = [
     {
         title: 'お知らせ 投稿',
         itemStyle: 'item',
-        routerPath: '/searchNotification',
+        routerPath: '/newEdiRecord',
     },
     {
         title: '掲示板 投稿',
