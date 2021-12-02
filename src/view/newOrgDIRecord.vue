@@ -19,5 +19,16 @@ export default {
         newOrgDIRecordLayout,
         homeBottomTemplate,
     },
+    created() {
+    if (localStorage.getItem('store')) {
+      this.$store.replaceState(
+        Object.assign(
+          {},
+          this.$store.state,
+          JSON.parse(localStorage.getItem('store'))
+        )
+      )
+    }
+  },
 }
 </script>

@@ -226,10 +226,17 @@ export default {
                 path: '/newEdiRecord',
             })
         },
+        async getUserData() {
+         await this.$serve.getManagementInfo(this.$store.getters.getOidcCode).then((res) => {
+            this.$store.dispatch('getTopManagementInfo', res)
+            localStorage.setItem('store', JSON.stringify(this.$store.state))
+        })
+    },
     },
     created() {},
     mounted() {
-        this.$store.dispatch('getTopManagementInfo')
+        this.getUserData()
+        // this.$store.dispatch('getTopManagementInfo')
     },
 }
 </script>

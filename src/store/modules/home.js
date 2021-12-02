@@ -89,8 +89,8 @@ export default {
             }
             commit('setBBSDropDowninfo', bbsDropDowninfo)
         },
-        async getTopManagementInfo({ rootState, commit }, code) {
-            const info = await serve.getManagementInfo(code)
+        getTopManagementInfo({ rootState, commit }, info) {
+            // const info = await serve.getManagementInfo(code)
             commit('setTopManagementInfo', info.data)
         },
         async getScientifiSocietyInfo({ rootState, commit }) {
