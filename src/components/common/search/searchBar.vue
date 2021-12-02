@@ -404,18 +404,18 @@ export default {
                 }
             } else if (this.$props.form == this.$constant.formList.BBS) {
                 return (
-                    'hidden md:block  h-10 w-10/12  rounded-r ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent '
-                )
+                        'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
             } else if (this.$props.form == this.$constant.formList.EDI) {
                 return (
-                    'hidden md:block  h-10 w-10/12  rounded-r ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent '
-                )
+                        'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
             }
         },
         sreachBarSPInputClass: function () {

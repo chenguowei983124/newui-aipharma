@@ -3,10 +3,11 @@
         <input
             type="button"
             class="
-                bg-gray-200
+                cursor-pointer
+                bg-gray_e6e6e6
                 hover:opacity-50
                 active:bg-personInformationButton active:opacity-100
-                border-b-2 border-gray-500
+                border-b-2 border-notice
                 h-10
                 rounded-full
                 notoSansJpAndEighteenBold
@@ -22,10 +23,11 @@
         <input
             type="button"
             class="
-                bg-gray-200
+            cursor-pointer
+                bg-gray_e6e6e6
                 hover:opacity-50
                 active:bg-personInformationButton active:opacity-100
-                border-b-2 border-gray-500
+                border-b-2 border-notice
                 h-10
                 rounded-full
                 notoSansJpAndEighteenBold
@@ -41,6 +43,7 @@
         <input
             type="button"
             :class="
+                'cursor-pointer' + 
                 'ml-0 md:ml-2 mt-2 md:mt-0 ' +
                 ' bg-orange-400' +
                 ' hover:opacity-50' +

@@ -27,6 +27,7 @@
                     h-7.5
                     px-1
                 "
+                @click="ediClick"
             >
                 投　稿
             </button>
@@ -56,8 +57,15 @@ export default {
         return {}
     },
     couputed: {},
-    watch: {},
-    methods: {},
+    watch: {
+    },
+    methods: {
+        ediClick() {
+            this.$router.push({
+                path: '/newEdiRecord',
+            })
+        },
+    },
     created() {},
 }
 </script>

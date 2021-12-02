@@ -22,13 +22,13 @@
             <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-245">
                 <div class="flex">
                     <div class="grid grid-cols-1
-                            md:flex-auto
+                            pm:flex-auto
                             gap-1
-                            md:space-y-3.75">
+                            pm:space-y-3.75">
                         <notification-list
                             :class="[
                                 dispFlg
-                                    ? 'hidden md:w-full md:flex-grow md:block'
+                                    ? 'hidden pm:w-full pm:flex-grow pm:block'
                                     : 'flex-grow w-full',
                             ]"
                             ref="notificationList"
@@ -39,7 +39,7 @@
                     </div>
                     <div
                         class="
-                            md:ml-2 md:mt-22 md:border-l-2 md:border-grayline
+                            pm:ml-2 pm:mt-22 pm:border-l-2 pm:border-grayline
                         "
                         v-if="dispFlg"
                     ></div>
@@ -47,7 +47,7 @@
                         class="
                             grid grid-cols-1
                             gap-1
-                            md:space-y-3.75 md:ml-2 md:w-132.5 md:flex-none
+                            pm:space-y-3.75 pm:ml-2 pm:w-132.5 pm:flex-none
                             
                         "
                         v-if="dispFlg"
@@ -56,7 +56,7 @@
                             class="
                                 flex-grow
                                 w-full
-                                md:ml-2 md:w-132.5 md:flex-none
+                                pm:ml-2 pm:w-132.5 pm:flex-none
                             "
                             ref="notificationTalking"
                             @close="getClose"

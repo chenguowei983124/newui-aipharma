@@ -918,7 +918,7 @@ const serve = {
     async postOwnQA(param) {
         const data = await axios('/api/qa/create_qa', {
             method: 'post',
-            data: { qa: param },
+            data: param,
         })
 
         return data
@@ -929,7 +929,7 @@ const serve = {
     async postUpdateOwnQA(param) {
         const data = await axios('/api/qa/update_qa', {
             method: 'post',
-            data: { qa: param },
+            data: param,
         })
 
         return data

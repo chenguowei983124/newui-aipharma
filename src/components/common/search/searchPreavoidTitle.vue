@@ -55,6 +55,7 @@
                     h-7.5
                     px-1
                 "
+                @click="inputOutClick"
             >
                 入出力
             </button>
@@ -71,7 +72,13 @@ export default {
     },
     couputed: {},
     watch: {},
-    methods: {},
+    methods: {
+        inputOutClick() {
+            this.$router.push({
+                path: '/preavoidsInputOut',
+            })
+        },
+    },
     created() {},
 }
 </script>

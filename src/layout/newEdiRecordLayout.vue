@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import newEdiRecordMain from '../components/ediRecord/newEdiRecordMain.vue'
+import newEdiRecordMain from '../components/ediRecord/recordMain.vue'
 
 export default {
     components: {

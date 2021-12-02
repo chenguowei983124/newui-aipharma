@@ -40,7 +40,7 @@
                     ></edit-and-delete>
                 </div>
             </div>
-            <div class="mt-5">
+            <div class="mt-5 ml-6">
                 <div
                     v-if="!isShow"
                     v-html="

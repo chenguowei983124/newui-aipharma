@@ -228,6 +228,7 @@ module.exports = {
                 ...theme('colors'),
                 redFF145A: '#FF145A',
                 blue326EB3: '#326EB3',
+                bule65B9E3: '#65B9E3',
                 aiSwitchBg: '#fceacc',
                 blueline: '#65bbe5',
                 downloadIcon: '#8CC85A',
@@ -374,6 +375,7 @@ module.exports = {
                 mid: '980px',
                 lm: '1080px',
                 cs: '460px',
+                pm: '880px'
                 // => @media (min-width: 640px) { ... }
             },
             opacity: {

@@ -220,7 +220,6 @@
                     </div>
                     <!-- view数 -->
                     <result-detail-row-item
-                    class=""
                         itemType="4"
                         itemTitle=" view"
                         :itemValue="row.viewCount.toString()"
