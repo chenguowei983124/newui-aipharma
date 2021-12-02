@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    components: { },
+    components: {},
     emits: ['toTop'],
     data() {
         return {}
@@ -39,7 +39,7 @@ export default {
                 if (0 > currentScroll) {
                     clearInterval(int)
                 } else {
-                    currentScroll = currentScroll - 12
+                    currentScroll = currentScroll - 48
                     document.documentElement.scrollTop = currentScroll
                 }
             }
