@@ -197,7 +197,6 @@ export default {
         },
         setCommon(state, info) {
             state.commonInfo = info.data
-            console.log('common', state.commonInfo)
         },
     },
 
@@ -241,8 +240,8 @@ export default {
             commit('basic', { key: 'isOrgDotsDetailedClick', value })
         },
         // 薬の分類 質問区分
-        async getCommonInfo({ rootState, commit }) {
-            const info = await serve.getOrgCommonInfo()
+        getCommonInfo({ rootState, commit }, info) {
+            // const info = await serve.getOrgCommonInfo()
             commit('setQaClassifyClass', info)
             commit('setQaClassifySubject', info)
 

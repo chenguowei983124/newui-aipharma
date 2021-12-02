@@ -181,7 +181,17 @@ export default {
         )
         this.$store.dispatch('getScientifiSocietyInfo')
         this.$store.dispatch('getTopPMDA')
-        this.$store.dispatch('getCommonInfo')
+        // this.$store.dispatch('getCommonInfo')
+        this.getHomeData()
+    },
+    methods: {
+        async getHomeData() {
+            const info = await this.$serve.getOrgCommonInfo().then((res) => {
+                this.$store.dispatch('getCommonInfo', res)
+                console.log(this.$store.state)
+                localStorage.setItem('store', JSON.stringify(this.$store.state))
+            })
+        },
     },
 }
 </script>
