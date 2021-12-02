@@ -1109,9 +1109,9 @@ export default {
                     shareScope: this.detail.publicRange,
                     patientGender: this.detail.patientGender,
                     qaSource: this.base.source,
-                    qaPubmeds: {
+                    qaPubmeds: [{
                         name: this.base.pmid,
-                    },
+                    }],
                     qaDocuments: {
                         file: this.base.files,
                     },

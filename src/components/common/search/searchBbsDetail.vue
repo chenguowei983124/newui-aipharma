@@ -135,8 +135,14 @@
                             return await fetchLanguages(query) // check JS block for implementation
                         }
                     "
-                    :classes="$constant.multiselectCss"
-                />
+                    :classes="$constant.multiselectCss">
+                    <template v-slot:option="{ option }">
+                    <div class="w-full">
+                        {{ option.label }}
+                        <div class="float-right" v-if="option.count !== undefined">{{ option.count }}件</div>
+                    </div>
+                    </template>
+                </Multiselect>
             </div>
         </div>
         <!-- 三行目、四行目 -->
@@ -155,7 +161,7 @@
                 :default-options="$constant.searchBbsScops"
                 @selected="setScopeInfo"
                 leftLableTitle="公開範囲"
-                buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
+                buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0 border-b-2 border-bule65B9E3"
                 inputStyle="w-full text-left pl-20 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none "
                 iconColor="#32a5dc"
@@ -205,6 +211,7 @@
                         notoSansJpAndTenBold
                         text-blueline
                         flex-none
+                        border-b-2 border-bule65B9E3
                     "
                     type="button"
                     @click="dateClear"
@@ -394,6 +401,7 @@ export default {
                             return {
                                 value: item.name,
                                 label: item.name,
+                                count: item.associatedCount,
                             }
                         })
                     }
@@ -403,6 +411,7 @@ export default {
                             setList = {
                                 value: result[key].value,
                                 label: result[key].label,
+                                count: result[key].count
                             }
                         }
                     })
@@ -441,6 +450,7 @@ export default {
                         return {
                             value: item.name,
                             label: item.name,
+                            count: item.associatedCount,
                         }
                     })
                 })
@@ -478,7 +488,6 @@ export default {
         dateClear: function () {
             this.$refs.datepickerFrom.clearPicker()
             this.$refs.datepickerTo.clearPicker()
-            this.$refs.mult.refreshOptions
         },
         inputClear() {
             this.$refs.datepickerFrom.clearPicker()

@@ -9,6 +9,7 @@
                 class="
                     text-googleTitle
                     notoSansJpAndTwentyBold
+                    md:text-2xl
                     pt-2.5
                     pb-2.5
                     pr-5
@@ -21,6 +22,7 @@
                 class="
                     text-googleTitle
                     notoSansJpAndTwentyBold
+                    md:text-2xl
                     pt-2.5
                     pb-2.5
                     md:pt-5 md:pb-5
@@ -54,14 +56,14 @@
                         :default-options="$constant.bbsScops"
                         @selected="setScopeValue"
                         :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 border-b-2 border-notice"
+                        inputStyle="w-full text-left notoSansJpAndSixteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                       border border-transparent focus:outline-none"
                     ></vue-single-select>
                 </div>
                 <div id="patientGender" class="mt-3 md:mt-5">
                     <div class="flex">
-                        <label class="notoSansJpAndSixteenBold">
+                        <label class="notoSansJpAndSixteenBold w-16">
                             ジャンル
                         </label>
                         <label class="text-red-500 ml-1"> * </label>
@@ -75,8 +77,8 @@
                         :default-options="$constant.bbsGenre"
                         @selected="setPatientGenderValue"
                         :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 border-b-2 border-notice"
+                        inputStyle="w-full text-left notoSansJpAndSixteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                       border border-transparent focus:outline-none"
                     ></vue-single-select>
                 </div>

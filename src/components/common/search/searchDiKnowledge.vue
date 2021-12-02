@@ -153,7 +153,14 @@
                         }
                     "
                     :classes="$constant.multiselectCss"
-                ></Multiselect>
+                >
+                <template v-slot:option="{ option }">
+                  <div class="w-full">
+                    {{ option.label }}
+                    <div class="float-right" v-if="option.count !== undefined">{{ option.count }}件</div>
+                  </div>
+                </template>
+              </Multiselect>
             </div>
         </div>
         <!-- 三行目 -->
@@ -299,6 +306,7 @@ export default {
               return {
                 value: item.tagId,
                 label: item.name,
+                count: item.associatedCount,
               }
             })
           }
@@ -308,6 +316,7 @@ export default {
               setList = {
                 value: result[key].value,
                 label: result[key].label,
+                count: result[key].count,
               }
             }
           })
@@ -335,6 +344,7 @@ export default {
             return {
               value: item.tagId,
               label: item.name,
+              count: item.associatedCount,
             }
           })
         })
@@ -344,7 +354,7 @@ export default {
     },
     inputClear() {
       this.tagValue = []
-      this.$store.commit('setSearchWordDI', '')
+      this.$store.dispatch('setSearchWord', '')
       this.$store.dispatch('setSearchTags', [])
       // 施設 初回設置[index]
       this.$store.commit('setCheckQDI', true)

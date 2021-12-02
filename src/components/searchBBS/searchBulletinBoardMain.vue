@@ -9,7 +9,7 @@
                 :default-options="$constant.singleSelectItem"
                 @selected="doSort"
                 :leftLableDisp="false"
-                buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
+                buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 border-b-2 border-notice"
                 inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                   border border-transparent focus:outline-none"
             ></vue-single-select>

@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div
-                        class="mt-5 ml-2"
+                        class="mt-5 ml-6"
                         v-html="
                             postList[0].title
                                 .replace(
