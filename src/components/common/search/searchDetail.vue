@@ -460,6 +460,10 @@ export default {
                     if (!storeExistFlg) {
                         selectedItem.push(this.orgOrgTagslist[index])
                         this.$store.dispatch('setOrgTagsList', selectedItem)
+                        localStorage.setItem(
+                            'store',
+                            JSON.stringify(this.$store.state)
+                        )
                     }
                 }
             }

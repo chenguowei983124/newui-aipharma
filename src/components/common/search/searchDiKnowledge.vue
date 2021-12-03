@@ -154,13 +154,18 @@
                     "
                     :classes="$constant.multiselectCss"
                 >
-                <template v-slot:option="{ option }">
-                  <div class="w-full">
-                    {{ option.label }}
-                    <div class="float-right" v-if="option.count !== undefined">{{ option.count }}件</div>
-                  </div>
-                </template>
-              </Multiselect>
+                    <template v-slot:option="{ option }">
+                        <div class="w-full">
+                            {{ option.label }}
+                            <div
+                                class="float-right"
+                                v-if="option.count !== undefined"
+                            >
+                                {{ option.count }}件
+                            </div>
+                        </div>
+                    </template>
+                </Multiselect>
             </div>
         </div>
         <!-- 三行目 -->
@@ -230,208 +235,228 @@ import Multiselect from '@vueform/multiselect'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { },
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
     },
-  },
-  components: {
-    searchDropdown,
-    searchSvg,
-    TriangleDownSvg,
-    Multiselect,
-    vueSingleSelect,
-  },
-  data() {
-    return {
-      searchText: null,
-      searchValue: '',
-      checkId: '',
-      isDetailClick: false,
-      tagValue: this.$store.getters.getSearchTags,
-      orgDiTagslist: [],
-    }
-  },
-  watch: {
-    tagValue() {
-      this.$store.dispatch('setSearchTags', this.tagValue)
-      this.$emit('tagValue', this.tagValue)
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
     },
-  },
-  computed: {
-    dispTagValue() {
-      this.tagValue = this.$store.getters.getSearchTags
-      // if (this.inputFlg) {
-      //     this.inputFlg = false
-      let selectedItem = this.$store.getters.getorgTagsList
-      for (let index = 0; index < this.orgDiTagslist.length; index++) {
-        const element = this.orgDiTagslist[index]
-        if (
-          this.orgDiTagslist[index].value ==
-          this.tagValue[this.tagValue.length - 1]
-        ) {
-          let storeExistFlg = false
-          for (let i = 0; i < selectedItem.length; i++) {
-            if (
-              selectedItem[i].value ==
-              this.orgDiTagslist[index].value
-            ) {
-              storeExistFlg = true
-            }
-          }
-          if (!storeExistFlg) {
-            selectedItem.push(this.orgDiTagslist[index])
-            this.$store.dispatch('setOrgTagsList', selectedItem)
-          }
+    data() {
+        return {
+            searchText: null,
+            searchValue: '',
+            checkId: '',
+            isDetailClick: false,
+            tagValue: this.$store.getters.getSearchTags,
+            orgDiTagslist: [],
         }
-      }
-      // }
-
-      return this.tagValue
     },
-  },
-  methods: {
-    async fetchLanguages(query) {
+    watch: {
+        tagValue() {
+            this.$store.dispatch('setSearchTags', this.tagValue)
+            this.$emit('tagValue', this.tagValue)
+        },
+    },
+    computed: {
+        dispTagValue() {
+            this.tagValue = this.$store.getters.getSearchTags
+            // if (this.inputFlg) {
+            //     this.inputFlg = false
+            let selectedItem = this.$store.getters.getorgTagsList
+            for (let index = 0; index < this.orgDiTagslist.length; index++) {
+                const element = this.orgDiTagslist[index]
+                if (
+                    this.orgDiTagslist[index].value ==
+                    this.tagValue[this.tagValue.length - 1]
+                ) {
+                    let storeExistFlg = false
+                    for (let i = 0; i < selectedItem.length; i++) {
+                        if (
+                            selectedItem[i].value ==
+                            this.orgDiTagslist[index].value
+                        ) {
+                            storeExistFlg = true
+                        }
+                    }
+                    if (!storeExistFlg) {
+                        selectedItem.push(this.orgDiTagslist[index])
+                        this.$store.dispatch('setOrgTagsList', selectedItem)
+                        localStorage.setItem(
+                            'store',
+                            JSON.stringify(this.$store.state)
+                        )
+                    }
+                }
+            }
+            // }
 
-      let searchTagsList = this.$store.getters.getSearchTagsLable
-      let result = this.$store.getters.getorgTagsList
-      if (query == null || query == '') {
-        if (Object.keys(searchTagsList).length !== 0) {
-          for (let i = 0; i < searchTagsList.length; i++) {
-            let response = await this.$serve.getSuggestTags(
-              searchTagsList[i]
+            return this.tagValue
+        },
+    },
+    methods: {
+        async fetchLanguages(query) {
+            let searchTagsList = this.$store.getters.getSearchTagsLable
+            let result = this.$store.getters.getorgTagsList
+            if (query == null || query == '') {
+                if (Object.keys(searchTagsList).length !== 0) {
+                    for (let i = 0; i < searchTagsList.length; i++) {
+                        let response = await this.$serve.getSuggestTags(
+                            searchTagsList[i]
+                        )
+                        result = response.data.map((item) => {
+                            return {
+                                value: item.tagId,
+                                label: item.name,
+                                count: item.associatedCount,
+                            }
+                        })
+                    }
+                    let setList = {}
+                    Object.keys(result).forEach(function (key) {
+                        if (result[key].label == searchTagsList[0]) {
+                            setList = {
+                                value: result[key].value,
+                                label: result[key].label,
+                                count: result[key].count,
+                            }
+                        }
+                    })
+                    let flg = false
+                    // 存在チェック
+                    for (let index = 0; index < this.tagValue.length; index++) {
+                        if (this.tagValue[index] == setList.value) {
+                            flg = true
+                        }
+                    }
+                    // 存在しない場合、入力に設定
+                    this.$store.dispatch('setSearchTagsLable', [])
+                    if (!flg) {
+                        this.$refs.multDi.select(setList)
+                    }
+                    this.orgDiTagslist = result
+                    this.inputFlg = true
+                } else {
+                    result = this.$store.getters.getorgTagsList
+                }
+            } else {
+                this.inputFlg = true
+                await this.$serve.getSuggestTags(query).then((response) => {
+                    result = response.data.map((item) => {
+                        return {
+                            value: item.tagId,
+                            label: item.name,
+                            count: item.associatedCount,
+                        }
+                    })
+                })
+                this.orgDiTagslist = result
+            }
+            return result
+        },
+        inputClear() {
+            this.tagValue = []
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            // 施設 初回設置[index]
+            this.$store.commit('setCheckQDI', true)
+            this.$store.commit('setCheckADI', true)
+            this.$store.commit('setCheckCommentDI', true)
+            this.$store.commit('setCheckAddFileNameDI', true)
+            this.$store.commit('setCheckContributorDI', true)
+            this.$store.commit('setCheckLastEditerDI', true)
+            this.$store.commit('setCheckFacilityNameDI', true)
+            this.$store.commit('setCheckNoteDI', true)
+        },
+        // 詳細条件クリックイベント
+        detailBottunClick: function (event) {
+            this.isDetailClick = !this.isDetailClick
+            this.$emit('isDetailClick', this.isDetailClick)
+        },
+        // 検索ボタン押下イベント
+        searchClick: function (event) {
+            // すべて
+            if (this.checkId == 1) {
+                // 検索APIを呼び出し(画面入力値)
+                this.$store.dispatch('searchAll', this.searchValue)
+
+                // 一括検索結果画面へ遷移
+                this.$router.push('/searchResultAll')
+            }
+            // DI ナレッジシェア
+            else if (this.checkId == 2) {
+                this.$router.push('/searchResultAll')
+            }
+            // 組織内 DI 記録（Q&A）
+            else if (this.checkId == 3) {
+                this.$router.push('/searchOrganization')
+            }
+            // 症例（プレアボイド）
+            else if (this.checkId == 4) {
+                this.$router.push('/searchOrganization')
+            }
+            // DI 辞書
+            else if (this.checkId == 5) {
+                this.$router.push('/searchOrganization')
+            }
+            // 製薬企業情報
+            else if (this.checkId == 6) {
+                this.$router.push('/searchOrganization')
+            }
+        },
+        // DropDown 選択したアイテムＩＤ取得
+        getCheckId(data) {
+            this.checkId = data
+        },
+        onCheckQChange() {
+            this.$store.commit('setCheckQDI', !this.$store.getters.getCheckQDI)
+        },
+        onChangeCheckA() {
+            this.$store.commit('setCheckADI', !this.$store.getters.getCheckADI)
+        },
+        onChangeCheckComment() {
+            this.$store.commit(
+                'setCheckCommentDI',
+                !this.$store.getters.getCheckCommentDI
             )
-            result = response.data.map((item) => {
-              return {
-                value: item.tagId,
-                label: item.name,
-                count: item.associatedCount,
-              }
-            })
-          }
-          let setList = {}
-          Object.keys(result).forEach(function (key) {
-            if (result[key].label == searchTagsList[0]) {
-              setList = {
-                value: result[key].value,
-                label: result[key].label,
-                count: result[key].count,
-              }
-            }
-          })
-          let flg = false
-          // 存在チェック
-          for (let index = 0; index < this.tagValue.length; index++) {
-            if (this.tagValue[index] == setList.value) {
-              flg = true
-            }
-          }
-          // 存在しない場合、入力に設定
-          this.$store.dispatch('setSearchTagsLable', [])
-          if (!flg) {
-            this.$refs.multDi.select(setList)
-          }
-          this.orgDiTagslist = result
-          this.inputFlg = true
-        } else {
-          result = this.$store.getters.getorgTagsList
-        }
-      } else {
-        this.inputFlg = true
-        await this.$serve.getSuggestTags(query).then((response) => {
-          result = response.data.map((item) => {
-            return {
-              value: item.tagId,
-              label: item.name,
-              count: item.associatedCount,
-            }
-          })
-        })
-        this.orgDiTagslist = result
-      }
-      return result
+        },
+        onChangeCheckAddFileName() {
+            this.$store.commit(
+                'setCheckAddFileNameDI',
+                !this.$store.getters.getCheckAddFileNameDI
+            )
+        },
+        onChangeCheckContributor() {
+            this.$store.commit(
+                'setCheckContributorDI',
+                !this.$store.getters.getCheckContributorDI
+            )
+        },
+        onChangeCheckLastEditer() {
+            this.$store.commit(
+                'setCheckLastEditerDI',
+                !this.$store.getters.getCheckLastEditerDI
+            )
+        },
+        onChangeCheckFacilityName() {
+            this.$store.commit(
+                'setCheckFacilityNameDI',
+                !this.$store.getters.getCheckFacilityNameDI
+            )
+        },
+        onChangeCheckNote() {
+            this.$store.commit(
+                'setCheckNoteDI',
+                !this.$store.getters.getCheckNoteDI
+            )
+        },
     },
-    inputClear() {
-      this.tagValue = []
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setSearchTags', [])
-      // 施設 初回設置[index]
-      this.$store.commit('setCheckQDI', true)
-      this.$store.commit('setCheckADI', true)
-      this.$store.commit('setCheckCommentDI', true)
-      this.$store.commit('setCheckAddFileNameDI', true)
-      this.$store.commit('setCheckContributorDI', true)
-      this.$store.commit('setCheckLastEditerDI', true)
-      this.$store.commit('setCheckFacilityNameDI', true)
-      this.$store.commit('setCheckNoteDI', true)
-
-    },
-    // 詳細条件クリックイベント
-    detailBottunClick: function (event) {
-      this.isDetailClick = !this.isDetailClick
-      this.$emit('isDetailClick', this.isDetailClick)
-    },
-    // 検索ボタン押下イベント
-    searchClick: function (event) {
-      // すべて
-      if (this.checkId == 1) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('searchAll', this.searchValue)
-
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 2) {
-        this.$router.push('/searchResultAll')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // DI 辞書
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 6) {
-        this.$router.push('/searchOrganization')
-      }
-    },
-    // DropDown 選択したアイテムＩＤ取得
-    getCheckId(data) {
-      this.checkId = data
-    },
-    onCheckQChange() {
-      this.$store.commit('setCheckQDI', !this.$store.getters.getCheckQDI)
-    },
-    onChangeCheckA() {
-      this.$store.commit('setCheckADI', !this.$store.getters.getCheckADI)
-    },
-    onChangeCheckComment() {
-      this.$store.commit('setCheckCommentDI', !this.$store.getters.getCheckCommentDI)
-    },
-    onChangeCheckAddFileName() {
-      this.$store.commit('setCheckAddFileNameDI', !this.$store.getters.getCheckAddFileNameDI)
-    },
-    onChangeCheckContributor() {
-      this.$store.commit('setCheckContributorDI', !this.$store.getters.getCheckContributorDI)
-    },
-    onChangeCheckLastEditer() {
-      this.$store.commit('setCheckLastEditerDI', !this.$store.getters.getCheckLastEditerDI)
-    },
-    onChangeCheckFacilityName() {
-      this.$store.commit('setCheckFacilityNameDI', !this.$store.getters.getCheckFacilityNameDI)
-    },
-    onChangeCheckNote() {
-      this.$store.commit('setCheckNoteDI', !this.$store.getters.getCheckNoteDI)
-    },
-  },
 }
 </script>
 
