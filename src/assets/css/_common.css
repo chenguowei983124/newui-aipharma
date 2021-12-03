@@ -131,3 +131,12 @@
 .inputLineCss {
     @apply border border-grayline border-transparent;
 }
+.multiselect-tag-remove {
+    @apply flex items-center justify-center p-1 mx-0.5 rounded-sm hover:bg-black hover:bg-opacity-10 group;
+}
+.multiselect-tag-remove-icon {
+    @apply bg-multiselect-remove bg-center bg-no-repeat opacity-30 inline-block w-3 h-3 group-hover:opacity-60;
+}
+.multiselect-tag-style {
+    @apply bg-gray-300 text-black notoSansJpAndTwelveRegular pl-2 rounded-full border-2 mr-1 mb-1 flex items-center whitespace-nowrap;
+}

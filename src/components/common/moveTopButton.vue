@@ -39,7 +39,7 @@ export default {
                 if (0 > currentScroll) {
                     clearInterval(int)
                 } else {
-                    currentScroll = currentScroll - 48
+                    currentScroll = currentScroll - 1000
                     document.documentElement.scrollTop = currentScroll
                 }
             }

@@ -325,6 +325,7 @@ module.exports = {
                 'litepie-secondary': colors.coolGray,
                 'test-Range-From': 'rgb(239,150,1)',
                 'test-Range-Mid': 'rgb(250,220,170)',
+                loading: 'rgba(255, 255, 255, 0.7)',
             },
             fontSize: (theme) => theme('Size'),
             fontSize: {
@@ -375,7 +376,7 @@ module.exports = {
                 mid: '980px',
                 lm: '1080px',
                 cs: '460px',
-                pm: '880px'
+                pm: '880px',
                 // => @media (min-width: 640px) { ... }
             },
             opacity: {

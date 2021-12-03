@@ -187,12 +187,36 @@
                         "
                         :classes="$constant.multiselectCss"
                     >
-                      <template v-slot:option="{ option }">
-                        <div class="w-full">
-                          {{ option.label }}
-                          <div class="float-right" v-if="option.count !== undefined">{{ option.count }}件</div>
-                        </div>
-                      </template>
+                        <template
+                            v-slot:tag="{ option, handleTagRemove, disabled }"
+                        >
+                            <div class="multiselect-tag-style">
+                                #
+                                {{ option.label }}
+                                <span
+                                    v-if="!disabled"
+                                    class="multiselect-tag-remove"
+                                    @mousedown.prevent="
+                                        handleTagRemove(option, $event)
+                                    "
+                                >
+                                    <span
+                                        class="multiselect-tag-remove-icon"
+                                    ></span>
+                                </span>
+                            </div>
+                        </template>
+                        <template v-slot:option="{ option }">
+                            <div class="w-full">
+                                # {{ option.label }}
+                                <div
+                                    class="float-right"
+                                    v-if="option.count !== undefined"
+                                >
+                                    {{ option.count }}件
+                                </div>
+                            </div>
+                        </template>
                     </Multiselect>
                 </div>
             </div>
@@ -370,260 +394,260 @@ import Multiselect from '@vueform/multiselect'
 import vueSingleSelect from '../dropdown/vueSingleSelect.vue'
 
 export default {
-  props: {
-    searchButtonClick: {
-      type: Function,
-      default: () => { },
+    props: {
+        searchButtonClick: {
+            type: Function,
+            default: () => {},
+        },
+        message: {
+            type: String,
+            default: '',
+        },
     },
-    message: {
-      type: String,
-      default: '',
+    components: {
+        searchDropdown,
+        searchSvg,
+        TriangleDownSvg,
+        Multiselect,
+        vueSingleSelect,
     },
-  },
-  components: {
-    searchDropdown,
-    searchSvg,
-    TriangleDownSvg,
-    Multiselect,
-    vueSingleSelect,
-  },
-  data() {
-    return {
-      searchText: null,
-      checkId: '',
-      isOrgDetailClick: true,
-      tagValue: this.$store.getters.getSearchTags,
-      tagTimer: '',
-      dispSelect: [],
-      //
-      orgOrgTagslist: [],
-      inputFlg: false,
-      // 
-      facilityID: 0,
-      // 薬の分類
-      qa_classify_class: 0,
-      // 質問区分
-      qa_classify_subject: 0
-    }
-  },
-  watch: {
-    tagValue() {
-      this.$store.dispatch('setSearchTags', this.tagValue)
-      this.$emit('tagValue', this.tagValue)
-    },
-  },
-  computed: {
-    dispTagValue() {
-      this.tagValue = this.$store.getters.getSearchTags
-      // if (this.inputFlg) {
-      //     this.inputFlg = false
-      let selectedItem = this.$store.getters.getorgTagsList
-      for (let index = 0; index < this.orgOrgTagslist.length; index++) {
-        const element = this.orgOrgTagslist[index]
-        if (
-          this.orgOrgTagslist[index].value ==
-          this.tagValue[this.tagValue.length - 1]
-        ) {
-          let storeExistFlg = false
-          for (let i = 0; i < selectedItem.length; i++) {
-            if (
-              selectedItem[i].value ==
-              this.orgOrgTagslist[index].value
-            ) {
-              storeExistFlg = true
-            }
-          }
-          if (!storeExistFlg) {
-            selectedItem.push(this.orgOrgTagslist[index])
-            this.$store.dispatch('setOrgTagsList', selectedItem)
-          }
+    data() {
+        return {
+            searchText: null,
+            checkId: '',
+            isOrgDetailClick: true,
+            tagValue: this.$store.getters.getSearchTags,
+            tagTimer: '',
+            dispSelect: [],
+            //
+            orgOrgTagslist: [],
+            inputFlg: false,
+            //
+            facilityID: 0,
+            // 薬の分類
+            qa_classify_class: 0,
+            // 質問区分
+            qa_classify_subject: 0,
         }
-      }
-      // }
-
-      return this.tagValue
     },
-  },
-  methods: {
-    async fetchLanguages(query) {
-      let searchTagsList = this.$store.getters.getSearchTagsLable
-      let result = this.$store.getters.getorgTagsList
-      if (query == null || query == '') {
-        if (Object.keys(searchTagsList).length !== 0) {
-          for (let i = 0; i < searchTagsList.length; i++) {
-            let response = await this.$serve.getSuggestTags(
-              searchTagsList[i]
+    watch: {
+        tagValue() {
+            this.$store.dispatch('setSearchTags', this.tagValue)
+            this.$emit('tagValue', this.tagValue)
+        },
+    },
+    computed: {
+        dispTagValue() {
+            this.tagValue = this.$store.getters.getSearchTags
+            // if (this.inputFlg) {
+            //     this.inputFlg = false
+            let selectedItem = this.$store.getters.getorgTagsList
+            for (let index = 0; index < this.orgOrgTagslist.length; index++) {
+                const element = this.orgOrgTagslist[index]
+                if (
+                    this.orgOrgTagslist[index].value ==
+                    this.tagValue[this.tagValue.length - 1]
+                ) {
+                    let storeExistFlg = false
+                    for (let i = 0; i < selectedItem.length; i++) {
+                        if (
+                            selectedItem[i].value ==
+                            this.orgOrgTagslist[index].value
+                        ) {
+                            storeExistFlg = true
+                        }
+                    }
+                    if (!storeExistFlg) {
+                        selectedItem.push(this.orgOrgTagslist[index])
+                        this.$store.dispatch('setOrgTagsList', selectedItem)
+                    }
+                }
+            }
+            // }
+
+            return this.tagValue
+        },
+    },
+    methods: {
+        async fetchLanguages(query) {
+            let searchTagsList = this.$store.getters.getSearchTagsLable
+            let result = this.$store.getters.getorgTagsList
+            if (query == null || query == '') {
+                if (Object.keys(searchTagsList).length !== 0) {
+                    for (let i = 0; i < searchTagsList.length; i++) {
+                        let response = await this.$serve.getSuggestTags(
+                            searchTagsList[i]
+                        )
+                        result = response.data.map((item) => {
+                            return {
+                                value: item.tagId,
+                                label: item.name,
+                                count: item.associatedCount,
+                            }
+                        })
+                    }
+                    let setList = {}
+                    Object.keys(result).forEach(function (key) {
+                        if (result[key].label == searchTagsList[0]) {
+                            setList = {
+                                value: result[key].value,
+                                label: result[key].label,
+                                count: result[key].count,
+                            }
+                        }
+                    })
+                    let flg = false
+                    // 存在チェック
+                    for (let index = 0; index < this.tagValue.length; index++) {
+                        if (this.tagValue[index] == setList.value) {
+                            flg = true
+                        }
+                    }
+                    // 存在しない場合、入力に設定
+                    this.$store.dispatch('setSearchTagsLable', [])
+                    if (!flg) {
+                        this.$refs.mult.select(setList)
+                    }
+                    this.orgOrgTagslist = result
+                    this.inputFlg = true
+                } else {
+                    result = this.$store.getters.getorgTagsList
+                }
+            } else {
+                this.inputFlg = true
+                await this.$serve.getSuggestTags(query).then((response) => {
+                    result = response.data.map((item) => {
+                        return {
+                            value: item.tagId,
+                            label: item.name,
+                            count: item.associatedCount,
+                        }
+                    })
+                })
+                this.orgOrgTagslist = result
+            }
+            // console.log('resultresult', result)
+
+            // console.log('this.orgOrgTagslist', this.orgOrgTagslist)
+            return result
+        },
+
+        inputClear(data) {
+            this.tagValue = []
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$refs.medicines.setValue('0')
+            this.$refs.qDistinction.setValue('0')
+            // this.$store.dispatch('setMedicineID', '')
+            // this.$store.dispatch('setQuestionID', '')
+            // 施設 初回設置[index]
+            this.$refs.facility.setValue('0')
+            this.$store.dispatch('setCheckQ', true)
+            this.$store.dispatch('setCheckA', true)
+            this.$store.dispatch('setCheckComment', true)
+            this.$store.dispatch('setCheckAddFileName', true)
+            this.$store.dispatch('setCheckContributor', true)
+            this.$store.dispatch('setCheckLastEditer', true)
+            this.$store.dispatch('setCheckFacilityName', true)
+            this.$store.dispatch('setCheckNote', true)
+        },
+        multiselectValue(value) {},
+        onCheckQChange() {
+            this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
+        },
+        onChangeCheckA() {
+            this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
+        },
+        onChangeCheckComment() {
+            this.$store.dispatch(
+                'setCheckComment',
+                !this.$store.getters.getCheckComment
             )
-            result = response.data.map((item) => {
-              return {
-                value: item.tagId,
-                label: item.name,
-                count: item.associatedCount,
-              }
-            })
-          }
-          let setList = {}
-          Object.keys(result).forEach(function (key) {
-            if (result[key].label == searchTagsList[0]) {
-              setList = {
-                value: result[key].value,
-                label: result[key].label,
-                count: result[key].count
-              }
+        },
+        onChangeCheckAddFileName() {
+            this.$store.dispatch(
+                'setCheckAddFileName',
+                !this.$store.getters.getCheckAddFileName
+            )
+        },
+        onChangeCheckContributor() {
+            this.$store.dispatch(
+                'setCheckContributor',
+                !this.$store.getters.getCheckContributor
+            )
+        },
+        onChangeCheckLastEditer() {
+            this.$store.dispatch(
+                'setCheckLastEditer',
+                !this.$store.getters.getCheckLastEditer
+            )
+        },
+        onChangeCheckFacilityName() {
+            this.$store.dispatch(
+                'setCheckFacilityName',
+                !this.$store.getters.getCheckFacilityName
+            )
+        },
+        onChangeCheckNote() {
+            this.$store.dispatch(
+                'setCheckNote',
+                !this.$store.getters.getCheckNote
+            )
+        },
+
+        sendInputInfo() {},
+        setMedicineID(value) {
+            // if (value != this.$store.getters.getMedicineID) {
+            this.$store.dispatch('setMedicineID', value)
+            // }
+        },
+        setQuestionID(value) {
+            this.$store.dispatch('setQuestionID', value)
+        },
+        setFacilityID(value) {
+            this.$store.dispatch('setFacilityID', value)
+        },
+        // 詳細条件クリックイベント
+        detailBottunClick: function (event) {
+            this.isOrgDetailClick = !this.isOrgDetailClick
+            this.$emit('isOrgDetailClick', this.isOrgDetailClick)
+        },
+        // 検索ボタン押下イベント
+        searchClick: function (event) {
+            // すべて
+            if (this.checkId == 1) {
+                // 検索APIを呼び出し(画面入力値)
+                this.$store.dispatch('searchAll', this.searchValue)
+
+                // 一括検索結果画面へ遷移
+                this.$router.push('/searchResultAll')
             }
-          })
-          let flg = false
-          // 存在チェック
-          for (let index = 0; index < this.tagValue.length; index++) {
-            if (this.tagValue[index] == setList.value) {
-              flg = true
+            // DI ナレッジシェア
+            else if (this.checkId == 2) {
+                this.$router.push('/searchResultAll')
             }
-          }
-          // 存在しない場合、入力に設定
-          this.$store.dispatch('setSearchTagsLable', [])
-          if (!flg) {
-            this.$refs.mult.select(setList)
-          }
-          this.orgOrgTagslist = result
-          this.inputFlg = true
-        } else {
-          result = this.$store.getters.getorgTagsList
-        }
-      } else {
-        this.inputFlg = true
-        await this.$serve.getSuggestTags(query).then((response) => {
-          result = response.data.map((item) => {
-            return {
-              value: item.tagId,
-              label: item.name,
-              count: item.associatedCount,
+            // 組織内 DI 記録（Q&A）
+            else if (this.checkId == 3) {
+                this.$router.push('/searchOrganization')
             }
-          })
-        })
-        this.orgOrgTagslist = result
-      }
-      // console.log('resultresult', result)
-
-      // console.log('this.orgOrgTagslist', this.orgOrgTagslist)
-      return result
+            // 症例（プレアボイド）
+            else if (this.checkId == 4) {
+                this.$router.push('/searchOrganization')
+            }
+            // DI 辞書
+            else if (this.checkId == 5) {
+                this.$router.push('/searchOrganization')
+            }
+            // 製薬企業情報
+            else if (this.checkId == 6) {
+                this.$router.push('/searchOrganization')
+            }
+        },
+        // DropDown 選択したアイテムＩＤ取得
+        getCheckId(data) {
+            this.checkId = data
+        },
     },
-
-    inputClear(data) {
-      this.tagValue = []
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setSearchTags', [])
-      this.$refs.medicines.setValue('0')
-      this.$refs.qDistinction.setValue('0')
-      // this.$store.dispatch('setMedicineID', '')
-      // this.$store.dispatch('setQuestionID', '')
-      // 施設 初回設置[index]
-      this.$refs.facility.setValue('0')
-      this.$store.dispatch('setCheckQ', true)
-      this.$store.dispatch('setCheckA', true)
-      this.$store.dispatch('setCheckComment', true)
-      this.$store.dispatch('setCheckAddFileName', true)
-      this.$store.dispatch('setCheckContributor', true)
-      this.$store.dispatch('setCheckLastEditer', true)
-      this.$store.dispatch('setCheckFacilityName', true)
-      this.$store.dispatch('setCheckNote', true)
-    },
-    multiselectValue(value) { },
-    onCheckQChange() {
-      this.$store.dispatch('setCheckQ', !this.$store.getters.getCheckQ)
-    },
-    onChangeCheckA() {
-      this.$store.dispatch('setCheckA', !this.$store.getters.getCheckA)
-    },
-    onChangeCheckComment() {
-      this.$store.dispatch(
-        'setCheckComment',
-        !this.$store.getters.getCheckComment
-      )
-    },
-    onChangeCheckAddFileName() {
-      this.$store.dispatch(
-        'setCheckAddFileName',
-        !this.$store.getters.getCheckAddFileName
-      )
-    },
-    onChangeCheckContributor() {
-      this.$store.dispatch(
-        'setCheckContributor',
-        !this.$store.getters.getCheckContributor
-      )
-    },
-    onChangeCheckLastEditer() {
-      this.$store.dispatch(
-        'setCheckLastEditer',
-        !this.$store.getters.getCheckLastEditer
-      )
-    },
-    onChangeCheckFacilityName() {
-      this.$store.dispatch(
-        'setCheckFacilityName',
-        !this.$store.getters.getCheckFacilityName
-      )
-    },
-    onChangeCheckNote() {
-      this.$store.dispatch(
-        'setCheckNote',
-        !this.$store.getters.getCheckNote
-      )
-    },
-
-    sendInputInfo() { },
-    setMedicineID(value) {
-      // if (value != this.$store.getters.getMedicineID) {
-      this.$store.dispatch('setMedicineID', value)
-      // }
-    },
-    setQuestionID(value) {
-      this.$store.dispatch('setQuestionID', value)
-    },
-    setFacilityID(value) {
-      this.$store.dispatch('setFacilityID', value)
-    },
-    // 詳細条件クリックイベント
-    detailBottunClick: function (event) {
-      this.isOrgDetailClick = !this.isOrgDetailClick
-      this.$emit('isOrgDetailClick', this.isOrgDetailClick)
-    },
-    // 検索ボタン押下イベント
-    searchClick: function (event) {
-      // すべて
-      if (this.checkId == 1) {
-        // 検索APIを呼び出し(画面入力値)
-        this.$store.dispatch('searchAll', this.searchValue)
-
-        // 一括検索結果画面へ遷移
-        this.$router.push('/searchResultAll')
-      }
-      // DI ナレッジシェア
-      else if (this.checkId == 2) {
-        this.$router.push('/searchResultAll')
-      }
-      // 組織内 DI 記録（Q&A）
-      else if (this.checkId == 3) {
-        this.$router.push('/searchOrganization')
-      }
-      // 症例（プレアボイド）
-      else if (this.checkId == 4) {
-        this.$router.push('/searchOrganization')
-      }
-      // DI 辞書
-      else if (this.checkId == 5) {
-        this.$router.push('/searchOrganization')
-      }
-      // 製薬企業情報
-      else if (this.checkId == 6) {
-        this.$router.push('/searchOrganization')
-      }
-    },
-    // DropDown 選択したアイテムＩＤ取得
-    getCheckId(data) {
-      this.checkId = data
-    },
-  },
 }
 </script>
 
