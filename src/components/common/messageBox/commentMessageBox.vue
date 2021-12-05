@@ -8,7 +8,7 @@
                 mid:w-191.25
                 md:w-191.25
                 h-80
-                border-2 border-black
+                border-2 border-grayline
                 items-center
                 bg-commentBgColor
                 rounded-lg
@@ -29,9 +29,9 @@
                     rounded-t-lg
                 "
             >
-                <div class="">コメント</div>
+                <div class="text-tags">コメント</div>
                 <button @click="closeCommentMessageBox()">
-                    <x-icon-svg></x-icon-svg>
+                    <x-icon-svg class="text-tags"></x-icon-svg>
                 </button>
             </div>
             <!-- 630*108 -->
@@ -43,7 +43,7 @@
                     mt-2
                     border
                     rounded
-                    border-black
+                    border-grayline
                     bg-white
                 "
             >
@@ -60,7 +60,6 @@
                             pl-4
                             placeholder-gray-500
                             focus:placeholder-opacity-0
-                            ring-1
                             border-transparent
                             focus:outline-none
                             focus:ring-1
@@ -78,7 +77,7 @@
                     /> -->
                 </div>
                 <div class="w-10 flex items-center justify-center">
-                    <button class="bg-green-500 rounded" @click="sendMessage">
+                    <button class="bg-downloadIcon rounded" @click="sendMessage">
                         <send-message-icon-svg></send-message-icon-svg>
                     </button>
                 </div>
@@ -87,11 +86,11 @@
                 <!-- <label class="inline-flex items-center"> -->
                 <input
                     type="checkbox"
-                    class="form-checkbox text-white"
+                    class="form-checkbox text-white ring-1 ring-grayline"
                     checked
                     v-model="flag"
                 />
-                <span class="ml-2 text-xs">匿名で投稿</span>
+                <span class="ml-2 text-xs text-tags font-NotoSansJp">匿名で投稿</span>
                 <!-- </label> -->
             </div>
             <div class="hidden">{{ getCommentData }}</div>
@@ -150,7 +149,7 @@
                                     <button
                                         @click="editAddCheckpointsTitle(items)"
                                         class="
-                                            bg-personOrganizationButton
+                                            bg-yellowfbbb14
                                             rounded
                                         "
                                     >
@@ -169,7 +168,7 @@
                                     <button
                                         @click="deleteFruit(items)"
                                         class="
-                                            bg-personInformationButton
+                                            bg-redf15a28
                                             rounded
                                             w-6
                                             h-6
@@ -192,7 +191,7 @@
                                         w-full
                                         flex
                                         justify-between
-                                        border-0 border-black
+                                        border-0 border-grayline
                                         text-xs
                                     "
                                 >
@@ -202,6 +201,8 @@
                                             w-11/12
                                             h-full
                                             placeholder-gray-500
+                                            ring-1
+                                            ring-326EB5Lins
                                             focus:placeholder-opacity-0
                                             border border-transparent
                                             focus:outline-none
@@ -231,16 +232,16 @@
                                                     items
                                                 )
                                             "
-                                            class="bg-green-400 rounded w-6 h-6"
+                                            class="bg-yellowfbbb14 rounded w-6 h-6"
                                         >
-                                            <check-icon-svg></check-icon-svg>
+                                            <check-icon-svg class="text-white"></check-icon-svg>
                                         </button>
                                         <button
                                             @click="
                                                 editAddCheckpointsTitle(items)
                                             "
                                             class="
-                                                bg-red-400
+                                                bg-garyTitle
                                                 rounded
                                                 w-6
                                                 h-6
@@ -249,7 +250,7 @@
                                                 justify-center
                                             "
                                         >
-                                            <x-icon-svg></x-icon-svg>
+                                            <x-icon-svg class="text-white"></x-icon-svg>
                                         </button>
                                     </div>
                                 </div>

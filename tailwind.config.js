@@ -39,6 +39,8 @@ module.exports = {
                 3.25: '0.8125rem',
                 // 15px
                 3.75: '0.9375rem',
+                // 18px
+                4.5: '1.125rem',
                 // 22px
                 5.5: '1.375rem',
                 // 30px
@@ -293,6 +295,14 @@ module.exports = {
                 googleTitle: 'rgb(50, 165,220)',
             },
             colors: {
+                gray808080: "#808080",
+                redf15a28: "#f15a28",
+                green39aa4a: "#39aa4a",
+                redc81e1e: "#c81e1e",
+                yellowfbbb14: "#fbbb14",
+                yellowf7931e: "#f7931e",
+                blueCAE6F4:"#CAE6F4",
+                // #333333
                 tags: 'rgb(51,51,51)',
                 aiSwitch: '#f09600',
                 notice: '#666666',

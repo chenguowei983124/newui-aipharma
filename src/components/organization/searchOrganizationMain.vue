@@ -30,7 +30,7 @@
                         @selected="setOrganizationDateSortValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 "
-                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                        inputStyle="w-full text-tags text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none "
                     ></vue-single-select>
                     <!-- 件 表示 区分 -->
@@ -44,13 +44,13 @@
                         @selected="setOrganizationCountSortValue"
                         :leftLableDisp="false"
                         buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
-                        inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                        inputStyle="w-full text-tags text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none"
                     ></vue-single-select>
                 </div>
             </div>
         </div>
-        <div class="space-y-2 mt-2">
+        <div class="space-y-3.75 mt-3.75">
             <div
                 v-for="(item, index) in $store.getters.organizationSearchInfo
                     .qas"
@@ -80,16 +80,16 @@
                             class="
                                 flex
                                 justify-between
-                                border-b-2 border-blueline
+                                border-b border-blueline
                                 items-center
                                 pb-5
                             "
                         >
-                            <div class="flex items-start">
+                            <div class="flex items-center">
                                 <div
                                     class="
-                                        notoSansJpAndTwentyFourBold
-                                        text-blueline
+                                        notoSansJpAndTwentyEightBold
+                                        text-view
                                         w-5
                                     "
                                 >
@@ -114,13 +114,13 @@
                             ></edit-and-delete>
                         </div>
                         <!-- A -->
-                        <div class="flex justify-between mt-5 items-start">
-                            <div class="flex w-5 h-6 text-yellow-500 text-sm">
+                        <div class="flex justify-between mt-5 items-center">
+                            <div class="flex w-5 h-6 text-notlooked text-sm">
                                 <div
                                     class="
                                         flex
                                         items-center
-                                        notoSansJpAndTwentyFourBold
+                                        notoSansJpAndTwentyEightBold
                                     "
                                 >
                                     A
@@ -174,7 +174,7 @@
                         </div>
                         <!-- 更新情報 pc/sp-->
                         <div class="flex flex-col pt-5 pl-0 md:pl-10 ">
-                            <div class="space-y-2 notoSansJpAndElevenRegular text-dropdownListItem">
+                            <div class="space-y-1.5 notoSansJpAndElevenRegular text-dropdownListItem">
                                 <div class="flex space-x-4">
                                     <div>最終編集日：{{ item.updatedAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
@@ -272,25 +272,12 @@
                             </div>
                             <div class="flex flex-wrap space-x-2 mt-2">
                                 <div
-                                    class="
-                                        rounded-full
-                                        border-2 border-gray-300
-                                        bg-gray-100
-                                        h-6
-                                        notoSansJpAndTwelveRegular
-                                        pl-1
-                                        pr-1
-                                        text-center
-                                        flex
-                                        items-center
-                                        mr-1
-                                        cursor-pointer
-                                    "
+                                    class="tagsCss"
                                     v-for="keywordTags in item.keywordTags"
                                     :key="keywordTags"
                                     @click="sendMsgToParent(keywordTags.name)"
                                 >
-                                    #&nbsp;{{ keywordTags.name }}
+                                    # {{ keywordTags.name }}
                                 </div>
                             </div>
                             <div
@@ -320,6 +307,8 @@
                                             text-white
                                             font-medium
                                             bg-whole
+                                            border-b-2
+                                            border-green39aa4a
                                         "
                                         @click="openGoodMessageBox(1, index)"
                                     >
@@ -338,7 +327,8 @@
                                             w-14
                                             rounded
                                             text-white
-                                            bg-red-400
+                                            bg-redf15a28
+                                            border-b-2 border-redc81e1e
                                         "
                                         @click="openGoodMessageBox(2, index)"
                                     >
@@ -357,7 +347,8 @@
                                             w-14
                                             rounded
                                             text-white
-                                            bg-yellow-300
+                                            bg-yellowfbbb14
+                                            border-b-2 border-yellowf7931e
                                         "
                                         @click="openCommentMessageBox(index)"
                                     >
@@ -390,7 +381,7 @@
                                     <span class="text"
                                         ><div
                                             class="
-                                                border-b border-gray-500
+                                                border-b border-notice
                                                 notoSansJpAndTwelveMedium
                                                 text-dropdownListItem
                                                 flex
@@ -421,8 +412,8 @@
                                                         ? 'transform rotate-180'
                                                         : '',
                                                 ]"
-                                                fill="#6b7280"
-                                                stroke="#ffffff"
+                                                fill="#666666"
+                                                stroke="#666666"
                                             ></triangle-down-svg></div
                                     ></span>
                                     <span class="line"></span>
@@ -437,7 +428,7 @@
                                     $store.getters.organizationSearchInfo.qas[
                                         index
                                     ].id
-                                        ? 'block'
+                                        ? 'block space-y-1.5'
                                         : 'hidden',
                                 ]"
                             >
@@ -450,7 +441,7 @@
                                     "
                                 >
                                     <div class="flex flex-auto">
-                                        <div class="w-30 flex-none">QAID</div>
+                                        <div class="w-30 flex-none">Q&A-ID</div>
                                         <div class="w-2">:</div>
                                         <div class="">
                                             {{ item.facilityQaNumber }}
@@ -718,9 +709,9 @@
                     </div>
                     <div
                         class="
-                            bg-cardViewCount
+                            bg-backgroundMain
                             rounded-b-lg
-                            text-center text-searchDropdown
+                            text-center text-view
                             h-7.5
                             flex
                             justify-center
@@ -750,8 +741,8 @@
                         >
                             <triangle-down-svg
                                 class="w-3 h-3"
-                                fill="#0099ff"
-                                stroke="#0099ff"
+                                fill="#32a5dc"
+                                stroke="#32a5dc"
                             ></triangle-down-svg>
                             <div
                                 class="text-xs font-NotoSansJp font-medium mr-1"
@@ -773,8 +764,8 @@
                         >
                             <triangle-down-svg
                                 class="w-3 h-3 transform rotate-180"
-                                fill="#0099ff"
-                                stroke="#0099ff"
+                                fill="#32a5dc"
+                                stroke="#32a5dc"
                             ></triangle-down-svg>
                             <div
                                 class="text-xs font-NotoSansJp font-medium mr-1"
@@ -795,10 +786,10 @@
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            page-class="text-center pt-2 align-middle notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
-            activeClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem bg-blueline text-white"
-            prevClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
-            nextClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center border-2 bg-white"
+            page-class="text-center pt-2 align-middle notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center rounded border-2 border-notice bg-white"
+            activeClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem bg-backgroundMainSearch text-white"
+            prevClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center rounded border-2 border-notice bg-white"
+            nextClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center rounded border-2 border-notice bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
         <div class="flex justify-center mt-2 text-dropdownListItem text-xs">{{ dispDetailRange }}件 表示</div>
@@ -1326,21 +1317,9 @@ export default {
 }
 
 .line {
-    /* width: 40%;
-    height: 2px;
-    background-image: linear-gradient(
-        to right,
-        #009a61 0%,
-        #009a61 80%,
-        transparent 80%
-    );
-    background-size: 30px 3px; 
-    background-repeat: repeat-x; */
     height: 2px;
     flex-grow: 2;
-    /* background-color: red; */
-    /* border-top: 2px dotted rgba(100, 98, 98, 0.897); */
-    border-top: 2px dashed rgba(100, 98, 98, 0.897);
+    border-top: 1px dashed #666666;
 }
 
 .text {

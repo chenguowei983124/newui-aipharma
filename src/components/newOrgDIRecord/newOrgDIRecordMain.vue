@@ -91,7 +91,7 @@
                             }"
                         />
                     </div>
-                    <div class="flex justify-end mt-1">
+                    <!-- <div class="flex justify-end mt-1">
                         <input
                             v-model="base.answer.isKeep"
                             type="checkbox"
@@ -108,7 +108,7 @@
                         <label class="ml-1 notoSansJpAndTwelveRegular">
                             回答保留
                         </label>
-                    </div>
+                    </div> -->
                 </div>
                 <div>
                     <label class="notoSansJpAndSixteenBold"> 出典・引用 </label>
@@ -544,7 +544,7 @@
                     ></Multiselect>
                 </div>
                 <div id="sideEffects" class="mt-3">
-                    <label class="notoSansJpAndSixteenBold"> 副作用 </label>
+                    <label class="notoSansJpAndSixteenBold"> 副作用名 </label>
                     <Multiselect
                         mode="tags"
                         v-model="detail.sideEffects"
@@ -847,7 +847,6 @@ export default {
                 question: '',
                 answer: {
                     text: '',
-                    isKeep: false,
                 },
                 source: [
                     {
@@ -1094,11 +1093,11 @@ export default {
                             ? this.detail.custom_details[i].value
                             : '',
                     customChoiceNameSingle:
-                        this.detail.custom_details[i].type === 'multiple'
+                        this.detail.custom_details[i].type === 'single'
                             ? this.detail.custom_details[i].value
                             : [],
                     customChoiceNameMultiple:
-                        this.detail.custom_details[i].type === 'single'
+                        this.detail.custom_details[i].type === 'multiple'
                             ? this.detail.custom_details[i].value
                             : [],
                 }
@@ -1262,7 +1261,7 @@ export default {
                     case '医薬品名':
                         result = this.getItemsFromList(qais.medicine_tags)
                         break
-                    case '副作用':
+                    case '副作用名':
                         result = this.getItemsFromList(qais.side_effects)
                         break
                     case '質問者':
@@ -1288,8 +1287,6 @@ export default {
             return tinymce.get(editorId).mode.get()
         },
         toggleEditorStatus: function (editorId, currentStatus) {
-            if (answer.isKeep) {
-            }
             if (currentStatus === 'design') {
                 tinymce.get(editorId).mode.set('readonly')
             } else {

@@ -138,7 +138,6 @@
                 <div class="hidden">{{ dispTagValue }}</div>
                 <Multiselect
                     ref="multDi"
-                    class="h-7.5"
                     v-model="tagValue"
                     mode="tags"
                     placeholder="#タグ"

@@ -479,7 +479,7 @@
                                     "
                                 >
                                     <div class="flex flex-auto">
-                                        <div class="w-30 flex-none">QAID</div>
+                                        <div class="w-30 flex-none">Q&A-ID</div>
                                         <div class="w-2">:</div>
                                         <div class="">
                                             {{ item.facilityQaNumber }}

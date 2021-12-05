@@ -36,7 +36,7 @@
             ]"
         ></div>
         <!-- 内容 -->
-        <div class="flex border-b-2 border-blue-200 mt-50 md:mt-12 h-10 md:h-16 ">
+        <div class="flex border-b-2 border-recruitment mt-50 md:mt-12 h-10 md:h-16 ">
             <!-- 左 -->
             <div
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
@@ -67,31 +67,25 @@
                     >
                         トレンドタグ
                     </div>
+                    <!-- <div class="h-20 bg-red-400 text-center inline-block align-middle">2312</div>
+                    <span class="inline-block align-top bg-blue-300">23122312</span> -->
                     <!-- @click="searchTag(item)" -->
                     <div class="flex flex-wrap space-x-1">
-                        <div
+                        <span
                             class="
-                                rounded-full
-                                border-2 border-gray-400
-                                bg-gray-100
-                                h-6
-                                notoSansJpAndTwelveRegular
-                                pl-1
-                                pr-1
-                                text-center
                                 hidden
                                 md:block
                                 mid:block
-                                cursor-pointer
                                 mt-1.25
+                                tagsCss
                             "
                             @click="searchTag(value.label)"
                             v-for="(value, key, index) in $store.getters
                                 .getOrganizationSeartorenndoTab.torenndoTab"
                             :key="index"
                         >
-                            #{{ value.label }}
-                        </div>
+                            # {{ value.label }}
+                        </span>
                     </div>
                 </div>
             </div>

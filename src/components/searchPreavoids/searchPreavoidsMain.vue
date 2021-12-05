@@ -417,8 +417,8 @@ export default {
     // 初期化検索条件
     initStore() {
       this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setStyles', -1)
-      this.$store.dispatch('setFacilityID', -1)
+      this.$store.dispatch('setStyles', 0)
+      this.$store.dispatch('setFacilityID', 0)
       this.$store.dispatch('setDateValueFrom', '')
       this.$store.dispatch('setDateValueTo', '')
       this.$store.dispatch('setPage', 1)
