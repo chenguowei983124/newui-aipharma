@@ -81,11 +81,6 @@ export default {
         iconType: { type: String, defult: '' },
         iconUrl: { type: String, defult: '' },
     },
-    computed: {
-        linkUrlParam() {
-            return { name: this.titleURL, query: { id: 'sdfs' } }
-        },
-    },
     watch: {},
     methods: {},
     created() {},

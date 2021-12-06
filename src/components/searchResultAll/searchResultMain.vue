@@ -206,7 +206,7 @@ export default {
         },
         setOwnURL() {
             let params = {
-                search: this.$route.query.searchKey,
+                search: this.$route.query.search,
                 // タグ
                 tags: '',
                 // 薬の分類
@@ -243,7 +243,7 @@ export default {
         },
         setDiURL() {
             let params = {
-                search: this.$route.query.searchKey,
+                search: this.$route.query.search,
                 // タグ
                 tags: '',
 
@@ -274,10 +274,10 @@ export default {
             return params
         },
         googleSearchUrl() {
-            if (this.$route.query.searchKey !== '') {
+            if (this.$route.query.search !== '') {
                 return (
                     'https://www.google.co.jp/search?q=' +
-                    this.$route.query.searchKey
+                    this.$route.query.search
                 )
             } else {
                   return ('https://www.google.co.jp/')
@@ -373,13 +373,13 @@ export default {
             if (this.$route.path != '/searchResultAll') {
                 return
             }
-            if (JSON.stringify(this.$route.query.searchKey) == '{}') {
-                this.$store.dispatch('saveSearchValue', '')
+            if (JSON.stringify(this.$route.query.search) == '{}') {
+                this.$store.dispatch('setSearchWord', '')
             }
             if (JSON.stringify(this.$route.query) !== '{}') {
                 this.$store.dispatch(
-                    'saveSearchValue',
-                    this.$route.query.searchKey
+                    'setSearchWord',
+                    this.$route.query.search
                 )
             }
 

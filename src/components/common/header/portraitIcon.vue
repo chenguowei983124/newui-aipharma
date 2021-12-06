@@ -79,24 +79,6 @@
                                     v-for="item in $constant.topManagementItemUserList"
                                     :key="item"
                                 >
-                                    <!-- <router-link
-                                        :to="item.routerPath"
-                                        v-if="item.title !== 'ログアウト'"
-                                    >
-                                        <div
-                                            class="
-                                                md:mt-1.5
-                                                text-black
-                                                font-bold
-                                                hover:opacity-50
-                                                active:opacity-50
-                                                cursor-pointer
-                                            "
-                                        >
-                                            {{ item.title }}
-                                        </div>
-                                    </router-link> -->
-
                                     <div
                                         class="
                                             md:mt-1.5
@@ -241,24 +223,6 @@
                                         v-for="item in $constant.topManagementItemUserList"
                                         :key="item"
                                     >
-                                        <!-- <router-link
-                                            :to="item.routerPath"
-                                            v-if="item.title !== 'ログアウト'"
-                                        >
-                                            <div
-                                                class="
-                                                    md:mt-1.5
-                                                    text-black
-                                                    font-bold
-                                                    hover:opacity-50
-                                                    active:opacity-50
-                                                    cursor-pointer
-                                                "
-                                            >
-                                                {{ item.title }}
-                                            </div>
-                                        </router-link> -->
-
                                         <div
                                             class="
                                                 h-9

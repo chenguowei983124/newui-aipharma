@@ -25,23 +25,6 @@
                     v-for="item in $constant.topManagementItemUserList"
                     :key="item"
                 >
-                    <!-- <router-link
-                        :to="item.routerPath"
-                        v-if="item.title !== 'ログアウト'"
-                    >
-                        <div
-                            class="
-                                notoSansJpAndFourteenRegular
-                                hover:opacity-50
-                                active:opacity-50
-                                cursor-pointer
-                                ml-2.5
-                            "
-                        >
-                            {{ item.title }}
-                        </div>
-                    </router-link> -->
-
                     <div
                         class="
                             notoSansJpAndFourteenRegular
