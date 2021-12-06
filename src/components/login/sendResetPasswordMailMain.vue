@@ -39,14 +39,12 @@
                     <input
                         type="submit"
                         class="
-                            bg-personOrganizationButton
-                            hover:opacity-50
-                            active:bg-personInformationButton active:opacity-100
                             h-10
                             rounded-sm
-                            notoSansJpAndEighteenBold
+                            notoSansJpAndEighteenBlack
                             text-white
                             w-86.25
+                            orangeButtonColors
                         "
                         @click="sendMailClick"
                         value="送信"
@@ -72,28 +70,28 @@
 <script>
 import logo from './logo.vue'
 export default {
-  data() {
-    return {
-      mailAddress: '',
-    }
-  },
-  components: {
-    logo,
-  },
-  methods: {
-    sendMailClick: function () {
-      let params = {
-        email: this.mailAddress,
-      }
-      this.$serve.postResetPasswordMail(params).then((res) => {
-        this.$toast.success(res.data.message, {
-          position: 'top-right',
-        })
-        this.$router.push('/')
-      })
+    data() {
+        return {
+            mailAddress: '',
+        }
     },
-  },
-  props: {},
+    components: {
+        logo,
+    },
+    methods: {
+        sendMailClick: function () {
+            let params = {
+                email: this.mailAddress,
+            }
+            this.$serve.postResetPasswordMail(params).then((res) => {
+                this.$toast.success(res.data.message, {
+                    position: 'top-right',
+                })
+                this.$router.push('/')
+            })
+        },
+    },
+    props: {},
 }
 </script>
 <style></style>

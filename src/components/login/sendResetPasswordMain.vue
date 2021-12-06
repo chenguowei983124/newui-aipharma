@@ -56,15 +56,13 @@
                     <input
                         type="submit"
                         class="
-                            bg-personOrganizationButton
-                            hover:opacity-50
-                            active:bg-personInformationButton active:opacity-100
                             h-10
                             rounded-sm
-                            notoSansJpAndEighteenBold
+                            notoSansJpAndEighteenBlack
                             text-white
-                            disabled:cursor-not-allowed
                             w-86.25
+                            orangeButtonColors
+                            disabled:cursor-not-allowed
                         "
                         @click="sendNewPassword"
                         :class="buttonDisabledStyle"
@@ -80,59 +78,59 @@
 <script>
 import logo from './logo.vue'
 export default {
-  data() {
-    return {
-      password: '',
-      passwordConfirmation: '',
-    }
-  },
-  components: {
-    logo,
-  },
-  computed: {
-    isDisabled() {
-      if (this.password == '' || this.passwordConfirmation == '') {
-        return true
-      } else {
-        return false
-      }
-    },
-    buttonDisabledStyle() {
-      if (this.password == '' || this.passwordConfirmation == '') {
-        return 'opacity-50'
-      } else {
-        return ''
-      }
-    },
-  },
-  methods: {
-    sendNewPassword: function () {
-      console.log(this.password)
-      console.log(this.passwordConfirmation)
-      if (this.password != this.passwordConfirmation) {
-        this.$toast.error(
-          '入力したパスワードが一致しないため、再入力してください。',
-          {
-            position: 'top-right',
-          }
-        )
-      } else {
-        let params = {
-          reset_password_token:
-            this.$route.query.reset_password_token,
-          password: this.password,
-          password_confirmation: this.passwordConfirmation,
+    data() {
+        return {
+            password: '',
+            passwordConfirmation: '',
         }
-        this.$serve.postResetPassword(params).then((res) => {
-          this.$toast.success(res.data.message, {
-            position: 'top-right',
-          })
-          this.$router.push('/')
-        })
-      }
     },
-  },
-  props: {},
+    components: {
+        logo,
+    },
+    computed: {
+        isDisabled() {
+            if (this.password == '' || this.passwordConfirmation == '') {
+                return true
+            } else {
+                return false
+            }
+        },
+        buttonDisabledStyle() {
+            if (this.password == '' || this.passwordConfirmation == '') {
+                return 'opacity-50'
+            } else {
+                return ''
+            }
+        },
+    },
+    methods: {
+        sendNewPassword: function () {
+            console.log(this.password)
+            console.log(this.passwordConfirmation)
+            if (this.password != this.passwordConfirmation) {
+                this.$toast.error(
+                    '入力したパスワードが一致しないため、再入力してください。',
+                    {
+                        position: 'top-right',
+                    }
+                )
+            } else {
+                let params = {
+                    reset_password_token:
+                        this.$route.query.reset_password_token,
+                    password: this.password,
+                    password_confirmation: this.passwordConfirmation,
+                }
+                this.$serve.postResetPassword(params).then((res) => {
+                    this.$toast.success(res.data.message, {
+                        position: 'top-right',
+                    })
+                    this.$router.push('/')
+                })
+            }
+        },
+    },
+    props: {},
 }
 </script>
 <style></style>

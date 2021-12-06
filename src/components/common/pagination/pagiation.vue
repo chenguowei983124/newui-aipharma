@@ -28,14 +28,6 @@
                 v-html="prevText"
             ></a>
         </li>
-        <!-- {{
-            pages
-        }} -->
-        <!-- @click="
-                page.selected
-                    ? prevFivePage(pages)
-                    : handlePageSelected(page.index + 1)
-            " -->
         <li
             v-for="(page, key, index) in pages"
             :key="index"
@@ -45,6 +37,13 @@
                 page.disabled ? disabledClass : '',
                 page.breakView ? breakViewClass : '',
             ]"
+            @click="
+                page.breakView
+                    ? index < 3
+                        ? prevFivePage(page)
+                        : nextFivePage(page)
+                    : handlePageSelected(page.index + 1)
+            "
         >
             <!-- {{ index }} -->
             <a
@@ -212,18 +211,21 @@ export default {
         },
         pageClass: {
             type: String,
+            default: 'pagination-page-class',
         },
         pageLinkClass: {
             type: String,
         },
         prevClass: {
             type: String,
+            default: 'pagination-prev-class',
         },
         prevLinkClass: {
             type: String,
         },
         nextClass: {
             type: String,
+            default: 'pagination-next-class',
         },
         nextLinkClass: {
             type: String,
@@ -236,7 +238,7 @@ export default {
         },
         activeClass: {
             type: String,
-            default: 'active',
+            default: 'pagination-active-class',
         },
         disabledClass: {
             type: String,

@@ -135,10 +135,10 @@ const issueIconitemList = [
 ]
 
 const topManagementItemUserList = [
-    { title: 'マイページ', routerPath: '/' },
-    { title: '施設切替', routerPath: '/' },
-    { title: '設定', routerPath: '/' },
-    { title: 'ログアウト', routerPath: '/' },
+    { id: 0, title: 'マイページ', routerPath: '/' },
+    { id: 1, title: '施設切替', routerPath: '/' },
+    { id: 2, title: '設定', routerPath: '/' },
+    { id: 3, title: 'ログアウト', routerPath: '' },
 ]
 
 const qaClassifyFacility = [

@@ -70,6 +70,10 @@
 .notoSansJpAndEighteenBold {
     @apply font-NotoSansJp text-lg font-bold;
 }
+/* font-family: NotoSansJp font-size: 18px font-weight: 900 */
+.notoSansJpAndEighteenBlack {
+    @apply font-NotoSansJp text-lg font-black;
+}
 /* font-family: NotoSansJp font-size: 20px font-weight: 700 */
 .notoSansJpAndTwentyBold {
     @apply font-NotoSansJp text-xl font-bold;
@@ -142,17 +146,8 @@
 }
 /* tags */
 .tagsCss {
-    @apply rounded-full
-    border-2 border-grayline
-  bg-commentBgColor
-    h-6
-    notoSansJpAndTwelveRegular
-    px-1
-    text-center
-    mr-1
-    p-px
-    cursor-pointer
-    text-tags;
+    @apply rounded-full border-2 border-grayline bg-commentBgColor h-6 notoSansJpAndTwelveRegular px-1
+    text-center mr-1 p-px cursor-pointer text-tags;
 }
 /* 検索対象 checkbox */
 .checkboxCss {
@@ -161,4 +156,29 @@
 /* ボタン Style */
 .buttonStyle {
     @apply w-43.75 md:w-30 h-10;
+}
+
+/* BUTTON COLOR css */
+.orangeButtonColors {
+    @apply bg-personOrganizationButton hover:opacity-50 active:opacity-100 border-b-2 border-orangeBorderB;
+}
+.blueButtonColors {
+    @apply bg-blueline hover:opacity-50  active:opacity-100 border-b-2 border-buttonbluelineB;
+}
+
+/* ページネーション css */
+.pagination-page-class {
+    @apply text-center pt-2 align-middle notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 border-2 rounded-sm border-notice bg-white hover:opacity-50 cursor-pointer;
+}
+
+.pagination-active-class {
+    @apply text-center pt-2 notoSansJpAndFourteenRegular  bg-pageblue border-pageblue text-white rounded-sm hover:opacity-50 cursor-pointer;
+}
+
+.pagination-prev-class {
+    @apply text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10  border-2 border-notice rounded-sm bg-white hover:opacity-50 cursor-pointer;
+}
+
+.pagination-next-class {
+    @apply text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10  border-2 bg-white rounded-sm border-notice hover:opacity-50 cursor-pointer;
 }

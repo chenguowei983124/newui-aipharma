@@ -79,9 +79,9 @@
                                     v-for="item in $constant.topManagementItemUserList"
                                     :key="item"
                                 >
-                                    <router-link
+                                    <!-- <router-link
                                         :to="item.routerPath"
-                                        @click="logoutClick"
+                                        v-if="item.title !== 'ログアウト'"
                                     >
                                         <div
                                             class="
@@ -95,7 +95,21 @@
                                         >
                                             {{ item.title }}
                                         </div>
-                                    </router-link>
+                                    </router-link> -->
+
+                                    <div
+                                        class="
+                                            md:mt-1.5
+                                            text-black
+                                            font-bold
+                                            hover:opacity-50
+                                            active:opacity-50
+                                            cursor-pointer
+                                        "
+                                        @click="linkClick(item)"
+                                    >
+                                        {{ item.title }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -227,24 +241,38 @@
                                         v-for="item in $constant.topManagementItemUserList"
                                         :key="item"
                                     >
-                                        <router-link
+                                        <!-- <router-link
                                             :to="item.routerPath"
-                                            @click="logoutClick"
+                                            v-if="item.title !== 'ログアウト'"
                                         >
                                             <div
                                                 class="
-                                                    h-9
-                                                    flex
-                                                    justify-center
-                                                    items-center
+                                                    md:mt-1.5
+                                                    text-black
+                                                    font-bold
+                                                    hover:opacity-50
+                                                    active:opacity-50
                                                     cursor-pointer
-                                                    border-t-2 border-black
-                                                    font-NotoSansJp
                                                 "
                                             >
                                                 {{ item.title }}
                                             </div>
-                                        </router-link>
+                                        </router-link> -->
+
+                                        <div
+                                            class="
+                                                h-9
+                                                flex
+                                                justify-center
+                                                items-center
+                                                cursor-pointer
+                                                border-t-2 border-black
+                                                font-NotoSansJp
+                                            "
+                                            @click="linkClick(item)"
+                                        >
+                                            {{ item.title }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -259,24 +287,31 @@
 <script>
 import iconDown from '../svgImage/iconDown.vue'
 export default {
-  emits: ['clickDown'],
-  components: { iconDown },
-  data() {
-    return {
-      isDown: false,
-    }
-  },
-  methods: {
-    clickDown() {
-      this.$store.dispatch(
-        'setPortraitClick',
-        !this.$store.getters.getPortraitClick
-      )
+    emits: ['clickDown'],
+    components: { iconDown },
+    data() {
+        return {
+            isDown: false,
+        }
     },
-    logoutClick() {
-      this.$serve.postLogout()
+    methods: {
+        clickDown() {
+            this.$store.dispatch(
+                'setPortraitClick',
+                !this.$store.getters.getPortraitClick
+            )
+        },
+        linkClick(item) {
+            if (item.id === 3) {
+                this.$serve.postLogout().then((res) => {
+                    localStorage.setItem('token', '')
+                    this.$router.push('/')
+                })
+            } else {
+                this.$router.push(item.routerPath)
+            }
+        },
     },
-  },
 }
 </script>
 

@@ -25,7 +25,10 @@
                     v-for="item in $constant.topManagementItemUserList"
                     :key="item"
                 >
-                    <router-link :to="item.routerPath" @click="logoutClick">
+                    <!-- <router-link
+                        :to="item.routerPath"
+                        v-if="item.title !== 'ログアウト'"
+                    >
                         <div
                             class="
                                 notoSansJpAndFourteenRegular
@@ -37,7 +40,20 @@
                         >
                             {{ item.title }}
                         </div>
-                    </router-link>
+                    </router-link> -->
+
+                    <div
+                        class="
+                            notoSansJpAndFourteenRegular
+                            hover:opacity-50
+                            active:opacity-50
+                            cursor-pointer
+                            ml-2.5
+                        "
+                        @click="linkClick(item)"
+                    >
+                        {{ item.title }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,9 +73,7 @@ export default {
         document.removeEventListener('keyup', this.handleClickOutside)
         document.removeEventListener('click', this.handleClickOutside)
     },
-    logoutClick() {
-        this.$serve.postLogout()
-    },
+
     data() {
         return {
             isDown: false,
@@ -74,6 +88,17 @@ export default {
                 return
             }
             this.isDown = false
+        },
+        linkClick(item) {
+            console.log('logout')
+            if (item.id === 3) {
+                this.$serve.postLogout().then((res) => {
+                    localStorage.setItem('token', '')
+                    this.$router.push('/')
+                })
+            } else {
+                this.$router.push(item.routerPath)
+            }
         },
     },
 }
