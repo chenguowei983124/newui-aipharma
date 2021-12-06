@@ -33,7 +33,7 @@
                     "
                     @click="toTop"
                 >
-                    <moveTopTriangle class="h-3.75 w-6"></moveTopTriangle>
+                    <moveTopTriangle class="h-3.75 w-6 mb-1"></moveTopTriangle>
                 </button>
             </div>
         </transition>
