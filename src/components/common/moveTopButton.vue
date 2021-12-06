@@ -1,36 +1,56 @@
 <template>
     <div v-show="isDisp" class="fixed block bottom-5 z-99">
-        <div
-            class="h-15 w-15 flex justify-center items-center cursor-pointer"
-            @click="toTop"
+        <transition
+            enter-active-class="transition duration-500 ease-in-out transform"
+            enter-from-class="scale-95 opacity-0"
+            enter-to-class="scale-100 opacity-100"
+            leave-active-class="transition duration-500 ease-in-out transform"
+            leave-from-class="scale-100 opacity-100"
+            leave-to-class="scale-95 opacity-0"
         >
-            <button
-                class="h-15 w-15 bg-toTop text-white rounded-full z-99"
+            <div
+                class="
+                    h-15
+                    w-15
+                    flex
+                    justify-center
+                    items-center
+                    cursor-pointer
+                "
                 @click="toTop"
             >
-                ▲
-            </button>
-
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="60" />
-                <polygon points="60 41.47 36 71.47 84 71.47 60 41.47" />
-            </svg> -->
-            <!-- class="hover:opacity-50 active:opacity-50" -->
-            <!-- id="_211012_ai_pharma_parts"
-                data-name="211012_ai_pharma_parts" -->
-            <!-- class="cls-2" -->
-        </div>
+                <button
+                    class="
+                        h-15
+                        w-15
+                        bg-toTop
+                        text-white
+                        rounded-full
+                        z-99
+                        justify-center
+                        items-center
+                        flex
+                    "
+                    @click="toTop"
+                >
+                    <moveTopTriangle class="h-3.75 w-6"></moveTopTriangle>
+                </button>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
+import moveTopTriangle from '../common/svgImage/moveTopTriangle.vue'
 export default {
-    components: {},
+    components: { moveTopTriangle },
     emits: ['toTop'],
     data() {
-        return {}
+        return { srcoll: 0 }
     },
-
+    mounted() {
+        window.addEventListener('scroll', this.moveTop)
+    },
     methods: {
         toTop() {
             let currentScroll = document.documentElement.scrollTop,
@@ -43,6 +63,12 @@ export default {
                     document.documentElement.scrollTop = currentScroll
                 }
             }
+        },
+        moveTop: function () {
+            this.srcoll =
+                window.pageYOffset ||
+                document.documentElement.scrollTop ||
+                document.body.scrollTop
         },
     },
     computed: {
@@ -62,7 +88,12 @@ export default {
                 this.$router.currentRoute.value.name != 'newEdiRecord' &&
                 this.$router.currentRoute.value.name
             ) {
-                return true
+                if (this.srcoll > 100) {
+                    return true
+                } else {
+                    return false
+                }
+                // return true
             } else {
                 return false
             }
