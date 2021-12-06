@@ -5,10 +5,24 @@
 
             <a
                 :class="titleStyle"
-                v-if="title != '' && titleURL != ''"
+                v-if="
+                    title != '' && titleURL != '' && titleUrlParam === undefined
+                "
                 :href="'#' + titleURL"
                 >{{ title }}</a
             >
+            <router-link
+                :class="titleStyle"
+                v-if="
+                    title != '' && titleURL != '' && titleUrlParam !== undefined
+                "
+                :to="{
+                    name: titleURL,
+                    query: titleUrlParam,
+                }"
+            >
+                <span>{{ title }}</span>
+            </router-link>
             <!-- タイトル　クリックできません -->
             <a :class="titleStyle" v-if="title != '' && titleURL == ''">{{
                 title
@@ -51,24 +65,30 @@
 import externalLink from '../svgImage/extarnalLink.vue'
 import triangleSvg from '../svgImage/triangleSvg.vue'
 export default {
-  components: { externalLink, triangleSvg },
-  props: {
-    headerStyle: { type: String, defult: '' },
-    title: { type: String, defult: '' },
-    titleStyle: { type: String, defult: '' },
-    titleURL: { type: String, defult: '' },
-    subTitle: { type: String, defult: '' },
-    subTitleStyle: { type: String, defult: '' },
-    subTitleURL: { type: String, defult: '' },
-    rightStyle: { type: String, defult: '' },
-    countTitle: { type: String, defult: '' },
-    countStyle: { type: String, defult: '' },
-    iconType: { type: String, defult: '' },
-    iconUrl: { type: String, defult: '' },
-  },
-  watch: {},
-  methods: {},
-  created() { },
+    components: { externalLink, triangleSvg },
+    props: {
+        headerStyle: { type: String, defult: '' },
+        title: { type: String, defult: '' },
+        titleStyle: { type: String, defult: '' },
+        titleURL: { type: String, defult: '' },
+        titleUrlParam: { type: Object, defult: undefined },
+        subTitle: { type: String, defult: '' },
+        subTitleStyle: { type: String, defult: '' },
+        subTitleURL: { type: String, defult: '' },
+        rightStyle: { type: String, defult: '' },
+        countTitle: { type: String, defult: '' },
+        countStyle: { type: String, defult: '' },
+        iconType: { type: String, defult: '' },
+        iconUrl: { type: String, defult: '' },
+    },
+    computed: {
+        linkUrlParam() {
+            return { name: this.titleURL, query: { id: 'sdfs' } }
+        },
+    },
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>
 <style scoped>

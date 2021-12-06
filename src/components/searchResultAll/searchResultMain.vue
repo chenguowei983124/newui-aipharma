@@ -31,8 +31,9 @@
             <resut-tag
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="DI ナレッジシェア"
+                :titleUrlParam="setDiURL"
                 titleStyle="bulletinBoardInfoTitle"
-                titleURL="/searchDiKnowledge"
+                titleURL="searchDiKnowledge"
             >
                 <result-detail-row
                     class="searchResult_detail_blue"
@@ -49,7 +50,8 @@
                 headerStyle="titleOnlyUnderlineBgColorBlue"
                 title="組織内 DI 記録（Q&A）"
                 titleStyle="bulletinBoardInfoTitle"
-                titleURL="/searchOrganization"
+                titleURL="searchOrganization"
+                :titleUrlParam="setOwnURL"
                 rightStyle="count"
                 :countTitle="'該当：' + searchOrganizationCount + '件'"
                 countStyle="searchResultAllCountLable"
@@ -130,7 +132,7 @@
                 titleURL=""
                 titleStyle="pdmaInfoTitle"
                 rightStyle="icon"
-                iconUrl="https://www.google.co.jp/"
+                :iconUrl="googleSearchUrl"
             >
                 <result-external-linkdetail-row
                     :sites="$store.getters.getSearchAllGoogleInfo.details"
@@ -201,6 +203,85 @@ export default {
 
                 return diKnowledgeitems
             },
+        },
+        setOwnURL() {
+            let params = {
+                search: this.$route.query.searchKey,
+                // タグ
+                tags: '',
+                // 薬の分類
+                medicine: '0',
+                // 質問区分
+                qacategory: '0',
+                // 施設
+                facility_flag: '0',
+                // 表示件数
+                displayed: '20',
+                // ソート順
+                sort: 'last_updated_at_desc',
+                // ページ
+                page: '1',
+                // 検索対象 Q
+                checkQ: true,
+                // 検索対象 A
+                checkA: true,
+                // 検索対象 コメント
+                checkComment: true,
+                // 検索対象 添付ファイル名
+                checkAddFileName: true,
+                // 検索対象 投稿者
+                checkContributor: true,
+                // 検索対象 最終編集者
+                checkLastEditer: true,
+                // 検索対象 施設名
+                checkFacilityName: true,
+                // 検索対象 備考
+                checkNote: true,
+                timestamp: new Date().getTime(),
+            }
+            return params
+        },
+        setDiURL() {
+            let params = {
+                search: this.$route.query.searchKey,
+                // タグ
+                tags: '',
+
+                // 表示件数
+                displayed: '20',
+                // ソート順
+                sort: 'last_updated_at_desc',
+                // ページ
+                page: '1',
+                // 検索対象 Q
+                checkQ: true,
+                // 検索対象 A
+                checkA: true,
+                // 検索対象 コメント
+                checkComment: true,
+                // 検索対象 添付ファイル名
+                checkAddFileName: true,
+                // 検索対象 投稿者
+                checkContributor: true,
+                // 検索対象 最終編集者
+                checkLastEditer: true,
+                // 検索対象 施設名
+                checkFacilityName: true,
+                // 検索対象 備考
+                checkNote: true,
+                timestamp: new Date().getTime(),
+            }
+            return params
+        },
+        googleSearchUrl() {
+            if (this.$route.query.searchKey !== '') {
+                return (
+                    'https://www.google.co.jp/search?q=' +
+                    this.$route.query.searchKey
+                )
+            } else {
+                  return ('https://www.google.co.jp/')
+            }
         },
         searchResults: {
             get: function () {

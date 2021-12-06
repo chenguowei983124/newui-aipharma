@@ -34,6 +34,7 @@
             :titleStyle="titleStyle"
             :titleURL="titleURL"
             :subTitle="subTitle"
+            :titleUrlParam="titleUrlParam"
             :subTitleStyle="subTitleStyle"
             :subTitleURL="subTitleURL"
             :rightStyle="rightStyle"
@@ -51,48 +52,53 @@ import resultDetailRow from './resultDetailRow.vue'
 import resultHeader from './reaultHeader.vue'
 import { computed } from '@vue/runtime-core'
 export default {
-  components: { resultDetailRow, resultHeader },
-  props: {
-    headerStyle: { type: String, defult: '' },
-    title: { type: String, defult: '' },
-    titleStyle: { type: String, defult: '' },
-    titleURL: { type: String, defult: '' },
-    subTitle: { type: String, defult: '' },
-    subTitleStyle: { type: String, defult: '' },
-    subTitleURL: { type: String, defult: '' },
-    rightStyle: { type: String, defult: '' },
-    countTitle: { type: String, defult: '' },
-    countStyle: { type: String, defult: '' },
-    iconType: { type: String, defult: '' },
-    iconUrl: { type: String, defult: '' },
-  },
-  setup(props) {
-    const resultHeaderStyle = computed(() => {
-      // console.log('setup')
-      const style = []
-      //   青背景
-      if (props.headerStyle == 'titleExternalLinkColorGray') {
-        style.push('h-10 rounded-t-lg py-1.5 px-2.5 md:px-5 border-gray-400 bg-cardTitlePmad')
-      }
-      if (props.headerStyle == 'titleOnlyUnderlineBgColorBlue') {
-        style.push('h-10 rounded-t-lg py-1.5 px-2.5 md:px-5 bg-cardTitle')
-      }
-      if (props.headerStyle == 'titleOnlyUnderlineBgColorGray') {
-        style.push('searchResult_header_bg_gray')
-      }
-      if (props.headerStyle == 'titleBgColorGray') {
-        style.push('organizationResult_header_bg_gray')
-      }
-      if (props.headerStyle == 'titleOnlyUnderlineGrayLine') {
-        style.push('searchResult_header_grayline')
-      }
-      return style
-    })
+    components: { resultDetailRow, resultHeader },
+    props: {
+        headerStyle: { type: String, defult: '' },
+        title: { type: String, defult: '' },
+        titleStyle: { type: String, defult: '' },
+        titleURL: { type: String, defult: '' },
+        titleUrlParam: { type: Object, defult: undefined },
+        subTitle: { type: String, defult: '' },
+        subTitleStyle: { type: String, defult: '' },
+        subTitleURL: { type: String, defult: '' },
+        rightStyle: { type: String, defult: '' },
+        countTitle: { type: String, defult: '' },
+        countStyle: { type: String, defult: '' },
+        iconType: { type: String, defult: '' },
+        iconUrl: { type: String, defult: '' },
+    },
+    setup(props) {
+        const resultHeaderStyle = computed(() => {
+            // console.log('setup')
+            const style = []
+            //   青背景
+            if (props.headerStyle == 'titleExternalLinkColorGray') {
+                style.push(
+                    'h-10 rounded-t-lg py-1.5 px-2.5 md:px-5 border-gray-400 bg-cardTitlePmad'
+                )
+            }
+            if (props.headerStyle == 'titleOnlyUnderlineBgColorBlue') {
+                style.push(
+                    'h-10 rounded-t-lg py-1.5 px-2.5 md:px-5 bg-cardTitle'
+                )
+            }
+            if (props.headerStyle == 'titleOnlyUnderlineBgColorGray') {
+                style.push('searchResult_header_bg_gray')
+            }
+            if (props.headerStyle == 'titleBgColorGray') {
+                style.push('organizationResult_header_bg_gray')
+            }
+            if (props.headerStyle == 'titleOnlyUnderlineGrayLine') {
+                style.push('searchResult_header_grayline')
+            }
+            return style
+        })
 
-    return {
-      resultHeaderStyle,
-    }
-  },
+        return {
+            resultHeaderStyle,
+        }
+    },
 }
 </script>
 <style scoped></style>
