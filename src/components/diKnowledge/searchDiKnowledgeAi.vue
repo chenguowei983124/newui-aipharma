@@ -455,7 +455,7 @@
                                         : 'hidden',
                                 ]"
                             >
-                                <div
+                                <!-- <div
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
@@ -470,7 +470,7 @@
                                             {{ item.facilityQaNumber }}
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div
                                     class="
                                         md:flex md:flex-row

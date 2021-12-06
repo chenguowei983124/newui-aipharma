@@ -11,7 +11,7 @@ export default {
         // searchTags: [], // タブ
         pageDI: '1', // ページ
         QaAiId: '', // QAAIID　
-        sortDI: '0', // ソート順
+        sortDI: 'last_updated_at_desc', // ソート順
         maxCountDI: '20', // 表示件数
         // 検索対象
         checkQDI: true, // Q

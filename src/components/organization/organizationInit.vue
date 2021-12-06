@@ -50,24 +50,13 @@
             <div>{{ 'トレンドタグ' }}</div>
             <div class="flex flex-wrap mt-2">
                 <div
-                    class="
-                        rounded-full
-                        border-2 border-gray-300
-                        bg-gray-100
-                        h-6
-                        notoSansJpAndTwelveRegular
-                        pl-1
-                        pr-1
-                        text-center
-                        mr-1
-                        cursor-pointer
-                    "
+                    class="tagsCss"
                     @click="sendMsgToParent(item.label)"
                     v-for="item in $store.getters.getOrganizationSeartorenndoTab
                         .torenndoTab"
                     :key="item"
                 >
-                    #{{ item.label }}
+                    # {{ item.label }}
                 </div>
             </div>
         </div>

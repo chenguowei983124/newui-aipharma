@@ -19,33 +19,33 @@
             <dots-horizontal></dots-horizontal>
         </div>
         <div
-            class="fixed cs:hidden top-0 left-0 right-0 bottom-0 z-75 bg-lock"
+            class="fixed cs:hidden top-0 left-0 right-0 bottom-0 z-10 bg-lock"
             v-if="boxDispFlg"
             @click.self="boxClose"
         ></div>
         <div
             class="
                 rounded-md
-                mid:border-gray-400
+                mid:border-tags
                 bg-white
                 h-20
                 cs:w-16 cs:absolute
                 fixed
                 w-11/12
-                z-75
+                z-10
                 left-4
                 cs:-left-6 cs:top-12
                 top-96
-                border-2 border-black
+                border-2 border-tags
             "
             v-if="boxDispFlg"
         >
-            <div class="mid:mx-3.5 font-NotoSansJp font-bold items-center">
+            <div class="mid:mx-3.5 font-NotoSansJp font-bold items-center text-tags">
                 <div
                     class="
                         text-center
                         h-10
-                        border-b-2 border-black
+                        border-b-2 border-tags
                         cs:border-0
                         pt-1.5
                         cs:pt-2

@@ -481,6 +481,7 @@ export default {
                     if (!storeExistFlg) {
                         selectedItem.push(this.bbsTagslist[index])
                         this.$store.dispatch('setBbsTagsList', selectedItem)
+                        localStorage.setItem('store',JSON.stringify(this.$store.state))
                     }
                 }
             }

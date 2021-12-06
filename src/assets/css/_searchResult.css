@@ -11,7 +11,7 @@
 }
 /* ラベル　グループ */
 .searchResult_lable_group {
-    @apply notoSansJpAndTwelveMedium text-white bg-group w-17.5 h-4 text-center block;
+    @apply notoSansJpAndTwelveMedium text-white bg-group w-17.5 h-4.5 text-center block;
 }
 /* ラベル　学会 */
 .searchResult_lable_society {
@@ -81,7 +81,7 @@
 }
 /* ラベル　自施設 値 */
 .searchResult_lable_ownFacility {
-    @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4 text-center block;
+    @apply notoSansJpAndTwelveMedium bg-organization text-white w-17.5 h-4.5 text-center block;
 }
 /* ラベル　他施設 値 */
 .searchResult_lable_otherFacility {

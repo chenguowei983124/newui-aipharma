@@ -26,7 +26,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox ring-1 text-white"
+                                        class="checkboxCss"
                                         :checked="$store.getters.getCheckQ"
                                         @change="onCheckQChange"
                                     />
@@ -42,7 +42,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox ring-1 text-white"
+                                        class="checkboxCss"
                                         :checked="$store.getters.getCheckA"
                                         @change="onChangeCheckA"
                                     />
@@ -58,7 +58,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox ring-1 text-white"
+                                        class="checkboxCss"
                                         :checked="
                                             $store.getters.getCheckComment
                                         "
@@ -78,7 +78,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox ring-1 text-white"
+                                        class="checkboxCss"
                                         :checked="
                                             $store.getters.getCheckAddFileName
                                         "
@@ -96,7 +96,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox ring-1 text-white"
+                                        class="checkboxCss"
                                         :checked="
                                             $store.getters.getCheckContributor
                                         "
@@ -114,7 +114,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox ring-1 text-white"
+                                        class="checkboxCss"
                                         :checked="
                                             $store.getters.getCheckLastEditer
                                         "
@@ -134,7 +134,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox ring-1 text-white"
+                                        class="checkboxCss"
                                         :checked="
                                             $store.getters.getCheckFacilityName
                                         "
@@ -152,7 +152,7 @@
                                 >
                                     <input
                                         type="checkbox"
-                                        class="form-checkbox ring-1 text-white"
+                                        class="checkboxCss"
                                         :checked="$store.getters.getCheckNote"
                                         @change="onChangeCheckNote"
                                     />
@@ -243,7 +243,7 @@
                     @selected="setMedicineID"
                     leftLableTitle="薬の分類"
                     buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
-                    inputStyle="w-full text-left pl-20 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                    inputStyle="w-full text-left pl-20 notoSansJpAndFourteenRegular border-2 h-7.5 border-blueCAE6F4 bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none "
                     iconColor="#32a5dc"
                 ></vue-single-select>
@@ -259,7 +259,7 @@
                     @selected="setQuestionID"
                     leftLableTitle="質問区分"
                     buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
-                    inputStyle="w-full text-left pl-20  notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                    inputStyle="w-full text-left pl-20  notoSansJpAndFourteenRegular border-2 h-7.5 border-blueCAE6F4 bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none"
                     iconColor="#32a5dc"
                 ></vue-single-select>
@@ -275,7 +275,7 @@
                     @selected="setFacilityID"
                     leftLableTitle="施設"
                     buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
-                    inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-20 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                    inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-20 border-2 h-7.5 border-blueCAE6F4 bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none"
                     iconColor="#32a5dc"
                 ></vue-single-select>
@@ -299,10 +299,7 @@
                             bg-personDataInfo
                             text-gray-700
                             notoSansJpAndSixteenBold
-                            w-43.75
-                            md:w-28
-                            h-9.5
-                            md:h-8
+                            buttonStyle
                         "
                         @click="inputClear"
                     >
@@ -314,11 +311,8 @@
                             border-b-2 border-orange-600
                             bg-searchBunnon
                             text-white
-                            notoSansJpAndSixteenBold
-                            w-43.75
-                            md:w-28
-                            h-9.5
-                            md:h-8
+                            notoSansJpAndEighteenBold
+                            buttonStyle
                             flex flex-row
                             justify-center
                             items-center
@@ -334,6 +328,7 @@
                         class="
                             flex
                             items-center
+                            mt-1
                             rounded
                             border-2 border-white
                             text-white text-center
@@ -468,7 +463,6 @@ export default {
                 }
             }
             // }
-
             return this.tagValue
         },
     },

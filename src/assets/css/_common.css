@@ -140,3 +140,25 @@
 .multiselect-tag-style {
     @apply bg-gray-300 text-black notoSansJpAndTwelveRegular pl-2 rounded-full border-2 mr-1 mb-1 flex items-center whitespace-nowrap;
 }
+/* tags */
+.tagsCss {
+    @apply rounded-full
+    border-2 border-grayline
+  bg-commentBgColor
+    h-6
+    notoSansJpAndTwelveRegular
+    px-1
+    text-center
+    mr-1
+    p-px
+    cursor-pointer
+    text-tags;
+}
+/* 検索対象 checkbox */
+.checkboxCss {
+    @apply form-checkbox ring-1 ring-blueCAE6F4 text-white;
+}
+/* ボタン Style */
+.buttonStyle {
+    @apply w-43.75 md:w-30 h-10;
+}

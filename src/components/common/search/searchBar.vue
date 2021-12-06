@@ -829,8 +829,9 @@ export default {
                     path: '/searchBulletinBoard',
                     query: params,
                 })
+            } 
             // お知らせ
-            } else if (this.checkId == 7) {
+            else if (this.checkId == 7) {
                 if (
                     this.$store.getters.getDateValueFrom != '' &&
                     this.$store.getters.getDateValueTo != ''
@@ -905,11 +906,10 @@ export default {
         },
         // DropDown 選択したアイテムＩＤ取得
         getCheckId(value) {
+            this.initStore(this.checkId, value)
             console.log('checkId', value)
             this.checkId = value
             this.$emit('orgcheckId', value)
-            this.$store.dispatch('setDateValueFrom', '')
-            this.$store.dispatch('setDateValueTo', '')
         },
         getIsDetailClick(value) {
             this.$emit('isDetailClick', value)
@@ -917,6 +917,120 @@ export default {
         //  組織内 DI 記録（Q&A）詳細条件 フラグ
         getIsOrgDetailClick(value) {
             this.$emit('isOrgDetailClick', value)
+        },
+        initStore(oldCheckId, newCheckId) {
+            this.$store.dispatch('setSearchWord', '')
+            if (oldCheckId == 1) {
+                this.initDIStore()
+            } else if (oldCheckId == 2) {
+                this.initOrwStore()
+            } else if (oldCheckId == 3) {
+                this.initPreavoidsStore()
+            } else if (oldCheckId == 4) {
+            } else if (oldCheckId == 5) {
+            } else if (oldCheckId == 6) {
+                this.initBbsStore()
+            } else if (oldCheckId == 7) {
+                this.initNotificationStore()
+            }
+
+            if (newCheckId == 1) {
+                this.initDIStore()
+            } else if (newCheckId == 2) {
+                this.initOrwStore()
+            } else if (newCheckId == 3) {
+                this.initPreavoidsStore()
+            } else if (newCheckId == 4) {
+            } else if (newCheckId == 5) {
+            } else if (newCheckId == 6) {
+                this.initBbsStore()
+            } else if (newCheckId == 7) {
+                this.initNotificationStore()
+            }
+        },
+        // 機能切替時、変更前機能の入力した検索情報をクリア（組織内DI記録検索画面）
+        initOrwStore() {
+            // this.$store.dispatch('setSearchWord', '')
+            // タブ
+            this.$store.dispatch('setSearchTags', [])
+            // 薬区分
+            this.$store.dispatch('setMedicineID', 0)
+            // 質問区分
+            this.$store.dispatch('setQuestionID', 0)
+            // 施設
+            this.$store.dispatch('setFacilityID', 0)
+            // ページ
+            this.$store.dispatch('setPage', 1)
+            // ソート順
+            this.$store.dispatch('setSort', 'last_updated_at_desc')
+            // 表示件数
+            this.$store.dispatch('setMaxCount', 20)
+            // 検索対象
+            this.$store.dispatch('setCheckQ', true) // Q
+            this.$store.dispatch('setCheckA', true) // A
+            this.$store.dispatch('setCheckComment', true) // コメント
+            this.$store.dispatch('setCheckAddFileName', true) // 添付ファイル名
+            this.$store.dispatch('setCheckContributor', true) // 投稿者
+            this.$store.dispatch('setCheckLastEditer', true) // 最終編集者
+            this.$store.dispatch('setCheckFacilityName', true) // 施設名
+            this.$store.dispatch('setCheckNote', true) // 備考
+        },
+        // 機能切替時、変更前機能の入力した検索情報をクリア（DIナレッジシェア検索画面）
+        initDIStore() {
+            // this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.commit('setPageDI', 1)
+            this.$store.commit('setSortDI', 'last_updated_at_desc')
+            this.$store.commit('setMaxCountDI', 20)
+            this.$store.commit('setCheckQDI', true)
+            this.$store.commit('setCheckADI', true)
+            this.$store.commit('setCheckCommentDI', true)
+            this.$store.commit('setCheckAddFileNameDI', true)
+            this.$store.commit('setCheckContributorDI', true)
+            this.$store.commit('setCheckLastEditerDI', true)
+            this.$store.commit('setCheckFacilityNameDI', true)
+            this.$store.commit('setCheckNoteDI', true)
+        },
+        // 機能切替時、変更前機能の入力した検索情報をクリア（症例（プレアボイド）検索画面）
+        initPreavoidsStore() {
+            // this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setStyles', 0)
+            this.$store.dispatch('setFacilityID', 0)
+            this.$store.dispatch('setDateValueFrom', '')
+            this.$store.dispatch('setDateValueTo', '')
+            this.$store.dispatch('setPage', 1)
+            this.$store.dispatch('setSort', 0)
+            this.$store.dispatch('setMaxCount', 0)
+        },
+        // 機能切替時、変更前機能の入力した検索情報をクリア（掲示板検索画面）
+        initBbsStore() {
+            let checkInfo = this.$store.getters.getBbsCheckInfo
+            checkInfo.checkTitle = true
+            checkInfo.checkContent = true
+            checkInfo.checkComment = true
+            checkInfo.checkPost = true
+            checkInfo.checkLastEditor = true
+            checkInfo.checkFacilityName = true
+            this.$store.dispatch('setBbsCheckInfo', checkInfo)
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSort', 'created_at-desc')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.dispatch('setSearchTagsLable', [])
+        },
+        // 機能切替時、変更前機能の入力した検索情報をクリア（お知らせ検索画面）
+        initNotificationStore() {
+            let checkInfo = this.$store.getters.getEdiCheckInfo
+            checkInfo.checkTitle = true
+            checkInfo.checkContent = true
+            checkInfo.checkComment = true
+            checkInfo.checkPost = true
+            checkInfo.checkLastEditor = true
+            checkInfo.checkFacilityName = true
+            this.$store.dispatch('setEdiCheckInfo', checkInfo)
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSort', 'created_at-desc')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.dispatch('setSearchTagsLable', [])
         },
     },
 }
