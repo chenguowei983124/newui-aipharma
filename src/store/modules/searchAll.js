@@ -258,8 +258,6 @@ export default {
         initSearchAllStatus({ rootState, state, commit }) {
             // 検索状態設定
             let status = state.searchAllStatus
-            console.log('searchAllStatus', state)
-            console.log('rootState', rootState)
             status.DiKnowledge = false
             status.AIDiKnowledge = false
             status.Organization = false

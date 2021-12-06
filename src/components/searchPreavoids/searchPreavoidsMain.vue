@@ -113,10 +113,6 @@
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            page-class="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            activeClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular bg-blueline text-white"
-            prevClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
-            nextClass="inline-block p-1 align-middle notoSansJpAndFourteenRegular h-8 w-8 text-center border-2 bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
 

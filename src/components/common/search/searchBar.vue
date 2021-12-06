@@ -19,6 +19,7 @@
                         <input
                             v-model="searchValueInput"
                             :class="sreachBarSPInputClass"
+                            @keydown.enter="searchClick"
                             type="text"
                             placeholder="キーワードを入力"
                         />
@@ -26,6 +27,7 @@
                         <input
                             v-model="searchValueInput"
                             :class="sreachBarPCInputClass"
+                            @keydown.enter="searchClick"
                             type="text"
                             :placeholder="pcPlaceholder"
                             @input="input"
@@ -519,7 +521,7 @@ export default {
             if (this.checkId == 0) {
                 let getTimestamp = new Date().getTime()
                 let params = {
-                    searchKey: this.$store.getters.getSearchWord,
+                    search: this.$store.getters.getSearchWord,
                     timestamp: getTimestamp,
                 }
                 // // 検索APIを呼び出し(画面入力値)
@@ -599,7 +601,6 @@ export default {
             }
             // 組織内 DI 記録（Q&A）
             else if (this.checkId == 2) {
-                console.log('組織内DI記録')
                 if (this.$props.form === this.$constant.formList.OWN) {
                     if (
                         Object.keys(this.$store.getters.getorgTagsList).length >
@@ -907,7 +908,6 @@ export default {
         // DropDown 選択したアイテムＩＤ取得
         getCheckId(value) {
             this.initStore(this.checkId, value)
-            console.log('checkId', value)
             this.checkId = value
             this.$emit('orgcheckId', value)
         },

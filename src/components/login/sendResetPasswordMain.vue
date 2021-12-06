@@ -50,6 +50,7 @@
                         "
                         type="password"
                         placeholder="新しいパスワード（確認用）"
+                        @keydown.enter="sendNewPassword"
                     />
                 </div>
                 <div class="mt-2.5">

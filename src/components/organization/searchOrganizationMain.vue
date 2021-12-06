@@ -786,10 +786,6 @@
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            page-class="text-center pt-2 align-middle notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center rounded border-2 border-notice bg-white"
-            activeClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem bg-backgroundMainSearch text-white"
-            prevClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center rounded border-2 border-notice bg-white"
-            nextClass="text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10 text-center rounded border-2 border-notice bg-white"
             class="flex justify-center space-x-1"
         ></pagination>
         <div class="flex justify-center mt-2 text-dropdownListItem text-xs">{{ dispDetailRange }}件 表示</div>

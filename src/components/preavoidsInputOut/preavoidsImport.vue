@@ -53,7 +53,7 @@
                         whitespace-nowrap
                         bg-garyTitle
                         hover:opacity-50
-                        active:bg-bg-gray-200 active:opacity-100
+                        active:bg-gray-200 active:opacity-100
                         rounded-sm
                         px-2
                         text-black text-center

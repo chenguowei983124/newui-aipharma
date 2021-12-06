@@ -26,7 +26,7 @@
                             focus:border-grayline
                             focus:border-transparent
                         "
-                        @keydown.prevent.down="moveNext"
+                        @keydown="loginKeydown"
                         type="text"
                         placeholder="メールアドレスorユーザーID"
                     />
@@ -188,7 +188,6 @@ export default {
                 AUTH_PATH,
             ])}?${queryString}`
 
-            console.log('login_url', url)
             window.open(url, '_self')
         },
         loginClick: function () {
@@ -205,7 +204,6 @@ export default {
             }
         },
         loginKeydown(e) {
-            console.log(e)
             if (e.key === 'Enter') {
                 if (this.loginId == '' || this.password == '') {
                     this.message =
@@ -301,10 +299,7 @@ export default {
         // },
     },
     mounted() {
-        console.log('this.loginId', this.loginId)
         this.getCookie()
-        console.log('this.loginId', this.loginId)
-        console.log(localStorage.getItem('token'))
         if (localStorage.getItem('token')) {
             let params = {
                 loginId: this.loginId,

@@ -85,7 +85,7 @@
                                 menubar: false,
                                 statusbar: false,
                                 plugins:
-                                    'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap  mentions quickbars linkchecker emoticons advtable export',
+                                    'print preview   importcss tinydrive searchreplace autolink autosave save directionality  visualblocks visualchars fullscreen image link media  template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists  wordcount imagetools textpattern noneditable help charmap quickbars emoticons ',
                                 toolbar:
                                     ' undo redo | bold italic underline strikethrough | fontsizeselect forecolor removeformat | alignleft aligncenter alignright alignjustify |  numlist bullist | image table link | fullscreen  preview pagebreak ',
                             }"
@@ -174,7 +174,7 @@
                                     w-11.25
                                     bg-gray-400
                                     hover:opacity-50
-                                    active:bg-bg-gray-200 active:opacity-100
+                                    active:bg-gray-200 active:opacity-100
                                     h-7.5
                                     md:h-10
                                     rounded-md
@@ -207,7 +207,7 @@
                                     class="
                                         bg-blueline
                                         hover:opacity-50
-                                        active:bg-bg-gray-200 active:opacity-100
+                                        active:bg-gray-200 active:opacity-100
                                         h-7
                                         md:h-7.5
                                         w-19.5
@@ -227,7 +227,7 @@
                                         w-11.25
                                         bg-gray-400
                                         hover:opacity-50
-                                        active:bg-bg-gray-200 active:opacity-100
+                                        active:bg-gray-200 active:opacity-100
                                         h-7.5
                                         md:h-10
                                         rounded-md
@@ -251,7 +251,7 @@
                         mt-2
                         bg-blueline
                         hover:opacity-50
-                        active:bg-bg-gray-200 active:opacity-100
+                        active:bg-gray-200 active:opacity-100
                         h-10
                         md:h-7
                         w-15
@@ -429,7 +429,7 @@
                                     whitespace-nowrap
                                     bg-gray-300
                                     hover:opacity-50
-                                    active:bg-bg-gray-200 active:opacity-100
+                                    active:bg-gray-200 active:opacity-100
                                     rounded-sm
                                     font-NotoSansJp
                                     px-2
@@ -470,7 +470,7 @@
                         mt-2
                         bg-blueline
                         hover:opacity-50
-                        active:bg-bg-gray-200 active:opacity-100
+                        active:bg-gray-200 active:opacity-100
                         h-10
                         md:h-7
                         w-15

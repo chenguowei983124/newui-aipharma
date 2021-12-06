@@ -33,6 +33,7 @@
                         "
                         type="text"
                         placeholder="メールアドレス"
+                        @keydown.enter="sendMailClick"
                     />
                 </div>
                 <div class="mt-2.5">

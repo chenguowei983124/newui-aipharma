@@ -343,15 +343,15 @@ export default {
             },
         },
     },
+    unmounted() {
+        this.$store.dispatch('setSearchWord', '')
+    },
     methods: {
         async getDispData() {
-            if (this.$route.query.searchKey != undefined) {
-                this.$store.dispatch(
-                    'saveSearchValue',
-                    this.$route.query.searchKey
-                )
+            if (this.$route.query.search != undefined) {
+                this.$store.dispatch('setSearchWord',this.$route.query.search)
             } else {
-                this.$store.dispatch('saveSearchValue', '')
+                this.$store.dispatch('setSearchWord', '')
             }
             this.execSearch()
         },

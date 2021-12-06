@@ -90,12 +90,14 @@
                             v-model="isAgree"
                             type="checkbox"
                             class="
+                                focus:ring-1 focus:ring-blueline
                                 form-checkbox
                                 w-3
                                 h-3
                                 text-white
                                 ring-1 ring-grayline
                             "
+                            @keydown.enter="sendNewPassword"
                             checked
                         />
                         <span class="ml-1 notoSansJpAndTwelveRegular pb-0.5"
@@ -165,26 +167,26 @@ export default {
     },
     methods: {
         sendNewPassword: function () {
-            if (this.password !== this.passwordConfirmation) {
-                this.$toast.error(
-                    '入力したパスワードが一致しないため、再入力してください。',
-                    {
-                        position: 'top-right',
-                    }
-                )
-            } else {
-                let params = {
-                    reset_password_token:
+            if(this.password != "" && this.passwordConfirmation != ""){
+                if(this.isAgree != false){
+                    if (this.password !== this.passwordConfirmation) {
+                        this.$toast.error('入力したパスワードが一致しないため、再入力してください。',
+                        {position: 'top-right',})
+                    } else {
+                        let params = {reset_password_token:
                         this.$route.query.reset_password_token,
-                    password: this.password,
-                    password_confirmation: this.passwordConfirmation,
+                        password: this.password,
+                        password_confirmation: this.passwordConfirmation,}
+                        this.$serve.patchSetPassword(params).then((res) => {
+                            this.$toast.success(res.data.message, {position: 'top-right',}) 
+                            this.$router.push('/')})
+                    }
+                } else {
+                    this.$toast.error('同意チェックを選択してください。',{position: 'top-right',})
                 }
-                this.$serve.patchSetPassword(params).then((res) => {
-                    this.$toast.success(res.data.message, {
-                        position: 'top-right',
-                    })
-                    this.$router.push('/')
-                })
+            } else {
+                this.$toast.error('入力したパスワードが一致しないため、再入力してください。',
+                {position: 'top-right',})
             }
         },
     },
