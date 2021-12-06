@@ -110,7 +110,7 @@
                             justify-center
                         "
                     >
-                        <excel></excel>
+                        <excel class="mt-4 h-7 w-5.5"></excel>
                     </td>
                     <!--  様式 2 -->
                     <td
@@ -121,7 +121,7 @@
                             justify-center
                         "
                     >
-                        <excel></excel>
+                        <excel class="mt-4 h-7 w-5.5"></excel>
                     </td>
                     <!-- 様式 3 -->
                     <td
@@ -132,7 +132,7 @@
                             justify-center
                         "
                     >
-                        <excel></excel>
+                        <excel class="mt-4 h-7 w-5.5"></excel>
                     </td>
                 </tr>
             </tbody>
