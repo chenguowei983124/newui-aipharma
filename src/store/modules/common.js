@@ -20,6 +20,8 @@ export default {
         dateValueTo: '',
         styles: '-1',
         scope: 'created_at-desc',
+        // 検索条件
+        searchWord: '', // キーワード
         bbsCheckInfo: {
             checkTitle: true,
             checkContent: true,
@@ -160,6 +162,10 @@ export default {
         getScope(state) {
             return state.scope
         },
+        // キーワード
+        getSearchWord(state) {
+          return state.searchWord
+      },
         getBbsCheckInfo(state) {
             return state.bbsCheckInfo
         },
@@ -241,10 +247,8 @@ export default {
         },
         // 薬の分類 質問区分
         getCommonInfo({ rootState, commit }, info) {
-            // const info = await serve.getOrgCommonInfo()
             commit('setQaClassifyClass', info)
             commit('setQaClassifySubject', info)
-
             commit('setCommon', info)
         },
         setOidcCode({ commit, state }, value) {
@@ -256,6 +260,10 @@ export default {
         },
         setScopeInfo({ commit }, value) {
             commit('setScope', value)
+        },
+        // キーワード
+        setSearchWord({ commit, state }, value) {
+          commit('basic', { key: 'searchWord', value })
         },
         setBbsCheckInfo({ commit }, value) {
             commit('setBbsCheck', value)

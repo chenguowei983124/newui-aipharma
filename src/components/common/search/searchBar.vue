@@ -406,18 +406,18 @@ export default {
                 }
             } else if (this.$props.form == this.$constant.formList.BBS) {
                 return (
-                        'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
-                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                        'focus:border-transparent '
-                    )
+                    'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
             } else if (this.$props.form == this.$constant.formList.EDI) {
                 return (
-                        'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
-                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                        'focus:border-transparent '
-                    )
+                    'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
+                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                    'focus:border-transparent '
+                )
             }
         },
         sreachBarSPInputClass: function () {
@@ -830,7 +830,7 @@ export default {
                     path: '/searchBulletinBoard',
                     query: params,
                 })
-            } 
+            }
             // お知らせ
             else if (this.checkId == 7) {
                 if (
@@ -919,7 +919,7 @@ export default {
             this.$emit('isOrgDetailClick', value)
         },
         initStore(oldCheckId, newCheckId) {
-            this.$store.dispatch('setSearchWord', '')
+            // this.$store.dispatch('setSearchWord', '')
             if (oldCheckId == 1) {
                 this.initDIStore()
             } else if (oldCheckId == 2) {
@@ -1012,7 +1012,7 @@ export default {
             checkInfo.checkLastEditor = true
             checkInfo.checkFacilityName = true
             this.$store.dispatch('setBbsCheckInfo', checkInfo)
-            this.$store.dispatch('setSearchWord', '')
+            // this.$store.dispatch('setSearchWord', '')
             this.$store.dispatch('setSort', 'created_at-desc')
             this.$store.dispatch('setSearchTags', [])
             this.$store.dispatch('setSearchTagsLable', [])
@@ -1027,7 +1027,7 @@ export default {
             checkInfo.checkLastEditor = true
             checkInfo.checkFacilityName = true
             this.$store.dispatch('setEdiCheckInfo', checkInfo)
-            this.$store.dispatch('setSearchWord', '')
+            // this.$store.dispatch('setSearchWord', '')
             this.$store.dispatch('setSort', 'created_at-desc')
             this.$store.dispatch('setSearchTags', [])
             this.$store.dispatch('setSearchTagsLable', [])

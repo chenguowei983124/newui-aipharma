@@ -586,9 +586,10 @@ const serve = {
     //===========================
     // 一括検索結果画面　おくすり事例情報取得
     //===========================
-    async getALLMedicineCase_Info() {
+    async getALLMedicineCase_Info(params) {
         const data = await axios('/api/qa/get_bunch_MedicineCase_info', {
             method: 'get',
+            params: params,
         })
 
         return data
@@ -601,15 +602,17 @@ const serve = {
         // if (!params.searchKey) {
         data = await axios('/api/qa/get_bunch_BulletinBoard_info', {
             method: 'get',
+            params: params,
         })
         return data
     },
     //===========================
     // 一括検索結果画面　一括検索結果画面のGoogle情報取得
     //===========================
-    async getALLGoogle_Info() {
+    async getALLGoogle_Info(params) {
         const data = await axios('/api/external/search_google', {
             method: 'get',
+            params: params,
         })
 
         return data

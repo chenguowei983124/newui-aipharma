@@ -347,7 +347,7 @@ export default {
         this.$store.dispatch('setSearchWord', '')
     },
     methods: {
-        async getDispData() {
+        getDispData() {
             if (this.$route.query.search != undefined) {
                 this.$store.dispatch('setSearchWord',this.$route.query.search)
             } else {

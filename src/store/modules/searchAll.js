@@ -2,7 +2,7 @@ import axios from 'axios'
 import serve from '../../service/api'
 export default {
     state: () => ({
-        searchKey: '',
+        // searchKey: '',
         organizationInfo: {},
         searchAllDiKnowledgeInfo: {},
         searchAIDiKnowledgeInfo: {},
@@ -45,9 +45,9 @@ export default {
         getSearchAllGoogleInfo(state) {
             return state.searchAllGoogleInfo
         },
-        getSearchValue(state) {
-            return state.searchKey
-        },
+        // getSearchValue(state) {
+        //     return state.searchKey
+        // },
         getSearchStatus(state) {
             // return state.searchAllStatus
             return (
@@ -83,9 +83,9 @@ export default {
         basic(state, payload) {
             state[payload.key] = payload.value
         },
-        setSearchKey(state, info) {
-            state.searchKey = info
-        },
+        // setSearchKey(state, info) {
+        //     state.searchKey = info
+        // },
         setSearchAllStatus(state, info) {
             state.searchAllStatus = info
         },
@@ -100,7 +100,7 @@ export default {
         // ========================================
         async searchALLLDiKnowledgeInfo({ rootState, state, commit, getters }) {
             let params = {
-                question: state.searchKey,
+                question: state.searchWord,
             }
             const info = await serve
                 .getALLDiKnowledgeInfo(params)
@@ -125,7 +125,7 @@ export default {
         // ========================================
         async searchAIDiKnowledgeInfo({ rootState, state, commit, getters }) {
             let params = {
-                question: state.searchKey,
+                question: state.searchWord,
             }
             const info = await serve
                 .getAIDiKnowledgeInfo(params)
@@ -155,7 +155,7 @@ export default {
             getters,
         }) {
             let params = {
-                question: state.searchKey,
+                question: state.searchWord,
             }
             const info = await serve
                 .getALLOrganizationInfo(params)
@@ -180,7 +180,7 @@ export default {
         // ========================================
         async searchALLLPreAvoidInfo({ rootState, state, commit, getters }) {
             let params = {
-                searchKey: state.searchKey,
+                searchKey: state.searchWord,
             }
             const info = await serve
                 .getALLMedicineCase_Info(params)
@@ -210,7 +210,7 @@ export default {
             getters,
         }) {
             let params = {
-                searchKey: state.searchKey,
+                searchKey: state.searchWord,
             }
             const info = await serve
                 .getALLBulletinBoard_Info(params)
@@ -235,7 +235,7 @@ export default {
         // ========================================
         async searchGoogleInfo({ rootState, state, commit, getters }) {
             let params = {
-                searchKey: state.searchKey,
+              question: state.searchWord,
             }
             const info = await serve
                 .getALLGoogle_Info(params)

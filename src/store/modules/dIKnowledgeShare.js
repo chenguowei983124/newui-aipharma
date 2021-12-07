@@ -7,7 +7,7 @@ export default {
         diKnowledgeShareNewQAInfo: {},
         diKnowledgeShareLookcarefullyQAInfo: {},
         // 検索条件
-        searchWordDI: '', // キーワード
+        // searchWordDI: '', // キーワード
         // searchTags: [], // タブ
         pageDI: '1', // ページ
         QaAiId: '', // QAAIID　
@@ -40,10 +40,10 @@ export default {
         getQaAiId(state) {
             return state.QaAiId
         },
-        // キーワード
-        getSearchWordDI(state) {
-            return state.searchWordDI
-        },
+        // // キーワード
+        // getSearchWordDI(state) {
+        //     return state.searchWordDI
+        // },
         // ページ
         getPageDI(state) {
             return state.pageDI
@@ -106,10 +106,10 @@ export default {
         setQaAiId(state, info) {
             return state.QaAiId = info
         },
-        // キーワード
-        setSearchWordDI(state, info) {
-            return state.searchWordDI = info
-        },
+        // // キーワード
+        // setSearchWordDI(state, info) {
+        //     return state.searchWordDI = info
+        // },
         // ページ
         setPageDI(state, info) {
             return state.pageDI = info

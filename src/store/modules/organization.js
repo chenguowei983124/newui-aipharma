@@ -11,7 +11,7 @@ export default {
         isOrganizationSearch: false,
 
         // 検索条件
-        searchWord: '', // キーワード
+        // searchWord: '', // キーワード
         searchTags: [], // タブ
         medicineID: '0', // 薬区分
         questionID: '0', // 質問区分
@@ -40,9 +40,9 @@ export default {
             return state.orgTagsList
         },
         // キーワード
-        getSearchWord(state) {
-            return state.searchWord
-        },
+        // getSearchWord(state) {
+        //     return state.searchWord
+        // },
         // タブ
         getSearchTags(state) {
             return state.searchTags
@@ -233,10 +233,10 @@ export default {
         setOrgTagsList({ commit, state }, value) {
             commit('basic', { key: 'orgTagsList', value })
         },
-        // キーワード
-        setSearchWord({ commit, state }, value) {
-            commit('basic', { key: 'searchWord', value })
-        },
+        // // キーワード
+        // setSearchWord({ commit, state }, value) {
+        //     commit('basic', { key: 'searchWord', value })
+        // },
         // タブ
         setSearchTags({ commit, state }, value) {
             commit('basic', { key: 'searchTags', value })
