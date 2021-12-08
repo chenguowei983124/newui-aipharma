@@ -12,6 +12,7 @@ const formList = {
     EDI: 'searchNotification',
     PIO: 'preavoidsInOut',
     PAM: 'pharmaCompany',
+    CHT: 'diChatbot',
 }
 // 様式リスト
 const style = [

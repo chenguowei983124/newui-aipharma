@@ -54,6 +54,10 @@
 .notoSansJpAndSixteenRegular {
     @apply font-NotoSansJp text-base font-normal;
 }
+/* font-family: NotoSansJp font-size: 16px font-weight: 500 */
+.notoSansJpAndSixteenMedium {
+    @apply font-NotoSansJp text-base font-medium;
+}
 /* font-family: NotoSansJp font-size: 16px font-weight: 700 */
 .notoSansJpAndSixteenBold {
     @apply font-NotoSansJp text-base font-bold;

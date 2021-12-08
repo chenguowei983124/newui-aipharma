@@ -19,6 +19,7 @@ import newBbsRecord from '/src/view/newBbsRecord.vue'
 import notFound from '/src/view/notFound.vue'
 import error from '/src/view/error.vue'
 import Redirect from '/src/view/Redirect.vue'
+import diChatbot from '/src/view/diChatbot.vue'
 
 const routes = [
     // ログイン　画面
@@ -156,6 +157,15 @@ const routes = [
         },
     },
     // 製薬企業一覧
+    {
+        path: '/diChatbot',
+        name: 'diChatbot',
+        component: diChatbot,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // DIチャットボット
     {
         path: '/searchPharmaCompany',
         name: 'searchPharmaCompany',

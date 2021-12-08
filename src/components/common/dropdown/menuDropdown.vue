@@ -482,7 +482,7 @@ export default {
                     id: '5',
                     title: '製薬企業DIチャットボット',
                     itemStyle: 'item',
-                    path: '',
+                    path: '/diChatbot',
                 },
                 { id: '6', title: 'ヘルプ', itemStyle: 'item', path: '' },
             ],
