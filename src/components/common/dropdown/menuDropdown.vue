@@ -438,7 +438,12 @@ export default {
                     path: '/searchPreavoids',
                 },
                 { id: '5', title: 'DI 辞書', itemStyle: 'item', path: '' },
-                { id: '6', title: '製薬企業情報', itemStyle: 'item', path: '' },
+                {
+                    id: '6',
+                    title: '製薬企業情報',
+                    itemStyle: 'item',
+                    path: '/searchPharmaCompany',
+                },
             ],
             menuItemList3: [
                 { id: '1', title: 'マイデータ', itemStyle: 'title', path: '' },

@@ -12,6 +12,7 @@ import searchDiKnowledge from '/src/view/searchDiKnowledge.vue'
 import searchPreavoids from '/src/view/searchPreavoids.vue'
 import searchBulletinBoard from '/src/view/searchBulletinBoard.vue'
 import searchNotification from '/src/view/searchNotification.vue'
+import searchPharmaCompany from '/src/view/searchPharmaCompany.vue'
 import newOrgDIRecord from '/src/view/newOrgDIRecord.vue'
 import preavoidsInputOut from '/src/view/preavoidsInputOut.vue'
 import newBbsRecord from '/src/view/newBbsRecord.vue'
@@ -150,6 +151,15 @@ const routes = [
         path: '/preavoidsInputOut',
         name: 'preavoidsInputOut',
         component: preavoidsInputOut,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // 製薬企業一覧
+    {
+        path: '/searchPharmaCompany',
+        name: 'searchPharmaCompany',
+        component: searchPharmaCompany,
         meta: {
             requireAuth: true,
         },

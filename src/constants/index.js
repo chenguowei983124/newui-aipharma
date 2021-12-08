@@ -11,6 +11,7 @@ const formList = {
     BBSR: 'BBSRecord',
     EDI: 'searchNotification',
     PIO: 'preavoidsInOut',
+    PAM: 'pharmaCompany',
 }
 // 様式リスト
 const style = [
@@ -174,6 +175,7 @@ const bbsGenre = [
     { value: 'questionnaire', title: 'アンケート' },
     { value: 'other', title: 'その他' },
 ]
+
 // 入力タグ様式
 const multiselectCss = {
     container:
