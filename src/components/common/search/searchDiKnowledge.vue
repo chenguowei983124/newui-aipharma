@@ -13,7 +13,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox ring-1 text-white"
+                                    class="checkboxCss"
                                     :checked="$store.getters.getCheckQDI"
                                     @change="onCheckQChange"
                                 />
@@ -25,7 +25,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox ring-1 text-white"
+                                    class="checkboxCss"
                                     :checked="$store.getters.getCheckADI"
                                     @change="onChangeCheckA"
                                 />
@@ -37,7 +37,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox ring-1 text-white"
+                                    class="checkboxCss"
                                     :checked="$store.getters.getCheckCommentDI"
                                     @change="onChangeCheckComment"
                                 />
@@ -53,7 +53,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox ring-1 text-white"
+                                    class="checkboxCss"
                                     :checked="
                                         $store.getters.getCheckAddFileNameDI
                                     "
@@ -69,7 +69,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox ring-1 text-white"
+                                    class="checkboxCss"
                                     :checked="
                                         $store.getters.getCheckContributorDI
                                     "
@@ -85,7 +85,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox ring-1 text-white"
+                                    class="checkboxCss"
                                     :checked="
                                         $store.getters.getCheckLastEditerDI
                                     "
@@ -103,7 +103,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox ring-1 text-white"
+                                    class="checkboxCss"
                                     :checked="
                                         $store.getters.getCheckFacilityNameDI
                                     "
@@ -119,7 +119,7 @@
                             <label class="inline-flex items-center justify-end">
                                 <input
                                     type="checkbox"
-                                    class="form-checkbox ring-1 text-white"
+                                    class="checkboxCss"
                                     :checked="$store.getters.getCheckNoteDI"
                                     @change="onChangeCheckNote"
                                 />
@@ -153,9 +153,28 @@
                     "
                     :classes="$constant.multiselectCss"
                 >
+                    <template
+                        v-slot:tag="{ option, handleTagRemove, disabled }"
+                    >
+                        <div class="multiselect-tag-style">
+                            #
+                            {{ option.label }}
+                            <span
+                                v-if="!disabled"
+                                class="multiselect-tag-remove"
+                                @mousedown.prevent="
+                                    handleTagRemove(option, $event)
+                                "
+                            >
+                                <span
+                                    class="multiselect-tag-remove-icon"
+                                ></span>
+                            </span>
+                        </div>
+                    </template>
                     <template v-slot:option="{ option }">
                         <div class="w-full">
-                            {{ option.label }}
+                            # {{ option.label }}
                             <div
                                 class="float-right"
                                 v-if="option.count !== undefined"
@@ -172,15 +191,9 @@
             <div class="flex space-x-2">
                 <button
                     class="
-                        rounded
-                        border-b-2 border-gray-500
-                        bg-personDataInfo
-                        text-tags
+                        grayButtonColors
                         notoSansJpAndSixteenBold
-                        w-43.75
-                        md:w-28
-                        h-9.5
-                        md:h-8
+                        buttonStyle
                     "
                     @click="inputClear"
                 >
@@ -188,14 +201,9 @@
                 </button>
                 <button
                     class="
-                        rounded
-                        border-b-2 border-orange-600
-                        bg-searchBunnon
-                        text-white
-                        w-43.75
-                        md:w-28
-                        h-9.5
-                        md:h-8
+                        orangeSearthButtonColors
+                        notoSansJpAndEighteenBold
+                        buttonStyle
                         flex flex-row
                         justify-center
                         items-center

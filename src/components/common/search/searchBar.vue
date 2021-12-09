@@ -34,6 +34,7 @@
                         />
                         <!-- 検索ボタン -->
                         <button
+                            class="border-b-2 border-personInformationButton"
                             @click="searchClick"
                             :class="sreachBarButtonClass"
                         >
@@ -318,18 +319,12 @@ export default {
             }
         },
         pcPlaceholder: function () {
-            if (this.$props.form == this.$constant.formList.TOP) {
+            if (this.checkId == 0) {
                 return 'Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます'
-            } else if (this.$props.form == this.$constant.formList.ALL) {
-                return 'Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます'
-            } else if (this.$props.form == this.$constant.formList.OWN) {
-                return 'キーワードを入力'
-            } else if (this.$props.form == this.$constant.formList.BBS) {
-                return 'キーワードを入力'
-            } else if (this.$props.form == this.$constant.formList.EDI) {
-                return 'キーワードを入力'
-            } else if (this.$props.form == this.$constant.formList.DI) {
+            } else if (this.checkId == 1) {
                 return '2単語以上からなる文章を入力　※単語での検索は機能しません'
+            } else if (this.checkId != 0 && this.checkId != 1) {
+                return 'キーワードを入力'
             }
         },
         sreachBarPCInputClass: function () {
@@ -480,8 +475,8 @@ export default {
                 return 'hidden'
             } else {
                 return (
-                    'bg-searchBunnon hover:bg-yellow-400 active:opacity-100 active:bg-personInformationButton' +
-                    'text-white rounded-none rounded-r-sm md:rounded-none md:rounded-tr md:rounded-br w-10  md:w-17.5 h-10 flex-none mr-2.5'
+                    'bg-searchBunnon hover:bg-top active:bg-personInformationButton ' +
+                    'text-white rounded-none rounded-r-sm md:rounded-none md:rounded-tr md:rounded-br w-10 md:w-17.5 h-10 flex-none mr-2.5 '
                 )
             }
         },

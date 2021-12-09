@@ -103,18 +103,23 @@ export default {
     },
     methods: {
         async doSearch(pgNo = 1) {
-            console.log('delete search',this.$route.query)
+            console.log('delete search', this.$route.query)
             this.initStore()
             let response
-            if (JSON.stringify(this.$route.query) !== '{}' &&
-                this.$route.query.id !== undefined) {
+            if (
+                JSON.stringify(this.$route.query) !== '{}' &&
+                this.$route.query.id !== undefined
+            ) {
                 Object.assign(this.params, { id: this.$route.query.id })
                 response = await this.$serve.getPostsrforId(
-                    '',
+                    this.$store.getters.getOidcCode,
                     this.$route.query.id
                 )
-            }else{
-                console.log('JSON.stringify(this.$route.query)',JSON.stringify(this.$route.query))
+            } else {
+                console.log(
+                    'JSON.stringify(this.$route.query)',
+                    JSON.stringify(this.$route.query)
+                )
                 if (JSON.stringify(this.$route.query) === '{}') {
                     this.resetSearchBar()
                     const PAGE_LIMIT = 20
@@ -180,7 +185,7 @@ export default {
                     response = await this.$serve.getPostList(queryStringData)
                 }
             }
-            if(response.data.data.length != 0){
+            if (response.data.data.length != 0) {
                 if (pgNo == 1) {
                     this.postList = this.formatPostList(response.data.data)
                     if (this.postList.length == 1) {

@@ -47,16 +47,16 @@
                 font-NotoSansJp
             "
         >
-            <div>{{ 'トレンドタグ' }}</div>
+            <div class="font-bold">{{ 'トレンドタグ' }}</div>
             <div class="flex flex-wrap mt-2">
                 <div
                     class="tagsCss"
-                    @click="sendMsgToParent(item.label)"
-                    v-for="item in $store.getters.getOrganizationSeartorenndoTab
-                        .torenndoTab"
+                    @click="sendMsgToParent(item.name)"
+                    v-for="item in $store.getters
+                        .getOrganizationSeartorenndoTab"
                     :key="item"
                 >
-                    # {{ item.label }}
+                    # {{ item.name }}
                 </div>
             </div>
         </div>
@@ -74,10 +74,7 @@ export default {
             this.$emit('listenToChildEvent', data)
         },
     },
-    mounted() {
-        ///api/qa/get_trendy_tags
-        // this.$store.dispatch('getOrganizationSeartorenndoTab')
-    },
+    mounted() {},
 }
 </script>
 

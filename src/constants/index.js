@@ -60,8 +60,8 @@ const organizationDateSort = [
 ]
 // 順 区分リスト
 const preavoidsDateSort = [
-    { value: '0', title: '投稿日が新しい順' },
-    { value: '1', title: '投稿日が古い順' },
+    { value: '0', title: '報告日が新しい順' },
+    { value: '1', title: '報告日が古い順' },
     { value: '2', title: '登録日が新しい順' },
     { value: '3', title: '登録日が古い順' },
 ]
@@ -79,14 +79,14 @@ const singleSelectItem = [
 const APIKEY = 'qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp'
 
 const managementitemList = [
-    { title: 'データ投稿', itemStyle: 'title' },
+    { title: 'データ登録', itemStyle: 'title' },
     {
-        title: '組織内DI 記録（Q&A）投稿',
+        title: '組織内DI 記録（Q&A）登録',
         itemStyle: 'item',
         routerPath: '/newOrgDIRecord',
     },
     {
-        title: '症例（プレアボイド）投稿',
+        title: '症例（プレアボイド）登録',
         itemStyle: 'item',
         routerPath: '/newOrgDIRecord',
     },
@@ -105,13 +105,13 @@ const managementitemList = [
 ]
 
 const managementPcitemList = [
-    { title: 'データ投稿', itemStyle: 'title' },
+    { title: 'データ登録', itemStyle: 'title' },
     {
-        title: '組織内DI 記録 投稿',
+        title: '組織内DI 記録 登録',
         itemStyle: 'item',
         routerPath: '/newOrgDIRecord',
     },
-    { title: '症例 投稿', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
+    { title: '症例 登録', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
     { title: 'マイデータ', itemStyle: 'title' },
     {
         title: '組織内DI 記録 ',
@@ -180,7 +180,7 @@ const bbsGenre = [
 // 入力タグ様式
 const multiselectCss = {
     container:
-        'relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-gray-300 rounded bg-white text-base leading-snug outline-none',
+        'relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-blueCAE6F4 rounded bg-white text-base leading-snug outline-none',
     containerDisabled: 'cursor-default bg-gray-100',
     containerOpen: 'rounded-b-none',
     containerOpenTop: 'rounded-t-none',

@@ -16,6 +16,8 @@
                     justify-center
                     items-center
                     cursor-pointer
+                    hover:opacity-50
+                    active:opacity-50
                 "
                 @click="toTop"
             >

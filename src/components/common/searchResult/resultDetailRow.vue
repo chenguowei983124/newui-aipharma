@@ -247,7 +247,7 @@
                             row.browseRequired != undefined &&
                             row.browseRequired == 'browse'
                         "
-                        addStyle="flex justify-center items-center mr-1.875 block md:hidden text-xs md:text-xxss md:flex-none"
+                        addStyle="mr-1.875 block md:hidden text-xs md:text-xxss md:flex-none"
                     ></result-detail-row-item>
                     <!-- 告知ラベル -->
                     <result-detail-row-item

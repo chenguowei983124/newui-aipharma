@@ -7,8 +7,7 @@
                 rounded-full
                 h-9
                 w-9
-                md:h-10
-                md:w-10
+                md:h-10 md:w-10
                 bg-personOrganizationButton
                 active:opacity-50
                 hover:opacity-50
@@ -36,74 +35,75 @@
             </svg>
         </div>
         <!-- sp リスト マスクレイヤー -->
-        <div
-            class="block md:hidden mid:hidden"
-            :class="{
-                'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
-                    $store.getters.getManagementClick,
-            }"
-            @click="clickDown"
-        >
-            <div v-if="$store.getters.getManagementClick == true">
-                <!-- リスト -->
-                <div class="flex justify-center mt-12.5">
-                    <div
-                        class="absolute w-88.75"
-                        v-if="$store.getters.getManagementClick"
-                    >
+        <div class="block md:hidden mid:hidden">
+            <div
+                :class="{
+                    'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
+                        $store.getters.getManagementClick,
+                }"
+                @click="clickDown"
+            >
+                <div v-if="$store.getters.getManagementClick == true">
+                    <!-- リスト -->
+                    <div class="flex justify-center mt-12.5">
                         <div
-                            v-for="item in $constant.managementitemList"
-                            :key="item"
-                            class="h-9 font-NotoSansJp cursor-pointer"
+                            class="absolute w-88.75"
+                            v-if="$store.getters.getManagementClick"
                         >
-                            <div class="">
-                                <div
-                                    :class="[
-                                        item.title == 'データ登録'
-                                            ? 'rounded-t border-t-2 border-personOrganizationButton'
-                                            : '',
-                                    ]"
-                                    v-if="item.itemStyle == 'title'"
-                                    class="
-                                        bg-personOrganizationButton
-                                        h-9
-                                        pl-2.5
-                                        flex
-                                        items-center
-                                        text-white
-                                        font-medium
-                                    "
-                                >
-                                    {{ item.title }}
-                                </div>
-                                <router-link
-                                    v-if="item.itemStyle == 'item'"
-                                    :to="{
-                                        path: item.routerPath,
-                                    }"
-                                >
+                            <div
+                                v-for="item in $constant.managementitemList"
+                                :key="item"
+                                class="h-9 font-NotoSansJp cursor-pointer"
+                            >
+                                <div class="">
                                     <div
                                         :class="[
-                                            item.title == '下書き一覧'
-                                                ? 'rounded-b border-b-2'
+                                            item.title == 'データ登録'
+                                                ? 'rounded-t border-t-2 border-personOrganizationButton'
                                                 : '',
                                         ]"
+                                        v-if="item.itemStyle == 'title'"
                                         class="
-                                            border-b-2
-                                            border-l-2
-                                            border-r-2
-                                            border-personOrganizationButton
-                                            bg-yellow-50
+                                            bg-personOrganizationButton
                                             h-9
                                             pl-2.5
                                             flex
                                             items-center
-                                            font-light
+                                            text-white
+                                            font-medium
                                         "
                                     >
                                         {{ item.title }}
                                     </div>
-                                </router-link>
+                                    <router-link
+                                        v-if="item.itemStyle == 'item'"
+                                        :to="{
+                                            path: item.routerPath,
+                                        }"
+                                    >
+                                        <div
+                                            :class="[
+                                                item.title == '下書き一覧'
+                                                    ? 'rounded-b border-b-2'
+                                                    : '',
+                                            ]"
+                                            class="
+                                                border-b-2
+                                                border-l-2
+                                                border-r-2
+                                                border-personOrganizationButton
+                                                bg-yellow-50
+                                                h-9
+                                                pl-2.5
+                                                flex
+                                                items-center
+                                                font-light
+                                            "
+                                        >
+                                            {{ item.title }}
+                                        </div>
+                                    </router-link>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -111,15 +111,15 @@
             </div>
         </div>
         <!-- pc リスト -->
-        <div
-            :class="{
-                'absolute top-0 left-0 right-0 bottom-0 z-75':
-                    $store.getters.getManagementClick,
-            }"
-            @click="clickDown"
-        >
-            <div v-if="$store.getters.getManagementClick == true">
-                <div class="hidden md:block mid:block">
+        <div class="hidden md:block mid:block">
+            <div
+                :class="{
+                    'absolute top-0 left-0 right-0 bottom-0 z-75':
+                        $store.getters.getManagementClick,
+                }"
+                @click="clickDown"
+            >
+                <div v-if="$store.getters.getManagementClick == true">
                     <div class="flex justify-end my-13 md:mr-28 mid:mr-37.5">
                         <div
                             class="w-37.5 mt-1"
@@ -196,14 +196,14 @@
 
 <script>
 export default {
-  methods: {
-    clickDown() {
-      this.$store.dispatch(
-        'setManagementClick',
-        !this.$store.getters.getManagementClick
-      )
+    methods: {
+        clickDown() {
+            this.$store.dispatch(
+                'setManagementClick',
+                !this.$store.getters.getManagementClick
+            )
+        },
     },
-  },
 }
 </script>
 

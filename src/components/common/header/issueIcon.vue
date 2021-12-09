@@ -7,8 +7,7 @@
                 rounded-full
                 h-9
                 w-9
-                md:w-10
-                md:h-10
+                md:w-10 md:h-10
                 bg-personInformationButton
                 active:opacity-50
                 hover:opacity-50
@@ -36,69 +35,81 @@
             </svg>
         </div>
         <!-- sp リスト マスクレイヤー -->
-        <div
-            class="block md:hidden mid:hidden"
-            :class="{
-                'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
-                    $store.getters.getIssueIconClick,
-            }"
-            @click="clickDown"
-        >
-            <div v-if="$store.getters.getIssueIconClick == true">
-                <div class="flex justify-center mt-12.5">
-                    <div
-                        class="absolute w-88.75"
-                        v-if="$store.getters.getIssueIconClick"
-                    >
+        <div class="block md:hidden mid:hidden">
+            <div
+                :class="{
+                    'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
+                        $store.getters.getIssueIconClick,
+                }"
+                @click="clickDown"
+            >
+                <div v-if="$store.getters.getIssueIconClick == true">
+                    <div class="flex justify-center mt-12.5">
                         <div
-                            v-for="(item, index) in $constant.issueIconitemList"
-                            :key="index"
-                            class="h-9 font-NotoSansJp cursor-pointer"
+                            class="absolute w-88.75"
+                            v-if="$store.getters.getIssueIconClick"
                         >
-                            <div class="">
-                                <div
-                                    v-if="item.itemStyle == 'title'"
-                                    class="
-                                        bg-personInformationButton
-                                        rounded-t
-                                        h-9
-                                        pl-2.5
-                                        flex
-                                        items-center
-                                        text-white
-                                        font-medium
-                                    "
-                                >
-                                    {{ item.title }}
-                                </div>
-                                <router-link
-                                    v-if="item.itemStyle == 'item'"
-                                    :to="{
-                                        path: item.routerPath,
-                                    }"
-                                >
+                            <div
+                                v-for="(
+                                    item, index
+                                ) in $constant.issueIconitemList"
+                                :key="index"
+                                class="h-9 font-NotoSansJp cursor-pointer"
+                            >
+                                <div class="">
                                     <div
-                                        :class="[
-                                            index + 1 == $constant.issueIconitemList.length
-                                            ? 'rounded-b'
-                                            : '',
-                                        ]"
+                                        v-if="item.itemStyle == 'title'"
                                         class="
-                                            border-b-2
-                                            border-l-2
-                                            border-r-2
-                                            border-personInformationButton
-                                            bg-yellow-50
+                                            bg-personInformationButton
+                                            rounded-t
                                             h-9
                                             pl-2.5
                                             flex
                                             items-center
-                                            font-light
+                                            text-white
+                                            font-medium
                                         "
                                     >
                                         {{ item.title }}
                                     </div>
-                                </router-link>
+                                    <router-link
+                                        v-if="item.itemStyle == 'item'"
+                                        :to="{
+                                            path: item.routerPath,
+                                        }"
+                                    >
+                                        <div
+                                            :class="[
+                                                index + 1 ==
+                                                $constant.issueIconitemList
+                                                    .length
+                                                    ? 'rounded-b'
+                                                    : '',
+                                            ]"
+                                            class="
+                                                border-b-2
+                                                border-l-2
+                                                border-r-2
+                                                border-personInformationButton
+                                                bg-yellow-50
+                                                h-9
+                                                pl-2.5
+                                                flex
+                                                items-center
+                                                font-light
+                                            "
+                                        >
+                                            <div
+                                                class="
+                                                    hover:opacity-50
+                                                    active:opacity-50
+                                                "
+                                            >
+                                                {{ item.title }}
+                                            </div>
+                                        </div>
+                                    </router-link>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,22 +117,25 @@
             </div>
         </div>
         <!-- pc リスト -->
-        <div
-            :class="{
-                'absolute top-0 left-0 right-0 bottom-0 z-75':
-                    $store.getters.getIssueIconClick,
-            }"
-            @click="clickDown"
-        >
-            <div v-if="$store.getters.getIssueIconClick == true">
-                <div class="hidden md:block mid:block">
+        <div class="hidden md:block mid:block">
+            <div
+                :class="{
+                    'absolute top-0 left-0 right-0 bottom-0 z-75':
+                        $store.getters.getIssueIconClick,
+                }"
+                @click="clickDown"
+            >
+                <div v-if="$store.getters.getIssueIconClick == true">
+                    <!-- <div class="hidden md:block mid:block"> -->
                     <div class="flex justify-end my-13 md:mr-40 mid:mr-50">
                         <div
                             class="w-37.5 mt-1"
                             v-if="$store.getters.getIssueIconClick"
                         >
                             <div
-                                v-for="(item, index) in $constant.issueIconitemList"
+                                v-for="(
+                                    item, index
+                                ) in $constant.issueIconitemList"
                                 :key="index"
                                 class="h-9 font-NotoSansJp cursor-pointer"
                             >
@@ -160,9 +174,11 @@
                                                 font-light
                                             "
                                             :class="[
-                                                index + 1 == $constant.issueIconitemList.length
-                                                ? 'rounded-b border-b-2'
-                                                : '',
+                                                index + 1 ==
+                                                $constant.issueIconitemList
+                                                    .length
+                                                    ? 'rounded-b border-b-2'
+                                                    : '',
                                             ]"
                                         >
                                             <div
@@ -179,6 +195,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -187,14 +204,14 @@
 
 <script>
 export default {
-  methods: {
-    clickDown() {
-      this.$store.dispatch(
-        'setIssueIconClick',
-        !this.$store.getters.getIssueIconClick
-      )
+    methods: {
+        clickDown() {
+            this.$store.dispatch(
+                'setIssueIconClick',
+                !this.$store.getters.getIssueIconClick
+            )
+        },
     },
-  },
 }
 </script>
 

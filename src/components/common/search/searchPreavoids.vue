@@ -39,6 +39,7 @@
                         w-9.5
                         block
                         bg-searchBar
+                        border-b-2 border-blueline
                         rounded
                         notoSansJpAndTenBold
                         text-blueline
@@ -66,7 +67,7 @@
                 :default-options="$constant.style"
                 @selected="setStyles"
                 leftLableTitle="様式"
-                buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
+                buttonStyle="pullDownButtonColors"
                 inputStyle="w-full text-left pl-12 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none flex justify-items-center  "
                 iconColor="#32a5dc"
@@ -83,7 +84,7 @@
                 :default-options="$constant.qaClassifyFacility"
                 @selected="setFacilityID"
                 leftLableTitle="施設"
-                buttonStyle="w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0"
+                buttonStyle="pullDownButtonColors"
                 inputStyle="w-full text-left pl-12 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none  flex justify-items-center "
                 iconColor="#32a5dc"
@@ -104,15 +105,9 @@
             <div class="flex space-x-2">
                 <button
                     class="
-                        rounded
-                        border-b-2 border-gray-500
-                        bg-personDataInfo
-                        text-gray-700
+                        grayButtonColors
                         notoSansJpAndSixteenBold
-                        w-43.75
-                        md:w-28
-                        h-9.5
-                        md:h-8
+                        buttonStyle
                     "
                     @click="clearClick"
                 >
@@ -120,15 +115,9 @@
                 </button>
                 <button
                     class="
-                        rounded
-                        border-b-2 border-orange-600
-                        bg-searchBunnon
-                        text-white
-                        notoSansJpAndSixteenBold
-                        w-43.75
-                        md:w-28
-                        h-9.5
-                        md:h-8
+                        orangeSearthButtonColors
+                        notoSansJpAndEighteenBold
+                        buttonStyle
                         flex flex-row
                         justify-center
                         items-center

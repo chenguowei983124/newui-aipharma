@@ -66,7 +66,7 @@
             headerStyle="titleOnlyUnderlineGrayLine"
             title="学会情報"
             titleStyle="scientifiSocietyInfoTitle"
-            subTitle="予約はこちら"
+            subTitle="掲載依頼はこちら"
             subTitleStyle="searchResult_header_reserveLink"
             subTitleURL="/"
         >

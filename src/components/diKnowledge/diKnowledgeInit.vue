@@ -44,7 +44,6 @@
                 p-2
                 text-sm
                 font-NotoSansJp
-                text-tags
             "
         >
             <div class="font-bold">
@@ -52,24 +51,13 @@
             </div>
             <div class="flex flex-wrap mt-2">
                 <div
-                    class="
-                        rounded-full
-                        border-2 border-gray-300
-                        bg-gray-100
-                        h-6
-                        notoSansJpAndTwelveRegular
-                        pl-1
-                        pr-1
-                        text-center
-                        mr-1
-                        cursor-pointer
-                    "
-                    @click="sendMsgToParent(item.label)"
-                    v-for="item in $store.getters.getOrganizationSeartorenndoTab
-                        .torenndoTab"
+                    class="tagsCss"
+                    @click="sendMsgToParent(item.name)"
+                    v-for="item in $store.getters
+                        .getOrganizationSeartorenndoTab"
                     :key="item"
                 >
-                    #&nbsp;{{ item.label }}
+                    # {{ item.name }}
                 </div>
             </div>
         </div>
@@ -80,16 +68,13 @@
 import ResutTag from '../common/searchResult/resultTag.vue'
 import ResultDetailRow from '../common/searchResult/resultAllDetailRow.vue'
 export default {
-  components: { ResutTag, ResultDetailRow },
-  methods: {
-    sendMsgToParent: function (data) {
-      this.$emit('listenToChildEventDiInit', data)
+    components: { ResutTag, ResultDetailRow },
+    methods: {
+        sendMsgToParent: function (data) {
+            this.$emit('listenToChildEventDiInit', data)
+        },
     },
-  },
-  mounted() {
-    ///api/qa/get_trendy_tags
-    // this.$store.dispatch('getOrganizationSeartorenndoTab')
-  },
+    mounted() {},
 }
 </script>
 

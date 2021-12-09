@@ -60,7 +60,12 @@
                             hover:opacity-50
                         "
                     >
-                        ヘルプ
+                        <a
+                            download="https://neo-ai-di-dev.kit-ai.jp/user/home/get_user_manual"
+                            target="_blank"
+                            href="https://neo-ai-di-dev.kit-ai.jp/user/home/get_user_manual"
+                            >使い方</a
+                        >
                     </div>
                 </div>
             </div>
@@ -75,17 +80,17 @@ import issueIcon from './issueIcon.vue'
 import managementIcon from './managementIcon.vue'
 import menuDropdownItem from '../dropdown/menuDropdown.vue'
 export default {
-  components: {
-    personalInfo,
-    portraitIcon,
-    menuDropdownItem,
-    issueIcon,
-    managementIcon,
-  },
-  props: {},
-  watch: {},
-  methods: {},
-  created() { },
+    components: {
+        personalInfo,
+        portraitIcon,
+        menuDropdownItem,
+        issueIcon,
+        managementIcon,
+    },
+    props: {},
+    watch: {},
+    methods: {},
+    created() {},
 }
 </script>
 <style scoped></style>

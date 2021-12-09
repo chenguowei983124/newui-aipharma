@@ -10,10 +10,10 @@
                 flex-none
                 pl-2
                 md:pl-0
-                w-12
+                w-60
             "
         >
-            症例
+            症例（プレアボイド）
         </div>
         <div class="flex flex-row space-x-2">
             <button

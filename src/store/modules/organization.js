@@ -136,13 +136,13 @@ export default {
             return state.organizationCountSort
         },
         getOrganizationSeartorenndoTab(state) {
-            const organizationSeartorenndoTab = {
-                torenndoTab: [{ value: 1, label: 'ファモチジン' },
-                { value: 2, label: 'ファモセット注' },
-                { value: 3, label: 'ロキソニン' },
-                { value: 4, label: '用途' },],
-            }
-            return organizationSeartorenndoTab
+            // const organizationSeartorenndoTab = {
+            //     torenndoTab: [{ value: 1, label: 'ファモチジン' },
+            //     { value: 2, label: 'ファモセット注' },
+            //     { value: 3, label: 'ロキソニン' },
+            //     { value: 4, label: '用途' },],
+            // }
+            return state.organizationSeartorenndoTab
         },
         getFilterBBS(state) {
             return state.filterBBS
@@ -191,10 +191,10 @@ export default {
         //===========================
         // 組織内DI記録検索結果取得（init タグ取得）
         //===========================
-        // async getOrganizationSeartorenndoTab({ rootState, commit }) {
-        //     const info = await serve.getOwnTab()
-        //     commit('setOrganizationTab', info)
-        // },
+        async getOrganizationSeartorenndoTab({ rootState, commit }) {
+            const info = await serve.getTrendTag()
+            commit('setOrganizationTab', info)
+        },
         //===========================
         // 組織内DI記録検索結果取得（新着QA）
         //===========================

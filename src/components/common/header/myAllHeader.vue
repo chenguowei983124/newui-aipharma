@@ -48,7 +48,12 @@
                             hover:opacity-50
                         "
                     >
-                        ヘルプ
+                        <a
+                            download="https://neo-ai-di-dev.kit-ai.jp/user/home/get_user_manual"
+                            target="_blank"
+                            href="https://neo-ai-di-dev.kit-ai.jp/user/home/get_user_manual"
+                            >使い方</a
+                        >
                     </div>
                 </div>
             </div>
@@ -79,7 +84,7 @@ export default {
     computed: {
         searchBarFixedClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
-                return 'fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-whiteborder-b-2 grayline '
+                return 'fixed md:static flex justify-between h-12.5 md:h-15 w-full z-99 bg-white border-b-2 grayline '
             } else if (this.$props.form == this.$constant.formList.ALL) {
                 return 'fixed flex justify-between h-12.5 md:h-15 w-full lm:w-270 z-99 bg-white border-b-2 grayline'
             } else if (this.$props.form == this.$constant.formList.DI) {

@@ -230,8 +230,9 @@
                                                 justify-center
                                                 items-center
                                                 cursor-pointer
-                                                border-t-2 border-black
+                                                border-t-2 border-tags
                                                 font-NotoSansJp
+                                                text-sm text-tags
                                             "
                                             @click="linkClick(item)"
                                         >

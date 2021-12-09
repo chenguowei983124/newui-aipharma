@@ -36,7 +36,16 @@
             ]"
         ></div>
         <!-- 内容 -->
-        <div class="flex border-b-2 border-recruitment mt-50 md:mt-12 h-10 md:h-16 ">
+        <div
+            class="
+                flex
+                border-b-2 border-recruitment
+                mt-50
+                md:mt-12
+                h-10
+                md:h-16
+            "
+        >
             <!-- 左 -->
             <div
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
@@ -63,28 +72,20 @@
                             text-sm
                             flex-none
                             font-NotoSansJp
+                            text-tags
                         "
                     >
                         トレンドタグ
                     </div>
-                    <!-- <div class="h-20 bg-red-400 text-center inline-block align-middle">2312</div>
-                    <span class="inline-block align-top bg-blue-300">23122312</span> -->
-                    <!-- @click="searchTag(item)" -->
-                    <div class="flex flex-wrap space-x-1">
+                    <div class="flex flex-wrap mr-1 text-tags">
                         <span
-                            class="
-                                hidden
-                                md:block
-                                mid:block
-                                mt-1.25
-                                tagsCss
-                            "
-                            @click="searchTag(value.label)"
+                            class="hidden md:block mid:block mt-1.25 tagsCss"
+                            @click="searchTag(value.name)"
                             v-for="(value, key, index) in $store.getters
-                                .getOrganizationSeartorenndoTab.torenndoTab"
+                                .getOrganizationSeartorenndoTab"
                             :key="index"
                         >
-                            # {{ value.label }}
+                            # {{ value.name }}
                         </span>
                     </div>
                 </div>
@@ -128,78 +129,69 @@
 </template>
 
 <script>
-// import CommentMessageBox from '../components/common/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/common/messageBox/goodMessageBox.vue'
 import searchBar from '../components/common/search/searchBar.vue'
 import searchOrganizationMain from '../components/organization/searchOrganizationMain.vue'
 import OrganizationInit from '../components/organization/organizationInit.vue'
 
 export default {
-  components: {
-    // CommentMessageBox,
-    GoodMessageBox,
-    searchBar,
-    searchOrganizationMain,
-    OrganizationInit,
-  },
+    components: {
+        GoodMessageBox,
+        searchBar,
+        searchOrganizationMain,
+        OrganizationInit,
+    },
 
-  props: {},
-  data() {
-    return {
-      // 詳細条件ボタン押下区分
-      isOrgDetailButtonClick: true,
-      isScroll: true,
-      // すべて 選択
-      isorgcheckIdMsg: ''
-      //   isOrgDetailButtonClick: false,
-    }
-  },
-  mounted() { },
-  methods: {
-    refishTagList() {
-      if (Object.keys(this.$store.getters.getorgTagsList).length > 0) {
-        this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
-      }
+    props: {},
+    data() {
+        return {
+            // 詳細条件ボタン押下区分
+            isOrgDetailButtonClick: true,
+            isScroll: true,
+            // すべて 選択
+            isorgcheckIdMsg: '',
+            //   isOrgDetailButtonClick: false,
+        }
     },
-    // ========================================
-    // 詳細条件ボタン押下区分を取得
-    // ========================================
-    getOrgDetailClick: function (data) {
-      this.isOrgDetailButtonClick = data
+    mounted() {},
+    methods: {
+        refishTagList() {
+            if (Object.keys(this.$store.getters.getorgTagsList).length > 0) {
+                this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
+            }
+        },
+        // ========================================
+        // 詳細条件ボタン押下区分を取得
+        // ========================================
+        getOrgDetailClick: function (data) {
+            this.isOrgDetailButtonClick = data
+        },
+        // スクロール
+        getScroll: function (value) {
+            this.isScroll = value
+        },
+        // クリック タグ
+        searchTag: function (value) {
+            let tagsLable = this.$store.getters.getSearchTagsLable
+            tagsLable.push(value)
+            this.$store.dispatch('setSearchTagsLable', tagsLable)
+            this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
+        },
+        // init中 クリック タグ
+        showMsgToParent: function (data) {
+            this.searchTag(data)
+        },
+        // DropDown 選択したアイテムＩＤ取得
+        orgcheckIdMsg: function (data) {
+            this.isorgcheckIdMsg = data
+        },
     },
-    // スクロール
-    getScroll: function (value) {
-      this.isScroll = value
+    created() {
+        let param = sessionStorage.getItem('searchParam')
+        this.$store.dispatch(
+            'setSearchWord',
+            sessionStorage.getItem('searchWord')
+        )
     },
-    // ========================================
-    // 詳細条件表示・非表示取得
-    // ========================================
-    // getDetailDisp: function (value) {
-    //   this.isOrgDetailButtonClick = value
-    // },
-
-    // クリック タグ
-    searchTag: function (value) {
-      let tagsLable = this.$store.getters.getSearchTagsLable
-      tagsLable.push(value)
-      this.$store.dispatch('setSearchTagsLable', tagsLable)
-      this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
-    },
-    // init中 クリック タグ
-    showMsgToParent: function (data) {
-      this.searchTag(data)
-    },
-    // DropDown 選択したアイテムＩＤ取得
-    orgcheckIdMsg: function (data) {
-      this.isorgcheckIdMsg = data
-    }
-  },
-  created() {
-    let param = sessionStorage.getItem('searchParam')
-    this.$store.dispatch(
-      'setSearchWord',
-      sessionStorage.getItem('searchWord')
-    )
-  },
 }
 </script>

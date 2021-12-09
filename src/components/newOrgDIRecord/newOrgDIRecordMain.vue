@@ -85,7 +85,7 @@
                                 menubar: false,
                                 statusbar: false,
                                 plugins:
-                                    'print preview   importcss tinydrive searchreplace autolink autosave save directionality  visualblocks visualchars fullscreen image link media  template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists  wordcount imagetools textpattern noneditable help charmap quickbars emoticons ',
+                                    'print preview importcss tinydrive searchreplace autolink autosave save directionality  visualblocks visualchars fullscreen image link media  template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists  wordcount imagetools textpattern noneditable help charmap quickbars emoticons ',
                                 toolbar:
                                     ' undo redo | bold italic underline strikethrough | fontsizeselect forecolor removeformat | alignleft aligncenter alignright alignjustify |  numlist bullist | image table link | fullscreen  preview pagebreak ',
                             }"
@@ -180,7 +180,7 @@
                                     rounded-md
                                     notoSansJpAndTwelveBold
                                     text-white
-                                    border-b-2 border-gray-500
+                                    border-b-2 border-notice
                                 "
                                 @click="onClearItem(base.source, index)"
                                 value="クリア"
@@ -195,7 +195,7 @@
                             "
                         >
                             <div
-                                class="bg-blue-400 block md:hidden"
+                                class="block md:hidden"
                                 :class="
                                     base.source.length == index + 1
                                         ? 'block'
@@ -208,13 +208,12 @@
                                         bg-blueline
                                         hover:opacity-50
                                         active:bg-gray-200 active:opacity-100
-                                        h-7
-                                        md:h-7.5
+                                        h-7.5
                                         w-19.5
                                         rounded
                                         notoSansJpAndFourteenBold
                                         text-white
-                                        border-b-2 border-bluelineB
+                                        border-b-2 border-pageblue
                                     "
                                     @click="onAddSource"
                                     value="+追加"
@@ -233,7 +232,7 @@
                                         rounded-md
                                         notoSansJpAndTwelveBold
                                         text-white
-                                        border-b-2 border-gray-500
+                                        border-b-2 border-notice
                                     "
                                     @click="onClearItem(base.source, index)"
                                     value="クリア"
@@ -252,13 +251,12 @@
                         bg-blueline
                         hover:opacity-50
                         active:bg-gray-200 active:opacity-100
-                        h-10
-                        md:h-7
-                        w-15
-                        rounded-sm
+                        h-7.5
+                        w-19.5
+                        rounded
                         notoSansJpAndFourteenBold
                         text-white
-                        border-b-2 border-blue-400
+                        border-b-2 border-pageblue
                     "
                     @click="onAddSource"
                     value="+追加"
@@ -471,13 +469,12 @@
                         bg-blueline
                         hover:opacity-50
                         active:bg-gray-200 active:opacity-100
-                        h-10
-                        md:h-7
-                        w-15
-                        rounded-sm
+                        h-7.5
+                        w-19.5
+                        rounded
                         notoSansJpAndFourteenBold
                         text-white
-                        border-b-2 border-blue-400
+                        border-b-2 border-pageblue
                     "
                     @click="onAddFile"
                     value="+追加"
@@ -505,16 +502,16 @@
                 <div id="mediTypes" class="mt-3">
                     <label class="notoSansJpAndSixteenBold"> 薬の分類 </label>
                     <Multiselect
-                    class="cursor-default"
-                      mode="tags"
-                      v-model="detail.mediTypes"
-                      :closeOnSelect="false"
-                      :searchable="true"
-                      :createTag="false"
-                      :options="
-                          $store.getters.getCommonInfo_qa_classify_class
-                      "
-                      :classes="$constant.multiselectCss"
+                        class="cursor-default"
+                        mode="tags"
+                        v-model="detail.mediTypes"
+                        :closeOnSelect="false"
+                        :searchable="true"
+                        :createTag="false"
+                        :options="
+                            $store.getters.getCommonInfo_qa_classify_class
+                        "
+                        :classes="$constant.multiselectCss"
                     ></Multiselect>
                 </div>
                 <div id="quesClass" class="mt-3">
@@ -564,7 +561,8 @@
                         :searchable="true"
                         :createTag="false"
                         :options="$store.getters.getCommonInfo.keyword_tags"
-                        :classes="$constant.multiselectCss">
+                        :classes="$constant.multiselectCss"
+                    >
                     </Multiselect>
                 </div>
                 <div id="questioner" class="mt-3">
@@ -582,13 +580,13 @@
                         "
                         @selected="setPrefessionValue"
                         :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
+                        buttonStyle="sortPullDownButtonColors"
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                               border border-transparent focus:outline-none"
                     ></vue-single-select>
 
                     <Multiselect
-                    class="mt-3"
+                        class="mt-3"
                         placeholder="診療科"
                         mode="tags"
                         v-model="detail.questioner.department"
@@ -615,7 +613,7 @@
                         "
                         :leftLableDisp="false"
                         @selected="setPatientGenderValue"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
+                        buttonStyle="sortPullDownButtonColors"
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                               border border-transparent focus:outline-none"
                     ></vue-single-select>
@@ -658,70 +656,70 @@
                         .custom_details"
                     :key="index"
                 >
-                  <div :id="'custom_details_' + item.id" class="mt-3">
-                      <label class="notoSansJpAndSixteenBold">
-                          {{ item.title }}
-                      </label>
-                      <vue-single-select
-                          :placeholder="'-- Choose an option --'"
-                          leftLableTitle="様式"
-                          v-if="item.data_type == 'single'"
-                          class="w-full"
-                          :name="'singleSelect_' + item.id"
-                          :default-value="
-                              $data['detail']['custom_details'][index].value
-                          "
-                          :default-input-attribs="{ tabindex: 1 }"
-                          :default-options="
-                              getItemsFromList(item.data, false)
-                          "
-                          v-model="
-                              $data['detail']['custom_details'][index].value
-                          "
-                          @selectItemByMouse="setSingleSelectValue"
-                          @selectItemByEnter="setSingleSelectValue"
-                          :leftLableDisp="false"
-                          buttonStyle="w-9.5 h-10 pt-4 bg-grayline rounded-r right-0"
-                          inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-10 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                    <div :id="'custom_details_' + item.id" class="mt-3">
+                        <label class="notoSansJpAndSixteenBold">
+                            {{ item.title }}
+                        </label>
+                        <vue-single-select
+                            :placeholder="'-- Choose an option --'"
+                            leftLableTitle="様式"
+                            v-if="item.data_type == 'single'"
+                            class="w-full"
+                            :name="'singleSelect_' + item.id"
+                            :default-value="
+                                $data['detail']['custom_details'][index].value
+                            "
+                            :default-input-attribs="{ tabindex: 1 }"
+                            :default-options="
+                                getItemsFromList(item.data, false)
+                            "
+                            v-model="
+                                $data['detail']['custom_details'][index].value
+                            "
+                            @selectItemByMouse="setSingleSelectValue"
+                            @selectItemByEnter="setSingleSelectValue"
+                            :leftLableDisp="false"
+                            buttonStyle="w-9.5 h-10 pt-4 bg-grayline rounded-r right-0 border-b-2 border-notice"
+                            inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-10 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                               border border-transparent focus:outline-none"
-                      ></vue-single-select>
+                        ></vue-single-select>
 
-                      <Multiselect
-                          mode="tags"
-                          v-model="
-                              $data['detail']['custom_details'][index].value
-                          "
-                          :closeOnSelect="false"
-                          :searchable="true"
-                          :createTag="false"
-                          :options="item.data"
-                          :classes="$constant.multiselectCss"
-                          v-if="item.data_type == 'multiple'"
-                      ></Multiselect>
+                        <Multiselect
+                            mode="tags"
+                            v-model="
+                                $data['detail']['custom_details'][index].value
+                            "
+                            :closeOnSelect="false"
+                            :searchable="true"
+                            :createTag="false"
+                            :options="item.data"
+                            :classes="$constant.multiselectCss"
+                            v-if="item.data_type == 'multiple'"
+                        ></Multiselect>
 
-                      <textarea
-                          v-else-if="item.data_type == 'text'"
-                          v-model="
-                              $data['detail']['custom_details'][index].value
-                          "
-                          class="
-                              block
-                              w-full
-                              NotoSansJp-normal
-                              rounded-sm
-                              pl-4
-                              placeholder-gray-500
-                              focus:placeholder-opacity-0
-                              inputLineCss
-                              focus:outline-none
-                              focus:ring-1
-                              focus:border-326EB5Lins
-                              focus:border-transparent
-                          "
-                          type="text"
-                          placeholder=""
-                      ></textarea>
-                  </div>
+                        <textarea
+                            v-else-if="item.data_type == 'text'"
+                            v-model="
+                                $data['detail']['custom_details'][index].value
+                            "
+                            class="
+                                block
+                                w-full
+                                NotoSansJp-normal
+                                rounded-sm
+                                pl-4
+                                placeholder-gray-500
+                                focus:placeholder-opacity-0
+                                inputLineCss
+                                focus:outline-none
+                                focus:ring-1
+                                focus:border-326EB5Lins
+                                focus:border-transparent
+                            "
+                            type="text"
+                            placeholder=""
+                        ></textarea>
+                    </div>
                 </div>
                 <div id="memo" class="mt-3">
                     <label class="notoSansJpAndSixteenBold"> 備考 </label>
@@ -1019,7 +1017,7 @@ export default {
         },
         saveEvent(kind) {
             // console.log('this.$route.query.id',this.$route.query.id)
-            if (typeof(this.$route.query.id) == 'undefined') {
+            if (typeof this.$route.query.id == 'undefined') {
                 let create = 'create'
                 let param = this.setParam(create)
                 this.$serve.postOwnQA(param).then((res) => {
@@ -1048,7 +1046,7 @@ export default {
                     }
                 })
             } else {
-                let update = "update"
+                let update = 'update'
                 let param = this.setParam(update)
                 Object.assign(param.qa, { id: this.$route.query.id })
                 this.$serve.postUpdateOwnQA(param).then((res) => {
@@ -1108,9 +1106,11 @@ export default {
                     shareScope: this.detail.publicRange,
                     patientGender: this.detail.patientGender,
                     qaSource: this.base.source,
-                    qaPubmeds: [{
-                        name: this.base.pmid,
-                    }],
+                    qaPubmeds: [
+                        {
+                            name: this.base.pmid,
+                        },
+                    ],
                     qaDocuments: {
                         file: this.base.files,
                     },
@@ -1129,7 +1129,10 @@ export default {
                     categories: '',
                     referenceMaterials: this.detail.references,
                     note: this.detail.memo,
-                    askedPersonClassId: this.detail.questioner.prefession == '-1' ? '' : this.detail.questioner.prefession,
+                    askedPersonClassId:
+                        this.detail.questioner.prefession == '-1'
+                            ? ''
+                            : this.detail.questioner.prefession,
                     publishFlag: data == 'create' || data == 'update' ? 1 : 0,
                 },
             }

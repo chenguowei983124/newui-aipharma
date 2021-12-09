@@ -11,20 +11,22 @@
                 {{ searchAiWords }}
             </div>
         </div>
-        <div class="space-y-2 mt-2">
+        <div class="space-y-3.75 mt-3.75">
             <div
                 v-for="(item, index) in $store.getters
                     .dIKnowledgeShareSearchAIInfo.qas"
                 :key="index"
             >
-                <div class="border-2 rounded-lg border-yellow-500">
+                <div
+                    class="border-2 rounded-lg border-personOrganizationButton"
+                >
                     <!-- Group -->
                     <div
                         class="
-                            bg-yellow-500
+                            bg-personOrganizationButton
                             notoSansJpAndTwelveMedium
                             text-white
-                            h-4
+                            h-4.5
                             w-25
                             flex-grow
                             -ml-0.5
@@ -43,7 +45,7 @@
                             class="
                                 flex
                                 justify-between
-                                border-b-2 border-yellow-500
+                                border-b-2 border-personOrganizationButton
                                 items-center
                                 pb-5
                             "
@@ -70,7 +72,7 @@
                         </div>
                         <!-- A -->
                         <div class="flex justify-between mt-5 items-start">
-                            <div class="flex w-5 h-6 text-yellow-500 text-sm">
+                            <div class="flex w-5 h-6 text-notlooked text-sm">
                                 <div
                                     class="
                                         flex
@@ -82,6 +84,7 @@
                                 </div>
                             </div>
                             <div
+                                id="answerTab"
                                 class="
                                     flex-grow
                                     break-all
@@ -118,7 +121,17 @@
                                             index
                                         ].id
                                     "
-                                    v-html="item.answer"
+                                    v-html="
+                                        item.answer
+                                            .replace(
+                                                '<ol>',
+                                                `<ol style='list-style-type: decimal;'>`
+                                            )
+                                            .replace(
+                                                '<ul>',
+                                                `<ul style='list-style-type: disc;'>`
+                                            )
+                                    "
                                 ></div>
                             </div>
                         </div>
@@ -126,7 +139,7 @@
                         <div class="flex flex-col pt-5 pl-0 md:pl-10">
                             <div
                                 class="
-                                    space-y-2
+                                    space-y-1.5
                                     notoSansJpAndElevenRegular
                                     text-dropdownListItem
                                 "
@@ -321,11 +334,8 @@
                                                 items-center
                                                 justify-end
                                                 font-NotoSansJp
-                                                h-7.5
-                                                w-14
-                                                rounded
                                                 text-white
-                                                bg-whole
+                                                goodButtonColors
                                             "
                                             @click="
                                                 openGoodMessageBox(1, index)
@@ -343,11 +353,8 @@
                                                 justify-end
                                                 font-NotoSansJp
                                                 items-center
-                                                h-7.5
-                                                w-14
-                                                rounded
                                                 text-white
-                                                bg-red-400
+                                                badButtonColors
                                             "
                                             @click="
                                                 openGoodMessageBox(2, index)
@@ -365,11 +372,8 @@
                                                 justify-end
                                                 font-NotoSansJp
                                                 items-center
-                                                h-7.5
-                                                w-14
-                                                rounded
                                                 text-white
-                                                bg-yellow-300
+                                                commentButtonColors
                                             "
                                             @click="
                                                 openCommentMessageBox(index)
@@ -386,24 +390,26 @@
                             </div>
                         </div>
                         <!-- 詳細情報 pc/sp -->
-                        <div :class="[
+                        <div
+                            :class="[
                                 isDetailDisp[
-                                    $store.getters.dIKnowledgeShareSearchAIInfo.qas[
-                                        index
-                                    ].id
+                                    $store.getters.dIKnowledgeShareSearchAIInfo
+                                        .qas[index].id
                                 ] ==
-                                $store.getters.dIKnowledgeShareSearchAIInfo.qas[index]
-                                    .id
+                                $store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                                    index
+                                ].id
                                     ? 'block'
                                     : 'hidden',
-                            ]">
+                            ]"
+                        >
                             <div class="flex flex-row justify-center text-sm">
                                 <div class="box">
                                     <span class="line"></span>
                                     <span class="text"
                                         ><div
                                             class="
-                                                border-b border-gray-500
+                                                border-b border-notice
                                                 notoSansJpAndTwelveRegular
                                                 text-grayline
                                                 flex
@@ -434,8 +440,8 @@
                                                         ? 'transform rotate-180'
                                                         : '',
                                                 ]"
-                                                fill="#6b7280"
-                                                stroke="#ffffff"
+                                                fill="#666666"
+                                                stroke="#666666"
                                             ></triangle-down-svg></div
                                     ></span>
                                     <span class="line"></span>
@@ -451,7 +457,7 @@
                                     ] ===
                                     $store.getters.dIKnowledgeShareSearchAIInfo
                                         .qas[index].id
-                                        ? 'block'
+                                        ? 'block space-y-1.5'
                                         : 'hidden',
                                 ]"
                             >
@@ -741,26 +747,33 @@
                             items-center
                             cursor-pointer
                         "
-                        @click="openDetailDisp($store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                        @click="
+                            openDetailDisp(
+                                $store.getters.dIKnowledgeShareSearchAIInfo.qas[
                                     index
-                                ].id)"
+                                ].id
+                            )
+                        "
                     >
-                        <div v-show="
+                        <div
+                            v-show="
                                 !(
                                     isDetailDisp[
-                                        $store.getters.dIKnowledgeShareSearchAIInfo
-                                            .qas[index].id
+                                        $store.getters
+                                            .dIKnowledgeShareSearchAIInfo.qas[
+                                            index
+                                        ].id
                                     ] ===
-                                    $store.getters.dIKnowledgeShareSearchAIInfo.qas[
-                                        index
-                                    ].id
+                                    $store.getters.dIKnowledgeShareSearchAIInfo
+                                        .qas[index].id
                                 )
                             "
-                             class="flex items-center">
+                            class="flex items-center"
+                        >
                             <triangle-down-svg
                                 class="w-3 h-3"
-                                fill="#F79800"
-                                stroke="#F79800"
+                                fill="#F09600"
+                                stroke="#F09600"
                             ></triangle-down-svg>
                             <div
                                 class="text-xs font-NotoSansJp font-medium mr-1"
@@ -768,7 +781,8 @@
                                 開く
                             </div>
                         </div>
-                        <div v-show="
+                        <div
+                            v-show="
                                 isDetailDisp[
                                     $store.getters.dIKnowledgeShareSearchAIInfo
                                         .qas[index].id
@@ -776,11 +790,13 @@
                                 $store.getters.dIKnowledgeShareSearchAIInfo.qas[
                                     index
                                 ].id
-                            " class="flex items-center">
+                            "
+                            class="flex items-center"
+                        >
                             <triangle-down-svg
                                 class="w-3 h-3 transform rotate-180"
-                                fill="#F79800"
-                                stroke="#F79800"
+                                fill="#F09600"
+                                stroke="#F09600"
                             ></triangle-down-svg>
                             <div
                                 class="text-xs font-NotoSansJp font-medium mr-1"
@@ -825,100 +841,116 @@ import GoodMessageBox from '../common/messageBox/goodMessageBox.vue'
 import CommentMessageBox from '../common/messageBox/commentMessageBox.vue'
 import ResultDetailRowItem from '../common/searchResult/resultDetailRowItem.vue'
 export default {
-  components: {
-    iconmonstrStar,
-    TriangleDownSvg,
-    resutTag,
-    resultDetailRow,
-    carousel,
-    Good,
-    bad,
-    talk,
-    xIconSvg,
-    Pagination,
-    vueSingleSelect,
-    GoodMessageBox,
-    CommentMessageBox,
-    ResultDetailRowItem,
-  },
-  props: {},
-  data() {
-    return {
-      isDetailDisp: [],
-      isDetailsDisp: [],
-      qaId: '',
-      rowIndex: 0,
-      // コメント フラグ
-      commentsFlag: ''
-    }
-  },
-  unmounted() {
-    this.$store.commit('setdIKnowledgeInfo', {})
-    this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
-  },
-  mounted() {
-    if (JSON.stringify(this.$route.query) == '{}') {
-      this.$store.commit('setdIKnowledgeInfo', {})
-      this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
-    }
-  },
-  watch: {
-    $route: function () {
-      if (this.$route.path != '/searchDiKnowledge') {
-        return
-      }
-
-      if (JSON.stringify(this.$route.query) == '{}') {
+    components: {
+        iconmonstrStar,
+        TriangleDownSvg,
+        resutTag,
+        resultDetailRow,
+        carousel,
+        Good,
+        bad,
+        talk,
+        xIconSvg,
+        Pagination,
+        vueSingleSelect,
+        GoodMessageBox,
+        CommentMessageBox,
+        ResultDetailRowItem,
+    },
+    props: {},
+    data() {
+        return {
+            isDetailDisp: [],
+            isDetailsDisp: [],
+            qaId: '',
+            rowIndex: 0,
+            // コメント フラグ
+            commentsFlag: '',
+        }
+    },
+    unmounted() {
         this.$store.commit('setdIKnowledgeInfo', {})
         this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
-      }
-    }
-  },
-  computed: {
-  },
-  methods: {
-    sendMsgToParent: function (data) {
-      this.$emit('listenToChildEventAi', data)
     },
-    // 開く クリック
-    openDetailDisp(index, count) {
-    // 1件のみの場合
-        if (count == 1) {
-          this.isDetailDisp[index] = index
-        } else {
-          this.isDetailDisp[index] = this.isDetailDisp[index] == index ? [] : index
-          if (this.isDetailsDisp[index] == index) {
-            this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index
-          }
+    mounted() {
+        if (JSON.stringify(this.$route.query) == '{}') {
+            this.$store.commit('setdIKnowledgeInfo', {})
+            this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
         }
     },
-    // 詳細情報 クリック
-    openDetailsDisp(index) {
-      this.isDetailsDisp[index] = this.isDetailsDisp[index] == index ? [] : index
+    watch: {
+        $route: function () {
+            if (this.$route.path != '/searchDiKnowledge') {
+                return
+            }
+
+            if (JSON.stringify(this.$route.query) == '{}') {
+                this.$store.commit('setdIKnowledgeInfo', {})
+                this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
+            }
+        },
     },
-    // フィードバック機能
-    openGoodMessageBox(type, index) {
-      let params = {
-        fbType: type,
-        qaId: this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].id,
-      }
-      this.$serve.sendFeedback(params).then((res) => {
-        if (res.data.status == 'create') {
-          this.$toast.success(res.data.message, { position: 'top-right', })
-          this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].feedbackGood = res.data.goodFeedbackCount
-          this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].feedbackBad = res.data.badFeedbackCount
-          this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[index].feedbackComment = res.data.commentFeedbackCount
-        }
-      })
+    computed: {},
+    methods: {
+        sendMsgToParent: function (data) {
+            this.$emit('listenToChildEventAi', data)
+        },
+        // 開く クリック
+        openDetailDisp(index, count) {
+            // 1件のみの場合
+            if (count == 1) {
+                this.isDetailDisp[index] = index
+            } else {
+                this.isDetailDisp[index] =
+                    this.isDetailDisp[index] == index ? [] : index
+                if (this.isDetailsDisp[index] == index) {
+                    this.isDetailsDisp[index] =
+                        this.isDetailsDisp[index] == index ? [] : index
+                }
+            }
+        },
+        // 詳細情報 クリック
+        openDetailsDisp(index) {
+            this.isDetailsDisp[index] =
+                this.isDetailsDisp[index] == index ? [] : index
+        },
+        // フィードバック機能
+        openGoodMessageBox(type, index) {
+            let params = {
+                fbType: type,
+                qaId: this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                    index
+                ].id,
+            }
+            this.$serve.sendFeedback(params).then((res) => {
+                if (res.data.status == 'create') {
+                    this.$toast.success(res.data.message, {
+                        position: 'top-right',
+                    })
+                    this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                        index
+                    ].feedbackGood = res.data.goodFeedbackCount
+                    this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                        index
+                    ].feedbackBad = res.data.badFeedbackCount
+                    this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[
+                        index
+                    ].feedbackComment = res.data.commentFeedbackCount
+                }
+            })
+        },
+        // 対象QAの全フィードバックコメントのうち閲覧可能なものを取得する
+        openCommentMessageBox(index) {
+            this.qaId =
+                this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[0].id
+            this.rowIndex = index
+            this.commentsFlag = 'aiComments'
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
     },
-    // 対象QAの全フィードバックコメントのうち閲覧可能なものを取得する
-    openCommentMessageBox(index) {
-      this.qaId = this.$store.getters.dIKnowledgeShareSearchAIInfo.qas[0].id
-      this.rowIndex = index
-      this.commentsFlag = 'aiComments'
-      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
-    },
-  },
 }
 </script>
 <style scoped>
@@ -933,9 +965,8 @@ export default {
 
 .line {
     height: 2px;
-    flex-grow: 1;
-    /* background-color: red; */
-    border-top: 2px dashed rgba(100, 98, 98, 0.897);
+    flex-grow: 2;
+    border-top: 1px dashed #666666;
 }
 
 .text {

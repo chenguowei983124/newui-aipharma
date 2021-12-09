@@ -18,6 +18,10 @@
 .notoSansJpAndTwelveRegular {
     @apply font-NotoSansJp font-normal text-xs;
 }
+/* font-family: NotoSansJp font-size: 12px */
+.fontLatoAndTwelveRegular {
+    @apply font-Lato font-normal text-xs;
+}
 /* font-family: NotoSansJp font-size: 12px  font-weight: 500*/
 .notoSansJpAndTwelveMedium {
     @apply font-NotoSansJp font-medium text-xs;
@@ -41,6 +45,10 @@
 /* font-family: NotoSansJp font-size: 14px font-weight: 700*/
 .notoSansJpAndFourteenBold {
     @apply font-NotoSansJp text-sm font-bold;
+}
+/* font-family: font-Lato font-size: 14px font-weight: 700*/
+.fontLatoAndFourteenBold {
+    @apply font-Lato text-sm font-bold;
 }
 /* font-family: NotoSansJp font-size: 15px  font-weight: 700*/
 .notoSansJpAndFifteenBold {
@@ -159,7 +167,7 @@
 }
 /* ボタン Style */
 .buttonStyle {
-    @apply w-43.75 md:w-30 h-10;
+    @apply w-42.5 md:w-30 h-10;
 }
 /* BUTTON COLOR css */
 .orangeButtonColors {
@@ -180,4 +188,39 @@
 }
 .pagination-next-class {
     @apply text-center pt-2 notoSansJpAndFourteenRegular text-dropdownListItem h-10 w-10  border bg-white rounded border-notice hover:opacity-50 cursor-pointer;
+}
+/* Top Pill Shape BUTTON COLOR css*/
+.orangePillShapeButtonColors {
+    @apply bg-personInformationButton border-b-2 border-redc81e1e hover:opacity-50 active:bg-redc81e1e active:opacity-100;
+}
+.yellowPillShapeButtonColors {
+    @apply bg-personOrganizationButton border-b-2 border-personInformationButton hover:opacity-50 active:bg-personInformationButton active:opacity-100;
+}
+/* Good BUTTON COLOR css */
+.goodButtonColors {
+    @apply bg-whole border-b-2 border-green39aa4a h-7.5 w-14 rounded;
+}
+/* Bad BUTTON COLOR css */
+.badButtonColors {
+    @apply h-7.5 w-14 rounded bg-redf15a28 border-b-2 border-redc81e1e;
+}
+/* Comment BUTTON COLOR css */
+.commentButtonColors {
+    @apply h-7.5 w-14 rounded bg-yellowfbbb14 border-b-2 border-yellowf7931e;
+}
+/* 詳細条件内のプルダウン BUTTON COLOR css */
+.pullDownButtonColors {
+    @apply w-9.5 h-7.5 pt-3 bg-searchBar rounded-r right-0 border-b-2 border-blueline;
+}
+/* ソート条件内のプルダウン BUTTON COLOR css */
+.sortPullDownButtonColors {
+    @apply w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 border-b-2 border-notice;
+}
+/* 条件をクリア BUTTON COLOR css*/
+.grayButtonColors {
+    @apply rounded border-b-2 border-notice bg-gray_e6e6e6 text-tags;
+}
+/* 検 索 BUTTON COLOR css*/
+.orangeSearthButtonColors {
+    @apply rounded border-b-2 border-personInformationButton bg-toTop text-white active:bg-personInformationButton;
 }

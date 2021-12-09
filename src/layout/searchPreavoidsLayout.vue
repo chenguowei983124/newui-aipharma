@@ -25,7 +25,6 @@
         </div>
         <div class="flex-grow max-h-full min-w-min block"></div>
     </div>
-    <!-- トレンドタグ -->
     <div class="flex pt-8">
         <div class="flex-grow max-h-full min-w-min block"></div>
         <div class="flex-shrink mr-1 ml-1 w-full md:w-191.25">
@@ -42,27 +41,21 @@
                     font-NotoSansJp
                 "
             >
-                <div>{{ 'トレンドタグ' }}</div>
+                <!-- @click="sendMsgToParent(item)" -->
+                <div>{{ 'トレンドキーワード' }}</div>
                 <div class="flex flex-wrap mt-2">
                     <div
                         class="
-                            rounded-full
-                            border-2 border-gray-400
-                            bg-gray-100
-                            h-6
+                            underline
+                            mr-2
                             notoSansJpAndTwelveRegular
-                            pl-1
-                            pr-1
                             text-center
                             hidden
                             md:block
                             mid:block
                             cursor-pointer
-                            mt-1.25
                         "
-                        @click="sendMsgToParent(item)"
-                        v-for="item in $store.getters
-                            .getOrganizationSeartorenndoTab.torenndoTab"
+                        v-for="item in $store.getters.getTrendKeywords"
                         :key="item"
                     >
                         {{ item.label }}
@@ -97,5 +90,8 @@ export default {
         },
     },
     created() {},
+    mounted() {
+        // this.$store.dispatch('getTrendKeywords')
+    },
 }
 </script>

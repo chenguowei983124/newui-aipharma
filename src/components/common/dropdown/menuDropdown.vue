@@ -52,15 +52,13 @@
                             mid:w-37.5
                             bg-white
                             flex
-                            mt-0
-                            md:mt-1.5
                             justify-center
                             items-center
                             cursor-pointer
                             mid:cursor-default
                         "
                         :class="{
-                            'absolute z-99 -bottom-12.5  md:w-37.5 left-12 md:top-0 md:left-15 ':
+                            'absolute z-99 -bottom-12.5 md:w-37.5 left-12 md:top-0 md:left-15 h-12.5 md:h-15':
                                 $store.getters.getIsMenuClick,
                         }"
                         @click="scrollToTop"
@@ -71,8 +69,8 @@
                                 w-21
                                 h-9.5
                                 mx-4
-                                pt-1
-                                md:pt-0
+                                mt-1
+                                md:mt-2
                                 active:opacity-50
                                 hover:opacity-50
                             "
@@ -105,7 +103,7 @@
     <div
         class=""
         :class="{
-            'fixed top-0 left-0 right-0 bottom-0 z-75':
+            'fixed top-0 left-0 right-0 bottom-0 z-75 bg-lock':
                 $store.getters.getIsMenuClick,
         }"
         @click.self="linkClick"
@@ -146,9 +144,7 @@
                     class="
                         h-7
                         pl-3.75
-                        font-NotoSansJp
-                        text-base
-                        font-normal
+                        notoSansJpAndFourteenRegular
                         text-dropdownListItem
                         flex
                         items-center
@@ -188,7 +184,10 @@
                 v-for="items in menuItemList2"
                 :key="items"
             >
-                <div v-if="items.itemStyle == 'title'">
+                <div
+                    v-if="items.itemStyle == 'title'"
+                    class="notoSansJpAndFourteenBold"
+                >
                     {{ items.title }}
                 </div>
             </div>
@@ -205,12 +204,11 @@
                     <div
                         v-if="items.itemStyle == 'item'"
                         class="
-                            font-NotoSansJp
-                            text-base
-                            font-normal
+                            notoSansJpAndFourteenRegular
                             text-dropdownListItem
                             h-7
                             pl-3.75
+                            pt-0.5
                             cursor-pointer
                             hover:opacity-50
                             active:opacity-50
@@ -244,7 +242,10 @@
                 v-for="items in menuItemList3"
                 :key="items"
             >
-                <div v-if="items.itemStyle == 'title'">
+                <div
+                    v-if="items.itemStyle == 'title'"
+                    class="notoSansJpAndFourteenBold"
+                >
                     {{ items.title }}
                 </div>
             </div>
@@ -261,13 +262,14 @@
                     <div
                         v-if="items.itemStyle == 'item'"
                         class="
-                            font-NotoSansJp
-                            text-base
-                            font-normal
+                            notoSansJpAndFourteenRegular
                             text-dropdownListItem
                             h-7
                             pl-3.75
+                            pt-0.5
                             cursor-pointer
+                            hover:opacity-50
+                            active:opacity-50
                         "
                         :class="[
                             items.id == menuItemList3.length
@@ -290,9 +292,7 @@
                     <div
                         v-if="items.itemStyle == 'subproject'"
                         class="
-                            font-NotoSansJp
-                            text-base
-                            font-normal
+                            notoSansJpAndFourteenRegular
                             text-dropdownListItem
                             h-7
                             pl-7.5
@@ -329,7 +329,10 @@
                 v-for="items in menuItemList4"
                 :key="items"
             >
-                <div v-if="items.itemStyle == 'title'">
+                <div
+                    v-if="items.itemStyle == 'title'"
+                    class="notoSansJpAndFourteenBold"
+                >
                     {{ items.title }}
                 </div>
             </div>
@@ -341,17 +344,16 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList4" :key="items">
-            <router-link :to="items.path" @click="linkClick">
-                <div v-if="itemType4">
+            <div v-if="itemType4">
+                <router-link :to="items.path" @click="linkClick">
                     <div
                         v-if="items.itemStyle == 'item'"
                         class="
-                            font-NotoSansJp
-                            text-base
-                            font-normal
+                            notoSansJpAndFourteenRegular
                             text-dropdownListItem
                             h-7
                             pl-3.75
+                            pt-0.5
                             cursor-pointer
                             hover:opacity-50
                             active:opacity-50
@@ -366,8 +368,28 @@
                         {{ items.title }}
                         <!-- </router-link> -->
                     </div>
+                </router-link>
+                <div
+                    v-if="items.itemStyle == 'urlitem'"
+                    class="
+                        notoSansJpAndFourteenRegular
+                        text-dropdownListItem
+                        h-7
+                        pl-3.75
+                        pt-0.5
+                        cursor-pointer
+                        hover:opacity-50
+                        active:opacity-50
+                    "
+                >
+                    <a
+                        download="https://neo-ai-di-dev.kit-ai.jp/user/home/get_user_manual"
+                        target="_blank"
+                        href="https://neo-ai-di-dev.kit-ai.jp/user/home/get_user_manual"
+                        >{{ items.title }}</a
+                    >
                 </div>
-            </router-link>
+            </div>
         </div>
     </div>
     <!-- </transition> -->
@@ -475,20 +497,45 @@ export default {
             ],
             menuItemList4: [
                 { id: '1', title: 'その他', itemStyle: 'title', path: '' },
-                { id: '2', title: '外部リンク', itemStyle: 'item', path: '' },
-                { id: '3', title: '動画', itemStyle: 'item', path: '' },
-                { id: '4', title: '学会', itemStyle: 'item', path: '' },
                 {
-                    id: '5',
-                    title: '製薬企業DIチャットボット',
+                    id: '2',
+                    title: 'DIチャットボット',
                     itemStyle: 'item',
                     path: '/diChatbot',
                 },
-                { id: '6', title: 'ヘルプ', itemStyle: 'item', path: '' },
+                {
+                    id: '3',
+                    title: 'お薬立ちリンク集  ',
+                    itemStyle: 'item',
+                    path: '',
+                },
+                {
+                    id: '4',
+                    title: '医療者向けサービス紹介 ',
+                    itemStyle: 'item',
+                    path: '',
+                },
+                // 初回表示非表示
+                // {
+                //     id: '5',
+                //     title: '動画',
+                //     itemStyle: 'item',
+                //     path: '',
+                // },
+                // {
+                //     id: '6',
+                //     title: '学会',
+                //     itemStyle: 'item',
+                //     path: '',
+                // },
+                { id: '5', title: '使い方', itemStyle: 'urlitem', path: '' },
             ],
         }
     },
     watch: {},
+    unmounted() {
+        this.$store.dispatch('setMenuClick', '')
+    },
     methods: {
         linkClick() {
             this.$store.dispatch(

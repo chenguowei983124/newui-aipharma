@@ -36,12 +36,15 @@
             >
                 <div>{{ subTitle }}</div>
                 <triangle-svg
-                    v-if="subTitle != '' && subTitle == '予約はこちら'"
+                    v-if="subTitle != '' && subTitle == '掲載依頼はこちら'"
                     class="transform rotate-90 cls-1"
                 ></triangle-svg>
             </a>
         </div>
-        <div class="flex flex-col justify-end h-full" v-if="rightStyle != ''">
+        <div
+            class="flex flex-col justify-center h-full"
+            v-if="rightStyle != ''"
+        >
             <div class="" v-if="rightStyle == 'count'">
                 <span
                     class="searchResultAllCountLable"
@@ -53,7 +56,7 @@
             <div v-if="rightStyle == 'icon'">
                 <a :href="iconUrl" target="_blank">
                     <external-link
-                        class="hover:opacity-50 active:opacity-50"
+                        class="h-4 w-4 hover:opacity-50 active:opacity-50"
                     ></external-link>
                 </a>
             </div>

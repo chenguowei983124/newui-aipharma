@@ -1,6 +1,14 @@
 <template>
     <div v-if="$store.getters.organizationSearchInfo != undefined">
-        <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium pb-1 mt-2">
+        <div
+            class="
+                flex flex-row
+                space-x-2
+                notoSansJpAndFourteenMedium
+                pb-1
+                mt-2
+            "
+        >
             検索条件：
             <div
                 class=""
@@ -14,14 +22,13 @@
         <!-- pc/sp -->
         <div class="flex justify-between flex-wrap space-y-3 mt-2">
             <div class="notoSansJpAndFourteenMedium">
-                該当：
-                {{ $store.getters.organizationSearchInfo.allCount }}件
+                該当： {{ $store.getters.organizationSearchInfo.allCount }}件
             </div>
             <div class="flex space-x-2">
-                <div class="flex space-x-3">
+                <div class="flex space-x-1 md:space-x-2">
                     <!-- 順 区分 -->
                     <vue-single-select
-                        class="w-54 cursor-pointer"
+                        class="w-55 cursor-pointer"
                         :name="'field1'"
                         :default-value="organizationDateSortValue"
                         :placeholder="'-- Choose an option --'"
@@ -29,13 +36,13 @@
                         :default-options="$constant.organizationDateSort"
                         @selected="setOrganizationDateSortValue"
                         :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 "
+                        buttonStyle="sortPullDownButtonColors"
                         inputStyle="w-full text-tags text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none "
+                                    border border-transparent focus:outline-none "
                     ></vue-single-select>
                     <!-- 件 表示 区分 -->
                     <vue-single-select
-                        class="w-32 cursor-pointer"
+                        class="w-32.5 cursor-pointer"
                         :name="'field2'"
                         :default-value="organizationCountSortValue"
                         :placeholder="'-- Choose an option --'"
@@ -43,9 +50,9 @@
                         :default-options="$constant.organizationCountSort"
                         @selected="setOrganizationCountSortValue"
                         :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
+                        buttonStyle="sortPullDownButtonColors"
                         inputStyle="w-full text-tags text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
+                                    border border-transparent focus:outline-none"
                     ></vue-single-select>
                 </div>
             </div>
@@ -62,13 +69,15 @@
                         class="
                             notoSansJpAndTwelveMedium
                             text-white
-                            h-4
+                            h-4.5
                             flex-grow
                             -ml-0.5
-                            -mt-0.45
+                            -mt-0.5
                         "
                     >
+                        <!-- 70*18 px -->
                         <result-detail-row-item
+                            itemSize="size"
                             itemType="1"
                             :typeKB="item.group"
                             v-if="item.group != undefined"
@@ -114,7 +123,7 @@
                             ></edit-and-delete>
                         </div>
                         <!-- A -->
-                        <div class="flex justify-between mt-5 items-center">
+                        <div class="flex justify-between mt-5 items-start">
                             <div class="flex w-5 h-6 text-notlooked text-sm">
                                 <div
                                     class="
@@ -156,8 +165,8 @@
                                         item.answer.toString().split('\n')[0]
                                     "
                                 ></div>
+                                <!-- class="overflow-x-auto" -->
                                 <div
-                                    class="overflow-x-auto"
                                     v-show="
                                         isDetailDisp[
                                             $store.getters
@@ -168,13 +177,29 @@
                                         $store.getters.organizationSearchInfo
                                             .qas[index].id
                                     "
-                                    v-html="item.answer"
+                                    v-html="
+                                        item.answer
+                                            .replace(
+                                                '<ol>',
+                                                `<ol style='list-style-type: decimal;'>`
+                                            )
+                                            .replace(
+                                                '<ul>',
+                                                `<ul style='list-style-type: disc;'>`
+                                            )
+                                    "
                                 ></div>
                             </div>
                         </div>
                         <!-- 更新情報 pc/sp-->
-                        <div class="flex flex-col pt-5 pl-0 md:pl-10 ">
-                            <div class="space-y-1.5 notoSansJpAndElevenRegular text-dropdownListItem">
+                        <div class="flex flex-col pt-5 pl-0 md:pl-10">
+                            <div
+                                class="
+                                    space-y-1.5
+                                    notoSansJpAndElevenRegular
+                                    text-dropdownListItem
+                                "
+                            >
                                 <div class="flex space-x-4">
                                     <div>最終編集日：{{ item.updatedAt }}</div>
                                     <div>質問日：{{ item.askedAt }}</div>
@@ -214,8 +239,8 @@
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
-                                            item.pubmed
-                                        }}"
+                                                item.pubmed
+                                            }}"
                                             target="view_window"
                                             >https://www.ncbi.nlm.nih.gov/pubmed/{{
                                                 item.pubmed
@@ -235,8 +260,8 @@
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
-                                            item.pubmed
-                                        }}"
+                                                item.pubmed
+                                            }}"
                                             target="view_window"
                                             >https://www.ncbi.nlm.nih.gov/pubmed/{{
                                                 item.pubmed
@@ -301,14 +326,9 @@
                                             flex
                                             items-center
                                             justify-end
-                                            h-7.5
-                                            w-14
-                                            rounded
                                             text-white
-                                            font-medium
-                                            bg-whole
-                                            border-b-2
-                                            border-green39aa4a
+                                            font-NotoSansJp
+                                            goodButtonColors
                                         "
                                         @click="openGoodMessageBox(1, index)"
                                     >
@@ -323,12 +343,9 @@
                                             flex
                                             justify-end
                                             items-center
-                                            h-7.5
-                                            w-14
-                                            rounded
                                             text-white
-                                            bg-redf15a28
-                                            border-b-2 border-redc81e1e
+                                            font-NotoSansJp
+                                            badButtonColors
                                         "
                                         @click="openGoodMessageBox(2, index)"
                                     >
@@ -343,12 +360,8 @@
                                             flex
                                             justify-end
                                             items-center
-                                            h-7.5
-                                            w-14
-                                            rounded
                                             text-white
-                                            bg-yellowfbbb14
-                                            border-b-2 border-yellowf7931e
+                                            commentButtonColors
                                         "
                                         @click="openCommentMessageBox(index)"
                                     >
@@ -788,8 +801,19 @@
             :container-class="'pagination'"
             class="flex justify-center space-x-1"
         ></pagination>
-        <div class="flex justify-center mt-2 text-dropdownListItem text-xs">{{ dispDetailRange }}件 表示</div>
-        <div class="border-b border-gray-400 mt-6 mb-4 md:mb-0"></div>
+        <div
+            class="
+                flex
+                justify-center
+                mt-2
+                text-dropdownListItem
+                font-NotoSansJp
+                text-xs
+            "
+        >
+            {{ dispDetailRange }}件 表示
+        </div>
+        <div class="border-b border-garyTitle mt-6 mb-4 md:mb-0"></div>
         <div
             :class="[
                 $store.getters.getCommentMessageBox
@@ -865,7 +889,7 @@ export default {
             result: Object,
             qaId: '',
             rowIndex: 0,
-            commentsFlag:''
+            commentsFlag: '',
         }
     },
     unmounted() {
@@ -991,9 +1015,10 @@ export default {
             this.$store.dispatch('setLoadingShowFlg', true)
             this.$store.dispatch('setIsLoadingShow', false)
         },
-        orgInit:function(){
+        orgInit: function () {
             this.$store.dispatch('getOrganizationNewQAInfo')
             this.$store.dispatch('getOrganizationLookcarefullyQAInfo')
+            this.$store.dispatch('getOrganizationSeartorenndoTab')
         },
         setSearchResult: function (value) {
             if (value != '') {
@@ -1253,7 +1278,10 @@ export default {
             this.qaId = this.$store.getters.organizationSearchInfo.qas[index].id
             this.rowIndex = index
             this.commentsFlag = 'orgComments'
-            this.$store.dispatch('setCommentMessageBox',!this.$store.getters.getCommentMessageBox)
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
         },
         getRoeId(id) {},
         ActicleDetail(index) {
@@ -1292,8 +1320,8 @@ export default {
                                 showCancelButton: false,
                                 confirmButtonText: 'OK',
                             })
-                        this.$emit('close', false)
-                        this.execSearch()
+                            this.$emit('close', false)
+                            this.execSearch()
                         })
                     }
                 })
@@ -1302,6 +1330,7 @@ export default {
     },
 }
 </script>
+
 <style>
 .box {
     height: 40px;
@@ -1321,17 +1350,21 @@ export default {
 .text {
     margin: 0 5px;
 }
+
 /* html　様式設定 */
+
 #answerTab .table {
     border-top: 1px solid #999;
     border-left: 1px solid #999;
     border-spacing: 0;
 }
+
 #answerTab table th {
     padding: 10px 30px;
     border-bottom: 1px solid #999;
     border-right: 1px solid #999;
 }
+
 #answerTab table td {
     padding: 10px 30px;
     border-left: 1px solid #999;

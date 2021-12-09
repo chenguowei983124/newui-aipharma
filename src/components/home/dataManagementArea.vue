@@ -86,9 +86,7 @@
                 <div class="flex flex-col h-22.5 w-42.5 space-y-2.5">
                     <button
                         class="
-                            bg-personInformationButton
-                            hover:opacity-50
-                            active:bg-red-600 active:opacity-100
+                            orangePillShapeButtonColors
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -101,9 +99,7 @@
 
                     <button
                         class="
-                            bg-personInformationButton
-                            hover:opacity-50
-                            active:bg-red-600 active:opacity-100
+                            orangePillShapeButtonColors
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -118,9 +114,7 @@
                 <div class="flex flex-col h-22.5 w-42.5 space-y-2.5">
                     <button
                         class="
-                            bg-personOrganizationButton
-                            hover:opacity-50
-                            active:bg-personInformationButton active:opacity-100
+                            yellowPillShapeButtonColors
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
@@ -128,21 +122,19 @@
                         "
                         @click="orgDiRecordClick"
                     >
-                        組織内DI 記録 投稿
+                        組織内DI 記録 登録
                     </button>
 
                     <button
                         class="
-                            bg-personOrganizationButton
-                            hover:opacity-50
-                            active:bg-personInformationButton active:opacity-100
+                            yellowPillShapeButtonColors
                             h-10
                             rounded-full
                             notoSansJpAndSixteenblack
                             text-white
                         "
                     >
-                        症例 投稿
+                        症例 登録
                     </button>
                 </div>
                 <div
@@ -227,11 +219,16 @@ export default {
             })
         },
         async getUserData() {
-         await this.$serve.getManagementInfo(this.$store.getters.getOidcCode).then((res) => {
-            this.$store.dispatch('getTopManagementInfo', res)
-            localStorage.setItem('store', JSON.stringify(this.$store.state))
-        })
-    },
+            await this.$serve
+                .getManagementInfo(this.$store.getters.getOidcCode)
+                .then((res) => {
+                    this.$store.dispatch('getTopManagementInfo', res)
+                    localStorage.setItem(
+                        'store',
+                        JSON.stringify(this.$store.state)
+                    )
+                })
+        },
     },
     created() {},
     mounted() {

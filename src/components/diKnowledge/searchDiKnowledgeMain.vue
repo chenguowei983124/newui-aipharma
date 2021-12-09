@@ -26,16 +26,15 @@
             </div>
         </div>
         <div class="notoSansJpAndFourteenMedium">
-            該当：
-            {{ $store.getters.dIKnowledgeShareSearchInfo.allCount }}件
+            該当： {{ $store.getters.dIKnowledgeShareSearchInfo.allCount }}件
         </div>
         <!-- pc/sp -->
         <div class="flex justify-start md:justify-end flex-wrap space-y-1">
             <div class="flex space-x-2 mt-3 md:-mt-3">
-                <div class="flex space-x-2">
+                <div class="flex space-x-1 md:space-x-2">
                     <!-- 順 区分 -->
                     <vue-single-select
-                        class="w-56 cursor-pointer"
+                        class="w-55 cursor-pointer"
                         :name="'field1'"
                         :default-value="diSortValue"
                         :placeholder="'-- Choose an option --'"
@@ -43,13 +42,13 @@
                         :default-options="$constant.organizationDateSort"
                         @selected="setDiSortValue"
                         :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0 "
+                        buttonStyle="sortPullDownButtonColors"
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none "
+                                    border border-transparent focus:outline-none "
                     ></vue-single-select>
                     <!-- 件 表示 区分 -->
                     <vue-single-select
-                        class="w-32 cursor-pointer"
+                        class="w-32.5 cursor-pointer"
                         :name="'field2'"
                         :default-value="diCountSortValue"
                         :placeholder="'-- Choose an option --'"
@@ -57,14 +56,14 @@
                         :default-options="$constant.organizationCountSort"
                         @selected="setDiCountSortValue"
                         :leftLableDisp="false"
-                        buttonStyle="w-9.5 h-7.5 pt-3 bg-grayline rounded-r right-0"
+                        buttonStyle="sortPullDownButtonColors"
                         inputStyle="w-full text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                border border-transparent focus:outline-none"
+                                    border border-transparent focus:outline-none"
                     ></vue-single-select>
                 </div>
             </div>
         </div>
-        <div class="space-y-2 mt-2">
+        <div class="space-y-3.75 mt-3.75">
             <div
                 v-for="(item, index) in $store.getters
                     .dIKnowledgeShareSearchInfo.qas"
@@ -76,13 +75,14 @@
                         class="
                             notoSansJpAndTwelveMedium
                             text-white
-                            h-4
+                            h-4.5
                             flex-grow
                             -ml-0.5
                             -mt-0.5
                         "
                     >
                         <result-detail-row-item
+                            itemSize="size"
                             itemType="1"
                             :typeKB="item.group"
                             v-if="item.group != undefined"
@@ -102,7 +102,7 @@
                             <div
                                 class="
                                     notoSansJpAndTwentyFourBold
-                                    text-blueline
+                                    text-view
                                     w-5
                                 "
                             >
@@ -116,7 +116,7 @@
                         </div>
                         <!-- A -->
                         <div class="flex justify-between mt-5 items-start">
-                            <div class="flex w-5 h-6 text-yellow-500 text-sm">
+                            <div class="flex w-5 h-6 text-notlooked text-sm">
                                 <div
                                     class="
                                         flex
@@ -169,7 +169,17 @@
                                             index
                                         ].id
                                     "
-                                    v-html="item.answer"
+                                    v-html="
+                                        item.answer
+                                            .replace(
+                                                '<ol>',
+                                                `<ol style='list-style-type: decimal;'>`
+                                            )
+                                            .replace(
+                                                '<ul>',
+                                                `<ul style='list-style-type: disc;'>`
+                                            )
+                                    "
                                 ></div>
                             </div>
                         </div>
@@ -177,7 +187,7 @@
                         <div class="flex flex-col pt-5 pl-0 md:pl-10">
                             <div
                                 class="
-                                    space-y-2
+                                    space-y-1.5
                                     notoSansJpAndElevenRegular
                                     text-dropdownListItem
                                 "
@@ -220,8 +230,8 @@
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
-                                            item.pubmed
-                                        }}"
+                                                item.pubmed
+                                            }}"
                                             target="view_window"
                                             >https://www.ncbi.nlm.nih.gov/pubmed/{{
                                                 item.pubmed
@@ -241,8 +251,8 @@
                                     >
                                         <a
                                             href="https://www.ncbi.nlm.nih.gov/pubmed/{{
-                                            item.pubmed
-                                        }}"
+                                                item.pubmed
+                                            }}"
                                             target="view_window"
                                             >https://www.ncbi.nlm.nih.gov/pubmed/{{
                                                 item.pubmed
@@ -279,27 +289,14 @@
                             <div>
                                 <div class="flex flex-wrap space-x-2 mt-2">
                                     <div
-                                        class="
-                                            rounded-full
-                                            border-2 border-gray-300
-                                            bg-gray-100
-                                            h-6
-                                            notoSansJpAndElevenRegular
-                                            pl-1
-                                            pr-1
-                                            text-center
-                                            flex
-                                            items-center
-                                            mr-1
-                                            cursor-pointer
-                                        "
+                                        class="tagsCss"
                                         v-for="keywordTags in item.keywordTags"
                                         :key="keywordTags"
                                         @click="
                                             sendMsgToParent(keywordTags.name)
                                         "
                                     >
-                                        #{{ keywordTags.name }}
+                                        # {{ keywordTags.name }}
                                     </div>
                                 </div>
 
@@ -336,11 +333,9 @@
                                                 flex
                                                 items-center
                                                 justify-end
-                                                h-7.5
-                                                w-14
-                                                rounded
                                                 text-white
-                                                bg-whole
+                                                font-medium
+                                                goodButtonColors
                                             "
                                             @click="
                                                 openGoodMessageBox(1, index)
@@ -356,12 +351,10 @@
                                             class="
                                                 flex
                                                 justify-end
-                                                items-center
-                                                h-7.5
-                                                w-14
-                                                rounded
                                                 text-white
-                                                bg-red-400
+                                                items-center
+                                                font-medium
+                                                badButtonColors
                                             "
                                             @click="
                                                 openGoodMessageBox(2, index)
@@ -378,11 +371,9 @@
                                                 flex
                                                 justify-end
                                                 items-center
-                                                h-7.5
-                                                w-14
-                                                rounded
                                                 text-white
-                                                bg-yellow-300
+                                                font-medium
+                                                commentButtonColors
                                             "
                                             @click="
                                                 openCommentMessageBox(index)
@@ -418,9 +409,9 @@
                                     <span class="text"
                                         ><div
                                             class="
-                                                border-b border-gray-500
-                                                notoSansJpAndTwelveRegular
-                                                text-grayline
+                                                border-b border-notice
+                                                notoSansJpAndTwelveMedium
+                                                text-dropdownListItem
                                                 flex
                                                 justify-center
                                                 items-center
@@ -449,8 +440,8 @@
                                                         ? 'transform rotate-180'
                                                         : '',
                                                 ]"
-                                                fill="#6b7280"
-                                                stroke="#ffffff"
+                                                fill="#666666"
+                                                stroke="#666666"
                                             ></triangle-down-svg></div
                                     ></span>
                                     <span class="line"></span>
@@ -466,7 +457,7 @@
                                     ] ===
                                     $store.getters.dIKnowledgeShareSearchInfo
                                         .qas[index].id
-                                        ? 'block'
+                                        ? 'block space-y-1.5'
                                         : 'hidden',
                                 ]"
                             >
@@ -474,7 +465,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -490,7 +481,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -514,7 +505,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -538,7 +529,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -562,7 +553,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -587,7 +578,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -605,7 +596,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -633,7 +624,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -657,7 +648,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                         border-b-2
                                     "
                                 >
@@ -680,7 +671,7 @@
                                         md:flex md:flex-row
                                         border-b-2
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                     "
                                     v-for="customDetails in item.customDetails"
                                     :key="customDetails"
@@ -729,7 +720,7 @@
                                     class="
                                         md:flex md:flex-row
                                         notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        text-dropdownListItem
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -779,8 +770,8 @@
                         >
                             <triangle-down-svg
                                 class="w-3 h-3"
-                                fill="#0099ff"
-                                stroke="#0099ff"
+                                fill="#32a5dc"
+                                stroke="#32a5dc"
                             ></triangle-down-svg>
                             <div
                                 class="text-xs font-NotoSansJp font-medium mr-1"
@@ -802,8 +793,8 @@
                         >
                             <triangle-down-svg
                                 class="w-3 h-3 transform rotate-180"
-                                fill="#0099ff"
-                                stroke="#0099ff"
+                                fill="#32a5dc"
+                                stroke="#32a5dc"
                             ></triangle-down-svg>
                             <div
                                 class="text-xs font-NotoSansJp font-medium mr-1"
@@ -826,8 +817,19 @@
             :container-class="'pagination'"
             class="flex justify-center space-x-1"
         ></pagination>
-        <div class="flex justify-center mt-2">{{ dispDetailRange }}件 表示</div>
-        <div class="border-b border-gray-400 mt-6 mb-4 md:mb-0"></div>
+        <div
+            class="
+                flex
+                justify-center
+                mt-2
+                text-dropdownListItem
+                font-NotoSansJp
+                text-xs
+            "
+        >
+            {{ dispDetailRange }}件 表示
+        </div>
+        <div class="border-b border-garyTitle mt-6 mb-4 md:mb-0"></div>
         <div
             :class="[
                 $store.getters.getCommentMessageBox
@@ -862,387 +864,452 @@ import { ref, onBeforeUpdate, onUpdated, onUnmounted, nextTick } from 'vue'
 import { reactive, onMounted } from 'vue'
 
 export default {
-  setup() {
-    onUnmounted(() => { })
-  },
-  components: {
-    TriangleDownSvg,
-    resutTag,
-    resultDetailRow,
-    carousel,
-    Good,
-    bad,
-    talk,
-    xIconSvg,
-    Pagination,
-    vueSingleSelect,
-    GoodMessageBox,
-    ResultDetailRowItem,
-    CommentMessageBox
-  },
-  props: {
-    exeSearchRefishOpts: {
-      type: Function,
-      default: () => { },
+    setup() {
+        onUnmounted(() => {})
     },
-  },
-  data() {
-    return {
-      // 順 区分 id
-      diSortValue: 'last_updated_at_desc',
-      // 件 表示 区分 id
-      diCountSortValue: 0,
-      pageCount: 20,
-      selectPage: 1,
-      isDetailDisp: [],
-      isDetailsDisp: [],
-      qaId: '',
-      rowIndex: 0,
-      // 検索AI　フラグ
-      aiFlag:false,
-      // コメント フラグ
-      commentsFlag: ''
-    }
-  },
-  unmounted() {
-    this.initStore()
-  },
-  mounted() {
-    if (JSON.stringify(this.$route.query) == '{}') {
-      this.initStore()
-      this.diInit()
-      this.$store.commit('setdIKnowledgeInfo', {})
-      this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
-    }
-    if (JSON.stringify(this.$route.query) !== '{}') {
-      this.resetSearchBar()
-      this.execSearch()
-    }
-  },
-  watch: {
-    $route: function () {
-      if (this.$route.path != '/searchDiKnowledge') {
-        return
-      }
-      this.selectPage = this.$route.query.page
-      if (JSON.stringify(this.$route.query) == '{}') {
+    components: {
+        TriangleDownSvg,
+        resutTag,
+        resultDetailRow,
+        carousel,
+        Good,
+        bad,
+        talk,
+        xIconSvg,
+        Pagination,
+        vueSingleSelect,
+        GoodMessageBox,
+        ResultDetailRowItem,
+        CommentMessageBox,
+    },
+    props: {
+        exeSearchRefishOpts: {
+            type: Function,
+            default: () => {},
+        },
+    },
+    data() {
+        return {
+            // 順 区分 id
+            diSortValue: 'last_updated_at_desc',
+            // 件 表示 区分 id
+            diCountSortValue: 0,
+            pageCount: 20,
+            selectPage: 1,
+            isDetailDisp: [],
+            isDetailsDisp: [],
+            qaId: '',
+            rowIndex: 0,
+            // 検索AI　フラグ
+            aiFlag: false,
+            // コメント フラグ
+            commentsFlag: '',
+        }
+    },
+    unmounted() {
         this.initStore()
-        this.$store.commit('setdIKnowledgeInfo', {})
-        this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
-      }
-
-      if (JSON.stringify(this.$route.query) !== '{}') {
-        this.resetSearchBar()
-        this.execSearch()
-      }
     },
-  },
-  computed: {
-    getPageCount() {
-      //   let page = 1;
-      if (this.diCountSortValue == '0') {
-        this.pageCount = 20
-      } else if (this.diCountSortValue == '1') {
-        this.pageCount = 50
-      } else if (this.diCountSortValue == '2') {
-        this.pageCount = 100
-      }
-      this.$store.commit('setMaxCountDI', this.pageCount)
-      return Math.ceil(
-        this.$store.getters.dIKnowledgeShareSearchInfo.allCount /
-        this.pageCount
-      )
-    },
-    // 明細部に表示明細のFROM-TO
-    dispDetailRange: function () {
-      let start = 1
-      let end = ''
-      if (this.selectPage > 1) {
-        start = (this.selectPage - 1) * this.pageCount + 1
-      }
-
-      if (this.$store.getters.dIKnowledgeShareSearchInfo.qas != undefined) {
-        end = start +
-          Object.keys(this.$store.getters.dIKnowledgeShareSearchInfo.qas)
-            .length - 1
-      }
-
-      if (this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 1) {
-        return start.toString()
-      } else {
-        if (this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 0) {
-          return '0'
-        } else {
-          return start.toString() + '-' + end.toString()
+    mounted() {
+        if (JSON.stringify(this.$route.query) == '{}') {
+            this.initStore()
+            this.diInit()
+            this.$store.commit('setdIKnowledgeInfo', {})
+            this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
         }
-      }
-    },
-  },
-  methods: {
-    execSearch(kb) {
-      // 設定　NULL
-      this.openDetailDisp('')
-      // QAID取得
-      let qaid = ''
-      let params
-
-      if (typeof (this.$route.query.id) != "undefined") {
-        qaid = this.$route.query.id
-        this.$store.dispatch('setQAID', qaid)
-        // sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
-      } 
-    //   else if (this.$store.getters.getQAID != '') {
-    //     qaid = this.$store.getters.getQAID
-    //   }
-    this.$store.dispatch('setLoadingShowFlg', false)
-            this.$store.dispatch('setIsLoadingShow', true)
-      let result
-      let resultAi
-      // QAID存在チェック
-      if (qaid != '') {
-        this.$store.commit('setdIKnowledgeInfo', {})
-        this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
-        params = {
-          id: qaid,
-          confidence: this.$route.query.confidence
+        if (JSON.stringify(this.$route.query) !== '{}') {
+            this.resetSearchBar()
+            this.execSearch()
         }
-        if (typeof (this.$route.query.confidence) == "undefined"
-          || this.$route.query.confidence == "nil") {
-          result = this.$serve.getDIKnowledgeSharedId(params)
-          this.setSearchResult(result)
-        } else {
-          resultAi = this.$serve.getDIKnowledgeSharedId(params)
-          this.setSearchResultAi(resultAi)
-
-        }
-      } else if (typeof (this.$route.query.page) != "undefined") {
-        result = this.$serve.getDIKnowledgeShare(this.$route.query)
-        resultAi = this.$serve.getDIKnowledgeShareAI(this.$route.query)
-        this.aiFlag = true
-
-        this.setSearchResult(result)
-        this.setSearchResultAi(resultAi)
-      }
-        this.diInit()
-        this.$store.dispatch('setLoadingShowFlg', true)
-            this.$store.dispatch('setIsLoadingShow', false)
     },
-    diInit:function(){
-    this.$store.dispatch('getDiKnowledgeShareNewQAInfo')
-    this.$store.dispatch('getDiKnowledgeShareLookcarefullyQAInfo')
-    },
-    setSearchResultAi: function (value) {
-      if (value != '' && typeof (value) != "undefined") {
-        value.then((response) => {
-          this.$store.commit('setdIKnowledgeShareSearchAIInfo', response)
-          if(this.aiFlag == false){
-              // 1件のみの場合、全回答情報を表示
-              if (response.data.allCount == 1) {
-                this.$emit('clickAi',response.data.qas[0].id, response.data.allCount)
-                let qaid = ''
-                if (this.$route.query.id) {
-                  qaid = this.$route.query.id
-                  this.$store.commit('setQaAiId', qaid)
-                } else if (this.$store.getters.getQaAiId != '') {
-                  qaid = this.$store.getters.getQaAiId
-                }
-                // ビュー件数更新
-                let params = {
-                //   id: response.data.qas[0].id,
-                id: qaid
-                }
-                this.$serve.sendViewCount(params)
-              }
-              this.aiFlag = false
+    watch: {
+        $route: function () {
+            if (this.$route.path != '/searchDiKnowledge') {
+                return
             }
-        })
+            this.selectPage = this.$route.query.page
+            if (JSON.stringify(this.$route.query) == '{}') {
+                this.initStore()
+                this.$store.commit('setdIKnowledgeInfo', {})
+                this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
+            }
 
-      }
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                this.resetSearchBar()
+                this.execSearch()
+            }
+        },
     },
-    setSearchResult: function (value) {
-      if (value != '' && typeof (value) != "undefined") {
-        value.then((response) => {
-          this.$store.commit('setdIKnowledgeInfo', response)
-          // 1件のみの場合、全回答情報を表示
-          if (response.data.allCount == 1) {
-            this.openDetailDisp(response.data.qas[0].id, response.data.allCount)
+    computed: {
+        getPageCount() {
+            //   let page = 1;
+            if (this.diCountSortValue == '0') {
+                this.pageCount = 20
+            } else if (this.diCountSortValue == '1') {
+                this.pageCount = 50
+            } else if (this.diCountSortValue == '2') {
+                this.pageCount = 100
+            }
+            this.$store.commit('setMaxCountDI', this.pageCount)
+            return Math.ceil(
+                this.$store.getters.dIKnowledgeShareSearchInfo.allCount /
+                    this.pageCount
+            )
+        },
+        // 明細部に表示明細のFROM-TO
+        dispDetailRange: function () {
+            let start = 1
+            let end = ''
+            if (this.selectPage > 1) {
+                start = (this.selectPage - 1) * this.pageCount + 1
+            }
+
+            if (
+                this.$store.getters.dIKnowledgeShareSearchInfo.qas != undefined
+            ) {
+                end =
+                    start +
+                    Object.keys(
+                        this.$store.getters.dIKnowledgeShareSearchInfo.qas
+                    ).length -
+                    1
+            }
+
+            if (this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 1) {
+                return start.toString()
+            } else {
+                if (
+                    this.$store.getters.dIKnowledgeShareSearchInfo.allCount == 0
+                ) {
+                    return '0'
+                } else {
+                    return start.toString() + '-' + end.toString()
+                }
+            }
+        },
+    },
+    methods: {
+        execSearch(kb) {
+            // 設定　NULL
+            this.openDetailDisp('')
+            // QAID取得
             let qaid = ''
-            if (this.$route.query.id) {
-              qaid = this.$route.query.id
-              this.$store.dispatch('setQAID', qaid)
-            } else if (this.$store.getters.getQAID != '') {
-              qaid = this.$store.getters.getQAID
+            let params
+
+            if (typeof this.$route.query.id != 'undefined') {
+                qaid = this.$route.query.id
+                this.$store.dispatch('setQAID', qaid)
+                // sessionStorage.setItem(this.$constant.searchParam.PAID, qaid)
             }
-            // ビュー件数更新
+            //   else if (this.$store.getters.getQAID != '') {
+            //     qaid = this.$store.getters.getQAID
+            //   }
+            this.$store.dispatch('setLoadingShowFlg', false)
+            this.$store.dispatch('setIsLoadingShow', true)
+            let result
+            let resultAi
+            // QAID存在チェック
+            if (qaid != '') {
+                this.$store.commit('setdIKnowledgeInfo', {})
+                this.$store.commit('setdIKnowledgeShareSearchAIInfo', {})
+                params = {
+                    id: qaid,
+                    confidence: this.$route.query.confidence,
+                }
+                if (
+                    typeof this.$route.query.confidence == 'undefined' ||
+                    this.$route.query.confidence == 'nil'
+                ) {
+                    result = this.$serve.getDIKnowledgeSharedId(params)
+                    this.setSearchResult(result)
+                } else {
+                    resultAi = this.$serve.getDIKnowledgeSharedId(params)
+                    this.setSearchResultAi(resultAi)
+                }
+            } else if (typeof this.$route.query.page != 'undefined') {
+                result = this.$serve.getDIKnowledgeShare(this.$route.query)
+                resultAi = this.$serve.getDIKnowledgeShareAI(this.$route.query)
+                this.aiFlag = true
+
+                this.setSearchResult(result)
+                this.setSearchResultAi(resultAi)
+            }
+            this.diInit()
+            this.$store.dispatch('setLoadingShowFlg', true)
+            this.$store.dispatch('setIsLoadingShow', false)
+        },
+        diInit: function () {
+            this.$store.dispatch('getDiKnowledgeShareNewQAInfo')
+            this.$store.dispatch('getDiKnowledgeShareLookcarefullyQAInfo')
+            this.$store.dispatch('getOrganizationSeartorenndoTab')
+        },
+        setSearchResultAi: function (value) {
+            if (value != '' && typeof value != 'undefined') {
+                value.then((response) => {
+                    this.$store.commit(
+                        'setdIKnowledgeShareSearchAIInfo',
+                        response
+                    )
+                    if (this.aiFlag == false) {
+                        // 1件のみの場合、全回答情報を表示
+                        if (response.data.allCount == 1) {
+                            this.$emit(
+                                'clickAi',
+                                response.data.qas[0].id,
+                                response.data.allCount
+                            )
+                            let qaid = ''
+                            if (this.$route.query.id) {
+                                qaid = this.$route.query.id
+                                this.$store.commit('setQaAiId', qaid)
+                            } else if (this.$store.getters.getQaAiId != '') {
+                                qaid = this.$store.getters.getQaAiId
+                            }
+                            // ビュー件数更新
+                            let params = {
+                                //   id: response.data.qas[0].id,
+                                id: qaid,
+                            }
+                            this.$serve.sendViewCount(params)
+                        }
+                        this.aiFlag = false
+                    }
+                })
+            }
+        },
+        setSearchResult: function (value) {
+            if (value != '' && typeof value != 'undefined') {
+                value.then((response) => {
+                    this.$store.commit('setdIKnowledgeInfo', response)
+                    // 1件のみの場合、全回答情報を表示
+                    if (response.data.allCount == 1) {
+                        this.openDetailDisp(
+                            response.data.qas[0].id,
+                            response.data.allCount
+                        )
+                        let qaid = ''
+                        if (this.$route.query.id) {
+                            qaid = this.$route.query.id
+                            this.$store.dispatch('setQAID', qaid)
+                        } else if (this.$store.getters.getQAID != '') {
+                            qaid = this.$store.getters.getQAID
+                        }
+                        // ビュー件数更新
+                        let params = {
+                            id: qaid,
+                        }
+                        this.$serve.sendViewCount(params)
+                    } else {
+                        this.isDetailDisp = []
+                    }
+                })
+            }
+        },
+        // =====================================================
+        // セッションに退避した情報をリーセット
+        // =====================================================
+        resetSearchBar: function () {
+            this.initStore()
+
+            if (typeof this.$route.query.id == 'undefined') {
+                this.$store.dispatch('setQAID', '')
+                this.$store.dispatch('setSearchWord', this.$route.query.search)
+                this.$store.dispatch(
+                    'setSearchTags',
+                    this.$route.query.tags.split(',')
+                )
+                this.$store.commit('setMaxCountDI', this.$route.query.displayed)
+                this.diSortValue = this.$route.query.sort
+                this.$store.commit('setSortDI', this.$route.query.sort)
+                if (this.$route.query.displayed == 20) {
+                    this.diCountSortValue = 0
+                } else if (this.$route.query.displayed == 50) {
+                    this.diCountSortValue = 1
+                } else if (this.$route.query.displayed == 100) {
+                    this.diCountSortValue = 2
+                }
+                this.$store.commit('setPageDI', this.$route.query.page)
+                this.$store.commit(
+                    'setCheckQDI',
+                    this.$route.query.checkQ.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.commit(
+                    'setCheckADI',
+                    this.$route.query.checkA.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.commit(
+                    'setCheckCommentDI',
+                    this.$route.query.checkComment.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.commit(
+                    'setCheckAddFileNameDI',
+                    this.$route.query.checkAddFileName.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.commit(
+                    'setCheckContributorDI',
+                    this.$route.query.checkContributor.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.commit(
+                    'setCheckLastEditerDI',
+                    this.$route.query.checkLastEditer.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.commit(
+                    'setCheckFacilityNameDI',
+                    this.$route.query.checkFacilityName.toString() === 'true',
+                    true,
+                    false
+                )
+                this.$store.commit(
+                    'setCheckNoteDI',
+                    this.$route.query.checkNote.toString() === 'true',
+                    true,
+                    false
+                )
+            }
+        },
+        // 初期化
+        initStore() {
+            this.$store.dispatch('setSearchWord', '')
+            this.$store.dispatch('setSearchTags', [])
+            this.$store.commit('setPageDI', 1)
+            this.$store.commit('setSortDI', 'last_updated_at_desc')
+            this.$store.commit('setMaxCountDI', 20)
+            this.$store.commit('setCheckQDI', true)
+            this.$store.commit('setCheckADI', true)
+            this.$store.commit('setCheckCommentDI', true)
+            this.$store.commit('setCheckAddFileNameDI', true)
+            this.$store.commit('setCheckContributorDI', true)
+            this.$store.commit('setCheckLastEditerDI', true)
+            this.$store.commit('setCheckFacilityNameDI', true)
+            this.$store.commit('setCheckNoteDI', true)
+        },
+        resetRouter() {
+            this.exeSearchRefishOpts()
+            let getTimestamp = new Date().getTime()
+            let dispDetailNumber = 20
+
+            if (this.diCountSortValue == 0) {
+                dispDetailNumber = 20
+            } else if (this.diCountSortValue == 1) {
+                dispDetailNumber = 50
+            } else if (this.diCountSortValue == 2) {
+                dispDetailNumber = 100
+            }
             let params = {
-              id: qaid,
+                search: this.$store.getters.getSearchWord,
+                tags: this.$store.getters.getSearchTags
+                    ? this.$store.getters.getSearchTags.join(',')
+                    : '',
+                displayed: dispDetailNumber,
+                sort: this.$store.getters.getSortDI,
+                page: this.$store.getters.getPageDI,
+                checkQ: this.$store.getters.getCheckQDI,
+                checkA: this.$store.getters.getCheckADI,
+                checkComment: this.$store.getters.getCheckCommentDI,
+                checkAddFileName: this.$store.getters.getCheckAddFileNameDI,
+                checkContributor: this.$store.getters.getCheckContributorDI,
+                checkLastEditer: this.$store.getters.getCheckLastEditerDI,
+                checkFacilityName: this.$store.getters.getCheckFacilityNameDI,
+                checkNote: this.$store.getters.getCheckNoteDI,
+                timestamp: getTimestamp,
             }
-            this.$serve.sendViewCount(params)
-          } else {
-            this.isDetailDisp = []
-          }
-        })
-
-      }
+            this.$router.push({
+                path: '/searchDiKnowledge',
+                query: params,
+            })
+        },
+        // 改ページのデータ検索
+        getSelectPage(value) {
+            this.selectPage = value
+            this.$store.commit('setPageDI', value)
+            this.resetRouter()
+        },
+        sendMsgToParent: function (data) {
+            this.$emit('listenToChildEventDi', data)
+        },
+        // 開くボタン押下
+        openDetailDisp(index, count) {
+            // 1件のみの場合
+            if (count == 1) {
+                this.isDetailDisp[index] = index
+            } else {
+                this.isDetailDisp[index] =
+                    this.isDetailDisp[index] == index ? [] : index
+                if (this.isDetailsDisp[index] == index) {
+                    this.isDetailsDisp[index] =
+                        this.isDetailsDisp[index] == index ? [] : index
+                }
+            }
+        },
+        // 明細の詳細情報リンク押下
+        openDetailsDisp(index) {
+            this.isDetailsDisp[index] =
+                this.isDetailsDisp[index] == index ? [] : index
+        },
+        clickCallback() {},
+        // 順 区分 選ぶ
+        setDiSortValue(value) {
+            if (this.diSortValue != value) {
+                this.diSortValue = value
+                this.$store.commit('setSortDI', value)
+                this.resetRouter()
+            }
+        },
+        // 件 表示 区分 選ぶ
+        setDiCountSortValue(value) {
+            if (this.diCountSortValue != value) {
+                this.diCountSortValue = value
+                this.resetRouter()
+            }
+        },
+        openGoodMessageBox(type, index) {
+            let params = {
+                fbType: type,
+                qaId: this.$store.getters.dIKnowledgeShareSearchInfo.qas[index]
+                    .id,
+            }
+            this.$serve.sendFeedback(params).then((res) => {
+                if (res.data.status == 'create') {
+                    this.$toast.success(res.data.message, {
+                        position: 'top-right',
+                    })
+                    this.$store.getters.dIKnowledgeShareSearchInfo.qas[
+                        index
+                    ].feedbackGood = res.data.goodFeedbackCount
+                    this.$store.getters.dIKnowledgeShareSearchInfo.qas[
+                        index
+                    ].feedbackBad = res.data.badFeedbackCount
+                    this.$store.getters.dIKnowledgeShareSearchInfo.qas[
+                        index
+                    ].feedbackComment = res.data.commentFeedbackCount
+                }
+            })
+        },
+        openCommentMessageBox(index) {
+            this.qaId =
+                this.$store.getters.dIKnowledgeShareSearchInfo.qas[index].id
+            this.rowIndex = index
+            this.commentsFlag = 'diComments'
+            this.$store.dispatch(
+                'setCommentMessageBox',
+                !this.$store.getters.getCommentMessageBox
+            )
+        },
     },
-    // =====================================================
-    // セッションに退避した情報をリーセット
-    // =====================================================
-    resetSearchBar: function () {
-      this.initStore()
-
-      if (typeof (this.$route.query.id) == "undefined") {
-        this.$store.dispatch('setQAID', '')
-        this.$store.dispatch('setSearchWord', this.$route.query.search)
-        this.$store.dispatch('setSearchTags', this.$route.query.tags.split(','))
-        this.$store.commit('setMaxCountDI', this.$route.query.displayed)
-        this.diSortValue = this.$route.query.sort
-        this.$store.commit('setSortDI', this.$route.query.sort)
-        if (this.$route.query.displayed == 20) {
-          this.diCountSortValue = 0
-        } else if (this.$route.query.displayed == 50) {
-          this.diCountSortValue = 1
-        } else if (this.$route.query.displayed == 100) {
-          this.diCountSortValue = 2
-        }
-        this.$store.commit('setPageDI', this.$route.query.page)
-        this.$store.commit('setCheckQDI', this.$route.query.checkQ.toString() === 'true', true, false)
-        this.$store.commit('setCheckADI', this.$route.query.checkA.toString() === 'true', true, false)
-        this.$store.commit('setCheckCommentDI', this.$route.query.checkComment.toString() === 'true', true, false)
-        this.$store.commit('setCheckAddFileNameDI', this.$route.query.checkAddFileName.toString() === 'true', true, false)
-        this.$store.commit('setCheckContributorDI', this.$route.query.checkContributor.toString() === 'true', true, false)
-        this.$store.commit('setCheckLastEditerDI', this.$route.query.checkLastEditer.toString() === 'true', true, false)
-        this.$store.commit('setCheckFacilityNameDI', this.$route.query.checkFacilityName.toString() === 'true', true, false)
-        this.$store.commit('setCheckNoteDI', this.$route.query.checkNote.toString() === 'true', true, false)
-      }
-    },
-    // 初期化
-    initStore() {
-      this.$store.dispatch('setSearchWord', '')
-      this.$store.dispatch('setSearchTags', [])
-      this.$store.commit('setPageDI', 1)
-      this.$store.commit('setSortDI', 'last_updated_at_desc')
-      this.$store.commit('setMaxCountDI', 20)
-      this.$store.commit('setCheckQDI', true)
-      this.$store.commit('setCheckADI', true)
-      this.$store.commit('setCheckCommentDI', true)
-      this.$store.commit('setCheckAddFileNameDI', true)
-      this.$store.commit('setCheckContributorDI', true)
-      this.$store.commit('setCheckLastEditerDI', true)
-      this.$store.commit('setCheckFacilityNameDI', true)
-      this.$store.commit('setCheckNoteDI', true)
-    },
-    resetRouter() {
-      this.exeSearchRefishOpts()
-      let getTimestamp = new Date().getTime()
-      let dispDetailNumber = 20
-
-      if (this.diCountSortValue == 0) {
-        dispDetailNumber = 20
-      } else if (this.diCountSortValue == 1) {
-        dispDetailNumber = 50
-      } else if (this.diCountSortValue == 2) {
-        dispDetailNumber = 100
-      }
-      let params = {
-        search: this.$store.getters.getSearchWord,
-        tags: this.$store.getters.getSearchTags
-          ? this.$store.getters.getSearchTags.join(',')
-          : '',
-        displayed: dispDetailNumber,
-        sort: this.$store.getters.getSortDI,
-        page: this.$store.getters.getPageDI,
-        checkQ: this.$store.getters.getCheckQDI,
-        checkA: this.$store.getters.getCheckADI,
-        checkComment: this.$store.getters.getCheckCommentDI,
-        checkAddFileName: this.$store.getters.getCheckAddFileNameDI,
-        checkContributor: this.$store.getters.getCheckContributorDI,
-        checkLastEditer: this.$store.getters.getCheckLastEditerDI,
-        checkFacilityName: this.$store.getters.getCheckFacilityNameDI,
-        checkNote: this.$store.getters.getCheckNoteDI,
-        timestamp: getTimestamp,
-      }
-      this.$router.push({
-        path: '/searchDiKnowledge',
-        query: params,
-      })
-    },
-    // 改ページのデータ検索
-    getSelectPage(value) {
-      this.selectPage = value
-      this.$store.commit('setPageDI', value)
-      this.resetRouter()
-    },
-    sendMsgToParent: function (data) {
-      this.$emit('listenToChildEventDi', data)
-    },
-    // 開くボタン押下
-    openDetailDisp(index, count) {
-      // 1件のみの場合
-      if (count == 1) {
-        this.isDetailDisp[index] = index
-      } else {
-        this.isDetailDisp[index] =
-          this.isDetailDisp[index] == index ? [] : index
-        if (this.isDetailsDisp[index] == index) {
-          this.isDetailsDisp[index] =
-            this.isDetailsDisp[index] == index ? [] : index
-        }
-      }
-    },
-    // 明細の詳細情報リンク押下
-    openDetailsDisp(index) {
-      this.isDetailsDisp[index] =
-        this.isDetailsDisp[index] == index ? [] : index
-    },
-    clickCallback() { },
-    // 順 区分 選ぶ
-    setDiSortValue(value) {
-      if (this.diSortValue != value) {
-        this.diSortValue = value
-        this.$store.commit('setSortDI', value)
-        this.resetRouter()
-      }
-    },
-    // 件 表示 区分 選ぶ
-    setDiCountSortValue(value) {
-      if (this.diCountSortValue != value) {
-        this.diCountSortValue = value
-        this.resetRouter()
-      }
-    },
-    openGoodMessageBox(type, index) {
-      let params = {
-        fbType: type,
-        qaId: this.$store.getters.dIKnowledgeShareSearchInfo.qas[index].id,
-      }
-      this.$serve.sendFeedback(params).then((res) => {
-        if (res.data.status == 'create') {
-          this.$toast.success(res.data.message, {
-            position: 'top-right',
-          })
-          this.$store.getters.dIKnowledgeShareSearchInfo.qas[
-            index
-          ].feedbackGood = res.data.goodFeedbackCount
-          this.$store.getters.dIKnowledgeShareSearchInfo.qas[
-            index
-          ].feedbackBad = res.data.badFeedbackCount
-          this.$store.getters.dIKnowledgeShareSearchInfo.qas[
-            index
-          ].feedbackComment = res.data.commentFeedbackCount
-        }
-      })
-    },
-    openCommentMessageBox(index) {
-      this.qaId = this.$store.getters.dIKnowledgeShareSearchInfo.qas[index].id
-      this.rowIndex = index
-      this.commentsFlag = 'diComments'
-      this.$store.dispatch('setCommentMessageBox', !this.$store.getters.getCommentMessageBox)
-
-    },
-  },
 }
 </script>
+
 <style scoped>
 .box {
     height: 40px;

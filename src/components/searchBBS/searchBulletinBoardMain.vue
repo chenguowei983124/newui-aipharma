@@ -106,10 +106,16 @@ export default {
     methods: {
         async doSearch(pgNo = 1) {
             this.initStore()
-            if (JSON.stringify(this.$route.query) !== '{}' 
-                && this.$route.query.id !== undefined) {
+            if (
+                JSON.stringify(this.$route.query) !== '{}' &&
+                this.$route.query.id !== undefined
+            ) {
                 Object.assign(this.params, { id: this.$route.query.id })
-                await this.$serve.getPostsrforId('', this.$route.query.id)
+                await this.$serve
+                    .getPostsrforId(
+                        this.$store.getters.getOidcCode,
+                        this.$route.query.id
+                    )
                     .then((response) => {
                         this.setSearchResult(response, pgNo)
                     })
@@ -189,7 +195,7 @@ export default {
             }
         },
         setSearchResult(response, pgNo) {
-            if (response.data.data.length != 0 ) {
+            if (response.data.data.length != 0) {
                 if (pgNo == 1) {
                     this.postList = this.formatPostList(response.data.data)
                     if (this.postList.length == 1) {
@@ -199,7 +205,7 @@ export default {
                     this.postList = this.formatPostList(response.data.data)
                 }
                 this.pagination = response.data.pagination
-            } 
+            }
         },
         formatPostList(data) {
             let list = this.postList
@@ -382,7 +388,10 @@ export default {
         },
         async upCallback(page, mescroll) {
             if (this.firsted) {
-                console.log('upCallbackfirsted------------start------',this.$route.query)
+                console.log(
+                    'upCallbackfirsted------------start------',
+                    this.$route.query
+                )
                 this.params = this.$route.query
                 await this.doSearch()
                 this.firsted = false

@@ -618,14 +618,23 @@ const serve = {
         return data
     },
     //===========================
-    // 組織内DI記録検索結果取得（init タグ取得）
+    // トレンドタグ情報取得 組織内DI記録/DIナレッジシェア（init タグ取得）
     //===========================
-    async getOwnTab() {
-        const data = await axios('/api/qa/get_organization_Tab', {
+    async getTrendTag() {
+        const data = await axios('/api/qa/get_trendy_tags', {
             method: 'get',
         })
         return data
     },
+    // //===========================
+    // // 組織内DI記録検索結果取得（init タグ取得）
+    // //===========================
+    // async getOwnTab() {
+    //     const data = await axios('/api/qa/get_organization_Tab', {
+    //         method: 'get',
+    //     })
+    //     return data
+    // },
     //===========================
     // 組織内DI記録検索結果取得（新着QA）
     //===========================

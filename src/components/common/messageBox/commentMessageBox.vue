@@ -7,7 +7,8 @@
                 w-93.75
                 mid:w-191.25
                 md:w-191.25
-                h-80
+                h-82.5
+                pb-2.5
                 border-2 border-grayline
                 items-center
                 bg-commentBgColor
@@ -77,7 +78,10 @@
                     /> -->
                 </div>
                 <div class="w-10 flex items-center justify-center">
-                    <button class="bg-downloadIcon rounded" @click="sendMessage">
+                    <button
+                        class="bg-downloadIcon rounded"
+                        @click="sendMessage"
+                    >
                         <send-message-icon-svg></send-message-icon-svg>
                     </button>
                 </div>
@@ -90,7 +94,9 @@
                     checked
                     v-model="flag"
                 />
-                <span class="ml-2 text-xs text-tags font-NotoSansJp">匿名で投稿</span>
+                <span class="ml-2 text-xs text-tags font-NotoSansJp"
+                    >匿名で投稿</span
+                >
                 <!-- </label> -->
             </div>
             <div class="hidden">{{ getCommentData }}</div>
@@ -148,10 +154,7 @@
                                 >
                                     <button
                                         @click="editAddCheckpointsTitle(items)"
-                                        class="
-                                            bg-yellowfbbb14
-                                            rounded
-                                        "
+                                        class="bg-yellowfbbb14 rounded"
                                     >
                                         <pencil-alt-icon-svg
                                             class="w-6 h-6"
@@ -167,12 +170,7 @@
                                 >
                                     <button
                                         @click="deleteFruit(items)"
-                                        class="
-                                            bg-redf15a28
-                                            rounded
-                                            w-6
-                                            h-6
-                                        "
+                                        class="bg-redf15a28 rounded w-6 h-6"
                                     >
                                         <trash-icon-svg
                                             class="w-6 h-5"
@@ -201,8 +199,7 @@
                                             w-11/12
                                             h-full
                                             placeholder-gray-500
-                                            ring-1
-                                            ring-326EB5Lins
+                                            ring-1 ring-326EB5Lins
                                             focus:placeholder-opacity-0
                                             border border-transparent
                                             focus:outline-none
@@ -232,9 +229,16 @@
                                                     items
                                                 )
                                             "
-                                            class="bg-yellowfbbb14 rounded w-6 h-6"
+                                            class="
+                                                bg-yellowfbbb14
+                                                rounded
+                                                w-6
+                                                h-6
+                                            "
                                         >
-                                            <check-icon-svg class="text-white"></check-icon-svg>
+                                            <check-icon-svg
+                                                class="text-white"
+                                            ></check-icon-svg>
                                         </button>
                                         <button
                                             @click="
@@ -250,7 +254,9 @@
                                                 justify-center
                                             "
                                         >
-                                            <x-icon-svg class="text-white"></x-icon-svg>
+                                            <x-icon-svg
+                                                class="text-white"
+                                            ></x-icon-svg>
                                         </button>
                                     </div>
                                 </div>

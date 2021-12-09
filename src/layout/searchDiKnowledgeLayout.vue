@@ -17,12 +17,12 @@
     </div>
     <div :class="[isScroll ? 'h-40 md:h-52.5 ' : 'h-40 md:h-52.5']"></div>
     <!-- 内容 -->
-    <div class="flex border-b-2 border-blue-200 mt-33.5 md:mt-5 md:h-20">
+    <div class="flex border-b-2 border-recruitment mt-33.5 md:mt-5 md:h-20">
         <!-- 左 -->
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
-        <div class="flex flex-col w-full md:w-191.25 justify-center">
+        <div class="flex flex-col w-full md:w-191.25 mt-4 justify-center">
             <div class="flex flex-row space-x-2 items-center">
                 <div
                     class="
@@ -49,29 +49,15 @@
                 >
                     トレンドタグ
                 </div>
-                <div class="flex flex-wrap space-x-1 text-tags">
+                <div class="flex flex-wrap mr-1 text-tags">
                     <div
-                        class="
-                            rounded-full
-                            border-2 border-gray-400
-                            bg-gray-100
-                            h-6
-                            notoSansJpAndTwelveRegular
-                            pl-1
-                            pr-1
-                            text-center
-                            hidden
-                            md:block
-                            mid:block
-                            cursor-pointer
-                            mt-1.25
-                        "
-                        @click="searchTag(value.label)"
+                        class="tagsCss hidden md:block mid:block mt-1.25"
+                        @click="searchTag(value.name)"
                         v-for="(value, key, index) in $store.getters
-                            .getOrganizationSeartorenndoTab.torenndoTab"
+                            .getOrganizationSeartorenndoTab"
                         :key="index"
                     >
-                        #&nbsp;{{ value.label }}
+                        # {{ value.name }}
                     </div>
                 </div>
             </div>
@@ -114,20 +100,9 @@
     >
         <good-message-box></good-message-box>
     </div>
-    <!-- comment-message-box -->
-    <!-- <div
-        :class="[
-            $store.getters.getCommentMessageBox
-                ? 'block fixed w-full top-1/4 z-99'
-                : 'hidden',
-        ]"
-    >
-        <comment-message-box class=""></comment-message-box>
-    </div> -->
 </template>
 
 <script>
-import CommentMessageBox from '../components/common/messageBox/commentMessageBox.vue'
 import GoodMessageBox from '../components/common/messageBox/goodMessageBox.vue'
 import searchBar from '../components/common/search/searchBar.vue'
 import SearchDiKnowledgeMain from '../components/diKnowledge/searchDiKnowledgeMain.vue'
@@ -135,66 +110,62 @@ import DiKnowledgeInit from '../components/diKnowledge/diKnowledgeInit.vue'
 import SearchDiKnowledgeAi from '../components/diKnowledge/searchDiKnowledgeAi.vue'
 
 export default {
-  //   emits: ["listenToChildEventDi", "listenToChildEventAi"],
-  components: {
-    CommentMessageBox,
-    GoodMessageBox,
-    searchBar,
-    SearchDiKnowledgeMain,
-    DiKnowledgeInit,
-    SearchDiKnowledgeAi,
-  },
+    components: {
+        GoodMessageBox,
+        searchBar,
+        SearchDiKnowledgeMain,
+        DiKnowledgeInit,
+        SearchDiKnowledgeAi,
+    },
 
-  props: {},
-  data() {
-    return {
-      isScroll: true,
-      isMenuOpen: true,
-      isDetailButtonClick: false,
-      parentMage: '',
-    }
-  },
-  methods: {
-    clickAi:function(index, count){
-        this.$refs.mainAi.openDetailDisp(index, count);
-      },
-    // スクロール
-    getScroll: function (value) {
-      this.isScroll = value
+    props: {},
+    data() {
+        return {
+            isScroll: true,
+            isMenuOpen: true,
+            isDetailButtonClick: false,
+            parentMage: '',
+        }
     },
-    refishTagList() {
-      if (Object.keys(this.$store.getters.getorgTagsList).length > 0) {
-        this.$refs.searchbar.$refs.diDetail.$refs.multDi.refreshOptions()
-      }
-    },
-    // getSearchResult: function (value) {
-    // },
-    // getDetailDisp: function (value) {
-    //   this.detailDisp = value
-    // },
-    // ========================================
-    // 詳細条件ボタン押下区分を取得
-    // ========================================
-    getDetailClick: function (data) {
-      this.isDetailButtonClick = data
-    },
-    // ========================================
-    // 詳細条件表示・非表示取得
-    // ========================================
+    methods: {
+        clickAi: function (index, count) {
+            this.$refs.mainAi.openDetailDisp(index, count)
+        },
+        // スクロール
+        getScroll: function (value) {
+            this.isScroll = value
+        },
+        refishTagList() {
+            if (Object.keys(this.$store.getters.getorgTagsList).length > 0) {
+                this.$refs.searchbar.$refs.diDetail.$refs.multDi.refreshOptions()
+            }
+        },
+        // ========================================
+        // 詳細条件ボタン押下区分を取得
+        // ========================================
+        getDetailClick: function (data) {
+            this.isDetailButtonClick = data
+        },
+        // ========================================
+        // 詳細条件表示・非表示取得
+        // ========================================
 
-    searchTag: function (value) {
-      let tagsLable = this.$store.getters.getSearchTagsLable
-      tagsLable.push(value)
-      this.$store.dispatch('setSearchTagsLable', tagsLable)
-      this.$refs.searchbar.$refs.diDetail.$refs.multDi.refreshOptions()
+        searchTag: function (value) {
+            let tagsLable = this.$store.getters.getSearchTagsLable
+            tagsLable.push(value)
+            this.$store.dispatch('setSearchTagsLable', tagsLable)
+            this.$refs.searchbar.$refs.diDetail.$refs.multDi.refreshOptions()
+        },
+        showMsgToParent: function (data) {
+            this.searchTag(data)
+        },
     },
-    showMsgToParent: function (data) {
-      this.searchTag(data)
+    created() {
+        let param = sessionStorage.getItem('searchParam')
+        this.$store.dispatch(
+            'setSearchWord',
+            sessionStorage.getItem('searchWord')
+        )
     },
-  },
-  created() {
-    let param = sessionStorage.getItem('searchParam')
-    this.$store.dispatch('setSearchWord', sessionStorage.getItem('searchWord'))
-  },
 }
 </script>
