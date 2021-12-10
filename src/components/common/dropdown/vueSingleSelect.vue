@@ -239,7 +239,13 @@ export default {
 
     watch: {
         defaultValue() {
+            console.log(this.defaultValue)
             if (this.defaultValue !== null) {
+                if (this.defaultValue === '') {
+                    console.log('sdf')
+                    this.selectedIndex = null
+                    this.inputText = ''
+                }
                 let length = this.defaultOptions.length
                 for (let index = 0; index < length; index++) {
                     let option = this.defaultOptions[index]
@@ -283,7 +289,7 @@ export default {
 
     computed: {
         inputAttribs() {
-            return Object.assign(
+            let obj = Object.assign(
                 {
                     placeholder: this.placeholder,
                     disabled: this.isDisabled,
@@ -292,6 +298,8 @@ export default {
                 },
                 this.defaultInputAttribs
             )
+
+            return obj
         },
 
         selectedOption() {
@@ -543,6 +551,7 @@ export default {
             if (!this.isOpened) {
                 if (this.defaultValue !== null) {
                     let length = this.defaultOptions.length
+                    this.displaySelectedIndex = 0
                     for (let index = 0; index < length; index++) {
                         let option = this.defaultOptions[index]
                         if (option.value == this.defaultValue) {

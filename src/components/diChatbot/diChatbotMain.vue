@@ -11,7 +11,7 @@
                         class="
                             text-googleTitle
                             notoSansJpAndTwentyBlack
-                            cs:notoSansJpAndTwentyFourBold
+                            cs:notoSansJpAndTwentyFourBlack cs:text-2xl
                             pt-2.5
                             pr-5
                             md:pt-5
@@ -35,11 +35,19 @@
                         24 時間365 日対応
                     </div>
                 </div>
-                <p class="break-words notoSansJpAndTwelveRegular mt-2">
+                <p class="break-words notoSansJpAndTwelveRegular mt-1 md:mt-5">
                     製薬企業が提供する医薬品に関する AI
                     チャットボットのリンク集です。
                 </p>
-                <p class="break-words notoSansJpAndTwelveRegular mb-5">
+                <p
+                    class="
+                        break-words
+                        notoSansJpAndTwelveRegular
+                        mt-2
+                        md:mt-2
+                        mb-5
+                    "
+                >
                     ※URL
                     をクリックすると各製薬企業のチャットボット（外部サイト）に移動します。
                 </p>
@@ -49,7 +57,7 @@
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
             ></div>
         </div>
-        <div class="flex">
+        <div class="flex mt-10">
             <!-- 左 -->
             <div
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
@@ -64,7 +72,6 @@
                         notoSansJpAndSixteenMedium
                         text-center
                         pt-2
-                        mt-5
                         border border-pageblue
                         bg-backgroundMain
                         mx-2
@@ -87,8 +94,8 @@
                 >
                     <div
                         class="
-                            pt-3.75
-                            ml-3.75
+                            pt-5
+                            ml-5
                             mb-0
                             spm:mb-3.75
                             lm:mb-3.75
@@ -100,26 +107,20 @@
                         <div class="notoSansJpAndSixteenMedium">
                             {{ item.companyName }}
                         </div>
-                        <div class="notoSansJpAndTwentyFourBold">
+                        <div class="mt-1 mb-2.5 notoSansJpAndTwentyFourBold">
                             {{ item.systemName }}
                         </div>
-                        <div class="notoSansJpAndTwelveRegular">
-                            {{ item.content }}
+                        <div
+                            class="notoSansJpAndTwelveRegular"
+                            v-for="content in item.content"
+                            :key="content"
+                        >
+                            {{ content }}
                         </div>
                     </div>
                     <div class="flex justify-center">
                         <div class="">
-                            <div
-                                class="
-                                    spm:w-60
-                                    lm:w-60
-                                    spm:h-20
-                                    lm:h-20
-                                    mt-3.75
-                                    mr-3.75
-                                    ml-3.75
-                                "
-                            >
+                            <div class="spm:w-70 lm:w-70 mt-5 mr-5 ml-5">
                                 <a
                                     :href="item.imageLinkUrl"
                                     target="_blank"
@@ -134,10 +135,10 @@
                             </div>
                             <div
                                 class="
-                                    mt-2
+                                    mt-3.75
                                     notoSansJpAndTwelveMedium
-                                    mb-3.75
-                                    ml-3.75
+                                    mb-5
+                                    ml-5
                                 "
                             >
                                 {{ item.productsNumber }}
@@ -147,11 +148,11 @@
                 </div>
 
                 <!-- 詳細説明 -->
-                <div class="mt-10 mx-2">
+                <div class="mt-7.5 md:mt-10 mx-2">
                     <div class="notoSansJpAndSixteenBold">
                         ■AI チャットボットとは
                     </div>
-                    <div class="notoSansJpAndFourteenRegular">
+                    <div class="mt-2 notoSansJpAndFourteenRegular">
                         チャットボットとは、「チャット」と「ボット（ロボット）」を組み合わせた言葉で、コンピュータがテキストを介して自動でやり取り（会話）をするプログラム（＝ロボット）のことです。
                     </div>
                     <div class="notoSansJpAndFourteenRegular">
@@ -222,7 +223,9 @@ import externalLink from '../common/svgImage/extarnalLink.vue'
 import img from '../../assets/image/tanamin_med_banner.jpg'
 import askam from '../../assets/image/askam_banner_a.jpg'
 import bayer_di_banner from '../../assets/image/bayer_di_banner.jpg'
-import banner_DI_chat from '../../assets/image/banner_DI-chat_300-100.png'
+import banner_DI_chat from '../../assets/image/dichat.png'
+import aiSystem from '../../assets/image/aiSystem.png'
+import dinabi from '../../assets/image/dinabi.png'
 export default {
     components: { searchSvg, Chatbot, externalLink },
     props: {},
@@ -236,29 +239,33 @@ export default {
                 {
                     companyName: 'シオノギ製薬',
                     systemName: 'DI チャット',
-                    content: 'ゾフルーザをはじめとする感染症関連の情報提供。',
-                    imageUrl: bayer_di_banner,
-                    imageLinkUrl:
-                        'https://www.shionogi.co.jp/med/dichat/index.html',
-                    productsNumber:
-                        '■対応製品数（全製品数）:29 品目（96 品目）',
+                    content: [
+                        'DIチャットは、人工知能を用いた自動回答システムにより、当社医薬品に関する情報を提供することを目的とした医療関係者のお客様限定のサービスです。',
+                    ],
+
+                    imageUrl: banner_DI_chat,
+                    imageLinkUrl: 'https://www.shionogi.co.jp/med/dichat/',
+                    productsNumber: '■対応製品数（全製品数）：29品目（96品目）',
                 },
                 {
                     companyName: 'バイエル薬品',
-                    systemName: 'DI チャットボット',
-                    content:
-                        'ゾフルーザをはじめとする〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇感染症関連の情報提供。',
+                    systemName: 'DIチャットボット',
+                    content: [
+                        'DI チャットボットは 、医療関係者向けに高脂血症治療剤（ロスーゼット®、アトーゼット®、ゼチー ア®）*の製品基本情報をオンラインで24時間365日検索できる製品情報検索システムです',
+                        '医療関係者が迅速に情報にアクセスすることが可能になります。',
+                        '*日本において製品名「ロスーゼット®配合錠LD/HD」「アトーゼット®配合錠LD/HD」「ゼチーア®錠10mg」としてバイエル薬品とオルガノン株式会社が共同販売を行っています。',
+                        'PP-ATO-JP-0355-30-11',
+                    ],
                     imageUrl: bayer_di_banner,
                     imageLinkUrl:
-                        'https://pharma-navi.bayer.jp/rosuzet/product/user-policy',
-                    productsNumber:
-                        '■対応製品数（全製品数）：3 品目（79 品目）',
+                        'https://rosuzet-atozet-di.ai-q.biz/GBYNsAMlCdbnAEJrW_tI/contact/top',
+                    productsNumber: '■対応製品数（全製品数）：3品目（49品目）',
                 },
                 {
                     companyName: 'ノバルティスファーマ',
                     systemName: '製品情報AI 検索システム',
-                    content: 'ゾフルーザをはじめとする感染症関連の情報提供。',
-                    imageUrl: img,
+                    content: ['ゾフルーザをはじめとする感染症関連の情報提供。'],
+                    imageUrl: aiSystem,
                     imageLinkUrl:
                         'https://misearch.kit-ai.jp/public/home/entrance',
                     productsNumber:
@@ -267,30 +274,37 @@ export default {
                 {
                     companyName: '武田テバファーマ',
                     systemName: 'DI ナビ',
-                    content: 'ゾフルーザをはじめとする感染症関連の情報提供。',
-                    imageUrl: bayer_di_banner,
+                    content: [
+                        'DIナビは人工知能を用いた自動回答システムです。当社医薬品に関する一般的な情報の提供、及び本サイトの案内を目的とした医療関係者向けのサービスです。24時間いつでも簡単にご利用いただけます。',
+                    ],
+                    imageUrl: dinabi,
                     imageLinkUrl: 'https://www.med.takeda-teva.com/di-net/',
-                    productsNumber:
-                        '■対応製品数（全製品数）：全品目（91 品目）',
+                    productsNumber: '■対応製品数（全製品数）：全品目（91品目）',
                 },
                 {
                     companyName: 'アムジェン',
                     systemName: 'AskAm',
-                    content: 'ゾフルーザをはじめとする感染症関連の情報提供。',
+                    content: ['ゾフルーザをはじめとする感染症関連の情報提供。'],
                     imageUrl: askam,
                     imageLinkUrl:
-                        'https://www.amgen.co.jp/products/for-physicians-authorization',
-                    productsNumber: '■対応製品数（全製品数）：全品目（6 品目）',
+                        'https://www.amgen.co.jp/products/for-physicians/medical-information/terms',
+                    productsNumber: '■対応製品数（全製品数）：全品目（6品目）',
                 },
                 {
                     companyName: '田辺三菱製薬',
                     systemName: 'たなみんmed',
-                    content: 'ゾフルーザをはじめとする感染症関連の情報提供。',
+                    content: [
+                        'お役立ちポイント',
+                        '・約160品目の情報をスピーディに検索（タブレット、スマホ対応）',
+                        '・基本情報（効能効果/用法用量/くすりのしおり他）や使用期限を回答',
+                        '・患者向け資材の閲覧/請求',
+                        '・製品Q&A表示',
+                    ],
                     imageUrl: img,
                     imageLinkUrl:
-                        'https://medical.mt-pharma.co.jp/tanamin-med/ask_chat_confirm?utm_campaign=tnmn-20210915&utm_medium=banner&utm_source=tnmn',
+                        'https://medical.mt-pharma.co.jp/relation/guest/r7Y4',
                     productsNumber:
-                        '■対応製品数（全製品数）：全品目（111 品目）',
+                        '■対応製品数（全製品数）：全品目（111品目）',
                 },
             ],
         }

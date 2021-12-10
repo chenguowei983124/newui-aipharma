@@ -107,6 +107,8 @@ export default {
                 return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 border-b-2 grayline z-99 bg-white'
             } else if (this.$props.form == this.$constant.formList.CHT) {
                 return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 border-b-2 grayline z-99 bg-white'
+            } else if (this.$props.form == this.$constant.formList.PAL) {
+                return 'flex justify-between h-12.5 md:h-15 w-full lm:w-270 border-b-2 grayline z-99 bg-white'
             }
         },
     },

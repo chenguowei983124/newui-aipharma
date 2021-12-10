@@ -114,7 +114,7 @@
 .notoSansJpAndTwentyFourBold {
     @apply font-NotoSansJp text-2xl font-bold;
 }
-/* font-family: NotoSansJp font-size: 24px font-weight: 700 */
+/* font-family: NotoSansJp font-size: 24px font-weight: 900 */
 .notoSansJpAndTwentyFourBlack {
     @apply font-NotoSansJp text-2xl font-black;
 }

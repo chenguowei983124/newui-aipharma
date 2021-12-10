@@ -38,7 +38,7 @@
                     <div
                         class="
                             block
-                            spm:flex
+                            md:flex
                             lm:flex
                             bg-blueline
                             w-full

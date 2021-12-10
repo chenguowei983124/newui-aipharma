@@ -25,6 +25,7 @@
                             focus:ring-1
                             focus:border-grayline
                             focus:border-transparent
+                            transform
                         "
                         @keydown="loginKeydown"
                         type="text"

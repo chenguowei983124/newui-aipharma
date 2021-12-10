@@ -67,7 +67,7 @@
                         <!-- v-bind:message="parentMsg" -->
                         <search-detail
                             ref="ownDetail"
-                            @isOrgDetailClick="getIsOrgDetailClick"
+                            @isOrgDetailClick="getIsDetailClick"
                             @tagValue="getOwnTagValue"
                             :searchButtonClick="searchClick"
                             v-on:inputClearValue="showMsg"

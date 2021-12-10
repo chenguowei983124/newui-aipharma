@@ -20,6 +20,7 @@ import notFound from '/src/view/notFound.vue'
 import error from '/src/view/error.vue'
 import Redirect from '/src/view/Redirect.vue'
 import diChatbot from '/src/view/diChatbot.vue'
+import pharmaLink from '/src/view/pharmaLinks.vue'
 
 const routes = [
     // ログイン　画面
@@ -170,6 +171,15 @@ const routes = [
         path: '/searchPharmaCompany',
         name: 'searchPharmaCompany',
         component: searchPharmaCompany,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // お薬立ちリンク集
+    {
+        path: '/pharmaLink',
+        name: 'pharmaLink',
+        component: pharmaLink,
         meta: {
             requireAuth: true,
         },

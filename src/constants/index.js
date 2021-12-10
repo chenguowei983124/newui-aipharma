@@ -13,6 +13,7 @@ const formList = {
     PIO: 'preavoidsInOut',
     PAM: 'pharmaCompany',
     CHT: 'diChatbot',
+    PAL: 'pharmaLinks',
 }
 // 様式リスト
 const style = [
@@ -191,7 +192,7 @@ const multiselectCss = {
         'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
     search: 'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white rounded pl-3.5',
     tags: 'flex-grow flex-shrink flex flex-wrap items-center mt-1 pl-2',
-    tag: 'bg-gray-300 text-black notoSansJpAndTwelveRegular pl-2 rounded-full border-2 mr-1 mb-1 flex items-center whitespace-nowrap',
+    tag: 'bg-gray-300 break-words text-black notoSansJpAndTwelveRegular pl-2 rounded-full border-2 mr-1 mb-1 flex items-center whitespace-nowrap',
     tagDisabled: 'pr-2 opacity-50',
     tagRemove:
         'flex items-center justify-center p-1 mx-0.5 rounded-sm hover:bg-black hover:bg-opacity-10 group',

@@ -104,16 +104,16 @@
                         </div>
                     </div>
                     <div
-                        class="mt-5 ml-6"
+                        class="mt-5"
                         v-html="
                             postList[0].title
                                 .replace(
                                     '<ol>',
-                                    `<ol style='list-style-type: decimal;'>`
+                                    `<ol style='list-style-type: decimal;margin: 1.5rem;'>`
                                 )
                                 .replace(
                                     '<ul>',
-                                    `<ul style='list-style-type: disc;'>`
+                                    `<ul style='list-style-type: disc;margin: 1.5rem;'>`
                                 )
                         "
                     ></div>
@@ -222,7 +222,7 @@
         </div>
         <div class="mt-2">
             <div
-                class="rounded border-2 h-8 pl-5"
+                class="rounded border-2 h-8"
                 @click="dispEditor = !dispEditor"
                 v-if="!dispEditor"
                 v-html="
@@ -230,9 +230,12 @@
                         .split(`<p>&nbsp;</p>`)[0]
                         .replace(
                             '<ol>',
-                            `<ol style='list-style-type: decimal;'>`
+                            `<ol style='margin: 1.5rem;list-style-type: decimal;'>`
                         )
-                        .replace('<ul>', `<ul style='list-style-type: disc;'>`)
+                        .replace(
+                            '<ul>',
+                            `<ul style='margin: 1.5rem;list-style-type: disc;'>`
+                        )
                 "
             ></div>
 

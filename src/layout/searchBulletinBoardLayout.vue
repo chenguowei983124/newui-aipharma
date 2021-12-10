@@ -9,6 +9,7 @@
                     :form="$constant.formList.BBS"
                     @isDetailClick="getDetailDisp"
                     @detailDisp="getScroll"
+                    @searchID="getSearchID"
                 ></search-bar>
             </div>
 
@@ -105,21 +106,67 @@ export default {
         },
         fixedHoverHight() {
             let css = ''
-            if (this.isDetailButtonClick) {
-                css = 'hidden group-hover:block h-66 md:h-52'
-            } else {
-                css = 'hidden group-hover:block h-46 md:h-32'
+            if (this.searchId == 0) {
+            } else if (this.searchId == 6) {
+                if (this.isDetailButtonClick) {
+                    css = 'hidden group-hover:block h-66 md:h-52'
+                } else {
+                    css = 'hidden group-hover:block h-46 md:h-32'
+                }
+            } else if (this.searchId == 7) {
+                if (this.isDetailButtonClick) {
+                    css = 'hidden group-hover:block h-66 md:h-52'
+                } else {
+                    css = 'hidden group-hover:block h-46 md:h-32'
+                }
+            } else if (this.searchId == 2) {
+                if (this.isDetailButtonClick) {
+                    css = 'hidden group-hover:block h-56'
+                } else {
+                    css = 'hidden group-hover:block h-36'
+                }
             }
-
             console.log('css', css)
             return css
         },
         detailHeightCss() {
+            console.log('this.searchId', this.searchId, this.searchId === 2)
             let css = ''
-            if (this.isDetailButtonClick) {
-                css = '-mb-96 md:-mb-96'
-            } else {
-                css = '-mb-121 md:-mb-96'
+            if (this.searchId == 0) {
+                console.log('this.searchId', this.searchId)
+            } else if (this.searchId == 6) {
+                console.log('this.searchId', this.searchId)
+                if (this.isDetailButtonClick) {
+                    css = '-mb-96 md:-mb-96'
+                } else {
+                    css = '-mb-121 md:-mb-96'
+                }
+            } else if (this.searchId == 7) {
+                console.log('this.searchId', this.searchId)
+                if (this.isDetailButtonClick) {
+                    css = '-mb-96 md:-mb-96'
+                } else {
+                    css = '-mb-121 md:-mb-96'
+                }
+            } else if (this.searchId == 2) {
+                console.log('1')
+                if (this.isScroll) {
+                    if (this.isDetailButtonClick) {
+                        console.log('2')
+                        css = 'h-65 md:h-88.75 '
+                    } else {
+                        console.log('3')
+                        css = 'h-36 md:h-60 '
+                    }
+                } else {
+                    if (this.isDetailButtonClick) {
+                        console.log('4')
+                        css = 'h-20 md:h-40 '
+                    } else {
+                        console.log('5')
+                        css = 'h-20 md:h-40 '
+                    }
+                }
             }
 
             console.log('css', css)
@@ -133,6 +180,7 @@ export default {
             isScroll: false,
             dispFlg: false,
             id: '',
+            searchId: '',
         }
     },
     mounted() {},
@@ -142,8 +190,11 @@ export default {
             console.log('asdf')
             this.isDetailButtonClick = data
         },
+        getSearchID(value) {
+            this.searchId = value
+        },
         getScroll: function (value) {
-            // this.isScroll = value
+            this.isScroll = value
         },
         openDetail(val) {
             console.log('openDetail', val)
@@ -161,10 +212,10 @@ export default {
             this.dispFlg = value
             this.$refs.bbsList.talkingClosed(deleteFlg)
         },
-        closeDispFlg(){
+        closeDispFlg() {
             this.dispFlg = false
         },
-        resetBbsRouter(){
+        resetBbsRouter() {
             this.$refs.bbsList.doSearch()
         },
         getUnpublish() {

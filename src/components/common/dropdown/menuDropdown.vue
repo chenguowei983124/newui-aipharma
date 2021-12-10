@@ -507,7 +507,7 @@ export default {
                     id: '3',
                     title: 'お薬立ちリンク集  ',
                     itemStyle: 'item',
-                    path: '',
+                    path: '/pharmaLink',
                 },
                 {
                     id: '4',
