@@ -11,7 +11,7 @@
                         text-googleTitle
                         notoSansJpAndTwentyBlack
                         cs:notoSansJpAndTwentyFourBlack
-                        pt-2.5
+                        pt-5
                         pb-2.5
                         pr-5
                         md:pt-5 md:pb-5
@@ -185,7 +185,9 @@
                         border-b-2 border-blueline
                         notoSansJpAndTwentyBold
                         text-view
-                        mt-10
+                        mt-5
+                        cs:mt-10
+                        lm:mt-10
                         pb-2.5
                         px-2
                     "
@@ -215,11 +217,15 @@
                                 class="
                                     border border-aiSwitch
                                     w-43.75
-                                    h-6
+                                    h-7.5
+                                    spm:h-6
+                                    lm:h-6
                                     notoSansJpAndTwelveMedium
                                     rounded-sm
                                     text-center text-aiSwitch
-                                    pt-0.5
+                                    pt-1.5
+                                    spm:pt-0.5
+                                    lm:pt-0.5
                                 "
                             >
                                 医療関係者向けサイト
@@ -229,11 +235,15 @@
                                 class="
                                     border border-notice
                                     w-43.75
-                                    h-6
+                                    h-7.5
+                                    spm:h-6
+                                    lm:h-6
                                     notoSansJpAndTwelveMedium
                                     rounded-sm
                                     text-center text-notice
-                                    pt-0.5
+                                    pt-1.5
+                                    spm:pt-0.5
+                                    lm:pt-0.5
                                     ml-2
                                 "
                             >

@@ -100,8 +100,8 @@
                             spm:mb-3.75
                             lm:mb-3.75
                             mr-0
-                            spm:mr-10
-                            lm:mr-10
+                            spm:mr-3
+                            lm:mr-3
                         "
                     >
                         <div class="notoSansJpAndSixteenMedium">
@@ -110,12 +110,22 @@
                         <div class="mt-1 mb-2.5 notoSansJpAndTwentyFourBold">
                             {{ item.systemName }}
                         </div>
-                        <div
-                            class="notoSansJpAndTwelveRegular"
-                            v-for="content in item.content"
-                            :key="content"
-                        >
-                            {{ content }}
+
+                        <div v-for="content in item.content" :key="content">
+                            <div v-if="content.type === 'text'">
+                                <div
+                                    :class="content.class"
+                                    v-html="content.title"
+                                ></div>
+                            </div>
+                            <ul
+                                class="pl-5 list-disc"
+                                v-if="content.type === 'li'"
+                            >
+                                <li :class="content.class">
+                                    {{ content.title }}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="flex justify-center">
@@ -186,24 +196,28 @@
                     </div>
                     <div class="mt-10">
                         <div class="flex justify-center">
-                            <button
-                                class="
-                                    orangeButtonColors
-                                    h-17.5
-                                    rounded-md
-                                    notoSansJpAndEighteenBlack
-                                    text-white text-center
-                                    w-full
-                                    md:w-93.75
-                                    disabled:cursor-not-allowed
-                                    px-10
-                                    break-words
-                                "
-                                @click="onCancel"
+                            <a
+                                href="https://www.k-idea.jp/medical/case/"
+                                target="_blank"
                             >
-                                <div>製薬企業のAI チャットボット</div>
-                                <div>導入・活用事例はコチラ</div>
-                            </button>
+                                <button
+                                    class="
+                                        orangeButtonColors
+                                        h-17.5
+                                        rounded-md
+                                        notoSansJpAndEighteenBlack
+                                        text-white text-center
+                                        w-full
+                                        md:w-93.75
+                                        disabled:cursor-not-allowed
+                                        px-10
+                                        break-words
+                                    "
+                                >
+                                    <div>製薬企業のAI チャットボット</div>
+                                    <div>導入・活用事例はコチラ</div>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -233,14 +247,18 @@ export default {
         return {
             title: 'すべて',
             keyWord: '',
-
+            aa: 'DI チャットボットは 、医療関係者向けに高脂血症治療剤（ロスーゼット&reg;アトーゼット&reg;、ゼチー ア&reg;）*の製品基本情報をオンラインで24時間365日検索できる製品情報検索システムです',
             dispList: [],
             list: [
                 {
                     companyName: 'シオノギ製薬',
                     systemName: 'DI チャット',
                     content: [
-                        'DIチャットは、人工知能を用いた自動回答システムにより、当社医薬品に関する情報を提供することを目的とした医療関係者のお客様限定のサービスです。',
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: 'DIチャットは、人工知能を用いた自動回答システムにより、当社医薬品に関する情報を提供することを目的とした医療関係者のお客様限定のサービスです。',
+                        },
                     ],
 
                     imageUrl: banner_DI_chat,
@@ -251,10 +269,26 @@ export default {
                     companyName: 'バイエル薬品',
                     systemName: 'DIチャットボット',
                     content: [
-                        'DI チャットボットは 、医療関係者向けに高脂血症治療剤（ロスーゼット®、アトーゼット®、ゼチー ア®）*の製品基本情報をオンラインで24時間365日検索できる製品情報検索システムです',
-                        '医療関係者が迅速に情報にアクセスすることが可能になります。',
-                        '*日本において製品名「ロスーゼット®配合錠LD/HD」「アトーゼット®配合錠LD/HD」「ゼチーア®錠10mg」としてバイエル薬品とオルガノン株式会社が共同販売を行っています。',
-                        'PP-ATO-JP-0355-30-11',
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: 'DI チャットボットは 、医療関係者向けに高脂血症治療剤（ロスーゼット&reg;アトーゼット&reg;、ゼチー ア&reg;）&#042;の製品基本情報をオンラインで24時間365日検索できる製品情報検索システムです',
+                        },
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: '医療関係者が迅速に情報にアクセスすることが可能になります。',
+                        },
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndElevenRegular',
+                            title: `&#042;日本において製品名「ロスーゼット&reg;配合錠LD/HD」「アトーゼット&reg;配合錠LD/HD」「ゼチーア&reg;錠10mg」としてバイエル薬品とオルガノン株式会社が共同販売を行っています。`,
+                        },
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndElevenRegular',
+                            title: 'PP-ATO-JP-0355-30-11',
+                        },
                     ],
                     imageUrl: bayer_di_banner,
                     imageLinkUrl:
@@ -264,7 +298,13 @@ export default {
                 {
                     companyName: 'ノバルティスファーマ',
                     systemName: '製品情報AI 検索システム',
-                    content: ['ゾフルーザをはじめとする感染症関連の情報提供。'],
+                    content: [
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: '○○○○○○○○○○○○○○○○○',
+                        },
+                    ],
                     imageUrl: aiSystem,
                     imageLinkUrl:
                         'https://misearch.kit-ai.jp/public/home/entrance',
@@ -275,7 +315,11 @@ export default {
                     companyName: '武田テバファーマ',
                     systemName: 'DI ナビ',
                     content: [
-                        'DIナビは人工知能を用いた自動回答システムです。当社医薬品に関する一般的な情報の提供、及び本サイトの案内を目的とした医療関係者向けのサービスです。24時間いつでも簡単にご利用いただけます。',
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: 'DIナビは人工知能を用いた自動回答システムです。当社医薬品に関する一般的な情報の提供、及び本サイトの案内を目的とした医療関係者向けのサービスです。24時間いつでも簡単にご利用いただけます。',
+                        },
                     ],
                     imageUrl: dinabi,
                     imageLinkUrl: 'https://www.med.takeda-teva.com/di-net/',
@@ -284,7 +328,13 @@ export default {
                 {
                     companyName: 'アムジェン',
                     systemName: 'AskAm',
-                    content: ['ゾフルーザをはじめとする感染症関連の情報提供。'],
+                    content: [
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: '○○○○○○○○○○○○○○○○○',
+                        },
+                    ],
                     imageUrl: askam,
                     imageLinkUrl:
                         'https://www.amgen.co.jp/products/for-physicians/medical-information/terms',
@@ -294,11 +344,31 @@ export default {
                     companyName: '田辺三菱製薬',
                     systemName: 'たなみんmed',
                     content: [
-                        'お役立ちポイント',
-                        '・約160品目の情報をスピーディに検索（タブレット、スマホ対応）',
-                        '・基本情報（効能効果/用法用量/くすりのしおり他）や使用期限を回答',
-                        '・患者向け資材の閲覧/請求',
-                        '・製品Q&A表示',
+                        {
+                            type: 'text',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: 'お役立ちポイント',
+                        },
+                        {
+                            type: 'li',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: '約160品目の情報をスピーディに検索（タブレット、スマホ対応）',
+                        },
+                        {
+                            type: 'li',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: '基本情報（効能効果/用法用量/くすりのしおり他）や使用期限を回答',
+                        },
+                        {
+                            type: 'li',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: '患者向け資材の閲覧/請求',
+                        },
+                        {
+                            type: 'li',
+                            class: 'notoSansJpAndTwelveRegular',
+                            title: '製品Q&A表示',
+                        },
                     ],
                     imageUrl: img,
                     imageLinkUrl:
