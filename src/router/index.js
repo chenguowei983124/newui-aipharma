@@ -21,6 +21,7 @@ import error from '/src/view/error.vue'
 import Redirect from '/src/view/Redirect.vue'
 import diChatbot from '/src/view/diChatbot.vue'
 import pharmaLink from '/src/view/pharmaLinks.vue'
+import prelusion from '/src/view/prelusion.vue'
 
 const routes = [
     // ログイン　画面
@@ -157,7 +158,7 @@ const routes = [
             requireAuth: true,
         },
     },
-    // 製薬企業一覧
+    //  DIチャットボット
     {
         path: '/diChatbot',
         name: 'diChatbot',
@@ -166,7 +167,7 @@ const routes = [
             requireAuth: true,
         },
     },
-    // DIチャットボット
+    // 製薬企業一覧
     {
         path: '/searchPharmaCompany',
         name: 'searchPharmaCompany',
@@ -180,6 +181,15 @@ const routes = [
         path: '/pharmaLink',
         name: 'pharmaLink',
         component: pharmaLink,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // 医療者向けサービス紹介
+    {
+        path: '/prelusion',
+        name: 'prelusion',
+        component: prelusion,
         meta: {
             requireAuth: true,
         },

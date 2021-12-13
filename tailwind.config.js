@@ -143,6 +143,8 @@ module.exports = {
                 55: '13.75rem',
                 // 225px
                 56.25: '14.0625rem',
+                // 245px
+                61.25:'15.3125rem',
                 // 252px
                 63: '15.75rem',
                 // 256px
@@ -163,6 +165,8 @@ module.exports = {
                 88.75: '22.1875rem',
                 // 375px
                 93.75: '23.4375rem',
+                // 416px
+                104: '26rem',
                 // 484px
                 121: '30.25rem',
                 // 530px
@@ -342,6 +346,7 @@ module.exports = {
                 'test-Range-Mid': 'rgb(250,220,170)',
                 loading: 'rgba(255, 255, 255, 0.7)',
                 chatbot: '#25839e',
+                chatbotline:'#5ba2b6'
             },
             fontSize: (theme) => theme('Size'),
             fontSize: {

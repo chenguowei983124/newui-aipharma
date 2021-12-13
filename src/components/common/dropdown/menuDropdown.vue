@@ -513,7 +513,7 @@ export default {
                     id: '4',
                     title: '医療者向けサービス紹介 ',
                     itemStyle: 'item',
-                    path: '',
+                    path: '/prelusion',
                 },
                 // 初回表示非表示
                 // {

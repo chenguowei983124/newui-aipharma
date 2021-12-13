@@ -213,74 +213,115 @@
                         </div>
                         <!-- 医療関係者向けサイト、一般向けサイト -->
                         <div class="flex mt-3.5">
-                            <div
-                                class="
-                                    border border-aiSwitch
-                                    w-43.75
-                                    h-7.5
-                                    spm:h-6
-                                    lm:h-6
-                                    notoSansJpAndTwelveMedium
-                                    rounded-sm
-                                    text-center text-aiSwitch
-                                    pt-1.5
-                                    spm:pt-0.5
-                                    lm:pt-0.5
-                                "
+                            <a :href="item.proUrl" target="_blank">
+                                <div
+                                    class="
+                                        border border-aiSwitch
+                                        w-43.75
+                                        h-7.5
+                                        spm:h-6
+                                        lm:h-6
+                                        notoSansJpAndTwelveMedium
+                                        rounded-sm
+                                        text-center text-aiSwitch
+                                        pt-1.5
+                                        spm:pt-0.5
+                                        lm:pt-0.5
+                                    "
+                                >
+                                    医療関係者向けサイト
+                                </div></a
                             >
-                                医療関係者向けサイト
-                            </div>
-
-                            <div
-                                class="
-                                    border border-notice
-                                    w-43.75
-                                    h-7.5
-                                    spm:h-6
-                                    lm:h-6
-                                    notoSansJpAndTwelveMedium
-                                    rounded-sm
-                                    text-center text-notice
-                                    pt-1.5
-                                    spm:pt-0.5
-                                    lm:pt-0.5
-                                    ml-2
-                                "
-                            >
-                                一般向けサイト
-                            </div>
+                            <a :href="item.genUrl" target="_blank">
+                                <div
+                                    class="
+                                        border border-notice
+                                        w-43.75
+                                        h-7.5
+                                        spm:h-6
+                                        lm:h-6
+                                        notoSansJpAndTwelveMedium
+                                        rounded-sm
+                                        text-center text-notice
+                                        pt-1.5
+                                        spm:pt-0.5
+                                        lm:pt-0.5
+                                        ml-2
+                                    "
+                                >
+                                    一般向けサイト
+                                </div>
+                            </a>
                         </div>
 
                         <!-- 電話番号、サイトなど -->
-                        <div class="mt-1 notoSansJpAndTwelveRegular">
-                            ■くすり相談窓口
+                        <div
+                            class="
+                                mt-2
+                                spm:mt-1
+                                lm:mt-1
+                                notoSansJpAndTwelveRegular
+                            "
+                        >
+                            {{ item.title1 }}
                         </div>
 
-                        <div class="notoSansJpAndSixteenBold text-view">
+                        <div
+                            class="
+                                mt-1
+                                spm:mt-0
+                                lm:mt-0
+                                notoSansJpAndSixteenBold
+                                text-view
+                            "
+                        >
                             {{ item.medicineCounter }}
                         </div>
 
-                        <div class="mt-1 notoSansJpAndTwelveRegular">
-                            ■資材請求
+                        <div
+                            class="
+                                mt-2
+                                spm:mt-1
+                                lm:mt-1
+                                notoSansJpAndTwelveRegular
+                            "
+                        >
+                            {{ item.title2 }}
                         </div>
-                        <div class="flex notoSansJpAndSixteenBold text-view">
+                        <div
+                            v-if="item.infoCounter === '' && item.webUrl === ''"
+                        >
+                            <div class="notoSansJpAndFourteenMedium text-black">
+                                担当MR にお尋ねください
+                            </div>
+                        </div>
+                        <div
+                            class="flex notoSansJpAndSixteenBold text-view"
+                            v-else
+                        >
                             <div class="notoSansJpAndSixteenBold text-view">
                                 {{ item.infoCounter }}
                             </div>
-
-                            <div
-                                class="ml-2 underline"
+                            <a
+                                href="item.webUrl"
+                                target="_blank"
                                 v-if="item.webUrl !== ''"
                             >
-                                <a href="item.webUrl">Webサイト</a>
-                            </div>
-                            <div class="ml-2 mt-1.5 md:mt-2">
-                                <externalLink
-                                    class="w-3.5 h-3.5 md:h-3 md:w-3"
-                                    fill="#32a5dc"
-                                    stroke="#32a5dc"
-                                ></externalLink>
-                            </div>
+                                <div class="ml-2 underline">Webサイト</div>
+                            </a>
+                            <a
+                                :href="item.iconUrl"
+                                target="_blank"
+                                v-if="item.iconUrl !== ''"
+                            >
+                                <div class="ml-2 mt-1.5 md:mt-2">
+                                    <externalLink
+                                        class="w-3.5 h-3.5 md:h-3 md:w-3"
+                                        fill="#32a5dc"
+                                        stroke="#32a5dc"
+                                    ></externalLink>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div
@@ -292,35 +333,55 @@
                             lm:w-50
                             flex
                             justify-center
+                            mt-5
+                            spm:mt-0
+                            lm:mt-0
                         "
                     >
                         <div>
-                            <div
-                                class="
-                                    w-65
-                                    spm:w-43.75
-                                    lm:w-43.75
-                                    h-7.5
-                                    spm:h-6
-                                    lm:h-6
-                                    rounded-sm
-                                    border-2 border-chatbot
-                                    notoSansJpAndTwelveMedium
-                                    flex
-                                    justify-center
-                                    text-chatbot
-                                    ml-0
-                                    spm:ml-6
-                                    lm:ml-6
-                                "
+                            <a
+                                :class="[
+                                    item.chatbotUrl != ''
+                                        ? 'block'
+                                        : 'hidden spm:block lm:block spm:invisible lm:invisible',
+                                ]"
+                                :href="item.chatbotUrl"
                             >
-                                <chatbot class="w-4 h-4 mt-1"></chatbot>
-                                <div class="mt-0.5">チャットボット</div>
-                            </div>
+                                <div
+                                    class="
+                                        w-65
+                                        spm:w-43.75
+                                        lm:w-43.75
+                                        h-7.5
+                                        spm:h-6
+                                        lm:h-6
+                                        rounded-sm
+                                        border-2 border-chatbot
+                                        notoSansJpAndTwelveMedium
+                                        flex
+                                        justify-center
+                                        text-chatbot
+                                        ml-0
+                                        spm:ml-6
+                                        lm:ml-6
+                                    "
+                                    :class="[
+                                        item.chatbotUrl !== ''
+                                            ? 'block'
+                                            : 'hidden spm:block lm:block spm:invisible lm:invisible',
+                                    ]"
+                                >
+                                    <chatbot
+                                        class="w-4 h-4 mt-1 mr-1"
+                                    ></chatbot>
+                                    <div class="mt-0.5">チャットボット</div>
+                                </div>
+                            </a>
 
                             <div
                                 class="
-                                    mt-3.5
+                                    mt-2
+                                    spm:mt-3.5
                                     w-65
                                     spm:w-50
                                     lm:w-50
@@ -332,7 +393,8 @@
                             ></div>
                             <div
                                 class="
-                                    mt-3.5
+                                    mt-2
+                                    spm:mt-3.5
                                     w-65
                                     spm:w-50
                                     lm:w-50
@@ -383,15 +445,17 @@ export default {
                 {
                     key: 'ア',
                     companyName: 'コーアイセイ株式会社',
-                    chatbotUrl: '',
+                    chatbotUrl: 'http://www.isei-pharm.co.jp/',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■くすり相談窓口',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
-                    iconUrl: '',
-                    imageUrl1: '',
-                    imageUrl2: '',
+                    iconUrl: 'http://www.isei-pharm.co.jp/',
+                    imageUrl1: 'http://www.isei-pharm.co.jp/',
+                    imageUrl2: 'http://www.isei-pharm.co.jp/',
                 },
                 {
                     key: 'ア',
@@ -399,10 +463,12 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■学術部',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
-                    iconUrl: '',
+                    iconUrl: 'http://www.isei-pharm.co.jp/',
                     imageUrl1: '',
                     imageUrl2: '',
                 },
@@ -412,10 +478,12 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
-                    iconUrl: '',
+                    iconUrl: 'http://www.isei-pharm.co.jp/',
                     imageUrl1: '',
                     imageUrl2: '',
                 },
@@ -425,9 +493,11 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
-                    webUrl: 'http://www.isei-pharm.co.jp/',
+                    webUrl: '',
                     iconUrl: '',
                     imageUrl1: '',
                     imageUrl2: '',
@@ -438,7 +508,24 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
+                    infoCounter: '',
+                    webUrl: '',
+                    iconUrl: '',
+                    imageUrl1: '',
+                    imageUrl2: '',
+                },
+                {
+                    key: 'ア',
+                    companyName: 'コーアイセイ株式会社',
+                    chatbotUrl: '',
+                    proUrl: '',
+                    genUrl: '',
+                    title1: '■お問い合わせ窓口',
+                    medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -451,7 +538,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -464,7 +553,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -477,20 +568,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
-                    infoCounter: '123-4567-8912',
-                    webUrl: 'http://www.isei-pharm.co.jp/',
-                    iconUrl: '',
-                    imageUrl1: '',
-                    imageUrl2: '',
-                },
-                {
-                    key: 'ア',
-                    companyName: 'コーアイセイ株式会社',
-                    chatbotUrl: '',
-                    proUrl: '',
-                    genUrl: '',
-                    medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -503,7 +583,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -516,7 +598,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -529,7 +613,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -542,7 +628,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -555,7 +643,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -568,7 +658,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -581,7 +673,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -594,7 +688,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -607,7 +703,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -620,7 +718,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -633,7 +733,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -646,7 +748,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -659,7 +763,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -672,7 +778,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -685,7 +793,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -698,7 +808,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -711,7 +823,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -724,7 +838,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -737,7 +853,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -750,7 +868,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -763,7 +883,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -776,7 +898,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -789,7 +913,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -802,7 +928,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -815,7 +943,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -828,7 +958,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -841,7 +973,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -854,7 +988,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -867,7 +1003,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -880,7 +1018,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -893,7 +1033,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -906,7 +1048,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -919,7 +1063,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -932,7 +1078,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -945,7 +1093,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -958,7 +1108,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -971,7 +1123,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -984,7 +1138,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -997,7 +1153,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1010,7 +1168,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1023,7 +1183,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1036,7 +1198,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1049,7 +1213,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1062,7 +1228,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1075,7 +1243,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1088,7 +1258,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1101,7 +1273,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1114,7 +1288,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1127,7 +1303,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1140,7 +1318,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1153,7 +1333,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1166,7 +1348,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1179,7 +1363,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1192,7 +1378,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1205,7 +1393,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1218,7 +1408,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1231,7 +1423,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1244,7 +1438,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1257,7 +1453,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1270,7 +1468,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1283,7 +1483,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1296,7 +1498,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1309,7 +1513,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1322,7 +1528,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1335,7 +1543,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1348,7 +1558,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1361,7 +1573,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1374,7 +1588,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1387,7 +1603,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1400,7 +1618,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1413,7 +1633,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1426,7 +1648,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1439,7 +1663,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1452,7 +1678,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1465,7 +1693,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1478,7 +1708,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1491,7 +1723,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1504,7 +1738,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1517,7 +1753,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1530,7 +1768,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1543,7 +1783,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1556,7 +1798,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1569,7 +1813,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1582,7 +1828,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1595,7 +1843,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1608,7 +1858,9 @@ export default {
                     chatbotUrl: '',
                     proUrl: '',
                     genUrl: '',
+                    title1: '■hhc ホットライン',
                     medicineCounter: '080-1234-5678',
+                    title2: '■資材請求',
                     infoCounter: '123-4567-8912',
                     webUrl: 'http://www.isei-pharm.co.jp/',
                     iconUrl: '',
@@ -1632,22 +1884,28 @@ export default {
             console.log(this.pamButtons)
             this.title = item.title
 
+            this.searchGroupData(item.title)
+        },
+        searchGroupData(title) {
             this.dispList = []
             for (let i = 0; i < this.list.length; i++) {
-                if (item.title === 'すべて') {
+                if (title === 'すべて') {
                     this.dispList = this.list
                 } else {
-                    if (item.title === this.list[i].key) {
+                    if (title === this.list[i].key) {
                         this.dispList.push(this.list[i])
                     }
                 }
             }
         },
         searchClick() {
+            this.searchGroupData(this.title)
             let temmlist = []
             if (this.keyWord !== '') {
                 for (let i = 0; i < this.dispList.length; i++) {
-                    if (this.keyWord === this.dispList[i].companyName) {
+                    if (
+                        this.dispList[i].companyName.indexOf(this.keyWord) >= 0
+                    ) {
                         temmlist.push(this.dispList[i])
                     }
                 }

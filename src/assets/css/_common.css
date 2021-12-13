@@ -196,6 +196,12 @@
 .yellowPillShapeButtonColors {
     @apply bg-personOrganizationButton border-b-2 border-personInformationButton hover:opacity-50 active:bg-personInformationButton active:opacity-100;
 }
+.greenDiChatbotButtonColors {
+    @apply bg-chatbotline border-b-2 border-chatbot hover:opacity-50 active:bg-chatbot active:opacity-100;
+}
+.goodServeButtonColors {
+    @apply bg-whole border-b-2 border-green39aa4a hover:opacity-50 active:bg-whole active:opacity-100;
+}
 /* Good BUTTON COLOR css */
 .goodButtonColors {
     @apply bg-whole border-b-2 border-green39aa4a h-7.5 w-14 rounded;

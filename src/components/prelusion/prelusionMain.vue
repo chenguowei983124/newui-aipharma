@@ -7,47 +7,29 @@
             ></div>
             <div class="flex flex-col w-full md:w-191.25 mx-2 md:mx-0">
                 <div class="flex justify-between p-2 md:p-5">
-                    <div
-                        class="
-                            text-googleTitle
-                            notoSansJpAndTwentyBlack
-                            md:notoSansJpAndTwentyFourBold
-                            lm:notoSansJpAndTwentyFourBold
-                        "
-                    >
-                        お
-                        <ruby>
-                            <rb
-                                class="
-                                    text-googleTitle
-                                    notoSansJpAndTwentyBlack
-                                    md:notoSansJpAndTwentyFourBold
-                                "
-                                >薬</rb
-                            >
-                            <rp>(</rp>
-                            <rt
-                                class="
-                                    text-googleTitle
-                                    notoSansJpAndTenBold
-                                    md:notoSansJpAndTenBold
-                                "
-                                >やく</rt
-                            >
-                            <rp>）)</rp>
-                            立ちリンク集
-                        </ruby>
-
-                        <p
+                    <div>
+                        <div
                             class="
-                                break-words
-                                notoSansJpAndTwelveRegular
-                                mt-2
-                                text-black
+                                text-googleTitle
+                                notoSansJpAndTwentyBlack
+                                md:notoSansJpAndTwentyFourBold
+                                lm:notoSansJpAndTwentyFourBold
                             "
                         >
-                            薬剤師の先生方のリンク集となります。
-                        </p>
+                            医療者向けサービス紹介
+                        </div>
+                        <div>
+                            <p
+                                class="
+                                    break-words
+                                    notoSansJpAndTwelveRegular
+                                    mt-2
+                                    text-black
+                                "
+                            >
+                                薬剤師の先生方のリンク集となります。
+                            </p>
+                        </div>
                     </div>
                     <div class="mt-2">
                         <div class="flex justify-center">

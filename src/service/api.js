@@ -953,6 +953,39 @@ const serve = {
 
         return data
     },
+    //===========================
+    // 症例入出力エクスポート
+    //===========================
+    async downloadPreavoidStyle(param, type = 0) {
+        let apiName = ''
+        if (type == 0) {
+            apiName = '/api/preavoid/style_export'
+        } else if (type == 1) {
+            apiName = '/api/preavoid/export_conversion_form_1'
+        } else if (type == 2) {
+            apiName = '/api/preavoid/export_conversion_form_2'
+        } else if (type == 3) {
+            apiName = '/api/preavoid/export_collection_conversion_form'
+        } else if (type == 4) {
+            apiName = '/api/preavoid/export_collection_conversion_form'
+        }
+        const data = await axios(apiName, {
+            method: 'post',
+            data: param,
+        })
+
+        return data
+    },
+    //===========================
+    // 症例入出力マニュアルエクスポート
+    //===========================
+    async downloadPreavoidManual() {
+        const data = await axios('/api/general/get_aipharma_user_manual', {
+            method: 'post',
+        })
+
+        return data
+    },
     async getTest() {
         const data = await axios('/preavoid/get_topmenu_Noticel_info_test', {
             method: 'get',

@@ -23,15 +23,7 @@
                     >
                         フォーム
                     </th>
-                    <!-- <th
-                        class="
-                            border-r border-b border-blueline
-                            w-50
-                            flex-none flex
-                            items-center
-                            justify-center
-                        "
-                    ></th> -->
+
                     <th
                         class="
                             border-r border-b border-blueline
@@ -76,8 +68,8 @@
             <tbody>
                 <tr
                     class="flex text-xs font-NotoSansJp h-15"
-                    v-for="item in detailList"
-                    :key="item"
+                    v-for="(item, index) in detailList"
+                    :key="index"
                 >
                     <!-- フォーム -->
                     <td
@@ -110,7 +102,9 @@
                             justify-center
                         "
                     >
-                        <excel class="mt-4 h-7 w-5.5"></excel>
+                        <div class="cursor-pointer" @click="sytle1Click(index)">
+                            <excel class="mt-4 h-7 w-5.5"></excel>
+                        </div>
                     </td>
                     <!--  様式 2 -->
                     <td
@@ -121,7 +115,9 @@
                             justify-center
                         "
                     >
-                        <excel class="mt-4 h-7 w-5.5"></excel>
+                        <div class="cursor-pointer" @click="sytle2Click(index)">
+                            <excel class="mt-4 h-7 w-5.5"></excel>
+                        </div>
                     </td>
                     <!-- 様式 3 -->
                     <td
@@ -132,7 +128,9 @@
                             justify-center
                         "
                     >
-                        <excel class="mt-4 h-7 w-5.5"></excel>
+                        <div class="cursor-pointer" @click="sytle3Click(index)">
+                            <excel class="mt-4 h-7 w-5.5"></excel>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -176,9 +174,61 @@ export default {
         }
     },
     computed: {},
-    mounted() {
-        this.checkAll = false
+    mounted() {},
+    methods: {
+        sytle1Click(index) {
+            console.log(index)
+            this.onExport(index, 1)
+        },
+        sytle2Click(index) {
+            console.log(index)
+            this.onExport(index, 2)
+        },
+        sytle3Click(index) {
+            console.log(index)
+            this.onExport(index, 3)
+        },
+        onExport(type, style) {
+            this.$store.dispatch('setDownload', true)
+            let param = {
+                style: style,
+            }
+            if (type == 0) {
+                param.updated_from = '19000401'
+                param.updated_to = '19000401'
+            }
+            this.$serve.downloadPreavoidStyle(param, type).then((res) => {
+                // const filename = this.getFileNameFromContentDisposition(
+                //     res.headers['content-disposition']
+                // )
+
+                let filename = 'sytle.xls'
+                if (type == 0) {
+                    filename = 'プレアボイド様式' + style + 'テンプレート.xlsx'
+                }
+                if (window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(res.data, filename)
+                } else {
+                    const blob = new Blob([res.data], {
+                        type: 'application/octet-stream',
+                    })
+                    const link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = filename
+                    link.click()
+                }
+            })
+        },
+        getFileNameFromContentDisposition(disposition) {
+            const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+            const matches = filenameRegex.exec(disposition)
+            if (matches != null && matches[1]) {
+                const fileName = matches[1].replace(/['"]/g, '')
+                return decodeURI(fileName)
+            } else {
+                return null
+            }
+        },
     },
-    methods: {},
 }
 </script>

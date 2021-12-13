@@ -29,7 +29,7 @@
                     class="cursor-pointer w-80"
                     :name="'styles'"
                     ref="styles"
-                    :default-value="defaultValue"
+                    :default-value="base.style"
                     :placeholder="'-- Choose an option --'"
                     :default-input-attribs="{
                         tabindex: 1,
@@ -107,7 +107,17 @@
                     <div>
                         ※同姓同名のユーザーがいる場合にはご注意ください。対応方法は
                     </div>
-                    <a class="underline text-blueline">マニュアル</a>
+                    <div
+                        class="
+                            underline
+                            text-blueline
+                            cursor-pointer
+                            hover:opacity-50
+                        "
+                        @click="manualClick"
+                    >
+                        マニュアル
+                    </div>
                     <div>をご参照ください。</div>
                 </div>
             </div>
@@ -143,7 +153,6 @@
 </template>
 
 <script>
-import aa from '../common/dateRange/litepie-datepicker.vue'
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../common/dateRange/litepie-datepicker.vue'
 import myTable from './myTable.vue'
@@ -152,10 +161,9 @@ export default {
     props: {},
     data() {
         return {
-            defaultValue: 0,
             base: {
                 file: {},
-                style: '',
+                style: '1',
             },
         }
     },
@@ -189,7 +197,35 @@ export default {
             }
         },
         setStyle(value) {
-            this.style = value
+            this.base.style = value
+        },
+        manualClick(type, style) {
+            this.$store.dispatch('setDownload', true)
+            let param = {}
+            this.$serve.downloadPreavoidManual().then((res) => {
+                const filename = '【AI-PHARMA】利用画面マニュアル.pdf'
+                if (window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(res.data, filename)
+                } else {
+                    const blob = new Blob([res.data], {
+                        type: 'application/octet-stream',
+                    })
+                    const link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = filename
+                    link.click()
+                }
+            })
+        },
+        getFileNameFromContentDisposition(disposition) {
+            const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+            const matches = filenameRegex.exec(disposition)
+            if (matches != null && matches[1]) {
+                const fileName = matches[1].replace(/['"]/g, '')
+                return decodeURI(fileName)
+            } else {
+                return null
+            }
         },
     },
     created() {},
