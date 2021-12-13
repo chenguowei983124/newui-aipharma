@@ -94,12 +94,12 @@
                 >
                     <div
                         class="
-                            pt-5
+                            pt-3.75
                             ml-5
                             mb-0
                             spm:mb-3.75
                             lm:mb-3.75
-                            mr-0
+                            mr-5
                             spm:mr-3
                             lm:mr-3
                         "
@@ -241,185 +241,185 @@ import banner_DI_chat from '../../assets/image/dichat.png'
 import aiSystem from '../../assets/image/aiSystem.png'
 import dinabi from '../../assets/image/dinabi.png'
 export default {
-    components: { searchSvg, Chatbot, externalLink },
-    props: {},
-    data() {
-        return {
-            title: 'すべて',
-            keyWord: '',
-            aa: 'DI チャットボットは 、医療関係者向けに高脂血症治療剤（ロスーゼット&reg;アトーゼット&reg;、ゼチー ア&reg;）*の製品基本情報をオンラインで24時間365日検索できる製品情報検索システムです',
-            dispList: [],
-            list: [
-                {
-                    companyName: 'シオノギ製薬',
-                    systemName: 'DI チャット',
-                    content: [
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: 'DIチャットは、人工知能を用いた自動回答システムにより、当社医薬品に関する情報を提供することを目的とした医療関係者のお客様限定のサービスです。',
-                        },
-                    ],
+  components: { searchSvg, Chatbot, externalLink },
+  props: {},
+  data() {
+    return {
+      title: 'すべて',
+      keyWord: '',
+      aa: 'DI チャットボットは 、医療関係者向けに高脂血症治療剤（ロスーゼット&reg;アトーゼット&reg;、ゼチー ア&reg;）*の製品基本情報をオンラインで24時間365日検索できる製品情報検索システムです',
+      dispList: [],
+      list: [
+        {
+          companyName: 'シオノギ製薬',
+          systemName: 'DI チャット',
+          content: [
+            {
+              type: 'text',
+              class: 'notoSansJpAndTwelveRegular',
+              title: 'DIチャットは、人工知能を用いた自動回答システムにより、当社医薬品に関する情報を提供することを目的とした医療関係者のお客様限定のサービスです。',
+            },
+          ],
 
-                    imageUrl: banner_DI_chat,
-                    imageLinkUrl: 'https://www.shionogi.co.jp/med/dichat/',
-                    productsNumber: '■対応製品数（全製品数）：29品目（96品目）',
-                },
-                {
-                    companyName: 'バイエル薬品',
-                    systemName: 'DIチャットボット',
-                    content: [
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: 'DI チャットボットは 、医療関係者向けに高脂血症治療剤（ロスーゼット&reg;アトーゼット&reg;、ゼチー ア&reg;）&#042;の製品基本情報をオンラインで24時間365日検索できる製品情報検索システムです',
-                        },
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: '医療関係者が迅速に情報にアクセスすることが可能になります。',
-                        },
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndElevenRegular',
-                            title: `&#042;日本において製品名「ロスーゼット&reg;配合錠LD/HD」「アトーゼット&reg;配合錠LD/HD」「ゼチーア&reg;錠10mg」としてバイエル薬品とオルガノン株式会社が共同販売を行っています。`,
-                        },
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndElevenRegular',
-                            title: 'PP-ATO-JP-0355-30-11',
-                        },
-                    ],
-                    imageUrl: bayer_di_banner,
-                    imageLinkUrl:
-                        'https://rosuzet-atozet-di.ai-q.biz/GBYNsAMlCdbnAEJrW_tI/contact/top',
-                    productsNumber: '■対応製品数（全製品数）：3品目（49品目）',
-                },
-                {
-                    companyName: 'ノバルティスファーマ',
-                    systemName: '製品情報AI 検索システム',
-                    content: [
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: '○○○○○○○○○○○○○○○○○',
-                        },
-                    ],
-                    imageUrl: aiSystem,
-                    imageLinkUrl:
-                        'https://misearch.kit-ai.jp/public/home/entrance',
-                    productsNumber:
-                        '■対応製品数（全製品数）：全品目（79 品目）',
-                },
-                {
-                    companyName: '武田テバファーマ',
-                    systemName: 'DI ナビ',
-                    content: [
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: 'DIナビは人工知能を用いた自動回答システムです。当社医薬品に関する一般的な情報の提供、及び本サイトの案内を目的とした医療関係者向けのサービスです。24時間いつでも簡単にご利用いただけます。',
-                        },
-                    ],
-                    imageUrl: dinabi,
-                    imageLinkUrl: 'https://www.med.takeda-teva.com/di-net/',
-                    productsNumber: '■対応製品数（全製品数）：全品目（91品目）',
-                },
-                {
-                    companyName: 'アムジェン',
-                    systemName: 'AskAm',
-                    content: [
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: '○○○○○○○○○○○○○○○○○',
-                        },
-                    ],
-                    imageUrl: askam,
-                    imageLinkUrl:
-                        'https://www.amgen.co.jp/products/for-physicians/medical-information/terms',
-                    productsNumber: '■対応製品数（全製品数）：全品目（6品目）',
-                },
-                {
-                    companyName: '田辺三菱製薬',
-                    systemName: 'たなみんmed',
-                    content: [
-                        {
-                            type: 'text',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: 'お役立ちポイント',
-                        },
-                        {
-                            type: 'li',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: '約160品目の情報をスピーディに検索（タブレット、スマホ対応）',
-                        },
-                        {
-                            type: 'li',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: '基本情報（効能効果/用法用量/くすりのしおり他）や使用期限を回答',
-                        },
-                        {
-                            type: 'li',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: '患者向け資材の閲覧/請求',
-                        },
-                        {
-                            type: 'li',
-                            class: 'notoSansJpAndTwelveRegular',
-                            title: '製品Q&A表示',
-                        },
-                    ],
-                    imageUrl: img,
-                    imageLinkUrl:
-                        'https://medical.mt-pharma.co.jp/relation/guest/r7Y4',
-                    productsNumber:
-                        '■対応製品数（全製品数）：全品目（111品目）',
-                },
-            ],
+          imageUrl: banner_DI_chat,
+          imageLinkUrl: 'https://www.shionogi.co.jp/med/dichat/',
+          productsNumber: '■対応製品数（全製品数）：29品目（96品目）',
+        },
+        {
+          companyName: 'バイエル薬品',
+          systemName: 'DIチャットボット',
+          content: [
+            {
+              type: 'text',
+              class: 'notoSansJpAndTwelveRegular',
+              title: 'DI チャットボットは 、医療関係者向けに高脂血症治療剤（ロスーゼット&reg;アトーゼット&reg;、ゼチー ア&reg;）&#042;の製品基本情報をオンラインで24時間365日検索できる製品情報検索システムです。',
+            },
+            {
+              type: 'text',
+              class: 'notoSansJpAndTwelveRegular',
+              title: '医療関係者が迅速に情報にアクセスすることが可能になります。',
+            },
+            {
+              type: 'text',
+              class: 'notoSansJpAndElevenRegular',
+              title: `&#042;日本において製品名「ロスーゼット&reg;配合錠LD/HD」「アトーゼット&reg;配合錠LD/HD」「ゼチーア&reg;錠10mg」としてバイエル薬品とオルガノン株式会社が共同販売を行っています。`,
+            },
+            {
+              type: 'text',
+              class: 'notoSansJpAndElevenRegular',
+              title: 'PP-ATO-JP-0355-30-11',
+            },
+          ],
+          imageUrl: bayer_di_banner,
+          imageLinkUrl:
+            'https://rosuzet-atozet-di.ai-q.biz/GBYNsAMlCdbnAEJrW_tI/contact/top',
+          productsNumber: '■対応製品数（全製品数）：3品目（49品目）',
+        },
+        {
+          companyName: 'ノバルティスファーマ',
+          systemName: '製品情報AI 検索システム',
+          content: [
+            {
+              type: 'text',
+              class: 'notoSansJpAndTwelveRegular',
+              title: '○○○○○○○○○○○○○○○○○',
+            },
+          ],
+          imageUrl: aiSystem,
+          imageLinkUrl:
+            'https://misearch.kit-ai.jp/public/home/entrance',
+          productsNumber:
+            '■対応製品数（全製品数）：全品目（79 品目）',
+        },
+        {
+          companyName: '武田テバファーマ',
+          systemName: 'DI ナビ',
+          content: [
+            {
+              type: 'text',
+              class: 'notoSansJpAndTwelveRegular',
+              title: 'DIナビは人工知能を用いた自動回答システムです。当社医薬品に関する一般的な情報の提供、及び本サイトの案内を目的とした医療関係者向けのサービスです。24時間いつでも簡単にご利用いただけます。',
+            },
+          ],
+          imageUrl: dinabi,
+          imageLinkUrl: 'https://www.med.takeda-teva.com/di-net/',
+          productsNumber: '■対応製品数（全製品数）：全品目（91品目）',
+        },
+        {
+          companyName: 'アムジェン',
+          systemName: 'AskAm',
+          content: [
+            {
+              type: 'text',
+              class: 'notoSansJpAndTwelveRegular',
+              title: '○○○○○○○○○○○○○○○○○',
+            },
+          ],
+          imageUrl: askam,
+          imageLinkUrl:
+            'https://www.amgen.co.jp/products/for-physicians/medical-information/terms',
+          productsNumber: '■対応製品数（全製品数）：全品目（6品目）',
+        },
+        {
+          companyName: '田辺三菱製薬',
+          systemName: 'たなみんmed',
+          content: [
+            {
+              type: 'text',
+              class: 'notoSansJpAndTwelveRegular',
+              title: 'お役立ちポイント',
+            },
+            {
+              type: 'li',
+              class: 'notoSansJpAndTwelveRegular',
+              title: '約160品目の情報をスピーディに検索（タブレット、スマホ対応）',
+            },
+            {
+              type: 'li',
+              class: 'notoSansJpAndTwelveRegular',
+              title: '基本情報（効能効果/用法用量/くすりのしおり他）や使用期限を回答',
+            },
+            {
+              type: 'li',
+              class: 'notoSansJpAndTwelveRegular',
+              title: '患者向け資材の閲覧/請求',
+            },
+            {
+              type: 'li',
+              class: 'notoSansJpAndTwelveRegular',
+              title: '製品Q&A表示',
+            },
+          ],
+          imageUrl: img,
+          imageLinkUrl:
+            'https://medical.mt-pharma.co.jp/relation/guest/r7Y4',
+          productsNumber:
+            '■対応製品数（全製品数）：全品目（111品目）',
+        },
+      ],
+    }
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    buttonClick(item) {
+      for (let i = 0; i < this.pamButtons.length; i++) {
+        if (item.id === this.pamButtons[i].id) {
+          this.pamButtons[i].focus = true
+        } else {
+          this.pamButtons[i].focus = false
         }
-    },
-    computed: {},
-    watch: {},
-    methods: {
-        buttonClick(item) {
-            for (let i = 0; i < this.pamButtons.length; i++) {
-                if (item.id === this.pamButtons[i].id) {
-                    this.pamButtons[i].focus = true
-                } else {
-                    this.pamButtons[i].focus = false
-                }
-            }
-            console.log(this.pamButtons)
-            this.title = item.title
+      }
+      console.log(this.pamButtons)
+      this.title = item.title
 
-            this.dispList = []
-            for (let i = 0; i < this.list.length; i++) {
-                if (item.title === 'すべて') {
-                    this.dispList = this.list
-                } else {
-                    if (item.title === this.list[i].key) {
-                        this.dispList.push(this.list[i])
-                    }
-                }
-            }
-        },
-        searchClick() {
-            let temmlist = []
-            if (this.keyWord !== '') {
-                for (let i = 0; i < this.dispList.length; i++) {
-                    if (this.keyWord === this.dispList[i].companyName) {
-                        temmlist.push(this.dispList[i])
-                    }
-                }
-                this.dispList = temmlist
-            }
-        },
+      this.dispList = []
+      for (let i = 0; i < this.list.length; i++) {
+        if (item.title === 'すべて') {
+          this.dispList = this.list
+        } else {
+          if (item.title === this.list[i].key) {
+            this.dispList.push(this.list[i])
+          }
+        }
+      }
     },
-    created() {},
-    mounted() {
-        this.dispList = this.list
+    searchClick() {
+      let temmlist = []
+      if (this.keyWord !== '') {
+        for (let i = 0; i < this.dispList.length; i++) {
+          if (this.keyWord === this.dispList[i].companyName) {
+            temmlist.push(this.dispList[i])
+          }
+        }
+        this.dispList = temmlist
+      }
     },
+  },
+  created() { },
+  mounted() {
+    this.dispList = this.list
+  },
 }
 </script>
 <style scoped></style>
