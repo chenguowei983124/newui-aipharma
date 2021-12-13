@@ -2,7 +2,6 @@
     <div class="fullOverlay" v-show="$store.getters.getIsLoadingShow">
         <span class="loader">Loading...</span>
     </div>
-    <span class="loader"></span>
 </template>
 <style scoped>
 .fullOverlay {
