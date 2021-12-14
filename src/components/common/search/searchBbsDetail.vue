@@ -1,5 +1,5 @@
 <template>
-    <div class="space-y-2">
+    <div class="space-y-2 -mb-2.5 md:-mb-0">
         <!-- 1.5行目 -->
         <div
             class="flex flex-row w-full mx-2 md:mx-0 font-bold text-white pt-2"
@@ -135,12 +135,36 @@
                             return await fetchLanguages(query) // check JS block for implementation
                         }
                     "
-                    :classes="$constant.multiselectCss">
+                    :classes="$constant.multiselectCss"
+                >
+                    <template
+                        v-slot:tag="{ option, handleTagRemove, disabled }"
+                    >
+                        <div class="multiselect-tag-style">
+                            # {{ option.label }}
+                            <span
+                                v-if="!disabled"
+                                class="multiselect-tag-remove"
+                                @mousedown.prevent="
+                                    handleTagRemove(option, $event)
+                                "
+                            >
+                                <span
+                                    class="multiselect-tag-remove-icon"
+                                ></span>
+                            </span>
+                        </div>
+                    </template>
                     <template v-slot:option="{ option }">
-                    <div class="w-full">
-                        {{ option.label }}
-                        <div class="float-right" v-if="option.count !== undefined">{{ option.count }}件</div>
-                    </div>
+                        <div class="w-full">
+                            # {{ option.label }}
+                            <div
+                                class="float-right"
+                                v-if="option.count !== undefined"
+                            >
+                                {{ option.count }}件
+                            </div>
+                        </div>
                     </template>
                 </Multiselect>
             </div>
@@ -201,7 +225,7 @@
                     }"
                     :leftLableDisp="false"
                 ></litepie-datepicker>
-                <button></button>
+                <span></span>
                 <input
                     class="
                         w-9.5
@@ -411,7 +435,7 @@ export default {
                             setList = {
                                 value: result[key].value,
                                 label: result[key].label,
-                                count: result[key].count
+                                count: result[key].count,
                             }
                         }
                     })
@@ -481,7 +505,10 @@ export default {
                     if (!storeExistFlg) {
                         selectedItem.push(this.bbsTagslist[index])
                         this.$store.dispatch('setBbsTagsList', selectedItem)
-                        localStorage.setItem('store',JSON.stringify(this.$store.state))
+                        localStorage.setItem(
+                            'store',
+                            JSON.stringify(this.$store.state)
+                        )
                     }
                 }
             }
@@ -546,7 +573,9 @@ export default {
             this.$emit('isDetailClick', this.isDetailClick)
         },
     },
-
+    created() {
+        this.$emit('isDetailClick', true)
+    },
     updated() {
         this.$nextTick(function () {
             // ビュー全体がレンダリングされた後にのみ実行されるコード

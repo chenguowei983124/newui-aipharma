@@ -85,7 +85,7 @@
                                 menubar: false,
                                 statusbar: false,
                                 plugins:
-                                    'print preview importcss tinydrive searchreplace autolink autosave save directionality  visualblocks visualchars fullscreen image link media  template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists  wordcount imagetools textpattern noneditable help charmap quickbars emoticons ',
+                                    'print preview importcss tinydrive searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons ',
                                 toolbar:
                                     ' undo redo | bold italic underline strikethrough | fontsizeselect forecolor removeformat | alignleft aligncenter alignright alignjustify |  numlist bullist | image table link | fullscreen  preview pagebreak ',
                             }"
@@ -870,20 +870,66 @@ export default {
                 sideEffects: [],
                 keyWord: [],
                 questioner: {
-                    prefession: '-1',
+                    prefession: '',
                     department: [],
                 },
-                patientGender: '',
+                patientGender: 0,
                 references: [],
                 diseaseName: [],
                 memo: '',
-                questionDate: '',
+                questionDate:
+                    new Date().getFullYear() +
+                    '.' +
+                    (new Date().getMonth() + 1) +
+                    '.' +
+                    new Date().getDate(),
                 publicRange: false,
                 custom_details: {},
             },
         }
     },
+    watch: {
+        $route: function () {
+            if (this.$route.path != '/newOrgDIRecord') {
+                return
+            }
+            console.log('this.$route.query', this.$route.query)
+            if (JSON.stringify(this.$route.query) == '{}') {
+                this.init()
+            }
+        },
+    },
     methods: {
+        init() {
+            this.base.question = ''
+            this.base.answer.text = ''
+            this.base.source = []
+            this.base.pmid = ''
+            this.url.pmid.text = ''
+            this.base.doi = ''
+            this.base.file = []
+            this.detail.mediTypes = []
+            this.detail.quesClass = []
+            this.detail.mediName = []
+            this.detail.sideEffects = []
+            this.detail.keyWord = []
+            this.setPrefessionValue('')
+            this.detail.questioner.department = []
+            this.detail.patientGender = 0
+            this.detail.references = []
+            this.detail.diseaseName = []
+            this.detail.memo = ''
+            this.$refs.datepickerFrom.clearPicker()
+            this.detail.questionDate =
+                new Date().getFullYear() +
+                '.' +
+                (new Date().getMonth() + 1) +
+                '.' +
+                new Date().getDate()
+            this.detail.publicRange = false
+            this.detail.custom_details = {}
+            this.initCustomDetails()
+        },
         onInputPmid(e) {
             // console.log('onChangeURL',e)
             if (!!e.target.value) {
@@ -948,7 +994,9 @@ export default {
             }
         },
         setPrefessionValue(value) {
-            // console.log(value)
+            if (value == null) {
+                value = 0
+            }
             this.detail.questioner.prefession = value
         },
         setPatientGenderValue(value) {
@@ -1001,7 +1049,11 @@ export default {
                             confirmButtonText: 'OK',
                         })
                         .then(() => {
-                            this.$router.go(-1)
+                            if (JSON.stringify(this.$route.query) == '{}') {
+                                this.$router.push('/myHome')
+                            } else {
+                                this.$router.go(-1)
+                            }
                         })
                 } else {
                     this.$swal
@@ -1032,7 +1084,11 @@ export default {
                             })
                             .then(() => {
                                 // this.clearInput()
-                                this.$router.go(-1)
+                                if (JSON.stringify(this.$route.query) == '{}') {
+                                    this.$router.push('/myHome')
+                                } else {
+                                    this.$router.go(-1)
+                                }
                             })
                     } else {
                         this.$swal
@@ -1061,7 +1117,11 @@ export default {
                             })
                             .then(() => {
                                 // this.clearInput()
-                                this.$router.go(-1)
+                                if (JSON.stringify(this.$route.query) == '{}') {
+                                    this.$router.push('/myHome')
+                                } else {
+                                    this.$router.go(-1)
+                                }
                             })
                     } else {
                         this.$swal
@@ -1130,7 +1190,7 @@ export default {
                     referenceMaterials: this.detail.references,
                     note: this.detail.memo,
                     askedPersonClassId:
-                        this.detail.questioner.prefession == '-1'
+                        this.detail.questioner.prefession == '0'
                             ? ''
                             : this.detail.questioner.prefession,
                     publishFlag: data == 'create' || data == 'update' ? 1 : 0,
@@ -1145,6 +1205,13 @@ export default {
             custom_details.map((cd) => {
                 switch (cd.data_type) {
                     case 'single':
+                        result.push({
+                            id: cd.id,
+                            type: cd.data_type,
+                            title: cd.title,
+                            value: '',
+                        })
+                        break
                     case 'text':
                         result.push({
                             id: cd.id,

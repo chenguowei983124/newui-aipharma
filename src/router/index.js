@@ -158,7 +158,7 @@ const routes = [
             requireAuth: true,
         },
     },
-    //  DIチャットボット
+    // DIチャットボット
     {
         path: '/diChatbot',
         name: 'diChatbot',

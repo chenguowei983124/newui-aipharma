@@ -19,7 +19,7 @@
                                 {{ $store.getters.topManagementInfo.user_name }}
                             </div>
                             <div class="notoSansJpAndTwelveRegular">
-                                {{ $store.getters.topManagementInfo.title }}
+                                {{ '先生' }}
                             </div>
                         </div>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-2 rounded-lg md:rounded-none">
+    <div class="pt-2 rounded-lg md:rounded-none -mb-2.5 md:-mb-0">
         <div class="mx-2 md:mx-0 space-y-2">
             <div
                 class="flex space-x-2"
@@ -263,6 +263,9 @@ export default {
             this.isDetailClick = !this.isDetailClick
             this.$emit('isDetailClick', this.isDetailClick)
         },
+    },
+    created() {
+        this.$emit('isDetailClick', true)
     },
 }
 </script>

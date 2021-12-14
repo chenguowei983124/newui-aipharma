@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-2 rounded-lg md:rounded-none">
+    <div class="pt-2 rounded-lg md:rounded-none -mb-2.5 md:-mb-0">
         <div class="space-y-2">
             <!-- 1.5行目 -->
             <div
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="flex flex-row">
-                            <div class="w-28 md:w-30">
+                            <div class="w-28 md:w-31">
                                 <!-- 添付ファイル名 -->
                                 <label
                                     class="inline-flex items-center justify-end"
@@ -518,9 +518,6 @@ export default {
                 })
                 this.orgOrgTagslist = result
             }
-            // console.log('resultresult', result)
-
-            // console.log('this.orgOrgTagslist', this.orgOrgTagslist)
             return result
         },
 
@@ -602,7 +599,7 @@ export default {
         // 詳細条件クリックイベント
         detailBottunClick: function (event) {
             this.isOrgDetailClick = !this.isOrgDetailClick
-            this.$emit('isOrgDetailClick', this.isOrgDetailClick)
+            this.$emit('isDetailClick', this.isOrgDetailClick)
         },
         // 検索ボタン押下イベント
         searchClick: function (event) {
@@ -639,6 +636,9 @@ export default {
         getCheckId(data) {
             this.checkId = data
         },
+    },
+    created() {
+        this.$emit('isDetailClick', true)
     },
 }
 </script>

@@ -101,7 +101,7 @@ export default {
             let arr = Array.from(
                 state.commonInfo.patient_gender.map((item) => {
                     return {
-                        value: item.name,
+                        value: item.id,
                         title: item.name,
                     }
                 })

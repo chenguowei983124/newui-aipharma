@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-full md:w-192.5 justify-between pr-2 md:pr-0">
+    <div class="flex w-full md:w-192.5 justify-between mt-2 pr-2 md:pr-0">
         <div
             class="
                 text-googleTitle
@@ -29,7 +29,7 @@
                 "
                 @click="bbsRecordClick"
             >
-                投　稿
+                投 稿
             </button>
             <button
                 class="

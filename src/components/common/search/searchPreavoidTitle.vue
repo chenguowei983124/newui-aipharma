@@ -1,7 +1,8 @@
 <template>
-    <div class="flex w-full md:w-192.5 justify-between pr-2 md:pr-0">
+    <div class="flex w-full md:w-192.5 justify-between mt-2 pr-2 md:pr-0">
         <div
             class="
+                flex
                 text-googleTitle
                 font-NotoSansJp
                 text-xl
@@ -10,10 +11,12 @@
                 flex-none
                 pl-2
                 md:pl-0
-                w-60
             "
         >
-            症例（プレアボイド）
+            症例
+            <span class="text-xxs md:text-2xl pt-2.5 md:pt-0"
+                >（プレアボイド）</span
+            >
         </div>
         <div class="flex flex-row space-x-2">
             <button

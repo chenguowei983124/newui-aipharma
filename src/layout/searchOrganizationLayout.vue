@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="searchOrganizationLayout">
         <!-- 検索枠 -->
         <div class="group">
             <!-- pcの場合 -->
@@ -7,40 +7,23 @@
                 <search-bar
                     ref="searchbar"
                     :form="$constant.formList.OWN"
-                    @isOrgDetailClick="getOrgDetailClick"
+                    @isDetailClick="getDetailDisp"
                     @detailDisp="getScroll"
-                    v-on:orgcheckId="orgcheckIdMsg"
+                    @checkId="checkIdMsg"
                 ></search-bar>
             </div>
 
-            <!-- spの場合、ヘッダー、検索枠の位置を替える -->
-            <div
-                :class="[
-                    isOrgDetailButtonClick
-                        ? 'hidden group-hover:block h-56'
-                        : 'hidden group-hover:block h-36',
-                ]"
-                v-if="!isScroll"
-            ></div>
+            <!-- spの場合、ヘッダー、検索枠の位置を替えるv-if="!isScroll" -->
+            <div :class="fixedHoverHight"></div>
         </div>
-        <div
-            class=""
-            :class="[
-                isScroll
-                    ? isOrgDetailButtonClick
-                        ? 'h-65 md:h-88.75 '
-                        : 'h-36 md:h-60 '
-                    : isOrgDetailButtonClick
-                    ? 'h-20 md:h-40 '
-                    : 'h-20 md:h-40 ',
-            ]"
-        ></div>
+        <div :class="fixedHight"></div>
+
         <!-- 内容 -->
         <div
             class="
                 flex
                 border-b-2 border-recruitment
-                mt-50
+                mt-0
                 md:mt-12
                 h-10
                 md:h-16
@@ -51,7 +34,7 @@
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
             ></div>
             <div class="flex flex-col w-full md:w-191.25 justify-start">
-                <div class="flex flex-row space-x-2 items-center">
+                <div class="flex flex-row mt-1 md:mt-0 space-x-2 items-center">
                     <div
                         class="
                             text-googleTitle text-xl
@@ -95,6 +78,7 @@
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
             ></div>
         </div>
+
         <div class="flex pt-6 md:pt-4">
             <div class="flex-grow max-h-full min-w-min block"></div>
             <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">
@@ -119,7 +103,7 @@
         <div
             :class="[
                 $store.getters.getGoodMessageBox
-                    ? 'block mt-2 w-full fixed z-20 bottom-20 '
+                    ? 'block mt-2 w-full fixed z-20 bottom-20'
                     : 'hidden',
             ]"
         >
@@ -145,13 +129,112 @@ export default {
     props: {},
     data() {
         return {
+            name: 'fixedHight',
+            name: 'fixedHoverHight',
             // 詳細条件ボタン押下区分
-            isOrgDetailButtonClick: true,
+            isDetailButtonClick: true,
             isScroll: true,
             // すべて 選択
-            isorgcheckIdMsg: '',
+            ischeckIdMsg: '2',
             //   isOrgDetailButtonClick: false,
         }
+    },
+    computed: {
+        fixedHight() {
+            let css = ''
+            if (this.ischeckIdMsg == '6' || this.ischeckIdMsg == '7') {
+                css = 'h-30 md:h-30'
+            } else {
+                if (this.isScroll) {
+                    if (this.isDetailButtonClick) {
+                        if (
+                            this.ischeckIdMsg == '0' ||
+                            this.ischeckIdMsg == '4' ||
+                            this.ischeckIdMsg == '5'
+                        ) {
+                            css = 'h-30 md:h-30'
+                        } else if (this.ischeckIdMsg == '1') {
+                            css = 'h-74.5 md:h-62.5'
+                        } else if (this.ischeckIdMsg == '2') {
+                            css = 'h-112.5 md:h-93.75'
+                        } else if (this.ischeckIdMsg == '3') {
+                            css = 'h-80 md:h-70'
+                        } else {
+                            css = 'h-48 md:h-93.75'
+                        }
+                    } else {
+                        if (
+                            this.ischeckIdMsg == '0' ||
+                            this.ischeckIdMsg == '4' ||
+                            this.ischeckIdMsg == '5'
+                        ) {
+                            css = 'h-48 md:h-30'
+                        } else if (this.ischeckIdMsg == '3') {
+                            css = 'h-48 md:h-42.5'
+                        } else if (this.ischeckIdMsg == '2') {
+                            css = 'h-86.25 md:h-64'
+                        } else {
+                            css = 'h-48 md:h-64'
+                        }
+                    }
+                } else {
+                    if (this.isDetailButtonClick) {
+                        css = 'h-30 md:h-30'
+                    } else {
+                        css = 'h-30 md:h-30'
+                    }
+                }
+            }
+            console.log('css', css)
+            return css
+        },
+        fixedHoverHight() {
+            let css = ''
+            // v-if="!isScroll"
+            if (this.ischeckIdMsg == '6' || this.ischeckIdMsg == '7') {
+                if (this.isDetailButtonClick) {
+                    css = 'hidden group-hover:block h-60 md:h-50'
+                } else {
+                    css = 'hidden group-hover:block h-60 md:h-30'
+                }
+            } else {
+                if (!this.isScroll) {
+                    if (this.isDetailButtonClick) {
+                        if (
+                            this.ischeckIdMsg == '0' ||
+                            this.ischeckIdMsg == '4' ||
+                            this.ischeckIdMsg == '5'
+                        ) {
+                            css = 'hidden group-hover:block'
+                        } else if (this.ischeckIdMsg == '1') {
+                            css = 'hidden group-hover:block h-48 md:h-32.5'
+                        } else if (this.ischeckIdMsg == '2') {
+                            css = 'hidden group-hover:block h-48 md:h-63.75'
+                        } else if (this.ischeckIdMsg == '3') {
+                            css = 'hidden group-hover:block h-48 md:h-40'
+                        } else {
+                            css = 'hidden group-hover:block h-48 md:h-63.75'
+                        }
+                    } else {
+                        if (
+                            this.ischeckIdMsg == '0' ||
+                            this.ischeckIdMsg == '4' ||
+                            this.ischeckIdMsg == '5'
+                        ) {
+                            css = 'hidden group-hover:block'
+                        } else if (this.ischeckIdMsg == '3') {
+                            css = 'hidden group-hover:block h-48 md:h-15'
+                        } else if (this.ischeckIdMsg == '2') {
+                            css = 'hidden group-hover:block h-48 md:h-34'
+                        } else {
+                            css = 'hidden group-hover:block h-48 md:h-34'
+                        }
+                    }
+                }
+            }
+            console.log('css', css)
+            return css
+        },
     },
     mounted() {},
     methods: {
@@ -160,14 +243,19 @@ export default {
                 this.$refs.searchbar.$refs.ownDetail.$refs.mult.refreshOptions()
             }
         },
-        // ========================================
+        // // ========================================
+        // // 詳細条件ボタン押下区分を取得
+        // // ========================================
+        // getOrgDetailClick: function (data) {
+        //     this.isOrgDetailButtonClick = data
+        // },
         // 詳細条件ボタン押下区分を取得
-        // ========================================
-        getOrgDetailClick: function (data) {
-            this.isOrgDetailButtonClick = data
+        getDetailDisp: function (data) {
+            this.isDetailButtonClick = data
         },
         // スクロール
         getScroll: function (value) {
+            console.log('getScroll', value)
             this.isScroll = value
         },
         // クリック タグ
@@ -182,8 +270,8 @@ export default {
             this.searchTag(data)
         },
         // DropDown 選択したアイテムＩＤ取得
-        orgcheckIdMsg: function (data) {
-            this.isorgcheckIdMsg = data
+        checkIdMsg: function (data) {
+            this.ischeckIdMsg = data
         },
     },
     created() {

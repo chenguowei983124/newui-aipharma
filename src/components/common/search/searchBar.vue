@@ -53,10 +53,12 @@
                     >
                         <search-di-knowledge
                             ref="diDetail"
+                            @isDetailClick="getIsDetailClick"
                             @tagValue="getOwnTagValue"
                             :searchButtonClick="searchClick"
                         ></search-di-knowledge>
                     </div>
+
                     <!-- 組織内DI記録詳細条件 -->
                     <div
                         :class="
@@ -64,13 +66,11 @@
                         "
                         v-if="checkId == 2 && form != $constant.formList.TOP"
                     >
-                        <!-- v-bind:message="parentMsg" -->
                         <search-detail
                             ref="ownDetail"
-                            @isOrgDetailClick="getIsDetailClick"
+                            @isDetailClick="getIsDetailClick"
                             @tagValue="getOwnTagValue"
                             :searchButtonClick="searchClick"
-                            v-on:inputClearValue="showMsg"
                         ></search-detail>
                     </div>
                     <!-- 症例詳細条件 -->
@@ -81,6 +81,7 @@
                         v-if="checkId == 3 && form != $constant.formList.TOP"
                     >
                         <search-preavoids
+                            @isDetailClick="getIsDetailClick"
                             :searchButtonClick="searchClick"
                         ></search-preavoids>
                     </div>
@@ -116,6 +117,14 @@
             <div :class="searchBarStyleClessMid">
                 <!-- 左青背景 -->
                 <!-- <div :class="searchBarProStyleClass"></div> -->
+                <!-- <search-di-title-bar
+                    v-if="form == this.$constant.formList.DI"
+                    @searchTagtoBrother="tagToBrother"
+                ></search-di-title-bar> -->
+                <!-- <search-org-title-bar
+                    v-if="form == this.$constant.formList.OWN"
+                    @searchTagtoBrother="tagToBrother"
+                ></search-org-title-bar> -->
                 <search-preavoid-title
                     v-if="form == this.$constant.formList.PVD"
                 ></search-preavoid-title>
@@ -138,6 +147,8 @@ import searchDetail from './searchDetail.vue'
 import searchDiKnowledge from './searchDiKnowledge.vue'
 import searchPreavoids from './searchPreavoids.vue'
 import searchBbsTitleBar from './searchBbsTitleBar.vue'
+// import searchOrgTitleBar from './searchOrgTitleBar.vue'
+// import searchDiTitleBar from './searchDiTitleBar.vue'
 import searchBbsDetail from './searchBbsDetail.vue'
 import searchEdiTitleBar from './searchEdiTitleBar.vue'
 import searchEdiDetail from './searchEdiDetail.vue'
@@ -156,6 +167,8 @@ export default {
         searchBbsDetail,
         searchEdiTitleBar,
         searchEdiDetail,
+        // searchOrgTitleBar,
+        // searchDiTitleBar,
         // Swal,
     },
     props: {
@@ -175,11 +188,15 @@ export default {
             detailDisp: true,
             ownTagVaule: [],
             parentMsg: '',
+            isDetailButtonClick: true,
         }
     },
     watch: {
         checkId: function () {
             this.$emit('searchID', this.checkId)
+        },
+        detailDisp: function () {
+            this.$emit('detailDisp', this.detailDisp)
         },
     },
     mounted() {
@@ -256,30 +273,25 @@ export default {
             } else if (this.$props.form == this.$constant.formList.DI) {
                 return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
             } else if (this.$props.form == this.$constant.formList.OWN) {
-                if (this.detailDisp == false) {
-                    return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 '
-                } else {
-                    return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-lg md:rounded-b-none'
-                }
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-0 md:pt-2.5 pb-0 md:pb-2.5 rounded-b-none'
             } else if (this.$props.form == this.$constant.formList.PVD) {
-                if (this.detailDisp == false) {
-                    return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 rounded-b-lg md:rounded-b-none'
-                } else {
-                    return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-lg md:rounded-b-none'
-                }
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-0 md:pt-2.5 pb-0 md:pb-2.5 rounded-b-none'
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 md:group-hover:pb-2.5 group-hover:pb-0 md:rounded-b-none '
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-none '
             } else if (this.$props.form == this.$constant.formList.EDI) {
-                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-2.5 rounded-b-lg md:rounded-b-none'
+                return 'bg-backgroundMainSearch flex justify-center items-center h-full w-full pt-2.5 pb-0 md:pb-2.5 rounded-b-none'
             }
         },
+
+        // this.$props.form == this.$constant.formList.OWN ||
+        // this.$props.form == this.$constant.formList.DI ||
         searchBarStyleClessMid: function () {
             if (
                 this.$props.form == this.$constant.formList.PVD ||
                 this.$props.form == this.$constant.formList.BBS ||
                 this.$props.form == this.$constant.formList.EDI
             ) {
-                return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2 border-blueline '
+                return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2 border-recruitment '
             } else {
                 return 'hidden'
             }
@@ -320,9 +332,9 @@ export default {
         },
         pcPlaceholder: function () {
             if (this.checkId == 0) {
-                return 'Q&A、おくすり事例、DI 辞書、掲示板、その他の検索エンジンの一括検索ができます'
+                return 'AI-Pharma内の各種メニューを横断的に検索できます'
             } else if (this.checkId == 1) {
-                return '2単語以上からなる文章を入力　※単語での検索は機能しません'
+                return '2単語以上からなる文章を入力 ※単語での検索は機能しません'
             } else if (this.checkId != 0 && this.checkId != 1) {
                 return 'キーワードを入力'
             }
@@ -336,18 +348,18 @@ export default {
                     'focus:border-transparent '
                 )
             } else if (this.$props.form == this.$constant.formList.ALL) {
-                if (this.checkId != 0) {
+                if (this.checkId == 0) {
                     return (
-                        'hidden md:block md:rounded-none md:rounded-r h-10 w-10/12  ' +
+                        'hidden md:block md:rounded-none h-10 w-10/12  ' +
                         'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
                         'focus:placeholder-opacity-0  border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
                         'focus:border-transparent '
                     )
                 } else {
                     return (
-                        'hidden md:block md:rounded-none h-10 w-10/12  ' +
+                        'hidden md:block  h-10 w-10/12  md:rounded-none md:rounded-r ' +
                         'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                        'focus:placeholder-opacity-0  border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
                         'focus:border-transparent '
                     )
                 }
@@ -400,19 +412,37 @@ export default {
                     )
                 }
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return (
-                    'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent '
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'hidden md:block  h-10 w-10/12 md:rounded-none' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                } else {
+                    return (
+                        'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                }
             } else if (this.$props.form == this.$constant.formList.EDI) {
-                return (
-                    'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent '
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'hidden md:block  h-10 w-10/12 md:rounded-none' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                } else {
+                    return (
+                        'hidden md:block  h-10 w-10/12 md:rounded-none md:rounded-r ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                }
             }
         },
         sreachBarSPInputClass: function () {
@@ -424,47 +454,101 @@ export default {
                     'focus:border-transparent '
                 )
             } else if (this.$props.form == this.$constant.formList.ALL) {
-                return (
-                    'block md:hidden h-10 w-10/12 ml-2.5 ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 rounded-none rounded-l-sm border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent '
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 rounded-none rounded-l-sm border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                } else {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 rounded-none rounded-l-sm border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent mr-2.5'
+                    )
+                }
             } else if (this.$props.form == this.$constant.formList.DI) {
-                return (
-                    'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-gray-300 border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent mr-2.5'
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded-none ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-gray-300 border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent'
+                    )
+                } else {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-gray-300 border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent mr-2.5'
+                    )
+                }
             } else if (this.$props.form == this.$constant.formList.OWN) {
-                return (
-                    'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent mr-2.5'
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded-none my-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent'
+                    )
+                } else {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded my-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent mr-2.5'
+                    )
+                }
             } else if (this.$props.form == this.$constant.formList.PVD) {
-                return (
-                    'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent mr-2.5'
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded my-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                } else {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded my-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent mr-2.5'
+                    )
+                }
             } else if (this.$props.form == this.$constant.formList.BBS) {
-                return (
-                    'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent mr-2.5'
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded mb-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                } else {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded mb-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent mr-2.5'
+                    )
+                }
             } else if (this.$props.form == this.$constant.formList.EDI) {
-                return (
-                    'block md:hidden h-10 w-10/12 ml-2.5 rounded ' +
-                    'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
-                    'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
-                    'focus:border-transparent mr-2.5'
-                )
+                if (this.checkId == 0) {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded mb-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent '
+                    )
+                } else {
+                    return (
+                        'block md:hidden h-10 w-10/12 ml-2.5 rounded mb-2.5 ' +
+                        'notoSansJpAndTwelveRegular flex-grow pl-4 placeholder-gray-500 ' +
+                        'focus:placeholder-opacity-0 border border-transparent focus:outline-none focus:ring-1 focus:ring-326EB5Lins ' +
+                        'focus:border-transparent mr-2.5'
+                    )
+                }
             }
         },
         sreachBarButtonClass: function () {
@@ -474,14 +558,27 @@ export default {
             ) {
                 return 'hidden'
             } else {
-                return (
-                    'bg-searchBunnon hover:bg-top active:bg-personInformationButton ' +
-                    'text-white rounded-none rounded-r-sm md:rounded-none md:rounded-tr md:rounded-br w-10 md:w-17.5 h-10 flex-none mr-2.5 '
-                )
+                if (
+                    this.$props.form == this.$constant.formList.OWN &&
+                    this.checkId == 0
+                ) {
+                    return (
+                        'bg-searchBunnon hover:bg-top active:bg-personInformationButton my-2.5 md:my-0 ' +
+                        'text-white rounded-none rounded-r-sm md:rounded-none md:rounded-tr md:rounded-br w-10 md:w-17.5 h-10 flex-none mr-2.5 '
+                    )
+                } else {
+                    return (
+                        'bg-searchBunnon hover:bg-top active:bg-personInformationButton ' +
+                        'text-white rounded-none rounded-r-sm md:rounded-none md:rounded-tr md:rounded-br w-10 md:w-17.5 h-10 flex-none mr-2.5 '
+                    )
+                }
             }
         },
     },
     methods: {
+        tagToBrother() {
+            this.$refs.ownDetail.$refs.mult.refreshOptions()
+        },
         clearSearchWord(val) {
             this.$store.dispatch('setSearchWord', val)
         },
@@ -507,8 +604,6 @@ export default {
             } else {
                 this.detailDisp = true
             }
-            // }
-            this.$emit('detailDisp', this.detailDisp)
         },
         // 検索ボタン押下イベント
         searchClick: function (event) {
@@ -904,9 +999,10 @@ export default {
         getCheckId(value) {
             this.initStore(this.checkId, value)
             this.checkId = value
-            this.$emit('orgcheckId', value)
+            this.$emit('checkId', this.checkId)
         },
         getIsDetailClick(value) {
+            this.isDetailButtonClick = value
             this.$emit('isDetailClick', value)
         },
         //  組織内 DI 記録（Q&A）詳細条件 フラグ

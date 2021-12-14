@@ -1,7 +1,17 @@
 <template>
     <div class="space-y-2">
         <!-- 1.5行目 -->
-        <div class="flex flex-row mx-2 md:mx-0 font-bold text-white pt-2">
+        <div
+            class="
+                flex flex-row
+                mx-2
+                md:mx-0
+                font-bold
+                text-white
+                font-NotoSansJp
+                pt-2
+            "
+        >
             <!-- 検索対象 左-->
             <div class="w-20 flex text-sm md:text-base">検索対象</div>
             <!-- 右 -->
@@ -48,7 +58,7 @@
                         </div>
                     </div>
                     <div class="flex flex-row">
-                        <div class="w-28 md:w-30">
+                        <div class="w-28 md:w-31">
                             <!-- 添付ファイル名 -->
                             <label class="inline-flex items-center justify-end">
                                 <input
@@ -187,7 +197,16 @@
             </div>
         </div>
         <!-- 三行目 -->
-        <div class="flex space-x-44 justify-center bg-backgroundMainSearch">
+        <div
+            class="
+                flex
+                space-x-44
+                justify-center
+                bg-backgroundMainSearch
+                pb-2
+                md:pb-0
+            "
+        >
             <div class="flex space-x-2">
                 <button
                     class="
@@ -380,11 +399,6 @@ export default {
             this.$store.commit('setCheckLastEditerDI', true)
             this.$store.commit('setCheckFacilityNameDI', true)
             this.$store.commit('setCheckNoteDI', true)
-        },
-        // 詳細条件クリックイベント
-        detailBottunClick: function (event) {
-            this.isDetailClick = !this.isDetailClick
-            this.$emit('isDetailClick', this.isDetailClick)
         },
         // 検索ボタン押下イベント
         searchClick: function (event) {

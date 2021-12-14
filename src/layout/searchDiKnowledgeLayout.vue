@@ -3,26 +3,24 @@
     <div class="group">
         <!-- pcの場合 -->
         <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
-            <!-- @detailDisp="getDetailDisp"
-                @isDetailClick="getDetailClick"
-                @searchResult="getSearchResult" -->
             <search-bar
                 ref="searchbar"
                 :form="$constant.formList.DI"
+                @isDetailClick="getDetailDisp"
                 @detailDisp="getScroll"
+                @checkId="checkIdMsg"
             ></search-bar>
         </div>
-        <div class="hidden group-hover:block h-30" v-if="!isScroll"></div>
-        <!-- <div class="h-40 md:h-52.5"></div> -->
+        <div :class="fixedHoverHight"></div>
     </div>
-    <div :class="[isScroll ? 'h-40 md:h-52.5 ' : 'h-40 md:h-52.5']"></div>
+    <div :class="fixedHight"></div>
     <!-- 内容 -->
-    <div class="flex border-b-2 border-recruitment mt-33.5 md:mt-5 md:h-20">
+    <div class="flex border-b-2 border- md:h-20">
         <!-- 左 -->
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
-        <div class="flex flex-col w-full md:w-191.25 mt-4 justify-center">
+        <div class="flex flex-col w-full md:w-191.25 justify-center">
             <div class="flex flex-row space-x-2 items-center">
                 <div
                     class="
@@ -121,10 +119,12 @@ export default {
     props: {},
     data() {
         return {
+            name: 'fixedHight',
+            name: 'fixedHoverHight',
             isScroll: true,
-            isMenuOpen: true,
-            isDetailButtonClick: false,
-            parentMage: '',
+            // すべて 選択
+            ischeckIdMsg: '1',
+            isDetailButtonClick: true,
         }
     },
     methods: {
@@ -140,11 +140,13 @@ export default {
                 this.$refs.searchbar.$refs.diDetail.$refs.multDi.refreshOptions()
             }
         },
-        // ========================================
         // 詳細条件ボタン押下区分を取得
-        // ========================================
-        getDetailClick: function (data) {
+        getDetailDisp: function (data) {
             this.isDetailButtonClick = data
+        },
+        // DropDown 選択したアイテムＩＤ取得
+        checkIdMsg: function (data) {
+            this.ischeckIdMsg = data
         },
         // ========================================
         // 詳細条件表示・非表示取得
@@ -156,8 +158,106 @@ export default {
             this.$store.dispatch('setSearchTagsLable', tagsLable)
             this.$refs.searchbar.$refs.diDetail.$refs.multDi.refreshOptions()
         },
+        // init中 クリック タグ
         showMsgToParent: function (data) {
             this.searchTag(data)
+        },
+    },
+    computed: {
+        fixedHight() {
+            let css = ''
+            if (this.ischeckIdMsg == '6' || this.ischeckIdMsg == '7') {
+                css = 'h-30 md:h-30'
+            } else {
+                if (this.isScroll) {
+                    if (this.isDetailButtonClick) {
+                        if (
+                            this.ischeckIdMsg == '0' ||
+                            this.ischeckIdMsg == '4' ||
+                            this.ischeckIdMsg == '5'
+                        ) {
+                            css = 'h-30 md:h-30'
+                        } else if (this.ischeckIdMsg == '1') {
+                            css = 'h-74.5 md:h-62.5'
+                        } else if (this.ischeckIdMsg == '2') {
+                            css = 'h-112.5 md:h-93.75'
+                        } else if (this.ischeckIdMsg == '3') {
+                            css = 'h-80 md:h-70'
+                        } else {
+                            css = 'h-48 md:h-93.75'
+                        }
+                    } else {
+                        if (
+                            this.ischeckIdMsg == '0' ||
+                            this.ischeckIdMsg == '4' ||
+                            this.ischeckIdMsg == '5'
+                        ) {
+                            css = 'h-48 md:h-30'
+                        } else if (this.ischeckIdMsg == '3') {
+                            css = 'h-48 md:h-42.5'
+                        } else if (this.ischeckIdMsg == '2') {
+                            css = 'h-86.25 md:h-64'
+                        } else {
+                            css = 'h-48 md:h-64'
+                        }
+                    }
+                } else {
+                    if (this.isDetailButtonClick) {
+                        css = 'h-30 md:h-30'
+                    } else {
+                        css = 'h-30 md:h-30'
+                    }
+                }
+            }
+            console.log('css', css)
+            return css
+        },
+        fixedHoverHight() {
+            let css = ''
+            // v-if="!isScroll"
+            if (this.ischeckIdMsg == '6' || this.ischeckIdMsg == '7') {
+                if (this.isDetailButtonClick) {
+                    css = 'hidden group-hover:block h-60 md:h-50'
+                } else {
+                    css = 'hidden group-hover:block h-48 md:h-30'
+                }
+            } else {
+                if (!this.isScroll) {
+                    if (this.isDetailButtonClick) {
+                        if (
+                            this.ischeckIdMsg == '0' ||
+                            this.ischeckIdMsg == '4' ||
+                            this.ischeckIdMsg == '5'
+                        ) {
+                            css = 'hidden group-hover:block'
+                        } else if (this.ischeckIdMsg == '1') {
+                            css = 'hidden group-hover:block h-48 md:h-32.5'
+                        } else if (this.ischeckIdMsg == '2') {
+                            css = 'hidden group-hover:block h-48 md:h-63.75'
+                        } else if (this.ischeckIdMsg == '3') {
+                            css = 'hidden group-hover:block h-48 md:h-40'
+                        } else {
+                            css = 'hidden group-hover:block h-48 md:h-63.75'
+                        }
+                    } else {
+                        if (
+                            this.ischeckIdMsg == '0' ||
+                            this.ischeckIdMsg == '4' ||
+                            this.ischeckIdMsg == '5'
+                        ) {
+                            css = 'hidden group-hover:block'
+                        } else if (this.ischeckIdMsg == '3') {
+                            css = 'hidden group-hover:block h-48 md:h-15'
+                        } else if (this.ischeckIdMsg == '2') {
+                            css = 'hidden group-hover:block h-48 md:h-34'
+                        } else {
+                            css = 'hidden group-hover:block h-48 md:h-34'
+                        }
+                    }
+                }
+            }
+            console.log('css', css)
+            return css
         },
     },
     created() {

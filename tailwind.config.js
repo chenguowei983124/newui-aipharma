@@ -13,7 +13,7 @@ module.exports = {
             },
             backgroundImage: (theme) => ({
                 'multiselect-caret': `url("${svgToDataUri(
-                    `<svg viewBox="0 0 320 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M31.3  192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg>`
+                    `<svg viewBox="0 0 320 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg>`
                 )}")`,
                 'multiselect-spinner': `url("${svgToDataUri(
                     `<svg viewBox="0 0 512 512" fill="${theme(
@@ -107,8 +107,8 @@ module.exports = {
                 32.5: '8.125rem',
                 // 134px
                 33.5: '8.375rem',
-                // 150px
-                35: '8.75rem',
+                // 136px
+                34: '8.5rem',
                 // 150px
                 37.5: '9.375rem',
                 38: '9.5rem',
@@ -145,16 +145,24 @@ module.exports = {
                 56.25: '14.0625rem',
                 // 245px
                 61.25:'15.3125rem',
+                // 250px
+                62.5: '15.625rem',
                 // 252px
                 63: '15.75rem',
+                // 255 px
+                63.75: '15.9375rem',
                 // 256px
                 64: '16rem',
                 // 260px
                 65: '16.25rem',
                 // 264px
                 66: '16.5rem',
+                // 275px
+                68.75: '17.1875rem',
                 // 280px
                 70: '17.5rem',
+                // 298px
+                74.5: '18.625rem',
                 // 330px
                 82.5: '20.625rem',
                 // 345px
@@ -167,6 +175,10 @@ module.exports = {
                 93.75: '23.4375rem',
                 // 416px
                 104: '26rem',
+                // 415px
+                103.75: '25.9375rem',
+                // 450px
+                112.5: '28.125rem',
                 // 484px
                 121: '30.25rem',
                 // 530px
@@ -271,21 +283,21 @@ module.exports = {
                 backgroundMain: 'rgb(214, 237, 248)',
                 backgroundMainSearch: 'rgb(50, 165, 220)',
                 searchResultTitle: 'rgb(101, 187, 229)',
-                personDataInfo: 'rgb(230,230,230)',
+                personDataInfo: 'rgb(230, 230, 230)',
                 personGroupInformation: 'rgb(253, 244, 229)',
                 personInformationButton: 'rgb(241, 90, 36)',
-                searchBunnon: 'rgb(240,150,0)',
-                cardTitle: 'rgb(101, 187,229)',
-                cardTitlePmad: 'rgb(153, 153,153)',
-                cardGroup1: 'rgb(105, 125,200)',
-                cardGroup2: 'rgb(140, 200,90)',
-                cardGroup3: 'rgb(250, 130,160)',
-                cardTypePmad1: 'rgb(236, 198,206)',
-                cardTypePmad2: 'rgb(252, 207,161)',
-                cardTypePmad3: 'rgb(187, 232,221)',
-                cardLooked: 'rgb(253, 245,230)',
-                cardBrowseRequired: 'rgb(212, 20,90)',
-                cardViewCount: 'rgb(204, 233,246)',
+                searchBunnon: 'rgb(240, 150, 0)',
+                cardTitle: 'rgb(101, 187, 229)',
+                cardTitlePmad: 'rgb(153, 153, 153)',
+                cardGroup1: 'rgb(105, 125, 200)',
+                cardGroup2: 'rgb(140, 200, 90)',
+                cardGroup3: 'rgb(250, 130, 160)',
+                cardTypePmad1: 'rgb(236, 198, 206)',
+                cardTypePmad2: 'rgb(252, 207, 161)',
+                cardTypePmad3: 'rgb(187, 232, 221)',
+                cardLooked: 'rgb(253, 245, 230)',
+                cardBrowseRequired: 'rgb(212, 20, 90)',
+                cardViewCount: 'rgb(204, 233, 246)',
                 lock: 'rgba(0,0,0,0.2)',
                 bbsLock:'#d3eaf5'
             }),
@@ -301,9 +313,10 @@ module.exports = {
                 cardPmadNew: 'rgb(212, 20, 90)',
                 cardPmadUpadte: 'rgb(241, 90, 36)',
                 dropdownListItem: 'rgb(102, 102, 102)',
-                googleTitle: 'rgb(50, 165,220)',
+                googleTitle: 'rgb(50, 165, 220)',
             },
             colors: {
+                grayB3B3B3:'#B3B3B3',
                 gray808080: '#808080',
                 redf15a28: '#f15a28',
                 green39aa4a: '#39aa4a',
@@ -312,7 +325,7 @@ module.exports = {
                 yellowf7931e: '#f7931e',
                 blueCAE6F4: '#CAE6F4',
                 // #333333
-                tags: 'rgb(51,51,51)',
+                tags: 'rgb(51, 51, 51)',
                 aiSwitch: '#f09600',
                 pageblue: '#32a5dc',
                 notice: '#666666',
@@ -343,8 +356,8 @@ module.exports = {
                 'light-blue': colors.lightBlue,
                 'litepie-primary': colors.emerald,
                 'litepie-secondary': colors.coolGray,
-                'test-Range-From': 'rgb(239,150,1)',
-                'test-Range-Mid': 'rgb(250,220,170)',
+                'test-Range-From': 'rgb(239, 150, 1)',
+                'test-Range-Mid': 'rgb(250, 220, 170)',
                 loading: 'rgba(255, 255, 255, 0.7)',
                 chatbot: '#25839e',
                 chatbotline:'#5ba2b6'
