@@ -332,7 +332,7 @@ export default {
             {
               type: 'text',
               class: 'notoSansJpAndTwelveRegular',
-              title: '○○○○○○○○○○○○○○○○○',
+              title: 'AskAm（AIチャットボット）により弊社医薬品に関する一般的な情報を24時間いつでも検索していただくことが出来ます。',
             },
           ],
           imageUrl: askam,
