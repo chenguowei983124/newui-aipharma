@@ -970,7 +970,7 @@ const serve = {
             apiName = '/api/preavoid/export_collection_conversion_form'
         }
         const data = await axios(apiName, {
-            method: 'post',
+            method: 'get',
             data: param,
         })
 
@@ -981,9 +981,19 @@ const serve = {
     //===========================
     async downloadPreavoidManual() {
         const data = await axios('/api/general/get_aipharma_user_manual', {
-            method: 'post',
+            method: 'get',
         })
 
+        return data
+    },
+    //===========================
+    // 症例入出力マニュアルインポート
+    //===========================
+    async importPreavoidStyle(param) {
+        const data = await axios('/api/preavoid/style_import', {
+            method: 'post',
+            data: param,
+        })
         return data
     },
     async getTest() {

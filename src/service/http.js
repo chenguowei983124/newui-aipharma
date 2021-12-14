@@ -11,7 +11,15 @@ const service = axios.create({
 service.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token')
-        if (store.getters.getDownload == true) {
+        if (store.getters.getUpload == true) {
+            store.dispatch('setUpload', false)
+            config.responseType = 'blob'
+            config.dataType = 'binary'
+            config.headers = {
+                // 'Authorization': `Bearer ${token}`,
+                Accept: 'application/octet-stream',
+            }
+        }else if (store.getters.getDownload == true) {
             store.dispatch('setDownload', false)
             config.responseType = 'blob'
             config.dataType = 'binary'
