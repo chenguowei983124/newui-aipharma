@@ -287,6 +287,7 @@ module.exports = {
                 cardBrowseRequired: 'rgb(212, 20,90)',
                 cardViewCount: 'rgb(204, 233,246)',
                 lock: 'rgba(0,0,0,0.2)',
+                bbsLock:'#d3eaf5'
             }),
             textColor: (theme) => theme('colors'),
             textColor: {
