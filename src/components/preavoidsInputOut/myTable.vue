@@ -142,93 +142,94 @@
 <script>
 import excel from '../common/svgImage/excel.vue'
 export default {
-    components: { excel },
-    props: {},
-    data() {
-        return {
-            detailList: [
-                {
-                    title: 'インポートフォーム',
-                    content: ['AI-PHARMAへのインポートフォーム'],
-                },
-                {
-                    title: '入力・変換フォーム',
-                    content: ['プレアボイド入力フォーム'],
-                },
-                {
-                    title: '印刷フォーム',
-                    content: ['インポートフォーム⇒印刷レイアウト'],
-                },
-                {
-                    title: '岡山県病薬フォーム',
-                    content: ['岡山県病薬の独自フォーム'],
-                },
-                {
-                    title: '日病薬入力支援フォーム改',
-                    content: [
-                        '日病薬への報告、リストの作成、',
-                        'AI-PHARMAへのインポート用フォーム',
-                    ],
-                },
-            ],
-        }
+  components: { excel },
+  props: {},
+  data() {
+    return {
+      detailList: [
+        {
+          title: 'インポートフォーム',
+          content: ['AI-PHARMAへのインポートフォーム'],
+        },
+        {
+          title: '入力・変換フォーム',
+          content: ['プレアボイド入力フォーム'],
+        },
+        {
+          title: '印刷フォーム',
+          content: ['インポートフォーム⇒印刷レイアウト'],
+        },
+        {
+          title: '岡山県病薬フォーム',
+          content: ['岡山県病薬の独自フォーム'],
+        },
+        {
+          title: '日病薬入力支援フォーム改',
+          content: [
+            '日病薬への報告、リストの作成、',
+            'AI-PHARMAへのインポート用フォーム',
+          ],
+        },
+      ],
+    }
+  },
+  computed: {},
+  mounted() { },
+  methods: {
+    sytle1Click(index) {
+      console.log(index)
+      this.onExport(index, 1)
     },
-    computed: {},
-    mounted() {},
-    methods: {
-        sytle1Click(index) {
-            console.log(index)
-            this.onExport(index, 1)
-        },
-        sytle2Click(index) {
-            console.log(index)
-            this.onExport(index, 2)
-        },
-        sytle3Click(index) {
-            console.log(index)
-            this.onExport(index, 3)
-        },
-        onExport(type, style) {
-            this.$store.dispatch('setDownload', true)
-            let param = {
-                style: style,
-            }
-            if (type == 0) {
-                param.updated_from = '19000401'
-                param.updated_to = '19000401'
-            }
-            this.$serve.downloadPreavoidStyle(param, type).then((res) => {
-                // const filename = this.getFileNameFromContentDisposition(
-                //     res.headers['content-disposition']
-                // )
+    sytle2Click(index) {
+      console.log(index)
+      this.onExport(index, 2)
+    },
+    sytle3Click(index) {
+      console.log(index)
+      this.onExport(index, 3)
+    },
+    onExport(type, style) {
+      this.$store.dispatch('setDownload', true)
+      let param = {
+        style: style,
+      }
+      if (type == 0) {
+        param.select = 'reportingAt'
+        param.updated_from = '19000401'
+        param.updated_to = '19000401'
+      }
+      this.$serve.downloadPreavoidStyle(param, type).then((res) => {
+        // const filename = this.getFileNameFromContentDisposition(
+        //     res.headers['content-disposition']
+        // )
 
-                let filename = 'sytle.xls'
-                if (type == 0) {
-                    filename = 'プレアボイド様式' + style + 'テンプレート.xlsx'
-                }
-                if (window.navigator.msSaveOrOpenBlob) {
-                    window.navigator.msSaveOrOpenBlob(res.data, filename)
-                } else {
-                    const blob = new Blob([res.data], {
-                        type: 'application/octet-stream',
-                    })
-                    const link = document.createElement('a')
-                    link.href = window.URL.createObjectURL(blob)
-                    link.download = filename
-                    link.click()
-                }
-            })
-        },
-        getFileNameFromContentDisposition(disposition) {
-            const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
-            const matches = filenameRegex.exec(disposition)
-            if (matches != null && matches[1]) {
-                const fileName = matches[1].replace(/['"]/g, '')
-                return decodeURI(fileName)
-            } else {
-                return null
-            }
-        },
+        let filename = 'sytle.xls'
+        if (type == 0) {
+          filename = 'プレアボイド様式' + style + 'テンプレート.xlsx'
+        }
+        if (window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(res.data, filename)
+        } else {
+          const blob = new Blob([res.data], {
+            type: 'application/octet-stream',
+          })
+          const link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = filename
+          link.click()
+        }
+      })
     },
+    getFileNameFromContentDisposition(disposition) {
+      const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+      const matches = filenameRegex.exec(disposition)
+      if (matches != null && matches[1]) {
+        const fileName = matches[1].replace(/['"]/g, '')
+        return decodeURI(fileName)
+      } else {
+        return null
+      }
+    },
+  },
 }
 </script>
