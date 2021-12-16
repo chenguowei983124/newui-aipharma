@@ -134,112 +134,112 @@ import resultDetailRowItem from './resultDetailRowItem.vue'
 import { computed } from '@vue/runtime-core'
 
 export default {
-  components: { resultDetailRowItem },
-  props: {
-    row: {},
-    proDetailStyle: {
-      type: String,
-      default: 'style1',
+    components: { resultDetailRowItem },
+    props: {
+        row: {},
+        proDetailStyle: {
+            type: String,
+            default: 'style1',
+        },
+        midDetailStyle: {
+            type: String,
+            default: 'style1',
+        },
+        bakDetailStyle: {
+            type: String,
+            default: 'style1',
+        },
+        lineStyle: {
+            type: String,
+            default: 'blueline',
+        },
+        routerPath: {
+            type: String,
+            default: '',
+        },
+        index: {
+            type: Number,
+            default: 0,
+        },
+        itemClick: {
+            type: Function,
+            default: (index) => {},
+        },
     },
-    midDetailStyle: {
-      type: String,
-      default: 'style1',
+    data() {
+        return {}
     },
-    bakDetailStyle: {
-      type: String,
-      default: 'style1',
-    },
-    lineStyle: {
-      type: String,
-      default: 'blueline',
-    },
-    routerPath: {
-      type: String,
-      default: '',
-    },
-    index: {
-      type: Number,
-      default: 0,
-    },
-    itemClick: {
-      type: Function,
-      default: (index) => { },
-    },
-  },
-  data() {
-    return {}
-  },
-  methods: {
-    testClick(index) {
-      console.log('test', index)
-    },
-    getLookedTitle(lookedKB, midStyle) {
-      if (lookedKB != undefined) {
-        if (lookedKB == 'looked') {
-          return 'truncate underline md:whitespace-pre text-dropdownListItem'
-        } else {
-          return 'truncate underline md:whitespace-pre'
-        }
-      } else {
-        if (midStyle == 'style1') {
-          return 'truncate underline md:whitespace-pre'
-        }
-        if (midStyle == 'style2') {
-          return 'truncate block pl-2 md:pl-0'
-        }
-      }
-    },
-    resetTitle(midStyle) {
-      if (midStyle == 'style2') {
-        return 'notoSansJpAndFourteenRegular truncate block pl-2 md:pl-0'
-      }
-    },
-    getDateFrom(dateFrom, dateTo) {
-      if (dateTo == '' || dateTo == 'undefined') {
-        return dateFrom
-      } else {
-        return dateFrom.concat(' - ')
-      }
-    },
-    getPmdastatusDefaultStype(status) {
-      if (status == '') {
-        return 'w-12.5 hidden md:block '
-      } else {
-        if (status == 'new') {
-          return 'searchResult_lable_new_right md:mr-2.5'
-        } else {
-          return 'searchResult_lable_update_right md:mr-2.5'
-        }
-        return null
-      }
-    },
-    getLineStyle(index, style) {
-      const line = []
-      if (style == 'blueline') {
-        line.push('border-b-2 border-blueline')
-      } else {
-        line.push('border-b-2 border-grayline')
-      }
+    methods: {
+        testClick(index) {
+            console.log('test', index)
+        },
+        getLookedTitle(lookedKB, midStyle) {
+            if (lookedKB != undefined) {
+                if (lookedKB == 'looked') {
+                    return 'truncate underline md:whitespace-pre text-dropdownListItem'
+                } else {
+                    return 'truncate underline md:whitespace-pre'
+                }
+            } else {
+                if (midStyle == 'style1') {
+                    return 'truncate underline md:whitespace-pre'
+                }
+                if (midStyle == 'style2') {
+                    return 'truncate block pl-2 md:pl-0'
+                }
+            }
+        },
+        resetTitle(midStyle) {
+            if (midStyle == 'style2') {
+                return 'notoSansJpAndFourteenRegular truncate block pl-2 md:pl-0'
+            }
+        },
+        getDateFrom(dateFrom, dateTo) {
+            if (dateTo == '' || dateTo == 'undefined') {
+                return dateFrom
+            } else {
+                return dateFrom.concat(' - ')
+            }
+        },
+        getPmdastatusDefaultStype(status) {
+            if (status == '') {
+                return 'w-12.5 hidden md:block '
+            } else {
+                if (status == 'new') {
+                    return 'searchResult_lable_new_right md:mr-2.5'
+                } else {
+                    return 'searchResult_lable_update_right md:mr-2.5'
+                }
+                return null
+            }
+        },
+        getLineStyle(index, style) {
+            const line = []
+            if (style == 'blueline') {
+                line.push('border-b-2 border-blueline')
+            } else {
+                line.push('border-b-2 border-grayline')
+            }
 
-      if (index == 4) {
-        return 'md:pb-4'
-      } else if (index == 0) {
-        line.push('md:pt-4')
-      }
-      return line
+            if (index == 4) {
+                return 'md:pb-4'
+            } else if (index == 0) {
+                line.push('md:pt-4')
+            }
+            return line
+        },
+        isDisp1(itemName, rowItem) {
+            if (rowItem == undefined) {
+                return false
+            }
+            this.sub1.forEach((element) => {
+                if (itemName == element) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+        },
     },
-    isDisp1(itemName, rowItem) {
-      if (rowItem == undefined) {
-        return false
-      }
-      this.sub1.forEach((element) => {
-        if (itemName == element) {
-          return true
-        } else {
-          return false
-        }
-      })
-    },
-  },
 }
 </script>

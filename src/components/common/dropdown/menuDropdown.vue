@@ -103,7 +103,7 @@
     <div
         class=""
         :class="{
-            'fixed top-0 left-0 right-0 bottom-0 z-75 bg-lock':
+            'fixed top-0 left-0 right-0 bottom-0 z-75 windowBackground':
                 $store.getters.getIsMenuClick,
         }"
         @click.self="linkClick"
@@ -179,16 +179,18 @@
                     (itemType4 = false)
             "
         >
-            <div
-                class="flex items-center ml-3.75 cursor-pointer"
-                v-for="items in menuItemList2"
-                :key="items"
-            >
+            <div class="ml-3.75 mt-0.5">
                 <div
-                    v-if="items.itemStyle == 'title'"
-                    class="notoSansJpAndFourteenBold"
+                    class="flex items-center cursor-pointer"
+                    v-for="items in menuItemList2"
+                    :key="items"
                 >
-                    {{ items.title }}
+                    <div
+                        v-if="items.itemStyle == 'title'"
+                        class="notoSansJpAndFourteenBold"
+                    >
+                        {{ items.title }}
+                    </div>
                 </div>
             </div>
             <!-- Triangle icon -->
@@ -237,16 +239,18 @@
                     (itemType4 = false)
             "
         >
-            <div
-                class="flex items-center ml-3.75 cursor-pointer"
-                v-for="items in menuItemList3"
-                :key="items"
-            >
+            <div class="ml-3.75 mt-0.5">
                 <div
-                    v-if="items.itemStyle == 'title'"
-                    class="notoSansJpAndFourteenBold"
+                    class="flex items-center cursor-pointer"
+                    v-for="items in menuItemList3"
+                    :key="items"
                 >
-                    {{ items.title }}
+                    <div
+                        v-if="items.itemStyle == 'title'"
+                        class="notoSansJpAndFourteenBold"
+                    >
+                        {{ items.title }}
+                    </div>
                 </div>
             </div>
             <!-- Triangle icon -->
@@ -257,38 +261,39 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList3" :key="items">
-            <router-link :to="{ path: items.path }" @click="linkClick">
-                <div v-if="itemType3">
-                    <div
-                        v-if="items.itemStyle == 'item'"
-                        class="
-                            notoSansJpAndFourteenRegular
-                            text-dropdownListItem
-                            h-7
-                            pl-3.75
-                            pt-0.5
-                            cursor-pointer
-                            hover:opacity-50
-                            active:opacity-50
-                        "
-                        :class="[
-                            items.id == menuItemList3.length
-                                ? ''
-                                : 'border-b-2 border-white',
-                        ]"
-                    >
-                        <!-- <router-link :to="{ path: items.path }"> -->
+            <!-- <router-link :to="{ path: items.path }" @click="linkClick"> -->
+            <div v-if="itemType3">
+                <div
+                    v-if="items.itemStyle == 'item'"
+                    class="
+                        notoSansJpAndFourteenRegular
+                        text-dropdownListItem
+                        h-7
+                        pl-3.75
+                        pt-0.5
+                        cursor-default
+                    "
+                    :class="[
+                        items.id == menuItemList3.length
+                            ? ''
+                            : 'border-b-2 border-white',
+                    ]"
+                >
+                    <!-- <router-link :to="{ path: items.path }"> -->
+                    <router-link :to="{ path: items.path }" @click="linkClick">
                         <div
                             v-if="items.path != ''"
                             class="hover:opacity-50 active:opacity-50"
                         >
                             {{ items.title }}
                         </div>
-                        <div v-else class="">
-                            {{ items.title }}
-                        </div>
-                        <!-- </router-link> -->
+                    </router-link>
+                    <div v-if="items.path == ''" class="">
+                        {{ items.title }}
                     </div>
+                    <!-- </router-link> -->
+                </div>
+                <router-link :to="{ path: items.path }" @click="linkClick">
                     <div
                         v-if="items.itemStyle == 'subproject'"
                         class="
@@ -310,8 +315,9 @@
                         {{ items.title }}
                         <!-- </router-link> -->
                     </div>
-                </div>
-            </router-link>
+                </router-link>
+            </div>
+            <!-- </router-link> -->
         </div>
         <!-- The Fourth -->
         <div
@@ -324,16 +330,18 @@
                     (itemType3 = false)
             "
         >
-            <div
-                class="flex items-center ml-3.75 cursor-pointer"
-                v-for="items in menuItemList4"
-                :key="items"
-            >
+            <div class="ml-3.75 mt-0.5">
                 <div
-                    v-if="items.itemStyle == 'title'"
-                    class="notoSansJpAndFourteenBold"
+                    class="flex items-center cursor-pointer"
+                    v-for="items in menuItemList4"
+                    :key="items"
                 >
-                    {{ items.title }}
+                    <div
+                        v-if="items.itemStyle == 'title'"
+                        class="notoSansJpAndFourteenBold"
+                    >
+                        {{ items.title }}
+                    </div>
                 </div>
             </div>
             <!-- Triangle icon -->
@@ -490,6 +498,30 @@ export default {
                 { id: '5', title: '登録', itemStyle: 'subproject', path: '' },
                 {
                     id: '6',
+                    title: 'お知らせ',
+                    itemStyle: 'item',
+                    path: '',
+                },
+                {
+                    id: '7',
+                    title: '投稿',
+                    itemStyle: 'subproject',
+                    path: '/newEdiRecord',
+                },
+                {
+                    id: '8',
+                    title: '掲示板',
+                    itemStyle: 'item',
+                    path: '',
+                },
+                {
+                    id: '9',
+                    title: '投稿',
+                    itemStyle: 'subproject',
+                    path: '/newBbsRecord',
+                },
+                {
+                    id: '10',
                     title: 'データ入出力',
                     itemStyle: 'item',
                     path: 'preavoidsInputOut',

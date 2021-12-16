@@ -30,10 +30,6 @@
 .notoSansJpAndTwelveBold {
     @apply font-NotoSansJp font-bold text-xs;
 }
-/* font-family: NotoSansJp font-size: 12px  font-weight: 700*/
-.notoSansJpAndTwelveBold {
-    @apply font-NotoSansJp font-bold text-xs;
-}
 /* font-family: NotoSansJp font-size: 14px font-weight: 400*/
 .notoSansJpAndFourteenRegular {
     @apply font-NotoSansJp text-sm font-normal;
@@ -191,10 +187,10 @@
 }
 /* Top Pill Shape BUTTON COLOR css*/
 .orangePillShapeButtonColors {
-    @apply bg-personInformationButton border-b-2 border-redc81e1e hover:bg-orange-600 active:bg-redc81e1e active:opacity-100;
+    @apply bg-personInformationButton border-b-2 border-redc81e1e hover:bg-opacity-25 active:bg-redc81e1e active:opacity-100;
 }
 .yellowPillShapeButtonColors {
-    @apply bg-personOrganizationButton border-b-2 border-personInformationButton hover:bg-orange-400 active:bg-personInformationButton active:opacity-100;
+    @apply bg-personOrganizationButton border-b-2 border-personInformationButton hover:bg-opacity-25 active:bg-personInformationButton active:opacity-100;
 }
 .greenDiChatbotButtonColors {
     @apply bg-chatbotline border-b-2 border-chatbot hover:opacity-50 active:bg-chatbot active:opacity-100;
@@ -204,15 +200,15 @@
 }
 /* Good BUTTON COLOR css */
 .goodButtonColors {
-    @apply bg-whole border-b-2 border-green39aa4a h-7.5 w-14 rounded;
+    @apply bg-whole border-b-2 border-green39aa4a h-7.5 w-14 rounded hover:opacity-50 active:bg-green39aa4a active:opacity-100;
 }
 /* Bad BUTTON COLOR css */
 .badButtonColors {
-    @apply h-7.5 w-14 rounded bg-redf15a28 border-b-2 border-redc81e1e;
+    @apply h-7.5 w-14 rounded bg-redf15a28 border-b-2 border-redc81e1e hover:opacity-50 active:bg-redc81e1e active:opacity-100;
 }
 /* Comment BUTTON COLOR css */
 .commentButtonColors {
-    @apply h-7.5 w-14 rounded bg-yellowfbbb14 border-b-2 border-yellowf7931e;
+    @apply h-7.5 w-14 rounded bg-yellowfbbb14 border-b-2 border-yellowf7931e hover:opacity-50 active:bg-yellowf7931e active:opacity-100;
 }
 /* 詳細条件内のプルダウン BUTTON COLOR css */
 .pullDownButtonColors {
@@ -237,4 +233,24 @@
 /* モーダルウィンドウが立ち上がった際の背景が暗くなる状態（17, 24, 39,　透過50％） */
 .windowBackground {
     @apply bg-gray-900 bg-opacity-50;
+}
+/* すべて　マウスオーバー */
+.topMouseover {
+    @apply hover:text-blueline active:text-view focus:text-view;
+}
+/* Comment send BUTTON COLOR css */
+.commentSendButtonColors {
+    @apply bg-downloadIcon border-b-2 border-green39aa4a hover:opacity-50 active:bg-green39aa4a active:opacity-100;
+}
+/* Comment delete BUTTON COLOR css */
+.commentDeleteButtonColors {
+    @apply bg-personInformationButton border-b-2 border-redc81e1e hover:opacity-50 active:bg-redc81e1e active:opacity-100;
+}
+/* Comment cancel BUTTON COLOR css */
+.commentCancelButtonColors {
+    @apply bg-grayB3B3B3 border-b-2 border-gray808080 hover:opacity-50 active:bg-gray808080 active:opacity-100;
+}
+/* Comment edit BUTTON COLOR css */
+.commentEditButtonColors {
+    @apply bg-yellowfbbb14 border-b-2 border-yellowf7931e hover:opacity-50 active:bg-yellowf7931e active:opacity-100;
 }

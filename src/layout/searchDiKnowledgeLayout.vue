@@ -15,13 +15,13 @@
     </div>
     <div :class="fixedHight"></div>
     <!-- 内容 -->
-    <div class="flex border-b-2 border- md:h-20">
+    <div class="flex border-b-2 border-recruitment md:h-20">
         <!-- 左 -->
         <div
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
         <div class="flex flex-col w-full md:w-191.25 justify-center">
-            <div class="flex flex-row space-x-2 items-center">
+            <div class="flex flex-row space-x-2 items-center my-2 md:my-0">
                 <div
                     class="
                         text-googleTitle text-xl

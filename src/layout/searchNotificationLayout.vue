@@ -42,7 +42,11 @@
                         ></notification-list>
                     </div>
                     <div
-                        class="pm:ml-2 pm:mt-0 pm:border-l-2 pm:border-grayline"
+                        class="
+                            pm:ml-2 pm:mt-0 pm:border-l-2
+                            md:border-l-2 md:border-grayline
+                            pm:border-grayline
+                        "
                         v-if="dispFlg"
                     ></div>
                     <div

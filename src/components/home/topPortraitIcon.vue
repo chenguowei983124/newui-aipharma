@@ -10,7 +10,7 @@
             <div
                 class="
                     absolute
-                    border border-black
+                    border border-tags
                     rounded
                     bg-white
                     w-25
@@ -18,6 +18,7 @@
                     space-y-2.5
                     py-2.5
                     mt-8
+                    z-99
                 "
                 v-if="isDown"
             >

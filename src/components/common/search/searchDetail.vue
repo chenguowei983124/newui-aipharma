@@ -601,37 +601,6 @@ export default {
             this.isOrgDetailClick = !this.isOrgDetailClick
             this.$emit('isDetailClick', this.isOrgDetailClick)
         },
-        // 検索ボタン押下イベント
-        searchClick: function (event) {
-            // すべて
-            if (this.checkId == 1) {
-                // 検索APIを呼び出し(画面入力値)
-                this.$store.dispatch('searchAll', this.searchValue)
-
-                // 一括検索結果画面へ遷移
-                this.$router.push('/searchResultAll')
-            }
-            // DI ナレッジシェア
-            else if (this.checkId == 2) {
-                this.$router.push('/searchResultAll')
-            }
-            // 組織内 DI 記録（Q&A）
-            else if (this.checkId == 3) {
-                this.$router.push('/searchOrganization')
-            }
-            // 症例（プレアボイド）
-            else if (this.checkId == 4) {
-                this.$router.push('/searchOrganization')
-            }
-            // DI 辞書
-            else if (this.checkId == 5) {
-                this.$router.push('/searchOrganization')
-            }
-            // 製薬企業情報
-            else if (this.checkId == 6) {
-                this.$router.push('/searchOrganization')
-            }
-        },
         // DropDown 選択したアイテムＩＤ取得
         getCheckId(data) {
             this.checkId = data

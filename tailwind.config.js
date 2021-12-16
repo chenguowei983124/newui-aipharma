@@ -453,7 +453,7 @@ module.exports = {
             maxHeight: ['focus'],
             cursor: ['disabled'],
             textOpacity: ['disabled'],
-            textColor: ['disabled'],
+            textColor: ['disabled','active'],
             display: ['group-hover', 'group-focus'],
             borderRadius: ['group-hover', 'group-focus'],
             padding: ['group-hover', 'group-focus'],

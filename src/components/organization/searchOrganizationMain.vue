@@ -1,14 +1,6 @@
 <template>
     <div v-if="$store.getters.organizationSearchInfo != undefined">
-        <div
-            class="
-                flex flex-row
-                space-x-2
-                notoSansJpAndFourteenMedium
-                pb-1
-                mt-2
-            "
-        >
+        <div class="flex flex-row space-x-2 notoSansJpAndFourteenMedium pb-1">
             検索条件：
             <div
                 class=""
@@ -38,7 +30,7 @@
                         :leftLableDisp="false"
                         buttonStyle="sortPullDownButtonColors"
                         inputStyle="w-full text-tags text-left notoSansJpAndFourteenRegular pl-2 border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
-                                    border border-transparent focus:outline-none "
+                                    border border-transparent focus:outline-none"
                     ></vue-single-select>
                     <!-- 件 表示 区分 -->
                     <vue-single-select
@@ -441,16 +433,15 @@
                                     $store.getters.organizationSearchInfo.qas[
                                         index
                                     ].id
-                                        ? 'block space-y-1.5'
+                                        ? 'block'
                                         : 'hidden',
                                 ]"
                             >
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        pb-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -464,9 +455,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -489,9 +479,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -513,9 +502,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -537,9 +525,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -562,9 +549,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -580,9 +566,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -608,9 +593,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -632,9 +616,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -655,9 +638,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        border-b-2
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                     v-for="customDetails in item.customDetails"
                                     :key="customDetails"
@@ -705,8 +687,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-dropdownListItem
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -790,7 +772,7 @@
                 </div>
             </div>
         </div>
-         <pagination
+        <pagination
             :page-count="getPageCount"
             :page-range="3"
             :margin-pages="1"
@@ -799,7 +781,7 @@
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            class="flex justify-center space-x-1"
+            class="flex justify-center space-x-1 mt-2.5"
         ></pagination>
         <div
             class="
@@ -817,7 +799,7 @@
         <div
             :class="[
                 $store.getters.getCommentMessageBox
-                    ? 'block fixed top-0 z-99 left-0 right-0 bottom-0 bg-lock'
+                    ? 'block fixed top-0 z-99 left-0 right-0 bottom-0 windowBackground'
                     : 'hidden',
             ]"
         >

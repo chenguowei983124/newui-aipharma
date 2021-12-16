@@ -55,7 +55,7 @@
     </div>
     <!-- <div
             :class="{
-                'absolute rounded-md top-0 left-0 right-0 bottom-0 bg-lock z-0': true,
+                'absolute rounded-md top-0 left-0 right-0 bottom-0 windowBackground z-0': true,
             }"
         ></div>
     </div> -->

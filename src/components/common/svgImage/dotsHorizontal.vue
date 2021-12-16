@@ -1,25 +1,23 @@
 <template>
     <svg
+        id="_211202_ai_pharma_parts"
+        data-name="211202_ai_pharma_parts"
         xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+        viewBox="0 0 25 5"
     >
-        <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="3"
-            d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-        />
+        <defs class="cls-1"></defs>
+        <circle class="cls-1" cx="2.5" cy="2.5" r="2.5" />
+        <circle class="cls-1" cx="12.5" cy="2.5" r="2.5" />
+        <circle class="cls-1" cx="22.5" cy="2.5" r="2.5" />
     </svg>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
-<style>
+<style scoped>
+.cls-1 {
+    fill: #999;
+}
 </style>

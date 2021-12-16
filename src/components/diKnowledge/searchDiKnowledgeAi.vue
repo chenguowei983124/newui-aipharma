@@ -45,27 +45,22 @@
                             class="
                                 flex
                                 justify-between
-                                border-b-2 border-personOrganizationButton
+                                border-b border-personOrganizationButton
                                 items-center
                                 pb-5
                             "
                         >
                             <div
                                 class="
-                                    notoSansJpAndTwentyFourBold
-                                    text-blueline
+                                    notoSansJpAndTwentyEightBold
+                                    text-view
                                     w-5
                                 "
                             >
                                 Q
                             </div>
                             <div
-                                class="
-                                    flex-grow
-                                    notoSansJpAndSixteenBold
-                                    ml-5
-                                    mt-2
-                                "
+                                class="flex-grow notoSansJpAndSixteenBold ml-5"
                             >
                                 {{ item.question }}
                             </div>
@@ -77,7 +72,7 @@
                                     class="
                                         flex
                                         items-center
-                                        notoSansJpAndTwentyFourBold
+                                        notoSansJpAndTwentyEightBold
                                     "
                                 >
                                     A
@@ -480,9 +475,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
+                                        detailsLineColors
+                                        pb-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -505,9 +499,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -529,9 +522,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -553,9 +545,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -578,9 +569,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -596,9 +586,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -624,9 +613,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -648,9 +636,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
-                                        border-b-2
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -671,9 +658,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        border-b-2
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                     v-for="customDetails in item.customDetails"
                                     :key="customDetails"
@@ -721,8 +707,8 @@
                                 <div
                                     class="
                                         md:flex md:flex-row
-                                        notoSansJpAndFourteenRegular
-                                        text-grayline
+                                        detailsLineColors
+                                        py-1.5
                                     "
                                 >
                                     <div class="flex flex-auto">
@@ -812,7 +798,7 @@
         <div
             :class="[
                 $store.getters.getCommentMessageBox
-                    ? 'block fixed top-0 z-99 left-0 right-0 bottom-0 bg-lock'
+                    ? 'block fixed top-0 z-99 left-0 right-0 bottom-0 windowBackground'
                     : 'hidden',
             ]"
         >

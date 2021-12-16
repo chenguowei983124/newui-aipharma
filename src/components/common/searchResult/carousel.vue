@@ -4,7 +4,7 @@
             flex
             justify-between
             cs:bg-cardTitlePmad
-            cs:mx-5
+            cs:mx-4.5
             h-48
             cs:h-21
             relative

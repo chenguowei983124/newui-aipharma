@@ -38,10 +38,10 @@
         <div class="block md:hidden mid:hidden">
             <div
                 :class="{
-                    'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
+                    'fixed top-0 left-0 right-0 bottom-0 windowBackground z-75':
                         $store.getters.getManagementClick,
                 }"
-                @click="clickDown"
+                @click="blankClickDown"
             >
                 <div v-if="$store.getters.getManagementClick == true">
                     <!-- リスト -->
@@ -117,7 +117,7 @@
                     'absolute top-0 left-0 right-0 bottom-0 z-75':
                         $store.getters.getManagementClick,
                 }"
-                @click="clickDown"
+                @click="blankClickDown"
             >
                 <div v-if="$store.getters.getManagementClick == true">
                     <div class="flex justify-end my-13 md:mr-28 mid:mr-37.5">
@@ -197,6 +197,11 @@
 <script>
 export default {
     methods: {
+        blankClickDown() {
+            if (this.$store.getters.getManagementClick) {
+                this.clickDown()
+            }
+        },
         clickDown() {
             this.$store.dispatch(
                 'setManagementClick',

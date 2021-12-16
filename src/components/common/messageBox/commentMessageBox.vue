@@ -7,9 +7,9 @@
                 w-93.75
                 mid:w-191.25
                 md:w-191.25
-                h-82.5
-                pb-2.5
-                border-2 border-grayline
+                h-93.75
+                pb-5
+                border-2 border-tags
                 items-center
                 bg-commentBgColor
                 rounded-lg
@@ -22,252 +22,309 @@
                     justify-between
                     items-center
                     bg-garyTitle
-                    notoSansJpAndEighteenBold
+                    font-NotoSansJp
+                    text-lg
                     h-10
                     w-full
-                    px-8
+                    px-5
                     py-2
                     rounded-t-lg
                 "
             >
                 <div class="text-tags">コメント</div>
-                <button @click="closeCommentMessageBox()">
-                    <x-icon-svg class="text-tags"></x-icon-svg>
-                </button>
+                <comment-x-svg
+                    @click="closeCommentMessageBox()"
+                    class="h-4 w-4 cursor-pointer"
+                ></comment-x-svg>
             </div>
-            <!-- 630*108 -->
-            <div
-                class="
-                    w-11/12
-                    h-13.75
-                    flex flex-row
-                    mt-2
-                    border
-                    rounded
-                    border-grayline
-                    bg-white
-                "
-            >
-                <div class="flex-auto p-1 notoSansJpAndTwelveRegular">
-                    <textarea
-                        style="resize: none"
-                        v-model="inputComment"
-                        rows="2"
-                        class="
-                            block
-                            w-full
-                            NotoSansJp-normal
-                            rounded-sm
-                            pl-4
-                            placeholder-gray-500
-                            focus:placeholder-opacity-0
-                            border-transparent
-                            focus:outline-none
-                            focus:ring-1
-                            focus:ring-326EB5Lins
-                            focus:border-transparent
-                        "
-                        type="text"
-                        placeholder="コメントを入力"
-                    ></textarea>
-                    <!-- <textarea
-                        rows="2"
-                        v-model="inputComment"
-                        placeholder="コメントを入力"
-                        class="h-full w-full pr-10"
-                    /> -->
+            <div class="flex w-full mt-5">
+                <div class="flex-none w-5">
+                    <!-- This item will not grow -->
                 </div>
-                <div class="w-10 flex items-center justify-center">
-                    <button
-                        class="bg-downloadIcon rounded"
-                        @click="sendMessage"
-                    >
-                        <send-message-icon-svg></send-message-icon-svg>
-                    </button>
-                </div>
-            </div>
-            <div class="w-11/12 flex justify-end mt-1">
-                <!-- <label class="inline-flex items-center"> -->
-                <input
-                    type="checkbox"
-                    class="form-checkbox text-white ring-1 ring-grayline"
-                    checked
-                    v-model="flag"
-                />
-                <span class="ml-2 text-xs text-tags font-NotoSansJp"
-                    >匿名で投稿</span
-                >
-                <!-- </label> -->
-            </div>
-            <div class="hidden">{{ getCommentData }}</div>
-            <!-- 630*144 -->
-            <div class="space-y-2 w-11/12 overflow-auto mt-1">
-                <div
-                    v-for="(items, index) in getItemList"
-                    :key="items"
-                    class=""
-                >
+                <div class="flex-grow">
+                    <!-- 630*108 w-11/12-->
                     <div
                         class="
-                            p-2
-                            w-full
-                            flex flex-col
+                            h-13.75
+                            flex flex-row
+                            border-2
                             rounded
-                            text-xs
+                            border-garyTitle
                             bg-white
                         "
                     >
-                        <div
-                            class="h-2/3 flex flex-row justify-between"
-                            :class="[items.isShow ? 'hidden' : 'block']"
-                        >
-                            <div class="w-60">
-                                <p
-                                    class=""
-                                    v-show="!items.isShow"
-                                    style="word-break-word;"
-                                >
-                                    {{ items.comment }}
-                                </p>
-                                <input
-                                    class="w-60 h-full"
-                                    type="text"
-                                    v-show="items.isShow"
-                                    v-model="items.comment"
-                                />
-                            </div>
-                            <div
+                        <div class="flex-auto notoSansJpAndTwelveRegular">
+                            <!-- focus:ring-1
+                                    focus:ring-326EB5Lins -->
+                            <textarea
+                                style="resize: none"
+                                v-model="inputComment"
+                                rows="2"
                                 class="
-                                    w-20
-                                    mid:w-full
-                                    flex
-                                    justify-end
-                                    space-x-2
+                                    block
+                                    w-full
+                                    h-full
+                                    NotoSansJp-normal
+                                    rounded-sm
+                                    pl-1
+                                    placeholder-gray-500
+                                    focus:placeholder-opacity-0
+                                    border-transparent
+                                    focus:outline-none focus:border-transparent
                                 "
+                                type="text"
+                                placeholder="コメントを入力"
+                            ></textarea>
+                        </div>
+                        <div class="mx-2.5 flex items-center justify-center">
+                            <button
+                                class="
+                                    rounded
+                                    h-7.5
+                                    w-7.5
+                                    pl-1.5
+                                    commentSendButtonColors
+                                "
+                                @click="sendMessage"
                             >
-                                <div
-                                    class="flex justify-center items-center"
-                                    v-if="
-                                        this.$store.getters.topManagementInfo
-                                            .user_id == items.userId
-                                    "
-                                >
-                                    <button
-                                        @click="editAddCheckpointsTitle(items)"
-                                        class="bg-yellowfbbb14 rounded"
-                                    >
-                                        <pencil-alt-icon-svg
-                                            class="w-6 h-6"
-                                        ></pencil-alt-icon-svg>
-                                    </button>
-                                </div>
-                                <div
-                                    class="flex justify-center items-center"
-                                    v-if="
-                                        this.$store.getters.topManagementInfo
-                                            .user_id == items.userId
-                                    "
-                                >
-                                    <button
-                                        @click="deleteFruit(items)"
-                                        class="bg-redf15a28 rounded w-6 h-6"
-                                    >
-                                        <trash-icon-svg
-                                            class="w-6 h-5"
-                                        ></trash-icon-svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="h-2/3 flex flex-row"
-                            :class="[items.isShow ? 'block' : 'hidden']"
-                        >
-                            <div class="w-full">
-                                <div
-                                    class="
-                                        w-full
-                                        flex
-                                        justify-between
-                                        border-0 border-grayline
-                                        text-xs
-                                    "
-                                >
-                                    <textarea
-                                        style="resize: none"
-                                        class="
-                                            w-11/12
-                                            h-full
-                                            placeholder-gray-500
-                                            ring-1 ring-326EB5Lins
-                                            focus:placeholder-opacity-0
-                                            border border-transparent
-                                            focus:outline-none
-                                            focus:ring-1
-                                            focus:ring-326EB5Lins
-                                            focus:border-transparent
-                                        "
-                                        type="text"
-                                        v-show="items.isShow"
-                                        v-model="editComment"
-                                    ></textarea>
-                                    <div
-                                        class="
-                                            w-20
-                                            flex
-                                            justify-end
-                                            space-x-2
-                                            mr-1
-                                            mid:mr-0
-                                        "
-                                    >
-                                        <button
-                                            @click="
-                                                editMessage(
-                                                    items.id,
-                                                    index,
-                                                    items
-                                                )
-                                            "
-                                            class="
-                                                bg-yellowfbbb14
-                                                rounded
-                                                w-6
-                                                h-6
-                                            "
-                                        >
-                                            <check-icon-svg
-                                                class="text-white"
-                                            ></check-icon-svg>
-                                        </button>
-                                        <button
-                                            @click="
-                                                editAddCheckpointsTitle(items)
-                                            "
-                                            class="
-                                                bg-garyTitle
-                                                rounded
-                                                w-6
-                                                h-6
-                                                flex
-                                                items-center
-                                                justify-center
-                                            "
-                                        >
-                                            <x-icon-svg
-                                                class="text-white"
-                                            ></x-icon-svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-1/3 flex justify-end items-center pt-2">
-                            投稿日時 :{{ items.createdDate }} 投稿者 :{{
-                                items.userName
-                            }}
+                                <send-message-icon-svg
+                                    class="w-4.5 h-4.5"
+                                ></send-message-icon-svg>
+                            </button>
                         </div>
                     </div>
+                    <div class="flex justify-end mt-1.25">
+                        <!-- <label class="inline-flex items-center"> -->
+                        <input
+                            type="checkbox"
+                            class="
+                                form-checkbox
+                                text-white
+                                ring-1 ring-grayline
+                            "
+                            checked
+                            v-model="flag"
+                        />
+                        <span class="ml-2 text-xs text-tags font-NotoSansJp"
+                            >匿名で投稿</span
+                        >
+                        <!-- </label> -->
+                    </div>
+                    <div class="hidden">{{ getCommentData }}</div>
+                    <!-- 630*144 w-11/12-->
+                    <!-- <div class="overflow-auto h-50 mb-5"> -->
+                    <div
+                        class="space-y-2 mt-3.75 overflow-auto h-50 mb-5 -mr-4"
+                    >
+                        <div
+                            v-for="(items, index) in getItemList"
+                            :key="items"
+                            class=""
+                        >
+                            <div
+                                class="
+                                    p-2
+                                    w-full
+                                    flex flex-col
+                                    rounded
+                                    text-xs
+                                    bg-white
+                                "
+                                :class="[
+                                    items.isShow ? 'border-notice border' : '',
+                                ]"
+                            >
+                                <div
+                                    class="h-2/3 flex flex-row justify-between"
+                                    :class="[items.isShow ? 'hidden' : 'block']"
+                                >
+                                    <div class="w-full">
+                                        <p
+                                            class=""
+                                            v-show="!items.isShow"
+                                            style="word-break-word;"
+                                        >
+                                            {{ items.comment }}
+                                        </p>
+                                        <input
+                                            class="h-full"
+                                            type="text"
+                                            v-show="items.isShow"
+                                            v-model="items.comment"
+                                        />
+                                    </div>
+                                    <div
+                                        class="w-20 flex justify-end space-x-2"
+                                    >
+                                        <div
+                                            class="
+                                                flex
+                                                justify-center
+                                                items-start
+                                            "
+                                            v-if="
+                                                this.$store.getters
+                                                    .topManagementInfo
+                                                    .user_id == items.userId
+                                            "
+                                        >
+                                            <button
+                                                class="
+                                                    h-7.5
+                                                    w-7.5
+                                                    commentEditButtonColors
+                                                    rounded
+                                                    pl-1.5
+                                                "
+                                                @click="
+                                                    editAddCheckpointsTitle(
+                                                        items
+                                                    )
+                                                "
+                                            >
+                                                <edit-icon-svg
+                                                    class="h-5 w-5"
+                                                ></edit-icon-svg>
+                                            </button>
+                                        </div>
+                                        <div
+                                            class="
+                                                flex
+                                                justify-center
+                                                items-start
+                                            "
+                                            v-if="
+                                                this.$store.getters
+                                                    .topManagementInfo
+                                                    .user_id == items.userId
+                                            "
+                                        >
+                                            <button
+                                                @click="deleteFruit(items)"
+                                                class="
+                                                    commentDeleteButtonColors
+                                                    rounded
+                                                    h-7.5
+                                                    w-7.5
+                                                "
+                                            >
+                                                <trash-icon-svg
+                                                    class="w-7.5 h-5.5"
+                                                ></trash-icon-svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="h-2/3 flex flex-row"
+                                    :class="[items.isShow ? 'block' : 'hidden']"
+                                >
+                                    <div class="w-full">
+                                        <div
+                                            class="
+                                                w-full
+                                                flex
+                                                justify-between
+                                                border-0 border-grayline
+                                                text-xs
+                                            "
+                                        >
+                                            <!--ring-1 ring-326EB5Lins 
+                                                focus:ring-1
+                                                focus:ring-326EB5Lins -->
+                                            <textarea
+                                                style="resize: none"
+                                                class="
+                                                    w-11/12
+                                                    h-full
+                                                    placeholder-gray-500
+                                                    focus:placeholder-opacity-0
+                                                    border border-transparent
+                                                    focus:outline-none
+                                                    focus:border-transparent
+                                                "
+                                                type="text"
+                                                v-show="items.isShow"
+                                                v-model="editComment"
+                                            ></textarea>
+                                            <div
+                                                class="
+                                                    w-20
+                                                    flex
+                                                    justify-end
+                                                    space-x-2
+                                                    mr-1
+                                                    mid:mr-0
+                                                "
+                                            >
+                                                <button
+                                                    @click="
+                                                        editMessage(
+                                                            items.id,
+                                                            index,
+                                                            items
+                                                        )
+                                                    "
+                                                    class="
+                                                        commentEditButtonColors
+                                                        rounded
+                                                        w-7.5
+                                                        h-7.5
+                                                        pl-1
+                                                    "
+                                                >
+                                                    <check-icon-svg
+                                                        class="text-white"
+                                                    ></check-icon-svg>
+                                                </button>
+                                                <button
+                                                    @click="
+                                                        editAddCheckpointsTitle(
+                                                            items
+                                                        )
+                                                    "
+                                                    class="
+                                                        commentCancelButtonColors
+                                                        rounded
+                                                        w-7.5
+                                                        h-7.5
+                                                        flex
+                                                        items-center
+                                                        justify-center
+                                                    "
+                                                >
+                                                    <x-icon-svg
+                                                        class="text-white"
+                                                    ></x-icon-svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="
+                                        h-1/3
+                                        flex
+                                        justify-end
+                                        items-center
+                                        text-xs
+                                        font-NotoSansJp
+                                        text-black
+                                        pt-2
+                                    "
+                                >
+                                    投稿日時 :{{ items.createdDate }}
+                                    <span class="ml-2"
+                                        >投稿者 :{{ items.userName }}</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+                <div class="flex-none w-5">
+                    <!-- This item will not grow -->
                 </div>
             </div>
         </div>
@@ -275,15 +332,19 @@
 </template>
 
 <script>
+import EditIconSvg from '../svgImage/editIconSvg.vue'
 import PencilAltIconSvg from '../svgImage/pencilAltIconSvg.vue'
 import TrashIconSvg from '../svgImage/trashIconSvg.vue'
 import SendMessageIconSvg from '../svgImage/sendMessageIconSvg.vue'
 import xIconSvg from '../svgImage/xIconSvg.vue'
+import commentXSvg from '../svgImage/commentXSvg.vue'
 import CheckIconSvg from '../svgImage/checkIconSvg.vue'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 export default {
     components: {
+        commentXSvg,
+        EditIconSvg,
         xIconSvg,
         SendMessageIconSvg,
         PencilAltIconSvg,
@@ -296,21 +357,10 @@ export default {
             get: {
                 if (this.$store.getters.getCommentMessageBox) {
                     this.searchMessage()
-                    // let params = {
-                    //     id: this.qaId,
-                    // }
-                    // await this.$serve.getComment(params).then((res) => {
-                    //     this.$store.dispatch(
-                    //         'setCommentInfo',
-                    //         res.data.resultInfo
-                    //     )
-                    // })
                 }
             }
         },
         getItemList() {
-            // console.log(this.$store.getters.getCommentInfo)
-            // console.log(this.$store.getters.topManagementInfo)
             return this.$store.getters.getCommentInfo
         },
     },
@@ -351,15 +401,6 @@ export default {
                         if (params != '') {
                             this.$serve.deleteComment(params).then((res) => {
                                 if (res.data.status == 'success') {
-                                    // this.swal.fire('', res.data.message, 'success')
-
-                                    // 指定されたindexの要素を1つ削除します。
-                                    // this.itemList = this.$store.getters.getCommentInfo
-                                    // this.itemList.splice(index, 1)
-                                    // this.$store.dispatch(
-                                    //     'setCommentInfo',
-                                    //     this.itemList
-                                    // )
                                     this.searchMessage()
                                     // Good,Bad,comment更新
                                     if (this.commentsFlag == 'aiComments') {
@@ -430,7 +471,7 @@ export default {
                         icon: '',
                         showCancelButton: true,
                         cancelButtonText: 'キャンセル',
-                        confirmButtonText: '削除',
+                        confirmButtonText: 'OK',
                     })
                     .then((result) => {
                         if (result.isConfirmed) {
@@ -484,21 +525,7 @@ export default {
                 this.$toast.success(res.data.message, {
                     position: 'top-right',
                 })
-
-                // // 登録したコメントを表示
-                // let row = {
-                //     comment: res.data.qaFeedback.fbComment,
-                //     createdDate: res.data.qaFeedback.createdAt,
-                //     id: res.data.qaFeedback.id,
-                //     updateDate: res.data.qaFeedback.updatedAt,
-                //     userId: res.data.qaFeedback.userId,
-                //     userName: res.data.qaFeedback.fbComment,
-                // }
-                // this.itemList = this.$store.getters.getCommentInfo
-                // this.itemList.push(row)
-                // this.$store.dispatch('setCommentInfo', this.itemList)
                 this.searchMessage()
-
                 // Good,Bad,comment更新
                 if (this.commentsFlag == 'aiComments') {
                     // GOOd
@@ -560,12 +587,6 @@ export default {
                 this.searchMessage()
                 this.editAddCheckpointsTitle(item)
             })
-
-            // this.itemList = this.$store.getters.getCommentInfo
-            // this.itemList[index].comment = this.editComment
-            // this.$store.dispatch('setCommentInfo', this.itemList)
-            // this.searchMessage()
-            // this.editAddCheckpointsTitle(item)
         },
         async searchMessage() {
             let params = {

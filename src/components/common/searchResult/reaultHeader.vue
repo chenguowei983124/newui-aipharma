@@ -35,10 +35,12 @@
                 class="flex flex-row items-center"
             >
                 <div>{{ subTitle }}</div>
-                <triangle-svg
-                    v-if="subTitle != '' && subTitle == '掲載依頼はこちら'"
-                    class="transform rotate-90 cls-1"
-                ></triangle-svg>
+                <div class="mt-0.5">
+                    <triangle-svg
+                        v-if="subTitle != '' && subTitle == '掲載依頼はこちら'"
+                        class="transform rotate-90 cls-1"
+                    ></triangle-svg>
+                </div>
             </a>
         </div>
         <div

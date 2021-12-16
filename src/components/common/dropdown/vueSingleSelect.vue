@@ -113,7 +113,7 @@ export default {
         leftLableStyle: {
             tpye: String,
             default:
-                'absolute mt-1.25 pl-2 left-1 text-lg text-blueline notoSansJpAndFourteenBold pointer-events-none',
+                'absolute mt-1.25 pl-2 left-1 text-lg text-blueline notoSansJpAndFourteenBold',
         },
         leftLableDisp: {
             type: Boolean,
@@ -239,10 +239,8 @@ export default {
 
     watch: {
         defaultValue() {
-            console.log(this.defaultValue)
             if (this.defaultValue !== null) {
                 if (this.defaultValue === '') {
-                    console.log('sdf')
                     this.selectedIndex = null
                     this.inputText = ''
                 }

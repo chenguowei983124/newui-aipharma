@@ -100,7 +100,7 @@
                     <div
                         class="block md:hidden mid:hidden"
                         :class="{
-                            'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
+                            'fixed top-0 left-0 right-0 bottom-0 windowBackground z-75':
                                 $store.getters.getPortraitClick,
                         }"
                         @click="clickDown"
@@ -170,13 +170,7 @@
                                                 }}
                                             </div>
                                             <div class="text-xs">
-                                                {{
-                                                    $store.getters
-                                                        .topManagementInfo
-                                                        .title == 'doctor'
-                                                        ? '先生'
-                                                        : ''
-                                                }}
+                                                {{ '先生' }}
                                             </div>
                                         </div>
 

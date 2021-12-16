@@ -38,10 +38,10 @@
         <div class="block md:hidden mid:hidden">
             <div
                 :class="{
-                    'fixed top-0 left-0 right-0 bottom-0 bg-lock z-75':
+                    'fixed top-0 left-0 right-0 bottom-0 windowBackground z-75':
                         $store.getters.getIssueIconClick,
                 }"
-                @click="clickDown"
+                @click="blankClickDown"
             >
                 <div v-if="$store.getters.getIssueIconClick == true">
                     <div class="flex justify-center mt-12.5">
@@ -120,13 +120,12 @@
         <div class="hidden md:block mid:block">
             <div
                 :class="{
-                    'absolute top-0 left-0 right-0 bottom-0 z-75':
+                    'absolute top-0 left-0 right-0 bottom-0 z-75 ':
                         $store.getters.getIssueIconClick,
                 }"
-                @click="clickDown"
+                @click="blankClickDown"
             >
                 <div v-if="$store.getters.getIssueIconClick == true">
-                    <!-- <div class="hidden md:block mid:block"> -->
                     <div class="flex justify-end my-13 md:mr-40 mid:mr-50">
                         <div
                             class="w-37.5 mt-1"
@@ -205,6 +204,11 @@
 <script>
 export default {
     methods: {
+        blankClickDown() {
+            if (this.$store.getters.getIssueIconClick) {
+                this.clickDown()
+            }
+        },
         clickDown() {
             this.$store.dispatch(
                 'setIssueIconClick',

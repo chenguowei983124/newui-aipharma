@@ -6,11 +6,7 @@
                     {{ $store.getters.topManagementInfo.user_name }}</a
                 >
                 <a class="font-NotoSansJp font-normal text-xs">
-                    {{
-                        $store.getters.topManagementInfo.title == 'doctor'
-                            ? '先生'
-                            : ''
-                    }}</a
+                    {{ '先生' }}</a
                 >
                 <a class="font-NotoSansJp font-normal text-xs">
                     {{ $store.getters.topManagementInfo.hospital }}

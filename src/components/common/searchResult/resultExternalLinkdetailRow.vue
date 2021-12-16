@@ -37,7 +37,7 @@
     </div>
     <!-- <div
             :class="{
-                ' absolute rounded-md top-0 left-0 right-0 bottom-0 bg-lock z-0':
+                ' absolute rounded-md top-0 left-0 right-0 bottom-0 windowBackground z-0':
                     aaa,
             }" 
         ></div>-->
@@ -45,12 +45,11 @@
 
 <script>
 export default {
-  props: {
-    sites: Array,
-    aaa: String
-  }
+    props: {
+        sites: Array,
+        aaa: String,
+    },
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -144,8 +144,8 @@
                         class="
                             underline
                             truncate
-                            hover:opacity-50
-                            active:opacity-50
+                            hover:text-grayline
+                            active:text-grayline
                         "
                         v-show="dispItem == 'title' && row.id != undefined"
                     >
@@ -219,7 +219,7 @@
                         itemType="1"
                         :typeKB="row.browseRequired"
                         v-if="row.browseRequired != undefined"
-                        addStyle="hidden md:block flex-none"
+                        addStyle="hidden md:block flex-none ml-2"
                     ></result-detail-row-item>
                 </span>
             </div>
@@ -347,7 +347,6 @@ export default {
             }
         },
         getLineStyle(index, style, length) {
-            // console.log("length", length)
             const line = []
 
             if (length != index + 1 && style == 'blueline') {

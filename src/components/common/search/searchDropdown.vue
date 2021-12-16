@@ -14,8 +14,8 @@
                 isDown ? 'rounded-tl' : 'rounded-l border-b-2 border-blueline',
             ]"
         >
-            <a class="text-searchDropdown pl-2 notoSansJpAndTwelveBold">
-                 {{ itemList[checkedID][0].title }}
+            <a class="text-view pl-2 notoSansJpAndTwelveRegular">
+                {{ itemList[checkedID][0].title }}
             </a>
             <div class="ml-1 mr-2">
                 <triangle-down-svg v-show="isDown == false"></triangle-down-svg>
@@ -45,7 +45,7 @@
                         <a class="w-4"></a>
                         <a
                             v-if="value.itemStyle == 'title'"
-                            class="NotoSansJp text-sm font-bold h-7.5"
+                            class="NotoSansJp text-xs font-bold h-7.5"
                             >{{ value.title }}</a
                         >
                     </div>
@@ -53,7 +53,7 @@
                     <!-- 未選択アイテム -->
                     <div v-if="value.id != checkedID" class="pl-2">
                         <div
-                            class="flex hover:opacity-50"
+                            class="flex topMouseover"
                             @click="itemClick(value)"
                         >
                             <a class="w-4"></a>
@@ -62,12 +62,13 @@
                             <a
                                 v-if="value.itemStyle == 'All'"
                                 class="
-                                    hover:text-googleTitle
+                                    topMouseover
                                     NotoSansJp
-                                    text-sm
+                                    text-xs
                                     font-semibold
                                     h-7.5
                                     pl-1
+                                    pt-2
                                 "
                                 >{{ value.title }}</a
                             >
@@ -76,13 +77,13 @@
                             <a
                                 v-if="value.itemStyle == 'item'"
                                 class="
-                                    hover:text-googleTitle
+                                    topMouseover
                                     NotoSansJp
-                                    text-sm
+                                    text-xs
                                     font-semibold
-                                    text-b
                                     h-7.5
                                     pl-1
+                                    pt-2
                                 "
                                 >{{ value.title }}</a
                             >
@@ -92,21 +93,22 @@
                     <!-- 選択したアイテム -->
                     <div v-if="value.id == checkedID" class="pl-2">
                         <div
-                            class="flex hover:text-googleTitle"
+                            class="flex topMouseover"
                             @click="itemClick(value)"
                         >
-                            <check-svg class="mt-1"> </check-svg>
+                            <check-svg class="mt-2"> </check-svg>
                             <!-- すべてアイテム -->
                             <a
                                 v-if="value.itemStyle == 'All'"
                                 class="
                                     text-googleTitle
                                     NotoSansJp
-                                    text-sm
+                                    text-xs
                                     font-semibold
-                                    hover:text-googleTitle
+                                    topMouseover
                                     h-7.5
                                     pl-1
+                                    pt-2
                                 "
                                 >{{ value.title }}</a
                             >
@@ -117,11 +119,12 @@
                                 class="
                                     text-googleTitle
                                     NotoSansJp
-                                    text-sm
+                                    text-xs
                                     font-semibold
-                                    hover:text-googleTitle
+                                    topMouseover
                                     h-7.5
                                     pl-1
+                                    pt-2
                                 "
                                 >{{ value.title }}</a
                             >
