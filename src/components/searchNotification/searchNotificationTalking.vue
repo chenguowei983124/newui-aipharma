@@ -15,8 +15,8 @@
             <div class="mt-4 pl-2 pr-2">
                 <div v-if="postList.length > 0">
                     <div>
-                        <div class="flex flex-grow">
-                            <div>
+                        <div class="flex flex-grow justify-between">
+                            <div class="w-full">
                                 <div class="flex justify-between pl-2 pr-8">
                                     <div class="flex">
                                         <result-detail-row-item

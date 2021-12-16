@@ -46,6 +46,8 @@
                             pm:ml-2 pm:mt-0 pm:border-l-2
                             md:border-l-2 md:border-grayline
                             pm:border-grayline
+                            hidden
+                            pm:block
                         "
                         v-if="dispFlg"
                     ></div>
@@ -53,6 +55,7 @@
                         class="
                             grid grid-cols-1
                             gap-1
+                            w-full
                             pm:space-y-3.75 pm:ml-2 pm:w-132.5 pm:flex-none
                         "
                         v-if="dispFlg"

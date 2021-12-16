@@ -49,6 +49,7 @@
                         class="
                             grid grid-cols-1
                             gap-1
+                            w-full
                             md:space-y-3.75 md:ml-2 md:w-132.5 md:flex-none
                         "
                         v-if="dispFlg"
