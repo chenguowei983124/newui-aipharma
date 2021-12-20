@@ -90,7 +90,13 @@
                 <!-- 明細 -->
                 <div class="space-y-2">
                     <div
-                        class="border border-pageblue rounded-md mx-2 pt-4"
+                        class="
+                            border border-pageblue
+                            rounded-md
+                            mx-2
+                            pt-2
+                            md:pt-4
+                        "
                         v-for="(item, index) in list"
                         :key="index"
                     >
@@ -113,7 +119,6 @@
                                     underline
                                     text-pageblue
                                     notoSansJpAndTwentyFourBold
-                                    mt-2
                                 "
                                 :href="item.urlLink"
                                 target="_blank"
@@ -151,7 +156,7 @@
                         </div>
 
                         <!-- 会社概要 -->
-                        <div class="pl-3.75 pr-3.75 mt-5">
+                        <div class="pl-3.75 pr-3.75 mt-2 md:mt-5">
                             <div
                                 class="
                                     notoSansJpAndFourteenRegular
