@@ -834,7 +834,7 @@ export default {
                             ? '0'
                             : this.$store.getters.getSort,
                     // ページ
-                    page: '1',
+                    // page: '1',
                     timestamp: getTimestamp,
                 }
                 this.$router.push({

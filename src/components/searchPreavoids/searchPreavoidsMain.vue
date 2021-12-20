@@ -216,21 +216,21 @@ export default {
             // 1ページに表示した明細件数を取得
             if (
                 this.$store.getters.getSearchPreavoidsInfo.searchData.length >
-                this.selectPage * this.pageCount
+                this.$store.getters.getPage * this.pageCount
             ) {
                 maxLoopCount = this.pageCount
             } else {
                 maxLoopCount =
                     this.$store.getters.getSearchPreavoidsInfo.searchData
                         .length -
-                    (this.selectPage - 1) * this.pageCount
+                    (this.$store.getters.getPage - 1) * this.pageCount
             }
             // console.log(maxLoopCount)
             // 検索結果から明細を抽出
             for (let i = 0; i < maxLoopCount; i++) {
                 dispDetail[i] =
                     this.$store.getters.getSearchPreavoidsInfo.searchData[
-                        (this.selectPage - 1) * this.pageCount + i
+                        (this.$store.getters.getPage - 1) * this.pageCount + i
                     ]
             }
             // console.log('dispDetail', dispDetail)
@@ -243,8 +243,8 @@ export default {
             console.log('this.selectPage ', this.selectPage)
             console.log('this.pageCount ', this.pageCount)
 
-            if (this.selectPage > 1) {
-                start = (this.selectPage - 1) * this.pageCount + 1
+            if (this.$store.getters.getPage > 1) {
+                start = (this.$store.getters.getPage - 1) * this.pageCount + 1
             }
             if (
                 this.$store.getters.getSearchPreavoidsInfo.searchData !=
@@ -257,48 +257,48 @@ export default {
                     1
             }
 
-            if (
-                this.$store.getters.getSearchPreavoidsInfo.searchData.length ==
-                1
-            ) {
-                return start.toString()
-            } else {
-                if (
-                    this.$store.getters.getSearchPreavoidsInfo.searchData
-                        .length == 0
-                ) {
-                    return '0'
-                } else {
-                    return start.toString() + '-' + end.toString()
-                }
-            }
-            // console.log(this.$store.getters.getSearchPreavoidsInfo.searchData)
-            // if (
-            //     this.$store.getters.getSearchPreavoidsInfo.searchData !=
-            //     undefined
-            // ) {
-            //     // console.log(start + this.pageCount)
-
-            //     if (
-            //         start + this.pageCount >
-            //         this.$store.getters.getSearchPreavoidsInfo.searchData.length
-            //     ) {
-            //         end =
-            //             this.$store.getters.getSearchPreavoidsInfo.searchData
-            //                 .length - 1
-            //     } else {
-            //         end = start + this.pageCount - 1
-            //     }
-            // }
-
             // if (
             //     this.$store.getters.getSearchPreavoidsInfo.searchData.length ==
             //     1
             // ) {
             //     return start.toString()
             // } else {
-            //     return start.toString() + '-' + end.toString()
+            //     if (
+            //         this.$store.getters.getSearchPreavoidsInfo.searchData
+            //             .length == 0
+            //     ) {
+            //         return '0'
+            //     } else {
+            //         return start.toString() + '-' + end.toString()
+            //     }
             // }
+            console.log(this.$store.getters.getSearchPreavoidsInfo.searchData)
+            if (
+                this.$store.getters.getSearchPreavoidsInfo.searchData !=
+                undefined
+            ) {
+                // console.log(start + this.pageCount)
+
+                if (
+                    start + this.pageCount >
+                    this.$store.getters.getSearchPreavoidsInfo.searchData.length
+                ) {
+                    end =
+                        this.$store.getters.getSearchPreavoidsInfo.searchData
+                            .length - 1
+                } else {
+                    end = start + this.pageCount - 1
+                }
+            }
+
+            if (
+                this.$store.getters.getSearchPreavoidsInfo.searchData.length ==
+                1
+            ) {
+                return start.toString()
+            } else {
+                return start.toString() + '-' + end.toString()
+            }
         },
     },
     methods: {
@@ -491,7 +491,7 @@ export default {
             }
             this.$store.dispatch('setSort', this.$route.query.sort)
             // ページネーション
-            this.$store.dispatch('setPage', this.$route.query.page)
+            this.$store.dispatch('setPage', 1)
         },
         resetRouter() {
             let getTimestamp = new Date().getTime()
@@ -514,7 +514,7 @@ export default {
                 displayed: dispDetailNumber,
                 sort: this.$store.getters.getSort,
                 timestamp: getTimestamp,
-                page: this.$store.getters.getPage,
+                // page: this.$store.getters.getPage,
             }
             this.$router.push({
                 path: '/searchPreavoids',
@@ -523,9 +523,10 @@ export default {
         },
         // 改ページのデータ検索
         getSelectPage(value) {
+            console.log(value)
             this.$store.dispatch('setPage', value)
             this.selectPage = value
-            this.resetRouter()
+            // this.resetRouter()
         },
         getSelectDispNumber(value) {
             if (this.organizationCountSort != value) {
