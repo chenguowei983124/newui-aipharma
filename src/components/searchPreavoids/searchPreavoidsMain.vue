@@ -84,7 +84,7 @@
                     ></vue-single-select>
                     <!-- 表示件数 -->
                     <vue-single-select
-                        class="w-32"
+                        class="w-32 cursor-pointer"
                         :name="'field2'"
                         :default-value="organizationCountSort"
                         :placeholder="'-- Choose an option --'"
@@ -106,9 +106,9 @@
         <!-- :click-handler="clickCallback" -->
         <pagination
             :page-count="getPageCount"
-            :page-range="5"
+            :page-range="3"
             :margin-pages="1"
-            :value="$store.getters.getPage"
+            :value="Number($store.getters.getPage)"
             @input="getSelectPage"
             :prev-text="'<'"
             :next-text="'>'"
@@ -165,7 +165,7 @@ export default {
             selectValue: '',
             pageCount: 20,
             selectPage: 1,
-            selectDispNumber: 0,
+            // selectDispNumber: 0,
         }
     },
     unmounted() {
@@ -192,11 +192,11 @@ export default {
         // 最大取得件数取得
         getPageCount() {
             // 選択したアイテムの数字を取得
-            if (this.selectDispNumber == '0') {
+            if (this.organizationCountSort == '0') {
                 this.pageCount = 20
-            } else if (this.selectDispNumber == '1') {
+            } else if (this.organizationCountSort == '1') {
                 this.pageCount = 50
-            } else if (this.selectDispNumber == '2') {
+            } else if (this.organizationCountSort == '2') {
                 this.pageCount = 100
             }
 
@@ -240,27 +240,21 @@ export default {
         dispDetailRange: function () {
             let start = 1
             let end = ''
+            console.log('this.selectPage ', this.selectPage)
+            console.log('this.pageCount ', this.pageCount)
+
             if (this.selectPage > 1) {
                 start = (this.selectPage - 1) * this.pageCount + 1
             }
-
-            // console.log(this.$store.getters.getSearchPreavoidsInfo.searchData)
             if (
                 this.$store.getters.getSearchPreavoidsInfo.searchData !=
                 undefined
             ) {
-                // console.log(start + this.pageCount)
-
-                if (
-                    start + this.pageCount >
-                    this.$store.getters.getSearchPreavoidsInfo.searchData.length
-                ) {
-                    end =
-                        this.$store.getters.getSearchPreavoidsInfo.searchData
-                            .length - 1
-                } else {
-                    end = start + this.pageCount - 1
-                }
+                end =
+                    start +
+                    this.$store.getters.getSearchPreavoidsInfo.searchData
+                        .length -
+                    1
             }
 
             if (
@@ -269,8 +263,42 @@ export default {
             ) {
                 return start.toString()
             } else {
-                return start.toString() + '-' + end.toString()
+                if (
+                    this.$store.getters.getSearchPreavoidsInfo.searchData
+                        .length == 0
+                ) {
+                    return '0'
+                } else {
+                    return start.toString() + '-' + end.toString()
+                }
             }
+            // console.log(this.$store.getters.getSearchPreavoidsInfo.searchData)
+            // if (
+            //     this.$store.getters.getSearchPreavoidsInfo.searchData !=
+            //     undefined
+            // ) {
+            //     // console.log(start + this.pageCount)
+
+            //     if (
+            //         start + this.pageCount >
+            //         this.$store.getters.getSearchPreavoidsInfo.searchData.length
+            //     ) {
+            //         end =
+            //             this.$store.getters.getSearchPreavoidsInfo.searchData
+            //                 .length - 1
+            //     } else {
+            //         end = start + this.pageCount - 1
+            //     }
+            // }
+
+            // if (
+            //     this.$store.getters.getSearchPreavoidsInfo.searchData.length ==
+            //     1
+            // ) {
+            //     return start.toString()
+            // } else {
+            //     return start.toString() + '-' + end.toString()
+            // }
         },
     },
     methods: {
@@ -431,7 +459,7 @@ export default {
             this.$store.dispatch('setDateValueTo', '')
             this.$store.dispatch('setPage', 1)
             this.$store.dispatch('setSort', 0)
-            this.$store.dispatch('setMaxCount', 0)
+            this.$store.dispatch('setMaxCount', 20)
         },
         // リーセット検索バー
         resetSearchBar: function () {
@@ -452,7 +480,7 @@ export default {
             this.$store.dispatch('setMaxCount', this.$route.query.displayed)
             this.preavoidsDateSort = this.$route.query.sort
 
-            this.selectDispNumber = this.$route.query.sort
+            // this.selectDispNumber = this.$route.query.sort
             if (this.$route.query.displayed == 20) {
                 this.organizationCountSort = 0
             } else if (this.$route.query.displayed == 50) {
@@ -476,7 +504,6 @@ export default {
             } else if (this.organizationCountSort == 2) {
                 dispDetailNumber = 100
             }
-            // console.log("dispDetailNumber", dispDetailNumber)
             let params = {
                 search: this.$store.getters.getSearchWord,
                 dateFrom: this.$store.getters.getDateValueFrom,
@@ -487,6 +514,7 @@ export default {
                 displayed: dispDetailNumber,
                 sort: this.$store.getters.getSort,
                 timestamp: getTimestamp,
+                page: this.$store.getters.getPage,
             }
             this.$router.push({
                 path: '/searchPreavoids',
@@ -497,17 +525,25 @@ export default {
         getSelectPage(value) {
             this.$store.dispatch('setPage', value)
             this.selectPage = value
+            this.resetRouter()
         },
         getSelectDispNumber(value) {
-            this.organizationCountSort = value
-            // this.$store.dispatch('setMaxCount', value)
-            this.resetRouter()
+            if (this.organizationCountSort != value) {
+                this.organizationCountSort = value
+                // ページ
+                this.$store.dispatch('setPage', 1)
+                this.resetRouter()
+            }
+
+            // this.organizationCountSort = value
+            // // this.$store.dispatch('setMaxCount', value)
+            // this.resetRouter()
         },
-        setSelectValue(value) {
-            this.selectValue = value
-            this.$store.dispatch('setSort', value)
-            this.resetRouter()
-        },
+        // setSelectValue(value) {
+        //     this.selectValue = value
+        //     this.$store.dispatch('setSort', value)
+        //     this.resetRouter()
+        // },
         openCommentMessageBox() {
             this.$store.dispatch(
                 'setCommentMessageBox',
@@ -532,6 +568,7 @@ export default {
         }
 
         if (JSON.stringify(this.$route.query) !== '{}') {
+            console.log('ksjihdfjksmd')
             this.resetSearchBar()
             this.execSearch()
         }

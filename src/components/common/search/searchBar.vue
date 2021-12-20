@@ -833,6 +833,8 @@ export default {
                         this.$props.form == this.$constant.formList.TOP
                             ? '0'
                             : this.$store.getters.getSort,
+                    // ページ
+                    page: '1',
                     timestamp: getTimestamp,
                 }
                 this.$router.push({
@@ -1091,7 +1093,7 @@ export default {
             this.$store.dispatch('setDateValueTo', '')
             this.$store.dispatch('setPage', 1)
             this.$store.dispatch('setSort', 0)
-            this.$store.dispatch('setMaxCount', 0)
+            this.$store.dispatch('setMaxCount', 20)
         },
         // 機能切替時、変更前機能の入力した検索情報をクリア（掲示板検索画面）
         initBbsStore() {
