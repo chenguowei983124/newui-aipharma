@@ -6,7 +6,7 @@
                 class="flex-grow max-h-full min-w-min hidden md:block mid:block"
             ></div>
             <div class="flex flex-col w-full md:w-191.25 mx-2 md:mx-0">
-                <div class="flex justify-between pb-3">
+                <div class="flex justify-between pb-5 md:pb-3">
                     <div class="pt-4">
                         <div
                             class="
@@ -76,7 +76,14 @@
             <div class="w-full md:w-191.25">
                 <!-- タイトル -->
                 <div
-                    class="h-10 notoSansJpAndSixteenMedium text-left mt-10 mx-2"
+                    class="
+                        h-10
+                        notoSansJpAndSixteenMedium
+                        text-left
+                        mt-5
+                        md:mt-10
+                        mx-2
+                    "
                 >
                     ■関連
                 </div>
@@ -237,6 +244,7 @@
                                 cursor-pointer
                                 notoSansJpAndTwelveMedium
                             "
+                            :class="[item.detailDisp ? 'mt-5' : 'mt-0']"
                             @click="detailDisp(index)"
                         >
                             <triangle-down-svg
