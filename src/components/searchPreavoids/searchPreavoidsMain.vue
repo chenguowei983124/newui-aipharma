@@ -113,10 +113,21 @@
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            class="flex justify-center space-x-1"
+            class="flex justify-center space-x-1 mt-2.5"
         ></pagination>
 
-        <div class="flex justify-center mt-2">{{ dispDetailRange }}件 表示</div>
+        <div
+            class="
+                flex
+                justify-center
+                mt-2
+                text-dropdownListItem
+                font-NotoSansJp
+                text-xs
+            "
+        >
+            {{ dispDetailRange }}件 表示
+        </div>
     </div>
 </template>
 
@@ -364,6 +375,7 @@ export default {
                 result = this.$serve.getPreavoidDataById({ id: qaid })
             } else if (this.$route.query.sort != undefined) {
                 result = this.$serve.getPreavoidDataByParams(this.$route.query)
+                console.log('getPreavoidDataByParams', result)
             }
 
             result.then((response) => {

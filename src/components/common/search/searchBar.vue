@@ -332,7 +332,7 @@ export default {
         },
         pcPlaceholder: function () {
             if (this.checkId == 0) {
-                return 'AI-Pharma内の各種メニューを横断的に検索できます'
+                return 'AI-PHARMA内の各種メニューを横断的に検索できます'
             } else if (this.checkId == 1) {
                 return '2単語以上からなる文章を入力 ※単語での検索は機能しません'
             } else if (this.checkId != 0 && this.checkId != 1) {

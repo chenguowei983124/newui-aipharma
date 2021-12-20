@@ -971,7 +971,7 @@ const serve = {
         }
         const data = await axios(apiName, {
             method: 'get',
-            data: param,
+            params: param,
         })
 
         return data

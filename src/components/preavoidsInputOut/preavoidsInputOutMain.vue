@@ -9,7 +9,7 @@
                 class="
                     text-googleTitle
                     notoSansJpAndTwentyBlack
-                    cs:notoSansJpAndTwentyFourBlack
+                    cs:text-2xl
                     pt-2.5
                     pb-2.5
                     pr-5

@@ -17,7 +17,7 @@
                     <div>
                         <div class="flex flex-grow justify-between">
                             <div class="w-full">
-                                <div class="flex justify-between pl-2 pr-8">
+                                <div class="flex justify-between pl-2 pr-4">
                                     <div class="flex">
                                         <result-detail-row-item
                                             itemType="1"

@@ -187,10 +187,10 @@
 }
 /* Top Pill Shape BUTTON COLOR css*/
 .orangePillShapeButtonColors {
-    @apply bg-personInformationButton border-b-2 border-redc81e1e hover:bg-opacity-25 active:bg-redc81e1e active:opacity-100;
+    @apply bg-personInformationButton border-b-2 hover:border-opacity-50 border-redc81e1e hover:bg-opacity-50 active:bg-redc81e1e active:opacity-100;
 }
 .yellowPillShapeButtonColors {
-    @apply bg-personOrganizationButton border-b-2 border-personInformationButton hover:bg-opacity-25 active:bg-personInformationButton active:opacity-100;
+    @apply bg-personOrganizationButton border-b-2 hover:border-opacity-50 border-personInformationButton hover:bg-opacity-50 active:bg-personInformationButton active:opacity-100;
 }
 .greenDiChatbotButtonColors {
     @apply bg-chatbotline border-b-2 border-chatbot hover:opacity-50 active:bg-chatbot active:opacity-100;

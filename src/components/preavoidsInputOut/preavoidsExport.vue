@@ -165,69 +165,70 @@
 import vueSingleSelect from '../common/dropdown/vueSingleSelect.vue'
 import litepieDatepicker from '../common/dateRange/litepie-datepicker.vue'
 export default {
-  components: { vueSingleSelect, litepieDatepicker },
-  props: {},
-  data() {
-    return {
-      dateValueFrom: '',
-      dateValueTo: '',
-      radioVal: 'reportingAt',
-      style: '1',
-    }
-  },
-  couputed: {},
-  watch: {},
-  methods: {
-    setStyle(value) {
-      this.style = value
-    },
-    dateClear() {
-      this.$refs.datepickerFrom.clearPicker()
-      this.$refs.datepickerTo.clearPicker()
-      this.dateValueFrom = ''
-      this.dateValueTo = ''
-    },
-    getRadio(value) {
-      console.log('Radio', this.radioVal)
-    },
-    onExport() {
-      this.$store.dispatch('setDownload', true)
-      let param = {
-        style: this.style,
-        updated_from: this.dateValueFrom.replaceAll('.', '/'),
-        updated_to: this.dateValueTo.replaceAll('.', '/'),
-        select: this.radioVal,
-      }
-      this.$serve.downloadPreavoidStyle(param).then((res) => {
-        // const filename = this.getFileNameFromContentDisposition(
-        //     res.headers['content-disposition']
-        // )
-        const filename = 'sytle.xls'
-        if (window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(res.data, filename)
-        } else {
-          const blob = new Blob([res.data], {
-            type: 'application/octet-stream',
-          })
-          const link = document.createElement('a')
-          link.href = window.URL.createObjectURL(blob)
-          link.download = filename
-          link.click()
+    components: { vueSingleSelect, litepieDatepicker },
+    props: {},
+    data() {
+        return {
+            dateValueFrom: '',
+            dateValueTo: '',
+            radioVal: 'reportingAt',
+            style: '1',
         }
-      })
     },
-    getFileNameFromContentDisposition(disposition) {
-      const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
-      const matches = filenameRegex.exec(disposition)
-      if (matches != null && matches[1]) {
-        const fileName = matches[1].replace(/['"]/g, '')
-        return decodeURI(fileName)
-      } else {
-        return null
-      }
+    couputed: {},
+    watch: {},
+    methods: {
+        setStyle(value) {
+            this.style = value
+        },
+        dateClear() {
+            this.$refs.datepickerFrom.clearPicker()
+            this.$refs.datepickerTo.clearPicker()
+            this.dateValueFrom = ''
+            this.dateValueTo = ''
+        },
+        getRadio(value) {
+            console.log('Radio', this.radioVal)
+        },
+        onExport() {
+            this.$store.dispatch('setDownload', true)
+            let param = {
+                style: this.style,
+                updated_from: this.dateValueFrom,
+                updated_to: this.dateValueTo,
+                select: this.radioVal,
+            }
+            console.log('param', param)
+            this.$serve.downloadPreavoidStyle(param).then((res) => {
+                // const filename = this.getFileNameFromContentDisposition(
+                //     res.headers['content-disposition']
+                // )
+                const filename = 'sytle.xls'
+                if (window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(res.data, filename)
+                } else {
+                    const blob = new Blob([res.data], {
+                        type: 'application/octet-stream',
+                    })
+                    const link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = filename
+                    link.click()
+                }
+            })
+        },
+        getFileNameFromContentDisposition(disposition) {
+            const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+            const matches = filenameRegex.exec(disposition)
+            if (matches != null && matches[1]) {
+                const fileName = matches[1].replace(/['"]/g, '')
+                return decodeURI(fileName)
+            } else {
+                return null
+            }
+        },
     },
-  },
-  created() { },
+    created() {},
 }
 </script>
 <style scoped></style>
