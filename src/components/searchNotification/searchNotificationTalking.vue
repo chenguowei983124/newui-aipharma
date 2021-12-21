@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div
-                        class="mt-3 ml-10 border-t-2 border-blueline"
+                        class="mt-3 ml-10 border-t-2 border-grayline"
                         v-for="(items, index) in postList[0].commnet"
                         :key="index"
                     >
