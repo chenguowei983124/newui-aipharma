@@ -979,9 +979,10 @@ const serve = {
     //===========================
     // 症例入出力マニュアルエクスポート
     //===========================
-    async downloadPreavoidManual() {
+    async downloadPreavoidManual(param) {
         const data = await axios('/api/general/get_aipharma_user_manual', {
             method: 'get',
+            params: param,
         })
 
         return data

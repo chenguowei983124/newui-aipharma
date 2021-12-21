@@ -191,31 +191,36 @@ export default {
             console.log('Radio', this.radioVal)
         },
         onExport() {
-            this.$store.dispatch('setDownload', true)
-            let param = {
-                style: this.style,
-                updated_from: this.dateValueFrom,
-                updated_to: this.dateValueTo,
-                select: this.radioVal,
-            }
-            console.log('param', param)
-            this.$serve.downloadPreavoidStyle(param).then((res) => {
-                // const filename = this.getFileNameFromContentDisposition(
-                //     res.headers['content-disposition']
-                // )
-                const filename = 'sytle.xls'
-                if (window.navigator.msSaveOrOpenBlob) {
-                    window.navigator.msSaveOrOpenBlob(res.data, filename)
-                } else {
-                    const blob = new Blob([res.data], {
-                        type: 'application/octet-stream',
-                    })
-                    const link = document.createElement('a')
-                    link.href = window.URL.createObjectURL(blob)
-                    link.download = filename
-                    link.click()
+            if (this.dateValueFrom >= this.dateValueTo) {
+                this.$swal.fire('', '期間（報告日）入力不正', '')
+                return
+            } else {
+                this.$store.dispatch('setDownload', true)
+                let param = {
+                    style: this.style,
+                    updated_from: this.dateValueFrom,
+                    updated_to: this.dateValueTo,
+                    select: this.radioVal,
                 }
-            })
+                console.log('param', param)
+                this.$serve.downloadPreavoidStyle(param).then((res) => {
+                    // const filename = this.getFileNameFromContentDisposition(
+                    //     res.headers['content-disposition']
+                    // )
+                    const filename = 'sytle.xls'
+                    if (window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(res.data, filename)
+                    } else {
+                        const blob = new Blob([res.data], {
+                            type: 'application/octet-stream',
+                        })
+                        const link = document.createElement('a')
+                        link.href = window.URL.createObjectURL(blob)
+                        link.download = filename
+                        link.click()
+                    }
+                })
+            }
         },
         getFileNameFromContentDisposition(disposition) {
             const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
