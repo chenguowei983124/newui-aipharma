@@ -207,7 +207,7 @@
                             </div>
                         </template>
                         <template v-slot:option="{ option }">
-                            <div class="w-full">
+                            <div class="w-full break-all">
                                 # {{ option.label }}
                                 <div
                                     class="float-right"

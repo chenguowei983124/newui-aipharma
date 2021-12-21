@@ -225,7 +225,6 @@ export default {
                         .length -
                     (this.$store.getters.getPage - 1) * this.pageCount
             }
-            // console.log(maxLoopCount)
             // 検索結果から明細を抽出
             for (let i = 0; i < maxLoopCount; i++) {
                 dispDetail[i] =
@@ -233,16 +232,12 @@ export default {
                         (this.$store.getters.getPage - 1) * this.pageCount + i
                     ]
             }
-            // console.log('dispDetail', dispDetail)
             return dispDetail
         },
         // 明細部に表示明細のFROM-TO
         dispDetailRange: function () {
             let start = 1
             let end = ''
-            console.log('this.selectPage ', this.selectPage)
-            console.log('this.pageCount ', this.pageCount)
-
             if (this.$store.getters.getPage > 1) {
                 start = (this.$store.getters.getPage - 1) * this.pageCount + 1
             }
@@ -256,29 +251,10 @@ export default {
                         .length -
                     1
             }
-
-            // if (
-            //     this.$store.getters.getSearchPreavoidsInfo.searchData.length ==
-            //     1
-            // ) {
-            //     return start.toString()
-            // } else {
-            //     if (
-            //         this.$store.getters.getSearchPreavoidsInfo.searchData
-            //             .length == 0
-            //     ) {
-            //         return '0'
-            //     } else {
-            //         return start.toString() + '-' + end.toString()
-            //     }
-            // }
-            console.log(this.$store.getters.getSearchPreavoidsInfo.searchData)
             if (
                 this.$store.getters.getSearchPreavoidsInfo.searchData !=
                 undefined
             ) {
-                // console.log(start + this.pageCount)
-
                 if (
                     start + this.pageCount >
                     this.$store.getters.getSearchPreavoidsInfo.searchData.length
@@ -403,7 +379,6 @@ export default {
                 result = this.$serve.getPreavoidDataById({ id: qaid })
             } else if (this.$route.query.sort != undefined) {
                 result = this.$serve.getPreavoidDataByParams(this.$route.query)
-                console.log('getPreavoidDataByParams', result)
             }
 
             result.then((response) => {
@@ -514,7 +489,6 @@ export default {
                 displayed: dispDetailNumber,
                 sort: this.$store.getters.getSort,
                 timestamp: getTimestamp,
-                // page: this.$store.getters.getPage,
             }
             this.$router.push({
                 path: '/searchPreavoids',
@@ -523,7 +497,6 @@ export default {
         },
         // 改ページのデータ検索
         getSelectPage(value) {
-            console.log(value)
             this.$store.dispatch('setPage', value)
             this.selectPage = value
             // this.resetRouter()
@@ -535,16 +508,7 @@ export default {
                 this.$store.dispatch('setPage', 1)
                 this.resetRouter()
             }
-
-            // this.organizationCountSort = value
-            // // this.$store.dispatch('setMaxCount', value)
-            // this.resetRouter()
         },
-        // setSelectValue(value) {
-        //     this.selectValue = value
-        //     this.$store.dispatch('setSort', value)
-        //     this.resetRouter()
-        // },
         openCommentMessageBox() {
             this.$store.dispatch(
                 'setCommentMessageBox',
@@ -554,7 +518,6 @@ export default {
         // ソート順
         setPreavoidsDateSortValue(value) {
             this.preavoidsDateSort = value
-            //   console.log(value)
             this.$store.dispatch('setSort', value)
             this.resetRouter()
         },
@@ -569,7 +532,6 @@ export default {
         }
 
         if (JSON.stringify(this.$route.query) !== '{}') {
-            console.log('ksjihdfjksmd')
             this.resetSearchBar()
             this.execSearch()
         }

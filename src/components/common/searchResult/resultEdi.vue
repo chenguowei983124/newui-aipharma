@@ -66,11 +66,10 @@
             <!--  三行目 -->
             <div class="flex-grow md:truncate">
                 <div
-                    class="pl-5 truncate"
+                    class="pl-5 truncate h-6 text-base msgHtmlBox"
                     v-html="
                         row.title
                             .toString()
-                            .split(`<p>&nbsp;</p>`)[0]
                             .replace(
                                 '<ol>',
                                 `<ol style='list-style-type: decimal;'>`
@@ -79,6 +78,8 @@
                                 '<ul>',
                                 `<ul style='list-style-type: disc;'>`
                             )
+                            .replace('font-size:24px', 'font-size:16px')
+                            .split('<br />')[0]
                     "
                     v-if="row.title != undefined"
                 ></div>
@@ -247,3 +248,11 @@ export default {
     },
 }
 </script>
+<style scoped>
+.msgHtmlBox >>> * {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+</style>
