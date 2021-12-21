@@ -62,7 +62,6 @@ export default {
       xhr.open('GET', filePath, false)
       xhr.overrideMimeType('text/html;charset=utf-8')
       xhr.send(null)
-      console.log(xhr.responseText)
       return xhr.status === okStatus ? xhr.responseText : null
     },
     termsUseClick() {
