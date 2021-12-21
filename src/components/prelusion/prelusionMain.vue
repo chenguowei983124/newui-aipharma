@@ -91,7 +91,7 @@
                 <div class="space-y-2">
                     <div
                         class="
-                            border border-pageblue
+                            border-2 border-pageblue
                             rounded-md
                             mx-2
                             pt-2
@@ -119,6 +119,7 @@
                                     underline
                                     text-pageblue
                                     notoSansJpAndTwentyFourBold
+                                    mt-2
                                 "
                                 :href="item.urlLink"
                                 target="_blank"
@@ -594,19 +595,19 @@ export default {
                     ],
                     carousel: [
                         {
-                            imgUrl: '',
+                            imgUrl: img1,
                             imgLinkUrl: '',
                         },
                         {
-                            imgUrl: '',
+                            imgUrl: img2,
                             imgLinkUrl: '',
                         },
                         {
-                            imgUrl: '',
+                            imgUrl: img3,
                             imgLinkUrl: '',
                         },
                         {
-                            imgUrl: '',
+                            imgUrl: img1,
                             imgLinkUrl: '',
                         },
                     ],
