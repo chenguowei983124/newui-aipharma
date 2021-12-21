@@ -20,7 +20,7 @@
             <div class="flex-grow min-w-min block"></div>
 
             <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-245">
-                <div class="flex">
+                <div :class="[dispFlg ? 'flex' : '']">
                     <div
                         class="
                             grid grid-cols-1
