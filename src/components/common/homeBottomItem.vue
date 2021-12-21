@@ -36,57 +36,59 @@
 <script>
 import termsUse from '../common/messageBox/TermsUse.vue'
 export default {
-    components: {
-        termsUse,
+  components: {
+    termsUse,
+  },
+  data() {
+    return {
+      title: 'AI-PHARMA利用約款',
+      data: '',
+      termsUsedata: '',
+      disclaimerdata: '',
+      disp: false,
+    }
+  },
+  methods: {
+    readFile(filePath) {
+      // 建立一个新的xhr对象
+      let xhr = null
+      if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest()
+      } else {
+        // eslint-disable-next-line
+        xhr = new ActiveXObject('Microsoft.XMLHTTP')
+      }
+      const okStatus = document.location.protocol === 'file' ? 0 : 200
+      xhr.open('GET', filePath, false)
+      xhr.overrideMimeType('text/html;charset=utf-8')
+      xhr.send(null)
+      console.log(xhr.responseText)
+      return xhr.status === okStatus ? xhr.responseText : null
     },
-    data() {
-        return {
-            title: 'AI-PHARMA利用約款',
-            data: '',
-            termsUsedata: '',
-            disclaimerdata: '',
-            disp: false,
-        }
+    termsUseClick() {
+      this.termsUsedata = this.readFile(
+        '/text/TermsUse.txt'
+      )
+      this.disp = true
+      this.data = this.termsUsedata
+      this.title = 'AI-PHARMA利用約款'
     },
-    methods: {
-        readFile(filePath) {
-            // 建立一个新的xhr对象
-            let xhr = null
-            if (window.XMLHttpRequest) {
-                xhr = new XMLHttpRequest()
-            } else {
-                // eslint-disable-next-line
-                xhr = new ActiveXObject('Microsoft.XMLHTTP')
-            }
-            const okStatus = document.location.protocol === 'file' ? 0 : 200
-            xhr.open('GET', filePath, false)
-            xhr.overrideMimeType('text/html;charset=utf-8')
-            xhr.send(null)
-            console.log(xhr.responseText)
-            return xhr.status === okStatus ? xhr.responseText : null
-        },
-        termsUseClick() {
-            this.disp = true
-            this.data = this.termsUsedata
-            this.title = 'AI-PHARMA利用約款'
-        },
-        disclaimerClick() {
-            this.disp = true
-            this.data = this.disclaimerdata
-            this.title = 'AI-PHARMA免責事項'
-        },
-        closeMessageBox() {
-            this.disp = false
-        },
+    disclaimerClick() {
+      this.disclaimerdata = this.readFile(
+        '/text/disclaimer.text'
+      )
+      this.disp = true
+      this.data = this.disclaimerdata
+      this.title = 'AI-PHARMA免責事項'
     },
-    mounted() {
-        this.termsUsedata = this.readFile(
-            'https://ai-pharma-dev.local/text/TermsUse.txt'
-        )
-        this.disclaimerdata = this.readFile(
-            'https://ai-pharma-dev.local/text/disclaimer.text'
-        )
+    closeMessageBox() {
+      this.disp = false
     },
+  },
+  mounted() {
+
+
+  },
 }
 </script>
 
