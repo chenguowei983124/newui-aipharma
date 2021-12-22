@@ -16,7 +16,7 @@
         </div>
 
         <div :class="fixedHight"></div>
-        <div class="flex h-screen-72">
+        <div class="flex h-screen-70">
             <div class="flex-grow min-w-min block"></div>
 
             <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-245">

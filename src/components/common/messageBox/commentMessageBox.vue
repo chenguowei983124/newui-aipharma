@@ -114,7 +114,8 @@
                     <!-- 630*144 w-11/12-->
                     <!-- <div class="overflow-auto h-50 mb-5"> -->
                     <div
-                        class="space-y-2 mt-3.75 overflow-auto h-50 mb-5 -mr-4"
+                        class="space-y-2 mt-3.75 overflow-auto h-50 mb-5"
+                        :class="[getItemList.length > 3 ? '-mr-4' : '']"
                     >
                         <div
                             v-for="(items, index) in getItemList"

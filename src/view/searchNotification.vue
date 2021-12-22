@@ -1,10 +1,10 @@
 <template>
-    <div class="relative h-screen">
+    <div class="relative h-full">
         <my-all-header :form="$constant.formList.EDI"></my-all-header>
         <!-- 内容 -->
         <search-notification-layout></search-notification-layout>
         <home-bottom-template
-            class="absolute bottom-0 w-full"
+            class="w-full absolute inset-x-0 bottom-0"
         ></home-bottom-template>
     </div>
 </template>

@@ -19,7 +19,7 @@ service.interceptors.request.use(
                 // 'Authorization': `Bearer ${token}`,
                 Accept: 'application/octet-stream',
             }
-        }else if (store.getters.getDownload == true) {
+        } else if (store.getters.getDownload == true) {
             store.dispatch('setDownload', false)
             config.responseType = 'blob'
             config.dataType = 'binary'

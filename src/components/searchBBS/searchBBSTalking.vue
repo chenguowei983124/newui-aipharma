@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto h-screen-60 md:h-screen-69" id="div_postList">
+    <div class="mx-auto h-screen-57 md:h-screen-66" id="div_postList">
         <div class="flex justify-between h-10 border-b-2 border-blueline">
             <div class="notoSansJpAndTwentyBold">スレッド</div>
             <div class="h-10 w-10 mt-1" @click="closeClick">
@@ -10,7 +10,7 @@
         <!-- "" -->
         <div
             class="overflow-y-scroll"
-            :class="[dispEditor ? 'h-7/10' : 'h-full md:h-9/10']"
+            :class="[dispEditor ? 'h-62/100' : 'h-full md:h-9/10']"
         >
             <div class="mt-4 pl-2 pr-2">
                 <div v-if="postList.length > 0">

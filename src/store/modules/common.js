@@ -40,6 +40,7 @@ export default {
         },
         oidcCode: '',
         download: false,
+        upload: false,
         bbsTagsList: [],
         loadingShowFlg: true,
     }),
@@ -50,6 +51,9 @@ export default {
         },
         getDownload(state) {
             return state.download
+        },
+        getUpload(state) {
+            return state.upload
         },
         getIsMenuClick(state) {
             return state.isMenuClick
@@ -180,6 +184,9 @@ export default {
     mutations: {
         basic(state, payload) {
             state[payload.key] = payload.value
+        },
+        setUpload({ commit }, value) {
+            commit('basic', { key: 'upload', value })
         },
         setCommnet(state, info) {
             state.commentInfo = info

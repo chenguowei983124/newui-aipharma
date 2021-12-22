@@ -1,10 +1,10 @@
 <template>
-    <div class="relative h-screen">
+    <div class="relative h-full">
         <my-all-header :form="$constant.formList.BBS"></my-all-header>
         <!-- 内容 -->
         <search-bulletin-board-layout></search-bulletin-board-layout>
         <home-bottom-template
-            class="absolute bottom-0 w-full"
+            class="w-full absolute inset-x-0 bottom-0"
         ></home-bottom-template>
     </div>
 </template>
