@@ -155,240 +155,240 @@ import googleItem from '../common/searchResult/googleItem.vue'
 import pharmaceuticalsItem from '../common/searchResult/pharmaceuticalsItem.vue'
 import jstageItem from '../common/searchResult/jstageItem.vue'
 export default {
-  components: {
-    resutTag,
-    resultDetailRow,
-    resultExternalLinkdetailRow,
-    carousel,
-    googleItem,
-    pharmaceuticalsItem,
-    jstageItem,
-  },
-  props: {},
-  data() {
-    return {}
-  },
-  computed: {
-    diKnowledge: {
-      get: function () {
-        var diKnowledgeitems = []
-        if (this.$store.getters.getSearchAIDiKnowledge != undefined) {
-          if (
-            Object.keys(this.$store.getters.getSearchAIDiKnowledge)
-              .length !== 0
-          ) {
-            diKnowledgeitems.push(
-              this.$store.getters.getSearchAIDiKnowledge
-            )
-          }
-        }
-        if (
-          this.$store.getters.getSearchAllDiKnowledge.details !=
-          undefined
-        ) {
-          if (
-            Object.keys(
-              this.$store.getters.getSearchAllDiKnowledge.details
-            ).length !== 0
-          ) {
-            for (var i in this.$store.getters
-              .getSearchAllDiKnowledge.details) {
-              diKnowledgeitems.push(
-                this.$store.getters.getSearchAllDiKnowledge
-                  .details[i]
-              )
+    components: {
+        resutTag,
+        resultDetailRow,
+        resultExternalLinkdetailRow,
+        carousel,
+        googleItem,
+        pharmaceuticalsItem,
+        jstageItem,
+    },
+    props: {},
+    data() {
+        return {}
+    },
+    computed: {
+        diKnowledge: {
+            get: function () {
+                var diKnowledgeitems = []
+                if (this.$store.getters.getSearchAIDiKnowledge != undefined) {
+                    if (
+                        Object.keys(this.$store.getters.getSearchAIDiKnowledge)
+                            .length !== 0
+                    ) {
+                        diKnowledgeitems.push(
+                            this.$store.getters.getSearchAIDiKnowledge
+                        )
+                    }
+                }
+                if (
+                    this.$store.getters.getSearchAllDiKnowledge.details !=
+                    undefined
+                ) {
+                    if (
+                        Object.keys(
+                            this.$store.getters.getSearchAllDiKnowledge.details
+                        ).length !== 0
+                    ) {
+                        for (var i in this.$store.getters
+                            .getSearchAllDiKnowledge.details) {
+                            diKnowledgeitems.push(
+                                this.$store.getters.getSearchAllDiKnowledge
+                                    .details[i]
+                            )
+                        }
+                    }
+                }
+
+                return diKnowledgeitems
+            },
+        },
+        setOwnURL() {
+            let params = {
+                search: this.$route.query.search,
+                // タグ
+                tags: '',
+                // 薬の分類
+                medicine: '0',
+                // 質問区分
+                qacategory: '0',
+                // 施設
+                facility_flag: '0',
+                // 表示件数
+                displayed: '20',
+                // ソート順
+                sort: 'last_updated_at_desc',
+                // ページ
+                page: '1',
+                // 検索対象 Q
+                checkQ: true,
+                // 検索対象 A
+                checkA: true,
+                // 検索対象 コメント
+                checkComment: true,
+                // 検索対象 添付ファイル名
+                checkAddFileName: true,
+                // 検索対象 投稿者
+                checkContributor: true,
+                // 検索対象 最終編集者
+                checkLastEditer: true,
+                // 検索対象 施設名
+                checkFacilityName: true,
+                // 検索対象 備考
+                checkNote: true,
+                timestamp: new Date().getTime(),
             }
-          }
-        }
+            return params
+        },
+        setDiURL() {
+            let params = {
+                search: this.$route.query.search,
+                // タグ
+                tags: '',
 
-        return diKnowledgeitems
-      },
+                // 表示件数
+                displayed: '20',
+                // ソート順
+                sort: 'last_updated_at_desc',
+                // ページ
+                page: '1',
+                // 検索対象 Q
+                checkQ: true,
+                // 検索対象 A
+                checkA: true,
+                // 検索対象 コメント
+                checkComment: true,
+                // 検索対象 添付ファイル名
+                checkAddFileName: true,
+                // 検索対象 投稿者
+                checkContributor: true,
+                // 検索対象 最終編集者
+                checkLastEditer: true,
+                // 検索対象 施設名
+                checkFacilityName: true,
+                // 検索対象 備考
+                checkNote: true,
+                timestamp: new Date().getTime(),
+            }
+            return params
+        },
+        googleSearchUrl() {
+            if (this.$route.query.search !== '') {
+                return (
+                    'https://www.google.co.jp/search?q=' +
+                    this.$route.query.search
+                )
+            } else {
+                  return ('https://www.google.co.jp/')
+            }
+        },
+        searchResults: {
+            get: function () {
+                if (
+                    this.$store.getters.getSearchAllOrganizationDidDocument
+                        .details != undefined
+                ) {
+                    if (
+                        Object.keys(
+                            this.$store.getters
+                                .getSearchAllOrganizationDidDocument.searchWords
+                        ).length !== 0
+                    ) {
+                        return this.$store.getters
+                            .getSearchAllOrganizationDidDocument.searchWords
+                    }
+                } else {
+                    return this.$store.getters.getSearchAllDiKnowledge
+                        .searchWords
+                }
+            },
+        },
+        searchOrganizationCount: {
+            get: function () {
+                if (
+                    this.$store.getters.getSearchAllOrganizationDidDocument
+                        .allCount != undefined
+                ) {
+                    return this.$store.getters
+                        .getSearchAllOrganizationDidDocument.allCount
+                } else {
+                    return 0
+                }
+            },
+        },
+        preAvoidCount: {
+            get: function () {
+                if (
+                    this.$store.getters.getSearchAllPreAvoid.allCount !=
+                    undefined
+                ) {
+                    return this.$store.getters.getSearchAllPreAvoid.allCount
+                } else {
+                    return 0
+                }
+            },
+        },
+        bulletinBoardInfoCount: {
+            get: function () {
+                if (
+                    this.$store.getters.getSearchAllBulletinBoardInfo
+                        .allCount != undefined
+                ) {
+                    return this.$store.getters.getSearchAllBulletinBoardInfo
+                        .allCount
+                } else {
+                    return 0
+                }
+            },
+        },
     },
-    setOwnURL() {
-      let params = {
-        search: this.$route.query.search,
-        // タグ
-        tags: '',
-        // 薬の分類
-        medicine: '0',
-        // 質問区分
-        qacategory: '0',
-        // 施設
-        facility_flag: '0',
-        // 表示件数
-        displayed: '20',
-        // ソート順
-        sort: 'last_updated_at_desc',
-        // ページ
-        page: '1',
-        // 検索対象 Q
-        checkQ: true,
-        // 検索対象 A
-        checkA: true,
-        // 検索対象 コメント
-        checkComment: true,
-        // 検索対象 添付ファイル名
-        checkAddFileName: true,
-        // 検索対象 投稿者
-        checkContributor: true,
-        // 検索対象 最終編集者
-        checkLastEditer: true,
-        // 検索対象 施設名
-        checkFacilityName: true,
-        // 検索対象 備考
-        checkNote: true,
-        timestamp: new Date().getTime(),
-      }
-      return params
-    },
-    setDiURL() {
-      let params = {
-        search: this.$route.query.search,
-        // タグ
-        tags: '',
-
-        // 表示件数
-        displayed: '20',
-        // ソート順
-        sort: 'last_updated_at_desc',
-        // ページ
-        page: '1',
-        // 検索対象 Q
-        checkQ: true,
-        // 検索対象 A
-        checkA: true,
-        // 検索対象 コメント
-        checkComment: true,
-        // 検索対象 添付ファイル名
-        checkAddFileName: true,
-        // 検索対象 投稿者
-        checkContributor: true,
-        // 検索対象 最終編集者
-        checkLastEditer: true,
-        // 検索対象 施設名
-        checkFacilityName: true,
-        // 検索対象 備考
-        checkNote: true,
-        timestamp: new Date().getTime(),
-      }
-      return params
-    },
-    googleSearchUrl() {
-      if (this.$route.query.search !== '') {
-        return (
-          'https://www.google.co.jp/search?q=' +
-          this.$route.query.search
-        )
-      } else {
-        return ('https://www.google.co.jp/')
-      }
-    },
-    searchResults: {
-      get: function () {
-        if (
-          this.$store.getters.getSearchAllOrganizationDidDocument
-            .details != undefined
-        ) {
-          if (
-            Object.keys(
-              this.$store.getters
-                .getSearchAllOrganizationDidDocument.searchWords
-            ).length !== 0
-          ) {
-            return this.$store.getters
-              .getSearchAllOrganizationDidDocument.searchWords
-          }
-        } else {
-          return this.$store.getters.getSearchAllDiKnowledge
-            .searchWords
-        }
-      },
-    },
-    searchOrganizationCount: {
-      get: function () {
-        if (
-          this.$store.getters.getSearchAllOrganizationDidDocument
-            .allCount != undefined
-        ) {
-          return this.$store.getters
-            .getSearchAllOrganizationDidDocument.allCount
-        } else {
-          return 0
-        }
-      },
-    },
-    preAvoidCount: {
-      get: function () {
-        if (
-          this.$store.getters.getSearchAllPreAvoid.allCount !=
-          undefined
-        ) {
-          return this.$store.getters.getSearchAllPreAvoid.allCount
-        } else {
-          return 0
-        }
-      },
-    },
-    bulletinBoardInfoCount: {
-      get: function () {
-        if (
-          this.$store.getters.getSearchAllBulletinBoardInfo
-            .allCount != undefined
-        ) {
-          return this.$store.getters.getSearchAllBulletinBoardInfo
-            .allCount
-        } else {
-          return 0
-        }
-      },
-    },
-  },
-  unmounted() {
-    this.$store.dispatch('setSearchWord', '')
-  },
-  methods: {
-    getDispData() {
-      if (this.$route.query.search != undefined) {
-        this.$store.dispatch('setSearchWord', this.$route.query.search)
-      } else {
+    unmounted() {
         this.$store.dispatch('setSearchWord', '')
-      }
-      this.execSearch()
     },
-    execSearch() {
-      this.$store.dispatch('initSearchAllStatus')
-      this.$store.dispatch('setLoadingShowFlg', false)
-      this.$store.dispatch('setIsLoadingShow', true)
+    methods: {
+        getDispData() {
+            if (this.$route.query.search != undefined) {
+                this.$store.dispatch('setSearchWord',this.$route.query.search)
+            } else {
+                this.$store.dispatch('setSearchWord', '')
+            }
+            this.execSearch()
+        },
+        execSearch() {
+            this.$store.dispatch('initSearchAllStatus')
+            this.$store.dispatch('setLoadingShowFlg', false)
+            this.$store.dispatch('setIsLoadingShow', true)
 
-      this.$store.dispatch('searchALLLDiKnowledgeInfo')
-      this.$store.dispatch('searchAIDiKnowledgeInfo')
-      this.$store.dispatch('searchALLLOrganizationInfo')
-      this.$store.dispatch('searchALLLPreAvoidInfo')
-      this.$store.dispatch('searchALLBulletinBoardInfo')
-      this.$store.dispatch('searchGoogleInfo')
+            this.$store.dispatch('searchALLLDiKnowledgeInfo')
+            this.$store.dispatch('searchAIDiKnowledgeInfo')
+            this.$store.dispatch('searchALLLOrganizationInfo')
+            this.$store.dispatch('searchALLLPreAvoidInfo')
+            this.$store.dispatch('searchALLBulletinBoardInfo')
+            this.$store.dispatch('searchGoogleInfo')
+        },
     },
-  },
-  watch: {
-    $route: function () {
-      if (this.$route.path != '/searchResultAll') {
-        return
-      }
-      if (JSON.stringify(this.$route.query.search) == '{}') {
-        this.$store.dispatch('setSearchWord', '')
-      }
-      if (JSON.stringify(this.$route.query) !== '{}') {
-        this.$store.dispatch(
-          'setSearchWord',
-          this.$route.query.search
-        )
-      }
+    watch: {
+        $route: function () {
+            if (this.$route.path != '/searchResultAll') {
+                return
+            }
+            if (JSON.stringify(this.$route.query.search) == '{}') {
+                this.$store.dispatch('setSearchWord', '')
+            }
+            if (JSON.stringify(this.$route.query) !== '{}') {
+                this.$store.dispatch(
+                    'setSearchWord',
+                    this.$route.query.search
+                )
+            }
 
-      this.execSearch()
+            this.execSearch()
+        },
     },
-  },
-  mounted() {
-    this.getDispData()
-  },
+    mounted() {
+        this.getDispData()
+    },
 }
 </script>
 <style scoped></style>

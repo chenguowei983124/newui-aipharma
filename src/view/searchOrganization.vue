@@ -14,22 +14,21 @@ import myAllHeader from '../components/common/header/myAllHeader.vue'
 import searchOrganizationLayout from '../layout/searchOrganizationLayout.vue'
 import homeBottomTemplate from '../components/common/homeBottomItem.vue'
 export default {
-    components: {
-        myAllHeader,
-        searchOrganizationLayout,
-        homeBottomTemplate,
-    },
-    created() {
-        if (localStorage.getItem('store')) {
-            this.$store.replaceState(
-                Object.assign(
-                    {},
-                    this.$store.state,
-                    JSON.parse(localStorage.getItem('store'))
-                )
-            )
-            // sessionStorage.removeItem('store')
-        }
-    },
+  components: {
+    myAllHeader,
+    searchOrganizationLayout,
+    homeBottomTemplate,
+  },
+  created() {
+    if (localStorage.getItem('store')) {
+      this.$store.replaceState(
+        Object.assign(
+          {},
+          this.$store.state,
+          JSON.parse(localStorage.getItem('store'))
+        )
+      )
+    }
+  },
 }
 </script>

@@ -78,7 +78,13 @@
                                 '<ul>',
                                 `<ul style='list-style-type: disc;'>`
                             )
+                            .replace('font-size:8px', 'font-size:16px')
+                            .replace('font-size:10px', 'font-size:16px')
+                            .replace('font-size:12px', 'font-size:16px')
+                            .replace('font-size:14px', 'font-size:16px')
+                            .replace('font-size:18px', 'font-size:16px')
                             .replace('font-size:24px', 'font-size:16px')
+                            .replace('font-size:36px', 'font-size:16px')
                             .split('<br />')[0]
                     "
                     v-if="row.title != undefined"

@@ -1,142 +1,142 @@
 <template>
-    <div class="overflow-x-auto">
-        <table class="w-180 min-w-full border-l border-t border-blueline">
-            <thead>
-                <tr
-                    class="
-                        flex
-                        bg-cardViewCount
-                        text-xs
-                        font-medium
-                        h-7.5
-                        notoSansJpAndTwelveBold
-                    "
-                >
-                    <th
-                        class="
-                            border-r border-b border-blueline
-                            w-63
-                            flex-none flex
-                            items-center
-                            justify-center
-                        "
-                    >
-                        フォーム
-                    </th>
+  <div class="overflow-x-auto">
+    <table class="w-180 min-w-full border-l border-t border-blueline">
+      <thead>
+        <tr
+          class="
+            flex
+            bg-cardViewCount
+            text-xs
+            font-medium
+            h-7.5
+            notoSansJpAndTwelveBold
+          "
+        >
+          <th
+            class="
+              border-r border-b border-blueline
+              w-63
+              flex-none flex
+              items-center
+              justify-center
+            "
+          >
+            フォーム
+          </th>
 
-                    <th
-                        class="
-                            border-r border-b border-blueline
-                            w-39
-                            flex-none flex
-                            items-center
-                            justify-center
-                            text-white
-                            bg-backgroundMainSearch
-                        "
-                    >
-                        様式 1
-                    </th>
-                    <th
-                        class="
-                            border-r border-b border-blueline
-                            w-39
-                            flex-none flex
-                            items-center
-                            justify-center
-                            bg-toTop
-                            text-white
-                        "
-                    >
-                        様式 2
-                    </th>
-                    <th
-                        class="
-                            border-r border-b border-blueline
-                            w-39
-                            flex-none flex
-                            items-center
-                            justify-center
-                            bg-whole
-                            text-white
-                        "
-                    >
-                        様式 3
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    class="flex text-xs font-NotoSansJp h-15"
-                    v-for="(item, index) in detailList"
-                    :key="index"
-                >
-                    <!-- フォーム -->
-                    <td
-                        class="
-                            border-r border-b border-blueline
-                            w-63
-                            flex-none
-                            justify-center
-                            pl-2
-                        "
-                    >
-                        <div class="notoSansJpAndFourteenBold">
-                            {{ item.title }}
-                        </div>
-                        <div
-                            class="notoSansJpAndTwelveRegular"
-                            v-for="(contents, index) in item.content"
-                            :key="index"
-                        >
-                            {{ contents }}
-                        </div>
-                    </td>
+          <th
+            class="
+              border-r border-b border-blueline
+              w-39
+              flex-none flex
+              items-center
+              justify-center
+              text-white
+              bg-backgroundMainSearch
+            "
+          >
+            様式 1
+          </th>
+          <th
+            class="
+              border-r border-b border-blueline
+              w-39
+              flex-none flex
+              items-center
+              justify-center
+              bg-toTop
+              text-white
+            "
+          >
+            様式 2
+          </th>
+          <th
+            class="
+              border-r border-b border-blueline
+              w-39
+              flex-none flex
+              items-center
+              justify-center
+              bg-whole
+              text-white
+            "
+          >
+            様式 3
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="flex text-xs font-NotoSansJp h-15"
+          v-for="(item, index) in detailList"
+          :key="index"
+        >
+          <!-- フォーム -->
+          <td
+            class="
+              border-r border-b border-blueline
+              w-63
+              flex-none
+              justify-center
+              pl-2
+            "
+          >
+            <div class="notoSansJpAndFourteenBold">
+              {{ item.title }}
+            </div>
+            <div
+              class="notoSansJpAndTwelveRegular"
+              v-for="(contents, index) in item.content"
+              :key="index"
+            >
+              {{ contents }}
+            </div>
+          </td>
 
-                    <!-- 様式 1 -->
-                    <td
-                        class="
-                            border-r border-b border-blueline
-                            w-39
-                            flex-none flex
-                            justify-center
-                        "
-                    >
-                        <div class="cursor-pointer" @click="sytle1Click(index)">
-                            <excel class="mt-4 h-7 w-5.5"></excel>
-                        </div>
-                    </td>
-                    <!--  様式 2 -->
-                    <td
-                        class="
-                            border-r border-b border-blueline
-                            w-39
-                            flex-none flex
-                            justify-center
-                        "
-                    >
-                        <div class="cursor-pointer" @click="sytle2Click(index)">
-                            <excel class="mt-4 h-7 w-5.5"></excel>
-                        </div>
-                    </td>
-                    <!-- 様式 3 -->
-                    <td
-                        class="
-                            border-r border-b border-blueline
-                            w-39
-                            flex-none flex
-                            justify-center
-                        "
-                    >
-                        <div class="cursor-pointer" @click="sytle3Click(index)">
-                            <excel class="mt-4 h-7 w-5.5"></excel>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div></div>
-    </div>
+          <!-- 様式 1 -->
+          <td
+            class="
+              border-r border-b border-blueline
+              w-39
+              flex-none flex
+              justify-center
+            "
+          >
+            <div class="cursor-pointer" @click="sytle1Click(index)">
+              <excel class="mt-4 h-7 w-5.5"></excel>
+            </div>
+          </td>
+          <!--  様式 2 -->
+          <td
+            class="
+              border-r border-b border-blueline
+              w-39
+              flex-none flex
+              justify-center
+            "
+          >
+            <div class="cursor-pointer" @click="sytle2Click(index)">
+              <excel class="mt-4 h-7 w-5.5"></excel>
+            </div>
+          </td>
+          <!-- 様式 3 -->
+          <td
+            class="
+              border-r border-b border-blueline
+              w-39
+              flex-none flex
+              justify-center
+            "
+          >
+            <div class="cursor-pointer" @click="sytle3Click(index)">
+              <excel class="mt-4 h-7 w-5.5"></excel>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div></div>
+  </div>
 </template>
 
 <script>

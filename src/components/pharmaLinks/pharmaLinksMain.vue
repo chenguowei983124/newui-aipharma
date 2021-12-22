@@ -1,217 +1,195 @@
 <template>
-    <div>
-        <div class="flex border-b-2 border-unlineblue">
-            <!-- 左 -->
-            <div
-                class="flex-grow max-h-full min-w-min hidden md:block mid:block"
-            ></div>
-            <div class="flex flex-col w-full md:w-191.25 mx-2 md:mx-0">
-                <div class="flex justify-between p-2 md:p-5">
-                    <div
-                        class="
-                            text-googleTitle
-                            notoSansJpAndTwentyBlack
-                            md:notoSansJpAndTwentyFourBold
-                            lm:notoSansJpAndTwentyFourBold
-                            md:text-2xl
-                        "
-                    >
-                        お<ruby>
-                            <rb>薬</rb>
-                            <rp>(</rp>
-                            <rt>やく</rt>
-                            <rp>）)</rp>
-                            立ちリンク集
-                        </ruby>
+  <div>
+    <div class="flex border-b-2 border-unlineblue">
+      <!-- 左 -->
+      <div
+        class="flex-grow max-h-full min-w-min hidden md:block mid:block"
+      ></div>
+      <div class="flex flex-col w-full md:w-191.25 mx-2 md:mx-0">
+        <div class="flex justify-between p-2 md:p-5">
+          <div
+            class="
+              text-googleTitle
+              notoSansJpAndTwentyBlack
+              md:notoSansJpAndTwentyFourBold
+              lm:notoSansJpAndTwentyFourBold
+              md:text-2xl
+            "
+          >
+            お<ruby>
+              <rb>薬</rb>
+              <rp>(</rp>
+              <rt>やく</rt>
+              <rp>）)</rp>
+              立ちリンク集
+            </ruby>
 
-                        <p
-                            class="
-                                break-words
-                                notoSansJpAndTwelveRegular
-                                mt-2
-                                text-black
-                            "
-                        >
-                            薬剤師の先生方のリンク集となります。
-                        </p>
-                    </div>
-                    <div class="mt-2">
-                        <div class="flex justify-center">
-                            <button
-                                class="
-                                    orangeButtonColors
-                                    rounded-md
-                                    notoSansJpAndFourteenBold
-                                    text-white text-center
-                                    w-29.5
-                                    h-13
-                                    flex
-                                    items-center
-                                    px-3
-                                    space-x-2
-                                "
-                                @click="onCancel"
-                            >
-                                <div>
-                                    <div>掲載希望は</div>
-                                    <div>コチラ</div>
-                                </div>
-                                <div>
-                                    <icon-right class="w-3 h-4"></icon-right>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
+            <p class="break-words notoSansJpAndTwelveRegular mt-2 text-black">
+              薬剤師の先生方のリンク集となります。
+            </p>
+          </div>
+          <div class="mt-2">
+            <div class="flex justify-center">
+              <button
+                class="
+                  orangeButtonColors
+                  rounded-md
+                  notoSansJpAndFourteenBold
+                  text-white text-center
+                  w-29.5
+                  h-13
+                  flex
+                  items-center
+                  px-3
+                  space-x-2
+                "
+                @click="onCancel"
+              >
+                <div>
+                  <div>掲載希望は</div>
+                  <div>コチラ</div>
                 </div>
+                <div>
+                  <icon-right class="w-3 h-4"></icon-right>
+                </div>
+              </button>
             </div>
-            <!-- 右 -->
-            <div
-                class="flex-grow max-h-full min-w-min hidden md:block mid:block"
-            ></div>
+          </div>
         </div>
-        <div class="flex">
-            <!-- 左 -->
-            <div
-                class="flex-grow max-h-full min-w-min hidden md:block mid:block"
-            ></div>
-
-            <!-- 中央 -->
-            <div class="w-full md:w-191.25">
-                <!-- タイトル -->
-                <div
-                    class="
-                        h-10
-                        notoSansJpAndSixteenMedium
-                        text-center
-                        pt-2
-                        mt-5
-                        border border-pageblue
-                        bg-backgroundMain
-                        mx-2
-                    "
-                >
-                    〇〇関連
-                </div>
-                <!-- 明細 -->
-                <div
-                    class="
-                        block
-                        md:flex
-                        lg:flex
-                        justify-between
-                        border-b border-l border-r border-pageblue
-                        mx-2
-                        p-3.75
-                    "
-                    v-for="item in list"
-                    :key="item"
-                >
-                    <div class="flex">
-                        <a
-                            class="
-                                underline
-                                text-pageblue
-                                notoSansJpAndTwentyFourBold
-                                mb-1
-                            "
-                            :href="item.urlLink"
-                            target="_blank"
-                            >{{ item.urlTitle }}</a
-                        >
-                        <a
-                            class="
-                                underline
-                                text-pageblue
-                                notoSansJpAndTwentyFourBold
-                                mt-2
-                            "
-                            :href="item.urlLink"
-                            target="_blank"
-                            ><external-link
-                                class="ml-2 w-4 h-4"
-                                fill="#999999"
-                                stroke="#999999"
-                            ></external-link
-                        ></a>
-                    </div>
-                    <div>
-                        <div
-                            class="
-                                notoSansJpAndFourteenRegular
-                                w-full
-                                md:w-104
-                                break-words
-                            "
-                            v-for="content in item.content"
-                            :key="content"
-                        >
-                            <div class="">{{ content }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="block md:flex px-2 mt-10">
-                    <button
-                        class="
-                            greenDiChatbotButtonColors
-                            rounded-md
-                            notoSansJpAndEighteenBlack
-                            text-white text-center
-                            w-full
-                            md:w-61.25
-                            h-17
-                            px-16
-                            md:px-2
-                            items-center
-                        "
-                        @click="onLinks"
-                    >
-                        DI チャットボットに関するリンク集
-                    </button>
-                    <button
-                        class="
-                            blueButtonColors
-                            rounded-md
-                            notoSansJpAndEighteenBlack
-                            text-white text-center
-                            w-full
-                            md:w-61.25
-                            h-17
-                            mt-2
-                            md:mt-0
-                            ml-0
-                            md:ml-2
-                        "
-                        @click="onPharmaLink"
-                    >
-                        製薬企業一覧
-                    </button>
-                    <button
-                        class="
-                            goodServeButtonColors
-                            rounded-md
-                            notoSansJpAndEighteenBlack
-                            text-white text-center
-                            w-full
-                            md:w-61.25
-                            h-17
-                            mt-2
-                            md:mt-0
-                            ml-0
-                            md:ml-2
-                        "
-                        @click="onPrelusion"
-                    >
-                        医療者向けサービス紹介
-                    </button>
-                </div>
-            </div>
-
-            <div
-                class="flex-grow max-h-full min-w-min hidden md:block mid:block"
-            ></div>
-        </div>
+      </div>
+      <!-- 右 -->
+      <div
+        class="flex-grow max-h-full min-w-min hidden md:block mid:block"
+      ></div>
     </div>
+    <div class="flex">
+      <!-- 左 -->
+      <div
+        class="flex-grow max-h-full min-w-min hidden md:block mid:block"
+      ></div>
+
+      <!-- 中央 -->
+      <div class="w-full md:w-191.25">
+        <!-- タイトル -->
+        <div
+          class="
+            h-10
+            notoSansJpAndSixteenMedium
+            text-center
+            pt-2
+            mt-5
+            border border-pageblue
+            bg-backgroundMain
+            mx-2
+          "
+        >
+          〇〇関連
+        </div>
+        <!-- 明細 -->
+        <div
+          class="
+            block
+            md:flex
+            lg:flex
+            justify-between
+            border-b border-l border-r border-pageblue
+            mx-2
+            p-3.75
+          "
+          v-for="item in list"
+          :key="item"
+        >
+          <div class="flex">
+            <a
+              class="underline text-pageblue notoSansJpAndTwentyFourBold mb-1"
+              :href="item.urlLink"
+              target="_blank"
+              >{{ item.urlTitle }}</a
+            >
+            <a
+              class="underline text-pageblue notoSansJpAndTwentyFourBold mt-2"
+              :href="item.urlLink"
+              target="_blank"
+              ><external-link
+                class="ml-2 w-4 h-4"
+                fill="#999999"
+                stroke="#999999"
+              ></external-link
+            ></a>
+          </div>
+          <div>
+            <div
+              class="notoSansJpAndFourteenRegular w-full md:w-104 break-words"
+              v-for="content in item.content"
+              :key="content"
+            >
+              <div class="">{{ content }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block md:flex px-2 mt-10">
+          <button
+            class="
+              greenDiChatbotButtonColors
+              rounded-md
+              notoSansJpAndEighteenBlack
+              text-white text-center
+              w-full
+              md:w-61.25
+              h-17
+              px-16
+              md:px-2
+              items-center
+            "
+            @click="onLinks"
+          >
+            DI チャットボットに関するリンク集
+          </button>
+          <button
+            class="
+              blueButtonColors
+              rounded-md
+              notoSansJpAndEighteenBlack
+              text-white text-center
+              w-full
+              md:w-61.25
+              h-17
+              mt-2
+              md:mt-0
+              ml-0
+              md:ml-2
+            "
+            @click="onPharmaLink"
+          >
+            製薬企業一覧
+          </button>
+          <button
+            class="
+              goodServeButtonColors
+              rounded-md
+              notoSansJpAndEighteenBlack
+              text-white text-center
+              w-full
+              md:w-61.25
+              h-17
+              mt-2
+              md:mt-0
+              ml-0
+              md:ml-2
+            "
+            @click="onPrelusion"
+          >
+            医療者向けサービス紹介
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="flex-grow max-h-full min-w-min hidden md:block mid:block"
+      ></div>
+    </div>
+  </div>
 </template>
 
 <script>

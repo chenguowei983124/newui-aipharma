@@ -5,9 +5,7 @@
                 <a class="font-NotoSansJp font-bold text-base">
                     {{ $store.getters.topManagementInfo.user_name }}</a
                 >
-                <a class="font-NotoSansJp font-normal text-xs">
-                    {{ '先生' }}</a
-                >
+                <a class="font-NotoSansJp font-normal text-xs"> {{ '先生' }}</a>
                 <a class="font-NotoSansJp font-normal text-xs">
                     {{ $store.getters.topManagementInfo.hospital }}
                 </a>
@@ -38,10 +36,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
-<style>
-</style>
+<style></style>

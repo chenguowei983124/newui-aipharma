@@ -45,11 +45,12 @@
                     : handlePageSelected(page.index + 1)
             "
         >
-            <!-- {{ index }} @click="index < 3 ? prevFivePage(page) : nextFivePage(page)"-->
+            <!-- {{ index }}  @click="index < 3 ? prevFivePage(page) : nextFivePage(page)"-->
             <a
                 v-if="page.breakView"
                 :class="[pageLinkClass, breakViewLinkClass]"
                 tabindex="0"
+               
                 ><slot name="breakViewContent">{{ breakViewText }}</slot></a
             >
             <a v-else-if="page.disabled" :class="pageLinkClass" tabindex="0">{{

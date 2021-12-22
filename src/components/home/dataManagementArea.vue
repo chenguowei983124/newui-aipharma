@@ -54,7 +54,7 @@
                     <div
                         class="
                             notoSansJpAndTwelveRegular
-                            text-left
+                            text-center
                             h-3.75
                             mb-3.75
                         "
@@ -191,50 +191,50 @@
 import TopPortraitIcon from '../home/topPortraitIcon.vue'
 
 export default {
-  components: { TopPortraitIcon },
-  props: {},
-  data() {
-    return {
-      isDown: false,
-    }
-  },
-  watch: {},
-  methods: {
-    itemClick() {
-      this.isDown = !this.isDown
+    components: { TopPortraitIcon },
+    props: {},
+    data() {
+        return {
+            isDown: false,
+        }
     },
-    orgDiRecordClick() {
-      this.$router.push({
-        path: '/newOrgDIRecord',
-      })
+    watch: {},
+    methods: {
+        itemClick() {
+            this.isDown = !this.isDown
+        },
+        orgDiRecordClick() {
+            this.$router.push({
+                path: '/newOrgDIRecord',
+            })
+        },
+        bbsRecordClick() {
+            this.$router.push({
+                path: '/newBbsRecord',
+            })
+        },
+        ediRecordClick() {
+            this.$router.push({
+                path: '/newEdiRecord',
+            })
+        },
+        async getUserData() {
+            await this.$serve
+                .getManagementInfo(this.$store.getters.getOidcCode)
+                .then((res) => {
+                    this.$store.dispatch('getTopManagementInfo', res)
+                    localStorage.setItem(
+                        'store',
+                        JSON.stringify(this.$store.state)
+                    )
+                })
+        },
     },
-    bbsRecordClick() {
-      this.$router.push({
-        path: '/newBbsRecord',
-      })
+    created() {},
+    mounted() {
+        this.getUserData()
+        // this.$store.dispatch('getTopManagementInfo')
     },
-    ediRecordClick() {
-      this.$router.push({
-        path: '/newEdiRecord',
-      })
-    },
-    async getUserData() {
-      await this.$serve
-        .getManagementInfo(this.$store.getters.getOidcCode)
-        .then((res) => {
-          this.$store.dispatch('getTopManagementInfo', res)
-          localStorage.setItem(
-            'store',
-            JSON.stringify(this.$store.state)
-          )
-        })
-    },
-  },
-  created() { },
-  mounted() {
-    this.getUserData()
-    // this.$store.dispatch('getTopManagementInfo')
-  },
 }
 </script>
 <style scoped></style>

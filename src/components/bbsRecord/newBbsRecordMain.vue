@@ -202,276 +202,276 @@ import Multiselect from '@vueform/multiselect'
 import Editor from '@tinymce/tinymce-vue'
 import { onBeforeRouteUpdate } from 'vue-router'
 export default {
-  setup() {
-    onBeforeRouteUpdate((to, from, next) => {
-      console.log('asdfasdfasdfasdfasdfasfasdf')
-      next()
-    })
-  },
-
-  components: {
-    newOrgDIRecordButtons,
-    vueSingleSelect,
-    litepieDatepicker,
-    Multiselect,
-    Editor,
-  },
-  data() {
-    return {
-      qa_informations: {},
-      params: {},
-      defaultScope: 'select',
-      defaultGenre: 'select',
-      base: {
-        scope: 'select',
-        genre: 'select',
-        title: '',
-        answer: '',
-        tags: [],
-      },
-      title:
-        JSON.stringify(this.$route.query) === '{}'
-          ? '  投稿'
-          : '  編集',
-    }
-  },
-
-  methods: {
-    // ジャンル選択した値取得
-    setPatientGenderValue(value) {
-      console.log('valueG', value)
-      this.base.genre = value
-    },
-
-    // 公開範囲選択した値取得
-    setScopeValue(value) {
-      this.base.scope = value
-    },
-    //　一時保存
-    tmpSaveEvent() {
-      this.$swal
-        .fire({
-          text: '下書き保存してよろしいですか？',
-          icon: '',
-          showCancelButton: true,
-          cancelButtonText: 'キャンセル',
-          confirmButtonText: '確認',
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            console.log('削除')
-            let params = {
-              code: this.$store.getters.getOidcCode,
-              post: {
-                division: 'BBS',
-                title: this.base.title,
-                content: this.base.answer,
-                genre: this.base.genre,
-                publish: false,
-                scope: this.base.scope,
-              },
-              tag: this.base.tags,
-            }
-            this.$serve.postPosts(params).then((res) => {
-              this.$swal
-                .fire({
-                  text: '保存されました。',
-                  icon: '',
-                  showCancelButton: false,
-                  cancelButtonText: 'キャンセル',
-                  confirmButtonText: 'OK',
-                })
-                .then(() => {
-                  // this.clearInput()
-                  this.$router.go(-1)
-                })
-            })
-          }
+    setup() {
+        onBeforeRouteUpdate((to, from, next) => {
+            console.log('asdfasdfasdfasdfasdfasfasdf')
+            next()
         })
     },
-    // 登録
-    saveEvent() {
-      let flg = false
-      flg = this.$swal
-        .fire({
-          text: '投稿してよろしいですか？',
-          icon: '',
-          showCancelButton: true,
-          cancelButtonText: 'キャンセル',
-          confirmButtonText: '確認',
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            console.log('this.base', this.base)
-            let params = {
-              code: this.$store.getters.getOidcCode,
-              post: {
-                division: 'BBS',
-                title: this.base.title,
-                content: this.base.answer,
-                genre: this.base.genre,
-                publish: true,
-                scope: this.base.scope,
-              },
-              tag: this.base.tags,
-            }
-            if (JSON.stringify(this.$route.query) === '{}') {
-              this.$serve.postPosts(params).then((res) => {
-                this.$swal
-                  .fire({
-                    text: '投稿されました。',
-                    icon: '',
-                    showCancelButton: false,
-                    cancelButtonText: 'キャンセル',
-                    confirmButtonText: 'OK',
-                  })
-                  .then(() => {
-                    // this.clearInput()
-                    this.$router.go(-1)
-                  })
-              })
-            } else {
-              console.log(this.$route.query.id)
-              Object.assign(params.post, {
-                post_id: this.$route.query.id,
-              })
-              this.$serve
-                .putBbsPosts(params, this.$route.query.id)
-                .then((res) => {
-                  this.$swal
-                    .fire({
-                      text: '投稿されました。',
-                      icon: '',
-                      showCancelButton: false,
-                      cancelButtonText: 'キャンセル',
-                      confirmButtonText: 'OK',
-                    })
-                    .then(() => {
-                      // this.clearInput()
-                      this.$router.go(-1)
-                    })
-                })
-            }
-          }
-        })
-      if (flg) {
-      }
+
+    components: {
+        newOrgDIRecordButtons,
+        vueSingleSelect,
+        litepieDatepicker,
+        Multiselect,
+        Editor,
     },
-    cancelEvent() {
-      this.$router.go(-1)
-    },
-    // 入力した内容をクリア
-    // clearInput() {
-    //     this.base.title = ''
-    //     this.base.answer = ''
-    //     this.$refs.scope.setValue('select')
-    //     this.$refs.genre.setValue('select')
-    //     this.base.tags = []
-    // },
-
-    // 検索結果画面で編集押下時、IDよりデータ取得
-    async doSearch() {
-      this.dispEditor = false
-      this.InputComment = ''
-      await this.$serve.postReadfeedbacks(this.id, '')
-
-      Object.assign(this.params, { division: 'BBS' })
-      const response = await this.$serve.getPostsrforId(
-        '',
-        this.$route.query.id
-      )
-      //
-      this.base.scope = response.data.data[0].post.scope
-      this.$refs.scope.setValue(String(this.base.scope))
-
-      this.base.genre = response.data.data[0].post.genre
-      this.$refs.genre.setValue(this.base.genre)
-
-      this.base.title = response.data.data[0].post.title
-      this.base.answer = response.data.data[0].post.content
-      for (let i = 0; i < response.data.data[0].post.tag.length; i++) {
-        this.base.tags.push(response.data.data[0].post.tag[i].name)
-      }
-      this.$refs.tag.refreshOptions()
-    },
-    async fetchLanguages(query) {
-      let result = {}
-      if (query == null || query == '') {
-        if (this.base.tags.length > 0) {
-          for (
-            let index = 0;
-            index < this.base.tags.length;
-            index++
-          ) {
-            let response = await this.$serve.getTagsMaster(
-              this.$store.getters.getOidcCode,
-              this.base.tags[index]
-            )
-            result = response.map((item) => {
-              if (item.name === this.base.tags[index]) {
-                return {
-                  value: item.name,
-                  label: item.name,
-                }
-              }
-            })
-
-            let setList = {
-              value: this.base.tags[index],
-              label: this.base.tags[index],
-            }
-
-            this.$refs.tag.select(setList)
-          }
+    data() {
+        return {
+            qa_informations: {},
+            params: {},
+            defaultScope: 'select',
+            defaultGenre: 'select',
+            base: {
+                scope: 'select',
+                genre: 'select',
+                title: '',
+                answer: '',
+                tags: [],
+            },
+            title:
+                JSON.stringify(this.$route.query) === '{}'
+                    ? '  投稿'
+                    : '  編集',
         }
-      } else {
-        console.log('query', query)
-        await this.$serve
-          .getTagsMaster(this.$store.getters.getOidcCode, query)
-          .then((response) => {
-            console.log(response)
-            result = response.map((item) => {
-              return {
-                value: item.name,
-                label: item.name,
-              }
-            })
-          })
-      }
-      return result
     },
-  },
 
-  computed: {
-    validation() {
-      const base = this.base
-      console.log(base.answer)
-      return {
-        question: !!base.scope,
-        genre: !!base.genre,
-        title: !!base.title,
-        answer: !!base.answer,
-      }
+    methods: {
+        // ジャンル選択した値取得
+        setPatientGenderValue(value) {
+            console.log('valueG', value)
+            this.base.genre = value
+        },
+
+        // 公開範囲選択した値取得
+        setScopeValue(value) {
+            this.base.scope = value
+        },
+        //　一時保存
+        tmpSaveEvent() {
+            this.$swal
+                .fire({
+                    text: '下書き保存してよろしいですか？',
+                    icon: '',
+                    showCancelButton: true,
+                    cancelButtonText: 'キャンセル',
+                    confirmButtonText: '確認',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('削除')
+                        let params = {
+                            code: this.$store.getters.getOidcCode,
+                            post: {
+                                division: 'BBS',
+                                title: this.base.title,
+                                content: this.base.answer,
+                                genre: this.base.genre,
+                                publish: false,
+                                scope: this.base.scope,
+                            },
+                            tag: this.base.tags,
+                        }
+                        this.$serve.postPosts(params).then((res) => {
+                            this.$swal
+                                .fire({
+                                    text: '保存されました。',
+                                    icon: '',
+                                    showCancelButton: false,
+                                    cancelButtonText: 'キャンセル',
+                                    confirmButtonText: 'OK',
+                                })
+                                .then(() => {
+                                    // this.clearInput()
+                                    this.$router.go(-1)
+                                })
+                        })
+                    }
+                })
+        },
+        // 登録
+        saveEvent() {
+            let flg = false
+            flg = this.$swal
+                .fire({
+                    text: '投稿してよろしいですか？',
+                    icon: '',
+                    showCancelButton: true,
+                    cancelButtonText: 'キャンセル',
+                    confirmButtonText: '確認',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        console.log('this.base', this.base)
+                        let params = {
+                            code: this.$store.getters.getOidcCode,
+                            post: {
+                                division: 'BBS',
+                                title: this.base.title,
+                                content: this.base.answer,
+                                genre: this.base.genre,
+                                publish: true,
+                                scope: this.base.scope,
+                            },
+                            tag: this.base.tags,
+                        }
+                        if (JSON.stringify(this.$route.query) === '{}') {
+                            this.$serve.postPosts(params).then((res) => {
+                                this.$swal
+                                    .fire({
+                                        text: '投稿されました。',
+                                        icon: '',
+                                        showCancelButton: false,
+                                        cancelButtonText: 'キャンセル',
+                                        confirmButtonText: 'OK',
+                                    })
+                                    .then(() => {
+                                        // this.clearInput()
+                                        this.$router.go(-1)
+                                    })
+                            })
+                        } else {
+                            console.log(this.$route.query.id)
+                            Object.assign(params.post, {
+                                post_id: this.$route.query.id,
+                            })
+                            this.$serve
+                                .putBbsPosts(params, this.$route.query.id)
+                                .then((res) => {
+                                    this.$swal
+                                        .fire({
+                                            text: '投稿されました。',
+                                            icon: '',
+                                            showCancelButton: false,
+                                            cancelButtonText: 'キャンセル',
+                                            confirmButtonText: 'OK',
+                                        })
+                                        .then(() => {
+                                            // this.clearInput()
+                                            this.$router.go(-1)
+                                        })
+                                })
+                        }
+                    }
+                })
+            if (flg) {
+            }
+        },
+        cancelEvent() {
+            this.$router.go(-1)
+        },
+        // 入力した内容をクリア
+        // clearInput() {
+        //     this.base.title = ''
+        //     this.base.answer = ''
+        //     this.$refs.scope.setValue('select')
+        //     this.$refs.genre.setValue('select')
+        //     this.base.tags = []
+        // },
+
+        // 検索結果画面で編集押下時、IDよりデータ取得
+        async doSearch() {
+            this.dispEditor = false
+            this.InputComment = ''
+            await this.$serve.postReadfeedbacks(this.id, '')
+
+            Object.assign(this.params, { division: 'BBS' })
+            const response = await this.$serve.getPostsrforId(
+                '',
+                this.$route.query.id
+            )
+            //
+            this.base.scope = response.data.data[0].post.scope
+            this.$refs.scope.setValue(String(this.base.scope))
+
+            this.base.genre = response.data.data[0].post.genre
+            this.$refs.genre.setValue(this.base.genre)
+
+            this.base.title = response.data.data[0].post.title
+            this.base.answer = response.data.data[0].post.content
+            for (let i = 0; i < response.data.data[0].post.tag.length; i++) {
+                this.base.tags.push(response.data.data[0].post.tag[i].name)
+            }
+            this.$refs.tag.refreshOptions()
+        },
+        async fetchLanguages(query) {
+            let result = {}
+            if (query == null || query == '') {
+                if (this.base.tags.length > 0) {
+                    for (
+                        let index = 0;
+                        index < this.base.tags.length;
+                        index++
+                    ) {
+                        let response = await this.$serve.getTagsMaster(
+                            this.$store.getters.getOidcCode,
+                            this.base.tags[index]
+                        )
+                        result = response.map((item) => {
+                            if (item.name === this.base.tags[index]) {
+                                return {
+                                    value: item.name,
+                                    label: item.name,
+                                }
+                            }
+                        })
+
+                        let setList = {
+                            value: this.base.tags[index],
+                            label: this.base.tags[index],
+                        }
+
+                        this.$refs.tag.select(setList)
+                    }
+                }
+            } else {
+                console.log('query', query)
+                await this.$serve
+                    .getTagsMaster(this.$store.getters.getOidcCode, query)
+                    .then((response) => {
+                        console.log(response)
+                        result = response.map((item) => {
+                            return {
+                                value: item.name,
+                                label: item.name,
+                            }
+                        })
+                    })
+            }
+            return result
+        },
     },
-    isValid() {
-      let valid = false
-      if (
-        this.base.scope != 'select' &&
-        this.base.genre != 'select' &&
-        this.base.title !== '' &&
-        this.base.answer !== ''
-      ) {
-        return true
-      } else {
-        return false
-      }
+
+    computed: {
+        validation() {
+            const base = this.base
+            console.log(base.answer)
+            return {
+                question: !!base.scope,
+                genre: !!base.genre,
+                title: !!base.title,
+                answer: !!base.answer,
+            }
+        },
+        isValid() {
+            let valid = false
+            if (
+                this.base.scope != 'select' &&
+                this.base.genre != 'select' &&
+                this.base.title !== '' &&
+                this.base.answer !== ''
+            ) {
+                return true
+            } else {
+                return false
+            }
+        },
     },
-  },
-  mounted() {
-    if (JSON.stringify(this.$route.query) !== '{}') {
-      this.doSearch()
-    }
-  },
+    mounted() {
+        if (JSON.stringify(this.$route.query) !== '{}') {
+            this.doSearch()
+        }
+    },
 }
 </script>
 

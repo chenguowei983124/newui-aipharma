@@ -40,7 +40,6 @@ export default {
         },
         oidcCode: '',
         download: false,
-        upload: false,
         bbsTagsList: [],
         loadingShowFlg: true,
     }),
@@ -51,9 +50,6 @@ export default {
         },
         getDownload(state) {
             return state.download
-        },
-        getUpload(state) {
-            return state.upload
         },
         getIsMenuClick(state) {
             return state.isMenuClick
@@ -168,8 +164,8 @@ export default {
         },
         // キーワード
         getSearchWord(state) {
-            return state.searchWord
-        },
+          return state.searchWord
+      },
         getBbsCheckInfo(state) {
             return state.bbsCheckInfo
         },
@@ -220,9 +216,6 @@ export default {
         setDownload({ commit }, value) {
             commit('basic', { key: 'download', value })
         },
-        setUpload({ commit }, value) {
-            commit('basic', { key: 'upload', value })
-        },
         setMenuClick({ commit, state }, value) {
             commit('basic', { key: 'isMenuClick', value })
         },
@@ -270,7 +263,7 @@ export default {
         },
         // キーワード
         setSearchWord({ commit, state }, value) {
-            commit('basic', { key: 'searchWord', value })
+          commit('basic', { key: 'searchWord', value })
         },
         setBbsCheckInfo({ commit }, value) {
             commit('setBbsCheck', value)
