@@ -22,7 +22,8 @@ import Redirect from '/src/view/Redirect.vue'
 import diChatbot from '/src/view/diChatbot.vue'
 import pharmaLink from '/src/view/pharmaLinks.vue'
 import prelusion from '/src/view/prelusion.vue'
-
+import myPage from '/src/view/myPage.vue'
+import myData from '/src/view/myData.vue'
 const routes = [
     // ログイン　画面
     {
@@ -194,6 +195,55 @@ const routes = [
             requireAuth: true,
         },
     },
+    // マイページ
+    {
+        path: '/myPage',
+        name: 'myPage',
+        component: myPage,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    {
+        path: '/myData',
+        redirect: '/myData/org',
+    },
+    // マイデータの所属内
+    {
+        path: '/myData/org',
+        name: 'myData/org',
+        component: myData,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // マイデータの症例
+    {
+        path: '/myData/pvd',
+        name: 'myData/pvd',
+        component: myData,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // マイデータの掲示板
+    {
+        path: '/myData/bbs',
+        name: 'myData/bbs',
+        component: myData,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    // マイデータの掲示板
+    {
+        path: '/myData/list',
+        name: 'myData/list',
+        component: myData,
+        meta: {
+            requireAuth: true,
+        },
+    },
     // エラー 画面
     {
         path: '/error',
@@ -227,6 +277,9 @@ router.beforeEach((to, from, next) => {
     } else {
         sessionStorage.setItem('routerID', 1)
     }
+
+    localStorage.setItem('from', from.path)
+    localStorage.setItem('to', to.path)
 
     if (to.meta.requireAuth) {
         // setTimeout(()=>{

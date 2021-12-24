@@ -144,7 +144,7 @@ module.exports = {
                 // 225px
                 56.25: '14.0625rem',
                 // 245px
-                61.25:'15.3125rem',
+                61.25: '15.3125rem',
                 // 250px
                 62.5: '15.625rem',
                 // 252px
@@ -184,7 +184,7 @@ module.exports = {
                 // // 500px
                 // 125: '31.25rem',
                 // 514px
-                128.5:'32.125rem',
+                128.5: '32.125rem',
                 // 530px
                 132.5: '33.0625rem',
                 // 720px
@@ -223,6 +223,16 @@ module.exports = {
                 '7/10': '70%',
                 '8/10': '80%',
                 '9/10': '90%',
+                'screen-50': '50vh',
+                'screen-51': '51vh',
+                'screen-52': '52vh',
+                'screen-53': '53vh',
+                'screen-54': '54vh',
+                'screen-55': '55vh',
+                'screen-56': '56vh',
+                'screen-67': '57vh',
+                'screen-58': '58vh',
+                'screen-59': '59vh',
                 'screen-60': '60vh',
                 'screen-61': '61vh',
                 'screen-62': '62vh',
@@ -304,7 +314,7 @@ module.exports = {
                 cardBrowseRequired: 'rgb(212, 20, 90)',
                 cardViewCount: 'rgb(204, 233, 246)',
                 lock: 'rgba(0,0,0,0.2)',
-                bbsLock:'#d3eaf5'
+                bbsLock: '#d3eaf5',
             }),
             textColor: (theme) => theme('colors'),
             textColor: {
@@ -321,7 +331,7 @@ module.exports = {
                 googleTitle: 'rgb(50, 165, 220)',
             },
             colors: {
-                grayB3B3B3:'#B3B3B3',
+                grayB3B3B3: '#B3B3B3',
                 gray808080: '#808080',
                 redf15a28: '#f15a28',
                 green39aa4a: '#39aa4a',
@@ -365,7 +375,7 @@ module.exports = {
                 'test-Range-Mid': 'rgb(250, 220, 170)',
                 loading: 'rgba(255, 255, 255, 0.7)',
                 chatbot: '#25839e',
-                chatbotline:'#5ba2b6'
+                chatbotline: '#5ba2b6',
             },
             fontSize: (theme) => theme('Size'),
             fontSize: {
@@ -458,7 +468,7 @@ module.exports = {
             maxHeight: ['focus'],
             cursor: ['disabled'],
             textOpacity: ['disabled'],
-            textColor: ['disabled','active'],
+            textColor: ['disabled', 'active'],
             display: ['group-hover', 'group-focus'],
             borderRadius: ['group-hover', 'group-focus'],
             padding: ['group-hover', 'group-focus'],

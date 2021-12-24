@@ -254,3 +254,6 @@
 .commentEditButtonColors {
     @apply bg-yellowfbbb14 border-b-2 border-yellowf7931e hover:opacity-50 active:bg-yellowf7931e active:opacity-100;
 }
+.mydataGrayButtonColors {
+    @apply rounded border-b-2 border-notice text-white hover:opacity-25 active:bg-notice;
+}

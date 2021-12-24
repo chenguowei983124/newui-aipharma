@@ -180,7 +180,7 @@
     @apply bg-white border-2 border-blueline rounded-lg w-full;
 }
 .searchResult_EdiDetail_gray {
-    @apply bg-white border-2 border-grayline rounded-lg w-full;
+    @apply bg-white border border-grayline rounded-lg w-full;
 }
 .searchResult_detail_gray {
     @apply bg-white border-b-2 border-l-2 border-r-2 border-grayline rounded-b-lg w-full;
@@ -189,6 +189,7 @@
 .bulletinBoardInfoTitle {
     @apply notoSansJpAndEighteenBold text-center text-white border-b border-white hover:opacity-50 active:opacity-50;
 }
+
 /* 新着Q＆Aタイトル */
 .newQaInfoTitle {
     @apply notoSansJpAndEighteenBold text-center text-white;

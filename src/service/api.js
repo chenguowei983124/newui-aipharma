@@ -842,7 +842,7 @@ const serve = {
     // コメント送信
     //===========================
     async updateComment(params) {
-        const data = await axios('/api/qa/update_comment', {
+        const data = await axios('/api/qa/update_qa_comment', {
             method: 'post',
             data: params,
         })
@@ -995,6 +995,21 @@ const serve = {
             method: 'post',
             data: param,
         })
+        return data
+    },
+    //===========================
+    // 組織内DI記録検索結果取得（検索条件）
+    //===========================
+    async getMydataOwnData(freeword) {
+        var params = {
+            freeword: freeword,
+        }
+
+        const data = await axios('/api/qa/get_organization_search_info', {
+            method: 'post',
+            data: params,
+        })
+
         return data
     },
     async getTest() {

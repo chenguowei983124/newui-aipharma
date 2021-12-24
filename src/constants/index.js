@@ -95,14 +95,14 @@ const managementitemList = [
     {
         title: '組織内DI 記録（Q&A）',
         itemStyle: 'item',
-        routerPath: '/newOrgDIRecord',
+        routerPath: '/myData/org',
     },
     {
         title: '症例（プレアボイド）',
         itemStyle: 'item',
-        routerPath: '/newOrgDIRecord',
+        routerPath: '/myData/pvd',
     },
-    { title: '下書き一覧', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
+    { title: '下書き一覧', itemStyle: 'item', routerPath: '/myData/list' },
 ]
 
 const managementPcitemList = [
@@ -117,10 +117,10 @@ const managementPcitemList = [
     {
         title: '組織内DI 記録 ',
         itemStyle: 'item',
-        routerPath: '/newOrgDIRecord',
+        routerPath: '/myData/org',
     },
-    { title: '症例', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
-    { title: '下書き一覧', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
+    { title: '症例', itemStyle: 'item', routerPath: '/myData/pvd' },
+    { title: '下書き一覧', itemStyle: 'item', routerPath: '/myData/list' },
 ]
 
 const issueIconitemList = [
@@ -138,7 +138,7 @@ const issueIconitemList = [
 ]
 
 const topManagementItemUserList = [
-    { id: 0, title: 'マイページ', routerPath: '/' },
+    { id: 0, title: 'マイページ', routerPath: '/myPage' },
     { id: 1, title: '施設切替', routerPath: '/' },
     { id: 2, title: '設定', routerPath: '/' },
     { id: 3, title: 'ログアウト', routerPath: '' },
