@@ -5,20 +5,788 @@
             title="所属内DI記録"
             titleStyle="notoSansJpAndEighteenBold text-center text-white"
         >
-            あｄふぁｓｄ
+            <div class="searchResult_detail_blue">
+                <div class="">
+                    <div
+                        class="
+                            mt-2.5
+                            pm:mt-5
+                            lm:mt-5
+                            mb-2.5
+                            ml-2.5
+                            pm:ml-5
+                            lm:ml-5
+                            w-34
+                            h-6
+                            pt-0.5
+                            notoSansJpAndTwelveMedium
+                            border border-notice
+                            rounded-sm
+                            text-center text-notice
+                            cursor-pointer
+                        "
+                        @click="owgDelete"
+                    >
+                        一覧から選択して削除
+                    </div>
+                    <div
+                        class="
+                            block
+                            pm:hidden
+                            lm:hidden
+                            border-b border-blueline
+                        "
+                    ></div>
+                </div>
+                <mydata-list
+                    class="notoSansJpAndTwelveMedium text-center"
+                    :dataList="orgDataList"
+                    :allCheck="owgAllCheck"
+                    :oneCheck="owgOneCheck"
+                    :appendedClick="appendedClick"
+                    :editClick="editClick"
+                    :titleList="orgTitleList"
+                ></mydata-list>
+            </div>
+        </result-tag>
+        <div class="mt-5"></div>
+        <result-tag
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="症例（プレアボイド）"
+            titleStyle="notoSansJpAndEighteenBold text-center text-white"
+        >
+            <div class="searchResult_detail_blue">
+                <div class="">
+                    <div
+                        class="
+                            mt-2.5
+                            pm:mt-5
+                            lm:mt-5
+                            mb-2.5
+                            ml-2.5
+                            pm:ml-5
+                            lm:ml-5
+                            w-34
+                            h-6
+                            pt-0.5
+                            notoSansJpAndTwelveMedium
+                            border border-notice
+                            rounded-sm
+                            text-center text-notice
+                            cursor-pointer
+                        "
+                        @click="owgDelete"
+                    >
+                        一覧から選択して削除
+                    </div>
+                    <div
+                        class="
+                            block
+                            pm:hidden
+                            lm:hidden
+                            border-b border-blueline
+                        "
+                    ></div>
+                </div>
+                <mydata-list
+                    class="notoSansJpAndTwelveMedium text-center"
+                    :dataList="pvdDataList"
+                    :allCheck="owgAllCheck"
+                    :oneCheck="owgOneCheck"
+                    :appendedClick="appendedClick"
+                    :editClick="editClick"
+                    :titleList="pvdTitleList"
+                ></mydata-list>
+            </div>
+        </result-tag>
+
+        <div class="mt-5"></div>
+        <result-tag
+            headerStyle="titleOnlyUnderlineBgColorBlue"
+            title="掲示板"
+            titleStyle="notoSansJpAndEighteenBold text-center text-white"
+        >
+            <div class="searchResult_detail_blue">
+                <div class="">
+                    <div
+                        class="
+                            mt-2.5
+                            pm:mt-5
+                            lm:mt-5
+                            mb-2.5
+                            ml-2.5
+                            pm:ml-5
+                            lm:ml-5
+                            w-34
+                            h-6
+                            pt-0.5
+                            notoSansJpAndTwelveMedium
+                            border border-notice
+                            rounded-sm
+                            text-center text-notice
+                            cursor-pointer
+                        "
+                        @click="owgDelete"
+                    >
+                        一覧から選択して削除
+                    </div>
+                    <div
+                        class="
+                            block
+                            pm:hidden
+                            lm:hidden
+                            border-b border-blueline
+                        "
+                    ></div>
+                </div>
+                <mydata-list
+                    class="notoSansJpAndTwelveMedium text-center"
+                    :dataList="bbsDataList"
+                    :allCheck="owgAllCheck"
+                    :oneCheck="owgOneCheck"
+                    :appendedClick="appendedClick"
+                    :editClick="editClick"
+                    :titleList="bbsTitleList"
+                ></mydata-list>
+            </div>
         </result-tag>
     </div>
 </template>
 
 <script>
 import resultTag from '../common/searchResult/resultTag.vue'
+import mydataList from '../common/searchResult/mydataList.vue'
 export default {
   components: {
-    resultTag
+    resultTag, mydataList
   },
   props: {},
   data() {
     return {
+      orgTitleList: {
+        content: "質問",
+        file: "添付",
+        date: "最終保存日付"
+      },
+      pvdTitleList: {
+        content: "内容",
+        file: "",
+        date: "最終保存日付"
+      },
+      bbsTitleList: {
+        content: "タイトル",
+        file: "添付",
+        date: "最終保存日付"
+      },
+      orgDataList: [
+        {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "1",
+          routerPath: "/newOrgDIRecord",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "asdfa",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }
+      ]
+      , pvdDataList: [
+        {
+          check: false,
+          content: "脳出欠でコイル塞栓術後経過◯◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "1",
+          routerPath: "/newOrgDIRecord",
+          delete: false
+        }, {
+          check: false,
+          content: "顆粒球減少症のため緊急入院◯◯◯◯◯◯◯◯◯…",
+          file: "asdfa",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "前立腺癌、骨転移性◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "右尿管癌のため手術予定の患◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "顆粒球減少症のため緊急入院◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "脳出欠でコイル塞栓術後経過◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "顆粒球減少症のため緊急入院◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "前立腺癌、骨転移性◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "右尿管癌のため手術予定の患◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "顆粒球減少症のため緊急入院◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }
+      ]
+      , bbsDataList: [
+        {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "1",
+          routerPath: "/newOrgDIRecord",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "asdfa",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }, {
+          check: false,
+          content: "痛み止めとして処方される◯◯◯◯◯◯◯◯◯…",
+          file: "",
+          dateTime: "2021 年 12 月 12 日  00:00",
+          id: "",
+          routerPath: "",
+          delete: false
+        }
+      ]
     }
   },
 
@@ -27,64 +795,21 @@ export default {
       if (this.$route.path != '/myData/list') {
         return
       }
-
-      this.$store.dispatch('clearPreavoidsInfo', {})
-      this.execSearch()
     },
   },
 
   methods: {
-    async selectedDownload(id) {
+    async appendedClick(id) {
       this.$store.dispatch('setDownload', true)
-      let data = this.$store.getters.getSearchPreavoidsInfo
-      let checkList = []
-      for (let index = 0; index < data.searchData.length; index++) {
-        if (data.searchData[index].check == true) {
-          checkList.push(data.searchData[index].id)
-        }
-      }
-      if (checkList.length == 0) {
-        this.$swal.fire(
-          '',
-          '一件もチェックされてないため、ダウンロードできません。'
-        )
-        return
-      }
+
       let params = {
-        id: checkList.join(','),
+        id: id,
       }
       await this.$serve.downloadPreavoidData(params).then((res) => {
         const filename = '123.xls'
-
-        if (window.navigator.msSaveOrOpenBlob) {
-          window.navigator.msSaveOrOpenBlob(res.data, filename)
-        } else {
-          const blob = new Blob([res.data], {
-            type: 'application/octet-stream',
-          })
-          const link = document.createElement('a')
-          link.href = window.URL.createObjectURL(blob)
-          link.download = filename
-          link.click()
-        }
-      })
-    },
-    async allDownload(id) {
-      this.$store.dispatch('setDownload', true)
-      let params = {
-        updated_from: new Date(
-          this.$store.getters.getDateValueFrom
-        ).toLocaleDateString(),
-        updated_to: new Date(
-          this.$store.getters.getDateValueTo
-        ).toLocaleDateString(),
-        comment: this.$store.getters.getSearchValue,
-        style: this.$store.getters.getStyles,
-        facility: this.$store.getters.getFacilityID,
-      }
-      await this.$serve.downloadPreavoidData(params).then((res) => {
-        const filename = '123.xls'
-
+        // const filename = this.getFileNameFromContentDisposition(
+        //     res.headers['content-disposition']
+        // )
         if (window.navigator.msSaveOrOpenBlob) {
           window.navigator.msSaveOrOpenBlob(res.data, filename)
         } else {
@@ -108,57 +833,31 @@ export default {
         return null
       }
     },
-    execSearch() {
-      this.$store.dispatch('setPearchPreavoidsInfo', {
-        searchData: [],
-        dataCount: 0,
-      })
-
-      this.$serve.getPreavoidDataByParams(this.$route.query).then((response) => {
-        let searchData = []
-        for (let i = 0; i < response.data.searchData.length; i++) {
-          searchData[i] = {
-            index: i,
-            check: false,
-            ageLevel: response.data.searchData[i].ageLevel,
-            comment: response.data.searchData[i].comment,
-            createdAt: response.data.searchData[i].createdAt,
-            facilityIdentificationNumber:
-              response.data.searchData[i]
-                .facilityIdentificationNumber,
-            facilityScaleName:
-              response.data.searchData[i].facilityScaleName,
-            genderId: response.data.searchData[i].genderId,
-            id: response.data.searchData[i].id,
-            name: response.data.searchData[i].name,
-            patientDivisionId:
-              response.data.searchData[i].patientDivisionId,
-            prefectureId: response.data.searchData[i].prefectureId,
-            prefectureName:
-              response.data.searchData[i].prefectureName,
-            primaryDisease:
-              response.data.searchData[i].primaryDisease,
-            reportingAt: response.data.searchData[i].reportingAt,
-            sideEffectName:
-              response.data.searchData[i].sideEffectName,
-            style: response.data.searchData[i].style,
-            suspectedDrug:
-              response.data.searchData[i].suspectedDrug,
-            title: response.data.searchData[i].title,
-            updatedAt: response.data.searchData[i].updatedAt,
-            userGroupId: response.data.searchData[i].userGroupId,
-            userGroupName:
-              response.data.searchData[i].userGroupName,
-          }
-        }
-        let dispResult = {
-          dataCount: response.data.dataCount,
-          searchData: searchData,
-        }
-        console.log("data", dispResult)
-        this.$store.dispatch('setPearchPreavoidsInfo', dispResult)
-      })
+    owgAllCheck(checked) {
+      for (let i = 0; i < this.orgDataList.length; i++) {
+        this.orgDataList[i].check = checked
+      }
     },
+    owgOneCheck(index) {
+      this.orgDataList[index].check = !this.orgDataList[index].check
+    },
+    owgDelete() {
+      for (let i = 0; i < this.orgDataList.length; i++) {
+        if (this.orgDataList[i].check == true) {
+          this.orgDataList[i].delete = true
+        }
+      }
+    },
+    editClick(row) {
+      let params = {
+        id: row.id,
+      }
+      this.$router.push({
+        path: row.routerPath,
+        query: params,
+      })
+    }
+
 
   },
   mounted() {

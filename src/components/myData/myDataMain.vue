@@ -67,128 +67,161 @@
             <div
                 class="w-full"
                 :class="[
-                    $route.path === '/myData/org' ? 'md:w-191.25' : 'md:w-245',
+                    $route.path === '/myData/org' ||
+                    $route.path === '/myData/list'
+                        ? 'pm:w-191.25 lm:w-191.25'
+                        : 'pm:w-245 lm:w-245',
                 ]"
             >
-                <div class="flex justify-center">
-                    <div class="md:w-191.25">
+                <div
+                    class="
+                        flex
+                        justify-center
+                        ml-2
+                        mr-2
+                        pm:ml-0 pm:mr-0
+                        lm:ml-0 lm:mr-0
+                    "
+                >
+                    <div class="w-full pm:w-191.25 lm:w-191.25">
                         <!-- 機能切替ボタン -->
-                        <div class="flex mt-5">
-                            <div class="flex justify-center">
-                                <button
-                                    class="
-                                        mydataGrayButtonColors
-                                        notoSansJpAndFourteenBold
-                                        rounded-md
-                                        w-45
-                                        h-10
-                                        flex
-                                        items-center
-                                        justify-center
-                                    "
-                                    :class="[
-                                        $route.path === '/myData/org'
-                                            ? 'bg-notice'
-                                            : 'bg-grayline',
-                                    ]"
-                                    @click="onOrgClick"
-                                >
-                                    <div>
-                                        <my-data-btn-org
-                                            class="w-6 h-6 mr-2"
-                                        ></my-data-btn-org>
-                                    </div>
-                                    <div>
-                                        <div>所属内DI 記録</div>
-                                    </div>
-                                </button>
+                        <div class="pm:flex lm:flex mt-2.5 pm:mt-5 lm:mt-5">
+                            <div class="flex">
+                                <div class="flex justify-center w-full">
+                                    <button
+                                        class="
+                                            mydataGrayButtonColors
+                                            notoSansJpAndFourteenBold
+                                            rounded-md
+                                            w-full
+                                            pm:w-45
+                                            lm:w-45
+                                            h-10
+                                            flex
+                                            items-center
+                                            justify-center
+                                        "
+                                        :class="[
+                                            $route.path === '/myData/org'
+                                                ? 'bg-notice'
+                                                : 'bg-grayline',
+                                        ]"
+                                        @click="onOrgClick"
+                                    >
+                                        <div>
+                                            <my-data-btn-org
+                                                class="w-6 h-6 mr-2"
+                                            ></my-data-btn-org>
+                                        </div>
+                                        <div>
+                                            <div>所属内DI 記録</div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="flex justify-center w-full ml-4">
+                                    <button
+                                        class="
+                                            mydataGrayButtonColors
+                                            rounded-md
+                                            notoSansJpAndFourteenBold
+                                            w-full
+                                            pm:w-45
+                                            lm:w-45
+                                            h-10
+                                            flex
+                                            items-center
+                                            justify-center
+                                        "
+                                        @click="onPvdClick"
+                                        :class="[
+                                            $route.path === '/myData/pvd'
+                                                ? 'bg-notice'
+                                                : 'bg-grayline',
+                                        ]"
+                                    >
+                                        <div>
+                                            <my-data-btn-pvd
+                                                class="w-5 h-6 mr-2"
+                                            ></my-data-btn-pvd>
+                                        </div>
+                                        <div>
+                                            <div>症例（プレアボイド）</div>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="flex justify-center ml-4">
-                                <button
+                            <div class="flex mt-2 pm:mt-0 lm:mt-0">
+                                <div
                                     class="
-                                        mydataGrayButtonColors
-                                        rounded-md
-                                        notoSansJpAndFourteenBold
-                                        w-45
-                                        h-10
                                         flex
-                                        items-center
                                         justify-center
+                                        w-full
+                                        ml-0
+                                        pm:ml-4
+                                        lm:ml-4
                                     "
-                                    @click="onPvdClick"
-                                    :class="[
-                                        $route.path === '/myData/pvd'
-                                            ? 'bg-notice'
-                                            : 'bg-grayline',
-                                    ]"
                                 >
-                                    <div>
-                                        <my-data-btn-pvd
-                                            class="w-5 h-6 mr-2"
-                                        ></my-data-btn-pvd>
-                                    </div>
-                                    <div>
-                                        <div>症例（プレアボイド）</div>
-                                    </div>
-                                </button>
-                            </div>
-                            <div class="flex justify-center ml-4">
-                                <button
-                                    class="
-                                        mydataGrayButtonColors
-                                        notoSansJpAndFourteenBold
-                                        rounded-md
-                                        w-45
-                                        h-10
-                                        flex
-                                        items-center
-                                        justify-center
-                                    "
-                                    @click="onBbsClick"
-                                    :class="[
-                                        $route.path === '/myData/bbs'
-                                            ? 'bg-notice'
-                                            : 'bg-grayline',
-                                    ]"
-                                >
-                                    <div>
-                                        <my-data-btn-bbs
-                                            class="w-8.5 h-6.5 mr-2"
-                                        ></my-data-btn-bbs>
-                                    </div>
-                                    <div>
-                                        <div>掲示板</div>
-                                    </div>
-                                </button>
-                            </div>
-                            <div class="flex justify-center ml-4">
-                                <button
-                                    class="
-                                        mydataGrayButtonColors
-                                        notoSansJpAndFourteenBold
-                                        rounded-md
-                                        w-45
-                                        h-10
-                                        flex
-                                        items-center
-                                        justify-center
-                                    "
-                                    :class="[
-                                        $route.path === '/myData/list'
-                                            ? 'bg-notice'
-                                            : 'bg-grayline',
-                                    ]"
-                                    @click="onListClick"
-                                >
-                                    <div>
-                                        <my-data-btn-list
-                                            class="w-9 h-5 mr-2"
-                                        ></my-data-btn-list>
-                                    </div>
-                                    <div>
-                                        <div>下書き一覧</div>
-                                    </div>
-                                </button>
+                                    <button
+                                        class="
+                                            mydataGrayButtonColors
+                                            notoSansJpAndFourteenBold
+                                            rounded-md
+                                            w-full
+                                            pm:w-45
+                                            lm:w-45
+                                            h-10
+                                            flex
+                                            items-center
+                                            justify-center
+                                        "
+                                        @click="onBbsClick"
+                                        :class="[
+                                            $route.path === '/myData/bbs'
+                                                ? 'bg-notice'
+                                                : 'bg-grayline',
+                                        ]"
+                                    >
+                                        <div>
+                                            <my-data-btn-bbs
+                                                class="w-8.5 h-6.5 mr-2"
+                                            ></my-data-btn-bbs>
+                                        </div>
+                                        <div>
+                                            <div>掲示板</div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="flex justify-center w-full ml-4">
+                                    <button
+                                        class="
+                                            mydataGrayButtonColors
+                                            notoSansJpAndFourteenBold
+                                            rounded-md
+                                            w-full
+                                            pm:w-45
+                                            lm:w-45
+                                            h-10
+                                            flex
+                                            items-center
+                                            justify-center
+                                        "
+                                        :class="[
+                                            $route.path === '/myData/list'
+                                                ? 'bg-notice'
+                                                : 'bg-grayline',
+                                        ]"
+                                        @click="onListClick"
+                                    >
+                                        <div>
+                                            <my-data-btn-list
+                                                class="w-9 h-5 mr-2"
+                                            ></my-data-btn-list>
+                                        </div>
+                                        <div>
+                                            <div>下書き一覧</div>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -198,7 +231,10 @@
                                 bg-backgroundMainSearch
                                 items-center
                                 flex
-                                mt-5
+                                w-full
+                                mt-2.5
+                                pm:mt-5
+                                lm:mt-5
                                 p-2
                             "
                         >
@@ -251,7 +287,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5">
+                <div
+                    class="
+                        mt-3
+                        pm:mt-5
+                        lm:mt-5
+                        ml-2
+                        mr-2
+                        pm:ml-0
+                        lm:ml-0
+                        pm:mr-0
+                        lm:mr-0
+                    "
+                >
                     <my-data-organinzation
                         :freeword="inputKeyword"
                         v-if="$route.path === '/myData/org'"
