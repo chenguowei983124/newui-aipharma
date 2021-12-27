@@ -331,6 +331,7 @@ module.exports = {
                 googleTitle: 'rgb(50, 165, 220)',
             },
             colors: {
+                grayeeeeee: '#eeeeee',
                 grayB3B3B3: '#B3B3B3',
                 gray808080: '#808080',
                 redf15a28: '#f15a28',
@@ -423,9 +424,11 @@ module.exports = {
                 bluelineB: '#65B2D9',
                 buttonbluelineB: '#3490bf',
                 orangeBorderB: '#ef5a24',
-                grayLine: '#666666',
+                grayBorderLine: '#666666',
                 backgroundMain: '#d6edf8',
                 chatbot: '#25839e',
+                pink_78145A: '#78145A',
+                blue_283C78: '#283C78',
             }),
             screens: {
                 mid: '980px',
