@@ -17,7 +17,7 @@ export default {
         questionID: '0', // 質問区分
         facilityID: '0', // 施設
         page: '1', // ページ
-        QAID: '', // QAID
+        QAID: '', // QAID　
         sort: 'last_updated_at_desc', // ソート順
         maxCount: '20', // 表示件数
         // 検索対象
@@ -31,11 +31,11 @@ export default {
         checkNote: true, // 備考
         filterBBS: {},
         searchTagsLable: [], // タブname
-        orgTagsList: [],
+        orgTagsList: []
     }),
 
     getters: {
-        //
+        // 
         getorgTagsList(state) {
             return state.orgTagsList
         },
@@ -186,7 +186,6 @@ export default {
             param
         ) {
             const info = await serve.getOwnData(param)
-            console.log(info)
             commit('setOrganizationSearchInfo', info)
         },
         //===========================
@@ -230,7 +229,7 @@ export default {
         setIsOrganizationSearch({ commit, state }, value) {
             commit('basic', { key: 'isOrganizationSearch', value })
         },
-        //
+        // 
         setOrgTagsList({ commit, state }, value) {
             commit('basic', { key: 'orgTagsList', value })
         },

@@ -1,6 +1,6 @@
 <template>
     <div class="" id="div_postList">
-        <div class="flex justify-end mb-2">
+        <div class="flex justify-end mb-2" v-if="postList.length != 0">
             <vue-single-select
                 class="w-42.5 cursor-pointer"
                 :name="'patientGenderList'"
@@ -14,6 +14,7 @@
                   border border-transparent focus:outline-none"
             ></vue-single-select>
         </div>
+        <div v-else></div>
         <mescroll-vue
             class="h-screen-63 md:h-screen-65 overflow-y-scroll"
             ref="mescroll"

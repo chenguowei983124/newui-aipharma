@@ -73,20 +73,22 @@
         <div class="flex h-screen-70">
             <div class="flex-grow min-w-min block"></div>
 
-            <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-245">
+            <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-245 lm:w-245">
                 <div :class="[dispFlg ? 'flex' : '']">
                     <div
                         class="
                             grid grid-cols-1
                             pm:flex-auto
+                            lm:flex-auto
                             gap-1
                             pm:space-y-3.75
+                            lm:space-y-3.75
                         "
                     >
                         <notification-list
                             :class="[
                                 dispFlg
-                                    ? 'hidden pm:w-full pm:flex-grow pm:block lg:w-full lg:flex-grow lg:block'
+                                    ? 'hidden pm:w-full pm:flex-grow pm:block lm:w-full lm:flex-grow lm:block'
                                     : 'flex-grow w-full',
                             ]"
                             ref="notificationList"
@@ -97,9 +99,9 @@
                     </div>
                     <div
                         class="
-                            pm:ml-2 pm:mt-0 pm:border-l-2
-                            md:border-l-2 md:border-grayline
-                            pm:border-grayline
+                            pm:ml-2 pm:mt-0 pm:border-l-2 pm:border-grayline
+                            md:ml-2 md:mt-0 md:border-l-2 md:border-grayline
+                            lm:ml-2 lm:mt-0 lm:border-l-2 lm:border-grayline
                             hidden
                             pm:block
                         "
@@ -111,6 +113,7 @@
                             gap-1
                             w-full
                             pm:space-y-3.75 pm:ml-2 pm:w-132.5 pm:flex-none
+                            lm:space-y-3.75 lm:ml-2 lm:w-132.5 lm:flex-none
                         "
                         v-if="dispFlg"
                     >
@@ -119,6 +122,7 @@
                                 flex-grow
                                 w-full
                                 pm:ml-2 pm:w-132.5 pm:flex-none
+                                lm:ml-2 lm:w-132.5 lm:flex-none
                             "
                             ref="notificationTalking"
                             @close="getClose"
