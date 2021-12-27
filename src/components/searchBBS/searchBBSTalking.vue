@@ -10,7 +10,7 @@
         <!-- "" -->
         <div
             class="overflow-y-scroll"
-            :class="[dispEditor ? 'h-62/100' : 'h-full md:h-9/10']"
+            :class="[dispEditor ? 'h-7/10' : 'h-full md:h-9/10 lm:h-9/10']"
         >
             <div class="mt-4 pl-2 pr-2">
                 <div v-if="postList.length > 0">
@@ -155,12 +155,10 @@
                                     flex
                                     items-center
                                     justify-end
-                                    h-7.5
-                                    w-14
                                     ml-2
                                     rounded
                                     text-white
-                                    bg-whole
+                                    goodButtonColors
                                 "
                                 @click="
                                     putFeedbacks(
@@ -180,11 +178,9 @@
                                     flex
                                     justify-end
                                     items-center
-                                    h-7.5
-                                    w-14
                                     rounded
                                     text-white
-                                    bg-red-400
+                                    badButtonColors
                                     ml-1
                                 "
                                 @click="
@@ -203,7 +199,7 @@
                         </div>
                     </div>
                     <div
-                        class="mt-3 ml-10 border-t-2 border-blueline"
+                        class="mt-3 ml-10 border-t border-blueline"
                         v-for="(items, index) in postList[0].commnet"
                         :key="index"
                     >

@@ -136,9 +136,16 @@
                                     notoSansJpAndFourteenBold
                                     pl-5
                                 "
+                                :class="[!(isDetailDisp[
+                                            $store.getters.dIKnowledgeShareSearchInfo.qas[index].id] ===
+                                        $store.getters.dIKnowledgeShareSearchInfo.qas[index].id)
+                                        ? 'truncate'
+                                        : '',
+                                ]"
                             >
                                 <!-- {{ item.answer }} -->
                                 <div
+                                    class="msgHtmlBoxP"
                                     v-show="
                                         !(
                                             isDetailDisp[
@@ -1318,5 +1325,12 @@ export default {
 
 .text {
     margin: 0 5px;
+}
+
+.msgHtmlBoxP :deep(*) {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 </style>

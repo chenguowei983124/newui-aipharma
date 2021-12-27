@@ -86,8 +86,15 @@
                                     notoSansJpAndFourteenBold
                                     pl-5
                                 "
+                                :class="[!(isDetailDisp[
+                                            $store.getters.dIKnowledgeShareSearchAIInfo.qas[index].id] ===
+                                        $store.getters.dIKnowledgeShareSearchAIInfo.qas[index].id)
+                                        ? 'truncate'
+                                        : '',
+                                ]"
                             >
                                 <div
+                                    class="msgHtmlBoxP"
                                     v-show="
                                         !(
                                             isDetailDisp[
@@ -957,5 +964,12 @@ export default {
 
 .text {
     margin: 0 5px;
+}
+
+.msgHtmlBoxP :deep(*) {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 </style>

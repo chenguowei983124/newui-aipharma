@@ -1,7 +1,7 @@
 <template>
     <!-- 検索枠 -->
     <div id="searchNotificationLayout">
-        <div class="group">
+        <div class="group" v-if="$store.getters.getSearchFlg">
             <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
                 <search-bar
                     ref="searchBar"
@@ -11,11 +11,65 @@
                     @searchID="getSearchID"
                 ></search-bar>
             </div>
+            <div
+                class="
+                    absolute
+                    hidden
+                    pm:group-hover:block
+                    lm:group-hover:block
+                    w-full
+                    h-7/10
+                    mt-13
+                    z-10
+                "
+                @click="chickHover"
+            ></div>
+            <div :class="fixedHoverHight"></div>
+        </div>
 
+        <div class="group" v-if="!$store.getters.getSearchFlg">
+            <div class="fixed flex-auto pt-12.5 md:pt-15 md:top-0 z-20 md:z-20">
+                <search-bar
+                    ref="searchBar"
+                    :form="$constant.formList.EDI"
+                    @isDetailClick="getDetailDisp"
+                    @detailDisp="getScroll"
+                    @searchID="getSearchID"
+                ></search-bar>
+            </div>
+            <div
+                class="
+                    absolute
+                    hidden
+                    pm:group-hover:block
+                    lm:group-hover:block
+                    w-full
+                    h-7/10
+                    mt-13
+                    z-10
+                "
+                @click="chickHover"
+            ></div>
             <div :class="fixedHoverHight"></div>
         </div>
 
         <div :class="fixedHight"></div>
+        <div
+            class="absolute w-full h-7/10 mt-13 top-0 z-10"
+            :class="hoverHidden ? 'block' : 'hidden'"
+        ></div>
+        <div
+            class="
+                flex
+                justify-center
+                mt-2
+                mb-4
+                pb-1.75
+                border-b-2 border-recruitment
+            "
+        >
+            <search-edi-title-bar></search-edi-title-bar>
+        </div>
         <div class="flex h-screen-70">
             <div class="flex-grow min-w-min block"></div>
 
@@ -32,7 +86,7 @@
                         <notification-list
                             :class="[
                                 dispFlg
-                                    ? 'hidden pm:w-full pm:flex-grow pm:block'
+                                    ? 'hidden pm:w-full pm:flex-grow pm:block lg:w-full lg:flex-grow lg:block'
                                     : 'flex-grow w-full',
                             ]"
                             ref="notificationList"
@@ -87,13 +141,23 @@
 import notificationList from '../components/searchNotification/searchNotificationMain.vue'
 import notificationTalking from '../components/searchNotification/searchNotificationTalking.vue'
 import searchBar from '../components/common/search/searchBar.vue'
+import searchEdiTitleBar from '../components/common/search/searchEdiTitleBar.vue'
 export default {
-    components: { notificationList, notificationTalking, searchBar },
+    components: {
+        notificationList,
+        notificationTalking,
+        searchBar,
+        searchEdiTitleBar,
+    },
     computed: {
         fixedHight() {
             let css = ''
             if (this.ischeckIdMsg == '6' || this.ischeckIdMsg == '7') {
-                css = 'h-48 md:h-48'
+                if (this.isDetailButtonClick) {
+                    css = 'h-34 md:h-32'
+                } else {
+                    css = 'h-30 md:h-32'
+                }
             } else {
                 if (this.isScroll) {
                     if (this.isDetailButtonClick) {
@@ -102,15 +166,15 @@ export default {
                             this.ischeckIdMsg == '4' ||
                             this.ischeckIdMsg == '5'
                         ) {
-                            css = 'h-48 md:h-48'
+                            css = 'h-34 md:h-32.5'
                         } else if (this.ischeckIdMsg == '1') {
-                            css = 'h-74.5 md:h-80'
+                            css = 'h-74.5 md:h-65'
                         } else if (this.ischeckIdMsg == '2') {
-                            css = 'h-112.5 md:h-112.5'
+                            css = 'h-112.5 md:h-93.75'
                         } else if (this.ischeckIdMsg == '3') {
-                            css = 'h-48 md:h-88.75'
+                            css = 'h-80 md:h-72'
                         } else {
-                            css = 'h-48 md:h-93.75'
+                            css = 'h-74.5 md:h-70'
                         }
                     } else {
                         if (
@@ -118,11 +182,13 @@ export default {
                             this.ischeckIdMsg == '4' ||
                             this.ischeckIdMsg == '5'
                         ) {
-                            css = 'h-48 md:h-30'
+                            css = 'h-48 md:h-32.5'
                         } else if (this.ischeckIdMsg == '3') {
-                            css = 'h-48 md:h-42.5'
+                            css = 'h-55 md:h-46'
                         } else if (this.ischeckIdMsg == '2') {
-                            css = 'h-86.25 md:h-64'
+                            css = 'h-86.25 md:h-69'
+                        } else if (this.ischeckIdMsg == '1') {
+                            css = 'h-80 md:h-70'
                         } else {
                             css = 'h-48 md:h-64'
                         }
@@ -204,10 +270,18 @@ export default {
             dispFlg: false,
             id: '',
             ischeckIdMsg: '7',
+            hoverHidden: false,
         }
     },
     mounted() {},
     methods: {
+        chickHover() {
+            console.log('hover', this.hoverHidden)
+            this.hoverHidden = !this.hoverHidden
+            if (this.hoverHidden) {
+                setTimeout(this.chickHover, 10)
+            }
+        },
         // 詳細条件ボタン押下区分を取得
         getDetailDisp: function (data) {
             this.isDetailButtonClick = data

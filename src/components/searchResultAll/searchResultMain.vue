@@ -48,7 +48,7 @@
 
             <resut-tag
                 headerStyle="titleOnlyUnderlineBgColorBlue"
-                title="組織内 DI 記録（Q&A）"
+                title="所属内DI記録"
                 titleStyle="bulletinBoardInfoTitle"
                 titleURL="searchOrganization"
                 :titleUrlParam="setOwnURL"

@@ -20,7 +20,7 @@
             :up="mescrollUp"
         >
             <div class="relative">
-                <div class="">
+                <div class="" v-if="postList.length != 0">
                     <div v-for="(article, index) in postList" :key="index">
                         <result-detail-row
                             class="searchResult_EdiDetail_gray mt-2"
@@ -31,6 +31,7 @@
                         </result-detail-row>
                     </div>
                 </div>
+                <div v-else class="flex justify-center text-lg mt-20">{{$store.getters.getMessage}}</div>
             </div>
         </mescroll-vue>
     </div>
@@ -67,22 +68,24 @@ export default {
                     size: 20,
                 },
                 htmlNodata: '<p class="upwarp-nodata">-- END --</p>',
+                htmlLoading: '<p class="upwarp-progress mescroll-rotate"></p ><p class="upwarp-tip">loading..</p >',
                 noMoreSize: 5,
 
                 toTop: {
                     offset: 1000,
                 },
-                empty: {
-                    warpId: 'div_postList',
-                    // icon: './static/mescroll/mescroll-empty.png',
-                    tip: 'データがありません。',
-                },
+                // empty: {
+                //     warpId: 'div_postList',
+                //     icon: './static/mescroll/mescroll-empty.png',
+                //     tip: 'データがありません。',
+                // },
             },
         }
     },
     watch: {
         $route(to, from) {
             console.log('searchNotificationMain watch', to.query)
+            this.$store.dispatch('setMessageActions', '')
             if (
                 to.path != '/searchNotification' ||
                 from.path != '/searchNotification'
@@ -195,6 +198,8 @@ export default {
                     this.postList = this.formatPostList(response.data.data)
                 }
                 this.pagination = response.data.pagination
+            } else {
+                this.$store.dispatch('setMessageActions', '検索結果がありません。キーワードを変更してお試しください。')
             }
         },
         formatPostList(data) {

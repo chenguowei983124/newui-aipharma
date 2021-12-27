@@ -251,7 +251,7 @@ export default {
       dispList: [],
       list: [
         {
-          companyName: 'シオノギ製薬',
+          companyName: '塩野義製薬',
           systemName: 'DI チャット',
           content: [
             {

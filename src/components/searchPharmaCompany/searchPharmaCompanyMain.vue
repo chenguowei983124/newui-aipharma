@@ -58,7 +58,7 @@
                       border-b-2 border-pageblue
                       hover:opacity-50
                       bg-white
-                      text-blueline
+                      text-view
                       notoSansJpAndEighteenBold
                     "
                     v-if="item.row === 1"
@@ -100,7 +100,7 @@
                         border-b-2
                         hover:opacity-50
                         bg-white
-                        text-blueline
+                        text-view
                         notoSansJpAndEighteenBold
                       "
                       v-if="item.row === 2"
@@ -197,7 +197,7 @@
               {{ item.companyName }}
             </div>
             <!-- 医療関係者向けサイト、一般向けサイト -->
-            <div class="flex mt-3.5">
+            <div class="flex mt-3.5 mb-2">
               <a :href="item.proUrl" target="_blank">
                 <div
                   class="
@@ -327,7 +327,7 @@
                       : 'hidden spm:block lm:block spm:invisible lm:invisible',
                   ]"
                 >
-                  <chatbot class="w-4 h-4 mt-1 mr-1"></chatbot>
+                  <chatbot class="w-5 h-5 mt-0.5 mr-1"></chatbot>
                   <div class="mt-0.5">チャットボット</div>
                 </div>
               </a>

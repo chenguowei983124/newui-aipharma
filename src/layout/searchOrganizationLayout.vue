@@ -43,8 +43,7 @@
                             pl-2
                             md:pl-0
                         "
-                    >
-                        組織内 DI 記録（Q&A）
+                    >所属内DI記録
                     </div>
                     <div
                         class="
@@ -88,7 +87,7 @@
                     font-NotoSansJp
                 "
             >
-                <span>組織内 DI 記録（Q&A）の全体件数</span>
+                <span>所属内DI記録の全体件数</span>
                 <span class="mx-1">:</span>
                 <span class="mr-4">123456</span>
                 <span class="border-l border-pageblue"></span>

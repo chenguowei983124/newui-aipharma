@@ -44,7 +44,7 @@
                 @click="blankClickDown"
             >
                 <div v-if="$store.getters.getIssueIconClick == true">
-                    <div class="flex justify-center mt-12.5">
+                    <div class="flex justify-center mt-12.5 text-sm font-NotoSansJp">
                         <div
                             class="absolute w-88.75"
                             v-if="$store.getters.getIssueIconClick"
@@ -136,7 +136,7 @@
                                     item, index
                                 ) in $constant.issueIconitemList"
                                 :key="index"
-                                class="h-9 font-NotoSansJp cursor-pointer"
+                                class="h-9 font-NotoSansJp cursor-pointer text-sm "
                             >
                                 <div class="">
                                     <div

@@ -125,9 +125,9 @@
                     v-if="form == this.$constant.formList.OWN"
                     @searchTagtoBrother="tagToBrother"
                 ></search-org-title-bar> -->
-                <!-- <search-preavoid-title
+                <search-preavoid-title
                     v-if="form == this.$constant.formList.PVD"
-                ></search-preavoid-title> -->
+                ></search-preavoid-title>
                 <search-bbs-title-bar
                     v-if="form == this.$constant.formList.BBS"
                 ></search-bbs-title-bar>
@@ -193,13 +193,11 @@ export default {
     },
     watch: {
         checkId: function (newValue, oldValue) {
-            if (
-                JSON.stringify(this.$route.query) === '{}' ||
-                this.$route.query.id !== undefined
-            ) {
-                this.initStore(oldValue, newValue)
+        if (JSON.stringify(this.$route.query) === '{}' ||
+            this.$route.query.id !== undefined) {
+            this.initStore(oldValue, newValue)
             }
-            this.$emit('searchID', this.checkId)
+        this.$emit('searchID', this.checkId)
         },
         detailDisp: function () {
             this.$emit('detailDisp', this.detailDisp)
@@ -291,23 +289,22 @@ export default {
 
         // this.$props.form == this.$constant.formList.OWN ||
         // this.$props.form == this.$constant.formList.DI ||
-        
         searchBarStyleClessMid: function () {
             if (
                 this.$props.form == this.$constant.formList.PVD ||
                 this.$props.form == this.$constant.formList.BBS ||
                 this.$props.form == this.$constant.formList.EDI
             ) {
-                return 'hidden group-hover:inline-flex bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2 border-recruitment '
+                return 'hidden group-hover:inline-flex bg-white flex justify-center items-center h-full w-full mt-2.5 md:mt-0 pt-2.5 pb-3 border-b-2 border-recruitment '
             } else {
                 return 'hidden'
             }
         },
         searchBarProStyleClass: function () {
             if (this.$props.form == this.$constant.formList.TOP) {
-                return 'bg-red-400 flex-grow'
+                return 'flex-grow'
             } else if (this.$props.form == this.$constant.formList.ALL) {
-                return 'bg-red-400 flex-grow'
+                return 'flex-grow'
             } else if (this.$props.form == this.$constant.formList.DI) {
                 return 'hidden'
             } else if (this.$props.form == this.$constant.formList.OWN) {
@@ -614,6 +611,8 @@ export default {
         },
         // 検索ボタン押下イベント
         searchClick: function (event) {
+            this.$store.dispatch('setSearchFlg', !this.$store.getters.getSearchFlg)
+            this.$store.dispatch('setMessageActions', '')
             // すべて
             if (this.checkId == 0) {
                 let getTimestamp = new Date().getTime()
@@ -1112,9 +1111,9 @@ export default {
             this.$store.dispatch('setBbsCheckInfo', checkInfo)
             // this.$store.dispatch('setSearchWord', '')
             this.$store.dispatch('setScopeInfo', '0'),
-                this.$store.dispatch('setDateValueFrom', ''),
-                this.$store.dispatch('setDateValueTo', ''),
-                this.$store.dispatch('setSort', 'created_at-desc')
+            this.$store.dispatch('setDateValueFrom', ''),
+            this.$store.dispatch('setDateValueTo', ''),
+            this.$store.dispatch('setSort', 'created_at-desc')
             this.$store.dispatch('setSearchTags', [])
             this.$store.dispatch('setSearchTagsLable', [])
         },
@@ -1130,9 +1129,9 @@ export default {
             this.$store.dispatch('setEdiCheckInfo', checkInfo)
             // this.$store.dispatch('setSearchWord', '')
             this.$store.dispatch('setScopeInfo', '0'),
-                this.$store.dispatch('setDateValueFrom', ''),
-                this.$store.dispatch('setDateValueTo', ''),
-                this.$store.dispatch('setSort', 'created_at-desc')
+            this.$store.dispatch('setDateValueFrom', ''),
+            this.$store.dispatch('setDateValueTo', ''),
+            this.$store.dispatch('setSort', 'created_at-desc')
             this.$store.dispatch('setSearchTags', [])
             this.$store.dispatch('setSearchTagsLable', [])
         },

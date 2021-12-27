@@ -53,7 +53,7 @@
                             <div
                                 v-for="item in $constant.managementitemList"
                                 :key="item"
-                                class="h-9 font-NotoSansJp cursor-pointer"
+                                class="h-9 font-NotoSansJp cursor-pointer text-sm "
                             >
                                 <div class="">
                                     <div
@@ -128,7 +128,7 @@
                             <div
                                 v-for="item in $constant.managementPcitemList"
                                 :key="item"
-                                class="h-9 font-NotoSansJp cursor-pointer"
+                                class="h-9 font-NotoSansJp cursor-pointer text-sm"
                             >
                                 <div class="">
                                     <div

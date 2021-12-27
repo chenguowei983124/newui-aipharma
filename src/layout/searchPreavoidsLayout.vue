@@ -15,8 +15,11 @@
         <!-- spの場合、ヘッダー、検索枠の位置を替える -->
     </div>
     <div :class="fixedHight"></div>
+    <div class="flex justify-center pt-2.5 pb-2.5 border-b-2 border-recruitment">
+            <search-preavoid-title></search-preavoid-title>
+        </div>
     <!-- 内容 -->
-    <div
+        <div
         class="flex mt-12 md:mt-10 pr-2 md:pr-0 justify-center"
         :class="isDetailButtonClick ? '' : 'mt-20 md:mt-20'"
     >
@@ -93,11 +96,13 @@
 <script>
 import searchBar from '../components/common/search/searchBar.vue'
 import searchPreavoidsMain from '../components/searchPreavoids/searchPreavoidsMain.vue'
+import searchPreavoidTitle from '../components/common/search/searchPreavoidTitle.vue'
 
 export default {
     components: {
         searchBar,
         searchPreavoidsMain,
+        searchPreavoidTitle
     },
     props: {},
     data() {
@@ -115,7 +120,7 @@ export default {
             let css = ''
             // h-30 => h-40 「h-10　追加する」
             if (this.ischeckIdMsg == '6' || this.ischeckIdMsg == '7') {
-                css = 'h-30 md:h-40'
+                css = 'h-30 md:h-30'
             } else {
                 if (this.isScroll) {
                     if (this.isDetailButtonClick) {
@@ -124,13 +129,13 @@ export default {
                             this.ischeckIdMsg == '4' ||
                             this.ischeckIdMsg == '5'
                         ) {
-                            css = 'h-30 md:h-40'
+                            css = 'h-30 md:h-30'
                         } else if (this.ischeckIdMsg == '1') {
-                            css = 'h-74.5 md:h-72.5'
+                            css = 'h-74.5 md:h-63'
                         } else if (this.ischeckIdMsg == '2') {
-                            css = 'h-112.5 md:h-103.75'
+                            css = 'h-112.5 md:h-93.75'
                         } else if (this.ischeckIdMsg == '3') {
-                            css = 'h-82.5 md:h-80'
+                            css = 'h-82.5 md:h-72'
                         } else {
                             css = 'h-48 md:h-93.75'
                         }

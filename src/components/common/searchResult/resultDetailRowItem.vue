@@ -275,8 +275,8 @@ export default {
             }
 
             if (props.typeKB == 'organization') {
-                // 2:組織内
-                return '組織内'
+                // 2:所属内
+                return '所属内'
             }
 
             if (props.typeKB == 'group') {

@@ -166,7 +166,7 @@
                                 : 'border-b-2 border-white',
                         ]"
                     >
-                        <div class="hover:opacity-50 active:opacity-50">
+                        <div class="hover:opacity-50 active:opacity-50 ">
                             {{ items.title }}
                         </div>
                     </div>

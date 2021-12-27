@@ -95,7 +95,7 @@
 }
 /* ラベル　告知 */
 .searchResult_lable_notice {
-    @apply notoSansJpAndTenMedium text-notice ring-notice w-16.25 h-4 ring-1;
+    @apply notoSansJpAndTenMedium text-notice bg-white ring-notice w-16.25 h-4 ring-1;
 }
 /* ラベル　view */
 .searchResult_lable_view {

@@ -2,7 +2,7 @@
     <div class="cs:relative">
         <div
             class="
-                bg-commentBgColor
+                bg-grayeeeeee
                 h-10
                 w-10
                 flex

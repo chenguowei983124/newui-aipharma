@@ -82,7 +82,7 @@ const APIKEY = 'qph8nbd0u6yvubz8os1ghqw2txzvs1uq3qng582s4w0t63vp'
 const managementitemList = [
     { title: 'データ登録', itemStyle: 'title' },
     {
-        title: '組織内DI 記録（Q&A）登録',
+        title: '所属内DI記録 登録',
         itemStyle: 'item',
         routerPath: '/newOrgDIRecord',
     },
@@ -93,7 +93,7 @@ const managementitemList = [
     },
     { title: 'マイデータ', itemStyle: 'title' },
     {
-        title: '組織内DI 記録（Q&A）',
+        title: '所属内DI記録',
         itemStyle: 'item',
         routerPath: '/myData/org',
     },
@@ -110,14 +110,14 @@ const managementitemList = [
 const managementPcitemList = [
     { title: 'データ登録', itemStyle: 'title' },
     {
-        title: '組織内DI 記録 登録',
+        title: '所属内DI記録 登録',
         itemStyle: 'item',
         routerPath: '/newOrgDIRecord',
     },
     { title: '症例 登録', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
     { title: 'マイデータ', itemStyle: 'title' },
     {
-        title: '所属内DI 記録 登録',
+        title: '所属内DI記録 登録',
         itemStyle: 'item',
         routerPath: '/myData/org',
     },
@@ -142,7 +142,7 @@ const issueIconitemList = [
 
 const topManagementItemUserList = [
     { id: 0, title: 'マイページ', routerPath: '/myPage' },
-    { id: 1, title: '施設切替', routerPath: '/' },
+    { id: 1, title: '所属切替', routerPath: '/' },
     { id: 2, title: '設定', routerPath: '/' },
     { id: 3, title: 'ログアウト', routerPath: '' },
 ]
@@ -158,13 +158,13 @@ const qaClassifyFacility = [
 const bbsScops = [
     { value: 'select', title: '選択してください' },
     { value: '0', title: '全体' },
-    { value: '1', title: '組織' },
+    { value: '1', title: '施設内' },
     { value: '2', title: 'グループ' },
 ]
 
 const searchBbsScops = [
     { value: '0', title: '全体' },
-    { value: '1', title: '組織' },
+    { value: '1', title: '施設内' },
     { value: '2', title: 'グループ' },
 ]
 const bbsGenreInfo = [

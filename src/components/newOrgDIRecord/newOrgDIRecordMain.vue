@@ -8,7 +8,7 @@
             class="flex flex-col w-full md:w-191.25 justify-center mx-2 md:mx-0"
         >
             <div class="text-googleTitle notoSansJpAndTwentyFourBold">
-                組織内DI 記録（Q&A） {{ title }}
+                所属内DI記録  {{ title }}
             </div>
             <div class="notoSansJpAndTwelveMedium mt-4">
                 個人情報及び著作権に抵触する恐れがあるファイルの取扱いにはご注意ください

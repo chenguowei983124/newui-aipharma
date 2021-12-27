@@ -136,11 +136,19 @@
                                     notoSansJpAndFourteenBold
                                     pl-5
                                 "
+                                :class="[!(isDetailDisp[
+                                            $store.getters.organizationSearchInfo.qas[index].id] ===
+                                        $store.getters.organizationSearchInfo.qas[index].id)
+                                        ? 'truncate'
+                                        : '',
+                                ]"
                             >
                                 <!-- {{ item.answer }} v-html="
                                         item.answer.toString().split('\n')[0]
                                     " -->
-                                <div
+                                <div    
+                                    class="msgHtmlBoxP"
+                                    v-html="item.answer.toString().split('\n')[0]"
                                     v-show="
                                         !(
                                             isDetailDisp[
@@ -155,20 +163,8 @@
                                             ].id
                                         )
                                     "
-                                    
-                                >{{item.answer}}</div>
-                                <!-- class="overflow-x-auto" 
-                                v-html="
-                                        item.answer
-                                            .replace(
-                                                '<ol>',
-                                                `<ol style='list-style-type: decimal;'>`
-                                            )
-                                            .replace(
-                                                '<ul>',
-                                                `<ul style='list-style-type: disc;'>`
-                                            )
-                                    "-->
+                                ></div>
+                                <!-- class="overflow-x-auto" -->
                                 <div
                                     v-show="
                                         isDetailDisp[
@@ -180,8 +176,15 @@
                                         $store.getters.organizationSearchInfo
                                             .qas[index].id
                                     "
-                                >
-                                {{item.answer + "asdasdsadas"}}</div>
+                                    v-html="item.answer.replace(
+                                                '<ol>',
+                                                `<ol style='list-style-type: decimal;'>`
+                                            )
+                                            .replace(
+                                                '<ul>',
+                                                `<ul style='list-style-type: disc;'>`
+                                            )"
+                                ></div>
                             </div>
                         </div>
                         <!-- 更新情報 pc/sp-->
@@ -907,10 +910,10 @@ export default {
         },
     },
     computed: {
-        aaa: function(data) {
-            console.log("CCCCCCCCC",data)
-            return data
-        },
+        // getAnswer: function (data) {
+        //     console.log('CCCCCCCCC', data)
+        //     return data
+        // },
         // 最大取得件数取得
         getPageCount() {
             // 選択したアイテムの数字を取得
@@ -958,7 +961,6 @@ export default {
         },
     },
     methods: {
-
         // CommentMessageBoxを閉じる
         closeCommentMessageBox() {
             this.$store.dispatch('setCommentMessageBox', false)
@@ -1319,7 +1321,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .box {
     height: 40px;
     width: 100%;
@@ -1359,5 +1361,11 @@ export default {
     border-top: 1px solid #999;
     border-bottom: 1px solid #999;
     border-right: 1px solid #999;
+}
+.msgHtmlBoxP :deep(*) {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 </style>

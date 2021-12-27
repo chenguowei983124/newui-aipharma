@@ -56,7 +56,7 @@
                             'absolute top-0 left-0 right-0 bottom-0 z-75':
                                 $store.getters.getPortraitClick,
                         }"
-                        @click="clickDown"
+                        @click="blankClickDown"
                     >
                         <div v-if="$store.getters.getPortraitClick == true">
                             <div
@@ -103,7 +103,7 @@
                             'fixed top-0 left-0 right-0 bottom-0 windowBackground z-75':
                                 $store.getters.getPortraitClick,
                         }"
-                        @click="clickDown"
+                        @click="blankClickDown"
                     >
                         <div v-if="$store.getters.getPortraitClick == true">
                             <!-- リスト -->
@@ -254,6 +254,11 @@ export default {
         }
     },
     methods: {
+        blankClickDown() {
+            if (this.$store.getters.getPortraitClick) {
+                this.clickDown()
+            }
+        },
         clickDown() {
             this.$store.dispatch(
                 'setPortraitClick',

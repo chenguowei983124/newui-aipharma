@@ -1,11 +1,15 @@
 <template>
-    <div class="relative h-full">
-        <my-all-header :form="$constant.formList.BBS"></my-all-header>
-        <!-- 内容 -->
-        <search-bulletin-board-layout></search-bulletin-board-layout>
-        <home-bottom-template
-            class="w-full absolute inset-x-0 bottom-0"
-        ></home-bottom-template>
+    <div class="flex flex-row">
+        <div class="h-screen-96"></div>
+        <div class="flex flex-col w-screen justify-between">
+            <div>
+                <my-all-header :form="$constant.formList.BBS"></my-all-header>
+                <!-- 内容 -->
+                <search-bulletin-board-layout></search-bulletin-board-layout>
+            </div>
+            <!-- ボトム情報 -->
+            <home-bottom-template class=""></home-bottom-template>
+        </div>
     </div>
 </template>
 
@@ -24,15 +28,15 @@ export default {
         homeBottomTemplate,
     },
     created() {
-    if (localStorage.getItem('store')) {
-      this.$store.replaceState(
-        Object.assign(
-          {},
-          this.$store.state,
-          JSON.parse(localStorage.getItem('store'))
-        )
-      )
-    }
-  },
+        if (localStorage.getItem('store')) {
+            this.$store.replaceState(
+                Object.assign(
+                    {},
+                    this.$store.state,
+                    JSON.parse(localStorage.getItem('store'))
+                )
+            )
+        }
+    },
 }
 </script>

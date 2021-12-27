@@ -68,7 +68,7 @@
                 @selected="setStyles"
                 leftLableTitle="様式"
                 buttonStyle="pullDownButtonColors"
-                inputStyle="w-full text-left pl-12 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                inputStyle="w-full text-left pl-12 notoSansJpAndFourteenRegular border-2 h-7.5 border-blueCAE6F4 bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none flex justify-items-center  "
                 iconColor="#32a5dc"
             ></vue-single-select>
@@ -85,7 +85,7 @@
                 @selected="setFacilityID"
                 leftLableTitle="施設"
                 buttonStyle="pullDownButtonColors"
-                inputStyle="w-full text-left pl-12 notoSansJpAndFourteenRegular border-2 h-7.5 border-grayline bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
+                inputStyle="w-full text-left pl-12 notoSansJpAndFourteenRegular border-2 h-7.5 border-blueCAE6F4 bg-white rounded placeholder-gray-500 focus:placeholder-opacity-0
                                 border border-transparent focus:outline-none  flex justify-items-center "
                 iconColor="#32a5dc"
             ></vue-single-select>

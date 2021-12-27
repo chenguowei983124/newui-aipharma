@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-full md:w-192.5 justify-between mt-2 pr-2 md:pr-0">
+    <div class="flex w-full md:w-192.5 justify-between pr-2 md:pr-0">
         <div
             class="
                 text-googleTitle
@@ -19,8 +19,8 @@
             <button
                 class="
                     rounded
-                    border-b-2 border-pink-800
-                    bg-redFF145A
+                    border-b-2 border-pink_78145A
+                    bg-browse
                     text-white
                     notoSansJpAndFourteenMedium
                     w-17
@@ -34,7 +34,7 @@
             <button
                 class="
                     rounded
-                    border-b-2 border-blue-900
+                    border-b-2 border-blue_283C78
                     bg-blue326EB3
                     text-white
                     notoSansJpAndFourteenMedium

@@ -43,9 +43,14 @@ export default {
         upload: false,
         bbsTagsList: [],
         loadingShowFlg: true,
+        searchFlg: false,
+        message : ''
     }),
 
     getters: {
+        getMessage(state) {
+            return state.message
+        },
         getBbsTagsList(state) {
             return state.bbsTagsList
         },
@@ -179,9 +184,15 @@ export default {
         getLoadingShowFlg(state) {
             return state.loadingShowFlg
         },
+        getSearchFlg(state) {        
+            return state.searchFlg
+        },
     },
 
     mutations: {
+        setMessage(state, info) {
+            state.message = info
+        },
         basic(state, payload) {
             state[payload.key] = payload.value
         },
@@ -214,6 +225,9 @@ export default {
     },
 
     actions: {
+        setMessageActions({ commit, state }, value) {
+            commit('basic', { key: 'message', value })
+        },
         formScreenToggle({ commit, state }, value) {
             commit('basic', { key: 'isFormScreen', value })
         },
@@ -268,6 +282,7 @@ export default {
         setScopeInfo({ commit }, value) {
             commit('setScope', value)
         },
+        setSearchFlg({ commit }, value) {commit('basic', { key: 'searchFlg', value }) },
         // キーワード
         setSearchWord({ commit, state }, value) {
           commit('basic', { key: 'searchWord', value })

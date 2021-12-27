@@ -140,11 +140,9 @@
                             flex
                             items-center
                             justify-end
-                            h-7.5
-                            w-14
                             rounded
                             text-white
-                            bg-whole
+                            goodButtonColors
                         "
                         @click="
                             putFeedbacks(
@@ -165,11 +163,9 @@
                             flex
                             justify-end
                             items-center
-                            h-7.5
-                            w-14
                             rounded
                             text-white
-                            bg-red-400
+                            badButtonColors 
                             ml-1
                         "
                         @click="

@@ -1,6 +1,6 @@
 <template>
     <div class="mx-auto h-screen-57 md:h-screen-66" id="div_postList">
-        <div class="flex justify-between h-10 border-b-2 border-grayline">
+        <div class="flex justify-between h-10 border-b-2 border-grayBorderLine">
             <div class="notoSansJpAndTwentyBold">スレッド</div>
             <div class="h-10 w-10 mt-1" @click="closeClick">
                 <x-icon-svg color="#666666"></x-icon-svg>
@@ -160,12 +160,10 @@
                                     flex
                                     items-center
                                     justify-end
-                                    h-7.5
-                                    w-14
                                     ml-2
                                     rounded
                                     text-white
-                                    bg-whole
+                                    goodButtonColors
                                 "
                                 @click="
                                     putFeedbacks(
@@ -185,11 +183,9 @@
                                     flex
                                     justify-end
                                     items-center
-                                    h-7.5
-                                    w-14
                                     rounded
                                     text-white
-                                    bg-red-400
+                                    badButtonColors
                                     ml-1
                                 "
                                 @click="
@@ -208,7 +204,7 @@
                         </div>
                     </div>
                     <div
-                        class="mt-3 ml-10 border-t-2 border-grayline"
+                        class="mt-3 ml-10 border-t border-grayBorderLine"
                         v-for="(items, index) in postList[0].commnet"
                         :key="index"
                     >
