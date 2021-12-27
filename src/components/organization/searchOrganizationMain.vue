@@ -137,7 +137,9 @@
                                     pl-5
                                 "
                             >
-                                <!-- {{ item.answer }} -->
+                                <!-- {{ item.answer }} v-html="
+                                        item.answer.toString().split('\n')[0]
+                                    " -->
                                 <div
                                     v-show="
                                         !(
@@ -153,11 +155,20 @@
                                             ].id
                                         )
                                     "
-                                    v-html="
-                                        item.answer.toString().split('\n')[0]
-                                    "
-                                ></div>
-                                <!-- class="overflow-x-auto" -->
+                                    
+                                >{{item.answer}}</div>
+                                <!-- class="overflow-x-auto" 
+                                v-html="
+                                        item.answer
+                                            .replace(
+                                                '<ol>',
+                                                `<ol style='list-style-type: decimal;'>`
+                                            )
+                                            .replace(
+                                                '<ul>',
+                                                `<ul style='list-style-type: disc;'>`
+                                            )
+                                    "-->
                                 <div
                                     v-show="
                                         isDetailDisp[
@@ -169,18 +180,8 @@
                                         $store.getters.organizationSearchInfo
                                             .qas[index].id
                                     "
-                                    v-html="
-                                        item.answer
-                                            .replace(
-                                                '<ol>',
-                                                `<ol style='list-style-type: decimal;'>`
-                                            )
-                                            .replace(
-                                                '<ul>',
-                                                `<ul style='list-style-type: disc;'>`
-                                            )
-                                    "
-                                ></div>
+                                >
+                                {{item.answer + "asdasdsadas"}}</div>
                             </div>
                         </div>
                         <!-- 更新情報 pc/sp-->
@@ -906,6 +907,10 @@ export default {
         },
     },
     computed: {
+        aaa: function(data) {
+            console.log("CCCCCCCCC",data)
+            return data
+        },
         // 最大取得件数取得
         getPageCount() {
             // 選択したアイテムの数字を取得
@@ -953,6 +958,7 @@ export default {
         },
     },
     methods: {
+
         // CommentMessageBoxを閉じる
         closeCommentMessageBox() {
             this.$store.dispatch('setCommentMessageBox', false)

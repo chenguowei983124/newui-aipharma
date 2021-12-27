@@ -65,6 +65,22 @@
             class="flex-grow max-h-full min-w-min hidden md:block mid:block"
         ></div>
     </div>
+    <div class="flex mt-2 pr-2 md:pr-0 justify-center">
+        <div
+            class="
+                w-full
+                md:w-192.5
+                flex
+                justify-end
+                text-view text-xs
+                font-NotoSansJp
+            "
+        >
+            <div>DIナレッジシェアの全体件数</div>
+            <div class="mx-1">:</div>
+            <div class="mr-1">123456</div>
+        </div>
+    </div>
     <div class="flex pt-8">
         <div class="flex-grow max-h-full min-w-min block"></div>
         <div class="flex-shrink mr-2.5 ml-2.5 w-full md:w-191.25">

@@ -22,8 +22,8 @@
             <button
                 class="
                     rounded
-                    border-b-2 border-pink-800
-                    bg-pink-600
+                    border-b-2 border-pink78145A
+                    bg-browse
                     text-white
                     notoSansJpAndFourteenMedium
                     w-17
@@ -36,8 +36,8 @@
             <button
                 class="
                     rounded
-                    border-b-2 border-blue-900
-                    bg-blue-700
+                    border-b-2 border-blue283C78
+                    bg-organization
                     text-white
                     notoSansJpAndFourteenMedium
                     w-20
@@ -50,8 +50,8 @@
             <button
                 class="
                     rounded
-                    border-b-2 border-blue-900
-                    bg-blue-700
+                    border-b-2 border-blue283C78
+                    bg-organization
                     text-white
                     notoSansJpAndFourteenMedium
                     w-13

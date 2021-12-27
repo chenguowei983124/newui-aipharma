@@ -80,6 +80,7 @@
                 :sub1="['dateFrom', 'dateTo']"
                 :sub2="['title', 'urlTitle']"
             >
+                <top-banner></top-banner>
                 <div
                     :class="[
                         $store.getters.topScientifiSocietyInfo.details == ''
@@ -163,12 +164,14 @@
 import resutTag from '../common/searchResult/resultTag.vue'
 import resultDetailRow from '../common/searchResult/resultDetailRow.vue'
 import carousel from '../common/searchResult/carousel.vue'
+import topBanner from '../../components/home/topBanner.vue'
 
 export default {
     components: {
         resutTag,
         resultDetailRow,
         carousel,
+        topBanner,
     },
     props: {},
     watch: {},

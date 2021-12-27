@@ -30,8 +30,26 @@
                     :class="[$store.getters.getIsMenuClick ? '' : '']"
                 ></div>
             </div>
-
-            <div class="flex ml-2.5 mr-2.5 md:ml-0 md:mr-0 mt-2.5 md:mt-4">
+            <!-- ユーザー数｜施設数 -->
+            <div
+                class="
+                    flex
+                    justify-center
+                    mt-6
+                    md:mt-2.5
+                    text-view text-xs
+                    font-NotoSansJp
+                "
+            >
+                <span class="">ユーザー数</span>
+                <span class="mx-1">:</span>
+                <span class="mr-4">123456</span>
+                <span class="border-l border-pageblue"></span>
+                <span class="ml-4">施設数</span>
+                <span class="mx-1">:</span>
+                <span class="">12345</span>
+            </div>
+            <div class="flex ml-2.5 mr-2.5 md:ml-0 md:mr-0 mt-0 md:mt-2.5">
                 <div
                     class="flex-grow mid:hidden w-0 max-h-full min-w-min"
                 ></div>
@@ -40,6 +58,11 @@
                         <search-result-main
                             class="flex-grow truncate"
                         ></search-result-main>
+                        <div class="flex justify-center bg-gray_e6e6e6">
+                            <top-chatbot-banner
+                                class="block mid:hidden"
+                            ></top-chatbot-banner>
+                        </div>
                     </div>
                 </div>
                 <div
@@ -55,6 +78,7 @@
                 >
                     <!-- ユーザーの情報 -->
                     <data-management-area></data-management-area>
+                    <top-chatbot-banner></top-chatbot-banner>
                 </div>
                 <div
                     class="flex-grow mid:hidden w-0 max-h-full min-w-min"
@@ -69,32 +93,37 @@
 import logo from '../components/home/logo.vue'
 import searchBar from '../components/common/search/searchBar.vue'
 import dataManagementArea from '../components/home/dataManagementArea.vue'
+import topChatbotBanner from '../components/home/topChatbotBanner.vue'
 import searchResultMain from '../components/home/searchResultMain.vue'
 
 export default {
-  components: {
-    searchBar,
-    logo,
-    dataManagementArea,
-    searchResultMain,
-  },
-  props: {},
-  data() {
-    return {
-      isMenuOpen: true,
-    }
-  },
-  watch: {},
-  methods: {},
-  created() {
-    if (!!import.meta.env.VITE_APP_IS_OIDC_AUTH && import.meta.env.VITE_APP_IS_OIDC_AUTH == 'true') {
-      if (!!this.$route.params.code) {
-        this.$store.dispatch('setOidcCode', this.$route.params.code)
-      }
-    } else {
-      this.$store.dispatch('setOidcCode', '')
-    }
-  },
+    components: {
+        searchBar,
+        logo,
+        dataManagementArea,
+        topChatbotBanner,
+        searchResultMain,
+    },
+    props: {},
+    data() {
+        return {
+            isMenuOpen: true,
+        }
+    },
+    watch: {},
+    methods: {},
+    created() {
+        if (
+            !!import.meta.env.VITE_APP_IS_OIDC_AUTH &&
+            import.meta.env.VITE_APP_IS_OIDC_AUTH == 'true'
+        ) {
+            if (!!this.$route.params.code) {
+                this.$store.dispatch('setOidcCode', this.$route.params.code)
+            }
+        } else {
+            this.$store.dispatch('setOidcCode', '')
+        }
+    },
 }
 </script>
 <style scoped></style>

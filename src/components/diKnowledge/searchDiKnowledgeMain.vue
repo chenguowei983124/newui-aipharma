@@ -805,7 +805,7 @@
             :prev-text="'<'"
             :next-text="'>'"
             :container-class="'pagination'"
-            class="flex justify-center space-x-1 mt-2.5"
+            class="flex justify-center space-x-1 mt-2"
         ></pagination>
         <div
             class="

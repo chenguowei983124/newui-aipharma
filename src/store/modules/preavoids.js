@@ -1,7 +1,7 @@
 export default {
     state: () => ({
-        searchPreavoidsInfo: { searchData: [], dataCount: 0},
-        trendKeywords:{} 
+        searchPreavoidsInfo: { searchData: [], dataCount: 0 },
+        trendKeywords: {},
     }),
 
     getters: {
@@ -10,10 +10,12 @@ export default {
             return state.searchPreavoidsInfo
         },
         getTrendKeywords(state) {
-            return  [{ value: 1, label: 'ファモチジン' },
+            return [
+                { value: 1, label: 'ファモチジン' },
                 { value: 2, label: 'ファモセット注' },
                 { value: 3, label: 'ロキソニン' },
-                { value: 4, label: '用途' }]
+                { value: 4, label: '用途' },
+            ]
         },
     },
 

@@ -122,7 +122,7 @@
                 <div v-if="$store.getters.getManagementClick == true">
                     <div class="flex justify-end my-13 md:mr-28 mid:mr-37.5">
                         <div
-                            class="w-37.5 mt-1"
+                            class="w-40 mt-1"
                             v-if="$store.getters.getManagementClick"
                         >
                             <div

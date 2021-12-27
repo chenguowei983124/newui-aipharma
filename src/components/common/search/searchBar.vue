@@ -125,9 +125,9 @@
                     v-if="form == this.$constant.formList.OWN"
                     @searchTagtoBrother="tagToBrother"
                 ></search-org-title-bar> -->
-                <search-preavoid-title
+                <!-- <search-preavoid-title
                     v-if="form == this.$constant.formList.PVD"
-                ></search-preavoid-title>
+                ></search-preavoid-title> -->
                 <search-bbs-title-bar
                     v-if="form == this.$constant.formList.BBS"
                 ></search-bbs-title-bar>
@@ -192,7 +192,13 @@ export default {
         }
     },
     watch: {
-        checkId: function () {
+        checkId: function (newValue, oldValue) {
+            if (
+                JSON.stringify(this.$route.query) === '{}' ||
+                this.$route.query.id !== undefined
+            ) {
+                this.initStore(oldValue, newValue)
+            }
             this.$emit('searchID', this.checkId)
         },
         detailDisp: function () {
@@ -285,13 +291,14 @@ export default {
 
         // this.$props.form == this.$constant.formList.OWN ||
         // this.$props.form == this.$constant.formList.DI ||
+        
         searchBarStyleClessMid: function () {
             if (
                 this.$props.form == this.$constant.formList.PVD ||
                 this.$props.form == this.$constant.formList.BBS ||
                 this.$props.form == this.$constant.formList.EDI
             ) {
-                return 'bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2 border-recruitment '
+                return 'hidden group-hover:inline-flex bg-white flex justify-center items-center h-full w-full pt-2.5 pb-2.5 border-b-2 border-recruitment '
             } else {
                 return 'hidden'
             }
@@ -332,7 +339,7 @@ export default {
         },
         pcPlaceholder: function () {
             if (this.checkId == 0) {
-                return 'AI-Pharma内の各種メニューを横断的に検索できます'
+                return 'AI-PHARMA内の各種メニューを横断的に検索できます'
             } else if (this.checkId == 1) {
                 return '2単語以上からなる文章を入力 ※単語での検索は機能しません'
             } else if (this.checkId != 0 && this.checkId != 1) {
@@ -1104,7 +1111,10 @@ export default {
             checkInfo.checkFacilityName = true
             this.$store.dispatch('setBbsCheckInfo', checkInfo)
             // this.$store.dispatch('setSearchWord', '')
-            this.$store.dispatch('setSort', 'created_at-desc')
+            this.$store.dispatch('setScopeInfo', '0'),
+                this.$store.dispatch('setDateValueFrom', ''),
+                this.$store.dispatch('setDateValueTo', ''),
+                this.$store.dispatch('setSort', 'created_at-desc')
             this.$store.dispatch('setSearchTags', [])
             this.$store.dispatch('setSearchTagsLable', [])
         },
@@ -1119,7 +1129,10 @@ export default {
             checkInfo.checkFacilityName = true
             this.$store.dispatch('setEdiCheckInfo', checkInfo)
             // this.$store.dispatch('setSearchWord', '')
-            this.$store.dispatch('setSort', 'created_at-desc')
+            this.$store.dispatch('setScopeInfo', '0'),
+                this.$store.dispatch('setDateValueFrom', ''),
+                this.$store.dispatch('setDateValueTo', ''),
+                this.$store.dispatch('setSort', 'created_at-desc')
             this.$store.dispatch('setSearchTags', [])
             this.$store.dispatch('setSearchTagsLable', [])
         },

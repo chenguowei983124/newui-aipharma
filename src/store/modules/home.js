@@ -35,9 +35,10 @@ export default {
         // managementGroup
         topManagementItemList(state) {
             const managementItemList = [
-                { title: '組織内DI 記録', itemStyle: 'title' },
-                { title: '症例', itemStyle: 'title' },
-                { title: '下書き一覧', itemStyle: 'title' },
+                { title: '所属内DI 記録', itemStyle: 'title', routerPath: '/myData/org'},
+                { title: '症例', itemStyle: 'title', routerPath: '/myData/pvd' },
+                { title: '掲示板', itemStyle: 'title', routerPath: '/myData/bbs' },
+                { title: '下書き一覧', itemStyle: 'title', routerPath: '/myData/list' },
             ]
 
             return managementItemList

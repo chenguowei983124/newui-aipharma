@@ -324,7 +324,7 @@
                             items-center
                             mt-1
                             rounded
-                            border-2 border-white
+                            border border-white
                             text-white text-center
                             notoSansJpAndFourteenRegular
                             w-24

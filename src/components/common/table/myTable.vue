@@ -200,7 +200,10 @@
                             justify-center
                         "
                     >
-                        {{ row.style }}
+                    <div v-if="row.style == '1'" class="text-pageblue">{{ row.style }}</div>
+                    <div v-if="row.style == '2'" class="text-notlooked">{{ row.style }}</div>
+                    <div v-if="row.style == '3'" class="text-whole">{{ row.style }}</div>
+                        
                     </td>
                     <!-- 報告日 -->
                     <td
@@ -365,13 +368,14 @@
                                         h-7.5
                                         w-7.5
                                         bg-downloadIcon
+                                        border-b-2 border-green39aa4a
                                         rounded
                                         mx-1
-                                        mt-1
+                                        mt-1.5
                                     "
                                 >
                                     <download-icon-svg
-                                        class="h-5 w-5 mx-1.25"
+                                        class="h-4 w-4 mx-1.75"
                                         @click="rowDownload(row.id)"
                                     ></download-icon-svg>
                                 </button>
@@ -379,13 +383,14 @@
                                     class="
                                         h-7.5
                                         w-7.5
-                                        bg-searchBunnon
+                                        bg-yellowfbbb14
+                                        border-b-2 border-yellowf7931e
                                         rounded
                                         mx-1
                                     "
                                 >
                                     <edit-icon-svg
-                                        class="h-5 w-5 mx-1.25"
+                                        class="h-4 w-4 mx-2"
                                         @click="rowEdit(row.id)"
                                     ></edit-icon-svg>
                                 </button>
@@ -394,12 +399,13 @@
                                         h-7.5
                                         w-7.5
                                         bg-personInformationButton
+                                        border-b-2 border-redc81e1e
                                         rounded
                                         mx-1
                                     "
                                 >
                                     <trash-icon-svg
-                                        class="h-5 w-5 mx-1.25"
+                                        class="h-4 w-4 mx-1.75"
                                         @click="rowDelete(row.id)"
                                     ></trash-icon-svg>
                                 </button>

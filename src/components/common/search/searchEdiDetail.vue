@@ -298,7 +298,7 @@
                         flex
                         items-center
                         rounded
-                        border-2 border-white
+                        border border-white
                         text-white text-center
                         notoSansJpAndFourteenRegular
                         w-24

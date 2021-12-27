@@ -118,17 +118,26 @@
     >
         <!-- The first one -->
         <div
-            class="flex justify-between bg-gray-300 h-7.5"
+            class="flex justify-between bg-gray-300 h-7.5 cursor-pointer"
             @click="
                 ;(itemType1 = !itemType1),
                     (itemType2 = false),
-                    (itemType3 = false),
-                    (itemType4 = false)
+                    (itemType3 = false)
             "
         >
-            <div class="flex items-center ml-3.75 cursor-pointer">
-                <!-- Home icon -->
-                <home-icon-svg class="h-5 w-5"></home-icon-svg>
+            <div class="ml-3.75 mt-1">
+                <div
+                    class="flex items-center cursor-pointer"
+                    v-for="items in menuItemList"
+                    :key="items"
+                >
+                    <div
+                        v-if="items.itemStyle == 'title'"
+                        class="notoSansJpAndFourteenBold"
+                    >
+                        {{ items.title }}
+                    </div>
+                </div>
             </div>
             <!-- Triangle icon -->
             <div class="cursor-pointer mt-2.5 mr-3.75">
@@ -139,47 +148,63 @@
         </div>
         <div class="" v-for="items in menuItemList" :key="items">
             <router-link :to="{ path: items.path }" @click="linkClick">
-                <div
-                    v-if="itemType1"
-                    class="
-                        h-7
-                        pl-3.75
-                        notoSansJpAndFourteenRegular
-                        text-dropdownListItem
-                        flex
-                        items-center
-                        cursor-pointer
-                    "
-                    :class="[
-                        items.id == menuItemList.length
-                            ? ''
-                            : 'border-b-2 border-white',
-                    ]"
-                >
+                <div v-if="itemType1">
                     <div
                         v-if="items.itemStyle == 'item'"
-                        class="hover:opacity-50 active:opacity-50"
+                        class="
+                            h-7
+                            pl-10
+                            notoSansJpAndFourteenRegular
+                            text-tags
+                            flex
+                            items-center
+                            cursor-pointer
+                        "
+                        :class="[
+                            items.id == menuItemList.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
                     >
-                        {{ items.title }}
-                        <!-- <router-link :to="{ path: items.path }">
-                        {{ items.title }}</router-link
-                    > -->
+                        <div class="hover:opacity-50 active:opacity-50">
+                            {{ items.title }}
+                        </div>
+                    </div>
+                    <div
+                        v-if="items.itemStyle == 'subproject'"
+                        class="
+                            h-7
+                            pl-16
+                            notoSansJpAndFourteenRegular
+                            text-tags
+                            flex
+                            items-center
+                            cursor-pointer
+                        "
+                        :class="[
+                            items.id == menuItemList.length
+                                ? ''
+                                : 'border-b-2 border-white',
+                        ]"
+                    >
+                        <div class="hover:opacity-50 active:opacity-50">
+                            {{ items.title }}
+                        </div>
                     </div>
                 </div>
             </router-link>
         </div>
         <!-- The second one -->
         <div
-            class="flex justify-between bg-gray-300 h-7.5"
+            class="flex justify-between bg-gray-300 h-7.5 cursor-pointer"
             :class="[itemType1 ? '' : 'border-t-2 border-white']"
             @click="
                 ;(itemType2 = !itemType2),
                     (itemType1 = false),
-                    (itemType3 = false),
-                    (itemType4 = false)
+                    (itemType3 = false)
             "
         >
-            <div class="ml-3.75 mt-0.5">
+            <div class="ml-3.75 mt-1">
                 <div
                     class="flex items-center cursor-pointer"
                     v-for="items in menuItemList2"
@@ -207,9 +232,9 @@
                         v-if="items.itemStyle == 'item'"
                         class="
                             notoSansJpAndFourteenRegular
-                            text-dropdownListItem
+                            text-tags
                             h-7
-                            pl-3.75
+                            pl-10
                             pt-0.5
                             cursor-pointer
                             hover:opacity-50
@@ -221,25 +246,22 @@
                                 : 'border-b-2 border-white',
                         ]"
                     >
-                        <!-- <router-link :to="{ path: items.path }"> -->
                         {{ items.title }}
-                        <!-- </router-link> -->
                     </div>
                 </div>
             </router-link>
         </div>
         <!-- The third -->
         <div
-            class="flex justify-between bg-gray-300 h-7.5"
+            class="flex justify-between bg-gray-300 h-7.5 cursor-pointer"
             :class="[itemType2 ? '' : 'border-t-2 border-white']"
             @click="
                 ;(itemType3 = !itemType3),
                     (itemType1 = false),
-                    (itemType2 = false),
-                    (itemType4 = false)
+                    (itemType2 = false)
             "
         >
-            <div class="ml-3.75 mt-0.5">
+            <div class="ml-3.75 mt-1">
                 <div
                     class="flex items-center cursor-pointer"
                     v-for="items in menuItemList3"
@@ -261,46 +283,16 @@
             </div>
         </div>
         <div class="" v-for="items in menuItemList3" :key="items">
-            <!-- <router-link :to="{ path: items.path }" @click="linkClick"> -->
             <div v-if="itemType3">
-                <div
-                    v-if="items.itemStyle == 'item'"
-                    class="
-                        notoSansJpAndFourteenRegular
-                        text-dropdownListItem
-                        h-7
-                        pl-3.75
-                        pt-0.5
-                        cursor-default
-                    "
-                    :class="[
-                        items.id == menuItemList3.length
-                            ? ''
-                            : 'border-b-2 border-white',
-                    ]"
-                >
-                    <!-- <router-link :to="{ path: items.path }"> -->
-                    <router-link :to="{ path: items.path }" @click="linkClick">
-                        <div
-                            v-if="items.path != ''"
-                            class="hover:opacity-50 active:opacity-50"
-                        >
-                            {{ items.title }}
-                        </div>
-                    </router-link>
-                    <div v-if="items.path == ''" class="">
-                        {{ items.title }}
-                    </div>
-                    <!-- </router-link> -->
-                </div>
-                <router-link :to="{ path: items.path }" @click="linkClick">
+                <router-link :to="items.path" @click="linkClick">
                     <div
-                        v-if="items.itemStyle == 'subproject'"
+                        v-if="items.itemStyle == 'item'"
                         class="
                             notoSansJpAndFourteenRegular
-                            text-dropdownListItem
+                            text-tags
                             h-7
-                            pl-7.5
+                            pl-10
+                            pt-0.5
                             cursor-pointer
                             hover:opacity-50
                             active:opacity-50
@@ -311,79 +303,16 @@
                                 : 'border-b-2 border-white',
                         ]"
                     >
-                        <!-- <router-link :to="{ path: items.path }"> -->
                         {{ items.title }}
-                        <!-- </router-link> -->
-                    </div>
-                </router-link>
-            </div>
-            <!-- </router-link> -->
-        </div>
-        <!-- The Fourth -->
-        <div
-            class="flex justify-between bg-gray-300 h-7.5"
-            :class="[itemType3 ? '' : 'border-t-2 border-white']"
-            @click="
-                ;(itemType4 = !itemType4),
-                    (itemType1 = false),
-                    (itemType2 = false),
-                    (itemType3 = false)
-            "
-        >
-            <div class="ml-3.75 mt-0.5">
-                <div
-                    class="flex items-center cursor-pointer"
-                    v-for="items in menuItemList4"
-                    :key="items"
-                >
-                    <div
-                        v-if="items.itemStyle == 'title'"
-                        class="notoSansJpAndFourteenBold"
-                    >
-                        {{ items.title }}
-                    </div>
-                </div>
-            </div>
-            <!-- Triangle icon -->
-            <div class="cursor-pointer mt-2.5 mr-3.75">
-                <icon-down v-if="itemType4 == false" class=""></icon-down>
-
-                <icon-down v-else class="transform rotate-180"></icon-down>
-            </div>
-        </div>
-        <div class="" v-for="items in menuItemList4" :key="items">
-            <div v-if="itemType4">
-                <router-link :to="items.path" @click="linkClick">
-                    <div
-                        v-if="items.itemStyle == 'item'"
-                        class="
-                            notoSansJpAndFourteenRegular
-                            text-dropdownListItem
-                            h-7
-                            pl-3.75
-                            pt-0.5
-                            cursor-pointer
-                            hover:opacity-50
-                            active:opacity-50
-                        "
-                        :class="[
-                            items.id == menuItemList4.length
-                                ? ''
-                                : 'border-b-2 border-white',
-                        ]"
-                    >
-                        <!-- <router-link :to="items.path"> -->
-                        {{ items.title }}
-                        <!-- </router-link> -->
                     </div>
                 </router-link>
                 <div
                     v-if="items.itemStyle == 'urlitem'"
                     class="
                         notoSansJpAndFourteenRegular
-                        text-dropdownListItem
+                        text-tags
                         h-7
-                        pl-3.75
+                        pl-10
                         pt-0.5
                         cursor-pointer
                         hover:opacity-50
@@ -400,7 +329,6 @@
             </div>
         </div>
     </div>
-    <!-- </transition> -->
 </template>
 
 <script>
@@ -422,113 +350,113 @@ export default {
     data() {
         return {
             isOpen: false,
-            itemType1: false,
+            itemType1: true,
             itemType2: false,
             itemType3: false,
-            itemType4: false,
             menuItemList: [
-                { id: '1', title: 'TOP', itemStyle: 'item', path: '/myhome' },
-                {
-                    id: '2',
-                    title: 'お知らせ',
-                    itemStyle: 'item',
-                    path: '/searchNotification',
-                },
-                // { id: '3', title: '掲示板', itemStyle: 'item', path: '/bulletinBoard' },
-                {
-                    id: '3',
-                    title: '掲示板',
-                    itemStyle: 'item',
-                    path: '/searchBulletinBoard',
-                },
-            ],
-            menuItemList2: [
                 {
                     id: '1',
-                    title: 'データベース',
+                    title: 'メインメニュー',
                     itemStyle: 'title',
                     path: '',
                 },
                 {
                     id: '2',
-                    title: 'DI ナレッジシェア',
+                    title: 'DIナレッジシェア',
                     itemStyle: 'item',
                     path: '/searchDiKnowledge',
                 },
                 {
                     id: '3',
-                    title: '組織内DI 記録（Q&A）',
+                    title: '所属内DI記録',
                     itemStyle: 'item',
                     path: '/searchOrganization',
                 },
                 {
                     id: '4',
-                    title: '症例（プレアボイド）',
-                    itemStyle: 'item',
-                    path: '/searchPreavoids',
-                },
-                { id: '5', title: 'DI 辞書', itemStyle: 'item', path: '' },
-                {
-                    id: '6',
-                    title: '製薬企業情報',
-                    itemStyle: 'item',
-                    path: '/searchPharmaCompany',
-                },
-            ],
-            menuItemList3: [
-                { id: '1', title: 'マイデータ', itemStyle: 'title', path: '' },
-                {
-                    id: '2',
-                    title: '組織内DI 記録（Q&A）',
-                    itemStyle: 'item',
-                    path: '',
-                },
-                {
-                    id: '3',
                     title: '登録',
                     itemStyle: 'subproject',
                     path: '/newOrgDIRecord',
                 },
                 {
-                    id: '4',
+                    id: '5',
                     title: '症例（プレアボイド）',
                     itemStyle: 'item',
-                    path: '',
+                    path: '/searchPreavoids',
                 },
-                { id: '5', title: '登録', itemStyle: 'subproject', path: '' },
-                {
-                    id: '6',
-                    title: 'お知らせ',
-                    itemStyle: 'item',
-                    path: '',
-                },
+                { id: '6', title: '登録', itemStyle: 'subproject', path: '' },
                 {
                     id: '7',
+                    title: '入出力',
+                    itemStyle: 'subproject',
+                    path: '/preavoidsInputOut',
+                },
+                {
+                    id: '8',
+                    title: 'お知らせ',
+                    itemStyle: 'item',
+                    path: '/searchNotification',
+                },
+                {
+                    id: '8',
                     title: '投稿',
                     itemStyle: 'subproject',
                     path: '/newEdiRecord',
                 },
                 {
-                    id: '8',
+                    id: '9',
                     title: '掲示板',
                     itemStyle: 'item',
-                    path: '',
+                    path: '/searchBulletinBoard',
                 },
                 {
-                    id: '9',
+                    id: '10',
                     title: '投稿',
                     itemStyle: 'subproject',
                     path: '/newBbsRecord',
                 },
+                { id: '11', title: 'DI辞書', itemStyle: 'item', path: '' },
                 {
-                    id: '10',
-                    title: 'データ入出力',
+                    id: '12',
+                    title: '製薬企業情報',
                     itemStyle: 'item',
-                    path: 'preavoidsInputOut',
+                    path: '/searchPharmaCompany',
                 },
             ],
-            menuItemList4: [
-                { id: '1', title: 'その他', itemStyle: 'title', path: '' },
+            menuItemList2: [
+                { id: '1', title: 'マイデータ', itemStyle: 'title', path: '' },
+                {
+                    id: '2',
+                    title: '所属内DI記録',
+                    itemStyle: 'item',
+                    path: '/mydata/org',
+                },
+                {
+                    id: '3',
+                    title: '症例（プレアボイド）',
+                    itemStyle: 'item',
+                    path: '/mydata/pvd',
+                },
+                {
+                    id: '4',
+                    title: '掲示板',
+                    itemStyle: 'item',
+                    path: '/mydata/bbs',
+                },
+                {
+                    id: '5',
+                    title: '下書き一覧',
+                    itemStyle: 'item',
+                    path: '/mydata/list',
+                },
+            ],
+            menuItemList3: [
+                {
+                    id: '1',
+                    title: 'お役立ちコンテンツ',
+                    itemStyle: 'title',
+                    path: '',
+                },
                 {
                     id: '2',
                     title: 'DIチャットボット',
@@ -537,16 +465,17 @@ export default {
                 },
                 {
                     id: '3',
-                    title: 'お薬立ちリンク集  ',
+                    title: 'お薬立ちリンク集',
                     itemStyle: 'item',
                     path: '/pharmaLink',
                 },
                 {
                     id: '4',
-                    title: '医療者向けサービス紹介 ',
+                    title: '医療者向けサービス紹介',
                     itemStyle: 'item',
                     path: '/prelusion',
                 },
+                { id: '5', title: '使い方', itemStyle: 'urlitem', path: '' },
                 // 初回表示非表示
                 // {
                 //     id: '5',
@@ -560,7 +489,6 @@ export default {
                 //     itemStyle: 'item',
                 //     path: '',
                 // },
-                { id: '5', title: '使い方', itemStyle: 'urlitem', path: '' },
             ],
         }
     },
@@ -570,6 +498,9 @@ export default {
     },
     methods: {
         linkClick() {
+            this.itemType1 = true
+            this.itemType2 = false
+            this.itemType3 = false
             this.$store.dispatch(
                 'setMenuClick',
                 !this.$store.getters.getIsMenuClick
@@ -591,4 +522,5 @@ export default {
     },
 }
 </script>
+
 <style></style>

@@ -16,7 +16,30 @@
     </div>
     <div :class="fixedHight"></div>
     <!-- 内容 -->
-    <div class="flex pt-8">
+    <div
+        class="flex mt-12 md:mt-10 pr-2 md:pr-0 justify-center"
+        :class="isDetailButtonClick ? '' : 'mt-20 md:mt-20'"
+    >
+        <div
+            class="
+                w-full
+                md:w-192.5
+                flex
+                justify-end
+                text-view text-xs
+                font-NotoSansJp
+            "
+        >
+            <span>症例の全体件数</span>
+            <span class="mx-1">:</span>
+            <span class="mr-4">123456</span>
+            <span class="border-l border-pageblue"> </span>
+            <span class="ml-4">公開件数</span>
+            <span class="mx-1">:</span>
+            <span class="">12345</span>
+        </div>
+    </div>
+    <div class="flex">
         <div class="flex-grow max-h-full min-w-min block"></div>
         <div class="flex-shrink mr-1 ml-1 w-full md:w-245">
             <div class="grid grid-cols-1 gap-1 md:space-y-3.75">

@@ -6,7 +6,7 @@
                     rounded-lg
                     bg-backgroundMain
                     md:w-50
-                    h-121
+                    h-128.5
                     grid
                     justify-items-center
                 "
@@ -54,7 +54,7 @@
                     <div
                         class="
                             notoSansJpAndTwelveRegular
-                            text-center
+                            text-left
                             h-3.75
                             mb-3.75
                         "
@@ -122,7 +122,7 @@
                         "
                         @click="orgDiRecordClick"
                     >
-                        組織内DI 記録 登録
+                        所属内DI 記録 登録
                     </button>
 
                     <button
@@ -139,10 +139,10 @@
                 </div>
                 <div
                     class="
-                        h-31
+                        h-37.5
                         w-42.5
                         rounded
-                        border-personOrganizationButton
+                        border-grayline
                         font-NotoSansJp
                         mb-3.75
                     "
@@ -151,7 +151,7 @@
                         class="
                             text-white
                             font-bold
-                            bg-personOrganizationButton
+                            bg-grayline
                             rounded-t
                             h-7.5
                             pl-2.5
@@ -162,12 +162,12 @@
                     </div>
                     <div
                         class="
-                            bg-personGroupInformation
+                            bg-commentBgColor
                             rounded-b
-                            border-personOrganizationButton border-2
+                            border-grayline border
                             grid
                             justify-items-start
-                            space-y-2.5
+                            space-y-2
                             py-1
                         "
                     >
@@ -176,9 +176,15 @@
                             v-for="item in $store.getters.topManagementItemList"
                             :key="item"
                         >
-                            <div v-if="item.itemStyle == 'title'">
-                                {{ item.title }}
-                            </div>
+                            <router-link
+                                :to="{
+                                    path: item.routerPath,
+                                }"
+                            >
+                                <div v-if="item.itemStyle == 'title'">
+                                    {{ item.title }}
+                                </div>
+                            </router-link>
                         </div>
                     </div>
                 </div>

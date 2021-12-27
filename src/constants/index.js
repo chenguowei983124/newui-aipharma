@@ -102,6 +102,8 @@ const managementitemList = [
         itemStyle: 'item',
         routerPath: '/myData/pvd',
     },
+    
+    { title: '掲示板', itemStyle: 'item', routerPath: '/myData/bbs' },
     { title: '下書き一覧', itemStyle: 'item', routerPath: '/myData/list' },
 ]
 
@@ -115,11 +117,12 @@ const managementPcitemList = [
     { title: '症例 登録', itemStyle: 'item', routerPath: '/newOrgDIRecord' },
     { title: 'マイデータ', itemStyle: 'title' },
     {
-        title: '組織内DI 記録 ',
+        title: '所属内DI 記録 登録',
         itemStyle: 'item',
         routerPath: '/myData/org',
     },
     { title: '症例', itemStyle: 'item', routerPath: '/myData/pvd' },
+    { title: '掲示板', itemStyle: 'item', routerPath: '/myData/bbs' },
     { title: '下書き一覧', itemStyle: 'item', routerPath: '/myData/list' },
 ]
 

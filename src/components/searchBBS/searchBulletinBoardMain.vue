@@ -1,6 +1,6 @@
 <template>
     <div class="" id="div_postList">
-        <div class="flex justify-end mb-2">
+        <div class="flex justify-end mb-2" v-if="postList.length != 0">
             <vue-single-select
                 class="w-42.5 cursor-pointer"
                 :name="'patientGenderList'"
@@ -14,13 +14,14 @@
                   border border-transparent focus:outline-none"
             ></vue-single-select>
         </div>
+        <div v-else></div>
         <mescroll-vue
             class="h-screen-63 md:h-screen-65 overflow-y-scroll"
             ref="mescroll"
             :up="mescrollUp"
         >
             <div class="relative">
-                <div class="">
+                <div class="" v-if="postList.length != 0">
                     <div v-for="(article, index) in postList" :key="index">
                         <result-detail-row
                             class="searchResult_bbsDetail_blue mt-2"
@@ -31,6 +32,7 @@
                         </result-detail-row>
                     </div>
                 </div>
+                <div v-else class="flex justify-center text-lg mt-20">検索結果がありません。キーワードを変更してお試しください。</div>
             </div>
         </mescroll-vue>
     </div>
@@ -74,11 +76,11 @@ export default {
                 toTop: {
                     offset: 1000,
                 },
-                empty: {
-                    warpId: 'div_postList',
-                    // icon: './static/mescroll/mescroll-empty.png',
-                    tip: 'データがありません。',
-                },
+                // empty: {
+                //     warpId: 'div_postList',
+                //     // icon: './static/mescroll/mescroll-empty.png',
+                //     tip: 'データがありません。',
+                // },
             },
         }
     },

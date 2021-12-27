@@ -251,7 +251,7 @@ export default {
 }
 </script>
 <style scoped>
-.msgHtmlBoxB >>> * {
+.msgHtmlBoxB :deep(*) {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
