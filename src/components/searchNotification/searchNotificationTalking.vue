@@ -272,8 +272,9 @@
                             h-7.5
                             w-17.5
                             rounded
-                            text-white
+                            text-tags
                             bg-gray_e6e6e6
+                            border-b-2 border-grayLine hover:opacity-50 active:bg-grayLine active:opacity-100
                             cursor-pointer
                         "
                         @click="dispEditor = !dispEditor"
@@ -289,7 +290,7 @@
                             w-17.5
                             rounded
                             text-white
-                            bg-whole
+                            bg-whole border-b-2 border-green39aa4a hover:opacity-50 active:bg-green39aa4a active:opacity-100
                             cursor-pointer
                         "
                         @click="sendPosts(postList[0].post_id)"

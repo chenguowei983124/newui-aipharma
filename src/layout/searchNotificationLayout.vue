@@ -104,6 +104,8 @@
                             lm:ml-2 lm:mt-0 lm:border-l-2 lm:border-grayline
                             hidden
                             pm:block
+                            md:block
+                            lm:block
                         "
                         v-if="dispFlg"
                     ></div>

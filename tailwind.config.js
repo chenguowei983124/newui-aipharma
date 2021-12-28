@@ -319,6 +319,7 @@ module.exports = {
                 cardViewCount: 'rgb(204, 233, 246)',
                 lock: 'rgba(0,0,0,0.2)',
                 bbsLock: '#d3eaf5',
+                pinkfba1b8: '#fba1b8'
             }),
             textColor: (theme) => theme('colors'),
             textColor: {
@@ -425,8 +426,8 @@ module.exports = {
                 personInformationButton: '#f15a24',
                 downloadIcon: '#8CC85A',
                 bluelineB: '#65B2D9',
-                buttonbluelineB: '#3490bf',
-                orangeBorderB: '#ef5a24',
+                buttonbluelineB: '#32a5dc',
+                orangeBorderB: '#f15a24',
                 grayLine: '#666666',
                 backgroundMain: '#d6edf8',
                 chatbot: '#25839e',

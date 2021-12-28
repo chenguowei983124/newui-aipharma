@@ -2,7 +2,7 @@
     <div>
         <div class="absolute w-full rounded-sm -ml-0.5 -mt-0.5">
             <div
-                class="bg-blueline bg-opacity-25 h-36 rounded-lg md:h-40.5"
+                class="bg-backgroundMain bg-opacity-25 h-36 rounded-lg md:h-40.5"
                 v-if="row.clicked"
             ></div>
         </div>

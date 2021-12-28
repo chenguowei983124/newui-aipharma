@@ -95,7 +95,7 @@
                 >{{ item.urlTitle }}</a
               >
               <a
-                class="underline text-pageblue notoSansJpAndTwentyFourBold mt-2"
+                class="underline text-pageblue notoSansJpAndTwentyFourBold mt-3"
                 :href="item.urlLink"
                 target="_blank"
                 ><external-link
@@ -120,7 +120,7 @@
                 rel="noopener noreferrer"
                 >{{ item.companyName }}</a
               >
-              <div class="ml-2 notoSansJpAndFourteenRegular text-grayline">
+              <div class="ml-2 font-NotoSansJp text-xs font-normal text-notice">
                 {{ item.company }}
               </div>
             </div>
@@ -128,7 +128,7 @@
             <!-- 会社概要 -->
             <div class="pl-3.75 pr-3.75 mt-2 md:mt-5">
               <div
-                class="notoSansJpAndFourteenRegular w-full break-words"
+                class="notoSansJpAndFourteenMedium w-full break-words"
                 v-for="content in item.companyContents"
                 :key="content"
               >
@@ -142,7 +142,7 @@
 
             <div class="pl-3.75 pr-3.75 mt-2">
               <div
-                class="notoSansJpAndFourteenRegular w-full break-words"
+                class="font-NotoSansJp text-xs font-normal w-full break-words"
                 v-for="content in item.contents"
                 :key="content"
               >
@@ -202,7 +202,7 @@
                 stroke="#32a5dc"
               ></triangle-down-svg>
               <div>
-                {{ item.detailDisp ? "折りたたみ" : "もっと読む" }}
+                {{ item.detailDisp ? "折りたたむ" : "もっと読む" }}
               </div>
             </div>
           </div>
@@ -247,8 +247,8 @@
             class="
               bg-group
               hover:opacity-25
-              border-b-2 border-pink-500
-              active:bg-pink-500 active:opacity-100
+              border-b-2 border-group
+              active:bg-pinkfba1b8 active:opacity-100
               rounded-md
               notoSansJpAndEighteenBlack
               text-white text-center
