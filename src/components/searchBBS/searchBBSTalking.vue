@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto h-screen-57 md:h-screen-66" id="div_postList">
+    <div class="mx-auto" :class="hiegthCss" id="div_postList">
         <div class="flex justify-between h-10 border-b-2 border-blueline">
             <div class="notoSansJpAndTwentyBold">スレッド</div>
             <div class="h-10 w-10 mt-1" @click="closeClick">
@@ -321,232 +321,233 @@ import EditAndDelete from '../common/searchResult/editAndDelete.vue'
 import MakeDetailRow from './makeDetailRow.vue'
 
 export default {
-    components: {
-        XIconSvg,
-        Editor,
-        sendMessageIconSvg,
-        resultDetailRow,
-        ResultDetailRowItem,
-        Good,
-        bad,
-        EditAndDelete,
-        MakeDetailRow,
+  components: {
+    XIconSvg,
+    Editor,
+    sendMessageIconSvg,
+    resultDetailRow,
+    ResultDetailRowItem,
+    Good,
+    bad,
+    EditAndDelete,
+    MakeDetailRow,
+  },
+  props: {
+    id: '',
+    hiegthCss: "",
+    exeSearchRefishOpts: {
+      type: Function,
+      default: () => { },
     },
-    props: {
-        id: '',
-        exeSearchRefishOpts: {
-            type: Function,
-            default: () => {},
-        },
+  },
+  data() {
+    return {
+      postList: [], // 列表数据
+      params: {},
+      dispFlg: false,
+      dispEditor: false,
+      InputComment: '',
+    }
+  },
+
+  watch: {},
+  methods: {
+    tagClick(name) {
+      let tagsLable = this.$store.getters.getSearchTagsLable
+      tagsLable.push(name)
+      this.$store.dispatch('setSearchTagsLable', tagsLable)
+      this.exeSearchRefishOpts()
     },
-    data() {
-        return {
-            postList: [], // 列表数据
-            params: {},
-            dispFlg: false,
-            dispEditor: false,
-            InputComment: '',
-        }
+    // ×押下
+    closeClick() {
+      this.$emit('close', false)
     },
 
-    watch: {},
-    methods: {
-        tagClick(name) {
-            let tagsLable = this.$store.getters.getSearchTagsLable
-            tagsLable.push(name)
-            this.$store.dispatch('setSearchTagsLable', tagsLable)
-            this.exeSearchRefishOpts()
-        },
-        // ×押下
-        closeClick() {
-            this.$emit('close', false)
-        },
-
-        // 該当明細編集押下
-        editDetail(dataInfo) {
-            let params = {
-                id: dataInfo.post_id,
-            }
-            this.$router.push({
-                path: '/newBbsRecord',
-                query: params,
-            })
-            console.log('該当明細編集押下', dataInfo.post_id)
-        },
-        // 該当明細削除押下
-        deleteDetail(dataInfo) {
-            this.$swal
-                .fire({
-                    text: '本当に削除してよろしいですか？',
-                    icon: '',
-                    showCancelButton: true,
-                    cancelButtonText: 'キャンセル',
-                    confirmButtonText: '削除',
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        this.$serve
-                            .deletePost('', dataInfo.post_id)
-                            .then(() => {
-                                this.$swal
-                                    .fire({
-                                        text: '削除されました。',
-                                        icon: '',
-                                        showCancelButton: false,
-                                        confirmButtonText: 'OK',
-                                    })
-                                    .then(() => {
-                                        this.$emit('close', false, 'delete')
-                                    })
-                            })
-                    }
-                })
-        },
-        async doSearch() {
-            this.dispEditor = false
-            this.InputComment = ''
-            Object.assign(this.params, { division: 'BBS' })
-            const response = await this.$serve.getPostsrforId('', this.id)
-            if (response.data.data.length != 0) {
-                this.postList = this.formatPostList(response.data.data)
-            } else {
-                this.$swal.fire({
-                    text: 'データがありません。',
+    // 該当明細編集押下
+    editDetail(dataInfo) {
+      let params = {
+        id: dataInfo.post_id,
+      }
+      this.$router.push({
+        path: '/newBbsRecord',
+        query: params,
+      })
+      console.log('該当明細編集押下', dataInfo.post_id)
+    },
+    // 該当明細削除押下
+    deleteDetail(dataInfo) {
+      this.$swal
+        .fire({
+          text: '本当に削除してよろしいですか？',
+          icon: '',
+          showCancelButton: true,
+          cancelButtonText: 'キャンセル',
+          confirmButtonText: '削除',
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.$serve
+              .deletePost('', dataInfo.post_id)
+              .then(() => {
+                this.$swal
+                  .fire({
+                    text: '削除されました。',
                     icon: '',
                     showCancelButton: false,
-                    // cancelButtonText: 'キャンセル',
                     confirmButtonText: 'OK',
-                })
-                this.closeClick()
-                // this.$emit('resetBbsRouter')
-            }
-        },
-        formatPostList(data) {
-            let list = []
-            for (let i = 0; i < data.length; i++) {
-                let listDetail = {
-                    id: data[i].post.id,
-                    post_id: data[i].post.post_id,
-                    urlTitle: data[i].post.title,
-                    title: data[i].post.content,
-                    date: data[i].post.created_at,
-                    group:
-                        data[i].post.scope == 0
-                            ? 'ownFacility'
-                            : data[i].post.scope == 1
-                            ? 'otherFacility'
-                            : 'group',
-                    viewCount: data[i].post.feedback.viewed,
-                    notificationType: data[i].post.genre,
-                    userName: data[i].post.user_data.user_name,
-                    workplace: data[i].post.user_data.workplace,
-                    commnetCount: data[i].post.commnet.length,
-                    feedback: data[i].post.feedback,
-                    tag: data[i].post.tag,
-                    commnet: data[i].post.commnet,
-                    user_id: data[i].post.user_id,
-                }
-
-                for (let i = 0; i < listDetail.commnet.length; i++) {
-                    listDetail.commnet[i].isShow = false
-                }
-                list.push(listDetail)
-            }
-            return list
-        },
-        closeEditEvent(index, value) {
-            this.postList[0].commnet[index].isShow = value
-        },
-
-        putFeedbacks(kind, post_id, feedbackId, index) {
-            let tempKind = kind
-            console.log('user', this.$store.getters.topManagementInfo.user_id)
-
-            if (index === undefined) {
-                console.log('feedback', this.postList[0].feedback.mine.user_id)
-                if (
-                    this.postList[0].feedback.mine.kind == kind &&
-                    this.postList[0].feedback.mine.user_id ==
-                        this.$store.getters.topManagementInfo.user_id
-                ) {
-                    tempKind = 0
-                }
-            } else {
-                console.log(
-                    'feedback user_id',
-                    this.postList[0].commnet[index].feedback.mine.user_id
-                )
-                console.log(
-                    'feedback kind',
-                    this.postList[0].commnet[index].feedback.mine.kind
-                )
-                if (
-                    this.postList[0].commnet[index].feedback.mine.kind ==
-                        kind &&
-                    this.postList[0].commnet[index].feedback.mine.user_id ==
-                        this.$store.getters.topManagementInfo.user_id
-                ) {
-                    tempKind = 0
-                }
-            }
-
-            let params = {
-                feedbackId: feedbackId,
-                code: this.$store.getters.getOidcCode,
-                feedback: {
-                    post_id: post_id,
-                    kind: tempKind,
-                },
-            }
-            this.$serve.putfeedbacks(params, '').then((res) => {
-                console.log(res)
-                if (res.data.status === 'SUCCESS') {
-                    if (index === undefined) {
-                        Object.assign(
-                            this.postList[0].feedback,
-                            res.data.feedback
-                        )
-                    } else {
-                        Object.assign(
-                            this.postList[0].commnet[index].feedback,
-                            res.data.feedback
-                        )
-                    }
-                    console.log('tempKind', tempKind)
-                    let message = '評価がキャンセルしました。'
-                    if (tempKind === 1) {
-                        message = 'Good評価ありがとうございました。'
-                    }
-                    if (tempKind === 2) {
-                        message = 'Bad評価ありがとうございました。'
-                    }
-                    this.$toast.success(message, {
-                        position: 'top-right',
-                    })
-                }
-            })
-        },
-        sendPosts(post_id) {
-            let param = {
-                code: this.$store.getters.getOidcCode,
-                post: {
-                    post_id: post_id,
-                    content: this.InputComment,
-                },
-            }
-            let res = this.$serve.postPosts(param)
-            this.$toast.success('送信成功しました。', {
-                position: 'top-right',
-            })
-
-            this.doSearch()
-        },
+                  })
+                  .then(() => {
+                    this.$emit('close', false, 'delete')
+                  })
+              })
+          }
+        })
     },
-    mounted() {
-        console.log('one')
-        this.$serve.postReadfeedbacks(this.id, '')
-        this.doSearch()
+    async doSearch() {
+      this.dispEditor = false
+      this.InputComment = ''
+      Object.assign(this.params, { division: 'BBS' })
+      const response = await this.$serve.getPostsrforId('', this.id)
+      if (response.data.data.length != 0) {
+        this.postList = this.formatPostList(response.data.data)
+      } else {
+        this.$swal.fire({
+          text: 'データがありません。',
+          icon: '',
+          showCancelButton: false,
+          // cancelButtonText: 'キャンセル',
+          confirmButtonText: 'OK',
+        })
+        this.closeClick()
+        // this.$emit('resetBbsRouter')
+      }
     },
+    formatPostList(data) {
+      let list = []
+      for (let i = 0; i < data.length; i++) {
+        let listDetail = {
+          id: data[i].post.id,
+          post_id: data[i].post.post_id,
+          urlTitle: data[i].post.title,
+          title: data[i].post.content,
+          date: data[i].post.created_at,
+          group:
+            data[i].post.scope == 0
+              ? 'ownFacility'
+              : data[i].post.scope == 1
+                ? 'otherFacility'
+                : 'group',
+          viewCount: data[i].post.feedback.viewed,
+          notificationType: data[i].post.genre,
+          userName: data[i].post.user_data.user_name,
+          workplace: data[i].post.user_data.workplace,
+          commnetCount: data[i].post.commnet.length,
+          feedback: data[i].post.feedback,
+          tag: data[i].post.tag,
+          commnet: data[i].post.commnet,
+          user_id: data[i].post.user_id,
+        }
+
+        for (let i = 0; i < listDetail.commnet.length; i++) {
+          listDetail.commnet[i].isShow = false
+        }
+        list.push(listDetail)
+      }
+      return list
+    },
+    closeEditEvent(index, value) {
+      this.postList[0].commnet[index].isShow = value
+    },
+
+    putFeedbacks(kind, post_id, feedbackId, index) {
+      let tempKind = kind
+      console.log('user', this.$store.getters.topManagementInfo.user_id)
+
+      if (index === undefined) {
+        console.log('feedback', this.postList[0].feedback.mine.user_id)
+        if (
+          this.postList[0].feedback.mine.kind == kind &&
+          this.postList[0].feedback.mine.user_id ==
+          this.$store.getters.topManagementInfo.user_id
+        ) {
+          tempKind = 0
+        }
+      } else {
+        console.log(
+          'feedback user_id',
+          this.postList[0].commnet[index].feedback.mine.user_id
+        )
+        console.log(
+          'feedback kind',
+          this.postList[0].commnet[index].feedback.mine.kind
+        )
+        if (
+          this.postList[0].commnet[index].feedback.mine.kind ==
+          kind &&
+          this.postList[0].commnet[index].feedback.mine.user_id ==
+          this.$store.getters.topManagementInfo.user_id
+        ) {
+          tempKind = 0
+        }
+      }
+
+      let params = {
+        feedbackId: feedbackId,
+        code: this.$store.getters.getOidcCode,
+        feedback: {
+          post_id: post_id,
+          kind: tempKind,
+        },
+      }
+      this.$serve.putfeedbacks(params, '').then((res) => {
+        console.log(res)
+        if (res.data.status === 'SUCCESS') {
+          if (index === undefined) {
+            Object.assign(
+              this.postList[0].feedback,
+              res.data.feedback
+            )
+          } else {
+            Object.assign(
+              this.postList[0].commnet[index].feedback,
+              res.data.feedback
+            )
+          }
+          console.log('tempKind', tempKind)
+          let message = '評価がキャンセルしました。'
+          if (tempKind === 1) {
+            message = 'Good評価ありがとうございました。'
+          }
+          if (tempKind === 2) {
+            message = 'Bad評価ありがとうございました。'
+          }
+          this.$toast.success(message, {
+            position: 'top-right',
+          })
+        }
+      })
+    },
+    sendPosts(post_id) {
+      let param = {
+        code: this.$store.getters.getOidcCode,
+        post: {
+          post_id: post_id,
+          content: this.InputComment,
+        },
+      }
+      let res = this.$serve.postPosts(param)
+      this.$toast.success('送信成功しました。', {
+        position: 'top-right',
+      })
+
+      this.doSearch()
+    },
+  },
+  mounted() {
+    console.log('one')
+    this.$serve.postReadfeedbacks(this.id, '')
+    this.doSearch()
+  },
 }
 </script>
 <style type="text/css">
